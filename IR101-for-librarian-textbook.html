@@ -373,6 +373,14 @@
     .mobile-toc ol { margin: .8rem 0 0; }
     .mobile-toc a { text-decoration: none; }
 
+    .ai-disclosure-notice {
+      margin: 0 0 2rem; padding: 1rem 1.15rem;
+      border: 1px solid #d8c7aa; border-left: 4px solid var(--accent);
+      border-radius: 10px; background: #fbf3e4; font: .84rem/1.55 var(--sans);
+    }
+    .ai-disclosure-notice p { margin: 0; }
+    .ai-disclosure-notice strong { color: var(--accent-dark); }
+
     .page-footer {
       max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 5rem) 3rem;
       color: var(--muted); font: .78rem/1.5 var(--sans); text-align: center;
@@ -462,7 +470,10 @@
         <summary>Contents</summary>
         <ol id="mobile-toc-list"></ol>
       </details>
-      <article id="article"><p>Most librarians understand Boolean searching.</p>
+      <article id="article"><aside class="ai-disclosure-notice" aria-labelledby="generative-ai-use-notice-title">
+<p><strong id="generative-ai-use-notice-title">Generative AI use disclosure.</strong> I used OpenAI tools, including ChatGPT and Codex, to assist with research, drafting, revision, code and all explanatory illustrations in this project. I reviewed and edited the outputs, checked cited claims against the linked sources and take responsibility for the final content. <a href="#generative-ai-use-disclosure">Read the full disclosure.</a></p>
+</aside>
+<p>Most librarians understand Boolean searching.</p>
 <p>We know what happens when we add another concept with <code>AND</code>, introduce alternatives with <code>OR</code>, or remove an unwanted meaning with <code>NOT</code>. We also know, often through painful experience, that a poor synonym can flood a search with irrelevant records, while insisting on the wrong term can make relevant material disappear entirely.</p>
 <p>What is less obvious is what happens after Boolean retrieval — or what happens when a search product no longer asks us to write Boolean at all.</p>
 <p>When relevance sorting is used, an academic database may rank eligible records using TF-IDF, BM25 or a proprietary mixture of lexical, field, date, citation and behavioural signals. Newer products increasingly advertise natural-language, semantic or AI-assisted discovery. <a href="https://clarivate.com/academia-government/blog/smart-search-designing-search-for-todays-scholars/">Web of Science Smart Search</a>, for example, combines vector and Boolean search. <a href="https://www.elsevier.com/products/scopus/scopus-ai">Scopus with AI</a> accepts natural-language questions and uses a Copilot query tool to select vector search, keyword search or both before synthesising an answer from retrieved abstracts.</p>
@@ -1614,6 +1625,11 @@ intersection → D1</code></pre>
 </figure>
 <p>With valid upper bounds, these methods change the work performed, not the answer: they return the same exact top <em>k</em> as exhaustive scoring. That guarantee is different from approximate early termination, which may deliberately trade some result quality for speed. The original methods are described by <a href="https://doi.org/10.1016/0306-4573(95)00020-H">Turtle and Flood’s MaxScore work</a>, <a href="https://doi.org/10.1145/956863.956944">Broder and colleagues’ WAND paper</a> and <a href="https://doi.org/10.1145/2009916.2010048">Ding and Suel’s Block-Max indexes paper</a>.</p>
 <hr>
+<h2 id="generative-ai-use-disclosure">Generative AI use disclosure<a aria-label="Link to Generative AI use disclosure" class="heading-anchor" href="#generative-ai-use-disclosure">#</a></h2>
+<p>I used generative AI tools, including OpenAI’s ChatGPT and Codex, throughout the development of this project. They assisted with background research and source discovery; proposing and testing explanations and examples; drafting and revising prose; creating and debugging HTML, CSS and JavaScript, including the BM25 Evidence Lab; and generating all explanatory illustrations.</p>
+<p>I determined the scope, argument and final wording; selected and reviewed the examples; checked factual claims against the linked sources; and take responsibility for the published content. AI outputs were not treated as evidence: citations refer to the underlying publications, documentation and other sources rather than to the AI tools.</p>
+<p>Generative AI can produce errors, omissions and overconfident formulations. Although I reviewed the material, readers should verify consequential claims against the cited sources and may report suspected errors through the project’s <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/issues">GitHub issue tracker</a>.</p>
+<hr>
 <h2 id="references">References<a aria-label="Link to References" class="heading-anchor" href="#references">#</a></h2>
 <p>Chen, X., Lakhotia, K., Oğuz, B., Gupta, A., Lewis, P., Peshterliev, S., Mehdad, Y., Gupta, S., and Yih, W. (2022). “<a href="https://aclanthology.org/2022.findings-emnlp.19/">Salient phrase aware dense retrieval: Can a dense retriever imitate a sparse one?</a>” <em>Findings of EMNLP 2022</em>, 250–262.</p>
 <p>Apache Lucene. (n.d.). “<a href="https://lucene.apache.org/core/10_1_0/core/org/apache/lucene/search/similarities/BM25Similarity.html">BM25Similarity</a>.”</p>
@@ -1774,7 +1790,7 @@ $$</p>
     </main>
   </div>
 
-  <footer class="page-footer">A standalone web edition generated from the supplied Markdown article.</footer>
+  <footer class="page-footer">A standalone web edition generated from the supplied Markdown article. · <a href="#generative-ai-use-disclosure">Generative AI use disclosure</a>.</footer>
 
   <script>
     const headings = [...document.querySelectorAll('#article h2[id], #article h3[id]')];
