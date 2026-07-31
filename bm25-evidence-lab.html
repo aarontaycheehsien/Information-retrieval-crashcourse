@@ -1,0 +1,1070 @@
+<!doctype html>
+<html lang="en-GB"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An interactive laboratory for building intuition about BM25 lexical ranking">
+<meta name="theme-color" content="#f4f0e8">
+<title>The BM25 Evidence Lab</title>
+<style>
+:root{
+  --paper:#f4f0e8; --paper-2:#fbf9f4; --ink:#17201f; --muted:#596462;
+  --line:#d5d0c5; --accent:#9d3f2b; --accent-dark:#6f291d;
+  --teal:#1d5b59; --teal-soft:#dce9e5; --gold-soft:#eee3c8; --code:#efeae0;
+  --shadow:0 18px 55px rgba(40,35,28,.10);
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace;
+
+  /* data-viz roles — validated against surface #fbf9f4 (light) */
+  --surface-1:#fbf9f4;
+  --grid:#e3ddd0; --axis:#c3bdae; --muted-ink:#7d7768;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#008300;
+  --s7:#4a3aa7; --s8:#e34948;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);
+  background:radial-gradient(circle at top left,rgba(157,63,43,.08),transparent 26rem),
+             linear-gradient(180deg,#eee9df 0,var(--paper) 22rem,var(--paper) 100%);
+  font-family:var(--serif);font-size:17px;line-height:1.68;text-rendering:optimizeLegibility;
+}
+a{color:var(--accent-dark);text-decoration-thickness:.08em;text-underline-offset:.17em}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid rgba(157,63,43,.38);outline-offset:3px;border-radius:3px}
+code{font-family:var(--mono);font-size:.86em;background:var(--code);border:1px solid #e2dacf;border-radius:.32em;padding:.09em .3em}
+
+/* ---------- shell ---------- */
+.hero{border-bottom:1px solid rgba(23,32,31,.15);padding:3.4rem clamp(1.1rem,4vw,3.5rem) 2.4rem}
+.hero-inner{max-width:1240px;margin:0 auto}
+.kicker{margin:0 0 .8rem;font:700 .74rem/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.06;letter-spacing:-.035em;margin:0 0 .9rem}
+.subtitle{font-size:clamp(1rem,1.9vw,1.2rem);color:var(--muted);max-width:60ch;margin:0 0 1.4rem}
+.backlink{font:600 .84rem/1 var(--sans)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:2rem clamp(1.1rem,4vw,3.5rem) 5rem}
+
+/* ---------- mode switch ---------- */
+.modebar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:0 0 1.6rem}
+.seg{display:inline-flex;background:var(--code);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{
+  font:600 .84rem/1 var(--sans);border:0;background:none;color:var(--muted);
+  padding:.55rem 1.1rem;border-radius:999px;cursor:pointer;
+}
+.seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+.spacer{flex:1}
+.btn{
+  font:600 .82rem/1 var(--sans);border:1px solid var(--line);background:var(--paper-2);
+  color:var(--ink);padding:.55rem .9rem;border-radius:8px;cursor:pointer
+}
+.btn:hover{border-color:var(--accent);color:var(--accent-dark)}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.primary:hover{background:var(--accent-dark);color:#fff}
+.btn[disabled]{opacity:.42;cursor:not-allowed}
+.btn[disabled]:hover{border-color:var(--line);color:var(--ink)}
+
+/* ---------- tour ---------- */
+.tour{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:14px;
+  padding:1.4rem 1.5rem;margin:0 0 1.6rem;box-shadow:var(--shadow)
+}
+.tour-head{display:flex;flex-wrap:wrap;gap:.8rem;align-items:baseline;margin-bottom:.5rem}
+.tour-step{font:700 .72rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.tour h2{font-size:1.32rem;line-height:1.2;letter-spacing:-.02em;margin:0}
+.tour p{margin:.55rem 0}
+.tour .dots{display:flex;gap:5px;margin-left:auto}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--accent)}
+.predict{background:var(--teal-soft);border-left:4px solid var(--teal);padding:.8rem 1rem;margin:.9rem 0;border-radius:0 8px 8px 0}
+.predict p{margin:0 0 .6rem;color:#173b39;font-weight:600}
+.choices{display:flex;flex-wrap:wrap;gap:.5rem}
+.choice{font:600 .82rem/1 var(--sans);border:1px solid #9dbdb8;background:var(--paper-2);color:#173b39;padding:.5rem .85rem;border-radius:8px;cursor:pointer}
+.choice:hover{border-color:var(--teal)}
+.choice.right{background:#1d5b59;color:#fff;border-color:#1d5b59}
+.choice.wrong{background:#f2ded8;border-color:#c58c7c;color:#6f291d}
+.reveal{margin-top:.85rem;padding-top:.85rem;border-top:1px solid var(--line)}
+.reveal[hidden]{display:none}
+.takeaway{background:var(--gold-soft);border-radius:8px;padding:.7rem .95rem;margin:.8rem 0 0;font-family:var(--sans);font-size:.9rem;line-height:1.6}
+.takeaway b{color:var(--accent-dark)}
+.tour-nav{display:flex;gap:.6rem;margin-top:1rem;align-items:center}
+
+/* ---------- panels ---------- */
+.lab{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr) minmax(0,330px);gap:1.1rem;align-items:start}
+.panel{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.15rem;box-shadow:var(--shadow)}
+.panel h3{font:700 .74rem/1.2 var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:0 0 .85rem}
+.panel h4{font:700 .78rem/1.3 var(--sans);color:var(--ink);margin:1.1rem 0 .5rem}
+
+/* query */
+.qbox{width:100%;font:600 .95rem/1.5 var(--mono);padding:.6rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);resize:vertical}
+.qbox:focus{border-color:var(--accent);outline:none}
+.hint{font:.76rem/1.5 var(--sans);color:var(--muted);margin:.45rem 0 0}
+
+/* term chips = legend */
+.terms{list-style:none;margin:.55rem 0 0;padding:0;display:flex;flex-direction:column;gap:5px}
+.term{display:flex;align-items:center;gap:.5rem;padding:.4rem .5rem;border-radius:7px;border:1px solid transparent;cursor:pointer;background:none;width:100%;text-align:left;font-family:var(--sans)}
+.term:hover{background:var(--code)}
+.term.off{opacity:.42}
+.swatch{width:11px;height:11px;border-radius:3px;flex:none}
+.term-name{font:600 .84rem/1 var(--mono);flex:none}
+.term-df{font:.72rem/1 var(--sans);color:var(--muted);margin-left:auto;white-space:nowrap;font-variant-numeric:tabular-nums}
+.idfbar{height:4px;border-radius:2px;background:var(--grid);width:52px;flex:none;overflow:hidden}
+.idfbar i{display:block;height:100%;background:var(--teal);border-radius:2px}
+
+/* corpus */
+.rec{border:1px solid var(--line);border-radius:9px;padding:.6rem .7rem;margin-bottom:.5rem;cursor:pointer;background:var(--paper)}
+.rec:hover{border-color:var(--accent)}
+.rec.sel{border-color:var(--accent);box-shadow:0 0 0 2px rgba(157,63,43,.14)}
+.rec.excluded{opacity:.44}
+.rec-top{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.2rem}
+.rec-id{font:800 .8rem/1 var(--sans);color:var(--accent);flex:none}
+.rec-len{font:.71rem/1 var(--sans);color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+.rec-text{font:.82rem/1.55 var(--serif);color:var(--ink);margin:0}
+.rec-text mark{background:none;padding:0 1px;border-radius:2px;font-weight:700;box-shadow:inset 0 -.45em 0 var(--hl)}
+.rec-note{font:.72rem/1.4 var(--sans);color:var(--muted);margin:.35rem 0 0;font-style:italic}
+
+/* results */
+.res{margin-bottom:.5rem;padding:.55rem .1rem;border-radius:8px;cursor:pointer}
+.res:hover{background:var(--code)}
+.res.sel{background:var(--code)}
+.res-top{display:flex;align-items:baseline;gap:.55rem;font-family:var(--sans);margin-bottom:.3rem}
+.res-rank{font:800 .82rem/1 var(--sans);color:var(--muted);width:1.4rem;flex:none;font-variant-numeric:tabular-nums}
+.res-id{font:800 .84rem/1 var(--sans);color:var(--accent);flex:none}
+.res-title{font:.82rem/1.35 var(--sans);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.res-score{margin-left:auto;font:700 .86rem/1 var(--sans);font-variant-numeric:tabular-nums;flex:none}
+.bar{display:flex;height:20px;border-radius:0 4px 4px 0;overflow:visible;align-items:stretch}
+.seg-m{position:relative;overflow:hidden}
+.seg-m:first-child{border-radius:4px 0 0 4px}
+.seg-m:last-child{border-radius:0 4px 4px 0}
+.seg-m span{position:absolute;inset:0;display:flex;align-items:center;padding:0 6px;font:700 .68rem/1 var(--sans);white-space:nowrap}
+.bar-empty{font:.78rem/1.4 var(--sans);color:var(--muted);font-style:italic;padding:.15rem 0}
+.andnote{background:var(--code);border-radius:8px;padding:.6rem .8rem;font:.8rem/1.55 var(--sans);color:var(--muted);margin:0 0 .9rem}
+
+/* explain */
+.why-doc{font:800 1rem/1.2 var(--sans);color:var(--accent);margin:0 0 .15rem}
+.why-title{font:.84rem/1.4 var(--serif);color:var(--muted);margin:0 0 .8rem}
+.mini{width:100%;border-collapse:collapse;font:.76rem/1.4 var(--sans);font-variant-numeric:tabular-nums}
+.mini th{text-align:left;font-weight:700;color:var(--muted);border-bottom:1px solid var(--line);padding:.35rem .3rem;font-size:.7rem;letter-spacing:.03em;text-transform:uppercase}
+.mini td{padding:.38rem .3rem;border-bottom:1px solid var(--grid)}
+.mini td:first-child{font-family:var(--mono);font-weight:700}
+.mini .num{text-align:right}
+.mini tr.zero td{color:var(--muted);opacity:.7}
+.dotmark{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:baseline}
+.meter{margin:.75rem 0 0}
+.meter-label{display:flex;justify-content:space-between;font:.74rem/1.4 var(--sans);color:var(--muted);margin-bottom:.25rem}
+.meter-track{height:7px;background:var(--grid);border-radius:4px;position:relative;overflow:hidden}
+.meter-fill{height:100%;background:var(--teal);border-radius:4px}
+.meter-avg{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--accent)}
+.prose-explain{font:.84rem/1.62 var(--serif);color:var(--ink);background:var(--teal-soft);border-radius:8px;padding:.7rem .85rem;margin:.85rem 0 0}
+.prose-explain code{background:rgba(255,255,255,.55)}
+
+/* controls */
+.ctrl{margin:.9rem 0 0}
+.ctrl-top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--sans);margin-bottom:.3rem}
+.ctrl-name{font:600 .8rem/1.3 var(--sans)}
+.ctrl-val{font:700 .8rem/1 var(--sans);color:var(--accent-dark);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
+.ctrl-note{font:.72rem/1.45 var(--sans);color:var(--muted);margin:.25rem 0 0}
+.switch{display:flex;align-items:center;gap:.55rem;font:600 .82rem/1.3 var(--sans);cursor:pointer;padding:.35rem 0}
+.switch input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+.chipset{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0 0}
+.chip{font:600 .76rem/1 var(--sans);border:1px solid var(--line);background:var(--paper);padding:.42rem .65rem;border-radius:999px;cursor:pointer;color:var(--ink)}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* saturation small multiples */
+.sm{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:.7rem 0 0}
+.sm figure{margin:0}
+.sm figcaption{font:600 .74rem/1.35 var(--sans);color:var(--muted);margin:0 0 .3rem}
+.sm svg{display:block;width:100%;height:auto;background:var(--surface-1);border-radius:6px}
+
+/* formula */
+details.adv{margin:1.6rem 0 0;background:var(--paper-2);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+details.adv>summary{cursor:pointer;padding:.95rem 1.2rem;font:700 .8rem/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);list-style:none}
+details.adv>summary::-webkit-details-marker{display:none}
+details.adv>summary::before{content:'▸ ';color:var(--accent)}
+details.adv[open]>summary::before{content:'▾ '}
+.adv-body{padding:0 1.2rem 1.2rem}
+.formula{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.35rem;font-family:var(--mono);font-size:1rem;background:var(--code);border-radius:10px;padding:1.1rem .9rem;margin:0 0 1rem;overflow-x:auto}
+.fpart{padding:.25rem .4rem;border-radius:6px;transition:background .18s,box-shadow .18s}
+.fpart.lit{background:var(--gold-soft);box-shadow:0 0 0 2px rgba(157,63,43,.3)}
+.frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle}
+.frac .top{border-bottom:1.5px solid var(--ink);padding:0 .35rem .1rem}
+.frac .bot{padding:.1rem .35rem 0}
+.sum{font-size:1.7rem;line-height:1}
+.legend-tbl{width:100%;border-collapse:collapse;font:.8rem/1.5 var(--sans)}
+.legend-tbl td{padding:.4rem .5rem;border-bottom:1px solid var(--grid);vertical-align:top}
+.legend-tbl td:first-child{font-family:var(--mono);font-weight:700;white-space:nowrap;width:1%}
+.adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:1rem}
+
+/* table view */
+.tablewrap{overflow-x:auto;margin:1rem 0 0;border:1px solid var(--line);border-radius:10px}
+table.full{border-collapse:collapse;width:100%;min-width:520px;font:.82rem/1.45 var(--sans);font-variant-numeric:tabular-nums}
+table.full th,table.full td{padding:.6rem .7rem;text-align:left;border-bottom:1px solid var(--line)}
+table.full th{background:#e8e1d3;font-size:.72rem;letter-spacing:.03em;text-transform:uppercase;color:#283230}
+table.full td.num{text-align:right}
+table.full tbody tr:nth-child(even){background:rgba(238,227,200,.25)}
+table.full tr:last-child td{border-bottom:0}
+
+/* pipeline */
+.pipe{margin:2.4rem 0 0;background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.5rem;box-shadow:var(--shadow)}
+.pipe h3{font:700 .74rem/1.2 var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:0 0 1rem}
+.pipe-stack{display:flex;flex-direction:column;align-items:center;gap:.3rem;font-family:var(--sans)}
+.pipe-row{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:.6rem 1rem;text-align:center;font-size:.85rem;width:100%;max-width:520px}
+.pipe-row.lead{background:var(--gold-soft);border-color:#d8c79a;font-weight:700}
+.pipe-row.sum-row{background:var(--teal);color:#fff;border-color:var(--teal);font-weight:700}
+.pipe-plus{font:700 1rem/1 var(--sans);color:var(--muted)}
+
+/* tooltip */
+#tip{position:fixed;z-index:60;pointer-events:none;background:#17201f;color:#f7f4ed;border-radius:8px;padding:.55rem .7rem;font:.76rem/1.5 var(--sans);box-shadow:0 10px 30px rgba(0,0,0,.28);max-width:240px;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+#tip b{color:#fff}
+#tip .tval{font-variant-numeric:tabular-nums}
+
+.footnote{font:.8rem/1.6 var(--sans);color:var(--muted);margin:2.2rem 0 0;padding-top:1rem;border-top:1px solid var(--line)}
+
+@media (max-width:1080px){
+  .lab{grid-template-columns:1fr 1fr}
+  .panel.explain{grid-column:1/-1}
+}
+@media (max-width:760px){
+  .lab{grid-template-columns:1fr}
+  .adv-grid,.sm{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff}
+  .modebar,.tour-nav,#tip{display:none}
+  .panel,.tour,.pipe{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="hero-inner">
+  <p class="kicker">Interactive companion</p>
+  <h1>The BM25 Evidence Lab</h1>
+  <p class="subtitle">BM25 treats matching words as weighted clues and adds their contributions into a graded score. This laboratory lets you change one source of evidence at a time and watch the ranking respond.</p>
+  <p class="backlink"><a href="IR101-for-librarian-textbook.html#bm25-words-as-weighted-clues">← Back to “BM25: words as weighted clues”</a></p>
+</div></header>
+
+<div class="wrap">
+
+  <div class="modebar">
+    <div class="seg" role="group" aria-label="Learning mode">
+      <button id="mode-tour" aria-pressed="true">Guided tour</button>
+      <button id="mode-sandbox" aria-pressed="false">Sandbox</button>
+    </div>
+    <div class="spacer"></div>
+    <button class="btn" id="btn-table" aria-expanded="false">Show as table</button>
+    <button class="btn" id="btn-reset">Reset</button>
+  </div>
+
+  <!-- guided tour -->
+  <section class="tour" id="tour" aria-live="polite">
+    <div class="tour-head">
+      <span class="tour-step" id="tour-step">Step 1 of 6</span>
+      <div class="dots" id="tour-dots"></div>
+    </div>
+    <h2 id="tour-title"></h2>
+    <div id="tour-intro"></div>
+    <div class="predict" id="tour-predict">
+      <p id="tour-question"></p>
+      <div class="choices" id="tour-choices"></div>
+    </div>
+    <div class="reveal" id="tour-reveal" hidden>
+      <div id="tour-answer"></div>
+      <div class="takeaway" id="tour-takeaway"></div>
+    </div>
+    <div class="tour-nav">
+      <button class="btn" id="tour-prev">← Previous</button>
+      <button class="btn primary" id="tour-next">Next step →</button>
+      <span class="hint" id="tour-skip-hint">You can skip the prediction, but guessing first is what builds the intuition.</span>
+    </div>
+  </section>
+
+  <!-- lab -->
+  <div class="lab">
+
+    <section class="panel" aria-labelledby="h-query">
+      <h3 id="h-query">Query &amp; collection</h3>
+
+      <label for="query" class="ctrl-name">Query</label>
+      <textarea id="query" class="qbox" rows="2" spellcheck="false"></textarea>
+      <p class="hint">No stemming, no stop-word removal, no phrase or field weighting — plain word matching, so you can see exactly what BM25 itself contributes.</p>
+
+      <h4>Query terms <span style="font-weight:400;color:var(--muted)">(the legend)</span></h4>
+      <ul class="terms" id="terms"></ul>
+      <p class="hint">Click a term to switch its evidence off. The bar next to each term shows how unusual it is in this collection.</p>
+
+      <div id="synbox" hidden>
+        <h4>Add a synonym for <code>delulu</code></h4>
+        <div class="chipset" id="syn-chips"></div>
+      </div>
+
+      <h4>The collection <span style="font-weight:400;color:var(--muted)">(6 records)</span></h4>
+      <div id="corpus"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-res">
+      <h3 id="h-res">Ranked results</h3>
+
+      <label class="switch"><input type="checkbox" id="strict"> Strict <code>AND</code> instead of BM25 ranking</label>
+      <div class="andnote" id="andnote" hidden></div>
+
+      <div id="results"></div>
+
+      <div id="ctrl-repeat" class="ctrl">
+        <div class="ctrl-top">
+          <span class="ctrl-name">Times <code>delulu</code> appears in Record D</span>
+          <span class="ctrl-val" id="repeat-val">3</span>
+        </div>
+        <input type="range" id="repeat" min="1" max="20" value="3">
+        <p class="ctrl-note">Watch Record D's <code>delulu</code> segment. The first repetitions matter; the twentieth barely registers.</p>
+        <div class="sm" id="satcharts"></div>
+      </div>
+
+      <div id="ctrl-pad" class="ctrl">
+        <div class="ctrl-top">
+          <span class="ctrl-name">Unrelated appendix paragraphs added to Record A</span>
+          <span class="ctrl-val" id="pad-val">0</span>
+        </div>
+        <input type="range" id="pad" min="0" max="8" value="0">
+        <p class="ctrl-note">This adds no matching words at all. Only the document's length changes.</p>
+      </div>
+
+      <div class="tablewrap" id="tablewrap" hidden></div>
+    </section>
+
+    <section class="panel explain" aria-labelledby="h-why">
+      <h3 id="h-why">Why did this score?</h3>
+      <div id="why"></div>
+    </section>
+  </div>
+
+  <details class="adv">
+    <summary>Show the BM25 machinery</summary>
+    <div class="adv-body">
+      <div class="formula" id="formula">
+        <span class="fpart" id="f-sum"><span class="sum">Σ</span></span>
+        <span class="fpart" id="f-idf">IDF(q)</span>
+        <span class="fpart" id="f-frac">
+          <span class="frac">
+            <span class="top">f(q,D) × (k₁ + 1)</span>
+            <span class="bot">f(q,D) + k₁ × (1 − b + b × |D| ÷ avgdl)</span>
+          </span>
+        </span>
+      </div>
+
+      <div class="adv-grid">
+        <div>
+          <h4 style="margin-top:0">What each part means</h4>
+          <table class="legend-tbl"><tbody>
+            <tr><td>f(q,D)</td><td>How many times the term occurs in this document</td></tr>
+            <tr><td>IDF(q)</td><td>How unusual the term is across the collection</td></tr>
+            <tr><td>|D| ÷ avgdl</td><td>This document's length relative to the average</td></tr>
+            <tr><td>k₁</td><td>How quickly repetition stops helping</td></tr>
+            <tr><td>b</td><td>How strongly document length matters</td></tr>
+          </tbody></table>
+        </div>
+        <div>
+          <h4 style="margin-top:0">Advanced parameters</h4>
+          <div class="ctrl" style="margin-top:.3rem">
+            <div class="ctrl-top"><span class="ctrl-name">Repetition saturation, k₁</span><span class="ctrl-val" id="k1-val">1.20</span></div>
+            <input type="range" id="k1" min="0" max="3" step="0.1" value="1.2">
+          </div>
+          <div class="ctrl">
+            <div class="ctrl-top"><span class="ctrl-name">Length normalisation, b</span><span class="ctrl-val" id="b-val">0.75</span></div>
+            <input type="range" id="b" min="0" max="1" step="0.05" value="0.75">
+          </div>
+          <p class="ctrl-note">Defaults are k₁ = 1.2 and b = 0.75. Nothing in the guided tour depends on changing them. Set b to 0 to switch document-length normalisation off entirely.</p>
+        </div>
+      </div>
+
+      <p class="ctrl-note" style="margin-top:1rem">This lab uses the Lucene inverse-document-frequency form, <code>ln(1 + (N − df + 0.5) ÷ (df + 0.5))</code>, which stays positive. Other implementations use variants that can go negative for very common terms, so two systems both described as “using BM25” can rank differently.</p>
+    </div>
+  </details>
+
+  <section class="pipe">
+    <h3>Where this sits in a real search product</h3>
+    <div class="pipe-stack">
+      <div class="pipe-row lead">BM25 lexical score <span style="font-weight:400;color:var(--muted)">— everything in this lab</span></div>
+      <div class="pipe-plus">+</div>
+      <div class="pipe-row">field, phrase and proximity boosts</div>
+      <div class="pipe-plus">+</div>
+      <div class="pipe-row">recency, citations and other static signals</div>
+      <div class="pipe-plus">+</div>
+      <div class="pipe-row">possible machine-learning reranking</div>
+      <div class="pipe-plus">=</div>
+      <div class="pipe-row sum-row">production search ranking</div>
+    </div>
+    <p class="ctrl-note" style="text-align:center;margin-top:1rem;max-width:60ch;margin-left:auto;margin-right:auto">
+      Changing k₁ and b here does not reproduce Primo, Scopus or PubMed. Those systems wrap lexical evidence of this kind inside considerably richer pipelines.
+    </p>
+  </section>
+
+  <p class="footnote">
+    Companion to <a href="IR101-for-librarian-textbook.html">“The Tokeniser Knows Every Piece, but Search Is Still Cooked”</a>.
+    The collection is deliberately tiny and fully visible so that every number on this page can be checked by hand.
+  </p>
+</div>
+
+<div id="tip" role="status" aria-live="off"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ============================== data ============================== */
+
+const RECORDS = [
+  { id:'A', title:'Delulu expectations during a job interview',
+    body:'Career advisers describe how delulu expectations shape what candidates say in a job interview.',
+    note:'Matches every query term.' },
+  { id:'B', title:'Managing unrealistic expectations during a job search',
+    body:'Practical advice for graduates whose expectations about salary and seniority do not match the job market.',
+    note:'Clearly relevant to a human reader, but contains neither “delulu” nor “interview”.' },
+  { id:'C', title:'Job interview advice for recent graduates',
+    body:'This guide covers preparation for the graduate job interview, including how to research an employer, how to structure answers about previous work, how to describe a project you led, what to ask at the end of an interview, how to follow up afterwards, and how to handle a second interview. It also reviews common mistakes candidates make when they discuss salary during a first interview with a large employer.',
+    note:'Several matches, but a long document.' },
+  { id:'D', title:'Delulu delulu delulu: workplace slang',
+    body:'A short job glossary entry.',
+    note:'Very short, and heavily concentrated on one rare term.', repeatDoc:true },
+  { id:'E', title:'Employment expectations and labour market trends',
+    body:'Survey data on how employment expectations shift across sectors and what that means for graduate workers.',
+    note:'Matches only through comparatively common words.' },
+  { id:'F', title:'Why foolish job applicants misread the interview',
+    body:'A critical look at foolish assumptions that candidates bring to the interview and the wider job market.',
+    note:'Holds the rare word “foolish” — which matters only if the query asks for it.' }
+];
+
+const FILLER = 'This appendix reproduces supplementary material about departmental funding arrangements, committee membership, archival storage conditions, and administrative correspondence unrelated to the main subject of the record.';
+
+const SERIES = ['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8'];
+
+const DEFAULTS = { query:'delulu job interview expectations', strict:false, k1:1.2, b:0.75, repeat:3, pad:0, off:[], sel:'A' };
+
+const state = Object.assign({}, DEFAULTS, { off:[] });
+
+/* colour follows the entity, never its rank: a term keeps its slot for the session */
+const colourOf = (function(){
+  const map = new Map(); let next = 0;
+  return function(term){
+    if(!map.has(term)){ map.set(term, SERIES[next % SERIES.length]); next++; }
+    return 'var(' + map.get(term) + ')';
+  };
+})();
+
+const cssVal = (function(){
+  const cs = getComputedStyle(document.documentElement); const cache = {};
+  return function(v){ const k=v.replace(/var\(|\)/g,''); if(!(k in cache)) cache[k]=cs.getPropertyValue(k).trim(); return cache[k]; };
+})();
+
+/* ============================== model ============================== */
+
+function tok(s){ return (String(s).toLowerCase().match(/[a-z0-9]+/g)) || []; }
+
+function queryTerms(){
+  const seen = new Set(); const out = [];
+  tok(state.query).forEach(function(t){ if(!seen.has(t)){ seen.add(t); out.push(t); } });
+  return out;
+}
+function activeTerms(){ return queryTerms().filter(function(t){ return state.off.indexOf(t) === -1; }); }
+
+function docText(rec){
+  if(rec.repeatDoc){
+    return (new Array(state.repeat + 1).join('delulu ')).trim() + ': workplace slang. ' + rec.body;
+  }
+  let t = rec.title + '. ' + rec.body;
+  if(rec.id === 'A' && state.pad > 0){ t += ' ' + new Array(state.pad + 1).join(FILLER + ' ').trim(); }
+  return t;
+}
+
+function buildDocs(){
+  return RECORDS.map(function(rec){
+    const text = docText(rec);
+    const tokens = tok(text);
+    const tf = Object.create(null);
+    tokens.forEach(function(t){ tf[t] = (tf[t] || 0) + 1; });
+    return { id:rec.id, rec:rec, text:text, len:tokens.length, tf:tf };
+  });
+}
+
+function idf(N, df){ return Math.log(1 + (N - df + 0.5) / (df + 0.5)); }
+
+function analyse(){
+  const docs = buildDocs();
+  const N = docs.length;
+  const avgdl = docs.reduce(function(s,d){ return s + d.len; }, 0) / N;
+  const terms = activeTerms();
+
+  const stats = {};
+  queryTerms().forEach(function(t){
+    const df = docs.filter(function(d){ return d.tf[t]; }).length;
+    stats[t] = { df:df, idf:df ? idf(N, df) : 0 };
+  });
+
+  docs.forEach(function(d){
+    d.parts = {}; d.total = 0;
+    d.norm = state.k1 * (1 - state.b + state.b * d.len / avgdl);
+    terms.forEach(function(t){
+      const f = d.tf[t] || 0;
+      if(!f || !stats[t].df){ d.parts[t] = 0; return; }
+      const c = stats[t].idf * (f * (state.k1 + 1)) / (f + d.norm);
+      d.parts[t] = c; d.total += c;
+    });
+    d.matched = terms.filter(function(t){ return (d.tf[t] || 0) > 0; });
+    d.eligible = state.strict ? (terms.length > 0 && d.matched.length === terms.length) : d.total > 0;
+  });
+
+  const ranked = docs.filter(function(d){ return d.eligible; })
+                     .sort(function(a,b){ return b.total - a.total || a.id.localeCompare(b.id); });
+
+  return { docs:docs, ranked:ranked, stats:stats, avgdl:avgdl, terms:terms, N:N };
+}
+
+/* ============================== helpers ============================== */
+
+const $ = function(s){ return document.querySelector(s); };
+const esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); };
+const fmt = function(n){ return n.toFixed(2); };
+
+/* text measurement so a label is never clipped */
+const measure = (function(){
+  const c = document.createElement('canvas').getContext('2d');
+  return function(text, font){ c.font = font; return c.measureText(text).width; };
+})();
+const SEGFONT = '700 10.9px ' + cssVal('var(--sans)').split(',')[0] + ', sans-serif';
+
+function relLum(hex){
+  const m = hex.replace('#','');
+  const rgb = [0,2,4].map(function(i){
+    let v = parseInt(m.substr(i,2),16)/255;
+    return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4);
+  });
+  return 0.2126*rgb[0] + 0.7152*rgb[1] + 0.0722*rgb[2];
+}
+function inkOn(varRef){
+  const hex = cssVal(varRef);
+  return /^#[0-9a-f]{6}$/i.test(hex) && relLum(hex) > 0.42 ? '#17201f' : '#ffffff';
+}
+
+/* ============================== tooltip ============================== */
+
+const tip = $('#tip');
+function showTip(html, ev){
+  tip.innerHTML = html; tip.classList.add('on');
+  const r = tip.getBoundingClientRect();
+  let x = ev.clientX + 14, y = ev.clientY + 16;
+  if(x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+  if(y + r.height > innerHeight - 8) y = ev.clientY - r.height - 16;
+  tip.style.left = Math.max(8,x) + 'px'; tip.style.top = Math.max(8,y) + 'px';
+}
+function hideTip(){ tip.classList.remove('on'); }
+addEventListener('scroll', hideTip, {passive:true});
+
+/* ============================== render ============================== */
+
+let A = null;
+
+function render(){
+  A = analyse();
+  renderTerms(); renderCorpus(); renderResults(); renderWhy(); renderTable();
+  renderSaturation(); renderSynonyms(); syncControls(); writeHash();
+}
+
+function syncControls(){
+  $('#query').value = state.query;
+  $('#strict').checked = state.strict;
+  $('#repeat').value = state.repeat; $('#repeat-val').textContent = state.repeat;
+  $('#pad').value = state.pad; $('#pad-val').textContent = state.pad;
+  $('#k1').value = state.k1; $('#k1-val').textContent = state.k1.toFixed(2);
+  $('#b').value = state.b; $('#b-val').textContent = state.b.toFixed(2);
+  const note = $('#andnote');
+  if(state.strict){
+    const kept = A.ranked.length;
+    note.hidden = false;
+    note.innerHTML = 'Every query term is compulsory. <b>' + kept + ' of 6</b> records qualif' + (kept===1?'ies':'y') +
+      (kept < 6 ? '. The rest are excluded outright, however much evidence they carry.' : '.');
+  } else { note.hidden = true; }
+}
+
+function renderTerms(){
+  const ul = $('#terms'); ul.innerHTML = '';
+  const terms = queryTerms();
+  const maxIdf = Math.max.apply(null, terms.map(function(t){ return A.stats[t].idf; }).concat([0.001]));
+  terms.forEach(function(t){
+    const st = A.stats[t], off = state.off.indexOf(t) !== -1;
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.className = 'term' + (off ? ' off' : '');
+    b.type = 'button';
+    b.setAttribute('aria-pressed', String(!off));
+    b.innerHTML =
+      '<span class="swatch" style="background:' + colourOf(t) + '"></span>' +
+      '<span class="term-name">' + esc(t) + '</span>' +
+      '<span class="idfbar"><i style="width:' + (st.idf/maxIdf*100).toFixed(1) + '%"></i></span>' +
+      '<span class="term-df">' + (st.df ? st.df + ' of 6' : 'not in index') + '</span>';
+    b.addEventListener('click', function(){
+      const i = state.off.indexOf(t);
+      if(i === -1) state.off.push(t); else state.off.splice(i,1);
+      render();
+    });
+    b.addEventListener('mousemove', function(ev){
+      showTip('<b>' + esc(t) + '</b><br>Appears in <span class="tval">' + st.df + '</span> of 6 records<br>' +
+              'Rarity weight (IDF): <span class="tval">' + fmt(st.idf) + '</span><br>' +
+              '<span style="opacity:.75">' + (off ? 'Currently switched off' : 'Click to switch this evidence off') + '</span>');
+    });
+    b.addEventListener('mouseleave', hideTip);
+    li.appendChild(b); ul.appendChild(li);
+  });
+  if(!terms.length) ul.innerHTML = '<li class="hint">Type a query above.</li>';
+}
+
+function highlight(text){
+  const terms = activeTerms();
+  if(!terms.length) return esc(text);
+  const map = {}; terms.forEach(function(t){ map[t] = colourOf(t); });
+  return text.split(/([A-Za-z0-9]+)/).map(function(piece){
+    const low = piece.toLowerCase();
+    if(map[low]) return '<mark style="--hl:' + map[low] + '4d">' + esc(piece) + '</mark>';
+    return esc(piece);
+  }).join('');
+}
+
+function renderCorpus(){
+  const host = $('#corpus'); host.innerHTML = '';
+  A.docs.forEach(function(d){
+    const el = document.createElement('div');
+    el.className = 'rec' + (state.sel === d.id ? ' sel' : '') + (state.strict && !d.eligible ? ' excluded' : '');
+    const shown = d.text.length > 320 ? d.text.slice(0,300) + ' …' : d.text;
+    el.innerHTML =
+      '<div class="rec-top"><span class="rec-id">' + d.id + '</span>' +
+      '<span class="rec-len">' + d.len + ' words</span></div>' +
+      '<p class="rec-text">' + highlight(shown) + '</p>' +
+      '<p class="rec-note">' + esc(d.rec.note) + '</p>';
+    el.addEventListener('click', function(){ state.sel = d.id; render(); });
+    host.appendChild(el);
+  });
+}
+
+function renderResults(){
+  const host = $('#results'); host.innerHTML = '';
+  if(!A.terms.length){ host.innerHTML = '<p class="bar-empty">No active query terms.</p>'; return; }
+  if(!A.ranked.length){
+    host.innerHTML = '<p class="bar-empty">No record qualifies.</p>'; return;
+  }
+  const max = A.ranked[0].total || 1;
+
+  A.ranked.forEach(function(d, i){
+    const row = document.createElement('div');
+    row.className = 'res' + (state.sel === d.id ? ' sel' : '');
+    const widthPct = state.strict ? 100 : (d.total / max * 100);
+
+    let segs = '';
+    if(state.strict){
+      segs = '<div class="seg-m" style="width:100%;background:var(--teal)"></div>';
+    } else {
+      const parts = A.terms.filter(function(t){ return d.parts[t] > 0; });
+      const barPx = (host.clientWidth || 520) * widthPct / 100;
+      parts.forEach(function(t, j){
+        const share = d.parts[t] / d.total * 100;
+        const segPx = barPx * share / 100;
+        const label = t;
+        const fits = segPx > measure(label, SEGFONT) + 18;
+        segs += '<div class="seg-m" data-doc="' + d.id + '" data-term="' + esc(t) + '" style="width:' + share + '%;background:' + colourOf(t) +
+                (j < parts.length-1 ? ';margin-right:2px' : '') + '">' +
+                (fits ? '<span style="color:' + inkOn(colourOf(t)) + '">' + esc(label) + '</span>' : '') +
+                '</div>';
+      });
+    }
+
+    row.innerHTML =
+      '<div class="res-top">' +
+        '<span class="res-rank">' + (i+1) + '</span>' +
+        '<span class="res-id">' + d.id + '</span>' +
+        '<span class="res-title">' + esc(d.rec.title) + '</span>' +
+        '<span class="res-score">' + (state.strict ? 'eligible' : fmt(d.total)) + '</span>' +
+      '</div>' +
+      '<div class="bar" style="width:' + widthPct + '%">' + segs + '</div>';
+
+    row.addEventListener('click', function(){ state.sel = d.id; render(); });
+    row.querySelectorAll('.seg-m[data-term]').forEach(function(seg){
+      seg.addEventListener('mousemove', function(ev){
+        const t = seg.dataset.term, st = A.stats[t];
+        showTip('<b>' + esc(t) + '</b> in Record ' + d.id + '<br>' +
+          'Occurrences here: <span class="tval">' + (d.tf[t]||0) + '</span><br>' +
+          'Appears in <span class="tval">' + st.df + '</span> of 6 records<br>' +
+          'Contribution: <span class="tval">' + fmt(d.parts[t]) + '</span> of ' + fmt(d.total), ev);
+      });
+      seg.addEventListener('mouseleave', hideTip);
+    });
+    host.appendChild(row);
+  });
+
+  const missing = A.docs.filter(function(d){ return !d.eligible; });
+  if(missing.length){
+    const p = document.createElement('p');
+    p.className = 'bar-empty';
+    p.textContent = 'Not retrieved: ' + missing.map(function(d){ return d.id; }).join(', ') +
+      (state.strict ? ' — missing at least one compulsory term.' : ' — no query term matches at all.');
+    host.appendChild(p);
+  }
+}
+
+function renderWhy(){
+  const host = $('#why');
+  const d = A.docs.filter(function(x){ return x.id === state.sel; })[0];
+  if(!d){ host.innerHTML = ''; return; }
+
+  const rows = A.terms.map(function(t){
+    const f = d.tf[t] || 0, st = A.stats[t], c = d.parts[t] || 0;
+    return '<tr class="' + (f ? '' : 'zero') + '">' +
+      '<td><span class="dotmark" style="background:' + colourOf(t) + '"></span>' + esc(t) + '</td>' +
+      '<td class="num">' + f + '</td>' +
+      '<td class="num">' + st.df + '</td>' +
+      '<td class="num">' + fmt(st.idf) + '</td>' +
+      '<td class="num">' + (f ? fmt(c) : '—') + '</td></tr>';
+  }).join('');
+
+  const ratio = d.len / A.avgdl;
+  const meterPct = Math.min(100, ratio / 2.4 * 100);
+  const avgPct = Math.min(100, 1 / 2.4 * 100);
+
+  host.innerHTML =
+    '<p class="why-doc">Record ' + d.id + '</p>' +
+    '<p class="why-title">' + esc(d.rec.title) + '</p>' +
+    '<table class="mini"><thead><tr><th>Term</th><th class="num">In doc</th><th class="num">df</th><th class="num">Rarity</th><th class="num">Score</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table>' +
+    '<div class="meter">' +
+      '<div class="meter-label"><span>Length ' + d.len + ' words</span><span>' +
+        (ratio < 1 ? (1/ratio).toFixed(1) + '× shorter than average' : ratio.toFixed(1) + '× the average') + '</span></div>' +
+      '<div class="meter-track"><div class="meter-fill" style="width:' + meterPct + '%"></div>' +
+      '<div class="meter-avg" style="left:' + avgPct + '%" title="collection average"></div></div>' +
+      '<p class="ctrl-note">The red mark is the collection average of ' + A.avgdl.toFixed(0) + ' words.</p>' +
+    '</div>' +
+    '<div class="prose-explain">' + explain(d) + '</div>';
+}
+
+function explain(d){
+  if(!A.terms.length) return 'No query terms are active, so there is no lexical evidence to weigh.';
+  if(!d.matched.length){
+    return 'Record ' + d.id + ' matches <b>none</b> of the active query terms, so every contribution is zero and it is never retrieved at all. ' +
+           'A purely lexical scoring model can only reach documents that share at least one term with the query.';
+  }
+  const sorted = d.matched.slice().sort(function(a,b){ return d.parts[b] - d.parts[a]; });
+  const top = sorted[0], st = A.stats[top];
+  const bits = [];
+
+  bits.push('<code>' + esc(top) + '</code> contributes most (' + fmt(d.parts[top]) + ') because it appears in only ' +
+    st.df + ' of the 6 records' + ((d.tf[top]||0) > 1 ? ' and occurs ' + d.tf[top] + ' times here' : '') + '.');
+
+  if((d.tf[top]||0) >= 3){
+    const one = st.idf * (1 * (state.k1+1)) / (1 + d.norm);
+    bits.push('Those repetitions help with diminishing returns: a single occurrence would already be worth ' + fmt(one) +
+      ', so ' + d.tf[top] + ' occurrences buy only ' + fmt(d.parts[top] - one) + ' more.');
+  }
+
+  const ratio = d.len / A.avgdl;
+  if(ratio < 0.75) bits.push('At ' + d.len + ' words it is well below the ' + A.avgdl.toFixed(0) + '-word average, so its matches count as concentrated rather than incidental.');
+  else if(ratio > 1.4) bits.push('At ' + d.len + ' words it is well above the ' + A.avgdl.toFixed(0) + '-word average, so the same matches are treated as more diluted.');
+
+  const unmatched = A.terms.filter(function(t){ return !(d.tf[t] > 0); });
+  if(unmatched.length) bits.push('It matches ' + d.matched.length + ' of ' + A.terms.length +
+    ' active terms; missing <code>' + unmatched.map(esc).join('</code>, <code>') + '</code> costs it evidence but does not exclude it.');
+
+  return bits.join(' ');
+}
+
+function renderTable(){
+  const wrap = $('#tablewrap');
+  if(wrap.hidden) return;
+  const head = '<tr><th>Rank</th><th>Record</th>' +
+    A.terms.map(function(t){ return '<th class="num"><span class="dotmark" style="background:' + colourOf(t) + '"></span>' + esc(t) + '</th>'; }).join('') +
+    '<th class="num">Total</th><th class="num">Length</th></tr>';
+  const body = A.docs.slice().sort(function(a,b){ return b.total - a.total; }).map(function(d){
+    const rank = A.ranked.indexOf(d);
+    return '<tr><td>' + (rank === -1 ? '—' : rank + 1) + '</td><td><b>' + d.id + '</b></td>' +
+      A.terms.map(function(t){ return '<td class="num">' + (d.parts[t] ? fmt(d.parts[t]) : '—') + '</td>'; }).join('') +
+      '<td class="num"><b>' + fmt(d.total) + '</b></td><td class="num">' + d.len + '</td></tr>';
+  }).join('');
+  wrap.innerHTML = '<table class="full"><thead>' + head + '</thead><tbody>' + body + '</tbody></table>';
+}
+
+/* --- saturation: two small multiples, each with its own baseline (never a dual axis) --- */
+function renderSaturation(){
+  const host = $('#satcharts');
+  if($('#ctrl-repeat').style.display === 'none'){ host.innerHTML = ''; return; }
+
+  const st = A.stats['delulu'];
+  if(!st || !st.df){ host.innerHTML = ''; return; }
+  const docs = A.docs, D = docs.filter(function(x){ return x.id === 'D'; })[0];
+  const xs = []; for(let n = 1; n <= 20; n++) xs.push(n);
+
+  const curve = xs.map(function(n){ return st.idf * (n * (state.k1+1)) / (n + D.norm); });
+  const linear = xs.map(function(n){ return curve[0] * n; });
+
+  host.innerHTML =
+    chart('If repetition counted in full', xs, linear, Math.max.apply(null, linear), '--s2') +
+    chart('What BM25 actually does', xs, curve, Math.max.apply(null, curve) * 1.12, '--s1');
+}
+
+function chart(caption, xs, ys, ymax, series){
+  const W = 260, H = 132, P = { t:10, r:12, b:22, l:30 };
+  const iw = W - P.l - P.r, ih = H - P.t - P.b;
+  const X = function(i){ return P.l + (xs[i]-1) / (xs.length-1) * iw; };
+  const Y = function(v){ return P.t + ih - (v / ymax) * ih; };
+  const pts = ys.map(function(v,i){ return X(i).toFixed(1) + ',' + Y(v).toFixed(1); }).join(' ');
+
+  const gridY = [0, ymax/2, ymax];
+  const grid = gridY.map(function(v){
+    return '<line x1="' + P.l + '" y1="' + Y(v).toFixed(1) + '" x2="' + (W-P.r) + '" y2="' + Y(v).toFixed(1) +
+           '" stroke="var(--grid)" stroke-width="1"/>' +
+           '<text x="' + (P.l-6) + '" y="' + (Y(v)+3.5).toFixed(1) + '" text-anchor="end" font-size="8.5" fill="var(--muted-ink)" font-family="var(--sans)">' + v.toFixed(1) + '</text>';
+  }).join('');
+
+  const cur = state.repeat, ci = cur - 1;
+  const marker = '<circle cx="' + X(ci).toFixed(1) + '" cy="' + Y(ys[ci]).toFixed(1) + '" r="4.5" fill="var(' + series + ')" stroke="var(--surface-1)" stroke-width="2"/>';
+  const endLabel = '<text x="' + (X(ci)+8).toFixed(1) + '" y="' + (Y(ys[ci])-7).toFixed(1) + '" font-size="9.5" font-weight="700" fill="var(--ink)" font-family="var(--sans)">' + ys[ci].toFixed(2) + '</text>';
+
+  const xticks = [1,5,10,15,20].map(function(n){
+    return '<text x="' + X(n-1).toFixed(1) + '" y="' + (H-7) + '" text-anchor="middle" font-size="8.5" fill="var(--muted-ink)" font-family="var(--sans)">' + n + '</text>';
+  }).join('');
+
+  return '<figure><figcaption>' + caption + '</figcaption>' +
+    '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + caption + ': contribution against number of occurrences">' +
+    grid +
+    '<line x1="' + P.l + '" y1="' + (P.t+ih) + '" x2="' + (W-P.r) + '" y2="' + (P.t+ih) + '" stroke="var(--axis)" stroke-width="1"/>' +
+    '<polyline points="' + pts + '" fill="none" stroke="var(' + series + ')" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+    marker + endLabel + xticks +
+    '</svg></figure>';
+}
+
+/* --- synonyms --- */
+const SYNONYMS = [
+  { word:'unrealistic', why:'a reasonable paraphrase' },
+  { word:'foolish',     why:'a rare but poor substitute' }
+];
+function renderSynonyms(){
+  const host = $('#syn-chips');
+  host.innerHTML = SYNONYMS.map(function(s){
+    const on = queryTerms().indexOf(s.word) !== -1;
+    return '<button class="chip' + (on ? ' on' : '') + '" data-syn="' + s.word + '">' +
+      (on ? '− ' : '+ ') + s.word + '</button>';
+  }).join('');
+  host.querySelectorAll('[data-syn]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const w = btn.dataset.syn, terms = queryTerms();
+      state.query = terms.indexOf(w) !== -1
+        ? terms.filter(function(t){ return t !== w; }).join(' ')
+        : state.query.trim() + ' ' + w;
+      render();
+    });
+  });
+}
+
+/* ============================== tour ============================== */
+
+const STEPS = [
+  {
+    title:'From admission rules to weighted clues',
+    intro:'<p>The query is <code>delulu job interview expectations</code>. Six records sit in the collection, and you can read every one of them.</p>' +
+          '<p>A strict Boolean system treats each word as a compulsory condition. BM25 does not.</p>',
+    q:'Under strict <code>AND</code>, how many of the six records survive?',
+    choices:['1','3','6'], answer:0,
+    answerText:'<p>Only <b>Record A</b> contains all four words. The other five are excluded outright — including Record B, which any librarian would call relevant.</p>' +
+               '<p>Switch the toggle off again and all six are back, each scoring from whatever it does match.</p>',
+    takeaway:'<b>BM25 still requires lexical overlap, but not total overlap.</b> A record can score from two matching words instead of four.',
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:true,repeat:3,pad:0,off:[],sel:'A'}); }
+  },
+  {
+    title:'Not every matching word is worth the same',
+    intro:'<p>Look at the query terms on the left. Each one carries a bar showing how unusual it is in this collection, and a count of how many records contain it.</p>' +
+          '<p><code>job</code> is nearly everywhere. <code>delulu</code> is not.</p>',
+    q:'Which contributes more to a score — matching <code>job</code>, or matching <code>delulu</code>?',
+    choices:['job','delulu','they are equal'], answer:1,
+    answerText:'<p>Matching <code>delulu</code> is worth roughly four times as much as matching <code>job</code>. A word appearing in 5 of 6 records barely distinguishes anything; a word in 2 of 6 does real work.</p>' +
+               '<p>Click Record D in the results and compare its two segments.</p>',
+    takeaway:'<b>Rarity increases discriminating power, not truth.</b> BM25 weights an unusual word heavily whether or not it is the right word.',
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'D'}); }
+  },
+  {
+    title:'Repetition helps, then stops helping',
+    intro:'<p>Record D is a short glossary entry that says <code>delulu</code> three times. Use the slider under the results to say it more often.</p>' +
+          '<p>The two small charts compare what would happen if repetition counted in full against what BM25 actually does.</p>',
+    q:'Take <code>delulu</code> from 3 occurrences to 20. Roughly how much does its contribution grow?',
+    choices:['about 7 times','about double','about 15 per cent'], answer:2,
+    answerText:'<p>From 1.88 to about 2.15 — roughly 15 per cent, for nearly seven times the repetition. The first two or three occurrences do almost all the work.</p>' +
+               '<p>Notice too that Record D never overtakes Record A this way, no matter how far you push the slider.</p>',
+    takeaway:'<b>Keyword stuffing does not pay proportionately.</b> Term-frequency saturation limits the benefit of repetition — though it cannot judge whether the term belonged in the query at all.',
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'D'}); }
+  },
+  {
+    title:'The same matches mean more in a short document',
+    intro:'<p>The second slider appends unrelated appendix paragraphs to Record A. It adds no query words whatsoever — only length.</p>',
+    q:'What happens to Record A’s score as the appendix grows?',
+    choices:['it stays the same — the matches are unchanged','it falls','it rises'], answer:1,
+    answerText:'<p>It falls steadily. Four matches in a 20-word record suggest the record is <i>about</i> those words; the same four matches in a 200-word record suggest they were mentioned in passing.</p>' +
+               '<p>Compare Record C as well: it matches <code>job</code> and <code>interview</code> several times, but at 75 words it still ranks below the much shorter Record F.</p>',
+    takeaway:'<b>Length normalisation rescales the evidence.</b> Five occurrences in a short abstract are stronger evidence than five in a long article.',
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'A'}); }
+  },
+  {
+    title:'BM25 adds the clues together',
+    intro:'<p>Now put the four factors in one place. Record A matches all four query terms. Record D matches only <code>delulu</code> and <code>job</code>.</p>' +
+          '<p>Drag the appendix slider up to <b>6</b> and watch the top two rows.</p>',
+    q:'Can a record matching two query terms outrank one matching all four?',
+    choices:['no — more matches always wins','yes'], answer:1,
+    answerText:'<p>At six appendix paragraphs, Record D overtakes Record A. D matches half as many terms and wins anyway, because the terms it does match are rarer, repeated, and concentrated in ten words rather than diluted across a hundred and seventy.</p>' +
+               '<p>This is the single most important thing to take from the lab, and the point where an implicit Boolean model of search breaks down.</p>',
+    takeaway:'<b>BM25 ranks by accumulating unequal, saturating, length-adjusted pieces of lexical evidence.</b> Matching more of the query usually helps — but it is evidence being weighed, not conditions being met.',
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'D'}); }
+  },
+  {
+    title:'What BM25 cannot understand',
+    intro:'<p>The query is now <code>delulu about getting a job</code>. Record B — “Managing unrealistic expectations during a job search” — is plainly relevant, but shares only the word <code>job</code>.</p>' +
+          '<p>Use the synonym buttons on the left to expand the query, one at a time.</p>',
+    q:'Both <code>unrealistic</code> and <code>foolish</code> occur in exactly one record. Which does BM25 weight more heavily?',
+    choices:['unrealistic — it is the better paraphrase','foolish — it is the worse paraphrase','neither — they are equally rare, so they weigh the same'], answer:2,
+    answerText:'<p>Both occur in exactly one of the six records, so BM25 gives them an identical rarity weight. It has no mechanism whatsoever for telling a good paraphrase from a bad one.</p>' +
+               '<p>Adding <code>unrealistic</code> lifts Record B to first place, which it deserves. Adding <code>foolish</code> lifts Record F to first place just as decisively — and Record F is about something else entirely. If anything <code>foolish</code> does <i>more</i> damage, purely because Record F happens to use the word twice.</p>',
+    takeaway:'<b>BM25 can weight lexical evidence intelligently. It cannot decide whether the vocabulary it was given expresses the right concept.</b> It is lexical evidence made less binary — not semantic understanding.',
+    apply:function(){ Object.assign(state,{query:'delulu about getting a job',strict:false,repeat:3,pad:0,off:[],sel:'B'}); }
+  }
+];
+
+let tourStep = 0, answered = [];
+
+function renderTour(){
+  const s = STEPS[tourStep];
+  $('#tour-step').textContent = 'Step ' + (tourStep+1) + ' of ' + STEPS.length;
+  $('#tour-title').innerHTML = s.title;
+  $('#tour-intro').innerHTML = s.intro;
+  $('#tour-question').innerHTML = s.q;
+
+  $('#tour-dots').innerHTML = STEPS.map(function(_,i){
+    return '<span class="dot' + (i <= tourStep ? ' on' : '') + '"></span>';
+  }).join('');
+
+  const ch = $('#tour-choices'); ch.innerHTML = '';
+  s.choices.forEach(function(c,i){
+    const b = document.createElement('button');
+    b.className = 'choice'; b.type = 'button'; b.innerHTML = c;
+    if(answered[tourStep] !== undefined){
+      if(i === s.answer) b.classList.add('right');
+      else if(i === answered[tourStep]) b.classList.add('wrong');
+      b.disabled = true;
+    }
+    b.addEventListener('click', function(){ answered[tourStep] = i; renderTour(); });
+    ch.appendChild(b);
+  });
+
+  const shown = answered[tourStep] !== undefined;
+  $('#tour-reveal').hidden = !shown;
+  if(shown){
+    $('#tour-answer').innerHTML = s.answerText;
+    $('#tour-takeaway').innerHTML = s.takeaway;
+  }
+  $('#tour-skip-hint').style.display = shown ? 'none' : '';
+  $('#tour-prev').disabled = tourStep === 0;
+  $('#tour-next').textContent = tourStep === STEPS.length-1 ? 'Finish → Sandbox' : 'Next step →';
+
+  applyStepVisibility();
+}
+
+function applyStepVisibility(){
+  const sandbox = state.mode === 'sandbox';
+  $('#ctrl-repeat').style.display = (sandbox || tourStep >= 2) ? '' : 'none';
+  $('#ctrl-pad').style.display    = (sandbox || tourStep >= 3) ? '' : 'none';
+  $('#synbox').hidden             = !(sandbox || tourStep === 5);
+}
+
+function gotoStep(i){
+  if(i < 0) return;
+  if(i >= STEPS.length){ setMode('sandbox'); return; }
+  tourStep = i;
+  STEPS[i].apply();
+  renderTour(); render();
+}
+
+/* ============================== modes ============================== */
+
+state.mode = 'tour';
+function setMode(m){
+  state.mode = m;
+  $('#mode-tour').setAttribute('aria-pressed', String(m==='tour'));
+  $('#mode-sandbox').setAttribute('aria-pressed', String(m==='sandbox'));
+  $('#tour').style.display = m === 'tour' ? '' : 'none';
+  applyStepVisibility();
+  render();
+}
+
+/* ============================== url state ============================== */
+
+function writeHash(){
+  if(state.mode !== 'sandbox') return;
+  const p = new URLSearchParams();
+  p.set('q', state.query);
+  if(state.strict) p.set('and','1');
+  if(state.repeat !== 3) p.set('r', state.repeat);
+  if(state.pad !== 0) p.set('p', state.pad);
+  if(state.k1 !== 1.2) p.set('k', state.k1);
+  if(state.b !== 0.75) p.set('b', state.b);
+  if(state.off.length) p.set('off', state.off.join(','));
+  history.replaceState(null,'','#' + p.toString());
+}
+function readHash(){
+  if(!location.hash.length) return false;
+  const p = new URLSearchParams(location.hash.slice(1));
+  if(!p.has('q')) return false;
+  state.query = p.get('q');
+  state.strict = p.get('and') === '1';
+  state.repeat = +(p.get('r') || 3);
+  state.pad = +(p.get('p') || 0);
+  state.k1 = +(p.get('k') || 1.2);
+  state.b = +(p.get('b') || 0.75);
+  state.off = p.get('off') ? p.get('off').split(',') : [];
+  return true;
+}
+
+/* ============================== wiring ============================== */
+
+$('#query').addEventListener('input', function(e){ state.query = e.target.value; render(); });
+$('#strict').addEventListener('change', function(e){ state.strict = e.target.checked; render(); });
+$('#repeat').addEventListener('input', function(e){ state.repeat = +e.target.value; render(); });
+$('#pad').addEventListener('input', function(e){ state.pad = +e.target.value; render(); });
+$('#k1').addEventListener('input', function(e){ state.k1 = +e.target.value; lite('#f-frac'); render(); });
+$('#b').addEventListener('input', function(e){ state.b = +e.target.value; lite('#f-frac'); render(); });
+
+$('#mode-tour').addEventListener('click', function(){ setMode('tour'); });
+$('#mode-sandbox').addEventListener('click', function(){ setMode('sandbox'); });
+$('#tour-prev').addEventListener('click', function(){ gotoStep(tourStep-1); });
+$('#tour-next').addEventListener('click', function(){ gotoStep(tourStep+1); });
+
+$('#btn-table').addEventListener('click', function(){
+  const w = $('#tablewrap');
+  w.hidden = !w.hidden;
+  this.setAttribute('aria-expanded', String(!w.hidden));
+  this.textContent = w.hidden ? 'Show as table' : 'Hide table';
+  renderTable();
+});
+
+$('#btn-reset').addEventListener('click', function(){
+  Object.assign(state, DEFAULTS, { off:[], mode:state.mode });
+  answered = [];
+  if(state.mode === 'tour') gotoStep(0); else render();
+});
+
+let liteTimer = null;
+function lite(sel){
+  const el = $(sel); if(!el) return;
+  el.classList.add('lit');
+  clearTimeout(liteTimer);
+  liteTimer = setTimeout(function(){ document.querySelectorAll('.fpart.lit').forEach(function(e){ e.classList.remove('lit'); }); }, 900);
+}
+
+/* boot */
+if(readHash()){ setMode('sandbox'); }
+else { STEPS[0].apply(); renderTour(); setMode('tour'); }
+
+})();
+</script>
+</body></html>
