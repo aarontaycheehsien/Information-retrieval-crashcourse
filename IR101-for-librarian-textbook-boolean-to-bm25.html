@@ -2,9 +2,9 @@
 <html lang="en-GB"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="What Gen Z slang teaches librarians about Boolean search, lexical ranking and dense retrieval">
+  <meta name="description" content="An alternative information-retrieval lesson that moves from Boolean admission rules and inverted indexes to BM25 ranking, then reveals why lexical search is broader than Boolean search">
   <meta name="theme-color" content="#f4f0e8">
-  <title>The Tokeniser Knows Every Piece, but Search Is Still Cooked</title>
+  <title>Boolean to BM25: An Alternative Information Retrieval Crash Course</title>
   <script>
     document.documentElement.classList.add('js');
   </script>
@@ -451,11 +451,26 @@
             margin-left: .3rem;
             text-decoration: none;
           }
-        </style></head>
+        
+          .evidence-stack {
+            display: grid;
+            gap: 1.25rem;
+            margin: 2rem 0;
+          }
+          .evidence-stack .evidence-card { margin: 0; }
+          .evidence-stack .evidence-card img {
+            margin: 1rem auto;
+            background: #fff;
+          }
+          .evidence-stack .evidence-card figcaption { font-size: .82rem; }
+          @media print {
+            .evidence-stack .evidence-card { break-inside: avoid; }
+          }</style></head>
 <body>
-  <header class="hero"><div class="hero-inner"><p class="kicker">A practical guide to retrieval architecture</p>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="hero"><div class="hero-inner"><p class="kicker">Alternative sequence &middot; Boolean to BM25</p>
       <h1>The Tokeniser Knows Every Piece, but Search Is Still Cooked</h1>
-      <p class="subtitle">What Gen Z slang teaches librarians about Boolean search, lexical ranking and dense retrieval</p>
+      <p class="subtitle">From Boolean admission rules and inverted indexes to ranked retrieval&mdash;and the surprise that lexical search is broader than Boolean search</p>
       <div class="tags" aria-label="Topics"><span>Boolean search</span><span>BM25</span><span>Dense retrieval</span><span>Hybrid search</span></div>
     </div>
   </header>
@@ -473,28 +488,32 @@
       <article id="article"><aside class="ai-disclosure-notice" aria-labelledby="generative-ai-use-notice-title">
 <p><strong id="generative-ai-use-notice-title">Generative AI use disclosure.</strong> I used OpenAI tools, including ChatGPT and Codex, to assist with research, drafting, revision, code and all explanatory illustrations in this project. I reviewed and edited the outputs, checked cited claims against the linked sources and take responsibility for the final content. <a href="#generative-ai-use-disclosure">Read the full disclosure.</a></p>
 </aside>
-<p>Most librarians understand Boolean searching.</p>
-<p>We know what happens when we add another concept with <code>AND</code>, introduce alternatives with <code>OR</code>, or remove an unwanted meaning with <code>NOT</code>. We also know, often through painful experience, that a poor synonym can flood a search with irrelevant records, while insisting on the wrong term can make relevant material disappear entirely.</p>
-<p>What is less obvious is what happens after Boolean retrieval — or what happens when a search product no longer asks us to write Boolean at all.</p>
-<p>When relevance sorting is used, an academic database may order records that pass any hard query conditions using lexical, field, date, citation and behavioural signals. BM25 is one common lexical ranking method, introduced later.&nbsp;</p><p>Newer products increasingly advertise natural-language, semantic or AI or LLM-assisted discovery. <a href="https://clarivate.com/academia-government/blog/smart-search-designing-search-for-todays-scholars/">Web of Science Smart Search</a>&nbsp;(not to be confused with Web of Science Research Assistant), for example, combines vector and Boolean search to produce a ranked set of results.</p><p><a href="https://www.elsevier.com/products/scopus/scopus-ai">Scopus with AI</a> accepts natural-language questions and uses a Copilot query tool to select vector search, keyword search or both before synthesising an answer from retrieved abstracts using an LLM.</p>
-<p>A information retrieval system also may first <a href="#query-understanding-changing-the-query-before-retrieval">parse, expand, decompose or rewrite the query</a>, before sending the transformed query to the actual retrieval and ranking algorithm, which may itself involve a <a href="#why-search-systems-use-multiple-stages">multi-stage candidate and ranking pipeline</a>.</p>
-<p>The natural question for librarians is:</p>
-<blockquote>
-<p>What do embeddings do better than Boolean searching, and what do they do worse?</p>
-</blockquote>
-<p>For most library search discussions, three approaches do most of the explanatory work:</p>
+<p>Most librarians understand Boolean searching. Yet two familiar result screens create puzzles that Boolean logic alone cannot answer.</p>
+<h2 id="two-familiar-search-results-and-two-puzzles">Two familiar search results&mdash;and two puzzles<a aria-label="Link to Two familiar search results&mdash;and two puzzles" class="heading-anchor" href="#two-familiar-search-results-and-two-puzzles">#</a></h2>
+<p>In the first example, a scite paper search combines a meaningful question about the open-access citation advantage with an invented string. Useful papers still appear near the top, and the interface reports millions of results.</p>
+<p>In the second, Google Scholar reports about 9.4 million results for <code>open access</code>, yet its interface reaches page 100 and its help documentation says that no more than 1,000 results can be shown for one query.</p>
+<div class="evidence-stack" aria-label="Opening search-result puzzles">
+<figure class="ir-figure evidence-card" aria-labelledby="scite-opening-caption">
+<h4>Puzzle one: the nonsense term did not empty the result list</h4>
+<img alt="Scite paper search returning results for a meaningful open-access question followed by an invented string" src="images/scite.png">
+<figcaption id="scite-opening-caption"><strong>Observed behaviour:</strong> relevant-looking results remain even though the query contains a string that is unlikely to occur in the collection.</figcaption>
+</figure>
+<figure class="ir-figure evidence-card" aria-labelledby="scholar-opening-caption">
+<h4>Puzzle two: the reported result set is much larger than the viewable list</h4>
+<img alt="Google Scholar page 100 for an open access search reporting about 9.4 million results" src="images/googlescholar1000.png">
+<figcaption id="scholar-opening-caption"><strong>Observed behaviour:</strong> the interface reports millions of matches, while <a href="https://scholar.google.com/intl/us/scholar/help.html">Google Scholar documents a 1,000-result display limit</a>.</figcaption>
+</figure>
+</div>
+<aside class="question-callout" aria-labelledby="opening-puzzles-title">
+<p class="question-callout-label">Keep these questions open</p>
+<h4 id="opening-puzzles-title">What must the search system be doing?</h4>
 <ol>
-<li><strong>Strict Boolean retrieval</strong>, where terms act as hard admission or exclusion rules.</li>
-<li><strong>BM25 or similar lexical ranking</strong>, where matching terms act as weighted clues.</li>
-<li><strong>Single-vector dense retrieval</strong>, usually implemented with a bi-encoder, where each indexed text unit is compressed into one learnt dense vector.</li>
+<li>Why did the invented string not exclude every scite result?</li>
+<li>How does Google Scholar decide which tiny fraction of the reported results appears first?</li>
 </ol>
-<p>Two additional names—<strong>learnt sparse retrieval</strong> and <strong>late interaction</strong>—are useful to recognise because vendors or technical papers may mention them. They complicate the keyword-versus-vector story, but they are not the centre of this article.</p><p>Academic Search Systems today are a mix of retrieval and generation often using Retrieval Augmented Generation.&nbsp;</p><blockquote>Retrieval-augmented generation (RAG) is a method where an AI retrieves relevant information from external sources such as evidence from search at query time and uses it as context to generate a more grounded answer.</blockquote><p>This text focuses only on <b>retrieval</b> - how systems retrieve and rank results to produce a ranked list of result rather than on the generation of answers.</p>
-<h2 id="two-category-errors-to-avoid">Two category errors to avoid<a aria-label="Link to Two category errors to avoid" class="heading-anchor" href="#two-category-errors-to-avoid">#</a></h2>
-<p>Librarians are often presented with a simple contrast: traditional Boolean or keyword search on one side, and modern vector or semantic search on the other. That framing is convenient, but it bundles together distinctions that need to be separated.</p>
-<p>First, lexical search does not necessarily mean Boolean search. A system can rely on matching words without treating every query term as a compulsory condition.</p>
-<p>Second, vector, embedding and semantic are not interchangeable. Vector-based components can coexist with lexical matching, exact-match rules and Boolean filters.</p>
-<p>The next sections begin with strict Boolean retrieval and the inverted index that makes it practical. They then distinguish Boolean admission rules from ranked lexical retrieval, introduce BM25 and return to the same index to show how it supports scoring. Dense embeddings follow, before an important qualification: not every vector is dense, learnt or semantic.</p>
-<p>With those cautions in mind, let us ask what each method preserves, what it learns and how it fails when the query contains a word such as <code>delulu</code>.</p>
+</aside>
+<p>These screenshots establish visible behaviour, not the products&rsquo; complete internal architectures. We will return to both examples after building the necessary machinery from the ground up.</p>
+<p>Begin with the most explicit case: a search in which every operator is an admission rule.</p>
 <h2 id="strict-boolean-search-words-as-admission-rules">Strict Boolean search: words as admission rules<a aria-label="Link to Strict Boolean search: words as admission rules" class="heading-anchor" href="#strict-boolean-search-words-as-admission-rules">#</a></h2>
 <p>Consider the query:</p>
 <blockquote>
@@ -513,7 +532,7 @@
 <li><code>NOT</code> excludes records.</li>
 </ul>
 <p>Boolean logic decides whether a record satisfies the query. A record that passes all of the query’s hard conditions is <strong>eligible</strong> to enter the result set.</p>
-<p>Boolean logic does not by itself decide which eligible record is most relevant. If relevance sorting is selected, a separate ranking stage can score and order the records that passed. Ranked lexical retrieval and BM25 are introduced below.</p>
+<p><strong>Boolean logic does not by itself assign relevance scores.</strong> Once several records are eligible, Boolean alone supplies no rule for deciding which should appear first.</p>
 <blockquote>
 <p>Boolean decides who gets into the competition. Ranking decides who finishes first.</p>
 </blockquote>
@@ -526,18 +545,7 @@
 <p><img alt="A poor synonym expansion changes which records can enter" src="images/01%20Boolean%20search%20-%20words%20as%20admission%20rules/ChatGPT%20Image%20Jul%2026,%202026,%2009_49_10%20PM.png"></p>
 <p>The reverse error is more serious. If a relevant record fails a compulsory <code>AND</code> condition, ranking cannot rescue it. It never enters the competition.</p>
 <p>This is why LLM-generated synonyms require particular care in formal Boolean strategies. A weak suggestion is not merely given a low weight. It changes which documents can be returned.</p>
-<h3 id="when-a-system-writes-the-boolean-query">When a system writes the Boolean query<a aria-label="Link to When a system writes the Boolean query" class="heading-anchor" href="#when-a-system-writes-the-boolean-query">#</a></h3>
-<p>A contemporary search interface may accept a natural-language question and use an NLP parser<sup id="fnref:nlp-parser"><a class="footnote-ref" href="#fn:nlp-parser">23</a></sup> or LLM to construct the Boolean expression on the user’s behalf. It might identify concepts, recognise dates or document types, add alternative terms and place those alternatives inside nested groups. For example, a question about social media and body image among teenage girls might become:</p>
-<blockquote>
-<p><code>(adolescent* OR teen*) AND ("social media" OR Instagram OR TikTok) AND ("body image" OR "body dissatisfaction")</code></p>
-</blockquote>
-<p>When the product supports them, a generated Boolean query can also use field searches or apply filters such as publication date, document type or affiliation, although exact field codes and supported filters vary between platforms:</p>
-<blockquote>
-<p><strong>Fielded concept search:</strong><br><code>TI=("social media" OR Instagram OR TikTok) AND TS=("body image" OR "body dissatisfaction")</code></p>
-<p><strong><a href="#web-of-science-smart-search-caption">Fields and inferred filters in Web of Science Smart Search:</a></strong><br><code>PY=(2020-2024) AND OG_SMART=(university of california) AND TS=(apple) AND TS=(oranges) AND TS=(bananas)</code></p>
-</blockquote>
-<p>The generated expression can still be executed as ordinary Boolean or lexical search.&nbsp;</p><p>The AI component has changed the query supplied to retrieval; it has not necessarily replaced lexical matching with vector similarity.&nbsp;</p><p><a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/040Search_Configurations/Natural_Language_Search_in_the_NDE_UI">Primo NDE Natural Language Search</a>, for example, uses ChatGPT 4.1 Mini to classify elements of the input, generate a basic Boolean query and expand it into six <code>OR</code>-connected permutations. The resulting structured query is sent to Primo Advanced Search, where users can inspect and edit it.</p>
-<p>By contrast, <a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/015_Getting_Started_with_Primo_Research_Assistant">Primo Research Assistant</a> uses a <a href="#why-search-systems-use-multiple-stages">hybrid, multi-stage setup</a>: an LLM converts the question into <code>OR</code>-connected Boolean variations, uses that to retrieves the candidates, and embeddings are usd to rerank up to 30 results to identify five top sources. The LLM then uses the sources’ abstracts to create an overview with inline references.</p><p>Both systems uses LLMs to convery the query into Boolean search strategies and run them through the Primo Search Engine (which is mostly lexical) which can make structured searching more accessible even if you type in natural language, but it also moves consequential choices behind the interface.&nbsp;</p><p>If the system adds a weak alternative, omits a concept or misreads a constraint, it changes the eligible set before ranking begins. For an auditable search, the generated Boolean query should ideally be visible, editable and exportable.&nbsp;</p><p>This technical is a type of&nbsp;<a href="#query-understanding-changing-the-query-before-retrieval">query understanding</a>&nbsp;and a later section will discuss this further.</p>
+<p>The admission decision is now clear, but the ordering problem is still open. First we need to see how a search engine finds the eligible records without rereading the entire collection.</p>
 <h2 id="how-boolean-and-bm25-use-an-inverted-index">How Boolean search uses an inverted index<a aria-label="Link to How Boolean search uses an inverted index" class="heading-anchor" href="#how-boolean-and-bm25-use-an-inverted-index">#</a></h2>
 <p>Large academic indexes like OpenAlex, Semantic Scholar, Exlibris CDI span hundreds of million of records. To handle queries as fast as possible, Boolean search does not normally reread every record whenever a query arrives.&nbsp;</p><p>It instead uses an <strong>inverted index</strong>: a structure that starts with searchable terms and points to the records containing them. Before examining how Boolean operators use that structure, we need to see how text becomes searchable terms.</p>
 <h3 id="before-the-index-text-becomes-tokens">Before the index: text becomes tokens<a aria-label="Link to Before the index: text becomes tokens" class="heading-anchor" href="#before-the-index-text-becomes-tokens">#</a></h3>
@@ -615,70 +623,9 @@ intersection → D1</code></pre>
 <h3 id="why-inverted-indexes-can-be-so-fast">Why inverted indexes can be so fast<a aria-label="Link to Why inverted indexes can be so fast" class="heading-anchor" href="#why-inverted-indexes-can-be-so-fast">#</a></h3>
 <p>The first advantage is <strong>selective access</strong>. The engine goes directly from each analysed query term to its posting list rather than scanning every document. Rare terms are especially selective because their lists are short.</p>
 <p>The second advantage is <strong>ordered access</strong>. Posting lists are normally sorted by document identifier. For a Boolean <code>AND</code> query, this makes it quick to find identifiers that appear in more than one list: the engine can work forwards through the lists instead of repeatedly searching earlier entries. A worked two-list example appears in <a href="#how-two-ordered-posting-lists-are-intersected">the advanced appendix</a>.</p>
-<p>The same dictionary and postings can support ranked lexical retrieval such as BM25 as well as Boolean set operations. After introducing BM25, we will return to the index to see how matching records acquire scores.</p>
-<h2 id="lexical-search-does-not-have-to-mean-boolean-search">Lexical search does not have to mean Boolean search<a aria-label="Link to Lexical search does not have to mean Boolean search" class="heading-anchor" href="#lexical-search-does-not-have-to-mean-boolean-search">#</a></h2>
-<p>Librarians often see a query such as:</p>
-<blockquote>
-<p>apple orange banana</p>
-</blockquote>
-<p>and assume that the search engine must interpret it as:</p>
-<blockquote>
-<p>apple AND orange AND banana</p>
-</blockquote>
-<p>That is a reasonable expectation in many academic databases, especially where spaces are treated as an implicit <code>AND</code>. But it is not an inherent property of keyword or lexical searching.</p>
-<blockquote>
-<p><strong>Lexical retrieval derives its evidence from matches between analysed query terms and indexed document terms. Boolean retrieval is just <u>one</u> way of turning lexical matches into hard admission or exclusion rules.</strong></p></blockquote>
-<p><img src="images/lexicalsearchisbroaderthanboolean.png" alt="Lexical search is broader than Boolean search"></p>
-<p>The same words can be processed in several entirely lexical ways that are not strict Boolean. No embeddings or semantic similarity are required.</p>
-<p>A system can apply different rules to decide which term matches are compulsory, and it can separately decide how the resulting documents should be scored or ordered.</p>
-<p>Under <strong>strict implicit AND</strong>, every term is compulsory (strict Boolean). A record containing <code>apple</code> and <code>orange</code> but not <code>banana</code> is excluded completely.</p>
-<blockquote>
-<p>Boolean matching says nothing about how the matched documents are scored and ranked, or even whether they will be ranked at all. While it is unthinkable today, early library catalogues often had no relevance sort: all records retrieved by strict Boolean were considered equally relevant, and the default sort was often by accession number. Today a separate relevance-ranking method commonly orders the records that pass.</p>
-</blockquote>
-<p>A system may instead use <strong>soft conjunction</strong>, sometimes called soft <code>AND</code>. It requires fewer than all of the query terms, commonly through a configurable minimum number or proportion of matches; that minimum may sometimes be one. It might accept records containing at least two of the three terms, or require a minimum proportion of a longer query. Such a system may drop the term&nbsp;<code>banana</code>&nbsp;and just match <font face="SFMono-Regular, Consolas, Liberation Mono, monospace"><span style="font-size: 15.84px; background-color: rgb(239, 234, 224);">apple</span></font>&nbsp;and&nbsp;<span style="background-color: rgb(239, 234, 224); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, monospace; font-size: 15.84px;">orange</span>&nbsp;. Documents lacking it can still qualify to appear in the results list.</p>
-<blockquote>
-<p>Like strict Boolean, <strong>soft conjunction</strong> does not by itself imply ranking, although in practice it is usually combined with another scoring or ranking system that produces a relevance score.</p>
-</blockquote>
-<p>A third common possibility is <strong>ranked lexical retrieval</strong>. Matching query terms contribute weighted evidence to a relevance score rather than functioning only as hard conditions.&nbsp;</p><p>Generally speaking, any document with <b>at least one</b> matched query term will be eligible to be retrieved and ranked.</p><p>In terms of scoring, a document matching two of the three terms may provides stronger evidence of relevancy than a document matching only one of three but this is not guaranteed.&nbsp;</p><p>In short, matching more of the query will generally help, but failing to match one word is not necessarily fatal.</p>
-<p><a href="#bm25-words-as-weighted-clues">BM25</a> is a common ranked lexical method. The next section explains how it calculates those weights and which records it can score.</p>
-<p><img src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/The%20next%20section%20explains%20how%20BM25%20calculates%20those%20weights..png" alt="The next section explains how BM25 calculates those weights."></p>
-<p>Soft conjunction and ranked lexical retrieval solve different problems. A minimum-match rule sets a hard threshold for inclusion; a ranking method assigns graded scores and orders results.</p>
-<p>In production systems, that score may be combined with field weighting, phrase and proximity boosts, and other signals such as citation counts or recency, as discussed below for Primo and other academic search products.</p>
-<p>The image below shows an example of&nbsp; a system that combines requiring a minimum number of matches and then ranking the documents that pass using weighted lexical evidence.</p>
-<p><img src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/A%20system%20can%20combine%20them%20by%20requiring%20a%20minimum%20number%20of%20matches%20and%20then%20ranking%20the%20eligible%20documents%20using%20weighted%20lexical%20evidence.png" alt="A system can combine them by requiring a minimum number of matches and then ranking the eligible documents using weighted lexical evidence"></p>
-<h3 id="what-happened-to-the-missing-word">What might be happening when documents are returned missing query terms<img src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/What%20happened%20to%20the%20missing%20word.png" alt="What happened to the missing word" style="color: rgb(23, 32, 31); font-size: 18px;"></h3><p>When a returned result lacks one of the words typed into the search box, several different things may have happened even if the system is mostly lexical.</p>
-<ol>
-<li><strong>Removed during query analysis.</strong> A query analyser may discard configured stop words such as <code>the</code>, <code>of</code> or <code>and</code> before retrieval. This is literal term dropping, although stop-word lists are configurable and not universal.</li><li><strong>Removed or changed during query rewriting.</strong> A system may deliberately reduce a verbose query, remove terms judged unhelpful, expand it with alternatives or otherwise reformulate it before retrieval.</li>
-<li><strong>Retained but optional.</strong> The term remains active and can improve a document’s score when present, but matching it is not required. In <code>apple orange banana</code>, a document containing <code>banana</code> may gain additional evidence even though documents lacking it remain eligible. This happens in<b> ranked lexical retrieval</b>.</li>
-<li><strong>Retained but unmatched.</strong> Suppose the query is <code>apple orange xyzplonk</code> and <code>xyzplonk</code> occurs nowhere in the index. The term may remain in the processed query but cannot contribute evidence to any result. Retrieval can still proceed from <code>apple</code> and <code>orange</code> if the system does not require every term.</li></ol><p>These behaviours are not mutually exclusive. A system might remove stop words, retain the remaining terms as optional clauses, require a minimum proportion to match and then rank the qualifying documents using TF-IDF, BM25 or another lexical scoring function.&nbsp;</p><p>They also span three distinct stages that are worth keeping apart: <strong>query analysis</strong> (tokenisation, normalisation, stemming and stop-word handling), <strong>query execution rules</strong> (required, optional or minimum-match clauses) and <a href="#query-understanding-changing-the-query-before-retrieval">query understanding or rewriting</a> (expansion, decomposition, routing, HyDE and related transformations).&nbsp;</p><p>None of this is by itself evidence that the eventual retriever is "semantic" or "non-lexical".</p>
-<p><img src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/These%20behaviours%20are%20not%20mutually%20exclusive.png" alt="These behaviours are not mutually exclusive"></p>
-<p>This confusion between what lexical search is predates today’s embedding-based search. Even in the early days of Google, many librarians insisted Google Search was not lexical or keyword because they noticed it did not follow strict Boolean.</p>
-<p>Google’s early help documentation described ordinary multiword searches as <code>AND</code> queries, but by 2009 Google had begun experimenting with silently ignoring some terms, according to a <a href="https://www.wired.com/2011/10/google-kills-its-other-plus-and-how-to-bring-it-back/">2011 retrospective in <em>Wired</em></a>. By 2012, I was already <a href="https://musingsaboutlibrarianship.blogspot.com/2012/05/how-is-google-different-from.html">describing Google as behaving like a “soft AND”</a> compared with traditional library systems.</p>
-<p>To librarians accustomed to academic databases, results that lacked one of the typed words could look as though Google had moved beyond lexical matching into “semantic search” or even use of dense embeddings.</p>
-<blockquote>
-<p><a href="https://blog.google/products-and-platforms/products/search/search-language-understanding-bert/">Google introduced BERT into Search in 2019</a>, primarily for query understanding and ranking, while core retrieval remained largely lexical. But BERT was not Google’s first machine-learning or neural ranking component<sup id="fnref:according-to-some-reports-google-s-rankbrain-int"><a class="footnote-ref" href="#fn:according-to-some-reports-google-s-rankbrain-int">24</a></sup>. More importantly, apparently non-Boolean behaviour did not by itself prove that dense retrieval was responsible.</p>
-</blockquote>
-<p>Sometimes synonym expansion or other semantic query interpretation may indeed have been involved, if you count that as “semantic search”.</p>
-<p>But the query term might instead have been removed during query analysis, retained as optional, retained but unable to match anything, or included in a query that required only partial matching.</p>
-<p>Ranked lexical retrieval could then order the resulting documents while remaining substantially lexical.<sup id="fnref:google-apparent-nonlexical"><a class="footnote-ref" href="#fn:google-apparent-nonlexical">17</a></sup></p>
-<p><img src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/Ranked%20lexical%20retrieval%20could%20then%20order%20the%20resulting%20documents%20while%20remaining%20substantially%20lexical.png" alt="Ranked lexical retrieval could then order the resulting documents while remaining substantially lexical"></p>
-<p>The important point is that a search box containing ordinary words does not reveal whether each word is:</p>
-<ul>
-<li>required;</li>
-<li>retained but optional;</li>
-<li>included in a minimum-match rule;</li>
-<li>used as weighted ranking evidence;</li>
-<li>retained but unable to match anything;</li>
-<li>removed during analysis, as with stop-word filtering; or</li>
-<li>removed or changed during query rewriting.</li>
-</ul>
-<p>Scite’s paper search provides a useful example. In the search below, a meaningful question about the open-access citation advantage is followed by a random invented string. Scite still retrieves <em>The Open Access Advantage</em> near the top and reports millions of results.</p>
-<p><img alt="Scite paper search still returns results when a meaningful query is followed by an invented word" src="images/scite.png"></p>
-<p>The screenshot does not reveal Scite’s complete retrieval architecture. It establishes only that the invented string is not functioning as a compulsory <code>AND</code> condition. The string may have been removed, retained as an optional term, or retained but unable to match anything in the index. The screenshot cannot distinguish among those possibilities. In every case, the remaining query could still be processed lexically.<sup id="fnref:scite-lexical-suggestive"><a class="footnote-ref" href="#fn:scite-lexical-suggestive">20</a></sup></p><p><img src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/Immediately%20after%20the%20existing%20Scite%20screenshot.png" alt="Immediately after the existing Scite screenshot"></p>
-<p>This distinction matters because strict Boolean retrieval and TF-IDF or BM25 ranking are all lexical. They rely on relationships between query terms and indexed terms. Strict Boolean uses those terms as admission rules, whereas TF-IDF or BM25 uses matching terms as weighted evidence.</p><blockquote>
-<p>A search system can therefore be non-Boolean without being semantic.</p>
-</blockquote><p><img src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/admissionrules.png" alt="admissionrules"></p>
+<p>The inverted index gets us quickly to the eligible set. But if several records pass, the posting lists do not inherently say which one deserves first place. The missing operation is a graded relevance score.</p>
 <h2 id="bm25-words-as-weighted-clues">BM25: words as weighted clues<a aria-label="Link to BM25: words as weighted clues" class="heading-anchor" href="#bm25-words-as-weighted-clues">#</a></h2>
+<p>An eligible set is not yet an ordered result list. BM25 supplies the missing ranking step by turning matching words into unequal, graded evidence.</p>
 <p><strong>BM25 is a lexical scoring function that ranks documents by combining weighted evidence from matching analysed terms.</strong> It is one of the standard workhorses of lexical retrieval, remains a common baseline against which newer retrieval methods are compared, and is the default text-scoring model in Apache Lucene and major Lucene-based search engines such as Elasticsearch, Apache Solr and OpenSearch.<sup id="fnref:lucene-family"><a class="footnote-ref" href="#fn:lucene-family">18</a></sup></p>
 <p>Librarians may be more familiar with the term <strong>TF-IDF</strong>. Its central intuition is straightforward: a matching word provides evidence that a document is relevant, but a relatively uncommon word usually tells us more than one appearing throughout the collection.</p>
 <p>BM25 follows the same practical intuition that matching terms should contribute different amounts of evidence, but it is not simply a revision of the canonical TF-IDF formula and instead comes from the probabilistic relevance tradition.<sup id="fnref:bm25-probability"><a class="footnote-ref" href="#fn:bm25-probability">1</a></sup></p>
@@ -687,7 +634,7 @@ intersection → D1</code></pre>
 <ol>
 <li><strong>Did the term match at all?</strong> A term that does not appear in the document contributes nothing.</li>
 <li><strong>How rare is the term in the collection?</strong> A term found in relatively few documents usually contributes more (higher score) than one found almost everywhere. This is inverse document frequency.<sup id="fnref:bm25-idf"><a class="footnote-ref" href="#fn:bm25-idf">2</a></sup></li>
-<li><strong>How often does it occur in the document, with diminishing returns?</strong> Repeated occurrences provide more evidence that the document concerns the term, but each additional occurrence should adds progressively less evidence. Seeing <code style="font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, monospace; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(239, 234, 224);">delulu</code> twice may be more informative than seeing it once. Seeing&nbsp;<span style="font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, monospace; font-size: 15.84px; background-color: rgb(239, 234, 224);">delulu</span>&nbsp;100 times does not make a document 100 times more relevant.&nbsp;But how much should it be? In BM25 this term saturation is handled by a parameter set by the system<sup id="fnref:bm25-query-frequency"><a class="footnote-ref" href="#fn:bm25-query-frequency">3</a></sup></li>
+<li><strong>How often does it occur in the document, with diminishing returns?</strong> Repeated occurrences provide more evidence that the document concerns the term, but each additional occurrence adds progressively less evidence. Seeing <code style="font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, monospace; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(239, 234, 224);">delulu</code> twice may be more informative than seeing it once. Seeing&nbsp;<span style="font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, monospace; font-size: 15.84px; background-color: rgb(239, 234, 224);">delulu</span>&nbsp;100 times does not make a document 100 times more relevant.&nbsp;But how much should it be? In BM25 this term saturation is handled by a parameter set by the system<sup id="fnref:bm25-query-frequency"><a class="footnote-ref" href="#fn:bm25-query-frequency">3</a></sup></li>
 <li><strong>Is that frequency unusually high given the document’s length?</strong> Five occurrences in a short abstract may be stronger evidence (higher score) than five occurrences in a very long document. This is document-length normalisation and like term saturation the strength of this normalisation is controlled by&nbsp;yet another parameter set by the system,</li>
 </ol>
 <p><img alt="The four questions BM25 asks about each matching term" src="images/02%20BM25%20-%20words%20as%20weighted%20clues/ChatGPT%20Image%20Jul%2026,%202026,%2009_32_47%20PM.png"></p>
@@ -750,17 +697,7 @@ intersection → D1</code></pre>
 <p>delulu job interview expectations</p>
 </blockquote>
 <p>a BM25 system can treat the terms as weighted evidence and retrieve the highest-scoring documents without requiring every one of them to appear.</p>
-<aside class="common-confusion" aria-labelledby="bm25-top-k-confusion-title">
-<p class="common-confusion-label">Common confusion</p>
-<h4 id="bm25-top-k-confusion-title">Does lexical retrieval have to return every matching document?</h4>
-<p><strong>1. BM25 still has a lexical match floor.</strong> In a pure BM25 search, a document normally becomes a candidate only if it contains at least one of the analysed query terms. Each matching query term can add a weighted contribution to the document’s score. If a document matches none of them, there is no lexical evidence to add, its BM25 score is zero and it is normally not retrieved. BM25 is therefore less restrictive than Boolean <code>AND</code>, but it does not retrieve documents with no lexical match at all.<sup id="fnref:bm25-one-term-floor"><a class="footnote-ref" href="#fn:bm25-one-term-floor">21</a></sup></p>
-<p><strong>2. Counting matches and ranking them require different amounts of work.</strong> A Boolean query defines a yes-or-no condition: a record either satisfies the expression or it does not. Once the system has identified that eligible set, counting its members is often comparatively cheap. This helps academic databases report a complete hit count.</p>
-<p>BM25 must additionally calculate a graded score for matching documents. If common query terms produce millions of candidates, scoring every candidate and fully sorting the resulting list can be expensive. A system can therefore report the size of a Boolean-eligible set without calculating and sorting a BM25 score for every record in that set. Seeing a complete hit count does not establish that every hit was exhaustively ranked.</p>
-<p><strong>3. Ranked retrieval can retain only the leaders.</strong> Instead of producing a fully sorted list of every candidate, the system can ask for only the 10, 100 or 1,000 highest-scoring documents. Information retrieval uses <em>k</em> as a placeholder for that requested number, so this is called a <strong>top-<em>k</em> result</strong>.</p>
-<p>Web search makes this practice familiar. <a href="https://support.google.com/websearch/answer/7585859">Google describes its ranking systems as sorting through billions of pages</a> to provide useful results, rather than exposing the entire index as a browsable result set. Google Scholar is more explicit: although a search may report many matches, <a href="https://scholar.google.com/intl/us/scholar/help.html">its help page says that users can view no more than 1,000 results</a> for a particular query.</p>
-<p><strong>Top <em>k</em> is not exclusive to dense retrieval.</strong> Approximate nearest-neighbour systems commonly return the nearest <em>k</em> vectors, which may make top <em>k</em> appear to be a vector-search concept. But BM25 can also return the <em>k</em> documents with the highest lexical scores. Top <em>k</em> describes how many leading results are retained; it does not describe where the scores came from.</p>
-<p>The <a href="#how-bm25-actually-uses-the-posting-lists">optional appendix</a> shows how BM25 maintains a small set of leading scores and how <a href="#for-awareness-maxscore-wand-and-block-max-pruning">MaxScore, WAND and Block-Max WAND</a> can reduce the work while preserving the exact top <em>k</em>.</p>
-</aside>
+
 <p>This makes it less brittle than strict Boolean, but not wise. BM25 does not know that <code>foolish</code> may be a poor substitute for <code>delulu</code>. If <code>foolish</code> is rare in the collection, its inverse-document-frequency weight could make it surprisingly influential.</p>
 <p>You can watch this happen in <a href="bm25-evidence-lab.html">the Evidence Lab</a>: adding <code>foolish</code> as a synonym lifts an unrelated record to first place just as decisively as the correct expansion lifts the right one.</p>
 <p><img alt="Rare query terms contribute stronger lexical evidence through IDF" src="images/02%20BM25%20-%20words%20as%20weighted%20clues/ChatGPT%20Image%20Jul%2026,%202026,%2009_33_13%20PM.png"></p>
@@ -769,7 +706,7 @@ intersection → D1</code></pre>
 <h2 id="how-bm25-uses-the-same-inverted-index">How BM25 uses the same inverted index<a aria-label="Link to How BM25 uses the same inverted index" class="heading-anchor" href="#how-bm25-uses-the-same-inverted-index">#</a></h2>
 <p>The earlier Boolean explanation introduced the <a href="#from-analysed-tokens-to-a-term-first-map">dictionary and posting lists</a> as a term-to-document map. BM25 can use the same underlying structure. What changes is what the search engine does with the matching records: <a href="#boolean-treats-postings-as-sets">Boolean operators treat postings mainly as sets</a>, while BM25 uses their stored evidence to calculate graded scores.</p>
 <p><img alt="Two stages of search: Boolean eligibility followed by BM25 relevance ranking" src="images/01%20Boolean%20search%20-%20words%20as%20admission%20rules/ChatGPT%20Image%20Jul%2026,%202026,%2009_49_01%20PM.png"></p>
-<p>The illustration shows one possible combination: a Boolean expression first restricts which records may proceed, and BM25 then ranks those records. BM25 can also retrieve directly without a preceding Boolean gate, subject to the <a href="#bm25-top-k-confusion-title">lexical match floor</a> explained above.</p>
+<p>The illustration shows one possible combination: a Boolean expression first restricts which records may proceed, and BM25 then ranks those records. BM25 can also retrieve directly without a preceding Boolean gate, subject to the <a href="#bm25-top-k-confusion-title">lexical match floor</a> discussed below when we return to Google Scholar.</p>
 <p>At query time, the process can be understood as five steps:</p>
 <ol>
 <li><strong>Look up each analysed query term.</strong> The dictionary points to the corresponding posting lists.</li>
@@ -783,6 +720,52 @@ intersection → D1</code></pre>
 <p>Selective access still matters. BM25 obtains candidates from the query terms’ posting lists rather than scanning every document, and rare terms lead to shorter lists. Ordered postings also help the engine bring together the score contributions belonging to the same document while moving forwards through the lists.</p>
 <p>Production indexes add further engineering to store posting lists compactly and avoid unnecessary work. Compression and blocks reduce storage and memory traffic, while score upper bounds and safe pruning methods such as MaxScore, WAND and Block-Max WAND can avoid scoring candidates that cannot enter the leading results. These techniques change how efficiently the same term-to-document map is stored and traversed; they do not turn BM25 into semantic retrieval. The <a href="#how-bm25-actually-uses-the-posting-lists">advanced appendix</a> provides a complete worked scoring example and explains these techniques in more detail. The classic <a href="https://nlp.stanford.edu/IR-book/html/htmledition/the-term-vocabulary-and-postings-lists-1.html"><em>Introduction to Information Retrieval</em></a> provides another introduction to dictionaries, postings and basic query processing.</p>
 <p>As a broad practical rule, lexical retrieval over an inverted index is generally fast and often less computationally demanding than dense retrieval at a similar scale. That is not a universal benchmark result: hardware, index design, query mix and accuracy settings all matter. The different candidate-generation machinery used for dense vectors is explained in <a href="#how-nearest-neighbour-indexing-makes-dense-retrieval-practical">the later dense-retrieval section</a>, after vectors and embeddings have been introduced.</p>
+<h2 id="lexical-search-does-not-have-to-mean-boolean-search">Lexical search does not have to mean Boolean search<a aria-label="Link to Lexical search does not have to mean Boolean search" class="heading-anchor" href="#lexical-search-does-not-have-to-mean-boolean-search">#</a></h2>
+<p>We can now name the larger family to which both of the preceding methods belong. <strong>Lexical retrieval derives evidence from relationships between analysed query terms and indexed document terms.</strong></p>
+<p>Strict Boolean retrieval and BM25 can therefore use the same vocabulary, the same text-analysis pipeline and the same inverted index. What differs is what they do with the matches.</p>
+<p>Suppose the analysed query contains:</p>
+<blockquote><p>apple orange banana</p></blockquote>
+<ol>
+<li><strong>Strict Boolean or implicit <code>AND</code>:</strong> all three terms are compulsory. A document missing <code>banana</code> is excluded.</li>
+<li><strong>Minimum match or soft conjunction:</strong> a configured number or proportion must match. A system might require any two of the three terms.</li>
+<li><strong>Any-match ranked retrieval:</strong> one matching term can make a document a candidate, and each additional match can add weighted evidence. BM25 commonly operates this way.</li>
+</ol>
+<blockquote class="pull-quote"><p>Same analysed terms. Same inverted index. Different rules for admission and scoring.</p></blockquote>
+<p><img src="images/lexicalsearchisbroaderthanboolean.png" alt="Diagram showing strict Boolean, minimum-match and ranked any-match retrieval as different forms of lexical retrieval"></p>
+<p>A minimum-match rule and a ranking function solve different problems. The first establishes a hard floor for inclusion; the second assigns graded scores and orders the candidates. A production system can use either one alone or combine them.</p>
+
+<h3 id="what-happened-to-the-missing-word">What might have happened to a missing query word<a aria-label="Link to What might have happened to a missing query word" class="heading-anchor" href="#what-happened-to-the-missing-word">#</a></h3>
+<p>When a returned result lacks one of the words typed into the search box, several explanations remain possible:</p>
+<ul>
+<li><strong>Removed during analysis:</strong> the system discarded a stop word or punctuation before retrieval.</li>
+<li><strong>Removed or changed during rewriting:</strong> an upstream component shortened, expanded or reformulated the query.</li>
+<li><strong>Retained but optional:</strong> matching the term could improve a score, but was not required.</li>
+<li><strong>Retained but unmatched:</strong> the term stayed in the processed query but occurred in no posting list, so it contributed nothing.</li>
+</ul>
+<p>These behaviours are not mutually exclusive. A system may analyse the query, require only a subset of the surviving terms, and then rank the qualifying documents using weighted word matches. None of that behaviour, by itself, identifies the complete retrieval architecture.</p>
+
+<h3 id="returning-to-the-opening-puzzles">Returning to the opening puzzles<a aria-label="Link to Returning to the opening puzzles" class="heading-anchor" href="#returning-to-the-opening-puzzles">#</a></h3>
+<h4 id="returning-to-scite">Scite: the invented string was not compulsory</h4>
+<p>The <a href="#scite-opening-caption">opening scite screenshot</a> establishes only that the invented string was not functioning as a compulsory <code>AND</code> condition. It may have been removed, retained as an optional term, or retained but unable to match anything. The screenshot cannot distinguish among these possibilities, and it does not prove that the interface uses BM25, dense retrieval or any other single method.<sup id="fnref:scite-lexical-suggestive"><a class="footnote-ref" href="#fn:scite-lexical-suggestive">20</a></sup></p>
+<p>The remaining words could still supply ordinary term-matching evidence. The visible result is non-Boolean behaviour, not proof that word matching has disappeared.</p>
+
+<h4 id="returning-to-google-scholar">Google Scholar: a hit count is not a fully browsable ranking</h4>
+<aside class="common-confusion" aria-labelledby="bm25-top-k-confusion-title">
+<p class="common-confusion-label">Common confusion</p>
+<h4 id="bm25-top-k-confusion-title">Does ranked retrieval have to return every matching document?</h4>
+<p><strong>1. BM25 still has a word-match floor.</strong> In a pure BM25 search, a document normally becomes a candidate only if it contains at least one analysed query term. With no matching term there is no evidence to add, so the score is zero and the document is normally not retrieved.<sup id="fnref:bm25-one-term-floor"><a class="footnote-ref" href="#fn:bm25-one-term-floor">21</a></sup></p>
+<p><strong>2. Counting and ranking require different work.</strong> A system may estimate or calculate the size of a matching set without fully scoring and sorting every member. A reported hit count therefore does not establish that every hit received an exhaustive final ranking.</p>
+<p><strong>3. The system can retain only the leaders.</strong> A ranking system can ask for the ten, hundred or thousand highest-scoring documents. Information retrieval uses <em>k</em> for the requested number, producing a <strong>top-<em>k</em></strong> result.</p>
+<p>The <a href="#scholar-opening-caption">opening Google Scholar screenshot</a> makes the distinction visible: millions of results are reported, results are normally sorted by relevance, and <a href="https://scholar.google.com/intl/us/scholar/help.html">only the first 1,000 can be shown for a particular query</a>.</p>
+<p><strong>Top <em>k</em> is not exclusive to vector search.</strong> BM25 can return the <em>k</em> highest word-based scores just as a vector system can return the <em>k</em> nearest vectors. Top <em>k</em> describes the result boundary, not the source of the score.</p>
+<p>The <a href="#how-bm25-actually-uses-the-posting-lists">advanced appendix</a> shows how a search engine can maintain a small set of leading BM25 scores and how MaxScore, WAND and Block-Max WAND can avoid unnecessary work while preserving the exact top <em>k</em>.</p>
+</aside>
+<p>This confusion predates modern embedding systems. Search products have long removed terms, treated them as optional, expanded queries and combined term evidence with other ranking signals. Google&rsquo;s current ranking-systems guide, for example, describes BERT, neural matching and RankBrain as distinct systems.<sup id="fnref:according-to-some-reports-google-s-rankbrain-int"><a class="footnote-ref" href="#fn:according-to-some-reports-google-s-rankbrain-int">24</a></sup> Apparently non-Boolean behaviour did not, by itself, prove that dense retrieval was responsible.<sup id="fnref:google-apparent-nonlexical"><a class="footnote-ref" href="#fn:google-apparent-nonlexical">17</a></sup></p>
+<blockquote class="pull-quote"><p>A search system can therefore be non-Boolean without being non-lexical or semantic.</p></blockquote>
+<h2 id="two-category-errors-to-avoid">One category error resolved&mdash;and one still ahead<a aria-label="Link to One category error resolved&mdash;and one still ahead" class="heading-anchor" href="#two-category-errors-to-avoid">#</a></h2>
+<p>The first category error is now resolved: <strong>lexical</strong> does not mean <strong>Boolean</strong>. Boolean admission, minimum-match thresholds and graded ranking are different ways of using word-based evidence.</p>
+<p>A second category error becomes important as we turn to neural retrieval: <strong>vector does not automatically mean dense, learnt or semantic.</strong> BM25 scores can be represented with sparse, vocabulary-aligned vectors, while contemporary bi-encoders usually produce learnt dense vectors.</p>
+<p>The next sections introduce retrieval embeddings and dense candidate generation before returning to that distinction in full.</p>
 <h2 id="from-word2vec-to-retrieval-embeddings">From Word2Vec to retrieval embeddings<a aria-label="Link to From Word2Vec to retrieval embeddings" class="heading-anchor" href="#from-word2vec-to-retrieval-embeddings">#</a></h2>
 <p>Before comparing kinds of vectors, it helps to establish the basic idea. A <strong>vector</strong> is an ordered list of numbers. In a simple diagram, two numbers could give an object horizontal and vertical coordinates. Machine-learning vectors usually have hundreds or thousands of dimensions, so we cannot draw them directly, but the same idea remains: each item is represented by a location in a mathematical space.</p>
 <p>An <strong>embedding</strong> is a mapping that places an item—such as a word, query or passage—into such a vector space. Items placed near one another are treated as similar according to whatever patterns the model learnt.</p>
@@ -1066,6 +1049,18 @@ intersection → D1</code></pre>
 </div>
 <figcaption>The transformation stage changes what is sent to retrieval. The retrieval method still determines how documents become candidates and receive scores.</figcaption>
 </figure>
+<h3 id="when-a-system-writes-the-boolean-query">When a system writes the Boolean query<a aria-label="Link to When a system writes the Boolean query" class="heading-anchor" href="#when-a-system-writes-the-boolean-query">#</a></h3>
+<p>A contemporary search interface may accept a natural-language question and use an NLP parser<sup id="fnref:nlp-parser"><a class="footnote-ref" href="#fn:nlp-parser">23</a></sup> or an LLM to construct a Boolean expression on the user&rsquo;s behalf. It might identify concepts, recognise dates or document types, add alternatives and place them inside nested groups. For example:</p>
+<blockquote><p><code>(adolescent* OR teen*) AND ("social media" OR Instagram OR TikTok) AND ("body image" OR "body dissatisfaction")</code></p></blockquote>
+<p>When supported, the generated query can also use fields and inferred filters:</p>
+<blockquote>
+<p><strong>Fielded concept search:</strong><br><code>TI=("social media" OR Instagram OR TikTok) AND TS=("body image" OR "body dissatisfaction")</code></p>
+<p><strong><a href="#web-of-science-smart-search-caption">Fields and inferred filters in Web of Science Smart Search:</a></strong><br><code>PY=(2020-2024) AND OG_SMART=(university of california) AND TS=(apple) AND TS=(oranges) AND TS=(bananas)</code></p>
+</blockquote>
+<p>The AI component has changed the query supplied to retrieval; it has not necessarily replaced term matching with vector similarity.</p>
+<p><a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/040Search_Configurations/Natural_Language_Search_in_the_NDE_UI">Primo NDE Natural Language Search</a>, for example, currently documents ChatGPT 4.1 Mini classifying elements of the input, generating a basic Boolean query and expanding it into six <code>OR</code>-connected permutations. Users can inspect and edit the structured query sent to Advanced Search.</p>
+<p>By contrast, <a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/015_Getting_Started_with_Primo_Research_Assistant">Primo Research Assistant</a> documents a multi-stage architecture: an LLM converts the question into <code>OR</code>-connected Boolean variations, CDI retrieves candidates, and embeddings rerank up to 30 results to identify five sources. An LLM then writes an overview from the selected abstracts.</p>
+<p>Both examples make structured searching accessible through natural language, but their transformations remain consequential. A weak alternative, omitted concept or misread constraint can change the candidate set before ranking begins. For an auditable search, the generated Boolean query should ideally be visible, editable and exportable.</p>
 <h3 id="common-query-understanding-techniques">Common query-understanding techniques<a aria-label="Link to Common query-understanding techniques" class="heading-anchor" href="#common-query-understanding-techniques">#</a></h3>
 <div class="table-wrap"><table>
 <thead>
