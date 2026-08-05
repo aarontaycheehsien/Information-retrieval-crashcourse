@@ -217,24 +217,18 @@
     }
     .question-callout p { margin: .8rem 0; }
 
-    .implication-callout {
-      margin: 2.2rem 0; padding: 1.25rem 1.4rem;
-      border: 2px solid var(--teal); border-left: 8px solid var(--accent);
-      border-radius: 12px; background: linear-gradient(135deg, var(--paper-2), #f1ece2);
-      box-shadow: 0 8px 24px rgba(40, 35, 28, .09);
+    /* Collapsed reference tables: the argument stays in the main flow, the
+       method-by-method detail stays available for readers who need it. */
+    .detail-drawer {
+      margin: 1.8rem 0; padding: .9rem 1.2rem; border: 1px solid var(--line);
+      border-left: 4px solid var(--accent); border-radius: 10px; background: #f7f3eb;
     }
-    .implication-callout-label {
-      display: inline-block; margin: 0 0 .7rem; padding: .3rem .55rem;
-      border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--teal));
-      color: white; font: 800 .7rem/1 var(--sans);
-      letter-spacing: .08em; text-transform: uppercase;
+    .detail-drawer > summary {
+      cursor: pointer; font: 800 .9rem/1.35 var(--sans); color: var(--accent-dark);
     }
-    .implication-callout h3 {
-      margin: 0 0 .9rem; color: var(--teal);
-      font: 800 1.2rem/1.3 var(--sans);
-    }
-    .implication-callout p { margin: .8rem 0; }
-    .implication-callout .table-wrap { margin: 1.1rem 0; background: white; }
+    .detail-drawer > summary::marker { color: var(--accent); }
+    .detail-drawer > p { margin: 1rem 0 .25rem; font-size: .92rem; color: #45504e; }
+    .detail-drawer .table-wrap { margin: 1.1rem 0 .25rem; background: white; }
 
     ul, ol { padding-left: 1.45rem; }
     li { margin: .55rem 0; padding-left: .15rem; }
@@ -449,7 +443,10 @@
       article { border: 0; box-shadow: none; padding: 0; }
       a { color: inherit; }
       h2, h3 { break-after: avoid; }
-      table, blockquote, .common-confusion, .question-callout, .implication-callout, .query-flow, .ir-figure, .orientation, .glossary { break-inside: avoid; }
+      table, blockquote, .common-confusion, .question-callout, .detail-drawer, .query-flow, .ir-figure, .orientation, .glossary { break-inside: avoid; }
+      /* Nothing collapsed may be lost on paper. content-visibility overrides the
+         UA rule that hides a closed <details> in Chromium. */
+      details > *:not(summary) { display: block !important; content-visibility: visible !important; }
     }
   </style>
   <script>
@@ -1437,16 +1434,18 @@ intersection → D1</code></pre>
 <p>Basic <a href="#top-k-is-a-result-boundary-not-a-dense-retrieval-method">RAG</a> retrieves and then generates. <strong>Agentic RAG</strong> lets a model choose retrieval actions while working towards a generated response. <strong>Agentic search</strong> is broader than both: it may end with a ranked set of papers, passages or evidence and never generate prose at all.</p>
 <p>Keeping these apart prevents RAG, deep research and agentic search from collapsing into a single marketing category—which, from the outside, is exactly what they tend to look like.</p>
 
-<h2 id="three-different-ways-vocabulary-can-go-wrong">Three different ways vocabulary can go wrong<a aria-label="Link to Three different ways vocabulary can go wrong" class="heading-anchor" href="#three-different-ways-vocabulary-can-go-wrong">#</a></h2>
-<p>Every component of a retrieval pipeline is now in view: transformation before retrieval, one or more retrievers, fusion, reranking, presentation or generation, and the controller that may sequence or repeat them. This section and the next use that complete picture to do something the earlier sections could not. Rather than describing what each method does, they ask where a search goes wrong—and show that failures which look alike from the result screen originate at quite different points in the pipeline, and therefore call for different remedies.</p>
-<p>Discussions of semantic search often muddle three separate problems:</p>
+<span id="three-different-ways-vocabulary-can-go-wrong" class="legacy-anchor"></span><h2 id="diagnosing-where-retrieval-goes-wrong">Diagnosing where retrieval goes wrong<a aria-label="Link to Diagnosing where retrieval goes wrong" class="heading-anchor" href="#diagnosing-where-retrieval-goes-wrong">#</a></h2>
+<p>Every component of a retrieval pipeline is now in view: transformation before retrieval, one or more retrievers, fusion, reranking, presentation or generation, and the controller that may sequence or repeat them. Agentic control does not remove the limitations of the components it controls. It may sometimes compensate for one by trying another query or another route, but it can just as easily carry an early failure forward into every later round.</p>
+<p>With the complete pipeline in view, this section can do something the earlier ones could not. Rather than describing what each method does, it works backwards from failures—and shows that results which look alike on the screen originate at quite different points in the pipeline, and therefore call for different remedies.</p>
+<p>Discussions of semantic search tend to collapse four separate problems into a single complaint about vocabulary. Only the first two are really about vocabulary at all:</p>
 <ol>
-<li><strong>Vocabulary mismatch:</strong> the query and relevant document express the same idea differently.</li>
-<li><strong>Vocabulary or representation gaps:</strong> an important string is absent, fragmented or poorly represented somewhere in the system.</li>
+<li><strong>Mismatch:</strong> the system knows both expressions but does not connect them.</li>
+<li><strong>Gap:</strong> an important string is absent, fragmented or poorly represented somewhere in the system.</li>
 <li><strong>Domain shift:</strong> the model has learnt the wrong sense, register or definition of relevance.</li>
+<li><strong>Composition failure:</strong> every word is familiar, but their combined meaning is missed.</li>
 </ol>
 <p>They produce different failure modes and favour different remedies.</p>
-<h3 id="1-vocabulary-mismatch">1. Vocabulary mismatch<a aria-label="Link to 1. Vocabulary mismatch" class="heading-anchor" href="#1-vocabulary-mismatch">#</a></h3>
+<span id="1-vocabulary-mismatch" class="legacy-anchor"></span><h3 id="vocabulary-mismatch">Vocabulary mismatch: the same idea in different words<a aria-label="Link to Vocabulary mismatch: the same idea in different words" class="heading-anchor" href="#vocabulary-mismatch">#</a></h3>
 <p>Suppose the query says:</p>
 <blockquote>
 <p>Am I being delulu about getting this job?</p>
@@ -1462,7 +1461,7 @@ intersection → D1</code></pre>
 <p>The same problem appears when a query says <code>this song slaps</code> and a review says <code>listeners found the track extremely enjoyable</code>, or when <code>improve my rizz</code> must retrieve advice about confidence and charm while flirting.</p>
 <p>This problem is older than neural retrieval. <a href="https://doi.org/10.1145/32206.32212">Furnas and colleagues</a> demonstrated in 1987 that people often choose different words for the same objects and operations. Librarians have long responded with controlled vocabularies, synonym expansion, citation searching, pearl growing and iterative searching.</p>
 <p>Learnt retrieval offers additional bridges. It does not invent the vocabulary problem.</p>
-<h3 id="2-different-kinds-of-vocabulary-gap">2. Different kinds of vocabulary gap<a aria-label="Link to 2. Different kinds of vocabulary gap" class="heading-anchor" href="#2-different-kinds-of-vocabulary-gap">#</a></h3>
+<span id="2-different-kinds-of-vocabulary-gap" class="legacy-anchor"></span><h3 id="vocabulary-and-representation-gaps">Vocabulary and representation gaps: the string is missing or poorly held<a aria-label="Link to Vocabulary and representation gaps: the string is missing or poorly held" class="heading-anchor" href="#vocabulary-and-representation-gaps">#</a></h3>
 <p>Now suppose someone searches for <code>delulu</code>, but the term does not occur anywhere in the indexed collection. For Boolean and BM25, the consequence is straightforward: the term has no posting and supplies no lexical match. Other analysed terms in a longer query may still retrieve records, but <code>delulu</code> itself contributes no evidence.</p>
 <p>Calling this simply an “OOV problem” is ambiguous. We need to ask three different questions:</p>
 <div class="table-wrap"><table>
@@ -1484,7 +1483,8 @@ intersection → D1</code></pre>
 <p>A standard single-vector dense retriever can usually encode the string as model tokens, but may blur it with related strings or concepts after contextualisation and pooling. Research on salient-phrase-aware dense retrieval documents this weakness while also showing that better training can mitigate it (<a href="https://aclanthology.org/2022.findings-emnlp.19/">Chen et al., 2022</a>).</p>
 <p>This is why a lexical path remains important for gene and protein identifiers, chemical strings, dataset titles, model names, article identifiers, product codes, personal names and newly coined terminology.</p>
 <p>The lesson is not that dense retrieval always fails on identifiers. It is that omitting exact lexical matching creates avoidable risk when exact identity determines relevance.</p>
-<h3 id="3-out-of-domain">3. Out of domain<a aria-label="Link to 3. Out of domain" class="heading-anchor" href="#3-out-of-domain">#</a></h3>
+<span id="3-out-of-domain" class="legacy-anchor"></span><h3 id="domain-shift">Domain shift: the wrong learnt meaning<a aria-label="Link to Domain shift: the wrong learnt meaning" class="heading-anchor" href="#domain-shift">#</a></h3>
+<p>The third problem is not a vocabulary problem at all, which is why grouping it with the first two obscures it. Nothing is missing and nothing is unconnected. The system has simply learnt an unsuitable meaning, or an unsuitable definition of relevance, somewhere other than here.</p>
 <p>Learnt retrieval gains power by importing linguistic and relevance patterns from training. It can also import the wrong ones.</p>
 <p>Imagine a retriever trained mainly on encyclopaedias, news and conventional question-answering data. We apply it to Gen Z social-media posts and ask:</p>
 <blockquote>
@@ -1507,8 +1507,8 @@ intersection → D1</code></pre>
 <p>A learnt retriever may transfer its theory of relevance badly.</p>
 <p>BM25 transfers less theory, but therefore has less learnt theory to transfer incorrectly.</p>
 </blockquote>
-<h2 id="when-every-word-is-familiar-and-search-still-gets-it-wrong">When every word is familiar and search still gets it wrong<a aria-label="Link to When every word is familiar and search still gets it wrong" class="heading-anchor" href="#when-every-word-is-familiar-and-search-still-gets-it-wrong">#</a></h2>
-<p>Sometimes the problem is neither a missing term nor a specialised domain. Every word is ordinary, but the expression means something else as a whole.</p>
+<span id="when-every-word-is-familiar-and-search-still-gets-it-wrong" class="legacy-anchor"></span><h3 id="composition-failure">Composition failure: familiar words, wrong combined meaning<a aria-label="Link to Composition failure: familiar words, wrong combined meaning" class="heading-anchor" href="#composition-failure">#</a></h3>
+<p>The fourth problem is different again. Nothing is missing, nothing is unconnected, and no specialised domain is involved. Every word is ordinary, but the expression means something else as a whole.</p>
 <p>Consider:</p>
 <blockquote>
 <p>Touch grass.</p>
@@ -1525,7 +1525,41 @@ intersection → D1</code></pre>
 <p>The sentences share a topic, register and much of their vocabulary, but their conclusions are opposite. A single pooled vector may place them close together because most of their features are similar.</p>
 <p>This is not proof that embeddings are mathematically incapable of negation. Models trained with suitable contradiction and hard-negative examples can improve, although current dense retrievers still show marked weaknesses on Boolean logic (<a href="https://aclanthology.org/2024.findings-emnlp.156/">Zhang et al., 2024</a>). It shows that broad semantic similarity and retrieval relevance are not identical. Sometimes one small difference must outweigh everything else two texts share.</p>
 <p>Strict Boolean can express that difference only when the searcher anticipates it. BM25 will probably retrieve both because they overlap lexically. No approach guarantees that the feature most important to the searcher will dominate.</p>
-<h2 id="comparing-the-three-main-approaches">Comparing the three main approaches<a aria-label="Link to Comparing the three main approaches" class="heading-anchor" href="#comparing-the-three-main-approaches">#</a></h2>
+<h3 id="matching-failures-to-remedies">Matching failures to remedies<a aria-label="Link to Matching failures to remedies" class="heading-anchor" href="#matching-failures-to-remedies">#</a></h3>
+<p>These four failures are hard to tell apart from the result screen, because all four look the same there: a relevant record is missing, or an irrelevant one is near the top. They are not hard to tell apart once the pipeline is in view, and they do not respond to the same intervention.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>What the searcher sees</th>
+<th>Likely origin</th>
+<th>What actually helps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A known relevant document is missing, and it turns out to use different wording</td>
+<td><a href="#vocabulary-mismatch">Mismatch</a></td>
+<td>Alternatives, controlled vocabulary, expansion, dense or hybrid retrieval</td>
+</tr>
+<tr>
+<td>An identifier, coined term or specialised string behaves erratically</td>
+<td><a href="#vocabulary-and-representation-gaps">Gap</a></td>
+<td>Keep an exact lexical route; inspect analysis, fields and tokenisation on both sides</td>
+</tr>
+<tr>
+<td>Results are plausible but read the query in the wrong sense or register</td>
+<td><a href="#domain-shift">Domain shift</a></td>
+<td>Test on local disciplines, genres and query types; adapt or replace the model</td>
+</tr>
+<tr>
+<td>Every word matches, yet the retrieved passage says the opposite or means something else</td>
+<td><a href="#composition-failure">Composition failure</a></td>
+<td>Phrase and proximity features, cross-encoders, late interaction, explicit logic, targeted training</td>
+</tr>
+</tbody>
+</table></div>
+<p>The middle column is the part that cannot be read off the screen, and it is why the same complaint—<em>the search missed something</em>—warrants a different question each time.</p>
+<span id="comparing-the-three-main-approaches" class="legacy-anchor"></span><h3 id="comparing-the-three-first-stage-approaches">Comparing the three main first-stage approaches<a aria-label="Link to Comparing the three main first-stage approaches" class="heading-anchor" href="#comparing-the-three-first-stage-approaches">#</a></h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1558,14 +1592,48 @@ intersection → D1</code></pre>
 </table></div>
 <p>These methods describe first-stage retrieval components, not mutually exclusive products. <a href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">Query transformation</a> is not a fourth row because it transforms or routes the query before retrieval. A reranker is not a fourth row either because it usually operates after one or more methods have produced candidates. <a href="#agentic-search-who-chooses-the-next-retrieval-action">Agentic search</a> is not a fourth row for a third reason: it describes how retrieval actions are selected and sequenced, not another way of deriving evidence from a query and a document. A real system may <a href="#why-hybrid-retrieval-remains-attractive">combine them</a>, add phrase features, rewrite the query, apply field boosts, incorporate controlled vocabulary and rerank a shortlist with a cross-encoder, a ColBERT-style model or an LLM—and may decide some of that at query time rather than in advance.</p>
 <p>That is why asking whether a product “uses vectors” tells us very little.</p>
-<aside class="implication-callout" aria-labelledby="reproducibility-implication-title">
-<p class="implication-callout-label">Implication for librarians</p>
-<h3 id="reproducibility-implication-title">Reproducibility depends on what is held fixed—and what is recorded</h3>
+<p>No first-stage approach preserves everything equally well, and real systems combine several. For libraries the practical consequence is that neither reproducibility nor explainability can be judged from a label such as Boolean, semantic, vector or AI search.</p>
+
+<h2 id="implications-for-library-practice">Implications for library practice and tool evaluation<a aria-label="Link to Implications for library practice and tool evaluation" class="heading-anchor" href="#implications-for-library-practice">#</a></h2>
+<p>The preceding sections described how search systems transform queries, select candidates, combine retrieval routes, rerank results and sometimes choose their own next action. Three consequences follow for libraries. Searches must be documentable. Retrieval decisions must be inspectable enough to support an accurate mental model. And products must be evaluated as complete pipelines rather than by their marketing labels.</p>
+<p>The three sections below take those in turn: what a library must be able to <em>record</em>, what it must be able to <em>see</em>, and what it should therefore <em>require and test</em> before licensing anything.</p>
+<h3 id="reproducibility-implication-title">Reproducibility depends on what is fixed—and what is recorded<a aria-label="Link to Reproducibility depends on what is fixed—and what is recorded" class="heading-anchor" href="#reproducibility-implication-title">#</a></h3>
 <p>Librarians often use <em>reproducible</em> to mean that another searcher can understand what was done and rerun it. No retrieval method guarantees an identical result set forever. Database coverage, indexing, controlled vocabulary, ranking configurations and model versions can all change.</p>
 <p>The useful question is therefore not simply “Is this search reproducible?” but:</p>
 <blockquote>
 <p><strong>Which parts of the retrieval pipeline were fixed, documented, exportable and versioned?</strong></p>
 </blockquote>
+<p>Three practical points follow. <strong>Reproducibility is conditional:</strong> the same query does not guarantee the same records or the same ranking once indexes, models and configurations move. <strong>Record what the system actually searched:</strong> saving the natural-language question is not enough when the system generated a Boolean query, expansions, subqueries, hypothetical text or an agentic sequence. <strong>Separate rerunning from comparison:</strong> an exact future recreation may be impossible, while a saved query, trace and exported result set still let a later run be compared against the original.</p>
+<p>At minimum, a record should cover four areas of the pipeline:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Pipeline area</th>
+<th>What should be recorded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Query interpretation</strong></td>
+<td>Original input, transformed queries, extracted filters, expansion terms, and model or parser version</td>
+</tr>
+<tr>
+<td><strong>Candidate retrieval</strong></td>
+<td>Database or index and its version, fields searched, indexed unit, retriever, parameters and cut-offs</td>
+</tr>
+<tr>
+<td><strong>Ranking and fusion</strong></td>
+<td>Sort order, ranking method, component result lists, fusion rule, reranking stage and final <em>k</em></td>
+</tr>
+<tr>
+<td><strong><a href="#agentic-search-who-chooses-the-next-retrieval-action">Agentic control</a></strong></td>
+<td>Every query executed, each tool or source selected, the observations returned, the sequence, and the stopping point</td>
+</tr>
+</tbody>
+</table></div>
+<details class="detail-drawer">
+<summary>Detailed reporting requirements, method by method</summary>
+<p>What supports reproducibility differs by retrieval component, and so does what has to be written down. This table expands each row of the summary above.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1612,21 +1680,24 @@ intersection → D1</code></pre>
 </tr>
 </tbody>
 </table></div>
+</details>
 <p>LLM-based rewriting adds a specific reproducibility risk. Sampling settings can make generation deliberately variable, while model updates, prompt changes and hosted inference infrastructure can affect outputs even when a temperature of zero or greedy decoding is used. This does not mean that every LLM call must vary; it means that identical output should not be assumed unless the complete system provides and tests that guarantee. A technical account of why deployed inference can vary is provided in <a href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/">Thinking Machines Lab’s discussion of LLM nondeterminism</a>.</p>
 <p>Across all methods, save the search date, reported count, retrieved identifiers and—where possible—a raw export. When an LLM rewrites the query, saving only the natural-language question is insufficient: preserve the exact internal query, subqueries, expansion terms or hypothetical document actually passed to retrieval. A rerun may then be compared with the original even when the live database or model has changed.</p>
 <blockquote>
 <p><strong>Determinism is conditional on a fixed system. LLM output is not automatically deterministic, and reproducibility is also a documentation practice. Transparency helps explain a result, but it does not guarantee that a future system will return the same records.</strong></p>
 </blockquote>
 <p>This aligns with <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7839230/">PRISMA-S</a>, which recommends reporting the complete strategy, database and platform, limits, dates and result counts, while recognising that some proprietary or similarity-based discovery operations may not be fully replicable.</p>
-</aside>
-<aside class="implication-callout" aria-labelledby="interpretability-and-understandability-depend-on-seeing-the-retrieval-pipeline">
-<p class="implication-callout-label">Implication for librarians</p>
-<h3 id="interpretability-and-understandability-depend-on-seeing-the-retrieval-pipeline">Interpretability and understandability depend on seeing the retrieval pipeline<a aria-label="Link to Interpretability and understandability depend on seeing the retrieval pipeline" class="heading-anchor" href="#interpretability-and-understandability-depend-on-seeing-the-retrieval-pipeline">#</a></h3>
+<span id="interpretability-and-understandability-depend-on-seeing-the-retrieval-pipeline" class="legacy-anchor"></span><h3 id="interpretability-requires-an-inspectable-pipeline">Interpretability requires an inspectable retrieval pipeline<a aria-label="Link to Interpretability requires an inspectable retrieval pipeline" class="heading-anchor" href="#interpretability-requires-an-inspectable-pipeline">#</a></h3>
+<p>Documentation records what was done. It does not, on its own, explain why any particular record appeared. That is a separate property, and it needs separate vocabulary.</p>
 <p><strong>Transparency</strong> means that information about the system is exposed. <strong>Interpretability</strong> means that a librarian can trace why a record was included, excluded, scored or reranked. <strong>Understandability</strong> means that the librarian can form an accurate, usable mental model of the system without having to inspect every equation or model weight.</p>
 <p>These qualities overlap, but they are not interchangeable. A vendor can publish a broad description of its ranking system without making a particular result interpretable. A detailed score display can still be hard to understand. And a search may be fully documented for a later rerun while leaving the reason for an individual result opaque.</p>
 <blockquote>
 <p><strong>Can a librarian trace why a record was included, scored, reranked or excluded—and identify which parts of that account remain unknown?</strong></p>
 </blockquote>
+<p>Three distinctions do most of the work in answering it. A highlighted term is not necessarily the cause of a result. A generated explanation is not necessarily a faithful execution trace. And an explanation can be perfectly understandable without exposing a single model weight.</p>
+<details class="detail-drawer">
+<summary>Detailed inspection by pipeline stage</summary>
+<p>Every stage can expose something useful, and every stage has a limit on what that exposure proves. The second and third columns are worth reading together: the value of an explanation lies as much in what it rules out as in what it shows.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1673,6 +1744,7 @@ intersection → D1</code></pre>
 </tr>
 </tbody>
 </table></div>
+</details>
 <p>A faithful explanation is an <strong>execution trace</strong>: it is derived from the actual query, index, candidates and scoring path used for that result. A plausible post-hoc explanation may still be helpful for orientation, but it should be labelled as an interpretation rather than presented as proof of what the system used. Highlighted words and generated rationales are especially easy to mistake for causal evidence when they may only describe a result after it was chosen.</p>
 <p><strong>What a useful inspection trail contains:</strong></p>
 <ol>
@@ -1688,10 +1760,10 @@ intersection → D1</code></pre>
 <blockquote>
 <p><strong>A search can be reproducible yet poorly understood if the saved query and identifiers do not reveal how records were selected or ranked. A clear-looking explanation does not make a search reproducible unless the relevant inputs, versions and outputs can also be recorded and rerun.</strong></p>
 </blockquote>
-</aside>
-<h2 id="what-to-ask-when-choosing-a-search-tool">What to ask when choosing a search tool<a aria-label="Link to What to ask when choosing a search tool" class="heading-anchor" href="#what-to-ask-when-choosing-a-search-tool">#</a></h2>
-<p>Most librarians will never train a retriever. They will license one, or license a database containing one. The distinctions above become procurement and evaluation questions.</p>
-<p>When a product advertises semantic, natural-language or AI search, ask:</p>
+<span id="what-to-ask-when-choosing-a-search-tool" class="legacy-anchor"></span><h3 id="choosing-and-governing-search-tools">Choosing and governing search tools<a aria-label="Link to Choosing and governing search tools" class="heading-anchor" href="#choosing-and-governing-search-tools">#</a></h3>
+<p>Most librarians will never train a retriever. They will license one, or license a database containing one. Documentation and inspection are therefore not only personal practices; they are things a library has to require in advance, because neither can be retrofitted to a product that was not built to expose them.</p>
+<p>When a product advertises semantic, natural-language or AI search, the distinctions above become five groups of procurement and evaluation questions.</p>
+<h4>Query transformation and control</h4>
 <ol>
 <li>
 <p><strong>What happens to the query before retrieval?</strong> Does the system parse fields and filters, construct Boolean, add alternatives, generate subqueries or hypothetical text, or choose among retrieval routes? Can users inspect, edit and export those transformations?</p>
@@ -1699,14 +1771,11 @@ intersection → D1</code></pre>
 <li>
 <p><strong><a href="#agentic-search-who-chooses-the-next-retrieval-action">Who controls the retrieval trajectory?</a></strong> Is the sequence fixed in advance, governed by rules written in advance, or selected by a model from intermediate results? If a model chooses, what tools, sources and iteration limits bound it? Can users see every query it ran, every source it consulted, every route it took and the point at which it decided to stop?</p>
 </li>
+</ol>
+<h4>Retrieval coverage and architecture</h4>
+<ol start="3">
 <li>
 <p><strong>Which retrieval and ranking components are used?</strong> Is there Boolean retrieval, BM25-like lexical ranking, dense retrieval or reranking? Do the components operate <a href="#why-search-systems-use-multiple-stages">in parallel, sequentially or both</a>, how many candidates survive each cut-off, and does the system select components by query or always combine them?</p>
-</li>
-<li>
-<p><strong>Is exact lexical matching retained?</strong> Can users search identifiers, chemical strings, gene names, dataset titles and quoted phrases without semantic expansion quietly changing the task?</p>
-</li>
-<li>
-<p><strong>How is text tokenised and analysed?</strong> Ask how the lexical path treats case, punctuation, hyphens and identifiers, and whether query and document analysis are compatible. For a dense model, ask whether it uses word, subword, character or byte inputs and how unfamiliar or newly coined strings are tested.</p>
 </li>
 <li>
 <p><strong>What is the indexed unit?</strong> Is the system retrieving titles, abstracts, passages, sections or complete articles? A product searching abstracts cannot retrieve evidence that occurs only in the full text, however sophisticated its vectors are.</p>
@@ -1715,25 +1784,50 @@ intersection → D1</code></pre>
 <p><strong>How are passage results assembled?</strong> If five chunks from the same paper match, are their scores combined, is only the best retained, or are five near-duplicate results shown?</p>
 </li>
 <li>
-<p><strong>What trained the relevance model?</strong> Web queries, question–answer pairs, citation links and scholarly relevance judgements teach different behaviours. How was the model adapted to the disciplines and document types being searched?</p>
+<p><strong><a href="#why-hybrid-retrieval-remains-attractive">How is the hybrid combined?</a></strong> A product may call itself hybrid because it contains two retrievers even when one signal rarely affects the final ranking. Ask where component lists are fused, whether a later stage reranks the merged candidates, what cut-offs apply, and whether users can inspect, compare or control the component result sets.</p>
+</li>
+</ol>
+<h4>Exactness and failure testing</h4>
+<ol start="7">
+<li>
+<p><strong>Is exact lexical matching retained?</strong> Can users search identifiers, chemical strings, gene names, dataset titles and quoted phrases without semantic expansion quietly changing the task?</p>
+</li>
+<li>
+<p><strong>How is text tokenised and analysed?</strong> Ask how the lexical path treats case, punctuation, hyphens and identifiers, and whether query and document analysis are compatible. For a dense model, ask whether it uses word, subword, character or byte inputs and how unfamiliar or newly coined strings are tested.</p>
 </li>
 <li>
 <p><strong>How are exactness, negation and exclusions tested?</strong> Ask for examples involving identifiers, contradictory claims, <code>NOT</code>-like intent and near-duplicate names — not only attractive paraphrase demonstrations.</p>
 </li>
 <li>
-<p><strong><a href="#why-hybrid-retrieval-remains-attractive">How is the hybrid combined?</a></strong> A product may call itself hybrid because it contains two retrievers even when one signal rarely affects the final ranking. Ask where component lists are fused, whether a later stage reranks the merged candidates, what cut-offs apply, and whether users can inspect, compare or control the component result sets.</p>
+<p><strong>What trained the relevance model?</strong> Web queries, question–answer pairs, citation links and scholarly relevance judgements teach different behaviours. How was the model adapted to the disciplines and document types being searched?</p>
 </li>
+</ol>
+<h4>Auditability and repeatability</h4>
+<ol start="11">
 <li>
 <p><strong>Can users inspect why a result appeared?</strong> Can they move from the displayed record backwards through the retrieval route, query transformation, matched evidence, ranking or reranking stages, and final fusion or display rules? Does the product distinguish a faithful execution trace from a helpful but post-hoc explanation?</p>
 </li>
 <li>
-<p><strong>Can the search be documented and rerun?</strong> Can users export the original input; exact generated Boolean query, filters, expansions, subqueries or hypothetical text; retrieval route; ranking mode; model version; index date; <em>k</em> or threshold; and retrieved identifiers? When the same search is rerun, does the system reuse the saved transformation or ask an LLM to generate it again? Does the vendor explain when model, index or ranking updates may change previously obtained results?</p>
+<p><strong>Can the search be documented and rerun?</strong> Can users export the original input; exact generated Boolean query, filters, expansions, subqueries or hypothetical text; retrieval route; ranking mode; model version; index date; <em>k</em> or threshold; and retrieved identifiers? When the same search is rerun, does the system reuse the saved transformation or ask an LLM to generate it again?</p>
 </li>
 <li>
-<p><strong>How is performance evaluated?</strong> Average benchmark scores can hide failures on the query types that matter locally. A serious evaluation should include the institution’s disciplines, vocabulary, languages and known difficult searches.</p>
+<p><strong>Are model, index and ranking changes disclosed?</strong> Does the vendor announce when an update may change results a user previously obtained, and is there any way to tell after the fact which version produced a saved search?</p>
+</li>
+</ol>
+<h4>Institutional evaluation</h4>
+<ol start="14">
+<li>
+<p><strong>How is performance evaluated, and on whose queries?</strong> Average benchmark scores can hide failures on the query types that matter locally. A serious evaluation uses the institution’s own disciplines, vocabulary, languages, document types and known relevant records.</p>
+</li>
+<li>
+<p><strong>Are failure cases part of the evaluation?</strong> A demonstration chosen by a vendor shows what the system does well. The searches that matter for procurement are the ones a library already knows to be difficult.</p>
+</li>
+<li>
+<p><strong>Can the library compare behaviour across an update?</strong> If a saved set of local test queries can be rerun after a model, index or ranking change, a library can detect a regression that no release note mentions.</p>
 </li>
 </ol>
 <p>None of these questions requires reading a loss function. All of them distinguish a retrieval design from a marketing label.</p>
+<p>Libraries do not need access to every model weight or engineering detail. They need enough visibility to establish what was actually searched, enough documentation to rerun or compare it later, and enough control to test whether the system works for their own collections and users.</p>
 <p>The tokeniser may be able to encode every piece of the query. The source article may be divided into sensible chunks. Each chunk may receive a dense vector, while a separate lexical system indexes its analysed terms. The final results may blend both signals.</p>
 <p>That still does not mean the retrieval system has any rizz.</p>
 <h2 id="appendix-character-and-byte-tokenisation">Appendix: character and byte tokenisation<a aria-label="Link to Appendix: character and byte tokenisation" class="heading-anchor" href="#appendix-character-and-byte-tokenisation">#</a></h2>
