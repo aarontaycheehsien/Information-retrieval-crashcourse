@@ -2,7 +2,7 @@
 """Confirm the textbook edition preserves every word of source prose."""
 import io, os, re
 
-REPO = r"C:\Users\aarontay\Downloads\Codex\informationretrievalcrashcourse"
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 src = io.open(os.path.join(REPO, "how-search-decides-what-you-see.html"), encoding="utf-8").read()
 new = io.open(os.path.join(REPO, "search-textbook.html"), encoding="utf-8").read()
 

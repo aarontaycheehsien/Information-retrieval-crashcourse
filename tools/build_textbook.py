@@ -7,9 +7,10 @@ lives in book_data.py and is emitted with class="drafted".
 """
 import io, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from book_data import STAGES, PARTS, CHAPTERS, EXERCISES, TABLE_CAPTIONS
+from book_data import (STAGES, PARTS, CHAPTERS, EXERCISES, TABLE_CAPTIONS,
+                       ORIENTATION_NOTE)
 
-REPO = r"C:\Users\aarontay\Downloads\Codex\informationretrievalcrashcourse"
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(REPO, "how-search-decides-what-you-see.html")
 OUT = os.path.join(REPO, "search-textbook.html")
 
@@ -21,6 +22,16 @@ body_start = src.index('<article id="article">') + len('<article id="article">')
 foot_start = src.index('<section class="footnotes">')
 article = src[body_start:foot_start]
 footnotes = src[foot_start:src.index("</section></article>") + len("</section></article>")]
+
+# The "Before you start" box is shared with the single-flow article, but the parts
+# and the application exercises exist only here, so that note is appended at build
+# time rather than living in the source.
+article, hit = re.subn(
+    r'(<aside class="orientation"[^>]*>.*?)(</aside>)',
+    lambda m: m.group(1) + u'<p class="drafted">' + ORIENTATION_NOTE + u'</p>' + m.group(2),
+    article, count=1, flags=re.S)
+if hit != 1:
+    raise SystemExit("orientation aside not found; ORIENTATION_NOTE was not injected")
 
 # ------------------------------------------------------------- split into blocks
 HEAD_RE = re.compile(
@@ -53,9 +64,9 @@ MAP = [
     ("lexical-search-does-not-have-to-mean-boolean-search",        "section", "ch3"),
     ("one-category-error-resolved-and-one-still-ahead",            "section", "ch3"),
     ("from-word2vec-to-retrieval-embeddings",                      "section", "ch4"),
+    ("how-a-contextual-encoder-becomes-a-retrieval-encoder",       "section", "ch4"),
     ("single-vector-dense-retrieval-compress-first-compare-later", "section", "ch4"),
     ("a-vector-does-not-have-to-be-dense-or-semantic",             "section", "ch4"),
-    ("what-a-dense-bi-encoder-actually-learns",                    "section", "ch4"),
     ("one-document-one-chunk-and-one-vector-are-not-the-same-thing","section", "ch4"),
     ("for-awareness-two-neural-variants",                          "section", "ch4"),
     ("rerankers-compare-more-carefully-after-retrieval",           "section", "ch5"),
@@ -68,14 +79,18 @@ MAP = [
 ACTION = {hid: (act, ch) for hid, act, ch in MAP}
 ORDER = ["intro", "ch1", "ch2", "ch3", "ch4", "ch5", "ch6", "ch7", "ch8", "ch9"]
 
-# Section-group dividers inside the oversized Chapter 4.
+# Section-group dividers inside the long Chapter 4.
 GROUPS = {
     "from-word2vec-to-retrieval-embeddings":
-        ("The basic dense-retrieval model",
-         "How text becomes a vector, how similar vectors are found at scale, and where the "
-         "result list is cut off."),
+        ("How a retrieval encoder is built",
+         "What a learnt vector is, what changes when the encoder reads context, and what "
+         "training has to add before proximity means anything for search."),
+    "single-vector-dense-retrieval-compress-first-compare-later":
+        ("How that encoder is deployed at collection scale",
+         "How the vectors are stored and compared, how similar ones are found quickly, and "
+         "where the result list is cut off."),
     "a-vector-does-not-have-to-be-dense-or-semantic":
-        ("Four qualifications the basic model needs",
+        ("Three qualifications the basic model needs",
          "Each of these corrects something the account above leaves misleading. None is an "
          "optional extra."),
 }

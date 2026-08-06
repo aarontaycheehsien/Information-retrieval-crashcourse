@@ -160,7 +160,8 @@ CHAPTERS = {
     "ch4": dict(
         eyebrow="Chapter 4", part=2,
         title="Embeddings and dense retrieval",
-        question="How can a system retrieve related texts that do not share words?",
+        question="How can a system learn representations that retrieve related texts "
+                 "without shared words?",
         stages=["r"],
         controller=False,
         orient=[
@@ -169,15 +170,20 @@ CHAPTERS = {
             "that limitation directly: instead of matching terms, it converts text into a "
             "vector of numbers and compares positions in a space where proximity is meant "
             "to encode similarity of meaning.",
-            "This is the longest chapter in the book, and it has two halves. The first "
-            "builds the basic model end to end—how text reaches a model, how a vector is "
-            "produced, how similar vectors are found quickly, and where the result list is "
-            "cut off. The second supplies four qualifications without which the basic model "
-            "is actively misleading.",
+            "This is the longest chapter in the book, and it has three parts. The first "
+            "builds the encoder—from one stored vector per word, to representations that "
+            "depend on context, to the training without which proximity in the resulting "
+            "space means nothing in particular. The second deploys that encoder across a "
+            "collection: how vectors are stored and compared, how similar ones are found "
+            "quickly, and where the result list is cut off. The third supplies three "
+            "qualifications without which the basic model is actively misleading.",
         ],
         established=[
             "A dense retriever compares learnt representations rather than strings, which "
             "is what allows it to bridge paraphrase.",
+            "Contextual encoding and retrieval are separate things. A pretrained encoder "
+            "supplies representations; retrieval training decides what they place close "
+            "together, and every embedding space therefore carries a theory of relevance.",
             "Model tokenisation and index analysis are different processes producing "
             "different units. A model token is not an indexed term.",
             "Approximate nearest-neighbour search is what makes dense retrieval practical, "
@@ -346,6 +352,16 @@ CHAPTERS = {
         transition=None,
     ),
 }
+
+# Appended to the shared "Before you start" box. The parts and the exercises exist
+# only in this edition, so this note cannot live in the source article.
+ORIENTATION_NOTE = (
+    "This edition divides the text into three parts and adds an "
+    "<strong>application exercise</strong> at the end of each. Every exercise asks you to run "
+    "real searches in a system your library licenses and write up what you find; they are the "
+    "slowest part of the book and the part that will tell you most about your own tools, but "
+    "the argument survives skipping them."
+)
 
 # One substantial application exercise at the end of each part.
 EXERCISES = {
