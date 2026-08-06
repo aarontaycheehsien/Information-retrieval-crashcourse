@@ -427,32 +427,65 @@ EXERCISES = {
     ),
 }
 
-# Table captions, keyed by the table's ordinal position in the source article (1-based).
+# Table captions, keyed by the table's column headers joined with " | ".
+#
+# Keyed this way rather than by ordinal position: inserting a table anywhere in
+# the article used to shift every caption after it onto the wrong table, silently.
+# A signature only breaks if the table's own headers change, and the build fails
+# loudly when a signature goes unmatched.
 TABLE_CAPTIONS = {
-    1: "Stages of lexical analysis, and what a sample string looks like after each.",
-    2: "Stemming and lemmatisation compared: how each reduces a word, and what to remember about the difference.",
-    3: "A miniature four-record collection, used throughout this chapter.",
-    4: "The same four records as an inverted index: each term paired with its posting list.",
-    5: "Scholarly and library systems documented as running on Lucene-family lexical infrastructure.",
-    6: "Word-level and subword tokenisation compared on an unfamiliar string.",
-    7: "Lexical index terms and dense model tokens are produced by different processes and are not interchangeable.",
-    8: "How the candidate set is bounded on the lexical route and on the dense-vector route.",
-    9: "Three retrieval methods by representation: how their weights arise, and what their dimensions mean.",
-    10: "The stages of a multi-stage pipeline, and why each belongs where it does.",
-    11: "One discovery product mapped to every stage described in this book, with the chapter that explains each.",
-    12: "Common query-understanding techniques: what each changes, and the main risk it introduces.",
-    13: "Query transformation in current discovery products, and what each case illustrates.",
-    14: "Natural-language filter extraction across products, with the documented boundary in each case.",
-    15: "Fixed, adaptive and agentic control arrangements, distinguished by how the next action is decided.",
-    16: "Deep search and deep research compared by search trajectory and by main output.",
-    17: "Where current academic tools sat at the time of testing, by control arrangement.",
-    18: "What agency costs and what it buys, against a fixed or rule-based workflow.",
-    19: "Three distinct questions hidden inside a single complaint about an out-of-vocabulary term.",
-    20: "Matching visible symptoms to their likely origin in the pipeline, and to the remedy that addresses it.",
-    21: "The three main first-stage approaches: what each preserves, its characteristic strength and its blind spot.",
-    22: "The four pipeline areas a reproducible search record must cover.",
-    23: "Detailed reporting requirements by retrieval method.",
-    24: "What an explanation can show at each pipeline stage, and what it cannot establish by itself.",
-    25: "Character and byte tokenisation compared on an unfamiliar string.",
-    26: "The same posting lists used for Boolean evaluation and for BM25 scoring.",
+    u"Stage | Illustrative output":
+        "Stages of lexical analysis, and what a sample string looks like after each.",
+    u"Method | How it works | Illustrative output | What to remember":
+        "Stemming and lemmatisation compared: how each reduces a word, and what to remember about the difference.",
+    u"Record | Text":
+        "A miniature four-record collection, used throughout this chapter.",
+    u"Indexed term | Posting list":
+        "The same four records as an inverted index: each term paired with its posting list.",
+    u"Product or project | Scholarly or library role | Documented Lucene-family infrastructure":
+        "Scholarly and library systems documented as running on Lucene-family lexical infrastructure.",
+    u"Tokenisation level | Possible treatment of an unfamiliar word | Main trade-off":
+        "Word-level and subword tokenisation compared on an unfamiliar string.",
+    u"Lexical index | Dense encoder":
+        "Lexical index terms and dense model tokens are produced by different processes and are not interchangeable.",
+    u"Lexical route | Dense-vector route":
+        "How the candidate set is bounded on the lexical route and on the dense-vector route.",
+    u"Method | Representation | How its weights arise | What its dimensions represent":
+        "Three retrieval methods by representation: how their weights arise, and what their dimensions mean.",
+    u"Stage | Main job | Why it belongs here":
+        "The stages of a multi-stage pipeline, and why each belongs where it does.",
+    u"Stage | What the documentation describes | Explained in":
+        "One discovery product mapped to every stage described in this book, with the chapter that explains each.",
+    u"Technique | What it changes | Main risk":
+        "Common query-understanding techniques: what each changes, and the main risk it introduces.",
+    u"Product | What changes the query | What receives the transformed query | What it illustrates":
+        "Query transformation in current discovery products, and what each case illustrates.",
+    u"Product | Constraints it can infer from natural language | Documented boundary":
+        "Natural-language filter extraction across products, with the documented boundary in each case.",
+    u"Control arrangement | How the next action is decided":
+        "Fixed, adaptive and agentic control arrangements, distinguished by how the next action is decided.",
+    u"Pattern | Search trajectory | Main output":
+        "Deep search and deep research compared by search trajectory and by main output.",
+    u"Control arrangement | Tools, as built at the time of testing":
+        "Where current academic tools sat at the time of testing, by control arrangement.",
+    u" | Fixed or rule-based workflow | Agentic search":
+        "What agency costs and what it buys, against a fixed or rule-based workflow.",
+    u"Question | What failure means":
+        "Three distinct questions hidden inside a single complaint about an out-of-vocabulary term.",
+    u"What the searcher sees | Likely origin | What actually helps":
+        "Matching visible symptoms to their likely origin in the pipeline, and to the remedy that addresses it.",
+    u"Method | What it preserves best | Characteristic strength | Characteristic blind spot":
+        "The three main first-stage approaches: what each preserves, its characteristic strength and its blind spot.",
+    u"Pipeline area | What should be recorded":
+        "The four pipeline areas a reproducible search record must cover.",
+    u"Component or method | What supports reproducibility | What needs to be recorded":
+        "Detailed reporting requirements by retrieval method.",
+    u"Pipeline stage | What a useful explanation shows | What that explanation cannot establish by itself":
+        "What an explanation can show at each pipeline stage, and what it cannot establish by itself.",
+    u"Half kept | How it reads | Trained to | What it suits | Where it leads":
+        "The two halves of the original Transformer, and the strand of research that kept each.",
+    u"Input level | Possible treatment of rizzlord | Main trade-off":
+        "Character and byte tokenisation compared on an unfamiliar string.",
+    u"Boolean use of postings | BM25 use of postings":
+        "The same posting lists used for Boolean evaluation and for BM25 scoring.",
 }

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Renumber the source article's footnotes to follow document order.
+"""Renumber the book's footnotes to follow document order.
 
-The article numbers footnotes by hand in three places: the superscript ref, the
+The book numbers footnotes by hand in three places: the superscript ref, the
 "Jump back to footnote N" title on the backref, and the order of the <li> items
 in the footnotes list. Moving a passage breaks all three. This pass reads the
 refs in document order and rewrites the numbers and the list order to match.
@@ -11,7 +11,7 @@ Re-runnable and idempotent. Run it after any edit that moves or adds a footnote.
 import io, os, re, sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(REPO, "how-search-decides-what-you-see.html")
+SRC = os.path.join(REPO, "search-textbook.html")
 
 src = io.open(SRC, encoding="utf-8").read()
 

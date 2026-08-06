@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
-"""Build the chaptered textbook edition from the single-flow source article.
+"""RETIRED. Built the chaptered textbook from the single-flow source article.
 
-Re-runnable: edit the source, re-run, get an updated textbook edition.
-Structural transform only -- the source prose is copied verbatim. All NEW prose
-lives in book_data.py and is emitted with class="drafted".
+Kept only as a record of how the chapter structure, apparatus and captions were
+originally produced. search-textbook.html is now the source of truth and is
+edited directly; running this would overwrite it from a frozen article and
+discard every change made since August 2026.
+
+See tools/README.md. Use maintain.py and renumber_footnotes.py instead.
 """
-import io, os, re, sys
+import io, os, re, string, sys
+
+if __name__ == "__main__" and "--i-understand-this-overwrites-the-book" not in sys.argv:
+    sys.exit(__doc__ + "\nRefusing to run. This script is retired.")
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from book_data import (STAGES, PARTS, CHAPTERS, EXERCISES, TABLE_CAPTIONS,
                        ORIENTATION_NOTE)
@@ -95,7 +102,8 @@ GROUPS = {
          "optional extra."),
 }
 
-BACKMATTER = ["appendix-character-and-byte-tokenisation",
+BACKMATTER = ["appendix-the-transformer",
+              "appendix-character-and-byte-tokenisation",
               "appendix-advanced-inverted-index-execution",
               "generative-ai-use-disclosure", "references"]
 
@@ -129,18 +137,34 @@ def label_for(ch):
     return ch[2:]
 
 fig_n, tab_n = {}, {}
-TABLE_WRAP_RE = re.compile(r'<div class="table-wrap"><table>')
+TABLE_WRAP_RE = re.compile(r'<div class="table-wrap"><table>(.*?)</table>', re.S)
 FIGCAP_RE = re.compile(r'<figcaption(?P<attrs>[^>]*)>')
 
 tbl_seen = [0]
+THEAD_RE = re.compile(r'<thead>(.*?)</thead>', re.S)
+TH_RE = re.compile(r'<th[^>]*>(.*?)</th>', re.S)
+uncaptioned = []
+
+def table_signature(table_html):
+    """Column headers joined with ' | ' -- the key TABLE_CAPTIONS is stored under."""
+    thead = THEAD_RE.search(table_html)
+    if not thead:
+        return u''
+    cells = TH_RE.findall(thead.group(1))
+    return u' | '.join(
+        re.sub(r'<[^>]+>', '', c).replace('&nbsp;', ' ').strip() for c in cells)
+
 def number_assets(html, chnum):
     """Prefix numbered labels onto tables and figures within one chapter."""
     fig_n.setdefault(chnum, 0)
     def do_table(m):
         tbl_seen[0] += 1
-        fig_n[chnum] = fig_n[chnum]
         tab_n[chnum] = tab_n.get(chnum, 0) + 1
-        cap = TABLE_CAPTIONS.get(tbl_seen[0], "")
+        sig = table_signature(m.group(1))
+        cap = TABLE_CAPTIONS.get(sig)
+        if cap is None:
+            uncaptioned.append((u'{}.{}'.format(chnum, tab_n[chnum]), sig))
+            cap = ''
         lbl = u'<p class="asset-label drafted">Table {}.{}{}</p>'.format(
             chnum, tab_n[chnum], (u' \u2014 ' + cap) if cap else '')
         return lbl + m.group(0)
@@ -296,7 +320,7 @@ for b in back:
     else:
         back_groups[-1].append(b)
 
-app_letter = iter("AB")
+app_letter = iter(string.ascii_uppercase)
 for grp in back_groups:
     top, subs = grp[0], grp[1:]
     is_app = top["id"].startswith("appendix")
@@ -348,7 +372,7 @@ def toc_html():
             rows.append(u'<li class="toc-ex"><a href="#exercise{n}">Application exercise {r}</a></li>'
                         .format(n=pnum, r="I" * pnum))
     rows.append(u'<li class="toc-part"><a href="#backmatter">End matter</a></li>')
-    letters = iter("AB")
+    letters = iter(string.ascii_uppercase)
     for b in back:
         if b["lvl"] != 2:
             continue
@@ -615,3 +639,11 @@ print("chapters:", {k: len(v) for k, v in chapters.items()})
 print("back-matter blocks:", len(back))
 print("tables numbered:", tbl_seen[0])
 print("figures per chapter:", fig_n)
+
+if uncaptioned:
+    print("\nWARNING: %d table(s) have no caption in TABLE_CAPTIONS." % len(uncaptioned))
+    print("Add an entry keyed by the signature shown, in tools/book_data.py:\n")
+    for num, sig in uncaptioned:
+        print(u'    u"%s":' % sig)
+        print(u'        "",   # Table %s' % num)
+    sys.exit(1)
