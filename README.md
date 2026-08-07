@@ -1,11 +1,29 @@
 # Information Retrieval Crash Course
 
-A practical introduction to information retrieval architecture for librarians, covering Boolean search, BM25, dense retrieval, hybrid search, reranking and query understanding.
+A practical introduction to information retrieval architecture for librarians, covering Boolean search, BM25, dense retrieval, hybrid search, reranking, query understanding, agentic search, retrieval failure and evaluation.
 
-[Read the textbook](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/)
+[**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.0, three parts, eleven chapters and four appendices.
 
 The repository also includes the interactive [BM25 Evidence Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/bm25-evidence-lab.html).
 
+`search-textbook.html` is the source of truth. The earlier single-flow web article, [How Search Decides What You See](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/how-search-decides-what-you-see.html), remains published but is frozen and has diverged from the book. See [`tools/README.md`](tools/README.md) for the maintenance passes, and [`CHANGELOG.md`](CHANGELOG.md) for what changed between versions.
+
+## Licence and reuse
+
+The text, tables, diagrams and code are licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — copy, excerpt, translate, adapt and redistribute for any purpose, including commercially, with credit. No permission request is needed.
+
+Screenshots of commercial products (scite, Google Scholar, Web of Science and others) are third-party material reproduced for comment and criticism, and are **not** covered. Product names and trademarks belong to their owners. See [`LICENSE`](LICENSE) for the full terms.
+
+### For instructors
+
+There are [**teaching notes**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/teaching-notes.html) — three course shapes (a half-day workshop, a six-week module, a twelve-week course), guidance on marking the three application exercises, discussion prompts per part, and the list of product claims to re-verify before teaching.
+
+Chapters and appendices are written to be assignable on their own, and each has a stable link — use the **Copy link** control in any chapter heading. Every chapter ends with three *Check yourself* questions whose answers stay hidden until clicked. Three combinations stand alone: Part I (Chapters 1–3) on lexical retrieval; Chapters 9–10 on retrieval failure and measurement; Chapter 11 with Appendix D on procurement and evaluation.
+
+### Suggested citation
+
+> Tay, A. C. H. (2026). *How search decides what you see: A librarian's guide to Boolean search, BM25, embeddings, reranking, and the retrieval pipelines behind hybrid and agentic search* (Version 1.0). https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/
+
 ## Generative AI use
 
-Generative AI assisted with research, drafting, revision, code and all explanatory illustrations. The author reviewed the outputs, checked cited claims against the linked sources and takes responsibility for the final content. Read the [full generative-AI use disclosure](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/IR101-for-librarian-textbook.html#generative-ai-use-disclosure).
+Generative AI assisted with research, drafting, revision, code and all explanatory illustrations. The author reviewed the outputs, checked cited claims against the linked sources and takes responsibility for the final content. Read the [full generative-AI use disclosure](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#generative-ai-use-disclosure).
