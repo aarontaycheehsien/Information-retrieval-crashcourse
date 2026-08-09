@@ -60,6 +60,7 @@ Keep these shapes when hand-editing, or the passes will not find the pieces:
 |---|---|
 | Chapter | `<section class="chapter" id="sec-KEY">` with `<p class="chapter-eyebrow">Chapter N</p>` then `<h2 id="KEY">` |
 | Appendix | `<section class="chapter appendix" id="app-X">` with an `Appendix X` eyebrow |
+| Front matter | Three eyebrows are recognised besides `Chapter N`: `Preface` numbers its assets `P.n`, `Introduction` numbers them `0.n`. Any other eyebrow is reported as an error rather than guessed at |
 | Table label | `<p class="asset-label drafted">Table 4.1 — caption sentence.</p>` immediately before the `.table-wrap` |
 | Figure label | `<span class="asset-label-inline drafted">Figure 4.1</span>` as the first child of the `<figcaption>` |
 | Figure title | `<p class="figure-title" id="SLUG-title">` as the first child of the `<figure>`. Not a heading — figure titles must stay out of the document's heading outline |

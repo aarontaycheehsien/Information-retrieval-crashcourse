@@ -80,6 +80,8 @@ for start, end, tag in sections:
         eye_txt = text_of(eye.group(1)) if eye else ''
         if eye_txt.lower().startswith('introduction'):
             label = '0'
+        elif eye_txt.lower().startswith('preface'):
+            label = 'P'
         else:
             m = re.match(r'Chapter\s+(\d+)', eye_txt)
             if m:
