@@ -2,7 +2,7 @@
 
 A practical introduction to information retrieval architecture for librarians, covering Boolean search, BM25, dense retrieval, hybrid search, reranking, query understanding, agentic search, retrieval failure and evaluation.
 
-[**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.0, three parts, twelve chapters and four appendices.
+[**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.0, three parts, twelve chapters and five appendices.
 
 The repository also includes the interactive [BM25 Evidence Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/bm25-evidence-lab.html).
 
