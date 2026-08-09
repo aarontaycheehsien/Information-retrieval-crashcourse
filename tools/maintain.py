@@ -95,8 +95,12 @@ for start, end, tag in sections:
                       title=heading_text(h2.group(2)) if h2 else ''))
 
 # ------------------------------------------------------ renumber assets in place
-TABLE_LBL_RE = re.compile(r'(<p class="asset-label[^"]*">)Table\s+[0-9A-Za-z]+\.\d+')
-FIG_LBL_RE = re.compile(r'(<span class="asset-label-inline[^"]*">)Figure\s+[0-9A-Za-z]+\.\d+')
+# The optional id is one this script wrote on an earlier run: it is rewritten
+# from the number being assigned now, which keeps the pass idempotent.
+TABLE_LBL_RE = re.compile(
+    r'<p class="(asset-label[^"]*)"(?:\s+id="[^"]*")?>Table\s+[0-9A-Za-z]+\.\d+')
+FIG_LBL_RE = re.compile(
+    r'<span class="(asset-label-inline[^"]*)"(?:\s+id="[^"]*")?>Figure\s+[0-9A-Za-z]+\.\d+')
 TABLE_RE = re.compile(r'<div class="table-wrap"><table>')
 FIGCAP_RE = re.compile(r'<figcaption')
 EYEBROW_SUB = re.compile(r'(<p class="chapter-eyebrow">)Appendix\s+[A-Z](</p>)')
@@ -110,16 +114,21 @@ for it in items:
     if it['kind'] == 'appendix':
         html = EYEBROW_SUB.sub(r'\g<1>Appendix %s\g<2>' % it['label'], html)
 
+    def anchor(prefix, num):
+        return u'%s-%s-%d' % (prefix, it['label'].lower(), num)
+
     n = [0]
     def next_table(m):
         n[0] += 1
-        return u'%sTable %s.%d' % (m.group(1), it['label'], n[0])
+        return u'<p class="%s" id="%s">Table %s.%d' % (
+            m.group(1), anchor('tbl', n[0]), it['label'], n[0])
     html = TABLE_LBL_RE.sub(next_table, html)
 
     f = [0]
     def next_fig(m):
         f[0] += 1
-        return u'%sFigure %s.%d' % (m.group(1), it['label'], f[0])
+        return u'<span class="%s" id="%s">Figure %s.%d' % (
+            m.group(1), anchor('fig', f[0]), it['label'], f[0])
     html = FIG_LBL_RE.sub(next_fig, html)
 
     # anything unlabelled cannot be numbered -- report it
@@ -218,6 +227,51 @@ def replace_list(html, list_id, inner):
 
 for list_id in ('toc-list', 'mobile-toc-list'):
     doc = replace_list(doc, list_id, TOC)
+
+# ------------------------------------------------- rebuild the asset index
+# Numbers and anchors were assigned above; this reads them back in document
+# order, so the index cannot disagree with the book.
+KEEP_INLINE = re.compile(r'</?(?!em\b|code\b|sub\b|sup\b|strong\b)[a-zA-Z][^>]*>')
+
+def index_title(raw):
+    """Plain-ish text: keep the small inline tags, drop links and the rest."""
+    txt = KEEP_INLINE.sub('', raw)
+    return re.sub(r'\s+', ' ', txt).strip()
+
+def first_sentence(txt):
+    m = re.search(r'^(.{25,}?[.?!])\s+[A-Z(]', txt)
+    return m.group(1) if m else txt
+
+def index_rows(entries):
+    return u''.join(
+        u'<li><a href="#%s">%s</a><span>%s</span></li>' % (aid, num, title)
+        for aid, num, title in entries)
+
+figures = []
+for m in re.finditer(r'<figure\b.*?</figure>', doc, re.S):
+    blk = m.group(0)
+    lbl = re.search(r'<span class="asset-label-inline[^"]*" id="([^"]+)">'
+                    r'(Figure\s+[0-9A-Za-z]+\.\d+)', blk)
+    ttl = re.search(r'<p class="figure-title[^"]*"[^>]*>(.*?)</p>', blk, re.S)
+    if not lbl:
+        problems.append('figure with no numbered label near: %r' % text_of(blk)[:60])
+        continue
+    if not ttl:
+        problems.append('%s has no <p class="figure-title">' % lbl.group(2))
+        continue
+    figures.append((lbl.group(1), lbl.group(2), index_title(ttl.group(1))))
+
+tables = []
+for m in re.finditer(u'<p class="asset-label[^"]*" id="([^"]+)">'
+                     u'(Table\\s+[0-9A-Za-z]+\\.\\d+)\\s*(?:—|&#8212;)\\s*(.*?)</p>',
+                     doc, re.S):
+    tables.append((m.group(1), m.group(2), first_sentence(index_title(m.group(3)))))
+
+if '<ol id="figure-index">' in doc:
+    doc = replace_list(doc, 'figure-index', index_rows(figures))
+    doc = replace_list(doc, 'table-index', index_rows(tables))
+else:
+    problems.append('no <ol id="figure-index"> to hold the asset index')
 
 # ------------------------------------------------------------- integrity checks
 ids = re.findall(r'\sid="([^"]+)"', doc)
