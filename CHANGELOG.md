@@ -59,6 +59,11 @@ single-flow article and is frozen.
   the genuinely prefatory work, the former Introduction now begins Part I.
   The three parts contain four chapters each, and Part I is now titled
   “Retrieval foundations and lexical search.”
+- **The Preface now unpacks the “semantic search” label.** It names several
+  materially different retrieval pipelines that may sit behind the same claim
+  and characterises the post-Transformer period as rapid experimentation, while
+  explicitly retaining the standards, benchmarks and mature methods that do
+  exist.
 - **Chapter 5 split in two.** At 5,469 words it was more than twice the median
   chapter, and it already carried three internal group dividers. It now breaks
   at its own seam into **Chapter 5, "Embeddings and the retrieval encoder"**
