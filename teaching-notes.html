@@ -113,9 +113,9 @@
     <h3>A half-day workshop (about three hours)</h3>
     <p>For practising librarians who need the vocabulary rather than the mechanism.</p>
     <ol>
-      <li><a href="search-textbook.html#intro">Introduction</a> and <a href="search-textbook.html#boolean-admission">Chapters 1</a>–<a href="search-textbook.html#beyond-boolean">3</a> — the whole of Part I. It ends by resolving the category error it exists to correct, so it stands alone better than any other segment.</li>
-      <li><a href="search-textbook.html#diagnosing-failure">Chapter 9</a> on retrieval failure, which needs surprisingly little of Part II to follow.</li>
-      <li><a href="search-textbook.html#library-practice">Chapter 11</a> with <a href="search-textbook.html#appendix-search-terminology">Appendix D</a> — the procurement and evaluation material.</li>
+      <li><a href="search-textbook.html#intro">Chapters 1</a>–<a href="search-textbook.html#beyond-boolean">4</a> — the whole of Part I. It ends by resolving the category error it exists to correct, so it stands alone better than any other segment.</li>
+      <li><a href="search-textbook.html#diagnosing-failure">Chapter 10</a> on retrieval failure, which needs surprisingly little of Part II to follow.</li>
+      <li><a href="search-textbook.html#library-practice">Chapter 12</a> with <a href="search-textbook.html#appendix-search-terminology">Appendix D</a> — the procurement and evaluation material.</li>
     </ol>
     <p>Skip Part II entirely. Participants will not be able to explain <em>why</em> dense retrieval bridges paraphrase, but they will be able to ask a vendor the right questions, which is the point of a workshop.</p>
 
@@ -124,16 +124,16 @@
     <div class="table-wrap"><table>
       <thead><tr><th>Weeks</th><th>Reading</th><th>Assessment</th></tr></thead>
       <tbody>
-        <tr><td>1–2</td><td>Introduction and Part I (Chapters 1–3)</td><td>Application exercise I</td></tr>
-        <tr><td>3–4</td><td>Part II (Chapters 4–7)</td><td>Application exercise II</td></tr>
-        <tr><td>5–6</td><td>Part III (Chapters 8–11)</td><td>Application exercise III</td></tr>
+        <tr><td>1–2</td><td>Part I (Chapters 1–4)</td><td>Application exercise I</td></tr>
+        <tr><td>3–4</td><td>Part II (Chapters 5–8)</td><td>Application exercise II</td></tr>
+        <tr><td>5–6</td><td>Part III (Chapters 9–12)</td><td>Application exercise III</td></tr>
       </tbody>
     </table></div>
-    <p>Part II is the heaviest fortnight at roughly 11,000 words. If that is too much, Chapter 7 on query transformation is the one to make optional — it is the most self-contained, and Chapter 8 reintroduces what it needs.</p>
+    <p>Part II is the heaviest fortnight at roughly 11,000 words. If that is too much, Chapter 8 on query transformation is the one to make optional — it is the most self-contained, and Chapter 9 reintroduces what it needs.</p>
 
     <h3>A twelve-week course</h3>
-    <p>A chapter a week, with the introduction and the appendices distributed as optional reading. Appendix A (the Transformer) pairs with Chapter 4; Appendix B (tokenisation) with Chapter 4 or 5; Appendix C (inverted-index execution) with Chapters 1 and 2; Appendix D (terminology) with Chapter 11 or, better, kept open throughout.</p>
-    <p>This shape leaves room for the thing the book cannot supply: students running searches in systems your institution actually licenses, and reporting back. Chapters 9, 10 and 11 are considerably more useful to someone who has spent a week failing to make a discovery layer behave.</p>
+    <p>One numbered chapter a week, with the appendices distributed as optional reading. Appendix A (the Transformer) pairs with Chapter 5; Appendix B (tokenisation) with Chapter 5 or 6; Appendix C (inverted-index execution) with Chapters 2 and 3; Appendix D (terminology) with Chapter 12 or, better, kept open throughout.</p>
+    <p>This shape leaves room for the thing the book cannot supply: students running searches in systems your institution actually licenses, and reporting back. Chapters 10, 11 and 12 are considerably more useful to someone who has spent a week failing to make a discovery layer behave.</p>
 
     <h2>The application exercises</h2>
 
@@ -142,7 +142,7 @@
     <h3>Exercise I — Explain a result list without invoking meaning</h3>
     <p><strong>Tests:</strong> whether the student can resist reaching for “semantic” as an explanation. They run a natural-language query, record four observations, and must account for each using only query analysis, the execution rule, or query transformation.</p>
     <p><strong>A strong answer</strong> names a specific layer for each observation and explains why the other two are ruled out. It also takes the final instruction seriously — listing what could <em>not</em> be explained lexically. That residue is the honest part, and a student who reports none has probably not tested hard enough.</p>
-    <p><strong>Common wrong turn:</strong> concluding that a missing query term proves semantic retrieval. That is precisely the inference Chapter 3 dismantles, and it is worth marking as a failure of the exercise rather than a minor error.</p>
+    <p><strong>Common wrong turn:</strong> concluding that a missing query term proves semantic retrieval. That is precisely the inference Chapter 4 dismantles, and it is worth marking as a failure of the exercise rather than a minor error.</p>
 
     <h3>Exercise II — Map a product onto the pipeline</h3>
     <p><strong>Tests:</strong> whether the student can distinguish what a vendor documents from what they inferred. Every stage must be labelled <em>documented</em>, <em>inferred</em> or <em>unknown</em>.</p>
@@ -150,7 +150,7 @@
     <p><strong>Common wrong turn:</strong> treating a named model as an architecture. “It uses BERT” fills no stage on the map.</p>
 
     <h3>Exercise III — Diagnose a failure, then try to document it</h3>
-    <p><strong>Tests:</strong> diagnosis against Chapter 9’s four categories, a measurement from Chapter 10, and the record from Chapter 11.</p>
+    <p><strong>Tests:</strong> diagnosis against Chapter 10’s four categories, a measurement from Chapter 11, and the record from Chapter 12.</p>
     <p><strong>A strong answer</strong> applies the remedy the diagnosis implies rather than the one the student would have reached for first, and reports honestly when it did not work. The second deliverable — a list of everything the product would not let them record — is the institutionally useful half, and worth weighting accordingly.</p>
     <p><strong>Common wrong turn:</strong> diagnosing every failure as vocabulary mismatch, which is the most familiar of the four and the one librarians are trained to see.</p>
 
@@ -186,11 +186,11 @@
     <p>Every claim about how a named product currently works carries the date it was checked. Re-verify these before teaching:</p>
 
     <ul>
-      <li><strong>Table 2.1</strong> — which scholarly systems run on Lucene-family infrastructure.</li>
-      <li><strong>Table 6.2 and Figure 6.1</strong> — the Primo Research Assistant pipeline traced end to end. This is the book's most load-bearing product example; if its documented cut-offs change, the argument still holds but the numbers do not.</li>
-      <li><strong>Tables 7.2 and 7.3</strong> — query transformation and natural-language filter extraction across products. Vendors add supported fields steadily.</li>
-      <li><strong>Table 8.3</strong> — where academic tools sat by control arrangement, tested April 2026. The book already warns this will date quickly, and the same vendor appears on two different rows, so brand-level generalisations were wrong even then.</li>
-      <li><strong>Figure 0.1</strong> — the two-by-two of AI academic search. Products migrate between quadrants.</li>
+      <li><strong>Table 3.1</strong> — which scholarly systems run on Lucene-family infrastructure.</li>
+      <li><strong>Table 7.2 and Figure 7.1</strong> — the Primo Research Assistant pipeline traced end to end. This is the book's most load-bearing product example; if its documented cut-offs change, the argument still holds but the numbers do not.</li>
+      <li><strong>Tables 8.2 and 8.3</strong> — query transformation and natural-language filter extraction across products. Vendors add supported fields steadily.</li>
+      <li><strong>Table 9.3</strong> — where academic tools sat by control arrangement, tested April 2026. The book already warns this will date quickly, and the same vendor appears on two different rows, so brand-level generalisations were wrong even then.</li>
+      <li><strong>Figure 1.1</strong> — the two-by-two of AI academic search. Products migrate between quadrants.</li>
     </ul>
 
     <p>A useful exercise in itself: assign a student the job of re-checking one of these tables against current vendor documentation and reporting what changed. It teaches the documentation-reading skill the whole book depends on, and it dates the material for you.</p>

@@ -15,7 +15,10 @@ single-flow article and is frozen.
 
 ### Added
 
-- **Chapter 10, "Measuring whether retrieval worked."** Relevance as a judgement;
+- **A Preface, “Why this book exists.”** It explains the gap the book is meant
+  to fill, the expertise it assumes from librarians, the choices made about
+  mechanism and mathematics, and three routes through the text.
+- **Chapter 11, "Measuring whether retrieval worked."** Relevance as a judgement;
   precision and recall and the trade between them; precision@k, MRR, MAP and
   nDCG; test collections, pooling and what a benchmark number is worth; how to
   build a local evaluation set; what a number cannot settle.
@@ -39,32 +42,37 @@ single-flow article and is frozen.
 - **"Where to go deeper"** — a dozen entry points for further reading grouped
   by what you would be trying to learn, all drawn from sources already cited.
 - **Date stamps on every claim about how a named product currently works**
-  (Tables 2.1, 6.2, 7.2, 7.3, 8.3 and Figure 0.1), plus a note in the
+  (Tables 3.1, 7.2, 8.2, 8.3, 9.3 and Figure 1.1), plus a note in the
   orientation explaining that undated claims are about mechanisms, which move
   far more slowly than the products built on them.
 - **A permalink control on every chapter and appendix heading**, so a reading
   list can point at one of them.
 - **Nav links on the three application exercises.** Previous/Next previously
   skipped them and dead-ended at the last chapter; the chain now runs unbroken
-  from the introduction to the back matter.
+  from Chapter 1 to the back matter.
 - Glossary entries for relevance judgement, precision, recall, precision@k, MRR,
   MAP, nDCG, test collection and pooling.
 
 ### Changed
 
-- **Chapter 4 split in two.** At 5,469 words it was more than twice the median
+- **“The retrieval problem” is now Chapter 1.** With the new Preface carrying
+  the genuinely prefatory work, the former Introduction now begins Part I.
+  The three parts contain four chapters each, and Part I is now titled
+  “Retrieval foundations and lexical search.”
+- **Chapter 5 split in two.** At 5,469 words it was more than twice the median
   chapter, and it already carried three internal group dividers. It now breaks
-  at its own seam into **Chapter 4, "Embeddings and the retrieval encoder"**
+  at its own seam into **Chapter 5, "Embeddings and the retrieval encoder"**
   (what a learnt vector is, context, BERT, subword tokenisation, retrieval
-  training) and **Chapter 5, "Dense retrieval at collection scale"**
+  training) and **Chapter 6, "Dense retrieval at collection scale"**
   (bi-encoder deployment, nearest-neighbour indexing, the top-*k* boundary,
-  sparse versus dense, and chunking). Roughly 2,750 and 2,850 words. Chapters 5
-  to 10 shifted up by one as a result.
+  sparse versus dense, and chunking). Roughly 2,750 and 2,850 words. Chapters 6
+  to 11 shifted up by one as a result.
 - **Chapter ids are now name-based** (`#dense-retrieval` rather than `#ch4`), so
   they survive chapters being inserted, split or reordered. Every old
   `#ch1`–`#ch9` link still resolves to the chapter it originally pointed at.
-- **"Implications for library practice and tool evaluation" is now Chapter 11**,
-  following the insertion of the evaluation chapter and the Chapter 4 split.
+- **"Implications for library practice and tool evaluation" is now Chapter 12**,
+  following the promotion of “The retrieval problem,” the insertion of the
+  evaluation chapter and the Chapter 5 split.
   Its tables renumbered accordingly.
 - **Heading levels made consistent.** Twenty-one section headings that were
   marked up below their true level are now in both tables of contents —
