@@ -1,7 +1,0 @@
-Do we need a section on inverted index?
-
-Do we need a section on tokenization - simple first then complicated subword tokenization
-
-do we need a big section on chunking
-
-Do we need a section on transformer - encoder vs decoder

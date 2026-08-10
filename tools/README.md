@@ -80,17 +80,12 @@ definition list. To add a term mark, add the term to the glossary and, if it is
 unambiguous enough to match safely in prose, to the `MARKED` list in the page
 script.
 
-## `legacy/`
+## Historical edition
 
 Until August 2026 the textbook was generated from
-`how-search-decides-what-you-see.html` by `legacy/build_textbook.py`, with new
-prose held in `legacy/book_data.py` and a prose-preservation check in
-`legacy/verify.py`.
-
-That pipeline is retired. **Do not run `build_textbook.py`** — it would
-overwrite `search-textbook.html` from the old article and discard everything
-written since. The files are kept only as a record of how the chapter structure,
-apparatus and captions were originally produced.
+`how-search-decides-what-you-see.html`. That build pipeline has been removed;
+its history remains available in Git. The HTML maintenance passes documented
+above are the only current authoring tools.
 
 `how-search-decides-what-you-see.html` remains published as the earlier
-single-flow edition. It is now frozen and will drift from the book.
+single-flow edition. It is frozen and will drift from the book.
