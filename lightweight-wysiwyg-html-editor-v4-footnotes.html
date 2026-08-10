@@ -251,9 +251,10 @@
     </div>
 
     <button id="newBtn" type="button">New</button>
-    <button id="openBtn" type="button" title="Open one HTML file">Open HTML</button>
+    <button id="openBtn" type="button" title="Open one HTML file; Chrome and Edge can grant direct-save access">Open HTML</button>
     <button id="openFolderBtn" type="button" title="Open an HTML project folder with its images and stylesheets; Chrome and Edge can also grant write access">Open Folder</button>
-    <button id="saveBtn" class="primary" type="button">Save HTML</button>
+    <button id="checkBtn" type="button" title="Check IDs, internal links, headings, local assets and footnotes">Check</button>
+    <button id="saveBtn" class="primary" type="button" title="Download the current HTML">Download HTML</button>
     <input id="fileInput" type="file" accept=".html,.htm,text/html" hidden>
     <input id="folderInput" type="file" webkitdirectory directory multiple hidden>
     <input id="imageInput" type="file" accept="image/*" hidden>
@@ -339,6 +340,7 @@
       const fileInput = document.getElementById("fileInput");
       const folderInput = document.getElementById("folderInput");
       const imageInput = document.getElementById("imageInput");
+      const saveBtn = document.getElementById("saveBtn");
 
       let currentMode = "visual";
       let currentFilename = "untitled.html";
@@ -348,7 +350,9 @@
       let storedDoctype = "<!doctype html>";
       let visualLoadSequence = 0;
       let projectDirectoryHandle = null;
+      let currentFileHandle = null;
       let savedVisualRange = null;
+      let saveInProgress = false;
 
       const projectFiles = new Map();
       const projectFileHandles = new Map();
@@ -391,6 +395,23 @@
         dirty = value;
         document.title = `${dirty ? "• " : ""}${currentFilename} — Lightweight HTML Editor`;
         filenameLabel.textContent = `${dirty ? "• " : ""}${currentFilename}`;
+      }
+
+      function updateSaveButton() {
+        const canWriteDirectly = Boolean(currentFileHandle?.createWritable);
+        saveBtn.textContent = canWriteDirectly ? "Save HTML" : "Download HTML";
+        saveBtn.title = canWriteDirectly
+          ? `Save directly back to ${currentFilename}`
+          : "Download the current HTML; your browser cannot write directly to the opened file";
+      }
+
+      function setCurrentFileHandle(handle = null) {
+        currentFileHandle = handle;
+        updateSaveButton();
+      }
+
+      function confirmDiscardUnsaved(action) {
+        return !dirty || confirm(`Discard unsaved changes and ${action}?`);
       }
 
       function extractDoctype(html) {
@@ -523,6 +544,7 @@
         projectFilesLower.clear();
         projectFileHandles.clear();
         projectDirectoryHandle = null;
+        setCurrentFileHandle(null);
         currentDocumentPath = "";
         projectRootName = "";
       }
@@ -740,6 +762,43 @@
         element.removeAttribute("data-lw-css-map");
       }
 
+      const machineOwnedSelectors = [
+        "#toc-list",
+        "#mobile-toc-list",
+        "#figure-index",
+        "#table-index"
+      ];
+
+      function elementForNode(node) {
+        if (!node) return null;
+        return node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+      }
+
+      function lockMachineOwnedSections(doc) {
+        let locked = 0;
+        for (const element of doc.querySelectorAll(machineOwnedSelectors.join(","))) {
+          if (element.hasAttribute("data-lw-editor-lock")) continue;
+          element.setAttribute(
+            "data-lw-editor-lock",
+            element.hasAttribute("contenteditable")
+              ? element.getAttribute("contenteditable")
+              : "__missing__"
+          );
+          element.setAttribute("contenteditable", "false");
+          locked += 1;
+        }
+        return locked;
+      }
+
+      function restoreMachineOwnedSections(root) {
+        for (const element of root.querySelectorAll("[data-lw-editor-lock]")) {
+          const original = element.getAttribute("data-lw-editor-lock");
+          if (original === "__missing__") element.removeAttribute("contenteditable");
+          else element.setAttribute("contenteditable", original);
+          element.removeAttribute("data-lw-editor-lock");
+        }
+      }
+
       function cleanedVisualDocumentHtml() {
         const doc = editorDocument();
         if (!doc?.documentElement) return sourceEditor.value || starterDocument;
@@ -779,6 +838,8 @@
           body.removeAttribute("data-lw-remove-contenteditable");
         }
 
+        restoreMachineOwnedSections(clone);
+
         for (const element of clone.querySelectorAll("*")) {
           for (const attribute of [...element.attributes]) {
             if (attribute.name.startsWith("data-lw-")) element.removeAttribute(attribute.name);
@@ -795,6 +856,14 @@
           if (!doc) return;
           doc.designMode = "on";
           doc.body?.setAttribute("contenteditable", "true");
+          const lockedCount = lockMachineOwnedSections(doc);
+
+          doc.addEventListener("beforeinput", event => {
+            if (elementForNode(event.target)?.closest?.("[data-lw-editor-lock]")) {
+              event.preventDefault();
+              setStatus("That section is generated automatically. Edit the relevant heading, figure or table instead.", true);
+            }
+          });
 
           doc.addEventListener("input", () => {
             markDirty();
@@ -822,7 +891,13 @@
           const assetNote = projectFiles.size
             ? ` Local assets loaded from ${projectRootName || "the selected folder"}.`
             : "";
-          setStatus(`Visual editor ready.${assetNote} Scripts are preserved but not executed.`);
+          const lockNote = lockedCount
+            ? ` ${lockedCount} generated contents/index section${lockedCount === 1 ? " is" : "s are"} protected.`
+            : "";
+          const saveNote = currentFileHandle?.createWritable
+            ? " Direct save is available."
+            : " Saving will download a replacement file.";
+          setStatus(`Visual editor ready.${assetNote}${lockNote}${saveNote} Scripts are preserved but not executed.`);
         } catch (error) {
           setStatus(`Could not initialise visual editing: ${error.message}`, true);
         }
@@ -953,6 +1028,66 @@
         return restored;
       }
 
+      function normaliseLinkTarget(value) {
+        let target = String(value || "").trim();
+        if (/^www\./i.test(target)) target = `https://${target}`;
+        if (/^(?:javascript|vbscript|data):/i.test(target)) return "";
+        return target;
+      }
+
+      function insertLink() {
+        if (currentMode !== "visual") return;
+        const doc = editorDocument();
+        const originalRange = getSavedVisualRange(doc);
+        if (!originalRange) {
+          setStatus("Select text, or place the cursor where the link should be inserted.", true);
+          return;
+        }
+
+        const entered = prompt(
+          "Enter a full external URL (https://…) or an internal target (#section-id):",
+          "https://"
+        );
+        if (entered === null) return;
+        const target = normaliseLinkTarget(entered);
+        if (!target || target === "https://" || target === "http://") {
+          setStatus("Enter a valid link. Script and data URLs are not allowed.", true);
+          return;
+        }
+
+        if (target.startsWith("#")) {
+          const id = safeDecode(target.slice(1));
+          if (!id || !doc.getElementById(id)) {
+            setStatus(`Internal target ${target} does not exist. Add its id in Source mode first.`, true);
+            return;
+          }
+        }
+
+        const range = restoreVisualRange(doc, originalRange);
+        if (!range) {
+          setStatus("The link insertion point was lost. Select the text and try again.", true);
+          return;
+        }
+
+        if (range.collapsed) {
+          const label = prompt("Visible link text:", target.startsWith("#") ? target.slice(1) : target);
+          if (label === null || !label.trim()) return;
+          const link = doc.createElement("a");
+          link.href = target;
+          link.textContent = label.trim();
+          range.insertNode(link);
+          range.setStartAfter(link);
+          range.collapse(true);
+          restoreVisualRange(doc, range);
+        } else {
+          doc.execCommand("createLink", false, target);
+        }
+
+        markDirty();
+        updateCount();
+        setStatus(`Inserted link to ${target}.`);
+      }
+
       function escapeHtml(value) {
         return String(value)
           .replace(/&/g, "&amp;")
@@ -991,8 +1126,55 @@
         return Math.max(listCount, 0, ...referenceNumbers) + 1;
       }
 
+      function renumberFootnotesInDocument(doc) {
+        const references = [...doc.querySelectorAll("a.footnote-ref")]
+          .map(link => {
+            const href = link.getAttribute("href") || "";
+            const key = href.startsWith("#fn:") ? href.slice(4) : "";
+            return { link, key, sup: link.closest("sup") };
+          })
+          .filter(item => item.key && item.sup);
+
+        const keys = references.map(item => item.key);
+        if (new Set(keys).size !== keys.length) return new Map();
+
+        const section = doc.querySelector("section.footnotes");
+        const list = section?.querySelector("ol");
+        if (!list) return new Map();
+
+        const notes = new Map(
+          [...list.children]
+            .filter(item => item.tagName === "LI" && item.id.startsWith("fn:"))
+            .map(item => [item.id.slice(3), item])
+        );
+        if (keys.some(key => !notes.has(key))) return new Map();
+
+        const ranks = new Map();
+        references.forEach(({ link, key, sup }, index) => {
+          const number = index + 1;
+          ranks.set(key, number);
+          link.textContent = String(number);
+          link.setAttribute("href", `#fn:${key}`);
+          sup.id = `fnref:${key}`;
+
+          const note = notes.get(key);
+          const backref = note.querySelector("a.footnote-backref, a.footnote");
+          if (backref) {
+            backref.setAttribute("href", `#fnref:${key}`);
+            backref.title = `Jump back to footnote ${number} in the text`;
+          }
+          list.appendChild(note);
+        });
+
+        return ranks;
+      }
+
       function ensureFootnoteStyles(doc) {
         if (doc.getElementById("lw-footnote-editor-styles")) return;
+        const existingCss = [...doc.querySelectorAll("style")]
+          .map(style => style.textContent || "")
+          .join("\n");
+        if (/a\.footnote-ref\b/.test(existingCss) && /\.footnotes\b/.test(existingCss)) return;
         const style = doc.createElement("style");
         style.id = "lw-footnote-editor-styles";
         style.textContent = `
@@ -1165,13 +1347,139 @@
         range.collapse(true);
         restoreVisualRange(doc, range);
 
+        const ranks = renumberFootnotesInDocument(doc);
+        const finalNumber = ranks.get(slug) || number;
+
         markDirty();
         updateCount();
-        setStatus(`Inserted footnote ${number}.`);
+        setStatus(`Inserted footnote ${finalNumber}; all footnotes are now in document order.`);
       }
 
-      function saveFile() {
-        const html = currentMode === "visual" ? visualHTML() : sourceEditor.value;
+      function currentHtml({ renumberVisualFootnotes = false } = {}) {
+        if (currentMode === "source") return sourceEditor.value;
+        if (renumberVisualFootnotes) renumberFootnotesInDocument(editorDocument());
+        return visualHTML();
+      }
+
+      function checkDocumentIntegrity(html = currentHtml()) {
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        const errors = [];
+        const warnings = [];
+
+        const ids = new Map();
+        for (const element of doc.querySelectorAll("[id]")) {
+          const id = element.id;
+          if (!id) {
+            warnings.push(`Empty id on <${element.tagName.toLowerCase()}>.`);
+            continue;
+          }
+          ids.set(id, (ids.get(id) || 0) + 1);
+        }
+        const duplicateIds = [...ids].filter(([, count]) => count > 1).map(([id]) => id);
+        if (duplicateIds.length) errors.push(`Duplicate id(s): ${duplicateIds.join(", ")}`);
+
+        const brokenInternal = new Set();
+        for (const link of doc.querySelectorAll("a[href^='#']")) {
+          const raw = link.getAttribute("href").slice(1);
+          if (!raw) continue;
+          const id = safeDecode(raw);
+          if (!ids.has(id)) brokenInternal.add(`#${id}`);
+        }
+        if (brokenInternal.size) {
+          errors.push(`Broken internal link(s): ${[...brokenInternal].join(", ")}`);
+        }
+
+        const unsafeLinks = [...doc.querySelectorAll("a[href]")]
+          .map(link => link.getAttribute("href") || "")
+          .filter(href => /^(?:javascript|vbscript|data):/i.test(href));
+        if (unsafeLinks.length) errors.push(`Unsafe link URL(s): ${unsafeLinks.join(", ")}`);
+
+        const refs = [...doc.querySelectorAll("a.footnote-ref")];
+        const notes = new Map(
+          [...doc.querySelectorAll("section.footnotes li[id^='fn:']")]
+            .map(note => [note.id.slice(3), note])
+        );
+        const referencedKeys = [];
+        refs.forEach((link, index) => {
+          const href = link.getAttribute("href") || "";
+          const key = href.startsWith("#fn:") ? href.slice(4) : "";
+          const sup = link.closest("sup");
+          if (!key || !sup || sup.id !== `fnref:${key}`) {
+            errors.push(`Malformed footnote reference near number ${link.textContent.trim() || index + 1}.`);
+            return;
+          }
+          referencedKeys.push(key);
+          if (!notes.has(key)) errors.push(`Footnote reference ${key} has no matching note.`);
+          if (link.textContent.trim() !== String(index + 1)) {
+            errors.push(`Footnote ${key} is numbered ${link.textContent.trim() || "?"}, expected ${index + 1}.`);
+          }
+          const backref = notes.get(key)?.querySelector("a.footnote-backref, a.footnote");
+          if (!backref || backref.getAttribute("href") !== `#fnref:${key}`) {
+            errors.push(`Footnote ${key} has no valid back-reference.`);
+          }
+        });
+        if (new Set(referencedKeys).size !== referencedKeys.length) {
+          errors.push("A footnote is referenced more than once.");
+        }
+        const orphans = [...notes.keys()].filter(key => !referencedKeys.includes(key));
+        if (orphans.length) errors.push(`Footnote(s) without a reference: ${orphans.join(", ")}`);
+
+        const missingHeadingIds = [...doc.querySelectorAll("article h2:not([id]), article h3:not([id])")]
+          .filter(heading => !heading.closest("figure, aside, details"));
+        if (missingHeadingIds.length) {
+          warnings.push(`${missingHeadingIds.length} article heading(s) have no id and cannot be linked internally.`);
+        }
+
+        const missingLocal = new Set();
+        if (projectFiles.size) {
+          for (const element of doc.querySelectorAll("[href], [src], [poster], [data]")) {
+            for (const attribute of ["href", "src", "poster", "data"]) {
+              if (!element.hasAttribute(attribute)) continue;
+              const reference = element.getAttribute(attribute);
+              const resolved = resolveProjectPath(reference);
+              if (resolved && !getProjectFile(resolved)) missingLocal.add(reference);
+            }
+          }
+        }
+        if (missingLocal.size) warnings.push(`Missing local file(s): ${[...missingLocal].join(", ")}`);
+
+        return {
+          errors,
+          warnings,
+          counts: {
+            ids: ids.size,
+            internalLinks: doc.querySelectorAll("a[href^='#']").length,
+            footnotes: refs.length
+          }
+        };
+      }
+
+      function integritySummary(report) {
+        if (report.errors.length) {
+          return `${report.errors.length} error${report.errors.length === 1 ? "" : "s"}` +
+            (report.warnings.length ? ` and ${report.warnings.length} warning${report.warnings.length === 1 ? "" : "s"}` : "");
+        }
+        if (report.warnings.length) {
+          return `${report.warnings.length} warning${report.warnings.length === 1 ? "" : "s"}`;
+        }
+        return `passed: ${report.counts.ids} ids, ${report.counts.internalLinks} internal links, ${report.counts.footnotes} footnotes`;
+      }
+
+      function showIntegrityCheck() {
+        const report = checkDocumentIntegrity();
+        const summary = integritySummary(report);
+        setStatus(`Check ${summary}.`, Boolean(report.errors.length));
+        if (report.errors.length || report.warnings.length) {
+          const lines = [
+            ...report.errors.map(item => `ERROR: ${item}`),
+            ...report.warnings.map(item => `WARNING: ${item}`)
+          ];
+          alert(`Document check\n\n${lines.join("\n")}`);
+        }
+        return report;
+      }
+
+      function downloadHtml(html) {
         const blob = new Blob([html], { type: "text/html;charset=utf-8" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -1180,17 +1488,72 @@
         document.body.appendChild(link);
         link.click();
         link.remove();
-        URL.revokeObjectURL(url);
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
         markDirty(false);
-        setStatus(
-          projectFiles.size
-            ? `Saved ${currentFilename}. Keep it in the same relative location inside ${projectRootName}.`
-            : `Saved ${currentFilename}`
-        );
+        setStatus(`Downloaded ${currentFilename}. Replace the repository copy with this file if your browser renamed or relocated it.`);
+      }
+
+      async function ensureWritePermission(handle) {
+        if (!handle?.queryPermission || !handle?.requestPermission) return true;
+        const options = { mode: "readwrite" };
+        if (await handle.queryPermission(options) === "granted") return true;
+        return await handle.requestPermission(options) === "granted";
+      }
+
+      async function writeHtmlToHandle(handle, html) {
+        if (!await ensureWritePermission(handle)) throw new Error("Write permission was not granted");
+        const writable = await handle.createWritable();
+        try {
+          await writable.write(new Blob([html], { type: "text/html;charset=utf-8" }));
+          await writable.close();
+        } catch (error) {
+          try { await writable.abort(); } catch { /* The stream may already be closed. */ }
+          throw error;
+        }
+      }
+
+      async function saveFile() {
+        if (saveInProgress) return;
+        const html = currentHtml({ renumberVisualFootnotes: true });
+        const report = checkDocumentIntegrity(html);
+        if (report.errors.length) {
+          const proceed = confirm(
+            `The document check found ${integritySummary(report)}. ` +
+            "Saving may leave broken links or footnotes. Save anyway?"
+          );
+          if (!proceed) {
+            setStatus("Save cancelled. Use Check for details.", true);
+            return;
+          }
+        }
+
+        if (!currentFileHandle?.createWritable) {
+          downloadHtml(html);
+          return;
+        }
+
+        saveInProgress = true;
+        saveBtn.disabled = true;
+        setStatus(`Saving directly to ${currentFilename}…`);
+        try {
+          await writeHtmlToHandle(currentFileHandle, html);
+          if (currentDocumentPath && projectFiles.has(currentDocumentPath)) {
+            registerProjectFile(currentDocumentPath, await currentFileHandle.getFile(), currentFileHandle);
+          }
+          markDirty(false);
+          setStatus(`Saved directly to ${currentFilename}. Git can now review the change.`);
+        } catch (error) {
+          setStatus(`Could not save directly: ${error.message}`, true);
+          if (confirm("Direct save failed. Download the edited HTML instead?")) downloadHtml(html);
+        } finally {
+          saveInProgress = false;
+          saveBtn.disabled = false;
+        }
       }
 
       async function showOpenedHtml(html, fileName, documentPath = "") {
         currentFilename = fileName.replace(/\.(html?)$/i, "") + ".html";
+        updateSaveButton();
         currentDocumentPath = normalisePath(documentPath);
         storedDoctype = extractDoctype(html);
         sourceEditor.value = html;
@@ -1208,17 +1571,50 @@
         markDirty(false);
       }
 
-      async function openFile(file) {
+      async function openFile(file, handle = null) {
         if (!file) return;
         try {
           clearProject();
+          setCurrentFileHandle(handle);
           const html = await file.text();
           await showOpenedHtml(html, file.name, file.name);
-          setStatus(`Opened ${file.name}. Use Open Folder if it has relative local images or stylesheets.`);
+          setStatus(
+            handle
+              ? `Opened ${file.name} with direct-save access. Use Open Folder if local images need to be displayed.`
+              : `Opened ${file.name} read-only. Saving will download a replacement file.`
+          );
         } catch (error) {
+          setCurrentFileHandle(null);
           setStatus(`Could not open file: ${error.message}`, true);
         } finally {
           fileInput.value = "";
+        }
+      }
+
+      async function openHtmlFile() {
+        if (!confirmDiscardUnsaved("open another HTML file")) return;
+        if (!window.showOpenFilePicker) {
+          fileInput.click();
+          return;
+        }
+
+        try {
+          const [handle] = await window.showOpenFilePicker({
+            id: "lightweight-html-editor-document",
+            multiple: false,
+            types: [{
+              description: "HTML documents",
+              accept: { "text/html": [".html", ".htm"] }
+            }]
+          });
+          await openFile(await handle.getFile(), handle);
+        } catch (error) {
+          if (error?.name === "AbortError") {
+            setStatus("Opening cancelled");
+            return;
+          }
+          setStatus("Direct file access is unavailable; using the read-only file picker.");
+          fileInput.click();
         }
       }
 
@@ -1226,6 +1622,7 @@
         for await (const [name, handle] of directoryHandle.entries()) {
           const path = normalisePath(`${prefix}/${name}`);
           if (handle.kind === "directory") {
+            if ([".git", "node_modules", ".venv", "__pycache__"].includes(name)) continue;
             await indexDirectoryHandle(handle, path);
           } else {
             const file = await handle.getFile();
@@ -1235,13 +1632,17 @@
       }
 
       async function openWritableFolder() {
+        if (!confirmDiscardUnsaved("open another folder")) return;
         if (!window.showDirectoryPicker) {
           folderInput.click();
           return;
         }
 
         try {
-          const directoryHandle = await window.showDirectoryPicker({ mode: "readwrite" });
+          const directoryHandle = await window.showDirectoryPicker({
+            id: "lightweight-html-editor-project",
+            mode: "readwrite"
+          });
           clearProject();
           projectDirectoryHandle = directoryHandle;
           projectRootName = directoryHandle.name || "selected folder";
@@ -1267,10 +1668,11 @@
           }
 
           const html = await selected.file.text();
+          setCurrentFileHandle(projectFileHandles.get(selected.path) || null);
           await showOpenedHtml(html, basename(selected.path), selected.path);
           setStatus(
             `Opened ${selected.path} with writable access to ${projectRootName}. ` +
-            "Inserted images can be copied into the project automatically."
+            "Save writes back to this HTML file, and inserted images can be copied into the project automatically."
           );
         } catch (error) {
           if (error?.name === "AbortError") {
@@ -1292,11 +1694,14 @@
       function chooseHtmlFile(htmlEntries) {
         if (htmlEntries.length === 1) return htmlEntries[0];
 
-        const preferredIndex = Math.max(
-          0,
-          htmlEntries.findIndex(entry => /^index\.html?$/i.test(entry.path))
-        );
-        const visible = htmlEntries.slice(0, 30);
+        const preferredNames = [currentFilename, "search-textbook.html", "index.html"];
+        let preferredIndex = -1;
+        for (const name of preferredNames) {
+          preferredIndex = htmlEntries.findIndex(entry => basename(entry.path).toLowerCase() === name.toLowerCase());
+          if (preferredIndex !== -1) break;
+        }
+        preferredIndex = Math.max(0, preferredIndex);
+        const visible = htmlEntries.slice(0, 50);
         const choices = visible.map((entry, index) => `${index + 1}. ${entry.path}`).join("\n");
         const extra = htmlEntries.length > visible.length
           ? `\n\nOnly the first ${visible.length} of ${htmlEntries.length} files are listed.`
@@ -1353,9 +1758,10 @@
       }
 
       async function newDocument() {
-        if (dirty && !confirm("Discard unsaved changes and create a new document?")) return;
+        if (!confirmDiscardUnsaved("create a new document")) return;
         clearProject();
         currentFilename = "untitled.html";
+        updateSaveButton();
         currentDocumentPath = "untitled.html";
         storedDoctype = "<!doctype html>";
         sourceEditor.value = starterDocument;
@@ -1376,9 +1782,10 @@
       sourceModeBtn.addEventListener("click", () => switchMode("source"));
 
       document.getElementById("newBtn").addEventListener("click", newDocument);
-      document.getElementById("openBtn").addEventListener("click", () => fileInput.click());
+      document.getElementById("openBtn").addEventListener("click", openHtmlFile);
       document.getElementById("openFolderBtn").addEventListener("click", openWritableFolder);
-      document.getElementById("saveBtn").addEventListener("click", saveFile);
+      document.getElementById("checkBtn").addEventListener("click", showIntegrityCheck);
+      saveBtn.addEventListener("click", saveFile);
       fileInput.addEventListener("change", () => openFile(fileInput.files[0]));
       folderInput.addEventListener("change", () => openFolder(folderInput.files));
 
@@ -1392,11 +1799,7 @@
         event.target.value = "";
       });
 
-      document.getElementById("linkBtn").addEventListener("click", () => {
-        const url = prompt("Enter the link URL:", "https://");
-        if (!url) return;
-        exec("createLink", url);
-      });
+      document.getElementById("linkBtn").addEventListener("click", insertLink);
 
       document.getElementById("unlinkBtn").addEventListener("click", () => exec("unlink"));
       document.getElementById("footnoteBtn").addEventListener("click", insertFootnote);
@@ -1534,7 +1937,7 @@
       document.addEventListener("keydown", event => {
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "o") {
           event.preventDefault();
-          fileInput.click();
+          openHtmlFile();
         }
       });
 
@@ -1555,11 +1958,13 @@
         const file = event.dataTransfer.files?.[0];
         if (!file || !/\.html?$/i.test(file.name)) return;
         event.preventDefault();
+        if (!confirmDiscardUnsaved("open the dropped HTML file")) return;
         openFile(file);
       });
 
       currentDocumentPath = "untitled.html";
       sourceEditor.value = starterDocument;
+      updateSaveButton();
       loadVisual(starterDocument);
       markDirty(false);
     })();

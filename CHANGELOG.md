@@ -55,6 +55,12 @@ single-flow article and is frozen.
 
 ### Changed
 
+- **Appendix E now develops learning to rank and reranking in depth.** It adds
+  a scaled toy feature mixture; separates supervision, formulation, objective
+  and model; explains click and position bias; distinguishes LTR from a
+  reranker; and uses Semantic Scholar's documented 2020 pipeline as a worked
+  production example. Chapter 7 and the appendix now cross-link at the points
+  where architecture gives way to training and deployment detail.
 - **“The retrieval problem” is now Chapter 1.** With the new Preface carrying
   the genuinely prefatory work, the former Introduction now begins Part I.
   The three parts contain four chapters each, and Part I is now titled
