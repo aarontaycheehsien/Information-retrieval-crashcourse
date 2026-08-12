@@ -55,6 +55,7 @@ single-flow article and is frozen.
 
 ### Changed
 
+- **Chapter 6 now makes “semantic search is a goal, not an architecture” a main-text distinction.** It separates the capability claim from BM25, ontology or query expansion, dense retrieval and neural reranking; uses Semantic Scholar’s documented keyword-retrieval-plus-reranking pipeline as the counterexample; and leaves the appendix as a terminology reminder rather than the place where the argument is introduced.
 - **Appendix E now develops learning to rank and reranking in depth.** It adds
   a scaled toy feature mixture; separates supervision, formulation, objective
   and model; explains click and position bias; distinguishes LTR from a
@@ -65,11 +66,15 @@ single-flow article and is frozen.
   the genuinely prefatory work, the former Introduction now begins Part I.
   The three parts contain four chapters each, and Part I is now titled
   “Retrieval foundations and lexical search.”
-- **The Preface now unpacks the “semantic search” label.** It names several
-  materially different retrieval pipelines that may sit behind the same claim
-  and characterises the post-Transformer period as rapid experimentation, while
-  explicitly retaining the standards, benchmarks and mature methods that do
-  exist.
+- **The Preface now unpacks the “semantic search” label.** A definition callout
+  presents it as search by meaning, usually contrasted with lexical search;
+  identifies dense retrieval over vector embeddings as the common contemporary
+  implementation without treating it as the definition; and links forward to
+  the chapters and appendix that develop the distinction. The surrounding text
+  names several materially different retrieval pipelines that may sit behind
+  the same claim and characterises the post-Transformer period as rapid
+  experimentation, while explicitly retaining the standards, benchmarks and
+  mature methods that do exist.
 - **Chapter 5 split in two.** At 5,469 words it was more than twice the median
   chapter, and it already carried three internal group dividers. It now breaks
   at its own seam into **Chapter 5, "Embeddings and the retrieval encoder"**
