@@ -314,7 +314,7 @@ table.full tr:last-child td{border-bottom:0}
 
       <div id="ctrl-repeat" class="ctrl">
         <div class="ctrl-top">
-          <span class="ctrl-name">Times <code>delulu</code> appears in Record D</span>
+          <label class="ctrl-name" for="repeat">Times <code>delulu</code> appears in Record D</label>
           <span class="ctrl-val" id="repeat-val">3</span>
         </div>
         <input type="range" id="repeat" min="1" max="20" value="3">
@@ -324,7 +324,7 @@ table.full tr:last-child td{border-bottom:0}
 
       <div id="ctrl-pad" class="ctrl">
         <div class="ctrl-top">
-          <span class="ctrl-name">Unrelated appendix paragraphs added to Record A</span>
+          <label class="ctrl-name" for="pad">Unrelated appendix paragraphs added to Record A</label>
           <span class="ctrl-val" id="pad-val">0</span>
         </div>
         <input type="range" id="pad" min="0" max="8" value="0">
@@ -368,11 +368,11 @@ table.full tr:last-child td{border-bottom:0}
         <div>
           <h4 style="margin-top:0">Advanced parameters</h4>
           <div class="ctrl" style="margin-top:.3rem">
-            <div class="ctrl-top"><span class="ctrl-name">Repetition saturation, k₁</span><span class="ctrl-val" id="k1-val">1.20</span></div>
+            <div class="ctrl-top"><label class="ctrl-name" for="k1">Repetition saturation, k₁</label><span class="ctrl-val" id="k1-val">1.20</span></div>
             <input type="range" id="k1" min="0" max="3" step="0.1" value="1.2">
           </div>
           <div class="ctrl">
-            <div class="ctrl-top"><span class="ctrl-name">Length normalisation, b</span><span class="ctrl-val" id="b-val">0.75</span></div>
+            <div class="ctrl-top"><label class="ctrl-name" for="b">Length normalisation, b</label><span class="ctrl-val" id="b-val">0.75</span></div>
             <input type="range" id="b" min="0" max="1" step="0.05" value="0.75">
           </div>
           <p class="ctrl-note">Defaults are k₁ = 1.2 and b = 0.75. Nothing in the guided tour depends on changing them. Set b to 0 to switch document-length normalisation off entirely.</p>

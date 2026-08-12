@@ -115,7 +115,7 @@
       border-radius: 999px; background: var(--teal); color: white;
       font: 800 .7rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase;
     }
-    .orientation h4 { margin: 0 0 .9rem; color: var(--teal); font: 800 1.15rem/1.3 var(--sans); }
+    .orientation :is(h3, h4) { margin: 0 0 .9rem; color: var(--teal); font: 800 1.15rem/1.3 var(--sans); }
     .orientation p { margin: .8rem 0; }
 
     .glossary {
@@ -194,7 +194,7 @@
       border-radius: 999px; background: var(--accent); color: white;
       font: 800 .7rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase;
     }
-    .common-confusion h4 {
+    .common-confusion :is(h3, h4) {
       margin: 0 0 .9rem; color: var(--accent-dark);
       font: 800 1.15rem/1.3 var(--sans);
     }
@@ -211,7 +211,7 @@
       border-radius: 999px; background: var(--teal); color: white;
       font: 800 .7rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase;
     }
-    .question-callout h4 {
+    .question-callout :is(h3, h4) {
       margin: 0 0 .9rem; color: var(--teal);
       font: 800 1.15rem/1.3 var(--sans);
     }
@@ -237,6 +237,11 @@
     .table-wrap {
       overflow-x: auto; margin: 2rem 0; border: 1px solid var(--line); border-radius: 10px;
     }
+    .visually-hidden {
+      position: absolute !important; width: 1px !important; height: 1px !important;
+      padding: 0 !important; margin: -1px !important; overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important;
+    }
     table { border-collapse: collapse; width: 100%; min-width: 620px; font: .88rem/1.45 var(--sans); }
     th, td { padding: .85rem .9rem; vertical-align: top; text-align: left; border-bottom: 1px solid var(--line); }
     th { background: #e8e1d3; color: #283230; font-size: .78rem; letter-spacing: .025em; text-transform: uppercase; }
@@ -247,7 +252,7 @@
       margin: 2rem 0; padding: 1.15rem; border: 1px solid var(--line);
       border-radius: 12px; background: #f7f3eb; font: .82rem/1.4 var(--sans);
     }
-    .query-flow h4 { margin: 0 0 1rem; color: var(--ink); font-size: 1rem; }
+    .query-flow :is(h3, h4) { margin: 0 0 1rem; color: var(--ink); font-size: 1rem; }
     .query-flow-track {
       display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.25fr) auto minmax(0, 1.25fr) auto minmax(0, 1fr);
       gap: .45rem; align-items: stretch;
@@ -268,7 +273,7 @@
       margin: 2rem 0; padding: 1.1rem; border: 1px solid var(--line);
       border-radius: 12px; background: #f7f3eb; font: .82rem/1.45 var(--sans);
     }
-    .ir-figure h4 {
+    .ir-figure :is(h3, h4) {
       margin: 0 0 .85rem; color: var(--ink); font-size: 1rem; line-height: 1.25;
     }
     .svg-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -529,8 +534,8 @@
 </ul>
 <p>This text is almost entirely about the first.</p>
 <figure class="ir-figure" aria-labelledby="ai-search-2x2-caption">
-<h4>Four shapes of AI academic search</h4>
-<div class="svg-scroll"><img src="images/2x2.png" alt="A two-by-two matrix of AI academic search tools. The horizontal axis, primary user-facing output, runs from ranked records or search results on the left to a synthesised answer or report on the right. The vertical axis, degree of retrieval iteration, runs from single-pass or limited retrieval at the bottom to iterative, multi-step retrieval at the top. Bottom left, quick search: Scopus, Google Scholar, Web of Science Smart Search, Primo Natural Language Search in NDE, EBSCOhost Natural Language Search. Bottom right, quick answer: Scopus AI, Web of Science Research Assistant, Primo Research Assistant, Consensus Pro Mode. Top left, iterative search: Ai2 Asta Find Paper, Google Scholar Labs. Top right, deep research: Undermind.ai, SciSpace Deep Review and Agents, Consensus Deep Search."></div>
+<h3>Four shapes of AI academic search</h3>
+<div class="svg-scroll"><img loading="lazy" decoding="async" src="images/2x2.png" alt="A two-by-two matrix of AI academic search tools. The horizontal axis, primary user-facing output, runs from ranked records or search results on the left to a synthesised answer or report on the right. The vertical axis, degree of retrieval iteration, runs from single-pass or limited retrieval at the bottom to iterative, multi-step retrieval at the top. Bottom left, quick search: Scopus, Google Scholar, Web of Science Smart Search, Primo Natural Language Search in NDE, EBSCOhost Natural Language Search. Bottom right, quick answer: Scopus AI, Web of Science Research Assistant, Primo Research Assistant, Consensus Pro Mode. Top left, iterative search: Ai2 Asta Find Paper, Google Scholar Labs. Top right, deep research: Undermind.ai, SciSpace Deep Review and Agents, Consensus Deep Search."></div>
 <figcaption id="ai-search-2x2-caption"><strong>Output format on the horizontal axis; retrieval iteration on the vertical.</strong> I introduced this framework in “<a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a>”. The boxes are softer than they look and products migrate between them: Scopus AI has since added a deep-search mode, and Web of Science Research Assistant now describes itself as <a href="#agentic-search-who-chooses-the-next-retrieval-action">agentic</a>—a claim examined, along with <a href="#where-current-academic-tools-actually-sit">where these tools actually sit</a>, near the end of this text. Treat it as a snapshot rather than a taxonomy.</figcaption>
 </figure>
 <p>The diagram sorts current academic tools along two axes. Horizontally: what the tool hands you—a ranked list of records, or a synthesised answer or report. Vertically: how much retrieval it performs—a single pass, or repeated, multi-step searching. That produces four recognisable shapes: quick search, quick answer, iterative search and deep research.<sup id="fnref:iterative-not-agentic"><a class="footnote-ref" href="#fn:iterative-not-agentic">1</a></sup></p>
@@ -540,7 +545,7 @@
 <p>That is the practical reason to spend a whole text on the less glamorous half. A generated answer can be fluent, correctly formatted and properly cited, and still be wrong about the state of the literature, simply because the search behind it missed something. No amount of prompt engineering or model upgrading reveals what was never retrieved.</p>
 <aside class="common-confusion" aria-labelledby="llms-in-retrieval-title">
 <p class="common-confusion-label">Common confusion</p>
-<h4 id="llms-in-retrieval-title">Leaving out generation does not mean leaving out large language models</h4>
+<h3 id="llms-in-retrieval-title">Leaving out generation does not mean leaving out large language models</h3>
 <p>An LLM can sit inside the <em>retrieval</em> half of a pipeline, and several of the systems in the diagram put it there. Those uses are covered here:</p>
 <ul>
 <li><strong>Writing the query.</strong> An LLM can turn a natural-language question into a Boolean expression, complete with fields and filters, before any searching happens. <a href="#when-a-system-writes-the-boolean-query">Discussed later</a>.</li>
@@ -554,7 +559,7 @@
 
 <aside class="orientation" aria-labelledby="orientation-title">
 <p class="orientation-label">Before you start</p>
-<h4 id="orientation-title">How to read this</h4>
+<h3 id="orientation-title">How to read this</h3>
 <p><strong>Roughly two to three hours, and no prior information-retrieval knowledge is assumed.</strong> It divides naturally into three sittings of about an hour, and nothing is lost by stopping between them. By the end you should be able to say what a search system is doing when it admits a record, what it is doing when it ranks one, and why those are separate decisions—then ask a vendor the right questions about both.</p>
 <p>No mathematics is required. Formulas are confined to the footnotes, and every argument that depends on one is also stated in words.</p>
 <p>There are three routes through it, depending on why you are here.</p>
@@ -599,19 +604,19 @@
 <p>In the second, Google Scholar reports about 9.4 million results for <code>open access</code>, yet its interface reaches page 100 and its help documentation says that no more than 1,000 results can be shown for one query.</p>
 <div class="evidence-stack" aria-label="Opening search-result puzzles">
 <figure class="ir-figure evidence-card" aria-labelledby="scite-opening-caption">
-<h4>Puzzle one: the nonsense term did not empty the result list</h4>
-<img alt="Scite paper search returning results for a meaningful open-access question followed by an invented string" src="images/scite.png">
+<h3>Puzzle one: the nonsense term did not empty the result list</h3>
+<img loading="lazy" decoding="async" alt="Scite paper search returning results for a meaningful open-access question followed by an invented string" src="images/scite.png">
 <figcaption id="scite-opening-caption"><strong>Observed behaviour:</strong> relevant-looking results remain even though the query contains a string that is unlikely to occur in the collection.</figcaption>
 </figure>
 <figure class="ir-figure evidence-card" aria-labelledby="scholar-opening-caption">
-<h4>Puzzle two: the reported result set is much larger than the viewable list</h4>
-<img alt="Google Scholar page 100 for an open access search reporting about 9.4 million results" src="images/googlescholar1000.png">
+<h3>Puzzle two: the reported result set is much larger than the viewable list</h3>
+<img loading="lazy" decoding="async" alt="Google Scholar page 100 for an open access search reporting about 9.4 million results" src="images/googlescholar1000.png">
 <figcaption id="scholar-opening-caption"><strong>Observed behaviour:</strong> the interface reports millions of matches, while <a href="https://scholar.google.com/intl/us/scholar/help.html">Google Scholar documents a 1,000-result display limit</a>.</figcaption>
 </figure>
 </div>
 <aside class="question-callout" aria-labelledby="opening-puzzles-title">
 <p class="question-callout-label">Keep these questions open</p>
-<h4 id="opening-puzzles-title">What must the search system be doing?</h4>
+<h3 id="opening-puzzles-title">What must the search system be doing?</h3>
 <ol>
 <li>Why did the invented string not exclude every scite result?</li>
 <li>How does Google Scholar decide which tiny fraction of the reported results appears first?</li>
@@ -648,7 +653,7 @@
 <p>delulu OR unrealistic OR irrational OR foolish</p>
 </blockquote>
 <p>If <code>foolish</code> is a poor alternative, records containing it may enter the result set. Ranking may push them down, but Boolean has already admitted them.</p>
-<p><img alt="A poor synonym expansion changes which records can enter" src="images/01%20Boolean%20search%20-%20words%20as%20admission%20rules/ChatGPT%20Image%20Jul%2026,%202026,%2009_49_10%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="A poor synonym expansion changes which records can enter" src="images/01%20Boolean%20search%20-%20words%20as%20admission%20rules/ChatGPT%20Image%20Jul%2026,%202026,%2009_49_10%20PM.png"></p>
 <p>The reverse error is more serious. If a relevant record fails a compulsory <code>AND</code> condition, ranking cannot rescue it. It never enters the competition.</p>
 <p>This is why LLM-generated synonyms require particular care in formal Boolean strategies. A weak suggestion is not merely given a low weight. It changes which documents can be returned.</p>
 <p>The admission decision is now clear, but the ordering problem is still open. First we need to see how a search engine finds the eligible records without rereading the entire collection.</p>
@@ -658,7 +663,8 @@
 <p>A computer does not begin with an intuitive understanding of words. It needs a rule for dividing a string of text into units it can process. <strong>Tokenisation</strong> is that division, and each resulting unit is a <strong>token</strong>. A token is often a word, but it can also be punctuation, part of a word, a character or another unit chosen by the system.</p>
 <p>For a simple English lexical index, the analysis might proceed as follows:</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Stage</th><th>Illustrative output</th></tr></thead>
+<caption class="visually-hidden">Illustrative lexical text-analysis pipeline</caption>
+<thead><tr><th scope="col">Stage</th><th scope="col">Illustrative output</th></tr></thead>
 <tbody>
 <tr><td>Original text</td><td><code>Delulu about jobs!</code></td></tr>
 <tr><td>Tokenisation</td><td><code>Delulu</code> · <code>about</code> · <code>jobs</code> · <code>!</code></td></tr>
@@ -677,7 +683,8 @@
 <h3 id="after-tokenisation-stemming-and-lemmatisation">After tokenisation: stemming and lemmatisation<a aria-label="Link to After tokenisation: stemming and lemmatisation" class="heading-anchor" href="#after-tokenisation-stemming-and-lemmatisation">#</a></h3>
 <p>Tokenisation decides where one unit ends and another begins. <strong>Stemming</strong> and <strong>lemmatisation</strong> are later analysis steps that may transform some of those units before matching. Their practical purpose is to let related grammatical forms share searchable evidence even when the user and the document do not contain exactly the same surface form.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Method</th><th>How it works</th><th>Illustrative output</th><th>What to remember</th></tr></thead>
+<caption class="visually-hidden">Comparison of stemming and lemmatisation</caption>
+<thead><tr><th scope="col">Method</th><th scope="col">How it works</th><th scope="col">Illustrative output</th><th scope="col">What to remember</th></tr></thead>
 <tbody>
 <tr><td><strong>Stemming</strong></td><td>Uses rules or heuristics to remove or replace common endings.</td><td><code>studies</code>, <code>studying</code> and <code>studied</code> might become <code>studi</code>.</td><td>The stem is a matching key and need not be a valid word.</td></tr>
 <tr><td><strong>Lemmatisation</strong></td><td>Uses vocabulary and morphological analysis, often including part of speech, to identify a dictionary form.</td><td>The same forms might become <code>study</code>; adjectival <code>better</code> may become <code>good</code>.</td><td>The output is a word, but the analyser must still choose the correct grammatical interpretation.</td></tr>
@@ -692,7 +699,8 @@
 <p>A collection is naturally organised document first: open a record, then read the words inside it. An inverted index reverses that direction for searching. It starts with an analysed term and points to the documents in which that term occurs.</p>
 <p>Imagine four tiny records:</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Record</th><th>Text</th></tr></thead>
+<caption class="visually-hidden">Four example records used to build an inverted index</caption>
+<thead><tr><th scope="col">Record</th><th scope="col">Text</th></tr></thead>
 <tbody>
 <tr><td>D1</td><td>Delulu job interview expectations</td></tr>
 <tr><td>D2</td><td>Job interview preparation guide</td></tr>
@@ -702,7 +710,8 @@
 </table></div>
 <p>After the analysis described above, the index maintains a <strong>dictionary</strong> of searchable terms. Each dictionary term points to a <strong>posting list</strong>: an ordered list of entries identifying the documents that contain it. A selected part of the dictionary for these records might look like this:</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Indexed term</th><th>Posting list</th></tr></thead>
+<caption class="visually-hidden">Selected inverted-index terms and their posting lists</caption>
+<thead><tr><th scope="col">Indexed term</th><th scope="col">Posting list</th></tr></thead>
 <tbody>
 <tr><td><code>delulu</code></td><td>D1, D4</td></tr>
 <tr><td><code>job</code></td><td>D1, D2, D3, D4</td></tr>
@@ -756,22 +765,23 @@ intersection → D1</code></pre>
 <li><strong>Is that frequency unusually high given the document’s length?</strong> Five occurrences in a short abstract may be stronger evidence (higher score) than five occurrences in a very long document. This is document-length normalisation and, like term saturation, the strength of this normalisation is controlled by a second parameter, conventionally written <em>b</em>.</li>
 </ol>
 <p>Questions 1 and 2 are shared with TF-IDF. Questions 3 and 4 are BM25’s substantive additions, and each is governed by one of those tuning parameters. Typical defaults are <em>k</em><sub>1</sub>&nbsp;=&nbsp;1.2 and <em>b</em>&nbsp;=&nbsp;0.75, the values used in the <a href="#how-bm25-actually-uses-the-posting-lists">worked example in the appendix</a>. A librarian inspecting a search engine’s ranking configuration will meet these two letters.</p>
-<p><img alt="The four questions BM25 asks about each matching term" src="images/02%20BM25%20-%20words%20as%20weighted%20clues/ChatGPT%20Image%20Jul%2026,%202026,%2009_32_47%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="The four questions BM25 asks about each matching term" src="images/02%20BM25%20-%20words%20as%20weighted%20clues/ChatGPT%20Image%20Jul%2026,%202026,%2009_32_47%20PM.png"></p>
 <blockquote>
 <p><strong>Try it:</strong> the formula is easier to understand when you can interfere with it. <a href="bm25-evidence-lab.html">The BM25 Evidence Lab</a> lets you change one source of evidence at a time — term rarity, repetition, document length — and watch a six-record ranking respond. It takes about five minutes and needs no prior knowledge of the equation.</p>
 </blockquote>
 <p>This description uses the standard single-field form of BM25 as a simplifying reference; related variants adapt it to structured records and very long documents.<sup id="fnref:bm25-variants"><a class="footnote-ref" href="#fn:bm25-variants">7</a></sup></p>
 <h3 id="bm25-and-lexical-ranking-in-academic-search">BM25 and lexical ranking in academic search<a aria-label="Link to BM25 and lexical ranking in academic search" class="heading-anchor" href="#bm25-and-lexical-ranking-in-academic-search">#</a></h3>
-<p><img alt="BM25 and lexical ranking in academic search" src="images/02%20BM25%20-%20words%20as%20weighted%20clues/BM25%20and%20lexical%20ranking%20in%20academic%20search.png"></p>
+<p><img loading="lazy" decoding="async" alt="BM25 and lexical ranking in academic search" src="images/02%20BM25%20-%20words%20as%20weighted%20clues/BM25%20and%20lexical%20ranking%20in%20academic%20search.png"></p>
 <p>The TF-IDF intuition is not merely textbook history. <a href="https://service.elsevier.com/app/answers/detail/a_id/14182/supporthub/scopus/">Scopus describes its relevance ranking</a> as using term frequency and inverse document frequency, supplemented by factors such as the field in which a term occurs, its position, the proximity of query terms and whether several query terms occur together in the same field.</p><p><a href="https://webofscience.help.clarivate.com/en-us/Content/search-results.htm?Highlight=sort">Web of Science</a> says its relevance sort considers matches in the title, abstract, keywords and Keywords Plus, with title and keywords weighted slightly more. These are recognisably lexical signals, but not evidence that the final ranking is plain BM25.</p><p><a href="https://europepmc.org/help">Europe PMC similarly explains</a> that its relevance ranking considers term frequency, term rarity, the number of matched query terms, field length and a small recency boost. These are not necessarily the same formula, but both expose recognisably lexical ranking signals used in production academic search.</p>
 <p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6112631/">PubMed offers an unusually clear documented BM25 example</a>. Its published <a href="#why-search-systems-use-multiple-stages">multi-stage architecture</a> for Best Match first retrieves and orders matching records with BM25, then uses LambdaMART<sup id="fnref:lambdamart"><a class="footnote-ref" href="#fn:lambdamart">8</a></sup> to rerank the top 500. PubMed’s current help still describes a weighted term-frequency stage followed by machine-learning reranking. It therefore shows both BM25’s continuing role and why a production ranking pipeline should not be reduced to one formula.</p>
-<p>Familiar academic search products often wrap similar lexical evidence inside richer ranking pipelines. <a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI">Primo’s Central Discovery Index</a> and <a href="https://knowledge.exlibrisgroup.com/Summon/Product_Documentation/Searching_in_The_Summon_Service/Search_Results/Summon%3A_Relevance_Ranking">Summon</a> describe proprietary systems that combine field and rare-term weighting, term frequency, field length, phrase and proximity boosts with static signals such as resource type, recency, peer-review status and citations.</p><p><img src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/primocdi.png" alt="Primo Central Discovery Index documentation describing its ranking signals"></p><p>Lucene-family infrastructure also appears in commercial scholarly and library search products, as well as in open-source projects used in this domain.</p>
+<p>Familiar academic search products often wrap similar lexical evidence inside richer ranking pipelines. <a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI">Primo’s Central Discovery Index</a> and <a href="https://knowledge.exlibrisgroup.com/Summon/Product_Documentation/Searching_in_The_Summon_Service/Search_Results/Summon%3A_Relevance_Ranking">Summon</a> describe proprietary systems that combine field and rare-term weighting, term frequency, field length, phrase and proximity boosts with static signals such as resource type, recency, peer-review status and citations.</p><p><img loading="lazy" decoding="async" src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/primocdi.png" alt="Primo Central Discovery Index documentation describing its ranking signals"></p><p>Lucene-family infrastructure also appears in commercial scholarly and library search products, as well as in open-source projects used in this domain.</p>
 <div class="table-wrap"><table>
+<caption class="visually-hidden">Library and scholarly search projects using Lucene-family infrastructure</caption>
 <thead>
 <tr>
-<th>Product or project</th>
-<th>Scholarly or library role</th>
-<th>Documented Lucene-family infrastructure</th>
+<th scope="col">Product or project</th>
+<th scope="col">Scholarly or library role</th>
+<th scope="col">Documented Lucene-family infrastructure</th>
 </tr>
 </thead>
 <tbody>
@@ -811,7 +821,7 @@ intersection → D1</code></pre>
 <p>Vendors may alter similarities, field weights, query parsing and other ranking signals, or apply additional ranking stages after initial retrieval.</p>
 <h2 id="how-bm25-uses-the-same-inverted-index">How BM25 uses the same inverted index<a aria-label="Link to How BM25 uses the same inverted index" class="heading-anchor" href="#how-bm25-uses-the-same-inverted-index">#</a></h2>
 <p>The earlier Boolean explanation introduced the <a href="#from-analysed-tokens-to-a-term-first-map">dictionary and posting lists</a> as a term-to-document map. BM25 can use the same underlying structure. What changes is what the search engine does with the matching records: <a href="#boolean-treats-postings-as-sets">Boolean operators treat postings mainly as sets</a>, while BM25 uses their stored evidence to calculate graded scores (using TF, IDF scores etc).</p>
-<p><img alt="Two stages of search: Boolean eligibility followed by BM25 relevance ranking" src="images/01%20Boolean%20search%20-%20words%20as%20admission%20rules/ChatGPT%20Image%20Jul%2026,%202026,%2009_49_01%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Two stages of search: Boolean eligibility followed by BM25 relevance ranking" src="images/01%20Boolean%20search%20-%20words%20as%20admission%20rules/ChatGPT%20Image%20Jul%2026,%202026,%2009_49_01%20PM.png"></p>
 <p>The illustration shows the combination developed so far: a Boolean expression first restricts which records may proceed, and BM25 then ranks those records.</p>
 <p>At query time, the process can be understood as five steps:</p>
 <ol>
@@ -841,7 +851,7 @@ intersection → D1</code></pre>
 </ol>
 <p>Options 2 and 3 are both also considered lexical search.</p><p>BM25 when used in #3 does not have to wait for a separate Boolean <code>AND</code> gate. It can retrieve candidates directly from the union of the query terms’ posting lists and rank them by their accumulated evidence. A record matching only <code>apple</code> can therefore compete with one matching <code>orange</code> and <code>banana</code>, although the additional matches will normally affect their scores.</p>
 <blockquote class="pull-quote"><p>Same analysed terms. Same inverted index. Different rules for admission and scoring.</p></blockquote>
-<p><img src="images/lexicalsearchisbroaderthanboolean.png" alt="Diagram showing strict Boolean, minimum-match and ranked any-match retrieval as different forms of lexical retrieval"></p>
+<p><img loading="lazy" decoding="async" src="images/lexicalsearchisbroaderthanboolean.png" alt="Diagram showing strict Boolean, minimum-match and ranked any-match retrieval as different forms of lexical retrieval"></p>
 <p>An admission rule, a ranking function and a result boundary solve three different problems. The first establishes a hard floor for inclusion; the second assigns graded scores; the third decides whether the system needs a complete ordering or only the leading results. A production system can control and combine all three.</p>
 
 <span id="what-bm25-can-and-cannot-do" class="legacy-anchor"></span><h3 id="impact-of-bm25-compared-to-boolean-on-poor-query-terms">Impact of BM25 compared to Boolean on poor query terms</h3>
@@ -857,7 +867,7 @@ intersection → D1</code></pre>
 <p>Any-match BM25 does not have that failure mode. Nothing is excluded merely for lacking <code>foolish</code>, so the relevant records still reach the ranking. That is a genuine advantage, and it is why the same bad term does less damage here.</p>
 <p>But BM25 is still affected by it. BM25 does not “know” that <code>foolish</code> is a poor substitute for <code>delulu</code>. If <code>foolish</code> is rare in the collection, its inverse-document-frequency weight makes it <em>more</em> influential, not less, so documents that merely contain it can be pulled above better ones. <strong>The bad term stops deciding who competes and starts distorting who wins.</strong></p>
 <p>You can watch this happen in <a href="bm25-evidence-lab.html">the Evidence Lab</a>: adding <code>foolish</code> as a synonym lifts an unrelated record to first place just as decisively as the correct expansion lifts the right one.</p>
-<p><img alt="Rare query terms contribute stronger lexical evidence through IDF" src="images/02%20BM25%20-%20words%20as%20weighted%20clues/ChatGPT%20Image%20Jul%2026,%202026,%2009_33_13%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Rare query terms contribute stronger lexical evidence through IDF" src="images/02%20BM25%20-%20words%20as%20weighted%20clues/ChatGPT%20Image%20Jul%2026,%202026,%2009_33_13%20PM.png"></p>
 <p>Term-frequency saturation does not identify weak query terms. It limits the benefit of repeating a term within a document; it does not judge whether that term belonged in the query in the first place.</p>
 <p>BM25 is not semantic understanding. It is lexical evidence made less binary.</p>
 
@@ -880,7 +890,7 @@ intersection → D1</code></pre>
 </blockquote>
 <p>Synonym expansion or another form of semantic query interpretation may sometimes have been involved, if that is counted as semantic search. But the missing term might instead have been removed during analysis, retained as optional evidence, retained but unable to match anything, or included in a query that required only partial matching.</p>
 <p>Ranked lexical retrieval could then order the resulting documents while remaining substantially lexical.<sup id="fnref:google-apparent-nonlexical"><a class="footnote-ref" href="#fn:google-apparent-nonlexical">11</a></sup></p>
-<p><img src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/Ranked%20lexical%20retrieval%20could%20then%20order%20the%20resulting%20documents%20while%20remaining%20substantially%20lexical.png" alt="Ranked lexical retrieval can order documents without requiring every query term while remaining substantially lexical"></p>
+<p><img loading="lazy" decoding="async" src="images/Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/Ranked%20lexical%20retrieval%20could%20then%20order%20the%20resulting%20documents%20while%20remaining%20substantially%20lexical.png" alt="Ranked lexical retrieval can order documents without requiring every query term while remaining substantially lexical"></p>
 <p>The historical lesson is the same as the technical one: seeing non-Boolean behaviour does not reveal whether the underlying evidence is lexical, dense, hybrid or produced by several stages. Nor does the model name: <a href="#what-bert-is-and-what-it-still-needs">what BERT actually is, and why its presence establishes so little about retrieval</a>, is set out once the representations it produces are on the table.</p>
 
 <h3 id="words-sent-to-retrieval-may-not-be-the-words-you-typed">The words sent to retrieval may not be the words you typed<a aria-label="Link to The words sent to retrieval may not be the words you typed" class="heading-anchor" href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">#</a></h3>
@@ -914,7 +924,7 @@ intersection → D1</code></pre>
 <p><strong><a href="#web-of-science-smart-search-caption">Fields and inferred filters in Web of Science Smart Search:</a></strong><br><code>PY=(2020-2024) AND OG_SMART=(university of california) AND TS=(apple) AND TS=(oranges) AND TS=(bananas)</code></p>
 </blockquote>
 <figure class="ir-figure" aria-labelledby="web-of-science-smart-search-caption">
-<img src="images/08%20Query%20understanding%20-%20changing%20the%20query%20before%20retrieval/web-of-science-smart-search-structured-query.png" alt="Web of Science Smart Search translating a natural-language request about dates, affiliation, apples, oranges and bananas into a structured fielded query">
+<img loading="lazy" decoding="async" src="images/08%20Query%20understanding%20-%20changing%20the%20query%20before%20retrieval/web-of-science-smart-search-structured-query.png" alt="Web of Science Smart Search translating a natural-language request about dates, affiliation, apples, oranges and bananas into a structured fielded query">
 <figcaption id="web-of-science-smart-search-caption"><strong>Web of Science Smart Search makes the transformation visible.</strong> It translates “apple oranges bananas from 2020 to 2024, affiliation is from university of california” into the editable structured query <code>PY=(2020-2024) AND OG_SMART=(university of california) AND TS=(apple) AND TS=(oranges) AND TS=(bananas)</code>. The publication years and organisation become fielded constraints, while the three topics become separate conditions.</figcaption>
 </figure>
 <p><a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/040Search_Configurations/Natural_Language_Search_in_the_NDE_UI">Primo NDE Natural Language Search</a> works the same way. It currently documents “ChatGPT 4.1Mini”—Ex Libris’s wording for OpenAI’s GPT-4.1 mini—classifying elements of the input, generating a basic Boolean query and expanding it into six <code>OR</code>-connected permutations. Users can inspect and edit the structured query sent to Advanced Search.</p>
@@ -964,7 +974,8 @@ intersection → D1</code></pre>
 <p>Classic Word2Vec commonly begins with word-level tokens and a fixed vocabulary of stored word vectors. If a complete word was absent from that vocabulary, the model had no vector for it and might replace it with an <strong>unknown token</strong>. This is the classic word-level <strong>out-of-vocabulary</strong>, or <strong>OOV</strong>, problem.</p>
 <p>Modern language models commonly use <strong>subword tokenisation</strong> instead. Frequent words may remain whole, while less familiar strings are divided into reusable pieces. Popular approaches and implementations include byte-pair encoding (BPE), WordPiece, and SentencePiece implementations of BPE or unigram tokenisation. Subword methods became important partly because they can represent many rare and newly formed words from smaller known units (<a href="https://aclanthology.org/P16-1162/">Sennrich et al., 2016</a>; <a href="https://aclanthology.org/D18-2012/">Kudo and Richardson, 2018</a>).</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Tokenisation level</th><th>Possible treatment of an unfamiliar word</th><th>Main trade-off</th></tr></thead>
+<caption class="visually-hidden">Comparison of word-, subword-, character-, and byte-level tokenisation</caption>
+<thead><tr><th scope="col">Tokenisation level</th><th scope="col">Possible treatment of an unfamiliar word</th><th scope="col">Main trade-off</th></tr></thead>
 <tbody>
 <tr><td>Word-level</td><td><code>rizzlord</code>, or an unknown token if the complete word is absent from the vocabulary</td><td>Short and intuitive, but complete unseen words can be OOV.</td></tr>
 <tr><td>Subword</td><td>Several known pieces selected from the model’s vocabulary. For example, a tokeniser might split <code>rizzlord</code> into <code>rizz</code> · <code>lord</code>. This split is illustrative only; the actual pieces depend on the particular tokeniser and its vocabulary.</td><td>Broader coverage, although the boundaries need not correspond to meaningful linguistic parts.</td></tr>
@@ -975,7 +986,8 @@ intersection → D1</code></pre>
 <h3 id="model-tokens-are-not-indexed-terms">Model tokens are not indexed terms<a aria-label="Link to Model tokens are not indexed terms" class="heading-anchor" href="#model-tokens-are-not-indexed-terms">#</a></h3>
 <p>The word <strong>token</strong> is used in both lexical and neural systems, but the tokens perform different jobs:</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Lexical index</th><th>Dense encoder</th></tr></thead>
+<caption class="visually-hidden">How lexical indexed terms differ from dense-encoder model tokens</caption>
+<thead><tr><th scope="col">Lexical index</th><th scope="col">Dense encoder</th></tr></thead>
 <tbody>
 <tr><td>Analysis produces indexed terms such as <code>delulu</code> or <code>job</code>.</td><td>The model tokeniser produces vocabulary IDs for words, subwords, characters or bytes.</td></tr>
 <tr><td>An indexed term can point directly to a posting list.</td><td>A model token is processed with surrounding tokens inside the encoder.</td></tr>
@@ -1010,7 +1022,7 @@ intersection → D1</code></pre>
 <span id="what-a-dense-bi-encoder-actually-learns" class="legacy-anchor"></span><h2 id="how-a-contextual-encoder-becomes-a-retrieval-encoder">How a contextual encoder becomes a retrieval encoder<a aria-label="Link to How a contextual encoder becomes a retrieval encoder" class="heading-anchor" href="#how-a-contextual-encoder-becomes-a-retrieval-encoder">#</a></h2>
 <p>It is tempting to say that dense embeddings represent “meaning”. That is useful shorthand, but it leaves out the most important question: meaning for what task?</p>
 <p>A dense retriever commonly starts with a pretrained language model. Producing one vector for a whole text requires a <strong>pooling</strong> step that combines the contextual token representations—commonly by averaging them, or by taking the representation computed at the sequence-opening position. Pooling on its own is not enough. Pretraining gives the model broad linguistic patterns, but a model that predicts masked or next words does not automatically arrange its pooled vectors well for search, and two texts can sit close together for reasons that have nothing to do with one answering a search for the other. Retrieval training changes the representation so that labelled relevant texts receive higher similarity scores than competing texts.<sup id="fnref:retrieval-training"><a class="footnote-ref" href="#fn:retrieval-training">17</a></sup></p>
-<p><img alt="Pretraining gives language patterns; retrieval training teaches what should rank together" src="images/04%20What%20a%20dense%20bi-encoder%20actually%20learns/ChatGPT%20Image%20Jul%2026,%202026,%2009_34_01%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Pretraining gives language patterns; retrieval training teaches what should rank together" src="images/04%20What%20a%20dense%20bi-encoder%20actually%20learns/ChatGPT%20Image%20Jul%2026,%202026,%2009_34_01%20PM.png"></p>
 <p>Suppose the query is:</p>
 <blockquote>
 <p>Am I being delulu about getting this job?</p>
@@ -1028,7 +1040,7 @@ intersection → D1</code></pre>
 <p>Ten signs that you performed well in your job interview</p>
 </blockquote>
 <p>The hard negative shares the broad topic and several important words, but it does not address whether the searcher’s expectations are unrealistic. Training encourages the model to score the labelled positive above both alternatives. Different systems implement this intuition with objectives such as triplet loss or contrastive softmax, and the selection of negative examples materially affects what the model learns.<sup id="fnref:triplet-loss"><a class="footnote-ref" href="#fn:triplet-loss">18</a></sup><sup id="fnref:contrastive-loss"><a class="footnote-ref" href="#fn:contrastive-loss">19</a></sup><sup id="fnref:hard-negatives"><a class="footnote-ref" href="#fn:hard-negatives">20</a></sup></p>
-<p><img alt="Retrieval training pulls labelled positives closer and pushes negatives away" src="images/04%20What%20a%20dense%20bi-encoder%20actually%20learns/ChatGPT%20Image%20Jul%2026,%202026,%2009_33_50%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Retrieval training pulls labelled positives closer and pushes negatives away" src="images/04%20What%20a%20dense%20bi-encoder%20actually%20learns/ChatGPT%20Image%20Jul%2026,%202026,%2009_33_50%20PM.png"></p>
 <p>Where did those labels come from? They might be based on human relevance judgements, clicked results, questions paired with answer passages, titles paired with abstracts, citations, automatically generated queries or neighbouring passages from the same document.</p>
 <p>Those sources teach different ideas of relevance. Clicks can reward popularity and ranking position. Question–answer pairs favour answer-bearing passages. Citations may teach scholarly relatedness rather than direct relevance. Titles and abstracts may mainly teach topical similarity.</p>
 <p>“Positive” and “negative” are training labels, not universal truths.<sup id="fnref:training-labels"><a class="footnote-ref" href="#fn:training-labels">21</a></sup></p>
@@ -1037,7 +1049,7 @@ intersection → D1</code></pre>
 <h2 id="single-vector-dense-retrieval-compress-first-compare-later">Single-vector dense retrieval: compress first, compare later<a aria-label="Link to Single-vector dense retrieval: compress first, compare later" class="heading-anchor" href="#single-vector-dense-retrieval-compress-first-compare-later">#</a></h2>
 <p>A conventional dense bi-encoder uses a query encoder and a document or passage encoder. They may share weights or use distinct parameter sets, while normally being trained jointly on the retrieval objective. <a href="https://aclanthology.org/2020.emnlp-main.550/">Dense Passage Retrieval</a> is a well-known example of this dual-encoder pattern.<sup id="fnref:bi-encoder"><a class="footnote-ref" href="#fn:bi-encoder">22</a></sup></p>
 <p>Each indexed unit is encoded without seeing the query, so its vector can be calculated in advance and stored. At search time, the system encodes the query and compares it with the stored vectors using a score such as dot product or cosine similarity. The comparison may be exhaustive, or a large collection may use an approximate nearest-neighbour index to reduce the work.<sup id="fnref:vector-similarity"><a class="footnote-ref" href="#fn:vector-similarity">23</a></sup></p>
-<p><img alt="The bi-encoder retrieval pipeline: encode independently, then compare vectors" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_42_53%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="The bi-encoder retrieval pipeline: encode independently, then compare vectors" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_42_53%20PM.png"></p>
 <p>The benefit is vocabulary bridging. A suitably trained model may place:</p>
 <blockquote>
 <p>Am I being delulu about getting this job?</p>
@@ -1047,9 +1059,9 @@ intersection → D1</code></pre>
 <p>How to recognise unrealistic expectations during a job search</p>
 </blockquote>
 <p>even though the important expressions do not overlap lexically.</p>
-<p><img alt="Dense retrieval can bridge different phrasings without lexical overlap" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_44_11%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Dense retrieval can bridge different phrasings without lexical overlap" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_44_11%20PM.png"></p>
 <p>The trade-off is compression. Each indexed passage must compress its topic, named entities, claims, qualifications and terminology into one point before it knows which query will arrive. Shorter chunks reduce that pressure, but each chunk is still represented by one pooled vector. Independent encoding therefore creates an information bottleneck as well as making precomputation possible.</p>
-<p><img alt="The compression bottleneck in single-vector dense retrieval" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_44_01%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="The compression bottleneck in single-vector dense retrieval" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_44_01%20PM.png"></p>
 <p>Broad similarity may consequently dominate a small but decisive detail. A model can recover the general meaning while blurring an exact code, a rare name, a negation or the difference between a question and its opposite.</p>
 <h3 id="how-nearest-neighbour-indexing-makes-dense-retrieval-practical">How nearest-neighbour indexing makes dense retrieval practical<a aria-label="Link to How nearest-neighbour indexing makes dense retrieval practical" class="heading-anchor" href="#how-nearest-neighbour-indexing-makes-dense-retrieval-practical">#</a></h3>
 <p>The earlier lexical sections separated <a href="#strict-boolean-search-words-as-admission-rules">Boolean eligibility</a> from <a href="#lexical-search-does-not-have-to-mean-boolean-search">direct BM25 candidate retrieval</a>. In both routes, an inverted index can jump from analysed query terms to matching records without scanning the complete collection.</p>
@@ -1085,10 +1097,11 @@ intersection → D1</code></pre>
 </blockquote>
 <p>The inverted index described earlier and a dense-vector index provide two different routes to a candidate set:</p>
 <div class="table-wrap"><table>
+<caption class="visually-hidden">Comparison of lexical inverted-index retrieval and dense vector-index retrieval</caption>
 <thead>
 <tr>
-<th>Lexical route</th>
-<th>Dense-vector route</th>
+<th scope="col">Lexical route</th>
+<th scope="col">Dense-vector route</th>
 </tr>
 </thead>
 <tbody>
@@ -1123,14 +1136,15 @@ intersection → D1</code></pre>
 <p>BM25 can be represented this way. The query activates dimensions corresponding to its terms; the document contains calculated weights for terms occurring in it; and their score can be expressed as a dot product between sparse representations.<sup id="fnref:bm25-sparse-vector"><a class="footnote-ref" href="#fn:bm25-sparse-vector">26</a></sup> In practice, BM25 is usually executed with the kind of inverted index described earlier rather than a dense nearest-neighbour index.</p>
 <p>Dense embeddings look different. They may have hundreds or thousands of dimensions, most of them non-zero. Those dimensions do not normally correspond directly to recognisable words such as <code>delulu</code>, <code>job</code> or <code>unrealistic</code>. Meaning and other learnt distinctions are distributed across the representation.</p>
 <p>The terms <strong>sparse</strong> and <strong>dense</strong> therefore describe the shape of a representation. They do not tell us whether it is neural, learnt, semantic or interpretable.</p>
-<p><img alt="Sparse and dense vectors compared" src="images/03%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/ChatGPT%20Image%20Jul%2026,%202026,%2009_35_31%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Sparse and dense vectors compared" src="images/03%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/ChatGPT%20Image%20Jul%2026,%202026,%2009_35_31%20PM.png"></p>
 <div class="table-wrap"><table>
+<caption class="visually-hidden">Sparse and dense vector representations used in retrieval</caption>
 <thead>
 <tr>
-<th>Method</th>
-<th>Representation</th>
-<th>How its weights arise</th>
-<th>What its dimensions represent</th>
+<th scope="col">Method</th>
+<th scope="col">Representation</th>
+<th scope="col">How its weights arise</th>
+<th scope="col">What its dimensions represent</th>
 </tr>
 </thead>
 <tbody>
@@ -1154,13 +1168,13 @@ intersection → D1</code></pre>
 </tr>
 </tbody>
 </table></div>
-<p><img alt="Density and learning are separate axes of a representation" src="images/03%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/ChatGPT%20Image%20Jul%2026,%202026,%2009_35_47%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Density and learning are separate axes of a representation" src="images/03%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/ChatGPT%20Image%20Jul%2026,%202026,%2009_35_47%20PM.png"></p>
 <p>This article uses <strong>embedding</strong> for a learnt mapping into a vector space. BM25 is better described as a calculated sparse representation or scoring model; a dense bi-encoder produces learnt dense embeddings.<sup id="fnref:embedding-terms"><a class="footnote-ref" href="#fn:embedding-terms">27</a></sup></p>
 <h2 id="one-document-one-chunk-and-one-vector-are-not-the-same-thing">One document, one chunk and one vector are not the same thing<a aria-label="Link to One document, one chunk and one vector are not the same thing" class="heading-anchor" href="#one-document-one-chunk-and-one-vector-are-not-the-same-thing">#</a></h2>
 <p>Dense retrieval also forces us to stop using <strong>document</strong> as though it meant only one thing.</p>
 <p>A source document might be an article, paper, report, webpage or book. The retrieval system may index its abstract, sections, paragraphs, sentences or overlapping token windows. Those are the <strong>indexed units</strong>.</p>
 <p>A 20-page article might therefore produce one indexed abstract, ten section units or 50 overlapping passages. In a conventional dense bi-encoder, each of those indexed units receives one pooled vector.</p>
-<p><img alt="The same article indexed using different chunking strategies" src="images/05%20One%20document,%20one%20chunk%20and%20one%20vector%20are%20not%20the%20same%20thing/ChatGPT%20Image%20Jul%2026,%202026,%2009_41_43%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="The same article indexed using different chunking strategies" src="images/05%20One%20document,%20one%20chunk%20and%20one%20vector%20are%20not%20the%20same%20thing/ChatGPT%20Image%20Jul%2026,%202026,%2009_41_43%20PM.png"></p>
 <p>These are separate choices:</p>
 <ul>
 <li><strong>Source-document granularity:</strong> the object a person thinks of as the document.</li>
@@ -1169,23 +1183,24 @@ intersection → D1</code></pre>
 <li><strong>Result aggregation:</strong> whether matching passages are displayed separately or combined into one article-level result.</li>
 </ul>
 <p>Chunking a paper into 50 passages creates 50 searchable units and, with a conventional bi-encoder, 50 independently searchable vectors. It does not mean that the complete paper has been captured faithfully in one vector, nor that evidence spread across different chunks will automatically be combined.</p>
-<p><img alt="A paper split into many searchable chunks and vectors" src="images/05%20One%20document,%20one%20chunk%20and%20one%20vector%20are%20not%20the%20same%20thing/ChatGPT%20Image%20Jul%2026,%202026,%2009_41_26%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="A paper split into many searchable chunks and vectors" src="images/05%20One%20document,%20one%20chunk%20and%20one%20vector%20are%20not%20the%20same%20thing/ChatGPT%20Image%20Jul%2026,%202026,%2009_41_26%20PM.png"></p>
 <p>This is not a theoretical distinction, and current products sit at very different points on it. The <a href="https://aarontay.substack.com/p/from-fixed-search-workflows-to-agentic">Wiley AI Gateway</a> returns chunks of the <em>full text</em> that may be relevant to a query, alongside the paper's metadata—so the indexed unit is a passage, and evidence buried in a methods section is reachable. A discovery layer built over <a href="#bm25-and-lexical-ranking-in-academic-search">records described by their metadata and abstracts</a> is working with a much coarser unit. Both may describe themselves as searching articles.</p>
 <p>The consequence is blunt: <strong>a system cannot retrieve evidence from text it never indexed.</strong> If a claim appears only in a paper's results section, and the retrieval system holds only that paper's abstract, no encoder, reranker or generated summary downstream can recover it. This is the same bottleneck logic that governs <a href="#why-search-systems-use-multiple-stages">shortlists</a>, applied one level earlier—at the point where the collection itself was defined.</p>
 <p>For librarians evaluating semantic search, the immediate questions are therefore more practical than architectural: what text was embedded, how large was each unit, and how are several matching passages turned back into an article-level result?<sup id="fnref:chunking"><a class="footnote-ref" href="#fn:chunking">28</a></sup></p>
 <h2 id="for-awareness-two-neural-variants">For awareness: two neural variants<a aria-label="Link to For awareness: two neural variants" class="heading-anchor" href="#for-awareness-two-neural-variants">#</a></h2>
 <p>The three-part comparison above is enough for most library discussions, but two additional terms may appear in technical documentation.</p>
 <p><strong>Learnt sparse retrieval</strong>, represented by systems such as <a href="https://doi.org/10.1145/3404835.3463098">SPLADE</a>, uses neural training to assign weights and predict useful expansions while retaining a sparse, vocabulary-aligned representation suitable for an inverted index.<sup id="fnref:splade-mechanics"><a class="footnote-ref" href="#fn:splade-mechanics">29</a></sup> It can be understood as a learnt bridge between lexical matching and semantic expansion. The floor described earlier still holds: a purely lexical scoring model must match at least one term. What changes is that the floor now applies to the expanded term set rather than the words as typed, which is how a sparse system running on an inverted index can retrieve a document sharing no typed word with the query without becoming dense. It can also be more interpretable than a pooled dense embedding: its active dimensions are labelled with vocabulary terms, so an analyst can inspect which original or expanded terms received weight. That visibility does not make every expansion correct or explain the model’s complete decision process.<sup id="fnref:splade-limitations"><a class="footnote-ref" href="#fn:splade-limitations">30</a></sup> As a concrete literature-review example, <a href="https://elicit.com/blog/semantic-search">Elicit uses SPLADE</a>: model-suggested related terms enrich the query before they are sent to <a href="#what-full-text-search-means-in-ir">regular full-text search</a>.</p>
-<p><img alt="SPLADE learns a sparse, vocabulary-aligned expansion" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_44_49%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="SPLADE learns a sparse, vocabulary-aligned expansion" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_44_49%20PM.png"></p>
 <p><strong>Late-interaction retrieval</strong>, represented by systems such as <a href="https://doi.org/10.1145/3397271.3401075">ColBERT</a>, retains several contextualised token vectors for each indexed unit instead of compressing everything into one pooled vector.<sup id="fnref:colbert-maxsim"><a class="footnote-ref" href="#fn:colbert-maxsim">31</a></sup> Where that arrangement sits between the pooled bi-encoder and the cross-encoder, and what it costs, is set out <a href="#where-colbert-style-late-interaction-fits">when the pipeline stages are assembled</a>. The property that matters here is interpretability at the scoring layer: the score can be decomposed into the strongest document-token match for each query token, so an analyst can inspect which token alignments contributed. The underlying vector dimensions remain latent, however, so ColBERT is not transparent end to end. For a visual, in-depth introduction, see <a href="https://meet.ameliechatelain.com/lectures/multi-vector-search/#21">Amélie Chatelain’s multi-vector search lecture</a>.</p>
-<p><img alt="ColBERT preserves local token-level matching evidence" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_45_04%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="ColBERT preserves local token-level matching evidence" src="images/06%20Single-vector%20dense%20retrieval%20-%20compress%20first,%20compare%20later/ChatGPT%20Image%20Jul%2026,%202026,%2009_45_04%20PM.png"></p>
 <p>The two are not equally visible in this sector, and the asymmetry is worth stating rather than leaving as an accident of which example was available. Learnt sparse retrieval has a named academic deployment in Elicit. <strong>Late interaction does not appear to have a comparable publicly documented deployment in a major academic search product</strong>—it is well represented in the research literature and in general-purpose retrieval infrastructure, less so on a vendor’s architecture page. The storage cost is the usual explanation offered: keeping token-level vectors for every indexed unit is considerably more expensive than keeping one. Absence of documentation is not evidence of absence, and this is exactly the kind of claim that dates, so treat it as a description of what is currently inspectable rather than of what exists.</p>
 <p>Both SPLADE and ColBERT remain dependent on model vocabulary and training data. The reason to know their names is simply to avoid a category error: neural retrieval is not always single-vector and semantic expansion is not always dense. Unless a library is developing or technically auditing a retrieval stack, their implementation details are unlikely to matter.</p>
 <h2 id="rerankers-compare-more-carefully-after-retrieval">Rerankers: compare more carefully after retrieval<a aria-label="Link to Rerankers: compare more carefully after retrieval" class="heading-anchor" href="#rerankers-compare-more-carefully-after-retrieval">#</a></h2>
 <h3 id="why-search-systems-use-multiple-stages">Why search systems use multiple stages<a aria-label="Link to Why search systems use multiple stages" class="heading-anchor" href="#why-search-systems-use-multiple-stages">#</a></h3>
 <p>Many production search systems are pipelines rather than one scoring formula. <a href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">Query transformation</a> may first rewrite or route the input, as the lexical sections described. Once retrieval begins, fast methods search the full collection, while progressively more expensive methods examine progressively fewer records. Applying the most detailed query–document comparison to millions of records for every search would usually be too slow and costly.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Stage</th><th>Main job</th><th>Why it belongs here</th></tr></thead>
+<caption class="visually-hidden">Stages in a multi-stage search pipeline</caption>
+<thead><tr><th scope="col">Stage</th><th scope="col">Main job</th><th scope="col">Why it belongs here</th></tr></thead>
 <tbody>
 <tr><td><strong>First-stage candidate retrieval</strong></td><td>Use Boolean, BM25, dense, learnt-sparse or another indexed route to search the full collection and produce a manageable shortlist.</td><td>Speed and recall matter most: the aim is to retain as many potentially relevant records as practical without examining every record deeply.</td></tr>
 <tr><td><strong>Fusion and deduplication</strong> <em>(optional)</em></td><td>Combine and reconcile candidates supplied by parallel lexical, dense or other retrievers.</td><td>Different routes may recover complementary records, but their lists and scores must be merged before later comparison.</td></tr>
@@ -1196,16 +1211,16 @@ intersection → D1</code></pre>
 <p>A reranker therefore usually does not search the complete collection. A fast first-stage retriever—perhaps BM25, a dense bi-encoder, ColBERT or a hybrid combination—first produces a shortlist. The reranker then spends more computation deciding how those candidates should be ordered.</p>
 <p>This division of labour creates both an efficiency gain and a ceiling. First-stage retrieval normally balances speed with recall; reranking concentrates on precision near the top. Every shortlist is also a bottleneck: a reranker, fusion stage or answer-generating model cannot rescue a relevant document that no earlier route allowed into the candidate set.</p>
 <p><a href="https://www.semanticscholar.org/faq/ranking-function">Semantic Scholar provides a public scholarly-search example of a reranking pipeline</a>: it describes a relevance function using query and paper features and makes its search reranker model openly available. This does not make it an LLM reranker, but it illustrates the broader pattern of applying a learnt ranking stage after candidate retrieval.</p>
-<p><img alt="Retrieve broadly, then rerank a shortlist more carefully" src="images/07%20Rerankers%20-%20compare%20more%20carefully%20after%20retrieval/ChatGPT%20Image%20Jul%2026,%202026,%2009_45_42%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Retrieve broadly, then rerank a shortlist more carefully" src="images/07%20Rerankers%20-%20compare%20more%20carefully%20after%20retrieval/ChatGPT%20Image%20Jul%2026,%202026,%2009_45_42%20PM.png"></p>
 <h3 id="cross-encoder-reranking">Cross-encoder reranking<a aria-label="Link to Cross-encoder reranking" class="heading-anchor" href="#cross-encoder-reranking">#</a></h3>
 <p>A <strong>bi-encoder</strong> encodes the query and candidate independently. Document or passage vectors can therefore be calculated in advance, and search reduces to comparing the query vector with stored vectors. That is what makes large-scale dense retrieval practical. The cost is that the query and document do not interact until after each has already been compressed into its representation.</p>
 <p>A <strong>cross-encoder</strong> does the opposite. It places the query and one candidate into the model together, typically as a single input sequence, and allows attention across all their tokens before producing a relevance score. The model can therefore examine whether a particular query term aligns with a particular passage, whether a qualifier changes the claim, or whether two otherwise similar texts differ in negation, entity or intent. Cross-encoder is an arrangement rather than a model: the same pretrained encoder that <a href="#how-a-contextual-encoder-becomes-a-retrieval-encoder">a bi-encoder trains for independent encoding</a> can be trained to score query–candidate pairs jointly instead. Putting BERT to work this way is how the arrangement became prominent in retrieval (<a href="https://arxiv.org/abs/1901.04085">Nogueira and Cho, 2019</a>).</p>
 <p>The price is computation. The candidate representation cannot simply be precomputed and reused because its encoding depends on the query. Reranking 100 candidates requires roughly 100 query–candidate model evaluations. This is usually affordable for a shortlist, but not for millions of records. Cross-encoder scores also reflect their training data, text truncation and definition of relevance; joint attention makes finer comparison possible, not infallible.</p>
-<p><img alt="Bi-encoders precompute independent vectors; cross-encoders compare query and candidate together" src="images/07%20Rerankers%20-%20compare%20more%20carefully%20after%20retrieval/ChatGPT%20Image%20Jul%2026,%202026,%2009_45_53%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Bi-encoders precompute independent vectors; cross-encoders compare query and candidate together" src="images/07%20Rerankers%20-%20compare%20more%20carefully%20after%20retrieval/ChatGPT%20Image%20Jul%2026,%202026,%2009_45_53%20PM.png"></p>
 <h3 id="where-colbert-style-late-interaction-fits">Where ColBERT-style late interaction fits<a aria-label="Link to Where ColBERT-style late interaction fits" class="heading-anchor" href="#where-colbert-style-late-interaction-fits">#</a></h3>
 <p>ColBERT sits between the pooled bi-encoder and the full cross-encoder. Like a bi-encoder, it encodes the query and document independently, so document token vectors can be prepared before the query arrives. Unlike a conventional bi-encoder, it does not reduce each indexed unit to one vector. Its late-interaction score compares query-token vectors with document-token vectors after encoding.</p>
 <p>This preserves more local matching evidence than a single pooled vector without paying the full cost of jointly encoding every query–document pair. ColBERT-style models can be used for first-stage retrieval or to rerank a shortlist, depending on the implementation and scale. They require more storage and computation than single-vector retrieval, but normally less query-time work than a cross-encoder over the same candidates.</p>
-<p><img alt="Where ColBERT-style late interaction sits between bi-encoders and cross-encoders" src="images/07%20Rerankers%20-%20compare%20more%20carefully%20after%20retrieval/ChatGPT%20Image%20Jul%2026,%202026,%2009_47_23%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Where ColBERT-style late interaction sits between bi-encoders and cross-encoders" src="images/07%20Rerankers%20-%20compare%20more%20carefully%20after%20retrieval/ChatGPT%20Image%20Jul%2026,%202026,%2009_47_23%20PM.png"></p>
 <p>All three arrangements are now on the table, and they answer the question <a href="#what-bert-is-and-what-it-still-needs">the section on BERT</a> had to leave open. A single pretrained encoder can be deployed in any of them: encode query and candidate <strong>independently</strong> and compare two pooled vectors, encode them <strong>jointly</strong> in one sequence and score the pair, or encode them separately as <strong>sets of token vectors</strong> and compare those. The choice is not a detail of implementation. It fixes what the system can afford—independent encoding scales to a collection, joint encoding does not—and it fixes what evidence survives to the comparison, because pooling discards the local detail that the other two keep.</p>
 <blockquote>
 <p>Naming the model identifies the family it came from. What determines behaviour is which of these arrangements it was placed in, and what it was trained to rank.</p>
@@ -1218,7 +1233,7 @@ intersection → D1</code></pre>
 <li><strong>Pairwise:</strong> compare two candidates and choose which is more relevant. Direct comparison can help with subtle distinctions, but many comparisons may be needed and preferences can be inconsistent.</li>
 <li><strong>Listwise:</strong> present several candidates together and ask the model to return an ordering. This gives the model comparative context, but long lists exceed context limits, so systems often use sliding windows or repeated partial rankings. Input order can influence the result.</li>
 </ul>
-<p><img alt="Pointwise, pairwise, and listwise LLM reranking" src="images/07%20Rerankers%20-%20compare%20more%20carefully%20after%20retrieval/ChatGPT%20Image%20Jul%2026,%202026,%2009_46_17%20PM.png"></p>
+<p><img loading="lazy" decoding="async" alt="Pointwise, pairwise, and listwise LLM reranking" src="images/07%20Rerankers%20-%20compare%20more%20carefully%20after%20retrieval/ChatGPT%20Image%20Jul%2026,%202026,%2009_46_17%20PM.png"></p>
 <p>These are not merely prompting details. They create different costs and failure modes. Research has demonstrated both listwise and pairwise LLM reranking, including zero-shot listwise reranking (<a href="https://arxiv.org/abs/2305.02156">Ma et al., 2023</a>) and pairwise ranking prompting (<a href="https://aclanthology.org/2024.findings-naacl.97/">Qin et al., 2024</a>).</p>
 <p>LLM rerankers can use richer instructions and longer textual context than many conventional rankers, but they are usually slower and more expensive. They may also be sensitive to prompt wording, candidate order, context-window limits, model updates and sampling settings. A generated explanation can make a decision easier to inspect, but a plausible explanation is not evidence that the ranking is correct.</p>
 <p>The practical questions are therefore: what produced the shortlist, how many candidates reached the reranker, what text and metadata the reranker saw, which ranking formulation it used, and how the complete pipeline was evaluated.</p>
@@ -1233,7 +1248,8 @@ intersection → D1</code></pre>
 <h4 id="primo-ra-pipeline-title">One product, every stage in this text</h4>
 <p>Primo Research Assistant is worth tracing end to end, because its documented pipeline happens to use almost every mechanism this text has described—and because each stage constrains the next.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Stage</th><th>What the documentation describes</th><th>Explained in</th></tr></thead>
+<caption class="visually-hidden">Primo Research Assistant retrieval pipeline</caption>
+<thead><tr><th scope="col">Stage</th><th scope="col">What the documentation describes</th><th scope="col">Explained in</th></tr></thead>
 <tbody>
 <tr><td>1. Query transformation</td><td>An LLM converts the user's question into an <code>OR</code>-connected Boolean query, and can auto-refine a limited set of filters such as date range, peer-reviewed status and resource type.</td><td><a href="#when-a-system-writes-the-boolean-query">When a system writes the Boolean query</a></td></tr>
 <tr><td>2. Candidate retrieval</td><td>That query goes to CDI, whose retrieval is largely lexical over an inverted index.</td><td><a href="#how-boolean-search-uses-an-inverted-index">Inverted indexes</a></td></tr>
@@ -1266,7 +1282,7 @@ intersection → D1</code></pre>
 <p>We can now return to the transformation stage introduced <a href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">during the lexical sections</a>. There, it did one thing: it turned what the user typed into a single better query, and handed that query to term matching. The definition given then still holds—<strong>query transformation is not a retrieval family</strong>, but an upstream stage feeding whichever retrievers sit behind it.</p>
 <p>What changes here is how much that stage can attempt. With dense retrieval, learnt sparse retrieval, fusion and reranking now available, a transformation stage need not produce one query at all. It can produce several, send them to different retrievers, invent text that no user wrote, or decide which retrieval route the question deserves. These techniques could not have been explained earlier because each of them depends on something the earlier sections had not yet supplied.</p>
 <figure class="query-flow" aria-labelledby="query-understanding-flow-title">
-<h4 id="query-understanding-flow-title">The same stage, with more available behind it</h4>
+<h3 id="query-understanding-flow-title">The same stage, with more available behind it</h3>
 <div class="query-flow-track">
 <div class="query-flow-step"><strong>User input</strong><span>keywords, a question or a longer description</span></div>
 <span class="query-flow-arrow" aria-hidden="true">→</span>
@@ -1281,11 +1297,12 @@ intersection → D1</code></pre>
 <h3 id="common-query-understanding-techniques">Common query-understanding techniques<a aria-label="Link to Common query-understanding techniques" class="heading-anchor" href="#common-query-understanding-techniques">#</a></h3>
 <p>The first two rows below were met earlier, in their lexical form. The remainder require the machinery of the intervening sections.</p>
 <div class="table-wrap"><table>
+<caption class="visually-hidden">Common query-understanding techniques</caption>
 <thead>
 <tr>
-<th>Technique</th>
-<th>What it changes</th>
-<th>Main risk</th>
+<th scope="col">Technique</th>
+<th scope="col">What it changes</th>
+<th scope="col">Main risk</th>
 </tr>
 </thead>
 <tbody>
@@ -1333,7 +1350,8 @@ intersection → D1</code></pre>
 <h3 id="query-understanding-in-current-discovery-products">Query understanding in current discovery products<a aria-label="Link to Query understanding in current discovery products" class="heading-anchor" href="#query-understanding-in-current-discovery-products">#</a></h3>
 <p>Current research products illustrate different points in this design space. The last two rows are the pattern already met in the lexical sections—<a href="#when-a-system-writes-the-boolean-query">a parser or LLM writing a query for a conventional engine</a>. The first two show what changes once learnt representations and vector paths are also available.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Product</th><th>What changes the query</th><th>What receives the transformed query</th><th>What it illustrates</th></tr></thead>
+<caption class="visually-hidden">Query understanding in current discovery products</caption>
+<thead><tr><th scope="col">Product</th><th scope="col">What changes the query</th><th scope="col">What receives the transformed query</th><th scope="col">What it illustrates</th></tr></thead>
 <tbody>
 <tr><td><a href="https://elicit.com/blog/semantic-search"><strong>Elicit</strong></a></td><td>Elicit uses <a href="#for-awareness-two-neural-variants">SPLADE</a>. Note that this is the in-representation expansion just described, not a rewrite of the kind the other three rows perform.</td><td>The activated terms are matched by <a href="#what-full-text-search-means-in-ir">regular full-text search</a>.</td><td>Model-driven semantic expansion can remain sparse, lexical and inspectable without becoming a dense-vector search.</td></tr>
 <tr><td><a href="https://webofscience.zendesk.com/hc/en-us/articles/32587676013713-Smart-Search"><strong>Web of Science Smart Search</strong></a></td><td>An NLP parser identifies entities and constructs a structured Web of Science Boolean query.</td><td>Document search can run a Boolean keyword path and a semantic-vector path, then blend their results.</td><td>One interface can combine conventional query parsing, Boolean retrieval and vector retrieval.</td></tr>
@@ -1344,7 +1362,8 @@ intersection → D1</code></pre>
 <h4 id="natural-language-filter-extraction-is-useful-but-limited">Natural-language filter extraction is useful but limited</h4>
 <p>Some academic search tools can also recognise a limited set of constraints in a natural-language request and turn them into fields, filters or refinements. This is useful query understanding, but it is not equivalent to supporting every filter, field tag or complex Boolean relationship available in the underlying database. A comparative review in <a href="https://katinamagazine.org/content/article/reviews/2025/deep-dive-into-three-ai-academic-search-tools">Katina Magazine</a> illustrates these differences, while the product documentation defines the currently supported controls:</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Product</th><th>Constraints it can infer from natural language</th><th>Documented boundary</th></tr></thead>
+<caption class="visually-hidden">Natural-language filter extraction in academic discovery products</caption>
+<thead><tr><th scope="col">Product</th><th scope="col">Constraints it can infer from natural language</th><th scope="col">Documented boundary</th></tr></thead>
 <tbody>
 <tr><td><a href="https://webofscience.zendesk.com/hc/en-us/articles/31437630410129-Web-of-Science-Research-Assistant"><strong>Web of Science Research Assistant</strong></a></td><td>Document requests can include constraints such as an institution, country or region, publication year or recency, and requests for highly cited or seminal papers.</td><td>Its guidance treats these as supported query patterns, but lists complex field-tagged Boolean queries as unsupported. Natural-language filter handling is therefore useful without being a replacement for the complete advanced-search language.</td></tr>
 <tr><td><a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/040Search_Configurations/Natural_Language_Search_in_the_NDE_UI"><strong>Primo VE NDE Natural Language Search</strong></a></td><td>It can recognise identifiers, author and title-related fields, resource type, online availability, peer-reviewed or open-access status, holdings, creation date and requested language.</td><td>The recognised fields and facets come from a defined list. Ex Libris also documents known failures in author detection and cases where fields may be joined with <code>OR</code> instead of the intended relationship.</td></tr>
@@ -1364,7 +1383,8 @@ intersection → D1</code></pre>
 <p>The preceding section showed a system generating several queries, routing them to different retrievers, fusing the results and reranking the candidates. None of that is necessarily agentic. The whole sequence may have been fixed before any user arrived. A separate question is whether the system can look at what came back and choose what to do next.</p>
 <h3 id="fixed-adaptive-and-agentic-are-not-the-same-thing">Fixed, adaptive and agentic are not the same thing<a aria-label="Link to Fixed, adaptive and agentic are not the same thing" class="heading-anchor" href="#fixed-adaptive-and-agentic-are-not-the-same-thing">#</a></h3>
 <div class="table-wrap"><table>
-<thead><tr><th>Control arrangement</th><th>How the next action is decided</th></tr></thead>
+<caption class="visually-hidden">Fixed, adaptive, and agentic control arrangements</caption>
+<thead><tr><th scope="col">Control arrangement</th><th scope="col">How the next action is decided</th></tr></thead>
 <tbody>
 <tr><td><strong>Fixed workflow</strong></td><td>The system always follows a predetermined sequence: generate five queries, run BM25 and dense retrieval, fuse the lists, rerank a hundred candidates.</td></tr>
 <tr><td><strong>Rule-based adaptive workflow</strong></td><td>Intermediate results change what happens next, but through rules written in advance: if fewer than twenty records are found, drop the narrowest concept and search again.</td></tr>
@@ -1379,7 +1399,8 @@ intersection → D1</code></pre>
 <h3 id="deep-search-can-still-be-agentic-search">Deep search can still be agentic search<a aria-label="Link to Deep search can still be agentic search" class="heading-anchor" href="#deep-search-can-still-be-agentic-search">#</a></h3>
 <p>The <a href="#ai-search-2x2-caption">opening diagram</a> sorted tools by output format and by how extensively they retrieve. Agency is a third property, and it lies on neither axis.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Pattern</th><th>Search trajectory</th><th>Main output</th></tr></thead>
+<caption class="visually-hidden">Relationship among retrieval iteration, agency, and output format</caption>
+<thead><tr><th scope="col">Pattern</th><th scope="col">Search trajectory</th><th scope="col">Main output</th></tr></thead>
 <tbody>
 <tr><td>Scripted deep search</td><td>Predetermined repeated retrieval</td><td>Records</td></tr>
 <tr><td><strong>Agentic deep search</strong></td><td>Model adapts retrieval actions from intermediate results</td><td>Records</td></tr>
@@ -1395,7 +1416,8 @@ intersection → D1</code></pre>
 <h3 id="where-current-academic-tools-actually-sit">Where current academic tools actually sit<a aria-label="Link to Where current academic tools actually sit" class="heading-anchor" href="#where-current-academic-tools-actually-sit">#</a></h3>
 <p>These distinctions would be idle if products sorted themselves neatly into them. The table below is a snapshot from my own testing, written up in April 2026 as “<a href="https://aarontay.substack.com/p/from-fixed-search-workflows-to-agentic">From Fixed Search Workflows to Agentic Academic Search: Promise, Progress, and the Invisible Menu Problem</a>”. It describes how these tools were built at that point, and it will date quickly.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Control arrangement</th><th>Tools, as built at the time of testing</th></tr></thead>
+<caption class="visually-hidden">Current academic search tools grouped by control arrangement</caption>
+<thead><tr><th scope="col">Control arrangement</th><th scope="col">Tools, as built at the time of testing</th></tr></thead>
 <tbody>
 <tr><td><strong>Fixed workflow</strong></td><td>Undermind’s original deep search, Consensus Deep Search and Ai2 Asta were built as predetermined, hand-crafted pipelines. The LLM’s role was largely confined to query understanding and output formatting; the sequence of retrieval steps did not depend on what those steps returned.</td></tr>
 <tr><td><strong>Partly agentic, inside an undisclosed harness</strong></td><td>Elicit Research Agents combine tools and workflows flexibly rather than following one pipeline—but a capability may need to be asked for explicitly before it is reachable. Telling Elicit to “search the web” produces behaviour its default academic search tool will not.</td></tr>
@@ -1419,7 +1441,8 @@ intersection → D1</code></pre>
 <h3 id="what-agency-costs-and-what-it-buys">What agency costs, and what it buys<a aria-label="Link to What agency costs, and what it buys" class="heading-anchor" href="#what-agency-costs-and-what-it-buys">#</a></h3>
 <p>More agency is not simply better. It is a trade, and for a great many searches it is a bad one.</p>
 <div class="table-wrap"><table>
-<thead><tr><th></th><th>Fixed or rule-based workflow</th><th>Agentic search</th></tr></thead>
+<caption class="visually-hidden">Trade-offs between fixed workflows and agentic search</caption>
+<thead><tr><th scope="col"><span class="visually-hidden">Criterion</span></th><th scope="col">Fixed or rule-based workflow</th><th scope="col">Agentic search</th></tr></thead>
 <tbody>
 <tr><td><strong>Cost and speed</strong></td><td>Cheap and fast. The steps are already decided, so nothing has to be reasoned out at query time.</td><td>Slower and dearer. A model is invoked to choose, and often to justify, each successive action—and every round adds latency and tokens.</td></tr>
 <tr><td><strong><a href="#reproducibility-implication-title">Reproducibility</a></strong></td><td>Comparatively strong. The same input follows the same path, so the workflow can be documented once and applies to every search.</td><td>Comparatively weak. The path is chosen per question and two runs of the same question may legitimately differ, so only a trace of the actual run describes what happened.</td></tr>
@@ -1467,7 +1490,8 @@ intersection → D1</code></pre>
 <p>Now suppose someone searches for <code>delulu</code>, but the term does not occur anywhere in the indexed collection. For Boolean and BM25, the consequence is straightforward: the term has no posting and supplies no lexical match. Other analysed terms in a longer query may still retrieve records, but <code>delulu</code> itself contributes no evidence.</p>
 <p>Calling this simply an “OOV problem” is ambiguous. We need to ask three different questions:</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Question</th><th>What failure means</th></tr></thead>
+<caption class="visually-hidden">Three meanings of an out-of-vocabulary or representation gap</caption>
+<thead><tr><th scope="col">Question</th><th scope="col">What failure means</th></tr></thead>
 <tbody>
 <tr><td><strong>Is there a corresponding term in the collection or index vocabulary?</strong></td><td>After <a href="#before-the-index-text-becomes-tokens">lexical tokenisation and analysis</a>, no indexed term has a posting for the string or concept.</td></tr>
 <tr><td><strong>Can the model tokeniser encode the string?</strong></td><td>A word-level model may lack a complete-word entry; a subword model may divide the string into known pieces; a character- or byte-level model may encode it more finely.</td></tr>
@@ -1530,11 +1554,12 @@ intersection → D1</code></pre>
 <h3 id="matching-failures-to-remedies">Matching failures to remedies<a aria-label="Link to Matching failures to remedies" class="heading-anchor" href="#matching-failures-to-remedies">#</a></h3>
 <p>These four failures are hard to tell apart from the result screen, because all four look the same there: a relevant record is missing, or an irrelevant one is near the top. They are not hard to tell apart once the pipeline is in view, and they do not respond to the same intervention.</p>
 <div class="table-wrap"><table>
+<caption class="visually-hidden">Matching retrieval failures to likely causes and remedies</caption>
 <thead>
 <tr>
-<th>What the searcher sees</th>
-<th>Likely origin</th>
-<th>What actually helps</th>
+<th scope="col">What the searcher sees</th>
+<th scope="col">Likely origin</th>
+<th scope="col">What actually helps</th>
 </tr>
 </thead>
 <tbody>
@@ -1563,12 +1588,13 @@ intersection → D1</code></pre>
 <p>The middle column is the part that cannot be read off the screen, and it is why the same complaint—<em>the search missed something</em>—warrants a different question each time.</p>
 <span id="comparing-the-three-main-approaches" class="legacy-anchor"></span><h3 id="comparing-the-three-first-stage-approaches">Comparing the three main first-stage approaches<a aria-label="Link to Comparing the three main first-stage approaches" class="heading-anchor" href="#comparing-the-three-first-stage-approaches">#</a></h3>
 <div class="table-wrap"><table>
+<caption class="visually-hidden">Comparison of strict Boolean, BM25, and single-vector dense retrieval</caption>
 <thead>
 <tr>
-<th>Method</th>
-<th>What it preserves best</th>
-<th>Characteristic strength</th>
-<th>Characteristic blind spot</th>
+<th scope="col">Method</th>
+<th scope="col">What it preserves best</th>
+<th scope="col">Characteristic strength</th>
+<th scope="col">Characteristic blind spot</th>
 </tr>
 </thead>
 <tbody>
@@ -1608,10 +1634,11 @@ intersection → D1</code></pre>
 <p>Three practical points follow. <strong>Reproducibility is conditional:</strong> the same query does not guarantee the same records or the same ranking once indexes, models and configurations move. <strong>Record what the system actually searched:</strong> saving the natural-language question is not enough when the system generated a Boolean query, expansions, subqueries, hypothetical text or an agentic sequence. <strong>Separate rerunning from comparison:</strong> an exact future recreation may be impossible, while a saved query, trace and exported result set still let a later run be compared against the original.</p>
 <p>At minimum, a record should cover four areas of the pipeline:</p>
 <div class="table-wrap"><table>
+<caption class="visually-hidden">Minimum retrieval-pipeline details to record for reproducibility</caption>
 <thead>
 <tr>
-<th>Pipeline area</th>
-<th>What should be recorded</th>
+<th scope="col">Pipeline area</th>
+<th scope="col">What should be recorded</th>
 </tr>
 </thead>
 <tbody>
@@ -1637,11 +1664,12 @@ intersection → D1</code></pre>
 <summary>Detailed reporting requirements, method by method</summary>
 <p>What supports reproducibility differs by retrieval component, and so does what has to be written down. This table expands each row of the summary above.</p>
 <div class="table-wrap"><table>
+<caption class="visually-hidden">Reporting requirements by retrieval component or method</caption>
 <thead>
 <tr>
-<th>Component or method</th>
-<th>What supports reproducibility</th>
-<th>What needs to be recorded</th>
+<th scope="col">Component or method</th>
+<th scope="col">What supports reproducibility</th>
+<th scope="col">What needs to be recorded</th>
 </tr>
 </thead>
 <tbody>
@@ -1701,11 +1729,12 @@ intersection → D1</code></pre>
 <summary>Detailed inspection by pipeline stage</summary>
 <p>Every stage can expose something useful, and every stage has a limit on what that exposure proves. The second and third columns are worth reading together: the value of an explanation lies as much in what it rules out as in what it shows.</p>
 <div class="table-wrap"><table>
+<caption class="visually-hidden">Inspectable evidence and limits by retrieval-pipeline stage</caption>
 <thead>
 <tr>
-<th>Pipeline stage</th>
-<th>What a useful explanation shows</th>
-<th>What that explanation cannot establish by itself</th>
+<th scope="col">Pipeline stage</th>
+<th scope="col">What a useful explanation shows</th>
+<th scope="col">What that explanation cannot establish by itself</th>
 </tr>
 </thead>
 <tbody>
@@ -1850,7 +1879,8 @@ intersection → D1</code></pre>
 <p><strong>The decoder strand came first.</strong> In June 2018 OpenAI published <a href="https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf">Improving Language Understanding by Generative Pre-Training</a>, keeping only the decoder and training it to predict the next word across a large corpus. That model was GPT. Scaling the same design produced GPT-2, GPT-3 and the systems now generally meant by <em>large language model</em>. This is the strand behind the generation half that <a href="#retrieval-not-generation">this book set aside at the outset</a>—and behind the parts of retrieval it does cover, where an LLM <a href="#beyond-one-query-expansion-decomposition-and-routing">rewrites a query</a>, <a href="#llms-as-rerankers">reranks a shortlist</a> or <a href="#agentic-search-who-chooses-the-next-retrieval-action">chooses the next action</a>.</p>
 <p><strong>The encoder strand followed four months later.</strong> <a href="https://aclanthology.org/N19-1423/">BERT</a>, from Google, kept only the encoder and trained it by masking words rather than predicting the next one—which is what allows it to read in both directions at once. Its paper argues directly against the decoder strand on this point: a left-to-right model is, in its terms, unnecessarily constrained when the task is to understand an existing text rather than continue it. That strand produced the models used for classification, entity recognition and question answering, and later the retrieval encoders in this book: Sentence-BERT, dense bi-encoders, <a href="#where-colbert-style-late-interaction-fits">ColBERT</a> and <a href="#cross-encoder-reranking">cross-encoders</a>.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Half kept</th><th>How it reads</th><th>Trained to</th><th>What it suits</th><th>Where it leads</th></tr></thead>
+<caption class="visually-hidden">Comparison of Transformer encoders and decoders</caption>
+<thead><tr><th scope="col">Half kept</th><th scope="col">How it reads</th><th scope="col">Trained to</th><th scope="col">What it suits</th><th scope="col">Where it leads</th></tr></thead>
 <tbody>
 <tr><td><strong>Encoder</strong></td><td>All positions at once, both directions</td><td>Fill in masked words</td><td>Representing a text that already exists</td><td>BERT, and the retrieval encoders derived from it</td></tr>
 <tr><td><strong>Decoder</strong></td><td>Left to right, one position at a time</td><td>Predict the next word</td><td>Generating continuations</td><td>GPT and the large language models</td></tr>
@@ -1885,7 +1915,8 @@ intersection → D1</code></pre>
 <p>The two square-bracketed items in the final stage are <strong>special tokens</strong> rather than words from the text. BERT-style models mark the start of a sequence and the boundary between segments, and the representation computed at the opening position is one of the things a retrieval model may later pool into a single vector for the whole text.</p>
 <h3 id="appendix-character-and-byte-inputs">Character and byte inputs<a aria-label="Link to Character and byte inputs" class="heading-anchor" href="#appendix-character-and-byte-inputs">#</a></h3>
 <div class="table-wrap"><table>
-<thead><tr><th>Input level</th><th>Possible treatment of <code>rizzlord</code></th><th>Main trade-off</th></tr></thead>
+<caption class="visually-hidden">Character- and byte-level treatment of an unfamiliar string</caption>
+<thead><tr><th scope="col">Input level</th><th scope="col">Possible treatment of <code>rizzlord</code></th><th scope="col">Main trade-off</th></tr></thead>
 <tbody>
 <tr><td>Character-level</td><td><code>r</code> · <code>i</code> · <code>z</code> · <code>z</code> · <code>l</code> · <code>o</code> · <code>r</code> · <code>d</code></td><td>Can represent unfamiliar strings at a fine level, but produces longer sequences whose individual units carry less information.</td></tr>
 <tr><td>Byte-level</td><td>The sequence of byte values used to encode the string</td><td>A fixed inventory can represent arbitrary digital text, but the sequence may be longer and further removed from recognisable words.</td></tr>
@@ -2053,7 +2084,8 @@ intersection → D1</code></pre>
 <p>At first the top-two heap has empty slots, so its competitive threshold is effectively zero. Once D1 and D2 fill it, the lower of their scores—D2’s 0.799—becomes the threshold, conventionally written <strong>θ</strong> (theta). A later candidate must beat θ to enter the top two. If that happens, the displaced score leaves the heap and θ can rise.</p>
 <p>This walkthrough uses a simple document-at-a-time view: move through ordered document identifiers and sum the query-term contributions for each candidate. Production engines may organise traversal differently, but they still obtain lexical evidence from the term dictionary, postings and document statistics.</p>
 <div class="table-wrap"><table>
-<thead><tr><th>Boolean use of postings</th><th>BM25 use of postings</th></tr></thead>
+<caption class="visually-hidden">Comparison of Boolean and BM25 uses of posting lists</caption>
+<thead><tr><th scope="col">Boolean use of postings</th><th scope="col">BM25 use of postings</th></tr></thead>
 <tbody>
 <tr><td>Determine whether a document satisfies the logical expression.</td><td>Find documents with matching evidence and calculate graded term contributions.</td></tr>
 <tr><td>A compulsory missing term excludes the document.</td><td>A missing term normally contributes zero, but does not necessarily exclude the document.</td></tr>
