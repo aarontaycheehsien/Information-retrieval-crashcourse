@@ -7,6 +7,14 @@ which text they were working from.
 The version shown in the page header and footer always matches the most recent
 entry here.
 
+## Unreleased
+
+### Added
+
+- **A recurring “What this changes in practice” box in Chapters 1–9.** Each
+  translates the chapter’s mechanism into guidance for searching, a diagnostic
+  test for troubleshooting, and a question to use when evaluating a product.
+
 ## Version 1.0 — August 2026
 
 First versioned release. The textbook edition is now the source of truth;
