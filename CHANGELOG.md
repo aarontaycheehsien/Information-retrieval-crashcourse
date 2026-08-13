@@ -7,6 +7,17 @@ which text they were working from.
 The version shown in the page header and footer always matches the most recent
 entry here.
 
+## Unreleased
+
+### Added
+
+- **Mechanism-based search guidance in Chapter 8.** A new framework starts
+  with what the searcher is supplying—a text string, structured expression,
+  citation edge, seed document, relevance judgement, browse target, API
+  predicate or agentic brief—before asking how that input should be phrased.
+  It also explains why high recall depends on combining methods rather than on
+  finding one privileged query style.
+
 ## Version 1.0 — August 2026
 
 First versioned release. The textbook edition is now the source of truth;
