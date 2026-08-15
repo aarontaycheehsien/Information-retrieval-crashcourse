@@ -2,7 +2,7 @@
 
 A practical introduction to information retrieval architecture for librarians, covering Boolean search, BM25, dense retrieval, hybrid search, reranking, query understanding, agentic search, retrieval failure and evaluation.
 
-[**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.0, three parts, twelve chapters and five appendices.
+[**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.0, three parts, twelve chapters and six appendices.
 
 The repository also includes the interactive [BM25 Evidence Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/bm25-evidence-lab.html).
 
@@ -18,7 +18,7 @@ Screenshots of commercial products (scite, Google Scholar, Web of Science and ot
 
 There are [**teaching notes**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/teaching-notes.html) — three course shapes (a half-day workshop, a six-week module, a twelve-week course), guidance on marking the three application exercises, discussion prompts per part, and the list of product claims to re-verify before teaching.
 
-Chapters and appendices are written to be assignable on their own, and each has a stable link — use the **Copy link** control in any chapter heading. Every chapter ends with three *Check yourself* questions whose answers stay hidden until clicked. Three combinations stand alone: Part I (Chapters 1–4) on retrieval foundations and lexical search; Chapters 10–11 on retrieval failure and measurement; Chapter 12 with Appendix D on procurement and evaluation.
+Chapters and appendices are written to be assignable on their own, and each has a stable link — use the **Copy link** control in any chapter heading. Every chapter ends with three *Check yourself* questions whose answers stay hidden until clicked. Three combinations stand alone: Part I (Chapters 1–4) on retrieval foundations and lexical search; Chapters 10–12 with Appendix F on retrieval failure, measurement and high-recall evidence synthesis; Chapter 12 with Appendix D on procurement and evaluation.
 
 ### Suggested citation
 

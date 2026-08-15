@@ -11,6 +11,11 @@ entry here.
 
 ### Added
 
+- **Appendix F, “Evidence synthesis as a high-recall retrieval problem.”** A
+  dated application of candidate generation, recall, relevance feedback and
+  reproducibility to systematic-review retrieval, TAR, ASReview and stopping
+  rules. Short cross-references in Chapters 2, 8, 10 and 12 and one compact
+  Chapter 11 call-out keep the extended treatment out of the main text.
 - **Mechanism-based search guidance in Chapter 8.** A new framework starts
   with what the searcher is supplying—a text string, structured expression,
   citation edge, seed document, relevance judgement, browse target, API
