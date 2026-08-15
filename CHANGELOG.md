@@ -23,6 +23,13 @@ entry here.
   It also explains why high recall depends on combining methods rather than on
   finding one privileged query style.
 
+### Changed
+
+- **Audience and reading-route guidance.** The README, Preface and teaching
+  notes now identify information literacy and evidence synthesis librarians as
+  the primary audiences, systems/discovery librarians as a secondary audience,
+  and Appendix F as core reading for the evidence-synthesis route.
+
 ## Version 1.0 — August 2026
 
 First versioned release. The textbook edition is now the source of truth;

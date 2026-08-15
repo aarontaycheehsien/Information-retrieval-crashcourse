@@ -1,6 +1,6 @@
 # Information Retrieval Crash Course
 
-A practical introduction to information retrieval architecture for librarians, covering Boolean search, BM25, dense retrieval, hybrid search, reranking, query understanding, agentic search, retrieval failure and evaluation.
+A practical introduction to information retrieval architecture, written primarily for information literacy and evidence synthesis librarians, with a smaller secondary audience of systems/discovery librarians. It covers Boolean search, BM25, dense retrieval, hybrid search, reranking, query understanding, agentic search, retrieval failure and evaluation.
 
 [**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.0, three parts, twelve chapters and six appendices.
 
@@ -16,9 +16,9 @@ Screenshots of commercial products (scite, Google Scholar, Web of Science and ot
 
 ### For instructors
 
-There are [**teaching notes**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/teaching-notes.html) — three course shapes (a half-day workshop, a six-week module, a twelve-week course), guidance on marking the three application exercises, discussion prompts per part, and the list of product claims to re-verify before teaching.
+There are [**teaching notes**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/teaching-notes.html) — audience-specific guidance for information literacy, evidence synthesis and systems/discovery cohorts; three course shapes (a half-day workshop, a six-week module, a twelve-week course); guidance on marking the three application exercises; discussion prompts per part; and the list of product claims to re-verify before teaching.
 
-Chapters and appendices are written to be assignable on their own, and each has a stable link — use the **Copy link** control in any chapter heading. Every chapter ends with three *Check yourself* questions whose answers stay hidden until clicked. Three combinations stand alone: Part I (Chapters 1–4) on retrieval foundations and lexical search; Chapters 10–12 with Appendix F on retrieval failure, measurement and high-recall evidence synthesis; Chapter 12 with Appendix D on procurement and evaluation.
+Chapters and appendices are written to be assignable on their own, and each has a stable link — use the **Copy link** control in any chapter heading. Every chapter ends with three *Check yourself* questions whose answers stay hidden until clicked. Three combinations stand alone particularly well: Part I (Chapters 1–4) as an information-literacy grounding in retrieval foundations and lexical search; Chapters 2, 8 and 10–12 with [Appendix F](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#appendix-evidence-synthesis-high-recall-retrieval) for evidence synthesis, where Appendix F should be treated as core rather than optional; and Chapter 12 with Appendix D for systems/discovery work on procurement and evaluation.
 
 ### Suggested citation
 
