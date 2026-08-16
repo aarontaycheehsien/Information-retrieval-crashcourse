@@ -11,6 +11,11 @@ entry here.
 
 ### Added
 
+- **Relevance as a conceptual thread across the textbook.** Chapter 1 now
+  separates matching from relevance and the query from the information need;
+  brief callbacks connect Boolean retrieval, BM25, embeddings, semantic
+  similarity, reranking and OOD transfer; and Chapter 11 develops the fuller
+  relevance framework and defines metrics against judged relevance.
 - **Appendix F, “Evidence synthesis as a high-recall retrieval problem.”** A
   dated application of candidate generation, recall, relevance feedback and
   reproducibility to systematic-review retrieval, TAR, ASReview and stopping
