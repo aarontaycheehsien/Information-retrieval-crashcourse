@@ -11,6 +11,13 @@ entry here.
 
 ### Added
 
+- **Diversity-aware ranking in Chapters 7 and 11.** A new Chapter 7 section
+  explains why a list of individually relevant records can still be
+  unhelpfully repetitive, distinguishes MMR, IA-Select, xQuAD and
+  determinantal point processes, and locates diversification after candidate
+  retrieval rather than treating it as a dense-search method. Chapter 11 adds
+  the corresponding evaluation warning and introduces aspect-aware measures
+  such as alpha-nDCG.
 - **Relevance as a conceptual thread across the textbook.** Chapter 1 now
   separates matching from relevance and the query from the information need;
   brief callbacks connect Boolean retrieval, BM25, embeddings, semantic
