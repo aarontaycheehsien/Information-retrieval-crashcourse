@@ -22,7 +22,30 @@ entry here.
   separates matching from relevance and the query from the information need;
   brief callbacks connect Boolean retrieval, BM25, embeddings, semantic
   similarity, reranking and OOD transfer; and Chapter 11 develops the fuller
-  relevance framework and defines metrics against judged relevance.
+  relevance framework and defines metrics against judged relevance. The thread
+  now also reaches Chapter 9: deciding to stop is a relevance judgement made on
+  the user's behalf, on results the user never sees, against a criterion no
+  interface states.
+- **Cognitive relevance (pertinence) as a fourth level**, in both Chapter 1 and
+  Chapter 11. Chapter 11's worked example — the same paper being right for a
+  specialist, useless to a newcomer and excluded by a reviewer — turns on the
+  reader's knowledge in the first two cases and on task criteria only in the
+  third, which the previous three-level scheme could not distinguish. Chapter 11
+  also now names the affective dimension as the one deliberately left out.
+- **Figure 1.5, "From a need to a relevance judgement."** The need-to-judgement
+  chain was previously the only titled diagram in the book that was not a
+  numbered figure, so it was missing from the figure index and could not be
+  cited or reused.
+- **Figure 11.1, "Where recall is decided, and where precision is competed
+  for."** Chapters 10 to 12 previously carried no figures at all.
+- **A fourth "Check yourself" question in Chapter 1**, on what a set of records
+  matching every search term does and does not establish. The chapter now
+  carries two central distinctions and the existing three questions tested
+  neither of the new one.
+- Glossary entries for relevance, information need, and system/algorithmic,
+  topical, cognitive and situational relevance. Only *relevance judgement* was
+  defined before, so a reader meeting "situational relevance" had nowhere to
+  look it up.
 - **Appendix F, “Evidence synthesis as a high-recall retrieval problem.”** A
   dated application of candidate generation, recall, relevance feedback and
   reproducibility to systematic-review retrieval, TAR, ASReview and stopping
@@ -41,6 +64,32 @@ entry here.
   notes now identify information literacy and evidence synthesis librarians as
   the primary audiences, systems/discovery librarians as a secondary audience,
   and Appendix F as core reading for the evidence-synthesis route.
+- **The Preface's distinction map is now eight distinctions, not six.** It
+  gained *a match is a relevance judgement* and *the query is the information
+  need*, which had become the book's organising distinctions without appearing
+  in the map that collects them.
+- **Chapter 1 now cites Mizzaro and Saracevic directly**, rather than
+  attributing richer accounts of relevance to unnamed researchers and linking
+  them only in Chapter 11 and the further reading. Part I is designed to be
+  assignable on its own.
+
+### Fixed
+
+- **"Every stage after the first can improve precision; none of them can
+  improve recall" was stated without its boundary condition**, in the body,
+  the chapter summary, the self-check answer and the glossary. It contradicted
+  Chapter 7, which justifies hybrid retrieval on the grounds that each route
+  recovers material the other misses, and Chapter 9, which says iteration
+  repairs recall failures as well as compounding them. The rule now names the
+  candidate-set boundary rather than a position in a pipeline diagram, and
+  Chapter 11 says why fusion over two retrievers and a second agentic round are
+  not exceptions to it.
+- **"Precision can be repaired by looking further down a list."** Reading
+  further down a list normally lowers precision. The passage now contrasts the
+  two costs directly: poor precision costs time, which can be spent; poor
+  recall costs evidence, which cannot be reached by reading harder.
+- Long words in a `.query-flow` step could overflow their box; the steps now
+  break words.
 
 ## Version 1.0 — August 2026
 
