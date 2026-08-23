@@ -231,8 +231,8 @@ input[type=range]:disabled{opacity:.42}
 
       <div class="control-block">
         <div class="ctrl">
-          <div class="ctrl-top"><label for="angle">Direction relative to query</label><span class="ctrl-val" id="angle-val">12°</span></div>
-          <input type="range" id="angle" min="-160" max="160" step="1" value="12">
+          <div class="ctrl-top"><label for="angle">Direction relative to query</label><span class="ctrl-val" id="angle-val">24°</span></div>
+          <input type="range" id="angle" min="-160" max="160" step="1" value="24">
           <p class="hint">0° means the same direction; 90° is perpendicular; 180° would be opposite.</p>
         </div>
         <div class="ctrl">
@@ -336,7 +336,7 @@ input[type=range]:disabled{opacity:.42}
       <section aria-labelledby="dimensions-title">
         <h3 id="dimensions-title">Why does the picture have only two axes?</h3>
         <p>A two-dimensional vector has two coordinates, <code>[x, y]</code>, so we can draw it as an arrow on a flat page. Add one more coordinate and it becomes <code>[x, y, z]</code>: the same kind of arrow in three-dimensional space. Keep adding coordinates and the pattern becomes <code>[x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>]</code>. Real text embeddings commonly contain hundreds or thousands of coordinates, so we cannot draw their full spaces.</p>
-        <p>The comparison rule does not change as dimensions are added. Dot product multiplies each pair of matching coordinates and adds the results; cosine also accounts for the vectors’ lengths. The horizontal and vertical axes here are anonymous drawing coordinates—not concepts such as “open access” or “citations”, and not a projection of a real embedding. This is a deliberately complete two-dimensional toy space in which every number can be inspected.</p>
+        <p>The comparison rule does not change as dimensions are added. Dot product multiplies each pair of matching coordinates and adds the results; cosine then divides that total by both vector lengths, which removes magnitude from the comparison. The horizontal and vertical axes here are anonymous drawing coordinates—not concepts such as “open access” or “citations”, and not a projection of a real embedding. This is a deliberately complete two-dimensional toy space in which every number can be inspected.</p>
       </section>
       <section aria-labelledby="negative-title">
         <h3 id="negative-title">Can cosine or dot-product scores be negative?</h3>

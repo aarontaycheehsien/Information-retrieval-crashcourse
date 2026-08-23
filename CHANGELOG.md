@@ -53,6 +53,11 @@ entry here.
   matching every search term does and does not establish. The chapter now
   carries two central distinctions and the existing three questions tested
   neither of the new one.
+- **A fourth "Check yourself" question in Chapter 6**, on the cosine/dot-product
+  rank reversal, and a matching first point in the chapter summary. The chapter
+  now opens with the comparison rule and spends two figures and a lab on it,
+  while the existing three questions and five summary points covered none of
+  it.
 - Glossary entries for relevance, information need, and system/algorithmic,
   topical, cognitive and situational relevance. Only *relevance judgement* was
   defined before, so a reader meeting "situational relevance" had nowhere to
@@ -77,9 +82,11 @@ entry here.
   the primary audiences, systems/discovery librarians as a secondary audience,
   and Appendix F as core reading for the evidence-synthesis route.
 - **The Preface's distinction map is now eight distinctions, not six.** It
-  gained *a match is a relevance judgement* and *the query is the information
-  need*, which had become the book's organising distinctions without appearing
-  in the map that collects them.
+  gained *a match is not a relevance judgement* and *the query is not the
+  information need*, which had become the book's organising distinctions
+  without appearing in the map that collects them. Both are phrased as the
+  correction rather than the error, so a reader skimming the list cannot
+  mistake the heading for a claim the book endorses.
 - **Chapter 1 now cites Mizzaro and Saracevic directly**, rather than
   attributing richer accounts of relevance to unnamed researchers and linking
   them only in Chapter 11 and the further reading. Part I is designed to be
@@ -102,6 +109,17 @@ entry here.
   recall costs evidence, which cannot be reached by reading harder.
 - Long words in a `.query-flow` step could overflow their box; the steps now
   break words.
+- **Chapter 6's stated reading time still described the shorter chapter.** The
+  vector-similarity explanation made Chapter 6 the longest chapter in the book
+  by prose word count, yet it claimed 21 minutes against Chapter 7's 24 for
+  fewer words. It now says 25.
+- **The Vector Similarity Lab appendix said cosine "also accounts for the
+  vectors' lengths"**, which reads as the opposite of the lab's own "cosine
+  compares direction and ignores length". It now says that cosine divides by
+  both lengths, matching the wording the guided tour already used.
+- The lab's direction control was marked up at 12° while candidate A's
+  default relative angle is 24°, so the value shown before the script ran
+  disagreed with the drawing.
 
 ## Version 1.0 — August 2026
 
