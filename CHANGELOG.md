@@ -83,6 +83,17 @@ entry here.
 ### Changed
 
 - **The distinction between vector, dense, learnt and semantic is now example-led.** Chapter 6 builds one vocabulary-aligned representation from binary presence through term frequency, TF–IDF and BM25, while distinguishing Boolean operators from vector overlap and inverted-index execution from the mathematical vector view. Four independent questions then separate numerical form, density, provenance and represented evidence; explicit metadata and learnt sparse retrieval break the shortcut “dense means semantic”. Two supplied figures illustrate the lexical construction and its contrast with dense embeddings, while the Vector Similarity Lab adds two guided-tour steps without changing its scoring controls.
+- **Chapter 6 now ends on the puzzle it opened with.** The two qualification
+  sections — a vector need not be dense or semantic, and one document is not
+  one vector — used to follow the Puzzle 3 resolution, so the chapter's
+  heaviest passage, the binary-presence to TF to TF–IDF to BM25 progression,
+  arrived after its own payoff. They now come before it and Puzzle 3 closes
+  the chapter. The "Two qualifications the basic model needs" divider is gone
+  with them: sitting in the chapter's natural order, the two sections no
+  longer need announcing. No prose changed. Tables 6.2 to 6.4 renumber to
+  follow the new order, so a link saved to `#tbl-6-2`, `#tbl-6-3` or
+  `#tbl-6-4` now lands on a different table; figures 6.1 to 6.11 are
+  unaffected.
 - **Audience and reading-route guidance.** The README, Preface and teaching
   notes now identify information literacy and evidence synthesis librarians as
   the primary audiences, systems/discovery librarians as a secondary audience,

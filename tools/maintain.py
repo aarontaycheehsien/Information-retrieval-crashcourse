@@ -286,6 +286,74 @@ broken = sorted({h for h in re.findall(r'href="#([^"]+)"', doc) if h and h not i
 if broken:
     problems.append('broken internal link(s): ' + ', '.join(broken))
 
+# ------------------------------------------ chapter, appendix and asset cross-refs
+# A link can stay valid and still lie. Renumbering a chapter, reordering two
+# sections or moving a table leaves every href resolving, while the number in
+# the link text now names something else. Nothing above catches that, because
+# the anchors are slugs and the numbers are prose.
+LINK_RE = re.compile(r'<a\b[^>]*href="#([^"]+)"[^>]*>(.*?)</a>', re.S)
+NUM_LIST = r'\d+(?:\s*(?:,|–|—|-|&|and|to)\s*\d+)*'
+CHAP_IN_TEXT = re.compile(r'Chapters?\s+(%s)' % NUM_LIST)
+APP_IN_TEXT = re.compile(r'Appendi(?:x|ces)\s+([A-Z])(?![a-z])')
+ASSET_ID_RE = re.compile(r'^(fig|tbl)-([0-9a-z]+)-(\d+)$')
+ASSET_TEXT_RE = re.compile(r'^(Figure|Table)\s+([0-9A-Z]+)\.(\d+)$')
+
+def chapter_label_map(html):
+    """Map every id inside a numbered chapter or appendix to that section's label."""
+    out = {}
+    lo = html.index('<article id="article">')
+    hi = html.index('<section class="footnotes">')
+    for start, end, tag in top_level_sections(html, lo, hi):
+        cls = attr(tag, 'class')
+        if 'chapter' not in cls or 'backsection' in cls or 'exercise' in cls:
+            continue
+        body = html[start:end]
+        eye = EYEBROW_RE.search(body)
+        m = re.match(r'(?:Chapter\s+(\d+)|Appendix\s+([A-Z]))\b',
+                     text_of(eye.group(1)) if eye else '')
+        if not m:                       # Preface and Introduction carry no number
+            continue
+        label = m.group(1) or m.group(2)
+        for i in re.findall(r'\sid="([^"]+)"', body):
+            out[i] = label
+    return out
+
+owner = chapter_label_map(doc)
+# A heading may legitimately name a chapter in its own title -- Appendix F's
+# "Applying Chapter 12 to active learning". A link quoting that title verbatim
+# is citing the heading, not claiming the target is Chapter 12.
+titles = {m.group(1): heading_text(m.group(2))
+          for m in re.finditer(r'<h[2-4][^>]*\bid="([^"]+)"[^>]*>(.*?)</h[2-4]>',
+                               doc, re.S)}
+stale = []
+for m in LINK_RE.finditer(doc):
+    target, txt = m.group(1), text_of(m.group(2))
+
+    asset = ASSET_ID_RE.match(target)
+    if asset:
+        said = ASSET_TEXT_RE.match(txt)
+        if said:
+            want = (u'Figure' if asset.group(1) == 'fig' else u'Table',
+                    asset.group(2).upper(), asset.group(3))
+            if (said.group(1), said.group(2), said.group(3)) != want:
+                stale.append(u'#%s is %s %s.%s but a link calls it %r'
+                             % (target, want[0], want[1], want[2], txt))
+        continue
+
+    label = owner.get(target)
+    if label is None or txt == titles.get(target):
+        continue
+    named = set(re.findall(r'\d+', u' '.join(CHAP_IN_TEXT.findall(txt))))
+    named.update(APP_IN_TEXT.findall(txt))
+    if re.match(r'^\d+$', txt):         # "…Chapter 3, 7 and 8" links each number alone
+        named.add(txt)
+    if named and label not in named:
+        stale.append(u'#%s is in %s but a link calls it %r'
+                     % (target, label, txt if len(txt) < 60 else txt[:57] + u'...'))
+if stale:
+    problems.append('stale cross-reference(s):\n      '
+                    + '\n      '.join(sorted(set(stale))))
+
 # ------------------------------------------------------------------------ write
 if doc != original:
     io.open(BOOK, "w", encoding="utf-8").write(doc)

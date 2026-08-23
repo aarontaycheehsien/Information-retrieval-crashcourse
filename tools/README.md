@@ -42,6 +42,23 @@ Then it reports what it cannot fix and exits non-zero:
 - a figure with no `<p class="figure-title">` for the index to quote
 - duplicate `id` attributes
 - broken internal links
+- **stale cross-references** — a link whose text names a chapter, appendix,
+  figure or table that is not what the link points at. A link can stay valid
+  and still lie: renumber a chapter, reorder two sections or move a table, and
+  every href still resolves while the number in the prose now names something
+  else. The broken-link check cannot see this, because the anchors are slugs
+  and the numbers are prose.
+
+  Checked: `Chapter 7`, `Chapters 10 to 12`, `Appendix D`, a bare number used
+  as chapter link text (the Preface currency warning links `3`, `7`, `8`, `9`
+  that way), and `Figure 6.2` / `Table 8.1`. A link whose text is exactly its
+  target's own heading is exempt, so Appendix F's section *Applying Chapter 12
+  to active learning* is not read as a claim about Chapter 12.
+
+  Only *linked* mentions can be checked — currently 50 of the book's 91
+  `Chapter N` mentions, and all 87 figure and table references. The other 41
+  are plain prose with no anchor to verify against, so a renumbering still
+  needs a read-through for those.
 
 **Caption text lives in the HTML**, not in the tool. `maintain.py` only owns the
 number prefix; everything after the em dash is yours.
