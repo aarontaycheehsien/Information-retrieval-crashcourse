@@ -22,42 +22,42 @@ entry here.
   make the rank reversal and the extension from two to many dimensions visible
   in the main text. The Preface and Appendix D connect the explanation to the
   book's existing distinctions rather than adding another category.
-- **Diversity-aware ranking in Chapters 7 and 11.** A new Chapter 7 section
+- **Diversity-aware ranking in Chapters 8 and 12.** A new Chapter 8 section
   explains why a list of individually relevant records can still be
   unhelpfully repetitive, distinguishes MMR, IA-Select, xQuAD and
   determinantal point processes, and locates diversification after candidate
-  retrieval rather than treating it as a dense-search method. Chapter 11 adds
+  retrieval rather than treating it as a dense-search method. Chapter 12 adds
   the corresponding evaluation warning and introduces aspect-aware measures
   such as alpha-nDCG.
 - **Relevance as a conceptual thread across the textbook.** Chapter 1 now
   separates matching from relevance and the query from the information need;
   brief callbacks connect Boolean retrieval, BM25, embeddings, semantic
-  similarity, reranking and OOD transfer; and Chapter 11 develops the fuller
+  similarity, reranking and OOD transfer; and Chapter 12 develops the fuller
   relevance framework and defines metrics against judged relevance. The thread
-  now also reaches Chapter 9: deciding to stop is a relevance judgement made on
+  now also reaches Chapter 10: deciding to stop is a relevance judgement made on
   the user's behalf, on results the user never sees, against a criterion no
   interface states.
 - **Cognitive relevance (pertinence) as a fourth level**, in both Chapter 1 and
-  Chapter 11. Chapter 11's worked example — the same paper being right for a
+  Chapter 12. Chapter 12's worked example — the same paper being right for a
   specialist, useless to a newcomer and excluded by a reviewer — turns on the
   reader's knowledge in the first two cases and on task criteria only in the
-  third, which the previous three-level scheme could not distinguish. Chapter 11
+  third, which the previous three-level scheme could not distinguish. Chapter 12
   also now names the affective dimension as the one deliberately left out.
 - **Figure 1.5, "From a need to a relevance judgement."** The need-to-judgement
   chain was previously the only titled diagram in the book that was not a
   numbered figure, so it was missing from the figure index and could not be
   cited or reused.
 - **Figure 11.1, "Where recall is decided, and where precision is competed
-  for."** Chapters 10 to 12 previously carried no figures at all.
+  for."** Chapters 11 to 13 previously carried no figures at all.
 - **A fourth "Check yourself" question in Chapter 1**, on what a set of records
   matching every search term does and does not establish. The chapter now
   carries two central distinctions and the existing three questions tested
   neither of the new one.
-- **A fourth "Check yourself" question in Chapter 6**, on the cosine/dot-product
-  rank reversal, and a matching first point in the chapter summary. The chapter
-  now opens with the comparison rule and spends two figures and a lab on it,
-  while the existing three questions and five summary points covered none of
-  it.
+- **A "Check yourself" question on the cosine/dot-product rank reversal**, and
+  a matching first point in the Chapter 6 summary. The chapter opens with the
+  comparison rule and spends two figures and a lab on it, while the existing
+  questions and summary points covered none of it. Chapter 6 still ends with
+  three questions: the split below moved the full-text one to Chapter 7.
 - Glossary entries for relevance, information need, and system/algorithmic,
   topical, cognitive and situational relevance. Only *relevance judgement* was
   defined before, so a reader meeting "situational relevance" had nowhere to
@@ -71,9 +71,9 @@ entry here.
 - **Appendix F, “Evidence synthesis as a high-recall retrieval problem.”** A
   dated application of candidate generation, recall, relevance feedback and
   reproducibility to systematic-review retrieval, TAR, ASReview and stopping
-  rules. Short cross-references in Chapters 2, 8, 10 and 12 and one compact
-  Chapter 11 call-out keep the extended treatment out of the main text.
-- **Mechanism-based search guidance in Chapter 8.** A new framework starts
+  rules. Short cross-references in Chapters 2, 9, 11 and 13 and one compact
+  Chapter 12 call-out keep the extended treatment out of the main text.
+- **Mechanism-based search guidance in Chapter 9.** A new framework starts
   with what the searcher is supplying—a text string, structured expression,
   citation edge, seed document, relevance judgement, browse target, API
   predicate or agentic brief—before asking how that input should be phrased.
@@ -82,7 +82,32 @@ entry here.
 
 ### Changed
 
-- **The distinction between vector, dense, learnt and semantic is now example-led.** Chapter 6 builds one vocabulary-aligned representation from binary presence through term frequency, TF–IDF and BM25, while distinguishing Boolean operators from vector overlap and inverted-index execution from the mathematical vector view. Four independent questions then separate numerical form, density, provenance and represented evidence; explicit metadata and learnt sparse retrieval break the shortcut “dense means semantic”. Two supplied figures illustrate the lexical construction and its contrast with dense embeddings, while the Vector Similarity Lab adds two guided-tour steps without changing its scoring controls.
+- **Chapter 6 is now two chapters.** The vector-similarity work had made it
+  the longest chapter in the book at roughly 5,400 words — twice any chapter
+  in Part I — carrying nine sections and two distinct arguments. It splits
+  along the seam that was already there. Chapter 6, *Dense retrieval at
+  collection scale*, keeps the scale-and-pipeline argument: the comparison
+  rule, nearest-neighbour indexing, candidate boundaries, top-*k*, and the
+  Puzzle 3 resolution that now closes it. A new **Chapter 7, *Representations
+  and indexed units***, takes what had been appended to that argument rather
+  than belonging to it: the lexical vector built one decision at a time from
+  binary presence to BM25, the four questions separating numerical form,
+  shape, provenance and evidence, and the distinction between a source
+  document, an indexed unit and a vector. Each chapter carries its own central
+  question, summary and questions, and they come to about 16 and 13 minutes —
+  back in line with the rest of the book. No prose was rewritten to make the
+  cut; the two halves shared no cross-references.
+- **Chapters 7 to 12 are now Chapters 8 to 13**, and Part II runs from Chapter
+  5 to Chapter 9. Every saved chapter link still resolves: chapter anchors are
+  slugs rather than numbers, so `#dense-at-scale`, `#reranking-and-hybrid` and
+  the rest are unchanged, as are the `#ch1`–`#ch9` anchors held over from the
+  earlier single-flow edition. Figure and table numbers do move — what was
+  Figure 6.6 is Figure 7.1, and the assets in Chapters 8 to 13 shift with their
+  chapters — so a link saved to a specific figure or table may now land on a
+  different one. The teaching notes' twelve-week course becomes a
+  thirteen-week course.
+
+- **The distinction between vector, dense, learnt and semantic is now example-led.** Chapter 7 builds one vocabulary-aligned representation from binary presence through term frequency, TF–IDF and BM25, while distinguishing Boolean operators from vector overlap and inverted-index execution from the mathematical vector view. Four independent questions then separate numerical form, density, provenance and represented evidence; explicit metadata and learnt sparse retrieval break the shortcut “dense means semantic”. Two supplied figures illustrate the lexical construction and its contrast with dense embeddings, while the Vector Similarity Lab adds two guided-tour steps without changing its scoring controls.
 - **Chapter 6 now ends on the puzzle it opened with.** The two qualification
   sections — a vector need not be dense or semantic, and one document is not
   one vector — used to follow the Puzzle 3 resolution, so the chapter's
@@ -90,10 +115,8 @@ entry here.
   arrived after its own payoff. They now come before it and Puzzle 3 closes
   the chapter. The "Two qualifications the basic model needs" divider is gone
   with them: sitting in the chapter's natural order, the two sections no
-  longer need announcing. No prose changed. Tables 6.2 to 6.4 renumber to
-  follow the new order, so a link saved to `#tbl-6-2`, `#tbl-6-3` or
-  `#tbl-6-4` now lands on a different table; figures 6.1 to 6.11 are
-  unaffected.
+  longer need announcing. No prose changed. Those two sections then became a
+  chapter of their own — see below.
 - **Audience and reading-route guidance.** The README, Preface and teaching
   notes now identify information literacy and evidence synthesis librarians as
   the primary audiences, systems/discovery librarians as a secondary audience,
@@ -106,7 +129,7 @@ entry here.
   mistake the heading for a claim the book endorses.
 - **Chapter 1 now cites Mizzaro and Saracevic directly**, rather than
   attributing richer accounts of relevance to unnamed researchers and linking
-  them only in Chapter 11 and the further reading. Part I is designed to be
+  them only in Chapter 12 and the further reading. Part I is designed to be
   assignable on its own.
 
 ### Fixed
@@ -114,11 +137,11 @@ entry here.
 - **"Every stage after the first can improve precision; none of them can
   improve recall" was stated without its boundary condition**, in the body,
   the chapter summary, the self-check answer and the glossary. It contradicted
-  Chapter 7, which justifies hybrid retrieval on the grounds that each route
-  recovers material the other misses, and Chapter 9, which says iteration
+  Chapter 8, which justifies hybrid retrieval on the grounds that each route
+  recovers material the other misses, and Chapter 10, which says iteration
   repairs recall failures as well as compounding them. The rule now names the
   candidate-set boundary rather than a position in a pipeline diagram, and
-  Chapter 11 says why fusion over two retrievers and a second agentic round are
+  Chapter 12 says why fusion over two retrievers and a second agentic round are
   not exceptions to it.
 - **"Precision can be repaired by looking further down a list."** Reading
   further down a list normally lowers precision. The passage now contrasts the
@@ -128,8 +151,9 @@ entry here.
   break words.
 - **Chapter 6's stated reading time still described the shorter chapter.** The
   vector-similarity explanation made Chapter 6 the longest chapter in the book
-  by prose word count, yet it claimed 21 minutes against Chapter 7's 24 for
-  fewer words. It now says 25.
+  by prose word count, yet it claimed 21 minutes against Chapter 8's 24 for
+  fewer words. It now says 16, the split below having taken about 2,200 words
+  out of it.
 - **The Vector Similarity Lab appendix said cosine "also accounts for the
   vectors' lengths"**, which reads as the opposite of the lab's own "cosine
   compares direction and ignores length". It now says that cosine divides by
