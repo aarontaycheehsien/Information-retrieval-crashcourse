@@ -62,6 +62,12 @@ entry here.
   topical, cognitive and situational relevance. Only *relevance judgement* was
   defined before, so a reader meeting "situational relevance" had nowhere to
   look it up.
+- **A glossary entry for vector normalisation**, distinguished from BM25's
+  document-length normalisation. Chapter 6 and the Vector Similarity Lab both
+  turn on it — the lab has a control for it — but it was previously defined
+  only in passing inside the *dot product* entry. It is deliberately not added
+  to the first-use term-mark list, because the book uses "normalisation" in
+  both senses.
 - **Appendix F, “Evidence synthesis as a high-recall retrieval problem.”** A
   dated application of candidate generation, recall, relevance feedback and
   reproducibility to systematic-review retrieval, TAR, ASReview and stopping
@@ -120,6 +126,10 @@ entry here.
 - The lab's direction control was marked up at 12° while candidate A's
   default relative angle is 24°, so the value shown before the script ran
   disagreed with the drawing.
+- **The lab's direction control stopped at ±160°**, so the −1 cosine endpoint
+  described in its own appendix — and in the glossary — could not actually be
+  reached in the sandbox. It now runs to ±180°, and the control hint says what
+  happens there rather than hedging.
 
 ## Version 1.0 — August 2026
 

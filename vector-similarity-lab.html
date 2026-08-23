@@ -232,8 +232,8 @@ input[type=range]:disabled{opacity:.42}
       <div class="control-block">
         <div class="ctrl">
           <div class="ctrl-top"><label for="angle">Direction relative to query</label><span class="ctrl-val" id="angle-val">24°</span></div>
-          <input type="range" id="angle" min="-160" max="160" step="1" value="24">
-          <p class="hint">0° means the same direction; 90° is perpendicular; 180° would be opposite.</p>
+          <input type="range" id="angle" min="-180" max="180" step="1" value="24">
+          <p class="hint">0° means the same direction; 90° is perpendicular; 180° is exactly opposite, where cosine similarity reaches −1.</p>
         </div>
         <div class="ctrl">
           <div class="ctrl-top"><label for="magnitude">Vector length</label><span class="ctrl-val" id="magnitude-val">1.00</span></div>
