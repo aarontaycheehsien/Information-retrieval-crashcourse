@@ -12,9 +12,9 @@ entry here.
 ### Added
 
 - **The Vector Similarity Lab and a plain-language Chapter 6 explanation.** The
-  new interactive companion uses a gentle eight-step tour from a drawable
-  two-dimensional toy example to cosine similarity, dot product, normalisation
-  and higher-dimensional vectors. Clearly separated off-axis defaults expose a
+  new interactive companion uses a gentle five-step tour from a drawable
+  two-dimensional toy example through cosine similarity, dot product and
+  normalisation to the difference between a score and a relevance judgement. Clearly separated off-axis defaults expose a
   cosine/dot-product rank reversal and a negative score, while the lab appendix
   explains how `[x, y]` extends to an n-coordinate embedding without pretending
   that the drawing is an actual semantic model. The resulting score remains
@@ -82,6 +82,28 @@ entry here.
 
 ### Changed
 
+- **The Vector Similarity Lab shows its arithmetic, and its tour is five steps
+  rather than eight.** Two of the eight steps were the only ones whose controls
+  did nothing: they displayed a static figure and asked a question the arrows on
+  screen could not answer, so a reader trained for four steps to read the plot
+  found it suddenly decorative. Both belong to what is now Chapter 7, which
+  makes their point with figures of its own. A third step, on extending `[x, y]`
+  to *n* coordinates, was already said twice more — verbatim in the lab appendix
+  below it, and again as Figure 6.2. Every remaining step moves the arrows.
+- **The lab substitutes the live numbers into the formulas**, under the plot,
+  for whichever candidate is selected: the two vectors as coordinates, the dot
+  product as the sum of its coordinate products, and cosine as that total
+  divided by both lengths, with the line for the active rule picked out. The
+  normalisation step previously asserted that cosine's denominator becomes one;
+  it now reads `cos = 0.914 ÷ (1.00 × 1.00) ≈ 0.914` while the reader watches.
+  Rounded results are marked `≈`, as the lab's worked example already did.
+- **In guided-tour mode the question now sits beside the evidence.** The tour
+  card used to span the full width above a three-column instrument, so on a
+  1400-pixel screen the plot a step asked about was below the fold. Above 1180
+  pixels the card moves into a column of its own alongside the plot and the
+  ranked list, and the controls — which the tour sets rather than the reader —
+  move beneath them. Sandbox mode and every narrower layout are unchanged.
+
 - **Chapter 6 is now two chapters.** The vector-similarity work had made it
   the longest chapter in the book at roughly 5,400 words — twice any chapter
   in Part I — carrying nine sections and two distinct arguments. It splits
@@ -107,7 +129,7 @@ entry here.
   different one. The teaching notes' twelve-week course becomes a
   thirteen-week course.
 
-- **The distinction between vector, dense, learnt and semantic is now example-led.** Chapter 7 builds one vocabulary-aligned representation from binary presence through term frequency, TF–IDF and BM25, while distinguishing Boolean operators from vector overlap and inverted-index execution from the mathematical vector view. Four independent questions then separate numerical form, density, provenance and represented evidence; explicit metadata and learnt sparse retrieval break the shortcut “dense means semantic”. Two supplied figures illustrate the lexical construction and its contrast with dense embeddings, while the Vector Similarity Lab adds two guided-tour steps without changing its scoring controls.
+- **The distinction between vector, dense, learnt and semantic is now example-led.** Chapter 7 builds one vocabulary-aligned representation from binary presence through term frequency, TF–IDF and BM25, while distinguishing Boolean operators from vector overlap and inverted-index execution from the mathematical vector view. Four independent questions then separate numerical form, density, provenance and represented evidence; explicit metadata and learnt sparse retrieval break the shortcut “dense means semantic”. Two supplied figures illustrate the lexical construction and its contrast with dense embeddings.
 - **Chapter 6 now ends on the puzzle it opened with.** The two qualification
   sections — a vector need not be dense or semantic, and one document is not
   one vector — used to follow the Puzzle 3 resolution, so the chapter's

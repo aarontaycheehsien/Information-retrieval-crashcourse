@@ -111,7 +111,11 @@ input[type=range]:disabled{opacity:.42}
 .plot-legend{display:flex;flex-wrap:wrap;gap:.8rem;margin:.7rem 0 0;font:650 .74rem/1.2 var(--sans);color:var(--muted)}
 .legend-item{display:flex;align-items:center;gap:.35rem}
 .swatch{width:11px;height:11px;border-radius:3px;background:var(--swatch)}
-.selected-detail{background:var(--code);border-radius:8px;padding:.65rem .8rem;margin-top:.8rem;font:.78rem/1.5 var(--sans)}
+.selected-detail{background:var(--code);border-radius:8px;padding:.65rem .8rem;margin-top:.8rem;font:.78rem/1.5 var(--sans);overflow-x:auto}
+.selected-detail p{margin:0}
+.work-head{margin-bottom:.35rem!important}
+.work-line{font:.74rem/1.7 var(--mono);white-space:nowrap;color:var(--muted)}
+.work-line.on{color:var(--ink);font-weight:700}
 
 .rank-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
 .rank-card{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:.65rem .7rem}
@@ -154,6 +158,18 @@ input[type=range]:disabled{opacity:.42}
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 [hidden]{display:none!important}
 
+.wrap.in-tour>.tour{margin-bottom:0}
+@media(min-width:1180px){
+  .wrap.in-tour{display:grid;grid-template-columns:minmax(310px,370px) 1fr;gap:1.1rem;align-items:start}
+  .wrap.in-tour>.modebar{grid-column:1/-1}
+  .wrap.in-tour>.tour{grid-column:1;position:sticky;top:1rem}
+  .wrap.in-tour>.lab{grid-column:2;grid-template-columns:minmax(320px,1fr) minmax(250px,310px)}
+  .wrap.in-tour>.lab>.panel:first-child{order:3;grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));column-gap:1.5rem;align-items:start}
+  .wrap.in-tour>.lab>.panel:first-child>h2{grid-column:1/-1}
+  .wrap.in-tour>.lab>.panel:first-child .control-block{border-top:0;padding-top:0;margin-top:0}
+  .wrap.in-tour>.lab .rank-panel{order:2}
+  .wrap.in-tour>.adv,.wrap.in-tour>.lab-appendix{grid-column:1/-1}
+}
 @media(max-width:980px){.lab{grid-template-columns:minmax(235px,280px) 1fr}.rank-panel{grid-column:1/-1}.rank-list{display:grid;grid-template-columns:repeat(3,1fr)}.score-table{max-width:620px;margin-left:auto;margin-right:auto}}
 @media(max-width:680px){body{font-size:16px}.hero{padding-top:2.4rem}.wrap{padding-left:1rem;padding-right:1rem}.lab{grid-template-columns:1fr}.rank-panel{grid-column:auto}.rank-list{grid-template-columns:1fr}.plot-wrap{min-height:235px}.formula-grid,.appendix-grid{grid-template-columns:1fr}.tour-nav .hint{width:100%}.spacer{display:none}.modebar{justify-content:space-between}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.vector-line,.endpoint{transition:none}}
@@ -164,8 +180,8 @@ input[type=range]:disabled{opacity:.42}
 <header class="hero"><div class="hero-inner">
   <p class="kicker">Interactive companion</p>
   <h1>The Vector Similarity Lab</h1>
-  <p class="subtitle">Vector search needs a rule for comparing the query with stored vectors. Move a few toy vectors to separate cosine similarity, dot product and relevance—then see why vector, dense and semantic are different properties.</p>
-  <p class="backlink"><a href="search-textbook.html#single-vector-dense-retrieval-compress-first-compare-later">← Back to “Single-vector dense retrieval”</a> · <a href="search-textbook.html#a-vector-does-not-have-to-be-dense-or-semantic">Read “A vector does not have to be dense or semantic”</a></p>
+  <p class="subtitle">Vector search needs a rule for comparing the query with stored vectors. Move a few toy vectors to separate cosine similarity, dot product and relevance, and watch the arithmetic change as you do.</p>
+  <p class="backlink"><a href="search-textbook.html#single-vector-dense-retrieval-compress-first-compare-later">← Back to “Single-vector dense retrieval”</a> · <a href="search-textbook.html#representations-and-units">On to “Representations and indexed units”</a></p>
 </div></header>
 
 <main class="wrap">
@@ -381,6 +397,10 @@ function clone(value){return JSON.parse(JSON.stringify(value));}
 function radians(degrees){return degrees*Math.PI/180;}
 function effectiveQueryMagnitude(){return normalised?1:QUERY.magnitude;}
 function effectiveMagnitude(id){return normalised?1:candidates[id].magnitude;}
+function queryValues(){
+  const theta=radians(QUERY.angle),length=effectiveQueryMagnitude();
+  return {x:length*Math.cos(theta),y:length*Math.sin(theta),length};
+}
 function values(id){
   const relativeTheta=radians(candidates[id].angle);
   const absoluteTheta=radians(QUERY.angle+candidates[id].angle);
@@ -457,7 +477,12 @@ function renderPlot(){
   ['Q','A','B','C'].forEach(renderVector);
   renderArc();
   const v=values(selected);
-  $('selected-detail').innerHTML=`<strong>Candidate ${selected}</strong> · relative direction ${displayAngle(candidates[selected].angle)} · displayed length ${v.length.toFixed(2)} · cosine ${f(v.cosine)} · dot product ${f(v.dot)}`;
+  const q=queryValues(),dotActive=metric==='dot';
+  $('selected-detail').innerHTML=
+    `<p class="work-head"><strong>Candidate ${selected}</strong> · ${displayAngle(candidates[selected].angle)} from the query · length ${v.length.toFixed(2)}</p>`
+    +`<p class="work-line">q = [${f(q.x)}, ${f(q.y)}]&nbsp;&nbsp;&nbsp;d = [${f(v.x)}, ${f(v.y)}]</p>`
+    +`<p class="work-line${dotActive?' on':''}">q · d = (${f(q.x)} × ${f(v.x)}) + (${f(q.y)} × ${f(v.y)}) ≈ ${f(v.dot)}</p>`
+    +`<p class="work-line${dotActive?'':' on'}">cos = ${f(v.dot)} ÷ (${q.length.toFixed(2)} × ${v.length.toFixed(2)}) ≈ ${f(v.cosine)}</p>`;
   $('svg-desc').textContent=`The query points diagonally at ${displayAngle(QUERY.angle)} with length ${effectiveQueryMagnitude().toFixed(2)}. Candidate ${selected} is selected at ${displayAngle(candidates[selected].angle)} relative to the query, with length ${v.length.toFixed(2)}. Using ${metric==='cosine'?'cosine similarity':'dot product'}, the ranking is ${ranked().join(', ')}.`;
 }
 
@@ -521,37 +546,6 @@ const TOURS=[
     metric:'dot',normalised:true,selected:'A',vectors:DEFAULTS
   },
   {
-    title:'The same idea extends beyond the page',
-    intro:'A drawable vector has two coordinates, [x, y]. Adding depth gives [x, y, z]. A real embedding simply continues the list, often for hundreds or thousands of coordinates that cannot all be drawn.',
-    question:'Does a 768-dimensional vector need a different definition of cosine or dot product?',
-    choices:[['No — the same operation covers more coordinate pairs','no'],['Yes — each dimension needs a new rule','yes']],correct:'no',
-    answer:'No. Dot product multiplies and adds more matching coordinate pairs; cosine also divides by the two higher-dimensional vector lengths. Only the number of coordinates changes.',
-    takeaway:'The page stops at two dimensions because human vision does. The comparison does not stop there.',
-    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
-  },
-  {
-    title:'A sparse list is still a vector',
-    intro:'The arrows in this lab are dense two-dimensional toys, but an ordered list does not stop being a vector when most of its coordinates are zero. Sparse and dense describe how many dimensions are active, not whether the object is a vector.',
-    question:'Is [0, 2.4, 0, 0, 1.1] a vector?',
-    choices:[['Yes — it is a sparse vector','yes'],['No — vectors must be dense','no']],correct:'yes',
-    answer:'Yes. It is an ordered list of five numbers, with only two active dimensions. A vocabulary space can contain tens of thousands of possible dimensions while a query or document activates only a few.',
-    takeaway:'Vector names the numerical object. Sparse and dense describe the pattern of active coordinates.',
-    image:'images/03%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/one-text-several-vector-representations.png',
-    imageAlt:'The text Open access increases citations represented as both sparse vocabulary-labelled weights and a dense text embedding. Both are vectors, and sparse or dense describes their shape.',
-    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
-  },
-  {
-    title:'Density does not decide meaning',
-    intro:'A dense vector can simply record explicit fields such as year, pages and citation count. A learnt sparse model can activate related vocabulary while leaving almost every dimension at zero. Shape alone therefore cannot reveal what evidence a representation preserves.',
-    question:'Can you tell from density alone whether a vector captures meaning?',
-    choices:[['No — you need its dimensions, design and training','no'],['Yes — dense always means semantic','yes']],correct:'no',
-    answer:'No. Density tells you how many coordinates are active. To interpret the vector, you also need to know what the coordinates represent and how their values were produced.',
-    takeaway:'Ask separate questions about numerical form, shape, provenance and intended evidence.',
-    image:'images/03%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/density-does-not-decide-meaning.png',
-    imageAlt:'A dense explicit metadata feature vector contrasted with a learnt sparse vocabulary vector, showing that density does not decide whether a representation is meaning-oriented.',
-    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
-  },
-  {
     title:'A similarity score is not relevance',
     intro:'Candidate A is closest under cosine, but it is from 2012. Candidate B is current but is a commentary. Only C meets both the date and study-design criteria.',
     question:'Does a cosine score of 0.914 mean a 91.4% chance that A is relevant?',
@@ -594,6 +588,7 @@ function chooseAnswer(button){
 
 function setMode(tourMode){
   inTour=tourMode;
+  document.querySelector('.wrap').classList.toggle('in-tour',inTour);
   $('mode-tour').setAttribute('aria-pressed',String(inTour));
   $('mode-sandbox').setAttribute('aria-pressed',String(!inTour));
   $('tour').hidden=!inTour;
@@ -613,6 +608,7 @@ $('tour-choices').addEventListener('click',event=>{const button=event.target.clo
 $('tour-prev').addEventListener('click',()=>{if(tourIndex>0){tourIndex-=1;applyTour(tourIndex);}});
 $('tour-next').addEventListener('click',()=>{if(tourIndex<TOURS.length-1){tourIndex+=1;applyTour(tourIndex);}else setMode(false);});
 
+document.querySelector('.wrap').classList.add('in-tour');
 applyTour(0);
 })();
 </script>
