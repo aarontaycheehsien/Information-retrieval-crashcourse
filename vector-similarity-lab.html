@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en-GB"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An interactive laboratory for building intuition about cosine similarity, dot product and vector-search rankings">
+<meta name="theme-color" content="#f4f0e8">
+<title>The Vector Similarity Lab</title>
+<style>
+:root{
+  --paper:#f4f0e8;--paper-2:#fbf9f4;--ink:#17201f;--muted:#596462;
+  --line:#d5d0c5;--accent:#9d3f2b;--accent-dark:#6f291d;
+  --teal:#1d5b59;--teal-soft:#dce9e5;--gold-soft:#eee3c8;--code:#efeae0;
+  --blue:#2a78d6;--orange:#d65d2a;--purple:#7451a6;--shadow:0 18px 55px rgba(40,35,28,.10);
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);
+  background:radial-gradient(circle at top left,rgba(157,63,43,.08),transparent 26rem),linear-gradient(180deg,#eee9df 0,var(--paper) 22rem,var(--paper) 100%);
+  font-family:var(--serif);font-size:17px;line-height:1.68;text-rendering:optimizeLegibility;
+}
+a{color:var(--accent-dark);text-decoration-thickness:.08em;text-underline-offset:.17em}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid rgba(157,63,43,.38);outline-offset:3px;border-radius:3px}
+code{font-family:var(--mono);font-size:.86em;background:var(--code);border:1px solid #e2dacf;border-radius:.32em;padding:.09em .3em}
+button,input{font:inherit}
+
+.hero{border-bottom:1px solid rgba(23,32,31,.15);padding:3.4rem clamp(1.1rem,4vw,3.5rem) 2.4rem}
+.hero-inner{max-width:1240px;margin:0 auto}
+.kicker{margin:0 0 .8rem;font:700 .74rem/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.06;letter-spacing:-.035em;margin:0 0 .9rem}
+.subtitle{font-size:clamp(1rem,1.9vw,1.2rem);color:var(--muted);max-width:65ch;margin:0 0 1.4rem}
+.backlink{font:600 .84rem/1 var(--sans)}
+.wrap{max-width:1240px;margin:0 auto;padding:2rem clamp(1.1rem,4vw,3.5rem) 5rem}
+
+.modebar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:0 0 1.6rem}
+.seg{display:inline-flex;background:var(--code);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{font:600 .84rem/1 var(--sans);border:0;background:none;color:var(--muted);padding:.55rem 1.1rem;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+.spacer{flex:1}
+.btn{font:600 .82rem/1 var(--sans);border:1px solid var(--line);background:var(--paper-2);color:var(--ink);padding:.62rem .9rem;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent-dark)}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.primary:hover{background:var(--accent-dark);color:#fff}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+.tour{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.5rem;margin:0 0 1.6rem;box-shadow:var(--shadow)}
+.tour-head{display:flex;flex-wrap:wrap;gap:.8rem;align-items:baseline;margin-bottom:.5rem}
+.tour-step{font:700 .72rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.tour h2{font-size:1.32rem;line-height:1.2;letter-spacing:-.02em;margin:0}
+.tour p{margin:.55rem 0}
+.tour-figure{max-width:860px;margin:.9rem auto 1rem;padding:.55rem;background:#f7f3eb;border:1px solid var(--line);border-radius:10px}
+.tour-figure img{display:block;width:100%;height:auto;margin:0;border-radius:6px}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--accent)}
+.predict{background:var(--teal-soft);border-left:4px solid var(--teal);padding:.8rem 1rem;margin:.9rem 0;border-radius:0 8px 8px 0}
+.predict p{margin:0 0 .6rem;color:#173b39;font-weight:600}
+.choices{display:flex;flex-wrap:wrap;gap:.5rem}
+.choice{font:600 .82rem/1.2 var(--sans);border:1px solid #9dbdb8;background:var(--paper-2);color:#173b39;padding:.54rem .85rem;border-radius:8px;cursor:pointer}
+.choice:hover{border-color:var(--teal)}
+.choice.right{background:var(--teal);color:#fff;border-color:var(--teal)}
+.choice.wrong{background:#f2ded8;border-color:#c58c7c;color:#6f291d}
+.reveal{margin-top:.85rem;padding-top:.85rem;border-top:1px solid var(--line)}
+.reveal[hidden]{display:none}
+.takeaway{background:var(--gold-soft);border-radius:8px;padding:.7rem .95rem;margin:.8rem 0 0;font-family:var(--sans);font-size:.9rem;line-height:1.6}
+.tour-nav{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem;align-items:center}
+.hint{font:.76rem/1.5 var(--sans);color:var(--muted);margin:.45rem 0 0}
+
+.lab{display:grid;grid-template-columns:minmax(245px,290px) minmax(380px,1fr) minmax(260px,320px);gap:1.1rem;align-items:start}
+.panel{min-width:0;background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.15rem;box-shadow:var(--shadow)}
+.panel h2,.panel h3{font:700 .74rem/1.2 var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:0 0 .85rem}
+.control-block{border-top:1px solid var(--line);padding-top:1rem;margin-top:1rem}
+.control-block:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.control-name{display:block;font:700 .8rem/1.35 var(--sans);color:var(--ink);margin-bottom:.5rem}
+.metric-buttons,.candidate-buttons{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.candidate-buttons{grid-template-columns:repeat(3,1fr)}
+.metric-buttons button,.candidate-buttons button{font:700 .78rem/1 var(--sans);border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:.6rem .45rem;border-radius:8px;cursor:pointer}
+.metric-buttons button[aria-pressed=true],.candidate-buttons button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.candidate-buttons button[data-id=A]{--candidate:var(--blue)}
+.candidate-buttons button[data-id=B]{--candidate:var(--orange)}
+.candidate-buttons button[data-id=C]{--candidate:var(--purple)}
+.candidate-buttons button[aria-pressed=false]{border-bottom:4px solid var(--candidate)}
+.switch{display:flex;gap:.55rem;align-items:flex-start;font:600 .82rem/1.45 var(--sans);cursor:pointer}
+.switch input{margin:.25rem 0 0;accent-color:var(--accent)}
+.ctrl{margin-top:.9rem}
+.ctrl-top{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.28rem}
+.ctrl-top label{font:650 .78rem/1.35 var(--sans)}
+.ctrl-val{margin-left:auto;font:700 .78rem/1 var(--mono);color:var(--accent-dark);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+input[type=range]:disabled{opacity:.42}
+.candidate-copy{font:.78rem/1.5 var(--sans);color:var(--muted);margin:.7rem 0 0}
+
+.query-box{background:var(--teal-soft);border-left:4px solid var(--teal);padding:.75rem .9rem;margin:0 0 1rem;border-radius:0 8px 8px 0;font:.83rem/1.5 var(--sans)}
+.query-box strong{display:block;color:#173b39;margin-bottom:.2rem}
+.query-meta{display:block;color:#45615f;font-size:.74rem;margin-top:.3rem}
+.plot-wrap{position:relative;width:100%;aspect-ratio:620/420;min-height:300px}
+.plot-wrap svg{display:block;width:100%;height:100%;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.grid-line{stroke:#ded8cb;stroke-width:1}
+.axis-line{stroke:#9b988f;stroke-width:1.5}
+.unit-circle{fill:none;stroke:#b7b0a3;stroke-width:1.5;stroke-dasharray:5 5}
+.vector-line{stroke-width:4;stroke-linecap:round;transition:x2 .22s ease,y2 .22s ease,stroke-width .15s ease}
+.vector-line.selected{stroke-width:7}
+.endpoint{stroke:var(--paper-2);stroke-width:3;transition:cx .22s ease,cy .22s ease}
+.vector-label{font:700 15px/1 var(--sans);paint-order:stroke;stroke:var(--paper);stroke-width:4px;stroke-linejoin:round}
+.axis-label,.unit-label,.angle-label{font:600 12px/1 var(--sans);fill:#6b706d}
+.angle-arc{fill:none;stroke:var(--accent);stroke-width:2.5}
+.plot-legend{display:flex;flex-wrap:wrap;gap:.8rem;margin:.7rem 0 0;font:650 .74rem/1.2 var(--sans);color:var(--muted)}
+.legend-item{display:flex;align-items:center;gap:.35rem}
+.swatch{width:11px;height:11px;border-radius:3px;background:var(--swatch)}
+.selected-detail{background:var(--code);border-radius:8px;padding:.65rem .8rem;margin-top:.8rem;font:.78rem/1.5 var(--sans)}
+
+.rank-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.rank-card{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:.65rem .7rem}
+.rank-top{display:flex;gap:.55rem;align-items:baseline;font-family:var(--sans)}
+.rank-number{font-weight:800;color:var(--muted)}
+.rank-id{font-weight:800;color:var(--candidate)}
+.rank-score{margin-left:auto;font:800 .86rem/1 var(--mono);font-variant-numeric:tabular-nums}
+.rank-copy{font:.74rem/1.4 var(--sans);color:var(--muted);margin:.38rem 0 0}
+.score-track{height:6px;background:#ded8cb;border-radius:3px;margin-top:.55rem;position:relative;overflow:hidden}
+.score-track::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:#8d8a83}
+.score-bar{position:absolute;top:0;height:100%;background:var(--candidate)}
+.score-table{width:100%;table-layout:fixed;border-collapse:collapse;margin-top:1rem;font:.72rem/1.35 var(--sans);font-variant-numeric:tabular-nums}
+.score-table th,.score-table td{border-top:1px solid var(--line);padding:.42rem .25rem;text-align:right}
+.score-table th:first-child,.score-table td:first-child{text-align:left}
+.score-table thead th{color:var(--muted);font-weight:700}
+.warning{background:var(--gold-soft);border-radius:8px;padding:.75rem .85rem;margin:1rem 0 0;font:.8rem/1.55 var(--sans)}
+
+.adv{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;margin-top:1.2rem;box-shadow:var(--shadow)}
+.adv summary{cursor:pointer;padding:1rem 1.2rem;font:700 .86rem/1.3 var(--sans)}
+.adv-body{border-top:1px solid var(--line);padding:1.1rem 1.2rem}
+.formula-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.formula{background:var(--code);border-radius:8px;padding:.85rem 1rem;text-align:center;font:600 .92rem/1.6 var(--mono);overflow-wrap:anywhere}
+.formula p{font:400 .77rem/1.55 var(--sans);text-align:left;color:var(--muted);margin:.6rem 0 0}
+.worked-example{margin-top:1rem;padding:1rem 1.05rem;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.worked-example h3{margin:0 0 .55rem;font:700 .88rem/1.35 var(--sans);color:var(--ink)}
+.example-vectors{margin:.35rem 0 .65rem;font:700 .9rem/1.5 var(--mono)}
+.calculation{margin:.35rem 0 .65rem;padding-left:1.3rem;font:.83rem/1.6 var(--sans)}
+.calculation li+li{margin-top:.25rem}
+.worked-example>p:last-child{margin:.55rem 0 0;font:.8rem/1.55 var(--sans);color:var(--muted)}
+.lab-appendix{margin-top:1.2rem;background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.3rem;box-shadow:var(--shadow)}
+.lab-appendix .appendix-label{margin:0 0 .35rem;font:700 .7rem/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.lab-appendix h2{font-size:1.35rem;line-height:1.2;margin:0 0 1rem}
+.appendix-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.appendix-grid section{min-width:0}
+.appendix-grid h3{font:700 .88rem/1.3 var(--sans);color:var(--ink);margin:0 0 .45rem}
+.appendix-grid p{font:.84rem/1.62 var(--sans);margin:.45rem 0}
+.appendix-takeaway{background:var(--teal-soft);border-radius:9px;padding:.8rem .95rem;margin:1rem 0 0;font:.84rem/1.6 var(--sans)}
+.appendix-takeaway strong{color:#173b39}
+.footnote{font:.77rem/1.55 var(--sans);color:var(--muted);text-align:center;margin:1.6rem auto 0;max-width:75ch}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+[hidden]{display:none!important}
+
+@media(max-width:980px){.lab{grid-template-columns:minmax(235px,280px) 1fr}.rank-panel{grid-column:1/-1}.rank-list{display:grid;grid-template-columns:repeat(3,1fr)}.score-table{max-width:620px;margin-left:auto;margin-right:auto}}
+@media(max-width:680px){body{font-size:16px}.hero{padding-top:2.4rem}.wrap{padding-left:1rem;padding-right:1rem}.lab{grid-template-columns:1fr}.rank-panel{grid-column:auto}.rank-list{grid-template-columns:1fr}.plot-wrap{min-height:235px}.formula-grid,.appendix-grid{grid-template-columns:1fr}.tour-nav .hint{width:100%}.spacer{display:none}.modebar{justify-content:space-between}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.vector-line,.endpoint{transition:none}}
+@media print{body{background:#fff}.hero{padding-top:1.5rem}.modebar,.tour-nav,.choices{display:none!important}.panel,.tour,.adv{box-shadow:none;break-inside:avoid}.lab{display:block}.panel{margin-bottom:1rem}.adv-body{display:block!important}}
+</style>
+</head><body>
+
+<header class="hero"><div class="hero-inner">
+  <p class="kicker">Interactive companion</p>
+  <h1>The Vector Similarity Lab</h1>
+  <p class="subtitle">Vector search needs a rule for comparing the query with stored vectors. Move a few toy vectors to separate cosine similarity, dot product and relevance—then see why vector, dense and semantic are different properties.</p>
+  <p class="backlink"><a href="search-textbook.html#single-vector-dense-retrieval-compress-first-compare-later">← Back to “Single-vector dense retrieval”</a> · <a href="search-textbook.html#a-vector-does-not-have-to-be-dense-or-semantic">Read “A vector does not have to be dense or semantic”</a></p>
+</div></header>
+
+<main class="wrap">
+  <div class="modebar">
+    <div class="seg" role="group" aria-label="Learning mode">
+      <button type="button" id="mode-tour" aria-pressed="true">Guided tour</button>
+      <button type="button" id="mode-sandbox" aria-pressed="false">Sandbox</button>
+    </div>
+    <div class="spacer"></div>
+    <button type="button" class="btn" id="btn-reset">Reset</button>
+  </div>
+
+  <section class="tour" id="tour" aria-labelledby="tour-title">
+    <div class="tour-head">
+      <span class="tour-step" id="tour-step">Step 1 of 8</span>
+      <div class="dots" id="tour-dots" aria-hidden="true"></div>
+    </div>
+    <h2 id="tour-title"></h2>
+    <div id="tour-intro"></div>
+    <div class="tour-figure" id="tour-figure" hidden></div>
+    <div class="predict" id="tour-predict">
+      <p id="tour-question"></p>
+      <div class="choices" id="tour-choices"></div>
+    </div>
+    <div class="reveal" id="tour-reveal" hidden>
+      <div id="tour-answer"></div>
+      <div class="takeaway" id="tour-takeaway"></div>
+    </div>
+    <div class="tour-nav">
+      <button type="button" class="btn" id="tour-prev">← Previous</button>
+      <button type="button" class="btn primary" id="tour-next">Next step →</button>
+      <span class="hint">Make a prediction first, then inspect the scores below.</span>
+    </div>
+  </section>
+
+  <div class="lab">
+    <section class="panel" aria-labelledby="controls-title">
+      <h2 id="controls-title">Comparison controls</h2>
+
+      <div class="control-block">
+        <span class="control-name">Scoring rule</span>
+        <div class="metric-buttons" role="group" aria-label="Scoring rule">
+          <button type="button" id="metric-cosine" aria-pressed="true">Cosine</button>
+          <button type="button" id="metric-dot" aria-pressed="false">Dot product</button>
+        </div>
+        <p class="hint" id="metric-hint">Cosine compares direction and ignores length.</p>
+      </div>
+
+      <div class="control-block">
+        <label class="switch" for="normalise"><input type="checkbox" id="normalise"> Normalise the query and every candidate to length one</label>
+        <p class="hint">With unit-length vectors, cosine similarity and dot product are numerically identical.</p>
+      </div>
+
+      <div class="control-block">
+        <span class="control-name">Candidate to edit</span>
+        <div class="candidate-buttons" role="group" aria-label="Candidate to edit">
+          <button type="button" data-id="A" aria-pressed="true">A</button>
+          <button type="button" data-id="B" aria-pressed="false">B</button>
+          <button type="button" data-id="C" aria-pressed="false">C</button>
+        </div>
+        <p class="candidate-copy" id="candidate-copy"></p>
+      </div>
+
+      <div class="control-block">
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="angle">Direction relative to query</label><span class="ctrl-val" id="angle-val">12°</span></div>
+          <input type="range" id="angle" min="-160" max="160" step="1" value="12">
+          <p class="hint">0° means the same direction; 90° is perpendicular; 180° would be opposite.</p>
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="magnitude">Vector length</label><span class="ctrl-val" id="magnitude-val">1.00</span></div>
+          <input type="range" id="magnitude" min="0.25" max="2.5" step="0.05" value="1">
+          <p class="hint">Length affects dot product but not cosine similarity.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="plot-title">
+      <h2 id="plot-title">Toy vector space</h2>
+      <div class="query-box"><strong>Query vector Q</strong>Empirical studies since 2024 on whether open access increases citations<span class="query-meta" id="query-meta">Toy display: 22° from the horizontal axis; length 1.90.</span></div>
+      <div class="plot-wrap">
+        <svg id="plot" viewBox="0 0 620 420" role="img" aria-labelledby="svg-title svg-desc">
+          <title id="svg-title">Query and candidate vectors</title>
+          <desc id="svg-desc">The longer query vector points diagonally upwards rather than along an axis. Candidate A is selected. Rankings update as the controls change.</desc>
+          <defs>
+            <marker id="arrow-q" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1d5b59"/></marker>
+            <marker id="arrow-a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2a78d6"/></marker>
+            <marker id="arrow-b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#d65d2a"/></marker>
+            <marker id="arrow-c" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#7451a6"/></marker>
+          </defs>
+          <g aria-hidden="true">
+            <line class="grid-line" x1="72" y1="115" x2="548" y2="115"/><line class="grid-line" x1="72" y1="305" x2="548" y2="305"/>
+            <line class="grid-line" x1="120" y1="40" x2="120" y2="380"/><line class="grid-line" x1="500" y1="40" x2="500" y2="380"/>
+            <line class="axis-line" x1="48" y1="210" x2="572" y2="210"/><line class="axis-line" x1="310" y1="28" x2="310" y2="392"/>
+            <circle class="unit-circle" cx="310" cy="210" r="95"/><text class="unit-label" x="401" y="200">length 1</text>
+            <text class="axis-label" x="552" y="230">x</text><text class="axis-label" x="322" y="43">y</text>
+          </g>
+          <path id="angle-arc" class="angle-arc" aria-hidden="true"/>
+          <text id="angle-label" class="angle-label" aria-hidden="true"></text>
+          <g aria-hidden="true">
+            <line id="vec-Q" class="vector-line" x1="310" y1="210" stroke="#1d5b59" marker-end="url(#arrow-q)"/>
+            <circle id="end-Q" class="endpoint" r="6" fill="#1d5b59"/>
+            <text id="label-Q" class="vector-label" fill="#1d5b59">Q</text>
+            <line id="vec-A" class="vector-line" x1="310" y1="210" stroke="#2a78d6" marker-end="url(#arrow-a)"/>
+            <circle id="end-A" class="endpoint" r="6" fill="#2a78d6"/>
+            <text id="label-A" class="vector-label" fill="#2a78d6">A</text>
+            <line id="vec-B" class="vector-line" x1="310" y1="210" stroke="#d65d2a" marker-end="url(#arrow-b)"/>
+            <circle id="end-B" class="endpoint" r="6" fill="#d65d2a"/>
+            <text id="label-B" class="vector-label" fill="#d65d2a">B</text>
+            <line id="vec-C" class="vector-line" x1="310" y1="210" stroke="#7451a6" marker-end="url(#arrow-c)"/>
+            <circle id="end-C" class="endpoint" r="6" fill="#7451a6"/>
+            <text id="label-C" class="vector-label" fill="#7451a6">C</text>
+          </g>
+        </svg>
+      </div>
+      <div class="plot-legend" aria-hidden="true">
+        <span class="legend-item"><i class="swatch" style="--swatch:var(--teal)"></i>Query Q</span>
+        <span class="legend-item"><i class="swatch" style="--swatch:var(--blue)"></i>Candidate A</span>
+        <span class="legend-item"><i class="swatch" style="--swatch:var(--orange)"></i>Candidate B</span>
+        <span class="legend-item"><i class="swatch" style="--swatch:var(--purple)"></i>Candidate C</span>
+      </div>
+      <div class="selected-detail" id="selected-detail"></div>
+    </section>
+
+    <section class="panel rank-panel" aria-labelledby="ranking-title">
+      <h2 id="ranking-title">Ranked candidates</h2>
+      <ol class="rank-list" id="rank-list"></ol>
+      <table class="score-table">
+        <caption class="sr-only">Exact cosine and dot-product scores for every candidate</caption>
+        <thead><tr><th>Candidate</th><th>Rel. angle</th><th>Length</th><th>Cosine</th><th>Dot</th></tr></thead>
+        <tbody id="score-body"></tbody>
+      </table>
+      <p class="warning"><strong>Best available is not necessarily relevant.</strong> Candidate A can be the nearest vector while failing the query’s date limit; Candidate B is a commentary rather than an empirical study. The score never observes those human criteria unless the representation and retrieval pipeline preserve them.</p>
+    </section>
+  </div>
+
+  <p id="live-summary" class="sr-only" aria-live="polite"></p>
+
+  <details class="adv" open>
+    <summary>Dot product and cosine similarity: formulas and worked example</summary>
+    <div class="adv-body">
+      <div class="formula-grid">
+        <div class="formula">q · d = Σᵢ₌₁ⁿ qᵢdᵢ = q₁d₁ + q₂d₂ + … + qₙdₙ
+          <p>Multiply each pair of coordinates, then add. A longer vector can receive a larger score even when its direction is less closely aligned.</p>
+        </div>
+        <div class="formula">cos(q,d) = (q · d) ÷ (‖q‖ × ‖d‖)
+          <p>Divide the dot product by both vector lengths. This removes magnitude and leaves directional alignment. When both lengths are one, the denominator is one and the two scores are identical.</p>
+        </div>
+      </div>
+      <div class="worked-example">
+        <h3>Worked example: combine coordinate products, then normalise</h3>
+        <p class="example-vectors">q = [1, 2]&nbsp;&nbsp;&nbsp; d = [3, 4]</p>
+        <ol class="calculation">
+          <li><strong>Dot product:</strong> q · d = (1 × 3) + (2 × 4) = 3 + 8 = <strong>11</strong>.</li>
+          <li><strong>Vector lengths:</strong> ‖q‖ = √(1² + 2²) = √5, and ‖d‖ = √(3² + 4²) = 5.</li>
+          <li><strong>Cosine similarity:</strong> cos(q,d) = 11 ÷ (√5 × 5) ≈ <strong>0.984</strong>.</li>
+        </ol>
+        <p>Cosine similarity combines the dot product with the two vector lengths: the dot product is its numerator, and dividing by the lengths removes magnitude from the comparison.</p>
+      </div>
+      <p class="hint">This page avoids a zero-length vector because its cosine similarity is undefined: there is no direction to compare.</p>
+    </div>
+  </details>
+
+  <section class="lab-appendix" aria-labelledby="appendix-title">
+    <p class="appendix-label">Lab appendix</p>
+    <h2 id="appendix-title">How to read a two-dimensional picture of a high-dimensional space</h2>
+    <div class="appendix-grid">
+      <section aria-labelledby="dimensions-title">
+        <h3 id="dimensions-title">Why does the picture have only two axes?</h3>
+        <p>A two-dimensional vector has two coordinates, <code>[x, y]</code>, so we can draw it as an arrow on a flat page. Add one more coordinate and it becomes <code>[x, y, z]</code>: the same kind of arrow in three-dimensional space. Keep adding coordinates and the pattern becomes <code>[x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>]</code>. Real text embeddings commonly contain hundreds or thousands of coordinates, so we cannot draw their full spaces.</p>
+        <p>The comparison rule does not change as dimensions are added. Dot product multiplies each pair of matching coordinates and adds the results; cosine also accounts for the vectors’ lengths. The horizontal and vertical axes here are anonymous drawing coordinates—not concepts such as “open access” or “citations”, and not a projection of a real embedding. This is a deliberately complete two-dimensional toy space in which every number can be inspected.</p>
+      </section>
+      <section aria-labelledby="negative-title">
+        <h3 id="negative-title">Can cosine or dot-product scores be negative?</h3>
+        <p>Yes. Cosine similarity is 1 for the same direction, 0 at 90°, and negative when the angle is greater than 90°, reaching −1 for exactly opposite directions. Candidate C begins in that negative region. A dot product can also be negative; without normalisation it has no fixed minimum or maximum because vector length also contributes.</p>
+        <p>Negative does not automatically mean “opposite in meaning”. It describes geometry in the representation the model learnt. Some text-embedding models produce mostly positive scores for ordinary inputs or occupy only a narrow part of the mathematical range. Even when every candidate scores below zero, the highest score is still the nearest or best available under that rule.</p>
+      </section>
+    </div>
+    <p class="appendix-takeaway"><strong>The safe interpretation:</strong> the axes make the arithmetic drawable; the embedding model gives the coordinates their operational meaning; the comparison rule turns those coordinates into a score; and a person or evaluation set supplies the relevance judgement.</p>
+  </section>
+
+  <p class="footnote">Companion to <a href="search-textbook.html">“How Search Decides What You See”</a>. Everything runs locally in this page; no query or vector is sent anywhere.</p>
+</main>
+
+<script>
+(function(){
+'use strict';
+
+const COLOURS={A:'var(--blue)',B:'var(--orange)',C:'var(--purple)'};
+const QUERY={angle:22,magnitude:1.9};
+const COPIES={
+  A:'A 2012 empirical study of open-access articles and citation counts — topically close, but outside the date limit.',
+  B:'A 2025 commentary on open access and citation practice — current, but not an empirical study.',
+  C:'A 2025 empirical study of repositories and citation advantage — the only record meeting both stated criteria.'
+};
+const DEFAULTS={A:{angle:24,magnitude:1},B:{angle:55,magnitude:1.65},C:{angle:122,magnitude:1.35}};
+let candidates=clone(DEFAULTS);
+let metric='cosine';
+let normalised=false;
+let selected='A';
+let tourIndex=0;
+let inTour=true;
+
+const $=id=>document.getElementById(id);
+const metricCos=$('metric-cosine');
+const metricDot=$('metric-dot');
+const normalise=$('normalise');
+const angle=$('angle');
+const magnitude=$('magnitude');
+const candidateButtons=[...document.querySelectorAll('.candidate-buttons button')];
+
+function clone(value){return JSON.parse(JSON.stringify(value));}
+function radians(degrees){return degrees*Math.PI/180;}
+function effectiveQueryMagnitude(){return normalised?1:QUERY.magnitude;}
+function effectiveMagnitude(id){return normalised?1:candidates[id].magnitude;}
+function values(id){
+  const relativeTheta=radians(candidates[id].angle);
+  const absoluteTheta=radians(QUERY.angle+candidates[id].angle);
+  const length=effectiveMagnitude(id);
+  const x=length*Math.cos(absoluteTheta);
+  const y=length*Math.sin(absoluteTheta);
+  const cosine=Math.cos(relativeTheta);
+  const dot=effectiveQueryMagnitude()*length*cosine;
+  return {x,y,length,cosine,dot};
+}
+function score(id){const v=values(id);return metric==='cosine'?v.cosine:v.dot;}
+function ranked(){return ['A','B','C'].sort((a,b)=>score(b)-score(a)||a.localeCompare(b));}
+function f(value){return (Math.abs(value)<.0005?0:value).toFixed(3);}
+function displayAngle(value){return value+'°';}
+
+function setMetric(next){metric=next;render();}
+function setSelected(id){selected=id;render();}
+
+function renderControls(){
+  metricCos.setAttribute('aria-pressed',String(metric==='cosine'));
+  metricDot.setAttribute('aria-pressed',String(metric==='dot'));
+  $('metric-hint').textContent=metric==='cosine'?'Cosine compares direction and ignores length.':'Dot product responds to direction and vector length.';
+  normalise.checked=normalised;
+  candidateButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.id===selected)));
+  angle.value=candidates[selected].angle;
+  magnitude.value=candidates[selected].magnitude;
+  magnitude.disabled=normalised;
+  $('angle-val').textContent=displayAngle(candidates[selected].angle);
+  $('magnitude-val').textContent=normalised?'1.00 (normalised)':candidates[selected].magnitude.toFixed(2);
+  $('candidate-copy').textContent=COPIES[selected];
+  $('query-meta').textContent=normalised?`Toy display: ${displayAngle(QUERY.angle)} from the horizontal axis; length 1.00 after normalisation.`:`Toy display: ${displayAngle(QUERY.angle)} from the horizontal axis; length ${QUERY.magnitude.toFixed(2)}.`;
+}
+
+function endpoint(id){
+  const centre={x:310,y:210};
+  const scale=95;
+  if(id==='Q'){
+    const theta=radians(QUERY.angle);
+    const length=effectiveQueryMagnitude();
+    return {x:centre.x+scale*length*Math.cos(theta),y:centre.y-scale*length*Math.sin(theta)};
+  }
+  const v=values(id);
+  return {x:centre.x+scale*v.x,y:centre.y-scale*v.y};
+}
+
+function renderVector(id){
+  const point=endpoint(id);
+  const line=$('vec-'+id),end=$('end-'+id),label=$('label-'+id);
+  line.setAttribute('x2',point.x);line.setAttribute('y2',point.y);
+  end.setAttribute('cx',point.x);end.setAttribute('cy',point.y);
+  const left=point.x>545;
+  const high=point.y<55;
+  label.setAttribute('x',point.x+(left?-24:12));
+  label.setAttribute('y',point.y+(high?22:-10));
+  line.classList.toggle('selected',id===selected);
+}
+
+function renderArc(){
+  const queryTheta=radians(QUERY.angle);
+  const candidateTheta=radians(QUERY.angle+candidates[selected].angle);
+  const radius=43;
+  const start={x:310+radius*Math.cos(queryTheta),y:210-radius*Math.sin(queryTheta)};
+  const finish={x:310+radius*Math.cos(candidateTheta),y:210-radius*Math.sin(candidateTheta)};
+  const sweep=candidates[selected].angle>=0?0:1;
+  const large=Math.abs(candidates[selected].angle)>180?1:0;
+  $('angle-arc').setAttribute('d',`M ${start.x} ${start.y} A ${radius} ${radius} 0 ${large} ${sweep} ${finish.x} ${finish.y}`);
+  const mid=radians(QUERY.angle+candidates[selected].angle/2);
+  $('angle-label').setAttribute('x',310+58*Math.cos(mid));
+  $('angle-label').setAttribute('y',210-58*Math.sin(mid)-4);
+  $('angle-label').textContent=displayAngle(candidates[selected].angle);
+}
+
+function renderPlot(){
+  ['Q','A','B','C'].forEach(renderVector);
+  renderArc();
+  const v=values(selected);
+  $('selected-detail').innerHTML=`<strong>Candidate ${selected}</strong> · relative direction ${displayAngle(candidates[selected].angle)} · displayed length ${v.length.toFixed(2)} · cosine ${f(v.cosine)} · dot product ${f(v.dot)}`;
+  $('svg-desc').textContent=`The query points diagonally at ${displayAngle(QUERY.angle)} with length ${effectiveQueryMagnitude().toFixed(2)}. Candidate ${selected} is selected at ${displayAngle(candidates[selected].angle)} relative to the query, with length ${v.length.toFixed(2)}. Using ${metric==='cosine'?'cosine similarity':'dot product'}, the ranking is ${ranked().join(', ')}.`;
+}
+
+function barStyle(value){
+  const limit=metric==='cosine'?1:4;
+  const bounded=Math.max(-limit,Math.min(limit,value));
+  const width=Math.abs(bounded)/limit*50;
+  return bounded>=0?`left:50%;width:${width}%`:`right:50%;width:${width}%`;
+}
+
+function renderRanking(){
+  const order=ranked();
+  $('rank-list').innerHTML=order.map((id,index)=>{
+    const active=score(id);
+    return `<li class="rank-card" style="--candidate:${COLOURS[id]}"><div class="rank-top"><span class="rank-number">${index+1}</span><span class="rank-id">Candidate ${id}</span><span class="rank-score">${f(active)}</span></div><p class="rank-copy">${COPIES[id]}</p><div class="score-track" aria-hidden="true"><i class="score-bar" style="${barStyle(active)}"></i></div></li>`;
+  }).join('');
+  $('score-body').innerHTML=['A','B','C'].map(id=>{
+    const v=values(id);
+    return `<tr><th scope="row">${id}</th><td>${displayAngle(candidates[id].angle)}</td><td>${v.length.toFixed(2)}</td><td>${f(v.cosine)}</td><td>${f(v.dot)}</td></tr>`;
+  }).join('');
+  $('live-summary').textContent=`Using ${metric==='cosine'?'cosine similarity':'dot product'}, Candidate ${order[0]} ranks first with score ${f(score(order[0]))}, followed by ${order[1]} and ${order[2]}.`;
+}
+
+function render(){renderControls();renderPlot();renderRanking();}
+
+const TOURS=[
+  {
+    title:'Start with two dimensions',
+    intro:'In this toy space, every text is an arrow described by a horizontal coordinate and a vertical coordinate. Similarity is simply a rule for deciding which candidate arrow is most like the query arrow.',
+    question:'Without calculating, which candidate points most like the query?',
+    choices:[['Candidate A','a'],['Candidate B','b'],['Candidate C','c']],correct:'a',
+    answer:'Candidate A. Its direction is closest to the query. That visual judgement is the relationship cosine similarity will turn into a number.',
+    takeaway:'Two coordinates are enough to draw the idea: one query arrow, several candidate arrows, and a rule that compares them.',
+    metric:'cosine',normalised:false,selected:'A',vectors:{A:{angle:24,magnitude:1},B:{angle:55,magnitude:1.65},C:{angle:82,magnitude:1.35}}
+  },
+  {
+    title:'Cosine turns direction into a score',
+    intro:'A is shorter than B, but it points more nearly in the query direction. Cosine looks at that angle and divides away both vector lengths.',
+    question:'Which candidate receives the higher cosine similarity?',
+    choices:[['A, because its direction is closer','a'],['B, because it is longer','b'],['They tie','tie']],correct:'a',
+    answer:'A ranks higher. Its 24° relative angle gives cosine 0.914; B is longer, but its 55° angle gives cosine 0.574.',
+    takeaway:'For cosine similarity, a smaller angle means greater alignment. Making an arrow longer or shorter does not change its cosine score.',
+    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
+  },
+  {
+    title:'Dot product also sees magnitude',
+    intro:'Keep the same separated arrows. A is better aligned, but B is long enough for magnitude to outweigh that angular disadvantage under dot product.',
+    question:'Which candidate now ranks first?',
+    choices:[['A, because its direction is closer','a'],['B, because its length outweighs the angle','b'],['They tie','tie']],correct:'b',
+    answer:'B ranks first. Its direction is less closely aligned, but its greater magnitude produces the larger dot product.',
+    takeaway:'Without normalisation, a dot-product ranking reflects direction and magnitude. A model can learn to use magnitude, so it is not merely an accidental nuisance.',
+    metric:'dot',normalised:false,selected:'B',vectors:DEFAULTS
+  },
+  {
+    title:'Normalisation makes the rules agree',
+    intro:'Normalisation gives every vector length one. The directions stay the same, but magnitude can no longer affect the dot product.',
+    question:'What happens to cosine similarity and dot product now?',
+    choices:[['They become numerically identical','same'],['Cosine becomes larger','cos'],['Dot product becomes larger','dot']],correct:'same',
+    answer:'They become identical for every candidate. With both lengths equal to one, cosine’s denominator is one, leaving the dot product.',
+    takeaway:'For unit-normalised vectors, cosine similarity and dot product are two names for the same calculation and produce the same ranking.',
+    metric:'dot',normalised:true,selected:'A',vectors:DEFAULTS
+  },
+  {
+    title:'The same idea extends beyond the page',
+    intro:'A drawable vector has two coordinates, [x, y]. Adding depth gives [x, y, z]. A real embedding simply continues the list, often for hundreds or thousands of coordinates that cannot all be drawn.',
+    question:'Does a 768-dimensional vector need a different definition of cosine or dot product?',
+    choices:[['No — the same operation covers more coordinate pairs','no'],['Yes — each dimension needs a new rule','yes']],correct:'no',
+    answer:'No. Dot product multiplies and adds more matching coordinate pairs; cosine also divides by the two higher-dimensional vector lengths. Only the number of coordinates changes.',
+    takeaway:'The page stops at two dimensions because human vision does. The comparison does not stop there.',
+    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
+  },
+  {
+    title:'A sparse list is still a vector',
+    intro:'The arrows in this lab are dense two-dimensional toys, but an ordered list does not stop being a vector when most of its coordinates are zero. Sparse and dense describe how many dimensions are active, not whether the object is a vector.',
+    question:'Is [0, 2.4, 0, 0, 1.1] a vector?',
+    choices:[['Yes — it is a sparse vector','yes'],['No — vectors must be dense','no']],correct:'yes',
+    answer:'Yes. It is an ordered list of five numbers, with only two active dimensions. A vocabulary space can contain tens of thousands of possible dimensions while a query or document activates only a few.',
+    takeaway:'Vector names the numerical object. Sparse and dense describe the pattern of active coordinates.',
+    image:'images/03%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/one-text-several-vector-representations.png',
+    imageAlt:'The text Open access increases citations represented as both sparse vocabulary-labelled weights and a dense text embedding. Both are vectors, and sparse or dense describes their shape.',
+    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
+  },
+  {
+    title:'Density does not decide meaning',
+    intro:'A dense vector can simply record explicit fields such as year, pages and citation count. A learnt sparse model can activate related vocabulary while leaving almost every dimension at zero. Shape alone therefore cannot reveal what evidence a representation preserves.',
+    question:'Can you tell from density alone whether a vector captures meaning?',
+    choices:[['No — you need its dimensions, design and training','no'],['Yes — dense always means semantic','yes']],correct:'no',
+    answer:'No. Density tells you how many coordinates are active. To interpret the vector, you also need to know what the coordinates represent and how their values were produced.',
+    takeaway:'Ask separate questions about numerical form, shape, provenance and intended evidence.',
+    image:'images/03%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/density-does-not-decide-meaning.png',
+    imageAlt:'A dense explicit metadata feature vector contrasted with a learnt sparse vocabulary vector, showing that density does not decide whether a representation is meaning-oriented.',
+    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
+  },
+  {
+    title:'A similarity score is not relevance',
+    intro:'Candidate A is closest under cosine, but it is from 2012. Candidate B is current but is a commentary. Only C meets both the date and study-design criteria.',
+    question:'Does a cosine score of 0.914 mean a 91.4% chance that A is relevant?',
+    choices:[['No — it is a comparison score','no'],['Yes — cosine is a probability','yes']],correct:'no',
+    answer:'No. The score describes alignment in this toy space. It does not observe the complete information need, and it is not calibrated as a probability.',
+    takeaway:'Nearest means best available under the chosen representation and rule. A person still judges whether the result satisfies the need.',
+    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
+  }
+];
+
+function applyTour(index){
+  const step=TOURS[index];
+  metric=step.metric;normalised=step.normalised;selected=step.selected;candidates=clone(step.vectors);
+  $('tour-step').textContent=`Step ${index+1} of ${TOURS.length}`;
+  $('tour-title').textContent=step.title;
+  $('tour-intro').innerHTML=`<p>${step.intro}</p>`;
+  const tourFigure=$('tour-figure');
+  tourFigure.hidden=!step.image;
+  tourFigure.innerHTML=step.image?`<img src="${step.image}" alt="${step.imageAlt}">`:'';
+  $('tour-question').textContent=step.question;
+  $('tour-choices').innerHTML=step.choices.map(([label,value])=>`<button type="button" class="choice" data-value="${value}">${label}</button>`).join('');
+  $('tour-reveal').hidden=true;
+  $('tour-answer').innerHTML=`<p>${step.answer}</p>`;
+  $('tour-takeaway').innerHTML=`<b>Keep:</b> ${step.takeaway}`;
+  $('tour-dots').innerHTML=TOURS.map((_,i)=>`<i class="dot${i===index?' on':''}"></i>`).join('');
+  $('tour-prev').disabled=index===0;
+  $('tour-next').textContent=index===TOURS.length-1?'Use the sandbox →':'Next step →';
+  render();
+}
+
+function chooseAnswer(button){
+  const step=TOURS[tourIndex];
+  [...$('tour-choices').querySelectorAll('button')].forEach(choice=>{
+    choice.disabled=true;
+    choice.classList.toggle('right',choice.dataset.value===step.correct);
+  });
+  if(button.dataset.value!==step.correct)button.classList.add('wrong');
+  $('tour-reveal').hidden=false;
+}
+
+function setMode(tourMode){
+  inTour=tourMode;
+  $('mode-tour').setAttribute('aria-pressed',String(inTour));
+  $('mode-sandbox').setAttribute('aria-pressed',String(!inTour));
+  $('tour').hidden=!inTour;
+  if(inTour){tourIndex=0;applyTour(0);}else{candidates=clone(DEFAULTS);metric='cosine';normalised=false;selected='A';render();}
+}
+
+metricCos.addEventListener('click',()=>setMetric('cosine'));
+metricDot.addEventListener('click',()=>setMetric('dot'));
+normalise.addEventListener('change',()=>{normalised=normalise.checked;render();});
+candidateButtons.forEach(button=>button.addEventListener('click',()=>setSelected(button.dataset.id)));
+angle.addEventListener('input',()=>{candidates[selected].angle=Number(angle.value);render();});
+magnitude.addEventListener('input',()=>{candidates[selected].magnitude=Number(magnitude.value);render();});
+$('mode-tour').addEventListener('click',()=>setMode(true));
+$('mode-sandbox').addEventListener('click',()=>setMode(false));
+$('btn-reset').addEventListener('click',()=>{if(inTour)applyTour(tourIndex);else{candidates=clone(DEFAULTS);metric='cosine';normalised=false;selected='A';render();}});
+$('tour-choices').addEventListener('click',event=>{const button=event.target.closest('button');if(button)chooseAnswer(button);});
+$('tour-prev').addEventListener('click',()=>{if(tourIndex>0){tourIndex-=1;applyTour(tourIndex);}});
+$('tour-next').addEventListener('click',()=>{if(tourIndex<TOURS.length-1){tourIndex+=1;applyTour(tourIndex);}else setMode(false);});
+
+applyTour(0);
+})();
+</script>
+</body></html>

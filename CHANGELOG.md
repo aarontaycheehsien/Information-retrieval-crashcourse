@@ -11,6 +11,17 @@ entry here.
 
 ### Added
 
+- **The Vector Similarity Lab and a plain-language Chapter 6 explanation.** The
+  new interactive companion uses a gentle eight-step tour from a drawable
+  two-dimensional toy example to cosine similarity, dot product, normalisation
+  and higher-dimensional vectors. Clearly separated off-axis defaults expose a
+  cosine/dot-product rank reversal and a negative score, while the lab appendix
+  explains how `[x, y]` extends to an n-coordinate embedding without pretending
+  that the drawing is an actual semantic model. The resulting score remains
+  explicitly separate from relevance and probability. Two new Chapter 6 figures
+  make the rank reversal and the extension from two to many dimensions visible
+  in the main text. The Preface and Appendix D connect the explanation to the
+  book's existing distinctions rather than adding another category.
 - **Diversity-aware ranking in Chapters 7 and 11.** A new Chapter 7 section
   explains why a list of individually relevant records can still be
   unhelpfully repetitive, distinguishes MMR, IA-Select, xQuAD and
@@ -60,6 +71,7 @@ entry here.
 
 ### Changed
 
+- **The distinction between vector, dense, learnt and semantic is now example-led.** Chapter 6 builds one vocabulary-aligned representation from binary presence through term frequency, TF–IDF and BM25, while distinguishing Boolean operators from vector overlap and inverted-index execution from the mathematical vector view. Four independent questions then separate numerical form, density, provenance and represented evidence; explicit metadata and learnt sparse retrieval break the shortcut “dense means semantic”. Two supplied figures illustrate the lexical construction and its contrast with dense embeddings, while the Vector Similarity Lab adds two guided-tour steps without changing its scoring controls.
 - **Audience and reading-route guidance.** The README, Preface and teaching
   notes now identify information literacy and evidence synthesis librarians as
   the primary audiences, systems/discovery librarians as a secondary audience,
