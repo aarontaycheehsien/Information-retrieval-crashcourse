@@ -11,6 +11,42 @@ entry here.
 
 ### Added
 
+- **One thread through Word2Vec, BERT and GPT training, in Chapter 5 and
+  Appendix A.** The chapter introduced the idea that a corpus supplies its own
+  training targets, then dropped it: BERT arrived pretrained “by predicting
+  masked tokens” without the book ever saying that this is the same idea in a
+  different shape, and GPT was never named in the chapter at all. A new section,
+  *What the model was trained to predict*, names the family and the two
+  objectives — **masked language modelling** and **next-token prediction** — and
+  gives **self-supervised** learning as the umbrella term, a word the book had
+  not used anywhere. A new figure shows one sentence hidden three ways, so the
+  continuity is visible rather than asserted. The section hands the
+  encoder/decoder lineage to Appendix A rather than repeating its table, and
+  Appendix A gains the framing it lacked: both strands pretrain without anyone
+  labelling anything, and differ only in which part of the text is hidden. Four
+  glossary entries and Chapter 5's reading time follow.
+- **Where a learnt vector comes from, in Chapter 5.** The opening section of
+  the embeddings chapter previously asserted the Part I to Part II break—
+  calculated weights giving way to learnt ones—without explaining it. It now
+  says where the numbers come from: a BM25 weight can be recomputed by hand
+  from a published formula, while an embedding holds neural-network parameters
+  settled during training. Because training needs a target and nobody has
+  labelled the meaning of every word, the section introduces Firth and the
+  distributional hypothesis as the move that supplies one, and presents
+  Word2Vec as a model acting on it—with the mechanism delegated to Jay
+  Alammar's illustrated walkthrough rather than reproduced. A new section,
+  *What the learnt geometry appears to encode*, adds the king−man+woman
+  ≈ queen regularity and the country-to-capital offsets as two figures, and a
+  footnote records why “appear to” is the right strength of claim: the
+  analogy result is normally reported after excluding the input words from the
+  candidate set. Firth, Harris, both further Mikolov papers and the three
+  analogy-critique papers join the reference list; the licence gains a
+  carve-out for the one figure reproduced from a published paper. Five new
+  figures carry the argument: where a BM25 weight and an embedding value each
+  come from, how a corpus supplies its own training targets, what survives
+  when the prediction head is discarded, and the two analogy demonstrations.
+  Chapter 5's stated reading time moves from 12 to 17 minutes to match its
+  new length.
 - **The Vector Similarity Lab and a plain-language Chapter 6 explanation.** The
   new interactive companion uses a gentle five-step tour from a drawable
   two-dimensional toy example through cosine similarity, dot product and
