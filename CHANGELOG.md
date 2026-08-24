@@ -11,6 +11,14 @@ entry here.
 
 ### Added
 
+- **Chapter 7 shows the binary vector at collection scale.** The five-step
+  lexical progression builds its vectors over a seven-term vocabulary so the
+  arithmetic fits on a page, which understates how sparse a real one is. A new
+  figure at the end of Step 2 carries the same three documents into a
+  2.3-million-term dictionary, where each is a handful of ones in a sea of
+  zeros — the reason an inverted index stores only the terms that occur.
+  Three superseded draft diagrams that no longer appeared anywhere in the book
+  are removed from the same folder.
 - **One thread through Word2Vec, BERT and GPT training, in Chapter 5 and
   Appendix A.** The chapter introduced the idea that a corpus supplies its own
   training targets, then dropped it: BERT arrived pretrained “by predicting
