@@ -1,6 +1,6 @@
 # Anchor-claim repetition ledger
 
-Status: **PROPOSED — awaiting human approval before prose edits**  
+Status: **APPLIED — scripted verification complete**
 Source audited: `search-textbook.html` at commit `9030f75`  
 Scope: claims A–E only  
 Inventory date: 2026-08-26
@@ -144,9 +144,9 @@ Disposition: **no edits**. These are progressive definitions, compact summaries,
 
 Disposition: **no edits**. The current Chapter 6 prose is progressive rather than two consecutive duplicated bold paragraphs, and the supposed Chapter 8/10 echoes are absent.
 
-## Proposed reversible edits
+## Approved and applied reversible edits
 
-No source edit may be applied until these eight entries are approved. Each `before` snippet was verified verbatim in the source at inventory time.
+All eight entries were approved after the user delegated the editorial decision. Each `before` snippet was verified verbatim immediately before editing, and each `after` snippet occurs exactly once in the resulting source.
 
 ### A1 — Chapter 2 pure echo
 
@@ -276,10 +276,42 @@ The book-wide sweep compared 2,154 eligible sentence blocks at Jaccard ≥ .80 a
 
 ## Approval record
 
-- Inventory commit: pending
-- Human approval: pending
-- Approved edit IDs: pending
-- Source drift check: pending
-- Final before/after claim counts: pending
-- Final visible-word delta: pending
-- Final verification: pending
+- Inventory commit: `52a1552` (`audit: inventory anchor-claim repetition`)
+- Human approval: delegated by the user with “you decide”; all eight conservative edits approved
+- Approved and applied edit IDs: A1–A3, B1–B3 and C1–C2
+- Source drift check: PASS — all eight `before` snippets occurred exactly once before editing; all are absent afterwards; every `after` snippet occurs exactly once
+
+### Final counts and word delta
+
+| Claim family | Before | After | Interpretation |
+|---|---:|---:|---|
+| A — match ≠ relevance | 15 | 14 | One pure echo removed; retained matches are canonical reinforcement or applications |
+| B — shortlist ceiling | 20 | 17 | Two duplicated captions and one later rescue-clause echo removed |
+| C — query ≠ need | 5 | 4 | One duplicated opener removed; remaining linked callback is shorter |
+| D — top-k boundary | 22 | 22 | Intentionally unchanged |
+| E — semantic goal | 10 | 10 | Intentionally unchanged |
+| **Total raw pattern hits** | **72** | **67** | Claim budgets satisfied after contextual classification |
+
+Core visible words changed from 60,085 to 59,991: **−94 words (−0.1564%)**. This is informational only and is consistent with a narrowly scoped anchor-claim trim.
+
+| Edited chapter | Before | After | Existing chip | Scaled result |
+|---|---:|---:|---:|---:|
+| Chapter 2 | 2,347 | 2,314 | 13 min | 13 min |
+| Chapter 3 | 1,889 | 1,884 | 11 min | 11 min |
+| Chapter 4 | 1,890 | 1,878 | 10 min | 10 min |
+| Chapter 6 | 3,025 | 3,010 | 16 min | 16 min |
+| Chapter 8 | 4,947 | 4,931 | 24 min | 24 min |
+| Chapter 9 | 3,193 | 3,180 | 17 min | 17 min |
+
+No reading-time chip changes were warranted after proportional scaling and nearest-minute rounding.
+
+### Final verification
+
+- PASS — `python tools/maintain.py`: no changes needed; no problems found
+- PASS — `python tools/renumber_footnotes.py`: all 56 footnotes already in order
+- PASS — all 508 pre-edit IDs remain; no IDs were added or duplicated
+- PASS — all 1,061 post-edit internal links resolve
+- PASS — structural counts remain 25 chapters, 46 `.ir-figure` elements, 51 captions, 13 chapter closes, 13 self-checks and 10 pull-quotes
+- PASS — `git diff --check`
+- PASS — affected HTML elements and new link targets parse correctly in the DOM
+- NOT AVAILABLE — in-app visual inspection; the local browser plugin could not initialise its trusted runtime path. No alternate browser surface was substituted. Because every edit shortens existing prose without changing element structure or CSS classes, this is recorded as a non-blocking tooling limitation.
