@@ -6,7 +6,7 @@ A practical introduction to information retrieval architecture, written primaril
 
 The repository also includes two interactive companions: the [BM25 Evidence Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/bm25-evidence-lab.html) and the [Vector Similarity Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/vector-similarity-lab.html).
 
-`search-textbook.html` is the source of truth. The earlier single-flow web article, [How Search Decides What You See](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/how-search-decides-what-you-see.html), remains published but is frozen and has diverged from the book. See [`tools/README.md`](tools/README.md) for the maintenance passes, and [`CHANGELOG.md`](CHANGELOG.md) for what changed between versions.
+`search-textbook.html` is the sole maintained edition and source of truth. The retired single-flow edition can be recovered from Git history, and its former public URL redirects to the textbook. See [`tools/README.md`](tools/README.md) for the maintenance passes, and [`CHANGELOG.md`](CHANGELOG.md) for what changed between versions.
 
 ## Licence and reuse
 
