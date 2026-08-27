@@ -232,6 +232,12 @@ entry here.
   reached in the sandbox. It now runs to ±180°, and the control hint says what
   happens there rather than hedging.
 
+### Removed
+
+- **The earlier single-flow web article has been retired.** Its former public
+  URL now redirects to the textbook, preserving shared fragment links; the
+  article itself remains available through Git history.
+
 ## Version 1.0 — August 2026
 
 First versioned release. The textbook edition is now the source of truth;

@@ -103,5 +103,6 @@ Until August 2026 the textbook was generated from
 its history remains available in Git. The HTML maintenance passes documented
 above are the only current authoring tools.
 
-`how-search-decides-what-you-see.html` remains published as the earlier
-single-flow edition. It is frozen and will drift from the book.
+The earlier single-flow article has been retired. Its content can be recovered
+from Git history, while `how-search-decides-what-you-see.html` is retained only
+as a redirect to the textbook.
