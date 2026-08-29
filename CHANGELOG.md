@@ -11,6 +11,42 @@ entry here.
 
 ### Added
 
+- **Part II opens with a map of itself.** Every chapter head carries a pipeline
+  map showing the stage it covers, but the part divider carried only a blurb, so
+  a reader entered the longest stretch in the book — five chapters and about 90
+  minutes — with no sense of its shape until they had finished it. The Part II
+  divider now carries the same map at part level: which chapter owns which
+  stage, with Presentation and the controller marked as Part III's business. The
+  map reuses the existing `stage-map` component; the coloured band would have
+  swallowed the stage colours, so it sits on its own light panel and the
+  existing `.stage` rules then work unchanged.
+- **Chapter 8 says what its four questions are before asking them.** At 23
+  minutes it is the longest chapter in the book, and it covers five separable
+  topics with no waypoint between the opening and the chapter close. A "Before
+  you start" panel now names the four questions the chapter answers — why stages
+  exist, what a second pass can afford, whether a good list is just a list of
+  good items, and what happens when more than one retriever runs — links each to
+  the section that answers it, and says that stopping between any two costs the
+  reader nothing.
+- **The encoder assembly line in Chapter 5 is now a figure.** The seven-step
+  path from text to one stored vector was an ASCII chain in a `<pre>` block: the
+  summary artefact of the whole chapter, rendered as the least visual element in
+  a chapter carrying eight figures. It is now Figure 5.7, built from the same
+  `query-flow` component Chapters 1, 4 and 9 use, with the second row picking up
+  where the first stops. Its caption names the two boundaries the chapter turns
+  on — model tokens never become index terms, and pooling is where the
+  per-token detail is spent, which is what late interaction later declines to do.
+- **Nine glossary entries for vocabulary Part II depends on.** The glossary and
+  the first-use term marks were built around Parts I and III, so the part that
+  introduces most of the book's machinery was the thinnest served. The most
+  serious gap was that *query understanding*, *query transformation* and
+  *retrieval control* — the spine of Chapter 9, set up in Chapter 4, and one of
+  the distinctions the book exists to teach — were not defined anywhere a reader
+  could look them up. Those three are now entries, along with *latent
+  dimension*, *late interaction*, *learnt sparse retrieval*, *hard negative*,
+  *blending / routing* and the encoder sense of *pooling*. Seven join the
+  `MARKED` list, so they now carry first-use marks in the chapters that use them.
+
 - **Chapter 7 shows the binary vector at collection scale.** The five-step
   lexical progression builds its vectors over a seven-term vocabulary so the
   arithmetic fits on a page, which understates how sparse a real one is. A new
@@ -199,6 +235,32 @@ entry here.
   assignable on its own.
 
 ### Fixed
+
+- **The glossary defined the wrong sense of *pooling*.** Its single entry gave
+  the Chapter 12 sense — judging only what several systems ranked highly, so a
+  test collection stays affordable — while Part II uses the word about
+  twenty-two times for the encoder step that turns contextual token
+  representations into one vector, and Chapter 5 makes that step load-bearing. A
+  reader who looked it up was misled rather than merely unhelped. There are now
+  two entries, *Pooling (encoder)* and *Pooling (test collections)*, each
+  pointing at the other.
+- ***Latent* was used nine times and never defined.** Its first appearance was a
+  Chapter 7 figure caption, which is also where a skim-reader lands first, and
+  Chapters 5 and 6 never use the word at all. A short paragraph now introduces
+  latent dimensions before the figure that contrasts them with vocabulary
+  dimensions, which the figure had been left to do on its own.
+- **Chapter 7's five-step build could not be navigated or linked.** Steps 1 to 5
+  and the four questions that follow them were `<h4>` elements without ids, and
+  `tools/maintain.py` builds both tables of contents from `<h3>` headings that
+  carry one. The chapter therefore offered two contents rows for nearly 3,000
+  words, and no single step of the progression it exists to teach — binary
+  presence through TF, TF–IDF and BM25 — could be deep-linked or assigned. All
+  seven are now `<h3>` with ids, taking Chapter 7 from two contents rows to nine.
+- **The teaching notes understated Part II by about 6,000 words.** They put the
+  heaviest fortnight at "roughly 11,000 words", a figure that appears to predate
+  the Chapter 5 expansion recorded above; Part III was above it too. The note now
+  gives all three parts, so the comparison an instructor is actually making is
+  visible: about 17,700 words against 8,800 for Part I and 14,000 for Part III.
 
 - **"Every stage after the first can improve precision; none of them can
   improve recall" was stated without its boundary condition**, in the body,
