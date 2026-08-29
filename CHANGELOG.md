@@ -11,6 +11,28 @@ entry here.
 
 ### Added
 
+- **The book now has an ending.** It opened on a personal frame — library
+  school, five minutes on TF–IDF, a lecturer saying vector search would not be
+  examined — and never returned to it; the argument simply stopped at Chapter
+  13's summary. More concretely, the Preface set a specific test ("by the end, I
+  hope you can look at a search system and separate two questions… why did this
+  record get into the candidate set at all, and why did it rank where it did?")
+  and nothing collected the answer. *What you can now ask* does: it names the
+  machinery behind each of those two questions and the asymmetry between them —
+  only the first has a ceiling. It reads the three opening puzzles as a set,
+  saying plainly that two of the three cannot be explained from an interface and
+  that this is the finding rather than a failure to reach one. It sends the
+  reader back to the eight distinctions to check them, which the Preface panel
+  now promises and links to. It states what the book does not give you. And it
+  closes the frame before ending on the one thing worth doing with it: the
+  Chapter 12 evaluation set, the only measurement whose definition of relevance
+  the library chose.
+
+  It sits between Application exercise III and the appendices, as a back-matter
+  section rather than a fourteenth chapter — so the book is still three parts,
+  thirteen chapters and six appendices, no part sitting moves, and no reading
+  time changes. Application exercise III's navigation now points to it.
+
 - **Both part dividers now carry a vocabulary checkpoint.** The book uses the
   device once, well — *Six terms to carry into Chapter 1* — and then never
   again, although the two places a reader most needs it are the part boundaries,
