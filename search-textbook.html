@@ -661,6 +661,15 @@
     .part-divider .part-title {
       margin: 0; padding: 0; border: 0; color: #fff;
       font: 800 1.9rem/1.2 var(--sans);
+      /* "Representations" at this size is wider than a 320px phone's column and
+         has nowhere to break, which pushed the whole document sideways. The
+         smaller size below keeps it on one piece; break-word is the safety net
+         if a longer part title is ever added. */
+      overflow-wrap: break-word;
+    }
+    /* Must follow the rule above: same selector, so source order decides. */
+    @media (max-width: 400px) {
+      .part-divider .part-title { font-size: 1.5rem; }
     }
     /* the shared h2 accent bar is a red rule; it has no place on a coloured
        band, and between an eyebrow and its title it reads as a separator */
@@ -874,7 +883,14 @@
       margin: 2rem 0 0; padding-top: 1.4rem; border-top: 1px solid var(--line);
     }
     .cnav {
-      flex: 1; max-width: 48%; padding: .8rem 1rem; border: 1px solid var(--line);
+      /* Two of these plus the row's 1rem gap have to fit exactly, so the cap is
+         half the row minus half the gap. A flat 48% leaves only 4% for a fixed
+         16px gap, which is short of it on anything narrower than about 400px
+         and pushed the page sideways there. min-width lets a long chapter title
+         shrink rather than setting the floor. */
+      flex: 1; min-width: 0; max-width: calc(50% - .5rem);
+      overflow-wrap: break-word;
+      padding: .8rem 1rem; border: 1px solid var(--line);
       border-radius: 10px; text-decoration: none; color: var(--ink);
       font: 700 .92rem/1.35 var(--sans); background: var(--paper-2);
     }
@@ -886,6 +902,15 @@
     }
     .cnav.next { text-align: right; }
     .cnav.ghost { border: 0; background: none; }
+
+    /* Below this, half a row is narrower than the longest word in a chapter
+       title, so side-by-side cards could only fit by breaking words mid-syllable.
+       Stacking gives each the full column and the break-word net never fires.
+       Must follow the .cnav rule above: same selector, source order decides. */
+    @media (max-width: 420px) {
+      .chapter-nav { flex-direction: column; }
+      .cnav { max-width: 100%; }
+    }
 
     /* three-level contents */
     .toc-part a {

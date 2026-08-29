@@ -371,6 +371,19 @@ entry here.
   Chapter 5 claimed 19 for 3,780; Appendix E ran slow and Appendix F badly fast.
   They now read 12, 20, 19 and 29. The Preface's own "three sittings" sentence
   and the Part I divider follow, at about 60 minutes.
+- **The last of the narrow-phone overflow, traced to two causes.** An earlier
+  pass fixed the citation URL and got 360px and up to zero, but left 20px at
+  320px that I could not isolate and said so. Bisecting each top-level section
+  in isolation found it: the **part titles**, where "Representations" at 1.9rem
+  is wider than a 320px column and has nowhere to break (15px), and the
+  **chapter Previous/Next cards**, where two items capped at `max-width: 48%`
+  plus the row's fixed `1rem` gap need 96% + 16px — more than fits on anything
+  narrower than about 400px (5px). The cap is now `calc(50% - .5rem)`, which is
+  exactly right at every width rather than a number that happens to work at
+  most of them; the cards stack below 420px, where half a row is narrower than
+  the longest word in a chapter title; and the part title drops to 1.5rem below
+  400px. The document no longer scrolls sideways at any width from 320px up.
+
 - **The page scrolled sideways on a narrow phone.** The suggested citation ends
   in a bare URL, which is a single unbreakable token, and it pushed the whole
   document 15 to 35 pixels wide below about 400px. It now breaks. The pipeline
