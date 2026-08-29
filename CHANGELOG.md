@@ -11,6 +11,26 @@ entry here.
 
 ### Added
 
+- **Both part dividers now carry a vocabulary checkpoint.** The book uses the
+  device once, well — *Six terms to carry into Chapter 1* — and then never
+  again, although the two places a reader most needs it are the part boundaries,
+  which are also where the reading times invite them to stop. Part II now opens
+  with the five things Part I established that it leans on (analysed term,
+  posting list, candidate set, the three separate controls, lexical retrieval)
+  and Part III with the five from Part II (embedding, indexed unit, the
+  candidate boundary, reranker, hybrid and multi-stage). Each entry says what
+  the coming part does with the term rather than only restating the glossary,
+  and the panels sit on the same light ground as the Part II pipeline map, for
+  the same reason: the coloured band would swallow them.
+- **Chapter 13 says which of its three sections is aimed at whom.** Its largest
+  section reads as procurement, in a book whose primary audiences are
+  information-literacy and evidence-synthesis librarians, and nothing told those
+  readers why they were being handed a tender checklist. A short paragraph now
+  places the first two sections with anyone who documents or teaches a search,
+  and frames the third as the shortest statement in the book of what the
+  preceding twelve chapters were for — the point at which every distinction
+  drawn becomes something a library can ask for and check.
+
 - **Chapter 5 says in advance that it is the steepest chapter.** Part I stays
   with words a librarian can see on the page; Chapter 5 is where the book stops
   being about words, and it introduces more glossary terms than any other
@@ -275,6 +295,13 @@ entry here.
   assignable on its own.
 
 ### Fixed
+
+- **The final chapter had the thinnest summary in the book.** Chapter 13 closed
+  on four points where every other chapter offers five to ten, and none of them
+  covered its longest section. Two more now do: that documentation and
+  inspection cannot be retrofitted, which is why they are procurement questions
+  rather than support tickets, and that separating a retrieval design from a
+  marketing label needs no mathematics, only the distinctions the book has drawn.
 
 - **The eight distinctions arrived about an hour before they could be read.**
   Five of the eight turn on *vector*, *embedding*, *dense*, *top-k* and
