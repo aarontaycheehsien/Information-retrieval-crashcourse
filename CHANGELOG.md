@@ -28,6 +28,18 @@ entry here.
   Chapter 12 evaluation set, the only measurement whose definition of relevance
   the library chose.
 
+  The puzzles now arrive as a panel rather than a paragraph. Chapter 4 settles
+  two of the three and Chapters 6 and 8 the last, so the three verdicts had
+  never appeared side by side; setting them out together — two greyed
+  *Unresolved*, one teal *Resolved — from a document* — makes the section's
+  central claim visible instead of asserted. It reuses the Preface's
+  `distinction-map` component. A back-matter section cannot carry a numbered
+  figure: `maintain.py` skips asset numbering for sections with no chapter
+  label, so a `figcaption` there would be silently unnumbered and missing from
+  the figures index, which promises every one of them in order. An unnumbered
+  panel is the book's existing answer to that, as `stage-map`, `orientation` and
+  `terminology-overlaps` already are.
+
   It sits between Application exercise III and the appendices, as a back-matter
   section rather than a fourteenth chapter — so the book is still three parts,
   thirteen chapters and six appendices, no part sitting moves, and no reading

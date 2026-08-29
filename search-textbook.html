@@ -237,6 +237,15 @@
     }
     .distinction-map-list dt { font-weight: 800; color: var(--ink); }
     .distinction-map-list dd { margin: 0; color: #45504e; }
+    /* The closing puzzle map turns on its three verdicts, so they are set to be
+       read before the prose beside them. Scoped to the list, and the Preface's
+       own distinction map carries no .verdict, so it is untouched. */
+    .distinction-map-list .verdict {
+      display: block; margin-top: .35rem; font-style: normal;
+      font: 800 .68rem/1.35 var(--sans); letter-spacing: .07em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .distinction-map-list .verdict.is-resolved { color: var(--teal); }
     @media (max-width: 700px) {
       .distinction-map-list > div { grid-template-columns: 1fr; gap: .25rem; }
     }
@@ -2877,7 +2886,17 @@ intersection → D1</code></pre>
 <p><a href="#preface">The Preface</a> set one test for this book: that by the end you could look at a search system and separate two questions that are usually blurred together—<em>why did this record get into the candidate set at all</em>, and <em>why did it rank where it did?</em></p>
 <p>Both now have machinery behind them. The first is settled by an admission rule and a candidate boundary: a compulsory Boolean clause, a minimum-match threshold, a first-stage retriever’s top-<em>k</em>, an approximate index that searched only part of the vector space, or a chunking decision that meant the sentence you wanted was never an indexed unit at all. The second is settled by a scoring function and everything downstream of it: BM25’s weighted term evidence, a similarity between two pooled vectors, a cross-encoder reading query and candidate in one sequence, a fusion rule, a reranker working through a budget of thirty.</p>
 <p>Keeping them apart matters because <a href="#precision-and-recall">only the first has a ceiling</a>. Everything after the candidate boundary competes for precision; nothing after it recovers a record that was never admitted. That asymmetry is what most of this book has been elaborating, and it is the thing worth carrying out of it if nothing else survives.</p>
-<p><a href="#three-familiar-search-results-and-three-puzzles">The three opening puzzles</a> are worth reading as a set rather than as three separate answers. Only one of them resolved. Semantic Scholar’s natural-language question returned 13 results where the keyword query returned about 35,300, and <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">we could account for that</a>—but only because the vendor had published a technical account describing lexical first-stage retrieval and a learnt reranker over a capped candidate set. <a href="#returning-to-the-opening-puzzles">The other two did not resolve.</a> The invented string in the scite search could have been removed during analysis, kept as optional evidence, or kept and matched nothing; the screen cannot distinguish those three. Google Scholar’s 9.4 million and its thousand-result display limit are two different properties, and neither reveals how anything was scored.</p>
+<p><a href="#three-familiar-search-results-and-three-puzzles">The three opening puzzles</a> are worth reading as a set rather than as three separate answers, because what separates them is not how hard each one was. It is whether anything outside the result screen was available to settle it.</p>
+<aside class="distinction-map" aria-labelledby="closing-puzzle-map-title">
+<h4 id="closing-puzzle-map-title">The three puzzles, and what each one settled</h4>
+<p>Chapter 1 posed three ordinary search behaviours and left them open. This is where each of them ended up.</p>
+<dl class="distinction-map-list">
+<div><dt>Puzzle 1 · scite<em class="verdict">Unresolved</em></dt><dd>An invented string did not empty a result list reporting millions of matches. Analysis may have discarded the term, the execution rule may have made it optional, or it may have survived and matched no posting list. The screen cannot separate those three, and looking harder will not help. <a href="#returning-to-the-opening-puzzles">Where it was left</a>.</dd></div>
+<div><dt>Puzzle 2 · Google Scholar<em class="verdict">Unresolved as to ranking</em></dt><dd>About 9.4 million results reported, with a documented limit of 1,000 shown. A display limit is an output boundary: it establishes what you may page through, and nothing whatever about which signals produced the order. <a href="#returning-to-the-opening-puzzles">Where it was left</a>.</dd></div>
+<div><dt>Puzzle 3 · Semantic Scholar<em class="verdict is-resolved">Resolved — from a document</em></dt><dd>A natural-language question returned 13 results where the keywords returned about 35,300. The vendor’s published technical account describes lexical first-stage retrieval and a learnt reranker over a capped candidate set. Without that account, this one would have joined the other two. <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">How it was resolved</a>.</dd></div>
+</dl>
+<p>Two of the three could not be settled from the interface. The third was settled by something a vendor chose to write down.</p>
+</aside>
 <p>That is the finding, not a failure to reach one. Two of three ordinary search behaviours cannot be explained from the interface, and the third could be explained only because somebody wrote the architecture down. What changed between Chapter 1 and here is not that the screens became legible. It is that you now know which questions a screen was never going to answer, and which document to go looking for instead.</p>
 <p>The Preface also listed <a href="#distinction-map-title">eight distinctions</a> and warned that several would mean nothing yet. This is the point to go back and check. If you can now say why a vector need not be an embedding, why <em>semantic</em> names a goal while <em>dense</em> names one route towards it, why top-<em>k</em> is an output boundary rather than a retrieval method, and why neural information retrieval covers several arrangements that behave quite differently, then the vocabulary is doing the work it was meant to do. Each of those confusions survives because it lets a vendor say something true and have it heard as something stronger.</p>
 <p>Some things this does not give you. You cannot read an architecture off an interface: the chapters that came closest managed it by reading documentation, not result screens. Most vendors will not answer <a href="#choosing-and-governing-search-tools">the questions in Chapter 13</a>, and a refusal is itself something you can record. Every claim here about a named product carries a date because it will age, while the mechanisms underneath move far more slowly than the products built on them. And none of this establishes whether a particular search was any good. It establishes how to ask, which is a smaller claim and a more durable one.</p>
