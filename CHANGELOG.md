@@ -263,6 +263,30 @@ entry here.
 
 ### Fixed
 
+- **Four reading times no reading rate could reconcile.** Measured as visible
+  chapter text excluding self-check answers, the book's stated times are
+  consistent at about 192 words a minute — every chapter but four sits within a
+  minute and a half of that. The Preface claimed 7 minutes for 2,377 words,
+  which needs 340 words a minute; Chapter 12 claimed 17 for 3,831 words while
+  Chapter 5 claimed 19 for 3,780; Appendix E ran slow and Appendix F badly fast.
+  They now read 12, 20, 19 and 29. The Preface's own "three sittings" sentence
+  and the Part I divider follow, at about 60 minutes.
+- **The page scrolled sideways on a narrow phone.** The suggested citation ends
+  in a bare URL, which is a single unbreakable token, and it pushed the whole
+  document 15 to 35 pixels wide below about 400px. It now breaks. The pipeline
+  map's stage boxes and the Copy link button spilled their rows at 320px, for
+  the same reason a grid item will not shrink below its own content: both can
+  now wrap. A 20px residue remains at 320px exactly, not traced to any element.
+- **Sixteen straight quotes and apostrophes in prose**, where the rest of the
+  book uses typographic ones — mostly possessives (CDI's, the model's, the
+  searcher's) and two quoted phrases in Chapter 8.
+- **"Four in Chapter 1" undercounted the self-checks.** Chapters 9 and 10 also
+  carry four questions rather than three. The README and the teaching notes both
+  said otherwise, and both now name all three chapters.
+- **The teaching notes' part word counts were measured loosely.** Now 18,000 for
+  Part II against 8,400 for Part I and 14,600 for Part III, on the same
+  self-checks-excluded basis as the reading times.
+
 - **The glossary defined the wrong sense of *pooling*.** Its single entry gave
   the Chapter 12 sense — judging only what several systems ranked highly, so a
   test collection stays affordable — while Part II uses the word about
