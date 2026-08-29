@@ -11,6 +11,33 @@ entry here.
 
 ### Added
 
+- **The delulu thread now runs through Chapter 8.** The example runs from the
+  Preface through Chapters 2 to 6, disappears for three chapters, and returns in
+  Chapter 11 — so the hole in it sat exactly where the machinery is densest, and
+  Chapter 8 carried no query example at all. The passage Chapter 5 introduced as
+  a *hard negative*, "Ten signs that you performed well in your job interview",
+  appeared once in the whole book and was then abandoned, despite being precisely
+  the case a cross-encoder exists to catch. The cross-encoder section — the
+  chapter's thinnest important section — now works it: the dense retriever of
+  Chapter 6 returns a shortlist holding both that passage and the one that
+  actually answers the question, they are hard to separate once each has been
+  pooled into a single vector, and joint encoding is what weighs *whether the
+  expectations are unrealistic* against *you performed well*. Chapter 5's account
+  of what training must teach and Chapter 8's account of what reranking must do
+  are now the same example.
+- **Chapter 9 works its eight query objects against one need.** The chapter's
+  thesis — that the object standing for the information need decides which
+  mechanism the search addresses, and that phrasing is downstream of both —
+  arrived as an eight-row table of abstract categories with no worked instance,
+  in the only chapter of Part II with more tables than figures. A new Figure 9.1
+  puts all eight against the question behind Puzzle 3, *is there an open access
+  citation advantage?*: the typed string, the subject heading, the citation edge,
+  the seed review, five marked records, an alert, an OpenAlex API predicate and a
+  task brief. Every box is the same need and none is a rephrasing of another,
+  which is the claim the table could state but not show. Table 9.1 stays as the
+  reference it always was. Chapter 9's reading time moves from 17 to 19 minutes,
+  Chapter 8's from 23 to 24, and Part II's stated sitting from 90 to 95.
+
 - **Part II opens with a map of itself.** Every chapter head carries a pipeline
   map showing the stage it covers, but the part divider carried only a blurb, so
   a reader entered the longest stretch in the book — five chapters and about 90
