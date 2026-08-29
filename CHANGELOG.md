@@ -11,6 +11,19 @@ entry here.
 
 ### Added
 
+- **Chapter 5 says in advance that it is the steepest chapter.** Part I stays
+  with words a librarian can see on the page; Chapter 5 is where the book stops
+  being about words, and it introduces more glossary terms than any other
+  chapter. Nothing warned the reader, so a reader who was managing Part I
+  comfortably could reasonably conclude at this point that the book had got away
+  from them. A "Before you start" panel now names the three things that have to
+  survive the chapter — an embedding is learnt rather than calculated, training
+  decides what sits near what, and model tokens are not index terms — and,
+  equally usefully, the three that can be read once and let go: Word2Vec's
+  mechanism, the king − man + woman arithmetic, and the difference between the
+  two pretraining objectives. It also points a reader who wants the payoff first
+  at Chapter 6's opening.
+
 - **The delulu thread now runs through Chapter 8.** The example runs from the
   Preface through Chapters 2 to 6, disappears for three chapters, and returns in
   Chapter 11 — so the hole in it sat exactly where the machinery is densest, and
@@ -262,6 +275,32 @@ entry here.
   assignable on its own.
 
 ### Fixed
+
+- **The eight distinctions arrived about an hour before they could be read.**
+  Five of the eight turn on *vector*, *embedding*, *dense*, *top-k* and
+  *neural* — words the book does not introduce until Part II — yet the panel
+  sits eight minutes into a Preface that has just promised no prior knowledge is
+  assumed. It now says so: several will mean nothing yet, that is the intended
+  state, and the panel is a checklist to return to rather than a prerequisite
+  for starting.
+- **One panel entry sent a beginner ninety minutes forward.** *The query is not
+  the information need* linked only to Chapter 9's account of choosing a query
+  object. Chapter 1 states the distinction itself, thirteen minutes away. It now
+  links there first, and to Chapter 9 for what follows from it.
+- **The "for awareness" escape hatch did not exist where it was promised.** The
+  Preface offered it as though main-text sections carried the marker; both
+  marked sections are in appendices, which the same sentence already makes
+  optional. The sentence now describes what is actually there.
+- **The currency warning omitted the chapter that ages fastest.** It named
+  Chapters 3, 8, 9 and 10, while Chapter 6 carries the most dated product
+  material in the book — Semantic Scholar's 2025 pipeline, OpenAlex Alice's
+  February 2026 arrival and April 2026 documentation, and the August 2026 result
+  counts. Chapter 1 and Appendix F were missing too. All are now listed.
+- **A cross-reference named the wrong table.** Chapter 11's *Diagnose before
+  choosing a remedy* pointed at Table 10.1, which is the control-arrangement
+  table; the diagnostic map with the remedy column is Table 11.1. It is now a
+  link as well as a correction, which puts it inside the set `maintain.py`
+  checks rather than the unlinked prose it cannot see.
 
 - **Four reading times no reading rate could reconcile.** Measured as visible
   chapter text excluding self-check answers, the book's stated times are
