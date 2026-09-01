@@ -46,7 +46,7 @@
 
     body {
       display: grid;
-      grid-template-rows: auto auto 1fr auto;
+      grid-template-rows: auto auto auto 1fr auto;
       min-height: 100vh;
       overflow: hidden;
     }
@@ -76,6 +76,18 @@
       color: var(--muted);
       font-size: .86rem;
     }
+
+    #textbookModeBadge {
+      flex: 0 0 auto;
+      padding: .22rem .5rem;
+      border-radius: 999px;
+      background: #e7f3ef;
+      color: #155b50;
+      font-size: .72rem;
+      font-weight: 750;
+    }
+
+    #textbookModeBadge[hidden] { display: none; }
 
     .spacer { flex: 1; }
 
@@ -134,10 +146,39 @@
       z-index: 2;
     }
 
+    #textbookToolbar {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .42rem .75rem;
+      overflow-x: auto;
+      background: #edf5f2;
+      border-bottom: 1px solid var(--border);
+      scrollbar-width: thin;
+      z-index: 2;
+    }
+
+    #textbookToolbar[hidden] { display: none; }
+    #textbookToolbar .toolbar-label {
+      flex: 0 0 auto;
+      color: #155b50;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    #textbookToolbar button { flex: 0 0 auto; padding: .3rem .55rem; }
+
     #toolbar button {
       min-width: 34px;
       padding: .3rem .55rem;
       font-weight: 600;
+    }
+
+    #toolbar button.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
     }
 
     #toolbar select {
@@ -180,7 +221,79 @@
       min-height: 0;
       padding: .75rem;
       overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+      gap: .75rem;
     }
+
+    body.outline-collapsed main {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    #outlinePanel {
+      min-width: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: .55rem;
+      padding: .75rem;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    body.outline-collapsed #outlinePanel { display: none; }
+
+    .outline-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+
+    .outline-header strong { font-size: .86rem; }
+    #outlineCount { color: var(--muted); font-size: .72rem; white-space: nowrap; }
+
+    #outlineSearch {
+      width: 100%;
+      min-height: 34px;
+      padding: .4rem .55rem;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      font: inherit;
+    }
+
+    #outlineList {
+      min-height: 0;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      scrollbar-width: thin;
+    }
+
+    #outlineList button {
+      width: 100%;
+      min-height: 0;
+      padding: .36rem .45rem;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      text-align: left;
+      font-size: .78rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    #outlineList button.level-1,
+    #outlineList button.level-2 { font-weight: 750; color: var(--text); }
+    #outlineList button.level-3 { padding-left: 1.15rem; color: var(--muted); }
+    #outlineList button.active { background: var(--panel-2); color: var(--accent); }
+    #outlineList .outline-empty { margin: .35rem; color: var(--muted); font-size: .78rem; }
 
     .editor-shell {
       height: 100%;
@@ -230,12 +343,222 @@
 
     .danger { color: var(--danger); }
 
+    #diagnosticsPanel {
+      position: fixed;
+      inset: 0 0 0 auto;
+      z-index: 20;
+      width: min(430px, 100vw);
+      display: flex;
+      flex-direction: column;
+      background: var(--panel);
+      border-left: 1px solid var(--border);
+      box-shadow: -8px 0 30px rgba(0,0,0,.18);
+    }
+
+    #diagnosticsPanel[hidden] { display: none; }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .8rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header h2 { margin: 0; font-size: 1rem; }
+    .panel-header h2 + button { margin-left: auto; }
+
+    #diagnosticsSummary {
+      margin: 0;
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    #diagnosticsList {
+      min-height: 0;
+      overflow: auto;
+      padding: .75rem;
+    }
+
+    .diagnostic-item {
+      display: block;
+      width: 100%;
+      min-height: 0;
+      margin: 0 0 .5rem;
+      padding: .7rem .75rem;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--muted);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      text-align: left;
+      font-size: .8rem;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .diagnostic-item.error { border-left-color: var(--danger); }
+    .diagnostic-item.warning { border-left-color: #b97800; }
+    .diagnostic-item:disabled { opacity: 1; cursor: default; }
+    .diagnostic-ok { color: var(--muted); font-size: .84rem; }
+
+    dialog {
+      width: min(700px, calc(100vw - 2rem));
+      max-height: calc(100vh - 2rem);
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      color: var(--text);
+      box-shadow: 0 24px 70px rgba(0,0,0,.3);
+    }
+
+    dialog::backdrop { background: rgba(0,0,0,.42); }
+
+    .dialog-body {
+      max-height: calc(100vh - 11rem);
+      overflow: auto;
+      padding: 1rem 1.15rem;
+    }
+
+    .dialog-body h3 { margin: 1rem 0 .45rem; font-size: .9rem; }
+    .dialog-body h3:first-child { margin-top: 0; }
+    .dialog-body ul { margin: .4rem 0 0; padding-left: 1.25rem; }
+    .dialog-body li { margin: .3rem 0; font-size: .82rem; }
+    .dialog-note { color: var(--muted); font-size: .82rem; }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: .55rem;
+      padding: .75rem 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--panel-2);
+    }
+
+    .structure-form { margin: 0; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: .8rem 1rem;
+    }
+
+    .form-grid label {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .form-grid label.full { grid-column: 1 / -1; }
+    .form-grid input,
+    .form-grid select,
+    .form-grid textarea {
+      width: 100%;
+      min-height: 36px;
+      padding: .48rem .55rem;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      font: inherit;
+      font-weight: 400;
+    }
+
+    .form-grid textarea { min-height: 90px; resize: vertical; }
+    .form-help { margin: .75rem 0 0; color: var(--muted); font-size: .76rem; }
+
+    #previewDialog {
+      width: calc(100vw - 1.5rem);
+      height: calc(100vh - 1.5rem);
+      max-width: none;
+      max-height: none;
+    }
+
+    .preview-layout {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr);
+    }
+
+    .preview-toolbar {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .55rem .8rem;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border);
+      background: var(--panel-2);
+    }
+
+    .preview-toolbar .toolbar-label {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .preview-toolbar button.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    #previewReport {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: .76rem;
+      white-space: nowrap;
+    }
+
+    #previewReport.warning { color: #a76300; font-weight: 700; }
+
+    .preview-stage {
+      min-width: 0;
+      min-height: 0;
+      overflow: auto;
+      padding: 1rem;
+      background: #cfd4d8;
+    }
+
+    .preview-frame-wrap {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: white;
+      border-radius: 7px;
+      box-shadow: 0 5px 24px rgba(0,0,0,.22);
+    }
+
+    #previewFrame {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      border: 0;
+      background: white;
+    }
+
     @media (max-width: 720px) {
       header h1 { display: none; }
       header { padding: .6rem .7rem; }
       main { padding: .45rem; }
       #toolbar { padding: .4rem; }
       #filename { display: none; }
+      main { grid-template-columns: minmax(0, 1fr); }
+      #outlinePanel {
+        position: absolute;
+        inset: .45rem auto .45rem .45rem;
+        z-index: 10;
+        width: min(290px, calc(100% - .9rem));
+      }
     }
   </style>
 </head>
@@ -243,6 +566,7 @@
   <header>
     <h1>Lightweight HTML Editor</h1>
     <span id="filename">untitled.html</span>
+    <span id="textbookModeBadge" hidden>Textbook mode</span>
     <div class="spacer"></div>
 
     <div class="mode-switch" aria-label="Editor mode">
@@ -250,10 +574,13 @@
       <button id="sourceModeBtn" type="button">Source</button>
     </div>
 
+    <button id="outlineToggleBtn" type="button" aria-expanded="true" title="Show or hide the document outline">Outline</button>
+
     <button id="newBtn" type="button">New</button>
     <button id="openBtn" type="button" title="Open one HTML file; Chrome and Edge can grant direct-save access">Open HTML</button>
     <button id="openFolderBtn" type="button" title="Open an HTML project folder with its images and stylesheets; Chrome and Edge can also grant write access">Open Folder</button>
     <button id="checkBtn" type="button" title="Check IDs, internal links, headings, local assets and footnotes">Check</button>
+    <button id="previewBtn" type="button" title="Open an isolated responsive, MathJax and print preview">Preview</button>
     <button id="saveBtn" class="primary" type="button" title="Download the current HTML">Download HTML</button>
     <input id="fileInput" type="file" accept=".html,.htm,text/html" hidden>
     <input id="folderInput" type="file" webkitdirectory directory multiple hidden>
@@ -303,7 +630,26 @@
     <button type="button" data-command="removeFormat" title="Clear inline formatting">Clear</button>
   </div>
 
+  <div id="textbookToolbar" aria-label="Textbook authoring toolbar" hidden>
+    <span class="toolbar-label">Textbook</span>
+    <button id="maintainTextbookBtn" class="primary" type="button" title="Renumber assets and footnotes, rebuild contents and indexes, and check cross-references">Maintain</button>
+    <span class="separator"></span>
+    <button type="button" data-structure="heading">Heading</button>
+    <button type="button" data-structure="figure">Figure</button>
+    <button type="button" data-structure="table">Table</button>
+    <button type="button" data-structure="callout">Callout</button>
+    <button type="button" data-structure="self-check">Self-check</button>
+  </div>
+
   <main>
+    <aside id="outlinePanel" aria-label="Document outline">
+      <div class="outline-header">
+        <strong>Document outline</strong>
+        <span id="outlineCount">0 headings</span>
+      </div>
+      <input id="outlineSearch" type="search" placeholder="Find a chapter or section" aria-label="Filter document outline">
+      <div id="outlineList"><p class="outline-empty">Open a document to build its outline.</p></div>
+    </aside>
     <div class="editor-shell">
       <iframe
         id="visualEditor"
@@ -325,6 +671,73 @@
     <span id="count">0 words</span>
   </footer>
 
+  <aside id="diagnosticsPanel" aria-label="Document diagnostics" hidden>
+    <div class="panel-header">
+      <h2>Document diagnostics</h2>
+      <button id="diagnosticsSaveBtn" type="button">Review save</button>
+      <button id="closeDiagnosticsBtn" type="button">Close</button>
+    </div>
+    <p id="diagnosticsSummary">No check has been run.</p>
+    <div id="diagnosticsList"></div>
+  </aside>
+
+  <dialog id="saveReviewDialog" aria-labelledby="saveReviewTitle">
+    <div class="panel-header">
+      <h2 id="saveReviewTitle">Review before saving</h2>
+    </div>
+    <div id="saveReviewBody" class="dialog-body"></div>
+    <div class="dialog-actions">
+      <button id="cancelSaveReviewBtn" type="button">Cancel</button>
+      <button id="backupSaveReviewBtn" type="button">Download backup</button>
+      <button id="confirmSaveReviewBtn" class="primary" type="button">Save HTML</button>
+    </div>
+  </dialog>
+
+  <dialog id="structureDialog" aria-labelledby="structureDialogTitle">
+    <form id="structureForm" class="structure-form">
+      <div class="panel-header">
+        <h2 id="structureDialogTitle">Insert textbook structure</h2>
+      </div>
+      <div class="dialog-body">
+        <div id="structureFields" class="form-grid"></div>
+        <p id="structureHelp" class="form-help"></p>
+      </div>
+      <div class="dialog-actions">
+        <button id="cancelStructureBtn" type="button">Cancel</button>
+        <button id="insertStructureBtn" class="primary" type="submit">Insert</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="previewDialog" aria-labelledby="previewTitle">
+    <div class="preview-layout">
+      <div class="panel-header">
+        <h2 id="previewTitle">Reader preview</h2>
+        <button id="reloadPreviewBtn" type="button">Reload</button>
+        <button id="printPreviewBtn" type="button">Print preview</button>
+        <button id="closePreviewBtn" type="button">Close</button>
+      </div>
+      <div class="preview-toolbar" aria-label="Responsive preview width">
+        <span class="toolbar-label">Viewport</span>
+        <button type="button" data-preview-width="320">320 px</button>
+        <button type="button" data-preview-width="360">360 px</button>
+        <button type="button" data-preview-width="768">768 px</button>
+        <button type="button" data-preview-width="desktop" class="active">Desktop</button>
+        <span id="previewReport" role="status" aria-live="polite">Preview not loaded</span>
+      </div>
+      <div class="preview-stage">
+        <div id="previewFrameWrap" class="preview-frame-wrap">
+          <iframe
+            id="previewFrame"
+            title="Disposable reader preview"
+            sandbox="allow-scripts allow-modals"
+            referrerpolicy="no-referrer"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
   <script>
     (() => {
       "use strict";
@@ -341,6 +754,30 @@
       const folderInput = document.getElementById("folderInput");
       const imageInput = document.getElementById("imageInput");
       const saveBtn = document.getElementById("saveBtn");
+      const outlinePanel = document.getElementById("outlinePanel");
+      const outlineList = document.getElementById("outlineList");
+      const outlineSearch = document.getElementById("outlineSearch");
+      const outlineCount = document.getElementById("outlineCount");
+      const outlineToggleBtn = document.getElementById("outlineToggleBtn");
+      const diagnosticsPanel = document.getElementById("diagnosticsPanel");
+      const diagnosticsSummary = document.getElementById("diagnosticsSummary");
+      const diagnosticsList = document.getElementById("diagnosticsList");
+      const saveReviewDialog = document.getElementById("saveReviewDialog");
+      const saveReviewBody = document.getElementById("saveReviewBody");
+      const backupSaveReviewBtn = document.getElementById("backupSaveReviewBtn");
+      const confirmSaveReviewBtn = document.getElementById("confirmSaveReviewBtn");
+      const textbookToolbar = document.getElementById("textbookToolbar");
+      const textbookModeBadge = document.getElementById("textbookModeBadge");
+      const structureDialog = document.getElementById("structureDialog");
+      const structureDialogTitle = document.getElementById("structureDialogTitle");
+      const structureForm = document.getElementById("structureForm");
+      const structureFields = document.getElementById("structureFields");
+      const structureHelp = document.getElementById("structureHelp");
+      const insertStructureBtn = document.getElementById("insertStructureBtn");
+      const previewDialog = document.getElementById("previewDialog");
+      const previewFrame = document.getElementById("previewFrame");
+      const previewFrameWrap = document.getElementById("previewFrameWrap");
+      const previewReport = document.getElementById("previewReport");
 
       let currentMode = "visual";
       let currentFilename = "untitled.html";
@@ -353,6 +790,21 @@
       let currentFileHandle = null;
       let savedVisualRange = null;
       let saveInProgress = false;
+      let baselineHtml = "";
+      let countUpdateTimer = null;
+      let outlineRefreshTimer = null;
+      let outlineTargets = [];
+      let pendingSaveReview = null;
+      let textbookMode = false;
+      let activeStructureType = "";
+      let previewToken = "";
+      let previewSequence = 0;
+      let previewWidth = "desktop";
+      let visualHistory = [];
+      let visualHistoryIndex = -1;
+      let historyCaptureTimer = null;
+      let applyingHistory = false;
+      let visualHistoryBaselineHtml = "";
 
       const projectFiles = new Map();
       const projectFileHandles = new Map();
@@ -840,6 +1292,11 @@
 
         restoreMachineOwnedSections(clone);
 
+        for (const element of clone.querySelectorAll("[data-lw-caret-format]")) {
+          if (!element.textContent && !element.children.length) element.remove();
+          else element.removeAttribute("data-lw-caret-format");
+        }
+
         for (const element of clone.querySelectorAll("*")) {
           for (const attribute of [...element.attributes]) {
             if (attribute.name.startsWith("data-lw-")) element.removeAttribute(attribute.name);
@@ -857,17 +1314,41 @@
           doc.designMode = "on";
           doc.body?.setAttribute("contenteditable", "true");
           const lockedCount = lockMachineOwnedSections(doc);
+          updateTextbookMode(doc);
+          resetVisualHistory(doc);
+          updateFormattingToolbarState(doc);
 
           doc.addEventListener("beforeinput", event => {
             if (elementForNode(event.target)?.closest?.("[data-lw-editor-lock]")) {
               event.preventDefault();
               setStatus("That section is generated automatically. Edit the relevant heading, figure or table instead.", true);
+              return;
+            }
+            if (event.inputType === "historyUndo" || event.inputType === "historyRedo") {
+              event.preventDefault();
+              changeVisualHistory(event.inputType === "historyUndo" ? -1 : 1);
+              return;
+            }
+            const inputCommands = {
+              formatBold: "bold",
+              formatItalic: "italic",
+              formatUnderline: "underline",
+              formatStrikeThrough: "strikeThrough",
+              insertUnorderedList: "insertUnorderedList",
+              insertOrderedList: "insertOrderedList"
+            };
+            if (inputCommands[event.inputType]) {
+              event.preventDefault();
+              formatCommand(inputCommands[event.inputType]);
             }
           });
 
           doc.addEventListener("input", () => {
+            normaliseEmptyFormattingCaret(doc);
             markDirty();
-            updateCount();
+            scheduleCountUpdate();
+            scheduleOutlineRefresh();
+            scheduleVisualHistoryCapture(doc);
           });
 
           doc.addEventListener("selectionchange", () => {
@@ -878,16 +1359,34 @@
                 savedVisualRange = range.cloneRange();
               }
             }
-            updateCount();
+            updateOutlineActive(doc);
+            updateFormattingToolbarState(doc);
           });
           doc.addEventListener("keydown", event => {
             if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
               event.preventDefault();
               saveFile();
+              return;
+            }
+            if ((event.ctrlKey || event.metaKey) && !event.altKey && event.key.toLowerCase() === "z") {
+              event.preventDefault();
+              changeVisualHistory(event.shiftKey ? 1 : -1);
+              return;
+            }
+            if ((event.ctrlKey || event.metaKey) && !event.altKey && event.key.toLowerCase() === "y") {
+              event.preventDefault();
+              changeVisualHistory(1);
+              return;
+            }
+            if ((event.ctrlKey || event.metaKey) && !event.altKey && ["b", "i", "u"].includes(event.key.toLowerCase())) {
+              event.preventDefault();
+              const command = { b: "bold", i: "italic", u: "underline" }[event.key.toLowerCase()];
+              formatCommand(command);
             }
           });
 
           updateCount();
+          refreshOutline(doc);
           const assetNote = projectFiles.size
             ? ` Local assets loaded from ${projectRootName || "the selected folder"}.`
             : "";
@@ -897,7 +1396,8 @@
           const saveNote = currentFileHandle?.createWritable
             ? " Direct save is available."
             : " Saving will download a replacement file.";
-          setStatus(`Visual editor ready.${assetNote}${lockNote}${saveNote} Scripts are preserved but not executed.`);
+          const textbookNote = textbookMode ? " Textbook mode detected." : "";
+          setStatus(`Visual editor ready.${textbookNote}${assetNote}${lockNote}${saveNote} Scripts are preserved but not executed.`);
         } catch (error) {
           setStatus(`Could not initialise visual editing: ${error.message}`, true);
         }
@@ -932,8 +1432,10 @@
           sourceModeBtn.classList.add("active");
           visualModeBtn.classList.remove("active");
           currentMode = "source";
+          updateTextbookMode(new DOMParser().parseFromString(sourceEditor.value, "text/html"));
           sourceEditor.focus();
           updateCount();
+          showOutlineMessage("Return to Visual mode to use the outline.");
           setStatus("Editing HTML source");
         } else {
           const html = sourceEditor.value.trim() || starterDocument;
@@ -944,21 +1446,523 @@
           sourceModeBtn.classList.remove("active");
           visualModeBtn.classList.add("active");
           currentMode = "visual";
+          updateTextbookMode(new DOMParser().parseFromString(html, "text/html"));
           await loadVisual(html);
         }
       }
 
-      function exec(command, value = null) {
+      const formattingBlockSelector = "p,h1,h2,h3,h4,h5,h6,li,blockquote,pre,td,th,figcaption,summary";
+      const inlineCommandTags = {
+        bold: ["strong", "b"],
+        italic: ["em", "i"],
+        underline: ["u"],
+        strikeThrough: ["s", "strike"]
+      };
+
+      function selectionNodePath(root, node) {
+        const path = [];
+        let current = node;
+        while (current && current !== root) {
+          const parent = current.parentNode;
+          if (!parent) return null;
+          path.unshift([...parent.childNodes].indexOf(current));
+          current = parent;
+        }
+        return current === root ? path : null;
+      }
+
+      function nodeAtSelectionPath(root, path) {
+        let current = root;
+        for (const index of path || []) {
+          current = current?.childNodes?.[index];
+          if (!current) return null;
+        }
+        return current;
+      }
+
+      function visualSelectionBookmark(doc) {
+        const range = getSavedVisualRange(doc);
+        if (!range || !doc.body.contains(range.commonAncestorContainer)) return null;
+        const startPath = selectionNodePath(doc.body, range.startContainer);
+        const endPath = selectionNodePath(doc.body, range.endContainer);
+        if (!startPath || !endPath) return null;
+        return {
+          startPath,
+          startOffset: range.startOffset,
+          endPath,
+          endOffset: range.endOffset
+        };
+      }
+
+      function clampRangeOffset(node, offset) {
+        const maximum = node.nodeType === 3 ? node.data.length : node.childNodes.length;
+        return Math.max(0, Math.min(Number(offset) || 0, maximum));
+      }
+
+      function restoreVisualBookmark(doc, bookmark) {
+        if (!bookmark) return null;
+        const start = nodeAtSelectionPath(doc.body, bookmark.startPath);
+        const end = nodeAtSelectionPath(doc.body, bookmark.endPath);
+        if (!start || !end) return null;
+        try {
+          const range = doc.createRange();
+          range.setStart(start, clampRangeOffset(start, bookmark.startOffset));
+          range.setEnd(end, clampRangeOffset(end, bookmark.endOffset));
+          return restoreVisualRange(doc, range);
+        } catch {
+          return null;
+        }
+      }
+
+      function visualHistoryEntry(doc) {
+        return { html: doc.body.innerHTML, selection: visualSelectionBookmark(doc) };
+      }
+
+      function updateHistoryButtons() {
+        const undo = toolbar.querySelector("button[data-command='undo']");
+        const redo = toolbar.querySelector("button[data-command='redo']");
+        if (undo) undo.disabled = currentMode !== "visual" || visualHistoryIndex <= 0;
+        if (redo) redo.disabled = currentMode !== "visual" || visualHistoryIndex >= visualHistory.length - 1;
+      }
+
+      function resetVisualHistory(doc) {
+        clearTimeout(historyCaptureTimer);
+        historyCaptureTimer = null;
+        visualHistory = [visualHistoryEntry(doc)];
+        visualHistoryIndex = 0;
+        visualHistoryBaselineHtml = visualHistory[0].html;
+        updateHistoryButtons();
+      }
+
+      function commitVisualHistory(doc = editorDocument()) {
+        if (applyingHistory || currentMode !== "visual" || !doc?.body) return;
+        clearTimeout(historyCaptureTimer);
+        historyCaptureTimer = null;
+        const entry = visualHistoryEntry(doc);
+        const current = visualHistory[visualHistoryIndex];
+        if (current?.html === entry.html) {
+          current.selection = entry.selection;
+          updateHistoryButtons();
+          return;
+        }
+        visualHistory.splice(visualHistoryIndex + 1);
+        visualHistory.push(entry);
+        if (visualHistory.length > 20) visualHistory.shift();
+        visualHistoryIndex = visualHistory.length - 1;
+        updateHistoryButtons();
+      }
+
+      function scheduleVisualHistoryCapture(doc = editorDocument()) {
+        if (applyingHistory || currentMode !== "visual") return;
+        clearTimeout(historyCaptureTimer);
+        historyCaptureTimer = setTimeout(() => commitVisualHistory(doc), 450);
+      }
+
+      function acceptVisualHistoryBaseline() {
+        if (currentMode === "visual") visualHistoryBaselineHtml = editorDocument()?.body?.innerHTML || "";
+      }
+
+      function changeVisualHistory(direction) {
         if (currentMode !== "visual") return;
         const doc = editorDocument();
-        try {
-          visualEditor.contentWindow.focus();
-          doc.execCommand(command, false, value);
-          markDirty();
-          updateCount();
-        } catch (error) {
-          setStatus(`Formatting command failed: ${error.message}`, true);
+        commitVisualHistory(doc);
+        const next = visualHistoryIndex + direction;
+        if (next < 0 || next >= visualHistory.length) {
+          setStatus(direction < 0 ? "Nothing to undo." : "Nothing to redo.");
+          return;
         }
+        applyingHistory = true;
+        try {
+          visualHistoryIndex = next;
+          doc.body.innerHTML = visualHistory[next].html;
+          lockMachineOwnedSections(doc);
+          restoreVisualBookmark(doc, visualHistory[next].selection);
+          refreshOutline(doc);
+          updateCount();
+          markDirty(doc.body.innerHTML !== visualHistoryBaselineHtml);
+          setStatus(direction < 0 ? "Undid the last edit." : "Redid the edit.");
+        } finally {
+          applyingHistory = false;
+          updateHistoryButtons();
+        }
+      }
+
+      function editableVisualRange(doc) {
+        const range = getSavedVisualRange(doc);
+        if (!range || !doc.body?.contains(range.commonAncestorContainer)) return null;
+        const start = elementForNode(range.startContainer);
+        const end = elementForNode(range.endContainer);
+        if (start?.closest("[data-lw-editor-lock]") || end?.closest("[data-lw-editor-lock]")) return null;
+        return range;
+      }
+
+      function selectionMarkers(doc, range) {
+        const collapsed = range.collapsed;
+        let end = null;
+        if (!collapsed) {
+          end = doc.createElement("span");
+          end.dataset.lwSelectionMarker = "end";
+          const endRange = range.cloneRange();
+          endRange.collapse(false);
+          endRange.insertNode(end);
+        }
+        const start = doc.createElement("span");
+        start.dataset.lwSelectionMarker = "start";
+        const startRange = range.cloneRange();
+        startRange.collapse(true);
+        startRange.insertNode(start);
+        return { start, end, collapsed };
+      }
+
+      function rangeBetweenMarkers(doc, markers) {
+        const range = doc.createRange();
+        if (markers.end) {
+          range.setStartAfter(markers.start);
+          range.setEndBefore(markers.end);
+        } else {
+          range.setStartBefore(markers.start);
+          range.collapse(true);
+        }
+        return range;
+      }
+
+      function restoreFromSelectionMarkers(doc, markers) {
+        const range = rangeBetweenMarkers(doc, markers);
+        markers.start.remove();
+        markers.end?.remove();
+        return restoreVisualRange(doc, range);
+      }
+
+      function unwrapElement(element) {
+        element.replaceWith(...element.childNodes);
+      }
+
+      function closestFormattingBlock(node) {
+        return elementForNode(node)?.closest(formattingBlockSelector) || null;
+      }
+
+      function blocksBetweenMarkers(doc, markers) {
+        if (markers.collapsed) {
+          const block = closestFormattingBlock(markers.start);
+          return block ? [block] : [];
+        }
+        const range = rangeBetweenMarkers(doc, markers);
+        const blocks = [];
+        const walker = doc.createTreeWalker(doc.body, 4);
+        let node;
+        while ((node = walker.nextNode())) {
+          if (!node.data || !range.intersectsNode(node)) continue;
+          const block = closestFormattingBlock(node);
+          if (block && !blocks.includes(block)) blocks.push(block);
+        }
+        if (!blocks.length) {
+          const startBlock = closestFormattingBlock(markers.start);
+          if (startBlock) blocks.push(startBlock);
+        }
+        return blocks;
+      }
+
+      function normaliseEmptyFormattingCaret(doc) {
+        for (const element of doc.querySelectorAll("[data-lw-caret-format]")) {
+          if (element.textContent || element.children.length) element.removeAttribute("data-lw-caret-format");
+        }
+      }
+
+      function finishFormattingMutation(doc, message = "Formatting applied.") {
+        normaliseEmptyFormattingCaret(doc);
+        markDirty();
+        scheduleCountUpdate();
+        scheduleOutlineRefresh();
+        commitVisualHistory(doc);
+        updateFormattingToolbarState(doc);
+        setStatus(message);
+      }
+
+      function runRangeMutation(mutator, message) {
+        if (currentMode !== "visual") return false;
+        const doc = editorDocument();
+        const range = editableVisualRange(doc);
+        if (!range) {
+          setStatus("Place the cursor in editable document content first.", true);
+          return false;
+        }
+        commitVisualHistory(doc);
+        const before = doc.body.innerHTML;
+        const bookmark = visualSelectionBookmark(doc);
+        const markers = selectionMarkers(doc, range);
+        try {
+          mutator(doc, markers);
+          restoreFromSelectionMarkers(doc, markers);
+        } catch (error) {
+          doc.body.innerHTML = before;
+          lockMachineOwnedSections(doc);
+          restoreVisualBookmark(doc, bookmark);
+          setStatus(error.message || "Formatting could not be applied to that selection.", true);
+          return false;
+        }
+        if (doc.body.innerHTML === before) return false;
+        finishFormattingMutation(doc, message);
+        return true;
+      }
+
+      function toggleInlineFormatting(command) {
+        const tags = inlineCommandTags[command];
+        const preferred = { bold: "strong", italic: "em", underline: "u", strikeThrough: "s" }[command];
+        const selector = tags.join(",");
+        runRangeMutation((doc, markers) => {
+          const existing = markers.start.parentElement?.closest(selector);
+          if (markers.collapsed) {
+            if (existing && doc.body.contains(existing)) {
+              unwrapElement(existing);
+            } else {
+              const wrapper = doc.createElement(preferred);
+              wrapper.dataset.lwCaretFormat = command;
+              markers.start.replaceWith(wrapper);
+              wrapper.appendChild(markers.start);
+            }
+            return;
+          }
+
+          const endExisting = markers.end?.parentElement?.closest(selector);
+          if (existing && existing === endExisting) {
+            unwrapElement(existing);
+            return;
+          }
+          const startBlock = closestFormattingBlock(markers.start);
+          const endBlock = closestFormattingBlock(markers.end);
+          if (!startBlock || startBlock !== endBlock) {
+            throw new Error("Apply inline formatting within one paragraph or heading at a time.");
+          }
+          const range = rangeBetweenMarkers(doc, markers);
+          const fragment = range.extractContents();
+          fragment.querySelectorAll(selector).forEach(unwrapElement);
+          const wrapper = doc.createElement(preferred);
+          wrapper.appendChild(fragment);
+          range.insertNode(wrapper);
+        }, `${command === "strikeThrough" ? "Strikethrough" : command[0].toUpperCase() + command.slice(1)} formatting applied.`);
+      }
+
+      function formatSelectedBlocks(tagName) {
+        const allowed = new Set(["p", "h1", "h2", "h3", "h4", "blockquote", "pre"]);
+        const wanted = String(tagName || "").toLowerCase();
+        if (!allowed.has(wanted)) return;
+        runRangeMutation((doc, markers) => {
+          const blocks = blocksBetweenMarkers(doc, markers);
+          if (!blocks.length) throw new Error("Place the cursor in a paragraph or heading first.");
+          for (const block of blocks) {
+            if (!allowed.has(block.tagName.toLowerCase())) {
+              throw new Error("Block styles cannot replace list items, table cells, captions or summaries.");
+            }
+            if (block.tagName.toLowerCase() === wanted) continue;
+            const replacement = doc.createElement(wanted);
+            for (const attribute of [...block.attributes]) replacement.setAttribute(attribute.name, attribute.value);
+            replacement.append(...block.childNodes);
+            block.replaceWith(replacement);
+          }
+        }, `Changed block style to ${wanted.toUpperCase()}.`);
+      }
+
+      function alignSelectedBlocks(alignment) {
+        runRangeMutation((doc, markers) => {
+          const blocks = blocksBetweenMarkers(doc, markers);
+          if (!blocks.length) throw new Error("Place the cursor in a text block first.");
+          blocks.forEach(block => {
+            block.style.textAlign = alignment;
+            if (!block.getAttribute("style")) block.removeAttribute("style");
+          });
+        }, `Aligned text ${alignment}.`);
+      }
+
+      function clearSelectedFormatting() {
+        const removable = "strong,b,em,i,u,s,strike,font,span[style]";
+        runRangeMutation((doc, markers) => {
+          if (markers.collapsed) {
+            let current = markers.start.parentElement?.closest(removable);
+            while (current && doc.body.contains(current)) {
+              const parent = current.parentElement;
+              unwrapElement(current);
+              current = parent?.closest(removable) || null;
+            }
+            return;
+          }
+          const range = rangeBetweenMarkers(doc, markers);
+          const fragment = range.extractContents();
+          [...fragment.querySelectorAll(removable)].reverse().forEach(unwrapElement);
+          fragment.querySelectorAll("[style]").forEach(element => element.removeAttribute("style"));
+          range.insertNode(fragment);
+        }, "Cleared inline formatting.");
+      }
+
+      function listItemsBetweenMarkers(doc, markers, list = null) {
+        const range = rangeBetweenMarkers(doc, markers);
+        const matches = [...(list || doc).querySelectorAll("li")].filter(item => {
+          if (item.contains(markers.start) || item.contains(markers.end)) return true;
+          try { return range.intersectsNode(item); }
+          catch { return false; }
+        });
+        return matches.filter(item => !matches.some(other => other !== item && item.contains(other)));
+      }
+
+      function unwrapSelectedListItems(doc, list, selectedItems) {
+        const allItems = [...list.children].filter(child => child.tagName === "LI");
+        const selected = allItems.filter(item => selectedItems.includes(item));
+        if (!selected.length) return;
+        if (selected.some(item => item.querySelector(":scope > ul, :scope > ol"))) {
+          throw new Error("Outdent nested list items before converting them to paragraphs.");
+        }
+        const lastIndex = allItems.indexOf(selected[selected.length - 1]);
+        const afterItems = allItems.slice(lastIndex + 1);
+        const afterList = afterItems.length ? list.cloneNode(false) : null;
+        afterList?.removeAttribute("id");
+        afterItems.forEach(item => afterList.appendChild(item));
+        const fragment = doc.createDocumentFragment();
+        selected.forEach(item => {
+          const paragraph = doc.createElement("p");
+          for (const attribute of [...item.attributes]) paragraph.setAttribute(attribute.name, attribute.value);
+          paragraph.append(...item.childNodes);
+          fragment.appendChild(paragraph);
+          item.remove();
+        });
+        if (afterList) list.after(fragment, afterList);
+        else list.after(fragment);
+        if (!list.querySelector(":scope > li")) list.remove();
+      }
+
+      function toggleListFormatting(tagName) {
+        runRangeMutation((doc, markers) => {
+          const wanted = tagName.toLowerCase();
+          const startList = markers.start.parentElement?.closest("ul,ol");
+          const endList = markers.end?.parentElement?.closest("ul,ol") || startList;
+          if (startList && startList === endList) {
+            if (startList.tagName.toLowerCase() === wanted) {
+              unwrapSelectedListItems(doc, startList, listItemsBetweenMarkers(doc, markers, startList));
+            } else {
+              const replacement = doc.createElement(wanted);
+              for (const attribute of [...startList.attributes]) replacement.setAttribute(attribute.name, attribute.value);
+              replacement.append(...startList.childNodes);
+              startList.replaceWith(replacement);
+            }
+            return;
+          }
+          if (startList || endList) throw new Error("Convert or extend one list at a time.");
+
+          const blocks = blocksBetweenMarkers(doc, markers);
+          if (!blocks.length) throw new Error("Place the cursor in one or more paragraphs first.");
+          if (blocks.some(block => !["P", "BLOCKQUOTE"].includes(block.tagName))) {
+            throw new Error("Lists can be created from paragraphs or blockquotes, not headings or table content.");
+          }
+          const parent = blocks[0].parentElement;
+          if (blocks.some(block => block.parentElement !== parent)) {
+            throw new Error("The selected paragraphs must share one container.");
+          }
+          for (let index = 1; index < blocks.length; index += 1) {
+            let sibling = blocks[index - 1].nextSibling;
+            while (sibling?.nodeType === 3 && !sibling.data.trim()) sibling = sibling.nextSibling;
+            if (sibling !== blocks[index]) throw new Error("Select adjacent paragraphs to make a list.");
+          }
+          const list = doc.createElement(wanted);
+          parent.insertBefore(list, blocks[0]);
+          blocks.forEach(block => {
+            const item = doc.createElement("li");
+            for (const attribute of [...block.attributes]) item.setAttribute(attribute.name, attribute.value);
+            item.append(...block.childNodes);
+            list.appendChild(item);
+            block.remove();
+          });
+        }, tagName === "ul" ? "Toggled bulleted list." : "Toggled numbered list.");
+      }
+
+      function changeIndentation(direction) {
+        runRangeMutation((doc, markers) => {
+          const items = listItemsBetweenMarkers(doc, markers);
+          if (items.length) {
+            const list = items[0].parentElement;
+            if (!list || !["UL", "OL"].includes(list.tagName) || items.some(item => item.parentElement !== list)) {
+              throw new Error("Indent list items from one list at a time.");
+            }
+            if (direction > 0) {
+              const previous = items[0].previousElementSibling;
+              if (!previous?.matches("li")) throw new Error("The first list item cannot be indented.");
+              let nested = [...previous.children].find(child => child.tagName === list.tagName);
+              if (!nested) {
+                nested = doc.createElement(list.tagName.toLowerCase());
+                previous.appendChild(nested);
+              }
+              items.forEach(item => nested.appendChild(item));
+              if (!list.querySelector(":scope > li")) list.remove();
+              return;
+            }
+            const parentItem = list.parentElement?.closest("li");
+            if (parentItem) {
+              let reference = parentItem;
+              items.forEach(item => {
+                reference.after(item);
+                reference = item;
+              });
+              if (!list.querySelector(":scope > li")) list.remove();
+            } else {
+              unwrapSelectedListItems(doc, list, items);
+            }
+            return;
+          }
+
+          const blocks = blocksBetweenMarkers(doc, markers);
+          if (!blocks.length) throw new Error("Place the cursor in a text block first.");
+          blocks.forEach(block => {
+            const current = Number.parseFloat(block.style.marginInlineStart) || 0;
+            const next = Math.max(0, current + direction * 32);
+            if (next) block.style.marginInlineStart = `${next}px`;
+            else block.style.removeProperty("margin-inline-start");
+            if (!block.getAttribute("style")) block.removeAttribute("style");
+          });
+        }, direction > 0 ? "Indented selection." : "Outdented selection.");
+      }
+
+      function removeSelectedLinks() {
+        runRangeMutation((doc, markers) => {
+          if (markers.collapsed) {
+            const link = markers.start.parentElement?.closest("a");
+            if (!link) throw new Error("Place the cursor inside a link, or select linked text.");
+            unwrapElement(link);
+            return;
+          }
+          const range = rangeBetweenMarkers(doc, markers);
+          const links = [...doc.querySelectorAll("a")].filter(link => {
+            try { return range.intersectsNode(link); }
+            catch { return false; }
+          });
+          if (!links.length) throw new Error("The selection contains no links.");
+          links.forEach(unwrapElement);
+        }, "Removed link formatting.");
+      }
+
+      function updateFormattingToolbarState(doc = editorDocument()) {
+        if (currentMode !== "visual" || !doc) return;
+        const range = getSavedVisualRange(doc);
+        const anchor = elementForNode(range?.startContainer);
+        for (const [command, tags] of Object.entries(inlineCommandTags)) {
+          const button = toolbar.querySelector(`button[data-command='${command}']`);
+          if (!button) continue;
+          const active = Boolean(anchor?.closest(tags.join(",")));
+          button.classList.toggle("active", active);
+          button.setAttribute("aria-pressed", String(active));
+        }
+      }
+
+      function formatCommand(command, value = null) {
+        if (command === "undo") return changeVisualHistory(-1);
+        if (command === "redo") return changeVisualHistory(1);
+        if (inlineCommandTags[command]) return toggleInlineFormatting(command);
+        if (command === "formatBlock") return formatSelectedBlocks(value);
+        if (command === "justifyLeft") return alignSelectedBlocks("left");
+        if (command === "justifyCenter") return alignSelectedBlocks("center");
+        if (command === "justifyRight") return alignSelectedBlocks("right");
+        if (command === "removeFormat") return clearSelectedFormatting();
+        if (command === "insertUnorderedList") return toggleListFormatting("ul");
+        if (command === "insertOrderedList") return toggleListFormatting("ol");
+        if (command === "indent") return changeIndentation(1);
+        if (command === "outdent") return changeIndentation(-1);
+        if (command === "unlink") return removeSelectedLinks();
       }
 
       function updateCount() {
@@ -966,9 +1970,8 @@
         if (currentMode === "visual") {
           text = editorDocument()?.body?.innerText || "";
         } else {
-          const temp = document.createElement("div");
-          temp.innerHTML = sourceEditor.value;
-          text = temp.textContent || "";
+          const parsed = new DOMParser().parseFromString(sourceEditor.value, "text/html");
+          text = parsed.body?.textContent || "";
         }
 
         const words = text.trim() ? text.trim().split(/\s+/).length : 0;
@@ -976,23 +1979,814 @@
         count.textContent = `${words.toLocaleString()} words · ${chars.toLocaleString()} characters`;
       }
 
-      function insertHTML(html) {
-        const doc = editorDocument();
-        visualEditor.contentWindow.focus();
+      function scheduleCountUpdate(delay = 280) {
+        clearTimeout(countUpdateTimer);
+        countUpdateTimer = setTimeout(() => {
+          countUpdateTimer = null;
+          updateCount();
+        }, delay);
+      }
 
-        if (doc.queryCommandSupported?.("insertHTML")) {
-          doc.execCommand("insertHTML", false, html);
-        } else {
-          const selection = doc.getSelection();
-          if (!selection?.rangeCount) return;
-          const range = selection.getRangeAt(0);
-          range.deleteContents();
-          const fragment = range.createContextualFragment(html);
-          range.insertNode(fragment);
+      function outlineHeadingText(heading) {
+        const clone = heading.cloneNode(true);
+        clone.querySelectorAll(".heading-anchor, .chapter-link").forEach(node => node.remove());
+        return (clone.textContent || "").replace(/\s+/g, " ").trim() || "Untitled heading";
+      }
+
+      function showOutlineMessage(message) {
+        outlineTargets = [];
+        outlineList.replaceChildren();
+        const empty = document.createElement("p");
+        empty.className = "outline-empty";
+        empty.textContent = message;
+        outlineList.appendChild(empty);
+        outlineCount.textContent = "0 headings";
+      }
+
+      function filterOutline() {
+        const needle = outlineSearch.value.trim().toLowerCase();
+        let visible = 0;
+        for (const button of outlineList.querySelectorAll("button[data-outline-index]")) {
+          const match = !needle || button.textContent.toLowerCase().includes(needle);
+          button.hidden = !match;
+          if (match) visible += 1;
+        }
+        outlineCount.textContent = needle
+          ? `${visible} of ${outlineTargets.length}`
+          : `${outlineTargets.length} heading${outlineTargets.length === 1 ? "" : "s"}`;
+      }
+
+      function refreshOutline(doc = editorDocument()) {
+        if (currentMode !== "visual" || !doc?.body) {
+          showOutlineMessage("Return to Visual mode to use the outline.");
+          return;
         }
 
-        markDirty();
+        let headings = [...doc.querySelectorAll("#article h2, #article h3")]
+          .filter(heading => !heading.closest("figure, aside, details, #toc-list, #mobile-toc-list"));
+        if (!headings.length) {
+          headings = [...doc.querySelectorAll("body h1, body h2, body h3")]
+            .filter(heading => !heading.closest("figure, aside, details"));
+        }
+
+        outlineTargets = headings;
+        outlineList.replaceChildren();
+        if (!headings.length) {
+          showOutlineMessage("No navigable headings found.");
+          return;
+        }
+
+        headings.forEach((heading, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `level-${Number(heading.tagName.slice(1))}`;
+          button.dataset.outlineIndex = String(index);
+          button.textContent = outlineHeadingText(heading);
+          button.title = heading.id ? `Jump to #${heading.id}` : "Jump to this heading";
+          outlineList.appendChild(button);
+        });
+        filterOutline();
+        updateOutlineActive(doc);
+      }
+
+      function scheduleOutlineRefresh(delay = 650) {
+        clearTimeout(outlineRefreshTimer);
+        outlineRefreshTimer = setTimeout(() => {
+          outlineRefreshTimer = null;
+          refreshOutline();
+        }, delay);
+      }
+
+      function updateOutlineActive(doc = editorDocument()) {
+        if (currentMode !== "visual" || !outlineTargets.length || !doc) return;
+        const selection = doc.getSelection();
+        if (!selection?.rangeCount) return;
+        const node = elementForNode(selection.anchorNode);
+        if (!node) return;
+
+        let activeIndex = -1;
+        outlineTargets.forEach((heading, index) => {
+          if (
+            heading === node ||
+            heading.contains(node) ||
+            (heading.compareDocumentPosition(node) & 4)
+          ) {
+            activeIndex = index;
+          }
+        });
+        outlineList.querySelectorAll("button[data-outline-index]").forEach(button => {
+          button.classList.toggle("active", Number(button.dataset.outlineIndex) === activeIndex);
+        });
+      }
+
+      function jumpToOutlineTarget(index) {
+        const target = outlineTargets[index];
+        const doc = editorDocument();
+        if (!target || !doc?.body?.contains(target)) return;
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        const range = doc.createRange();
+        range.selectNodeContents(target);
+        range.collapse(false);
+        restoreVisualRange(doc, range);
+        updateOutlineActive(doc);
+        setStatus(`Jumped to ${outlineHeadingText(target)}.`);
+      }
+
+      function setOutlineExpanded(expanded) {
+        document.body.classList.toggle("outline-collapsed", !expanded);
+        outlineToggleBtn.setAttribute("aria-expanded", String(expanded));
+      }
+
+      function isTextbookDocument(doc) {
+        return Boolean(
+          doc?.querySelector("article#article") &&
+          doc.querySelector("section.chapter") &&
+          doc.getElementById("toc-list") &&
+          doc.getElementById("figure-index") &&
+          doc.getElementById("table-index")
+        );
+      }
+
+      function updateTextbookMode(doc = editorDocument()) {
+        textbookMode = isTextbookDocument(doc);
+        textbookToolbar.hidden = !textbookMode;
+        textbookModeBadge.hidden = !textbookMode;
+        textbookToolbar.querySelectorAll("button[data-structure]").forEach(button => {
+          button.disabled = currentMode !== "visual";
+        });
+        document.getElementById("maintainTextbookBtn").disabled = !textbookMode;
+      }
+
+      function textbookSections(doc) {
+        const article = doc.querySelector("article#article");
+        if (!article) return [];
+        return [...article.children].filter(element =>
+          element.matches?.("section") && !element.classList.contains("footnotes")
+        );
+      }
+
+      function cleanHeadingHtml(heading) {
+        if (!heading) return "";
+        const clone = heading.cloneNode(true);
+        clone.querySelectorAll(".heading-anchor, .chapter-link").forEach(node => node.remove());
+        return clone.innerHTML.trim();
+      }
+
+      function replaceLeadingText(element, pattern, replacement) {
+        if (!element) return false;
+        const walker = element.ownerDocument.createTreeWalker(element, 4);
+        let node;
+        while ((node = walker.nextNode())) {
+          if (!pattern.test(node.data)) continue;
+          const next = node.data.replace(pattern, replacement);
+          if (next === node.data) return false;
+          node.data = next;
+          return true;
+        }
+        return false;
+      }
+
+      function sectionMaintenanceInfo(section, appendixIndex) {
+        const classes = section.classList;
+        const kind = classes.contains("part-divider") ? "part" :
+          classes.contains("exercise") ? "exercise" :
+          classes.contains("appendix") ? "appendix" :
+          classes.contains("backsection") ? "backsection" :
+          classes.contains("chapter") ? "chapter" : "other";
+        const eyebrow = section.querySelector(":scope > .chapter-head .chapter-eyebrow, :scope > .chapter-eyebrow");
+        const eyebrowText = eyebrow?.textContent.trim() || "";
+        let label = null;
+        if (kind === "appendix") label = String.fromCharCode(65 + appendixIndex);
+        else if (kind === "chapter") {
+          if (/^introduction/i.test(eyebrowText)) label = "0";
+          else if (/^preface/i.test(eyebrowText)) label = "P";
+          else label = eyebrowText.match(/^Chapter\s+(\d+)/i)?.[1] || "?";
+        }
+        const h2 = section.querySelector(":scope > .chapter-head h2, :scope > h2");
+        return { section, kind, label, eyebrow, h2, title: outlineHeadingText(h2 || section) };
+      }
+
+      function makeTocRows(doc, infos) {
+        const rows = [];
+        for (const info of infos) {
+          const { section, kind, h2 } = info;
+          const sid = section.id;
+          if (kind === "part") {
+            if (!sid || !h2) continue;
+            const tag = section.querySelector(":scope > .part-tag")?.textContent.trim() || "";
+            const title = outlineHeadingText(h2);
+            const shown = section.classList.contains("backmatter-divider") || !tag ? (tag || title) : `${tag} · ${title}`;
+            const li = doc.createElement("li");
+            li.className = "toc-part";
+            const link = doc.createElement("a");
+            link.href = `#${sid}`;
+            link.textContent = shown;
+            li.appendChild(link);
+            rows.push(li);
+            continue;
+          }
+          if (kind === "exercise") {
+            if (!sid || !h2) continue;
+            const li = doc.createElement("li");
+            li.className = "toc-ex";
+            const link = doc.createElement("a");
+            link.href = `#${sid}`;
+            link.textContent = outlineHeadingText(h2).split("—")[0].trim();
+            li.appendChild(link);
+            rows.push(li);
+            continue;
+          }
+          if (!h2?.id) continue;
+
+          const li = doc.createElement("li");
+          li.className = "toc-ch";
+          if (sid.startsWith("sec-")) li.dataset.ch = sid.slice(4);
+          const link = doc.createElement("a");
+          link.href = `#${h2.id}`;
+          const eyebrowText = info.eyebrow?.textContent.trim() || "";
+          if (eyebrowText) {
+            const em = doc.createElement("em");
+            em.textContent = eyebrowText;
+            link.appendChild(em);
+          }
+          const title = doc.createElement("span");
+          title.innerHTML = cleanHeadingHtml(h2);
+          while (title.firstChild) link.appendChild(title.firstChild);
+          li.appendChild(link);
+
+          if (section.classList.contains("chapter") && !section.classList.contains("backsection")) {
+            const subheadings = [...section.querySelectorAll("h3[id]")].filter(heading =>
+              !heading.closest("figure, aside, details") && !heading.classList.contains("group-title")
+            );
+            if (subheadings.length) {
+              const sublist = doc.createElement("ol");
+              sublist.className = "toc-subs";
+              for (const heading of subheadings) {
+                const subitem = doc.createElement("li");
+                subitem.className = "toc-sec";
+                const sublink = doc.createElement("a");
+                sublink.href = `#${heading.id}`;
+                sublink.innerHTML = cleanHeadingHtml(heading);
+                subitem.appendChild(sublink);
+                sublist.appendChild(subitem);
+              }
+              li.appendChild(sublist);
+            }
+          }
+          rows.push(li);
+        }
+        return rows;
+      }
+
+      function rebuildTextbookTocs(doc, infos) {
+        const rows = makeTocRows(doc, infos);
+        let rebuilt = 0;
+        for (const id of ["toc-list", "mobile-toc-list"]) {
+          const list = doc.getElementById(id);
+          if (!list) continue;
+          list.replaceChildren(...rows.map(row => row.cloneNode(true)));
+          rebuilt += 1;
+        }
+        return rebuilt;
+      }
+
+      function allowedIndexHtml(source) {
+        const wrapper = source.ownerDocument.createElement("span");
+        wrapper.innerHTML = source.innerHTML;
+        const allowed = new Set(["EM", "CODE", "SUB", "SUP", "STRONG"]);
+        [...wrapper.querySelectorAll("*")].reverse().forEach(element => {
+          if (!allowed.has(element.tagName)) element.replaceWith(...element.childNodes);
+        });
+        return wrapper.innerHTML.replace(/\s+/g, " ").trim();
+      }
+
+      function firstSentence(value) {
+        const text = String(value || "").replace(/\s+/g, " ").trim();
+        const match = text.match(/^(.{25,}?[.?!])\s+[A-Z(]/);
+        return match ? match[1] : text;
+      }
+
+      function rebuildAssetIndexes(doc, problems) {
+        const figures = [];
+        for (const figure of doc.querySelectorAll("figure")) {
+          const label = figure.querySelector("figcaption .asset-label-inline[id]");
+          const title = figure.querySelector(":scope > .figure-title");
+          if (!label) {
+            problems.push(`Figure has no numbered label near “${outlineHeadingText(figure).slice(0, 60)}”.`);
+            continue;
+          }
+          if (!title) {
+            problems.push(`${label.textContent.trim()} has no direct .figure-title.`);
+            continue;
+          }
+          figures.push({ id: label.id, number: label.textContent.trim(), html: allowedIndexHtml(title) });
+        }
+
+        const tables = [];
+        for (const label of doc.querySelectorAll("p.asset-label[id]")) {
+          const match = label.textContent.trim().match(/^(Table\s+[0-9A-Za-z]+\.\d+)\s*—\s*(.*)$/s);
+          if (!match) {
+            problems.push(`Table label has no caption text: “${label.textContent.trim()}”.`);
+            continue;
+          }
+          tables.push({ id: label.id, number: match[1], html: escapeHtml(firstSentence(match[2])) });
+        }
+
+        function fill(id, entries) {
+          const list = doc.getElementById(id);
+          if (!list) {
+            problems.push(`No #${id} list is available for the asset index.`);
+            return;
+          }
+          list.replaceChildren();
+          for (const entry of entries) {
+            const li = doc.createElement("li");
+            const link = doc.createElement("a");
+            link.href = `#${entry.id}`;
+            link.textContent = entry.number;
+            const span = doc.createElement("span");
+            span.innerHTML = entry.html;
+            li.append(link, span);
+            list.appendChild(li);
+          }
+        }
+
+        fill("figure-index", figures);
+        fill("table-index", tables);
+        return { figures: figures.length, tables: tables.length };
+      }
+
+      function staleTextbookCrossReferences(doc, infos) {
+        const problems = [];
+        const owners = new Map();
+        for (const info of infos) {
+          if (!["chapter", "appendix"].includes(info.kind) || !/^\d+$|^[A-Z]$/.test(info.label || "")) continue;
+          [info.section, ...info.section.querySelectorAll("[id]")]
+            .forEach(element => owners.set(element.id, info.label));
+        }
+        const titles = new Map(
+          [...doc.querySelectorAll("h2[id], h3[id], h4[id]")]
+            .map(heading => [heading.id, outlineHeadingText(heading)])
+        );
+
+        for (const link of doc.querySelectorAll("a[href^='#']")) {
+          const target = safeDecode((link.getAttribute("href") || "").slice(1));
+          const text = link.textContent.replace(/\s+/g, " ").trim();
+          const asset = target.match(/^(fig|tbl)-([0-9a-z]+)-(\d+)$/);
+          if (asset) {
+            const said = text.match(/^(Figure|Table)\s+([0-9A-Z]+)\.(\d+)$/);
+            if (said) {
+              const wanted = [asset[1] === "fig" ? "Figure" : "Table", asset[2].toUpperCase(), asset[3]];
+              if (said[1] !== wanted[0] || said[2] !== wanted[1] || said[3] !== wanted[2]) {
+                problems.push(`#${target} is ${wanted[0]} ${wanted[1]}.${wanted[2]} but a link calls it “${text}”.`);
+              }
+            }
+            continue;
+          }
+
+          const owner = owners.get(target);
+          if (!owner || text === titles.get(target)) continue;
+          const named = new Set();
+          for (const match of text.matchAll(/Chapters?\s+(\d+(?:\s*(?:,|–|—|-|&|and|to)\s*\d+)*)/g)) {
+            match[1].match(/\d+/g)?.forEach(value => named.add(value));
+          }
+          for (const match of text.matchAll(/Appendi(?:x|ces)\s+([A-Z])(?![a-z])/g)) named.add(match[1]);
+          if (/^\d+$/.test(text)) named.add(text);
+          if (named.size && !named.has(owner)) {
+            problems.push(`#${target} is in ${owner} but a link calls it “${text.slice(0, 60)}”.`);
+          }
+        }
+        return [...new Set(problems)].sort();
+      }
+
+      function maintainTextbookDocument(doc) {
+        const before = doc.documentElement.outerHTML;
+        const problems = [];
+        const changes = [];
+        const sections = textbookSections(doc);
+        let appendixIndex = 0;
+        const infos = sections.map(section => {
+          const info = sectionMaintenanceInfo(section, appendixIndex);
+          if (info.kind === "appendix") appendixIndex += 1;
+          return info;
+        });
+
+        for (const info of infos) {
+          if (info.kind === "appendix" && info.eyebrow) {
+            const wanted = `Appendix ${info.label}`;
+            if (info.eyebrow.textContent.trim() !== wanted) {
+              info.eyebrow.textContent = wanted;
+              changes.push(`Updated ${wanted} lettering`);
+            }
+          }
+          if (info.label === "?") {
+            problems.push(`Chapter ${info.section.id || "(without id)"} has an unrecognised eyebrow.`);
+            continue;
+          }
+          if (info.label === null) continue;
+
+          const tableLabels = [...info.section.querySelectorAll("p.asset-label")];
+          const tables = [...info.section.querySelectorAll(".table-wrap > table")];
+          tableLabels.forEach((label, index) => {
+            const number = index + 1;
+            const wantedId = `tbl-${info.label.toLowerCase()}-${number}`;
+            replaceLeadingText(label, /^Table\s+[0-9A-Za-z]+\.\d+/, `Table ${info.label}.${number}`);
+            label.id = wantedId;
+          });
+          if (tables.length !== tableLabels.length) {
+            problems.push(`${info.title}: ${tables.length} table(s) but ${tableLabels.length} numbered label(s).`);
+          }
+
+          const figures = [...info.section.querySelectorAll("figure > figcaption")];
+          const figureLabels = figures.map(caption => caption.querySelector(".asset-label-inline")).filter(Boolean);
+          figureLabels.forEach((label, index) => {
+            const number = index + 1;
+            const wantedId = `fig-${info.label.toLowerCase()}-${number}`;
+            replaceLeadingText(label, /^Figure\s+[0-9A-Za-z]+\.\d+/, `Figure ${info.label}.${number}`);
+            label.id = wantedId;
+          });
+          if (figures.length !== figureLabels.length) {
+            problems.push(`${info.title}: ${figures.length} figure caption(s) but ${figureLabels.length} numbered label(s).`);
+          }
+        }
+
+        const tocCount = rebuildTextbookTocs(doc, infos);
+        if (tocCount) changes.push(`Rebuilt ${tocCount} table-of-contents lists`);
+        const assets = rebuildAssetIndexes(doc, problems);
+        changes.push(`Rebuilt indexes for ${assets.figures} figures and ${assets.tables} tables`);
+
+        const footnoteRanks = renumberFootnotesInDocument(doc);
+        if (doc.querySelectorAll("a.footnote-ref").length && !footnoteRanks.size) {
+          problems.push("Footnotes could not be renumbered because references or notes are duplicated or incomplete.");
+        } else if (footnoteRanks.size) {
+          changes.push(`Renumbered ${footnoteRanks.size} footnotes`);
+        }
+
+        problems.push(...staleTextbookCrossReferences(doc, infos));
+        const changed = before !== doc.documentElement.outerHTML;
+        return { changed, changes: [...new Set(changes)], problems: [...new Set(problems)] };
+      }
+
+      function mergeMaintenanceProblems(report, maintenance) {
+        for (const message of maintenance?.problems || []) {
+          const rendered = `Textbook maintenance: ${message}`;
+          report.errors.push(rendered);
+          report.issues.push({ severity: "error", message: rendered, targetId: "" });
+        }
+        return report;
+      }
+
+      function maintainCurrentTextbook({ announce = true } = {}) {
+        let doc;
+        if (currentMode === "source") {
+          doc = new DOMParser().parseFromString(sourceEditor.value, "text/html");
+        } else {
+          doc = editorDocument();
+        }
+        if (!isTextbookDocument(doc)) {
+          const result = { changed: false, changes: [], problems: ["This document does not match the textbook structure."] };
+          if (announce) setStatus(result.problems[0], true);
+          return result;
+        }
+
+        const result = maintainTextbookDocument(doc);
+        if (currentMode === "source") {
+          const html = `${storedDoctype}\n${doc.documentElement.outerHTML}`;
+          if (result.changed) sourceEditor.value = html;
+        } else {
+          lockMachineOwnedSections(doc);
+          refreshOutline(doc);
+        }
+        if (result.changed) {
+          markDirty();
+          if (currentMode === "visual") commitVisualHistory(doc);
+        }
         updateCount();
+
+        if (announce) {
+          const report = mergeMaintenanceProblems(checkDocumentIntegrity(currentHtml()), result);
+          renderDiagnostics(report);
+          setStatus(
+            result.problems.length
+              ? `Textbook maintenance completed with ${result.problems.length} problem${result.problems.length === 1 ? "" : "s"}.`
+              : `Textbook maintenance complete: ${result.changes.join("; ")}.`,
+            Boolean(result.problems.length)
+          );
+        }
+        return result;
+      }
+
+      function slugifyId(value, fallback = "section") {
+        const slug = String(value || "")
+          .normalize("NFKD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/&/g, " and ")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+        return slug || fallback;
+      }
+
+      function uniqueDocumentId(doc, suggested) {
+        const base = slugifyId(suggested);
+        let candidate = base;
+        let suffix = 2;
+        while (doc.getElementById(candidate)) candidate = `${base}-${suffix++}`;
+        return candidate;
+      }
+
+      function structureField(name) {
+        return structureForm.elements.namedItem(name);
+      }
+
+      function openStructureDialog(type) {
+        if (currentMode !== "visual" || !textbookMode) return;
+        const configurations = {
+          heading: {
+            title: "Insert heading",
+            help: "Headings receive stable link targets and are added to the generated contents when appropriate.",
+            fields: `
+              <label class="full">Heading text<input name="title" required autocomplete="off"></label>
+              <label>Level<select name="level"><option value="h3">Section (H3)</option><option value="h4">Subsection (H4)</option></select></label>
+              <label>Link ID<input name="id" placeholder="generated-from-heading" pattern="[A-Za-z][A-Za-z0-9._:-]*"></label>`
+          },
+          figure: {
+            title: "Insert figure",
+            help: "The figure number and index entry are generated by Textbook maintenance.",
+            fields: `
+              <label class="full">Figure title<input name="title" required autocomplete="off"></label>
+              <label class="full">Image path<input name="src" required placeholder="images/example.png" autocomplete="off"></label>
+              <label class="full">Alternative text<textarea name="alt" required rows="2"></textarea></label>
+              <label class="full">Caption<textarea name="caption" required rows="3"></textarea></label>`
+          },
+          table: {
+            title: "Insert table",
+            help: "Separate cells with | or Tab, and put each body row on a new line. Numbering and the table index are generated automatically.",
+            fields: `
+              <label class="full">Caption<input name="caption" required autocomplete="off"></label>
+              <label class="full">Column headings<textarea name="headers" required rows="2" placeholder="Column 1 | Column 2"></textarea></label>
+              <label class="full">Body rows<textarea name="rows" required rows="5" placeholder="Value 1 | Value 2&#10;Value 3 | Value 4"></textarea></label>`
+          },
+          callout: {
+            title: "Insert callout",
+            help: "Callouts use the textbook’s established question, practice and common-confusion patterns.",
+            fields: `
+              <label>Type<select name="kind"><option value="question">Reasonable question</option><option value="practice">Practice</option><option value="common-confusion">Common confusion</option></select></label>
+              <label>Label<input name="label" value="Reasonable question" required></label>
+              <label class="full">Title<input name="title" required autocomplete="off"></label>
+              <label class="full">Body<textarea name="body" required rows="6" placeholder="Plain text paragraphs or simple HTML"></textarea></label>`
+          },
+          "self-check": {
+            title: "Add self-check question",
+            help: "The question is added to the nearest chapter’s Check yourself section; one is created if necessary.",
+            fields: `
+              <label class="full">Question<textarea name="question" required rows="3"></textarea></label>
+              <label class="full">Answer<textarea name="answer" required rows="5" placeholder="Plain text paragraphs or simple HTML"></textarea></label>`
+          }
+        };
+        const configuration = configurations[type];
+        if (!configuration) return;
+        activeStructureType = type;
+        structureDialogTitle.textContent = configuration.title;
+        structureFields.innerHTML = configuration.fields;
+        structureHelp.textContent = configuration.help;
+        structureDialog.showModal();
+        structureFields.querySelector("input, select, textarea")?.focus();
+
+        if (type === "callout") {
+          structureField("kind").addEventListener("change", event => {
+            const labels = {
+              question: "Reasonable question",
+              practice: "Practice",
+              "common-confusion": "Common confusion"
+            };
+            structureField("label").value = labels[event.target.value];
+          });
+        }
+      }
+
+      function blockInsertionRange(doc, originalRange) {
+        const range = originalRange?.cloneRange() || doc.createRange();
+        if (!originalRange) {
+          range.selectNodeContents(doc.body);
+          range.collapse(false);
+          return range;
+        }
+        const anchor = elementForNode(range.endContainer);
+        if (anchor?.closest("[data-lw-editor-lock]")) return null;
+        const block = anchor?.closest(
+          "p, h1, h2, h3, h4, h5, h6, ul, ol, pre, blockquote, figure, .table-wrap, aside, details"
+        );
+        if (block && doc.body.contains(block)) {
+          range.selectNode(block);
+          range.collapse(false);
+        } else {
+          range.collapse(false);
+        }
+        return range;
+      }
+
+      function insertStructuredNodes(doc, range, nodes) {
+        const fragment = doc.createDocumentFragment();
+        nodes.forEach(node => fragment.appendChild(node));
+        const last = nodes[nodes.length - 1];
+        range.insertNode(fragment);
+        const after = doc.createRange();
+        after.setStartAfter(last);
+        after.collapse(true);
+        restoreVisualRange(doc, after);
+      }
+
+      function appendSanitisedBody(target, rawValue) {
+        const wrapper = sanitiseFootnoteFragment(target.ownerDocument, rawValue);
+        target.append(...wrapper.childNodes);
+      }
+
+      function tableCells(value) {
+        return String(value || "").split(/[|\t]/).map(cell => cell.trim());
+      }
+
+      function submitStructure(event) {
+        event.preventDefault();
+        if (!structureForm.reportValidity()) return;
+        const doc = editorDocument();
+        commitVisualHistory(doc);
+        const originalRange = getSavedVisualRange(doc);
+        const anchor = elementForNode(originalRange?.startContainer);
+        const sectionContext = anchor?.closest("article#article > section");
+        const context = anchor?.closest("section.chapter, section.appendix");
+        if (activeStructureType !== "self-check" && !sectionContext) {
+          setStatus("Place the cursor in the textbook section where this structure should be inserted.", true);
+          return;
+        }
+        let range = blockInsertionRange(doc, originalRange);
+        if (!range && activeStructureType !== "self-check") {
+          setStatus("Place the cursor in editable textbook content, outside generated contents and indexes.", true);
+          structureDialog.close();
+          return;
+        }
+
+        const nodes = [];
+        if (activeStructureType === "heading") {
+          const title = structureField("title").value.trim();
+          const level = structureField("level").value === "h4" ? "h4" : "h3";
+          const heading = doc.createElement(level);
+          heading.id = uniqueDocumentId(doc, structureField("id").value.trim() || title);
+          heading.append(title);
+          if (level === "h3") {
+            const anchor = doc.createElement("a");
+            anchor.className = "heading-anchor";
+            anchor.href = `#${heading.id}`;
+            anchor.setAttribute("aria-label", `Link to ${title}`);
+            anchor.textContent = "#";
+            heading.append(" ", anchor);
+          }
+          nodes.push(heading);
+        } else if (activeStructureType === "figure") {
+          const title = structureField("title").value.trim();
+          const src = normaliseLinkTarget(structureField("src").value);
+          if (!src) {
+            setStatus("Use a safe relative image path or web URL.", true);
+            return;
+          }
+          const figure = doc.createElement("figure");
+          figure.className = "ir-figure";
+          const titleElement = doc.createElement("p");
+          titleElement.className = "figure-title";
+          titleElement.id = uniqueDocumentId(doc, `figure-${title}-title`);
+          titleElement.textContent = title;
+          figure.setAttribute("aria-labelledby", titleElement.id);
+          const image = doc.createElement("img");
+          image.setAttribute("src", src);
+          image.alt = structureField("alt").value.trim();
+          const caption = doc.createElement("figcaption");
+          const label = doc.createElement("span");
+          label.className = "asset-label-inline";
+          label.textContent = "Figure 0.0";
+          caption.append(label, ` ${structureField("caption").value.trim()}`);
+          figure.append(titleElement, image, caption);
+          nodes.push(figure);
+        } else if (activeStructureType === "table") {
+          const headers = tableCells(structureField("headers").value);
+          const rows = structureField("rows").value.split(/\r?\n/).filter(row => row.trim()).map(tableCells);
+          if (!headers.length || rows.some(row => row.length !== headers.length)) {
+            setStatus(`Every table row must contain exactly ${headers.length} cell${headers.length === 1 ? "" : "s"}.`, true);
+            return;
+          }
+          const label = doc.createElement("p");
+          label.className = "asset-label";
+          label.textContent = `Table 0.0 — ${structureField("caption").value.trim()}`;
+          const wrap = doc.createElement("div");
+          wrap.className = "table-wrap";
+          const table = doc.createElement("table");
+          const thead = doc.createElement("thead");
+          const headerRow = doc.createElement("tr");
+          headers.forEach(value => {
+            const th = doc.createElement("th");
+            th.scope = "col";
+            th.textContent = value;
+            headerRow.appendChild(th);
+          });
+          thead.appendChild(headerRow);
+          const tbody = doc.createElement("tbody");
+          rows.forEach(values => {
+            const row = doc.createElement("tr");
+            values.forEach(value => {
+              const cell = doc.createElement("td");
+              cell.textContent = value;
+              row.appendChild(cell);
+            });
+            tbody.appendChild(row);
+          });
+          table.append(thead, tbody);
+          wrap.appendChild(table);
+          nodes.push(label, wrap);
+        } else if (activeStructureType === "callout") {
+          const kind = structureField("kind").value;
+          const classNames = {
+            question: ["question-callout", "question-callout-label"],
+            practice: ["practice-callout", "practice-callout-label"],
+            "common-confusion": ["common-confusion", "common-confusion-label"]
+          };
+          const [asideClass, labelClass] = classNames[kind] || classNames.question;
+          const aside = doc.createElement("aside");
+          aside.className = asideClass;
+          const title = structureField("title").value.trim();
+          const heading = doc.createElement("h4");
+          heading.id = uniqueDocumentId(doc, title);
+          heading.textContent = title;
+          aside.setAttribute("aria-labelledby", heading.id);
+          const label = doc.createElement("p");
+          label.className = labelClass;
+          label.textContent = structureField("label").value.trim();
+          aside.append(label, heading);
+          appendSanitisedBody(aside, structureField("body").value);
+          nodes.push(aside);
+        } else if (activeStructureType === "self-check") {
+          const chapter = context;
+          if (!chapter) {
+            setStatus("Place the cursor in the chapter or appendix that should receive this question.", true);
+            return;
+          }
+          let selfCheck = chapter.querySelector(":scope > section.self-check");
+          if (!selfCheck) {
+            selfCheck = doc.createElement("section");
+            selfCheck.className = "self-check";
+            selfCheck.setAttribute("aria-label", "Questions on this chapter");
+            const label = doc.createElement("p");
+            label.className = "self-check-label";
+            label.textContent = "Check yourself";
+            selfCheck.appendChild(label);
+            const navigation = chapter.querySelector(":scope > .chapter-nav");
+            chapter.insertBefore(selfCheck, navigation || null);
+          }
+          const details = doc.createElement("details");
+          details.className = "self-check-q";
+          const summary = doc.createElement("summary");
+          summary.textContent = structureField("question").value.trim();
+          details.appendChild(summary);
+          appendSanitisedBody(details, structureField("answer").value);
+          selfCheck.appendChild(details);
+          nodes.push(details);
+          range = null;
+        }
+
+        if (range && nodes.length) insertStructuredNodes(doc, range, nodes);
+        structureDialog.close();
+        const maintenance = maintainCurrentTextbook({ announce: false });
+        markDirty();
+        scheduleCountUpdate();
+        scheduleOutlineRefresh();
+        commitVisualHistory(doc);
+        setStatus(
+          maintenance.problems.length
+            ? `Inserted ${activeStructureType}; maintenance found ${maintenance.problems.length} problem${maintenance.problems.length === 1 ? "" : "s"}.`
+            : `Inserted ${activeStructureType} and refreshed textbook numbering and indexes.`,
+          Boolean(maintenance.problems.length)
+        );
+      }
+
+      function insertHTML(html) {
+        const doc = editorDocument();
+        let range = editableVisualRange(doc);
+        if (!range) {
+          setStatus("Place the cursor in editable document content first.", true);
+          return;
+        }
+        commitVisualHistory(doc);
+        const fragment = range.createContextualFragment(html);
+        const inserted = [...fragment.childNodes];
+        if (!inserted.length) return;
+        if (inserted.some(node => node.nodeType === 1 && node.tagName === "HR")) {
+          range = blockInsertionRange(doc, range) || range;
+        }
+        range.deleteContents();
+        range.insertNode(fragment);
+        const caret = doc.createRange();
+        caret.setStartAfter(inserted[inserted.length - 1]);
+        caret.collapse(true);
+        restoreVisualRange(doc, caret);
+        finishFormattingMutation(doc, "Inserted content.");
       }
 
 
@@ -1063,29 +2857,49 @@
           }
         }
 
-        const range = restoreVisualRange(doc, originalRange);
+        restoreVisualRange(doc, originalRange);
+        const range = editableVisualRange(doc);
         if (!range) {
           setStatus("The link insertion point was lost. Select the text and try again.", true);
           return;
         }
 
+        let label = "";
         if (range.collapsed) {
-          const label = prompt("Visible link text:", target.startsWith("#") ? target.slice(1) : target);
-          if (label === null || !label.trim()) return;
-          const link = doc.createElement("a");
-          link.href = target;
-          link.textContent = label.trim();
-          range.insertNode(link);
-          range.setStartAfter(link);
-          range.collapse(true);
-          restoreVisualRange(doc, range);
-        } else {
-          doc.execCommand("createLink", false, target);
+          const existing = elementForNode(range.startContainer)?.closest("a");
+          if (!existing) {
+            const enteredLabel = prompt("Visible link text:", target.startsWith("#") ? target.slice(1) : target);
+            if (enteredLabel === null || !enteredLabel.trim()) return;
+            label = enteredLabel.trim();
+          }
         }
 
-        markDirty();
-        updateCount();
-        setStatus(`Inserted link to ${target}.`);
+        runRangeMutation((document, markers) => {
+          if (markers.collapsed) {
+            const existing = markers.start.parentElement?.closest("a");
+            if (existing) {
+              existing.setAttribute("href", target);
+              return;
+            }
+            const link = document.createElement("a");
+            link.href = target;
+            link.textContent = label;
+            markers.start.before(link);
+            return;
+          }
+          const startBlock = closestFormattingBlock(markers.start);
+          const endBlock = closestFormattingBlock(markers.end);
+          if (!startBlock || startBlock !== endBlock) {
+            throw new Error("Create a link within one paragraph or heading at a time.");
+          }
+          const selected = rangeBetweenMarkers(document, markers);
+          const fragment = selected.extractContents();
+          fragment.querySelectorAll("a").forEach(unwrapElement);
+          const link = document.createElement("a");
+          link.href = target;
+          link.appendChild(fragment);
+          selected.insertNode(link);
+        }, `Inserted link to ${target}.`);
       }
 
       function escapeHtml(value) {
@@ -1301,6 +3115,7 @@
         );
         if (rawText === null || !rawText.trim()) return;
 
+        commitVisualHistory(doc);
         ensureFootnoteStyles(doc);
         const { list } = footnoteSectionForRange(doc, originalRange);
         const number = nextFootnoteNumber(doc, list);
@@ -1351,7 +3166,8 @@
         const finalNumber = ranks.get(slug) || number;
 
         markDirty();
-        updateCount();
+        scheduleCountUpdate();
+        commitVisualHistory(doc);
         setStatus(`Inserted footnote ${finalNumber}; all footnotes are now in document order.`);
       }
 
@@ -1361,38 +3177,192 @@
         return visualHTML();
       }
 
+      function previewInstrumentation(token) {
+        const encodedToken = JSON.stringify(token);
+        return `<script>
+          (() => {
+            "use strict";
+            const token = ${encodedToken};
+            const selectorFor = element => {
+              if (element.id) return "#" + CSS.escape(element.id);
+              const classes = [...element.classList].slice(0, 2).map(value => "." + CSS.escape(value)).join("");
+              return element.tagName.toLowerCase() + classes;
+            };
+            const report = stage => {
+              const root = document.documentElement;
+              const viewportWidth = root.clientWidth;
+              const overflowPixels = Math.max(0, root.scrollWidth - viewportWidth);
+              const culprits = [...document.body.querySelectorAll("*")]
+                .filter(element => !["SCRIPT", "STYLE", "LINK", "META"].includes(element.tagName))
+                .filter(element => {
+                  const rect = element.getBoundingClientRect();
+                  return rect.right > viewportWidth + 2 || rect.left < -2;
+                })
+                .slice(0, 6)
+                .map(selectorFor);
+              parent.postMessage({
+                type: "lw-reader-preview-report",
+                token,
+                stage,
+                viewportWidth,
+                documentWidth: root.scrollWidth,
+                overflowPixels,
+                culprits,
+                mathCount: document.querySelectorAll("mjx-container").length,
+                scriptCount: document.scripts.length,
+                chapterRows: document.querySelectorAll(".chapter-head-row").length,
+                termMarks: document.querySelectorAll(".term-mark").length
+              }, "*");
+            };
+            addEventListener("message", event => {
+              if (event.data?.type === "lw-reader-preview-print" && event.data.token === token) print();
+              if (event.data?.type === "lw-reader-preview-measure" && event.data.token === token) report("resized");
+            });
+            let resizeTimer;
+            addEventListener("resize", () => {
+              clearTimeout(resizeTimer);
+              resizeTimer = setTimeout(() => report("resized"), 100);
+            });
+            document.addEventListener("DOMContentLoaded", () => report("dom-ready"));
+            addEventListener("load", () => report("loaded"));
+            [400, 1200, 3000].forEach((delay, index) => setTimeout(() => report(index === 2 ? "settled" : "rendering"), delay));
+            if (window.MathJax?.startup?.promise) {
+              Promise.resolve(window.MathJax.startup.promise).then(() => report("math-ready"), () => report("math-error"));
+            }
+          })();
+        <\/script>`;
+      }
+
+      function injectPreviewInstrumentation(html, token) {
+        const instrumentation = previewInstrumentation(token);
+        if (/<\/body\s*>/i.test(html)) return html.replace(/<\/body\s*>/i, `${instrumentation}</body>`);
+        return `${html}${instrumentation}`;
+      }
+
+      function applyPreviewWidth(width = previewWidth) {
+        previewWidth = width;
+        previewFrameWrap.style.width = width === "desktop" ? "100%" : `${Number(width)}px`;
+        previewDialog.querySelectorAll("button[data-preview-width]").forEach(button => {
+          const active = button.dataset.previewWidth === String(width);
+          button.classList.toggle("active", active);
+          button.setAttribute("aria-pressed", String(active));
+        });
+        previewReport.textContent = width === "desktop"
+          ? "Desktop viewport · checking layout…"
+          : `${width} px viewport · checking layout…`;
+        previewReport.classList.remove("warning");
+      }
+
+      let previewExpectsMath = false;
+
+      async function loadReaderPreview() {
+        const sequence = ++previewSequence;
+        const html = currentHtml();
+        previewExpectsMath = /\$\$[\s\S]*?\$\$|\\\([^)]*\\\)|\\\[[\s\S]*?\\\]/.test(html);
+        previewToken = typeof crypto.randomUUID === "function"
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        previewReport.textContent = "Preparing isolated reader preview…";
+        previewReport.classList.remove("warning");
+        try {
+          const prepared = await prepareHtmlForVisual(html);
+          if (sequence !== previewSequence || !previewDialog.open) return;
+          previewFrame.srcdoc = injectPreviewInstrumentation(prepared, previewToken);
+        } catch (error) {
+          if (sequence !== previewSequence) return;
+          previewReport.textContent = `Preview failed: ${error.message}`;
+          previewReport.classList.add("warning");
+        }
+      }
+
+      function openReaderPreview() {
+        if (!previewDialog.open) previewDialog.showModal();
+        applyPreviewWidth(previewWidth);
+        loadReaderPreview();
+      }
+
+      function closeReaderPreview() {
+        previewSequence += 1;
+        previewToken = "";
+        previewFrame.removeAttribute("srcdoc");
+        previewReport.textContent = "Preview not loaded";
+        previewReport.classList.remove("warning");
+        if (previewDialog.open) previewDialog.close();
+      }
+
+      function handlePreviewReport(event) {
+        const data = event.data;
+        if (!previewDialog.open || data?.type !== "lw-reader-preview-report" || data.token !== previewToken) return;
+        const width = previewWidth === "desktop"
+          ? `${data.viewportWidth} px desktop`
+          : `${previewWidth} px frame (${data.viewportWidth} px content)`;
+        const layout = data.overflowPixels
+          ? `horizontal overflow +${data.overflowPixels}px${data.culprits.length ? ` (${data.culprits.join(", ")})` : ""}`
+          : "no horizontal overflow";
+        const math = previewExpectsMath
+          ? (data.mathCount ? `MathJax rendered ${data.mathCount}` : "MathJax loading or unavailable")
+          : "no maths detected";
+        const enhancements = data.chapterRows || data.termMarks
+          ? `reader scripts active (${data.chapterRows} chapter headers, ${data.termMarks} term marks)`
+          : "reader scripts loaded";
+        previewReport.textContent = `${width} · ${layout} · ${math} · ${enhancements}`;
+        const mathFailed = previewExpectsMath && ["settled", "math-error"].includes(data.stage) && !data.mathCount;
+        previewReport.classList.toggle("warning", Boolean(data.overflowPixels || mathFailed));
+      }
+
       function checkDocumentIntegrity(html = currentHtml()) {
         const doc = new DOMParser().parseFromString(html, "text/html");
         const errors = [];
         const warnings = [];
+        const issues = [];
+
+        function issueTargetId(element) {
+          if (!element) return "";
+          if (element.id) return element.id;
+          return element.closest?.("[id]")?.id || "";
+        }
+
+        function addIssue(severity, message, element = null) {
+          const item = { severity, message, targetId: issueTargetId(element) };
+          issues.push(item);
+          (severity === "error" ? errors : warnings).push(message);
+        }
 
         const ids = new Map();
         for (const element of doc.querySelectorAll("[id]")) {
           const id = element.id;
           if (!id) {
-            warnings.push(`Empty id on <${element.tagName.toLowerCase()}>.`);
+            addIssue("warning", `Empty id on <${element.tagName.toLowerCase()}>.`, element);
             continue;
           }
           ids.set(id, (ids.get(id) || 0) + 1);
         }
         const duplicateIds = [...ids].filter(([, count]) => count > 1).map(([id]) => id);
-        if (duplicateIds.length) errors.push(`Duplicate id(s): ${duplicateIds.join(", ")}`);
+        if (duplicateIds.length) {
+          addIssue(
+            "error",
+            `Duplicate id(s): ${duplicateIds.join(", ")}`,
+            doc.getElementById(duplicateIds[0])
+          );
+        }
 
-        const brokenInternal = new Set();
+        const brokenInternal = new Map();
         for (const link of doc.querySelectorAll("a[href^='#']")) {
           const raw = link.getAttribute("href").slice(1);
           if (!raw) continue;
           const id = safeDecode(raw);
-          if (!ids.has(id)) brokenInternal.add(`#${id}`);
+          if (!ids.has(id) && !brokenInternal.has(id)) brokenInternal.set(id, link);
         }
-        if (brokenInternal.size) {
-          errors.push(`Broken internal link(s): ${[...brokenInternal].join(", ")}`);
+        for (const [id, link] of brokenInternal) {
+          addIssue("error", `Broken internal link: #${id}`, link);
         }
 
-        const unsafeLinks = [...doc.querySelectorAll("a[href]")]
-          .map(link => link.getAttribute("href") || "")
-          .filter(href => /^(?:javascript|vbscript|data):/i.test(href));
-        if (unsafeLinks.length) errors.push(`Unsafe link URL(s): ${unsafeLinks.join(", ")}`);
+        for (const link of doc.querySelectorAll("a[href]")) {
+          const href = link.getAttribute("href") || "";
+          if (/^(?:javascript|vbscript|data):/i.test(href)) {
+            addIssue("error", `Unsafe link URL: ${href}`, link);
+          }
+        }
 
         const refs = [...doc.querySelectorAll("a.footnote-ref")];
         const notes = new Map(
@@ -1405,29 +3375,78 @@
           const key = href.startsWith("#fn:") ? href.slice(4) : "";
           const sup = link.closest("sup");
           if (!key || !sup || sup.id !== `fnref:${key}`) {
-            errors.push(`Malformed footnote reference near number ${link.textContent.trim() || index + 1}.`);
+            addIssue("error", `Malformed footnote reference near number ${link.textContent.trim() || index + 1}.`, link);
             return;
           }
           referencedKeys.push(key);
-          if (!notes.has(key)) errors.push(`Footnote reference ${key} has no matching note.`);
+          if (!notes.has(key)) addIssue("error", `Footnote reference ${key} has no matching note.`, link);
           if (link.textContent.trim() !== String(index + 1)) {
-            errors.push(`Footnote ${key} is numbered ${link.textContent.trim() || "?"}, expected ${index + 1}.`);
+            addIssue(
+              "error",
+              `Footnote ${key} is numbered ${link.textContent.trim() || "?"}, expected ${index + 1}.`,
+              link
+            );
           }
           const backref = notes.get(key)?.querySelector("a.footnote-backref, a.footnote");
           if (!backref || backref.getAttribute("href") !== `#fnref:${key}`) {
-            errors.push(`Footnote ${key} has no valid back-reference.`);
+            addIssue("error", `Footnote ${key} has no valid back-reference.`, notes.get(key) || link);
           }
         });
         if (new Set(referencedKeys).size !== referencedKeys.length) {
-          errors.push("A footnote is referenced more than once.");
+          addIssue("error", "A footnote is referenced more than once.");
         }
         const orphans = [...notes.keys()].filter(key => !referencedKeys.includes(key));
-        if (orphans.length) errors.push(`Footnote(s) without a reference: ${orphans.join(", ")}`);
+        if (orphans.length) {
+          addIssue("error", `Footnote(s) without a reference: ${orphans.join(", ")}`, notes.get(orphans[0]));
+        }
 
         const missingHeadingIds = [...doc.querySelectorAll("article h2:not([id]), article h3:not([id])")]
-          .filter(heading => !heading.closest("figure, aside, details"));
-        if (missingHeadingIds.length) {
-          warnings.push(`${missingHeadingIds.length} article heading(s) have no id and cannot be linked internally.`);
+          .filter(heading => !heading.closest("figure, aside, details, .part-divider, .exercise"));
+        for (const heading of missingHeadingIds) {
+          addIssue(
+            "warning",
+            `Heading “${outlineHeadingText(heading)}” has no id and cannot be linked internally.`,
+            heading
+          );
+        }
+
+        for (const image of doc.querySelectorAll("img")) {
+          if (!image.hasAttribute("alt") || !image.getAttribute("alt").trim()) {
+            addIssue("warning", `Image ${image.getAttribute("src") || "(without src)"} has no alternative text.`, image);
+          }
+        }
+
+        for (const element of doc.querySelectorAll("[aria-labelledby], [aria-describedby], label[for]")) {
+          for (const attribute of ["aria-labelledby", "aria-describedby", "for"]) {
+            const value = element.getAttribute(attribute);
+            if (!value) continue;
+            for (const id of value.trim().split(/\s+/)) {
+              if (!ids.has(id)) addIssue("error", `${attribute} points to missing id #${id}.`, element);
+            }
+          }
+        }
+
+        for (const figure of doc.querySelectorAll("figure.ir-figure")) {
+          if (!figure.querySelector(":scope > .figure-title")) {
+            addIssue("warning", "Textbook figure has no direct .figure-title.", figure);
+          }
+          const caption = figure.querySelector(":scope > figcaption");
+          if (!caption) addIssue("error", "Textbook figure has no figcaption.", figure);
+          else if (!caption.querySelector(".asset-label-inline")) {
+            addIssue("warning", "Textbook figure caption has no numbered asset label.", figure);
+          }
+        }
+
+        for (const table of doc.querySelectorAll(".table-wrap > table")) {
+          if (!table.parentElement.previousElementSibling?.classList.contains("asset-label")) {
+            addIssue("warning", "Textbook table has no .asset-label immediately before .table-wrap.", table);
+          }
+        }
+
+        for (const details of doc.querySelectorAll("details")) {
+          if (!details.querySelector(":scope > summary")) {
+            addIssue("error", "A details element has no direct summary.", details);
+          }
         }
 
         const missingLocal = new Set();
@@ -1441,15 +3460,19 @@
             }
           }
         }
-        if (missingLocal.size) warnings.push(`Missing local file(s): ${[...missingLocal].join(", ")}`);
+        if (missingLocal.size) addIssue("warning", `Missing local file(s): ${[...missingLocal].join(", ")}`);
 
         return {
           errors,
           warnings,
+          issues,
           counts: {
             ids: ids.size,
             internalLinks: doc.querySelectorAll("a[href^='#']").length,
-            footnotes: refs.length
+            footnotes: refs.length,
+            figures: doc.querySelectorAll("figure").length,
+            tables: doc.querySelectorAll("table").length,
+            images: doc.querySelectorAll("img").length
           }
         };
       }
@@ -1465,32 +3488,227 @@
         return `passed: ${report.counts.ids} ids, ${report.counts.internalLinks} internal links, ${report.counts.footnotes} footnotes`;
       }
 
+      function renderDiagnostics(report) {
+        diagnosticsPanel.hidden = false;
+        diagnosticsSummary.textContent = `Check ${integritySummary(report)}. ` +
+          `${report.counts.figures} figures, ${report.counts.tables} tables and ${report.counts.images} images inspected.`;
+        diagnosticsList.replaceChildren();
+
+        if (!report.issues.length) {
+          const ok = document.createElement("p");
+          ok.className = "diagnostic-ok";
+          ok.textContent = "No document-integrity problems were found.";
+          diagnosticsList.appendChild(ok);
+          return;
+        }
+
+        for (const item of report.issues) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `diagnostic-item ${item.severity}`;
+          button.textContent = `${item.severity.toUpperCase()}: ${item.message}`;
+          if (item.targetId) {
+            button.dataset.targetId = item.targetId;
+            button.title = `Jump to #${item.targetId}`;
+          } else {
+            button.disabled = true;
+          }
+          diagnosticsList.appendChild(button);
+        }
+      }
+
+      async function jumpToDiagnosticTarget(targetId) {
+        if (!targetId) return;
+        if (currentMode === "source") {
+          await switchMode("visual");
+          setTimeout(() => jumpToDiagnosticTarget(targetId), 100);
+          return;
+        }
+        const doc = editorDocument();
+        const target = doc?.getElementById(targetId);
+        if (!target) {
+          setStatus(`Could not find #${targetId} in the visual editor.`, true);
+          return;
+        }
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        const range = doc.createRange();
+        range.selectNodeContents(target);
+        range.collapse(true);
+        restoreVisualRange(doc, range);
+        updateOutlineActive(doc);
+        setStatus(`Jumped to #${targetId}.`);
+      }
+
       function showIntegrityCheck() {
         const report = checkDocumentIntegrity();
         const summary = integritySummary(report);
         setStatus(`Check ${summary}.`, Boolean(report.errors.length));
-        if (report.errors.length || report.warnings.length) {
-          const lines = [
-            ...report.errors.map(item => `ERROR: ${item}`),
-            ...report.warnings.map(item => `WARNING: ${item}`)
-          ];
-          alert(`Document check\n\n${lines.join("\n")}`);
-        }
+        renderDiagnostics(report);
         return report;
       }
 
-      function downloadHtml(html) {
+      function downloadNamedHtml(html, filename) {
         const blob = new Blob([html], { type: "text/html;charset=utf-8" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = currentFilename || "document.html";
+        link.download = filename || "document.html";
         document.body.appendChild(link);
         link.click();
         link.remove();
         setTimeout(() => URL.revokeObjectURL(url), 30000);
+      }
+
+      function downloadHtml(html) {
+        downloadNamedHtml(html, currentFilename || "document.html");
+        baselineHtml = html;
         markDirty(false);
+        acceptVisualHistoryBaseline();
         setStatus(`Downloaded ${currentFilename}. Replace the repository copy with this file if your browser renamed or relocated it.`);
+      }
+
+      function backupFilename() {
+        const stamp = new Date().toISOString().replace(/[:T]/g, "-").replace(/\.\d+Z$/, "Z");
+        const stem = (currentFilename || "document.html").replace(/\.html?$/i, "");
+        return `${stem}.backup-${stamp}.html`;
+      }
+
+      function downloadBaselineBackup() {
+        if (!baselineHtml) {
+          setStatus("There is no opened or previously saved version to back up.", true);
+          return;
+        }
+        const filename = backupFilename();
+        downloadNamedHtml(baselineHtml, filename);
+        setStatus(`Downloaded backup ${filename}.`);
+      }
+
+      function summariseHtml(html) {
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        const text = doc.body?.textContent || "";
+        const ids = new Map(
+          [...doc.querySelectorAll("[id]")].map(element => [element.id, element.outerHTML])
+        );
+        return {
+          normalised: doc.documentElement?.outerHTML || html,
+          words: text.trim() ? text.trim().split(/\s+/).length : 0,
+          characters: text.length,
+          bytes: new Blob([html]).size,
+          ids,
+          counts: {
+            elements: doc.querySelectorAll("body *").length,
+            headings: doc.querySelectorAll("h1, h2, h3, h4, h5, h6").length,
+            links: doc.querySelectorAll("a[href]").length,
+            images: doc.querySelectorAll("img").length,
+            figures: doc.querySelectorAll("figure").length,
+            tables: doc.querySelectorAll("table").length,
+            footnotes: doc.querySelectorAll("a.footnote-ref").length,
+            ids: ids.size
+          }
+        };
+      }
+
+      function compareDocuments(beforeHtml, afterHtml) {
+        const before = summariseHtml(beforeHtml || starterDocument);
+        const after = summariseHtml(afterHtml);
+        const addedIds = [...after.ids.keys()].filter(id => !before.ids.has(id));
+        const removedIds = [...before.ids.keys()].filter(id => !after.ids.has(id));
+        const changedIds = [...after.ids.keys()].filter(id =>
+          before.ids.has(id) && before.ids.get(id) !== after.ids.get(id)
+        );
+        const countChanges = [];
+        for (const key of Object.keys(after.counts)) {
+          if (before.counts[key] !== after.counts[key]) {
+            countChanges.push(`${key}: ${before.counts[key].toLocaleString()} → ${after.counts[key].toLocaleString()}`);
+          }
+        }
+        if (before.words !== after.words) {
+          countChanges.push(`words: ${before.words.toLocaleString()} → ${after.words.toLocaleString()}`);
+        }
+        if (before.characters !== after.characters) {
+          countChanges.push(`text characters: ${before.characters.toLocaleString()} → ${after.characters.toLocaleString()}`);
+        }
+        return {
+          changed: before.normalised !== after.normalised,
+          bytesBefore: before.bytes,
+          bytesAfter: after.bytes,
+          countChanges,
+          addedIds,
+          removedIds,
+          changedIds
+        };
+      }
+
+      function appendReviewList(title, items, limit = 18) {
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+        saveReviewBody.appendChild(heading);
+        if (!items.length) {
+          const empty = document.createElement("p");
+          empty.className = "dialog-note";
+          empty.textContent = "None.";
+          saveReviewBody.appendChild(empty);
+          return;
+        }
+        const list = document.createElement("ul");
+        items.slice(0, limit).forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          list.appendChild(li);
+        });
+        if (items.length > limit) {
+          const li = document.createElement("li");
+          li.textContent = `…and ${items.length - limit} more`;
+          list.appendChild(li);
+        }
+        saveReviewBody.appendChild(list);
+      }
+
+      function renderSaveReview(diff, report) {
+        saveReviewBody.replaceChildren();
+
+        const summary = document.createElement("p");
+        summary.className = "dialog-note";
+        summary.textContent = diff.changed
+          ? `The document changed. File size is ${diff.bytesBefore.toLocaleString()} → ${diff.bytesAfter.toLocaleString()} bytes.`
+          : "No semantic DOM changes were detected against the last opened or saved version.";
+        saveReviewBody.appendChild(summary);
+
+        appendReviewList("Count changes", diff.countChanges);
+        appendReviewList("Added IDs", diff.addedIds.map(id => `#${id}`));
+        appendReviewList("Removed IDs", diff.removedIds.map(id => `#${id}`));
+        appendReviewList("Changed identified elements", diff.changedIds.map(id => `#${id}`));
+
+        const diagnosticItems = [
+          ...report.errors.map(item => `ERROR: ${item}`),
+          ...report.warnings.map(item => `WARNING: ${item}`)
+        ];
+        appendReviewList(`Diagnostics — ${integritySummary(report)}`, diagnosticItems, 12);
+
+        backupSaveReviewBtn.disabled = !baselineHtml;
+        confirmSaveReviewBtn.textContent = currentFileHandle?.createWritable
+          ? (report.errors.length ? "Save anyway" : "Save HTML")
+          : (report.errors.length ? "Download anyway" : "Download HTML");
+      }
+
+      function finishSaveReview(result) {
+        if (saveReviewDialog.open) saveReviewDialog.close();
+        const resolve = pendingSaveReview;
+        pendingSaveReview = null;
+        resolve?.(result);
+      }
+
+      function reviewBeforeSave(html, report) {
+        const diff = compareDocuments(baselineHtml || starterDocument, html);
+        renderSaveReview(diff, report);
+        if (!saveReviewDialog.showModal) {
+          return Promise.resolve(confirm(
+            `Review: ${diff.countChanges.join(", ") || "no count changes"}. ` +
+            `Check ${integritySummary(report)}. Continue?`
+          ) ? "save" : "cancel");
+        }
+        saveReviewDialog.showModal();
+        return new Promise(resolve => { pendingSaveReview = resolve; });
       }
 
       async function ensureWritePermission(handle) {
@@ -1513,18 +3731,17 @@
       }
 
       async function saveFile() {
-        if (saveInProgress) return;
+        if (saveInProgress || saveReviewDialog.open) return;
+        if (currentMode === "source") {
+          updateTextbookMode(new DOMParser().parseFromString(sourceEditor.value, "text/html"));
+        }
+        const maintenance = textbookMode ? maintainCurrentTextbook({ announce: false }) : null;
         const html = currentHtml({ renumberVisualFootnotes: true });
-        const report = checkDocumentIntegrity(html);
-        if (report.errors.length) {
-          const proceed = confirm(
-            `The document check found ${integritySummary(report)}. ` +
-            "Saving may leave broken links or footnotes. Save anyway?"
-          );
-          if (!proceed) {
-            setStatus("Save cancelled. Use Check for details.", true);
-            return;
-          }
+        const report = mergeMaintenanceProblems(checkDocumentIntegrity(html), maintenance);
+        const reviewResult = await reviewBeforeSave(html, report);
+        if (reviewResult !== "save") {
+          setStatus("Save cancelled.");
+          return;
         }
 
         if (!currentFileHandle?.createWritable) {
@@ -1540,7 +3757,9 @@
           if (currentDocumentPath && projectFiles.has(currentDocumentPath)) {
             registerProjectFile(currentDocumentPath, await currentFileHandle.getFile(), currentFileHandle);
           }
+          baselineHtml = html;
           markDirty(false);
+          acceptVisualHistoryBaseline();
           setStatus(`Saved directly to ${currentFilename}. Git can now review the change.`);
         } catch (error) {
           setStatus(`Could not save directly: ${error.message}`, true);
@@ -1552,6 +3771,8 @@
       }
 
       async function showOpenedHtml(html, fileName, documentPath = "") {
+        diagnosticsPanel.hidden = true;
+        outlineSearch.value = "";
         currentFilename = fileName.replace(/\.(html?)$/i, "") + ".html";
         updateSaveButton();
         currentDocumentPath = normalisePath(documentPath);
@@ -1568,6 +3789,7 @@
         }
 
         await loadVisual(html);
+        baselineHtml = html;
         markDirty(false);
       }
 
@@ -1759,6 +3981,8 @@
 
       async function newDocument() {
         if (!confirmDiscardUnsaved("create a new document")) return;
+        diagnosticsPanel.hidden = true;
+        outlineSearch.value = "";
         clearProject();
         currentFilename = "untitled.html";
         updateSaveButton();
@@ -1774,37 +3998,96 @@
           currentMode = "visual";
         }
         await loadVisual(starterDocument);
+        baselineHtml = starterDocument;
         markDirty(false);
         setStatus("New document");
       }
 
       visualModeBtn.addEventListener("click", () => switchMode("visual"));
       sourceModeBtn.addEventListener("click", () => switchMode("source"));
+      outlineToggleBtn.addEventListener("click", () => {
+        setOutlineExpanded(document.body.classList.contains("outline-collapsed"));
+      });
+      outlineSearch.addEventListener("input", filterOutline);
+      outlineList.addEventListener("click", event => {
+        const button = event.target.closest("button[data-outline-index]");
+        if (button) jumpToOutlineTarget(Number(button.dataset.outlineIndex));
+      });
+      document.getElementById("closeDiagnosticsBtn").addEventListener("click", () => {
+        diagnosticsPanel.hidden = true;
+      });
+      document.getElementById("diagnosticsSaveBtn").addEventListener("click", () => {
+        diagnosticsPanel.hidden = true;
+        saveFile();
+      });
+      diagnosticsList.addEventListener("click", event => {
+        const button = event.target.closest("button[data-target-id]");
+        if (button) jumpToDiagnosticTarget(button.dataset.targetId);
+      });
+      document.getElementById("cancelSaveReviewBtn").addEventListener("click", () => finishSaveReview("cancel"));
+      backupSaveReviewBtn.addEventListener("click", downloadBaselineBackup);
+      confirmSaveReviewBtn.addEventListener("click", () => finishSaveReview("save"));
+      saveReviewDialog.addEventListener("cancel", event => {
+        event.preventDefault();
+        finishSaveReview("cancel");
+      });
 
       document.getElementById("newBtn").addEventListener("click", newDocument);
       document.getElementById("openBtn").addEventListener("click", openHtmlFile);
       document.getElementById("openFolderBtn").addEventListener("click", openWritableFolder);
       document.getElementById("checkBtn").addEventListener("click", showIntegrityCheck);
+      document.getElementById("previewBtn").addEventListener("click", openReaderPreview);
       saveBtn.addEventListener("click", saveFile);
       fileInput.addEventListener("change", () => openFile(fileInput.files[0]));
       folderInput.addEventListener("change", () => openFolder(folderInput.files));
 
       toolbar.addEventListener("click", event => {
         const button = event.target.closest("button[data-command]");
-        if (button) exec(button.dataset.command);
+        if (button) formatCommand(button.dataset.command);
       });
 
       document.getElementById("blockFormat").addEventListener("change", event => {
-        if (event.target.value) exec("formatBlock", event.target.value);
+        if (event.target.value) formatCommand("formatBlock", event.target.value);
         event.target.value = "";
       });
 
       document.getElementById("linkBtn").addEventListener("click", insertLink);
 
-      document.getElementById("unlinkBtn").addEventListener("click", () => exec("unlink"));
+      document.getElementById("unlinkBtn").addEventListener("click", () => formatCommand("unlink"));
       document.getElementById("footnoteBtn").addEventListener("click", insertFootnote);
       document.getElementById("hrBtn").addEventListener("click", () => insertHTML("<hr>"));
       document.getElementById("imageBtn").addEventListener("click", () => imageInput.click());
+      document.getElementById("maintainTextbookBtn").addEventListener("click", () => maintainCurrentTextbook());
+      textbookToolbar.addEventListener("click", event => {
+        const button = event.target.closest("button[data-structure]");
+        if (button) openStructureDialog(button.dataset.structure);
+      });
+      document.getElementById("cancelStructureBtn").addEventListener("click", () => structureDialog.close());
+      structureDialog.addEventListener("cancel", () => { activeStructureType = ""; });
+      structureDialog.addEventListener("close", () => {
+        structureForm.reset();
+        structureFields.replaceChildren();
+      });
+      structureForm.addEventListener("submit", submitStructure);
+      document.getElementById("reloadPreviewBtn").addEventListener("click", loadReaderPreview);
+      document.getElementById("printPreviewBtn").addEventListener("click", () => {
+        if (!previewToken) return;
+        previewFrame.contentWindow?.postMessage({ type: "lw-reader-preview-print", token: previewToken }, "*");
+      });
+      document.getElementById("closePreviewBtn").addEventListener("click", closeReaderPreview);
+      previewDialog.querySelector(".preview-toolbar").addEventListener("click", event => {
+        const button = event.target.closest("button[data-preview-width]");
+        if (!button) return;
+        applyPreviewWidth(button.dataset.previewWidth);
+        setTimeout(() => {
+          previewFrame.contentWindow?.postMessage({ type: "lw-reader-preview-measure", token: previewToken }, "*");
+        }, 100);
+      });
+      previewDialog.addEventListener("cancel", event => {
+        event.preventDefault();
+        closeReaderPreview();
+      });
+      window.addEventListener("message", handlePreviewReport);
 
       function findMatchingProjectPath(file) {
         const matches = [...projectFiles.entries()].filter(([, candidate]) =>
@@ -1916,7 +4199,7 @@
 
       sourceEditor.addEventListener("input", () => {
         markDirty();
-        updateCount();
+        scheduleCountUpdate();
       });
 
       sourceEditor.addEventListener("keydown", event => {
@@ -1964,6 +4247,7 @@
 
       currentDocumentPath = "untitled.html";
       sourceEditor.value = starterDocument;
+      baselineHtml = starterDocument;
       updateSaveButton();
       loadVisual(starterDocument);
       markDirty(false);
