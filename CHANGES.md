@@ -21,3 +21,12 @@
 - Verification: all substantive words from the split/moved source ranges are preserved; 530 IDs are unique; all 399 internal targets resolve; all 55 footnote pairs remain intact and sequential; styles, scripts, and Appendix F are byte-identical to baseline.
 - The full-section Chapter 5-family word count is 4,524 versus 4,459 before the split (+1.46%) because the mandatory new chapter header, central question, stage map, and structural labels add 65 words. The moved substantive content itself is exactly word-preserved, which is the Phase 1 tolerance check used by `verify.py`.
 - Snapshot audit: `phase1-audit.json`.
+
+## Phase 2 — figure and table renumbering
+
+- Kept Figures 5.1–5.6 in Chapter 5.
+- Renumbered the moved Chapter 6 assets to Table 6.1 and Figures 6.1–6.3.
+- Shifted all Chapter 6–13 asset prefixes to 7–15 using temporary ASCII tokens, including labels, IDs, hrefs, prose references, and the back-matter indexes.
+- Renumbered the moved RRF worked example from Table E.1 / `tbl-e-1` to Table 10.1 / `tbl-10-1`. Appendix E retains Tables E.2–E.5 as required by the plan's no-renumbering rule for remaining lettered assets.
+- Verification: all 195 asset occurrences remain; all 96 physical labels and generated IDs are unique and mutually consistent; every occurrence has a physical label; no asset token remains; Appendix F, scripts, and styles are byte-identical to baseline.
+- Snapshot audit: `phase2-audit.json`.

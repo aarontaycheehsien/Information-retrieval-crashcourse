@@ -365,9 +365,92 @@ def phase1(document: str, baseline: dict) -> str:
     return document
 
 
+def phase2(document: str, baseline: dict) -> str:
+    if 'id="sec-retrieval-encoder"' not in document or 'id="sec-hybrid-and-fusion"' not in document:
+        raise RuntimeError("Phase 2 requires the Phase 1 structure")
+    if "%%ASSET" in document:
+        raise RuntimeError("unresolved asset token found before Phase 2")
+    original_tokens = sorted(set(re.findall(r"%%[A-Z0-9]+%%", document)))
+    substitutions: list[tuple[str, int]] = []
+
+    def exact(old: str, token: str, label: str) -> None:
+        nonlocal document
+        count = document.count(old)
+        if count == 0:
+            raise RuntimeError("Phase 2 target not found: " + label)
+        document = document.replace(old, token)
+        substitutions.append((label, count))
+
+    # The second half of old Chapter 5 becomes the new Chapter 6.
+    exact("Table 5.1", "Table %%ASSETT61%%", "Table 5.1 -> 6.1")
+    exact("tbl-5-1", "%%ASSETIDT61%%", "tbl-5-1 -> tbl-6-1")
+    for old_index, new_index in ((7, 1), (8, 2), (9, 3)):
+        exact(
+            "Figure 5.%d" % old_index,
+            f"Figure %%ASSETF6{new_index}%%",
+            "Figure 5.%d -> 6.%d" % (old_index, new_index),
+        )
+        exact(
+            "fig-5-%d" % old_index,
+            f"%%ASSETIDF6{new_index}%%",
+            "fig-5-%d -> fig-6-%d" % (old_index, new_index),
+        )
+
+    # Existing chapter prefixes shift around the two inserted chapters.
+    for old_prefix, new_prefix in ((13, 15), (12, 14), (11, 13), (10, 12), (9, 11), (8, 9), (7, 8), (6, 7)):
+        text_pattern = re.compile(r"\b(Figure|Table) %d\.(\d+)\b" % old_prefix)
+        id_pattern = re.compile(r"\b(fig|tbl)-%d-(\d+)\b" % old_prefix)
+        text_matches = len(text_pattern.findall(document))
+        id_matches = len(id_pattern.findall(document))
+        if text_matches == 0 or id_matches == 0:
+            raise RuntimeError("no asset text/id matches for Chapter %d" % old_prefix)
+        document = text_pattern.sub(
+            lambda match: f"{match.group(1)} %%ASSETP{new_prefix}%%.{match.group(2)}",
+            document,
+        )
+        document = id_pattern.sub(
+            lambda match: f"{match.group(1)}-%%ASSETIDP{new_prefix}%%-{match.group(2)}",
+            document,
+        )
+        substitutions.append(("asset prefix %d -> %d" % (old_prefix, new_prefix), text_matches + id_matches))
+
+    # The worked RRF table moved out of Appendix E with its section.
+    exact("Table E.1", "Table %%ASSETT101%%", "Table E.1 -> 10.1")
+    exact("tbl-e-1", "%%ASSETIDT101%%", "tbl-e-1 -> tbl-10-1")
+
+    resolutions = {
+        "%%ASSETT61%%": "6.1",
+        "%%ASSETIDT61%%": "tbl-6-1",
+        "%%ASSETF61%%": "6.1",
+        "%%ASSETF62%%": "6.2",
+        "%%ASSETF63%%": "6.3",
+        "%%ASSETIDF61%%": "fig-6-1",
+        "%%ASSETIDF62%%": "fig-6-2",
+        "%%ASSETIDF63%%": "fig-6-3",
+        "%%ASSETT101%%": "10.1",
+        "%%ASSETIDT101%%": "tbl-10-1",
+    }
+    for new_prefix in (15, 14, 13, 12, 11, 9, 8, 7):
+        resolutions[f"%%ASSETP{new_prefix}%%"] = str(new_prefix)
+        resolutions[f"%%ASSETIDP{new_prefix}%%"] = str(new_prefix)
+    for token, value in resolutions.items():
+        if token in document:
+            document = document.replace(token, value)
+    if "%%ASSET" in document:
+        raise RuntimeError("Phase 2 left unresolved asset tokens")
+    if sorted(set(re.findall(r"%%[A-Z0-9]+%%", document))) != original_tokens:
+        raise RuntimeError("Phase 2 changed non-asset placeholder tokens")
+
+    print("asset substitutions:")
+    for label, count in substitutions:
+        print("  ", label, count)
+    validate_common(document, baseline, require_app_f_exact=True)
+    return document
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("phase1",))
+    parser.add_argument("phase", choices=("phase1", "phase2"))
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -377,6 +460,8 @@ def main() -> None:
 
     if args.phase == "phase1":
         updated = phase1(document, baseline)
+    elif args.phase == "phase2":
+        updated = phase2(document, baseline)
     else:
         raise AssertionError(args.phase)
 

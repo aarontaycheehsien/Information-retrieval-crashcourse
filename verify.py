@@ -157,6 +157,42 @@ def main() -> None:
             "only the four planned Phase 1 tokens are present",
         )
 
+    if args.phase == "2":
+        expected_prefixes = {
+            "1": 10, "2": 10, "3": 8, "4": 6, "5": 12, "6": 8,
+            "7": 14, "8": 20, "9": 15, "10": 2, "11": 17, "12": 10,
+            "13": 7, "14": 6, "15": 6, "A": 2, "B": 4, "C": 10,
+            "D": 8, "E": 8, "F": 12,
+        }
+        require(audit["summary"]["numbered_asset_count"] == 195, "all 195 asset occurrences remain")
+        require(audit["summary"]["asset_prefix_counts"] == expected_prefixes, "asset prefix counts match Phase 2")
+        objects = audit["labelled_asset_objects"]
+        object_labels = [item["label"] for item in objects]
+        require(len(object_labels) == len(set(object_labels)) == 96, "all 96 physical asset labels are unique")
+        require(
+            set(item["label"] for item in audit["numbered_assets"]) == set(object_labels),
+            "every asset occurrence has a matching physical label",
+        )
+        bad_ids = []
+        for item in objects:
+            expected_id = ("fig" if item["kind"] == "Figure" else "tbl") + "-%s-%d" % (
+                item["prefix"].lower(), item["index"]
+            )
+            if item["id"] != expected_id:
+                bad_ids.append("%s has %s, expected %s" % (item["label"], item["id"], expected_id))
+        require(not bad_ids, "all physical asset IDs match their labels")
+        moved_table = [item for item in objects if item["label"] == "Table 10.1"]
+        require(
+            len(moved_table) == 1 and moved_table[0]["section_id"] == "sec-hybrid-and-fusion",
+            "the RRF worked example is Table 10.1 in the hybrid/fusion chapter",
+        )
+        require("%%ASSET" not in current, "no Phase 2 asset tokens remain")
+        require(
+            sorted(set(re.findall(r"%%[A-Z0-9]+%%", current)))
+            == ["%%NEW10%%", "%%NEW6%%", "%%TIME10%%", "%%TIME6%%"],
+            "Phase 1 structural tokens remain unchanged",
+        )
+
     print("verification complete for phase", args.phase)
 
 
