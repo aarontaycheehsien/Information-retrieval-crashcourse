@@ -9,6 +9,7 @@ exercise a phase without changing the book.
 from __future__ import annotations
 
 import argparse
+import collections
 import hashlib
 import json
 import os
@@ -18,6 +19,7 @@ import re
 REPO = os.path.dirname(os.path.abspath(__file__))
 BOOK = os.path.join(REPO, "search-textbook.html")
 BASELINE = os.path.join(REPO, "baseline.json")
+PHASE2_AUDIT = os.path.join(REPO, "phase2-audit.json")
 
 
 def read_bytes(path: str) -> tuple[bytes, str]:
@@ -448,9 +450,82 @@ def phase2(document: str, baseline: dict) -> str:
     return document
 
 
+def phase3(document: str, baseline: dict) -> str:
+    with open(PHASE2_AUDIT, encoding="utf-8") as handle:
+        phase2_audit = json.load(handle)
+    current_hash = hashlib.sha256(document.encode("utf-8")).hexdigest()
+    if current_hash != phase2_audit["metadata"]["sha256"]:
+        raise RuntimeError("Phase 3 input does not match the Phase 2 snapshot")
+
+    original_tokens = sorted(set(re.findall(r"%%[A-Z0-9]+%%", document)))
+    simple_map = {6: 7, 7: 8, 9: 11, 10: 12, 11: 13, 12: 14, 13: 15}
+    expected_counts = {6: 7, 7: 3, 9: 6, 10: 5, 11: 5, 12: 9, 13: 10}
+    edits = []
+    observed = collections.Counter()
+    for reference in phase2_audit["textual_references"]:
+        match = re.fullmatch(r"Chapter (\d+)", reference["match"])
+        if not match or reference["zone"] not in ("prose", "end-matter"):
+            continue
+        old_number = int(match.group(1))
+        if old_number not in simple_map:
+            continue
+        start = int(reference["position"])
+        old_text = "Chapter %d" % old_number
+        if document[start : start + len(old_text)] != old_text:
+            raise RuntimeError("Phase 3 position drift at %d for %s" % (start, old_text))
+        token = f"%%CHAPTER{simple_map[old_number]}%%"
+        edits.append((start, start + len(old_text), token))
+        observed[old_number] += 1
+    if dict(observed) != expected_counts:
+        raise RuntimeError("Phase 3 simple-reference counts changed: %r" % dict(observed))
+    for start, end, token in sorted(edits, reverse=True):
+        document = document[:start] + token + document[end:]
+
+    ranges = [
+        ("Chapters 5 and 6", "%%RANGE5TO7%%", "Chapters 5 to 7", 1),
+        ("Chapters 5–6", "%%RANGE5DASH7%%", "Chapters 5–7", 1),
+        ("Chapters 8 and 9", "%%RANGE9TO11%%", "Chapters 9 to 11", 1),
+        (
+            '<a href="#diagnosing-failure">Chapters 11</a>–<a href="#library-practice">13</a>',
+            "%%RANGE13TO15LINKED%%",
+            '<a href="#diagnosing-failure">Chapters 13</a> to <a href="#library-practice">15</a>',
+            2,
+        ),
+        ("Chapters 11 and 12", "%%RANGE13AND14%%", "Chapters 13 and 14", 1),
+        ("Chapters 1 and 12", "%%RANGE1AND14%%", "Chapters 1 and 14", 1),
+    ]
+    for old, token, _, expected in ranges:
+        count = document.count(old)
+        if count != expected:
+            raise RuntimeError("Phase 3 range %r: expected %d, found %d" % (old, expected, count))
+        document = document.replace(old, token)
+
+    app_f_aria_old = 'aria-label="Link to Applying Chapter 13 to active learning"'
+    app_f_aria_token = 'aria-label="Link to Applying %%APPFCH15%% to active learning"'
+    if document.count(app_f_aria_old) != 1:
+        raise RuntimeError("Appendix F heading aria-label did not match uniquely")
+    document = document.replace(app_f_aria_old, app_f_aria_token)
+
+    for new_number in simple_map.values():
+        document = document.replace(f"%%CHAPTER{new_number}%%", "Chapter %d" % new_number)
+    for _, token, replacement, _ in ranges:
+        document = document.replace(token, replacement)
+    document = document.replace("%%APPFCH15%%", "Chapter 15")
+
+    if sorted(set(re.findall(r"%%[A-Z0-9]+%%", document))) != original_tokens:
+        raise RuntimeError("Phase 3 changed or left non-structural placeholder tokens")
+    for phrase, expected in baseline["guards"]["exclusion_exact_text_counts"].items():
+        if document.count(phrase) != expected:
+            raise RuntimeError("exclusion changed: %r" % phrase)
+    validate_common(document, baseline, require_app_f_exact=False)
+    print("simple Chapter substitutions:", dict(sorted(observed.items())))
+    print("range substitutions:", sum(item[3] for item in ranges))
+    return document
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("phase1", "phase2"))
+    parser.add_argument("phase", choices=("phase1", "phase2", "phase3"))
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -462,6 +537,8 @@ def main() -> None:
         updated = phase1(document, baseline)
     elif args.phase == "phase2":
         updated = phase2(document, baseline)
+    elif args.phase == "phase3":
+        updated = phase3(document, baseline)
     else:
         raise AssertionError(args.phase)
 

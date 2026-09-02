@@ -31,3 +31,12 @@
 - Renumbered the moved RRF worked example from Table E.1 / `tbl-e-1` to Table 10.1 / `tbl-10-1`. Appendix E retains Tables E.2–E.5 as required by the plan's no-renumbering rule for remaining lettered assets.
 - Verification: all 195 asset occurrences remain; all 96 physical labels and generated IDs are unique and mutually consistent; every occurrence has a physical label; no asset token remains; Appendix F, scripts, and styles are byte-identical to baseline.
 - Snapshot audit: `phase2-audit.json`.
+
+## Phase 3 — unambiguous chapter references
+
+- Updated 45 singular internal chapter references in prose and end matter: old 6→7 (7), 7→8 (3), 9→11 (6), 10→12 (5), 11→13 (5), 12→14 (9), and 13→15 (10).
+- Updated seven specified range constructions, including the two linked `Chapters 11–13` reading-path ranges to `Chapters 13 to 15`.
+- Updated the accessible label for `Applying Chapter 15 to active learning` while retaining its existing non-numeric ID.
+- Left TOCs, chapter navigation, chapter heads, all Chapter 5/8 judged references, external-work titles, and every non-shifting exclusion untouched.
+- Verification: the output is exactly reproducible from the Phase 2 snapshot; all six exclusion strings retain their baseline counts; Appendix F remains within its 0.5% word-count guard, all six F.x label blocks are byte-identical, and all 13 textual `Appendix F` references remain.
+- Snapshot audit: `phase3-audit.json`.
