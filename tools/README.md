@@ -1,5 +1,19 @@
 # Tooling
 
+## Canvas-style annotation helper
+
+Run `tools\start-annotation-editor.cmd` from Windows Explorer, Command Prompt, or PowerShell. It starts a server bound only to `127.0.0.1`, prints a tokenized editor URL, and serves this repository. Keep that terminal open and use the printed URL for Claude proposal controls. Opening the HTML file directly still supports comments, browser storage, sidecar import/export, and Codex copy/import, but not the Claude button.
+
+The full-featured flow is:
+
+1. Open the repository with **Open Folder**, select text in one supported block, and choose **Comment** (or press `Ctrl+Alt+M`).
+2. Use **Run Claude**, or **Copy for Codex** and paste returned JSON through **Import proposal**. When Codex discovers the page's WebMCP tools, it can list annotations, read bounded context, and submit a proposal directly.
+3. Review each proposal. Only **Accept** changes document text; dismissing, retrying, resolving, or deleting does not apply proposal text.
+
+Annotations are stored as `<document-name>.annotations.json` beside the document when a writable folder handle is available. Otherwise they remain in browser storage until exported. Sidecars are ignored by Git by default.
+
+The helper keeps jobs in memory, gives Claude no tools or filesystem access, and requests a strict proposal schema. Stop it with `Ctrl+C`. Automated checks use `node --test tools/annotation-agent-server.test.mjs` and a mock process, so they do not consume a Claude run.
+
 `search-textbook.html` is the **source of truth**. Edit it directly. Nothing
 generates it, and nothing overwrites your prose.
 

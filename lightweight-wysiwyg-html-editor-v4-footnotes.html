@@ -15,6 +15,13 @@
       --border: #d9dde3;
       --accent: #2457d6;
       --accent-contrast: #ffffff;
+      --accent-soft: #e8efff;
+      --comment: #a65d00;
+      --comment-soft: #fff1cf;
+      --proposal: #6b45c6;
+      --proposal-soft: #eee8ff;
+      --resolved: #1f7a55;
+      --resolved-soft: #e4f4ec;
       --danger: #b3261e;
       --shadow: 0 1px 3px rgba(0,0,0,.08);
     }
@@ -29,6 +36,13 @@
         --border: #3b414a;
         --accent: #8ab4f8;
         --accent-contrast: #10203d;
+        --accent-soft: #293b59;
+        --comment: #ffbd66;
+        --comment-soft: #493819;
+        --proposal: #c8b5ff;
+        --proposal-soft: #393052;
+        --resolved: #83d7b0;
+        --resolved-soft: #203e33;
         --danger: #f28b82;
         --shadow: 0 1px 4px rgba(0,0,0,.35);
       }
@@ -222,11 +236,19 @@
       padding: .75rem;
       overflow: hidden;
       display: grid;
-      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) minmax(280px, 360px);
       gap: .75rem;
     }
 
     body.outline-collapsed main {
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    }
+
+    body.annotations-collapsed main {
+      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+    }
+
+    body.outline-collapsed.annotations-collapsed main {
       grid-template-columns: minmax(0, 1fr);
     }
 
@@ -245,6 +267,7 @@
     }
 
     body.outline-collapsed #outlinePanel { display: none; }
+    body.annotations-collapsed #annotationPanel { display: none; }
 
     .outline-header {
       display: flex;
@@ -302,6 +325,114 @@
       border-radius: 10px;
       overflow: hidden;
       box-shadow: var(--shadow);
+    }
+
+    #annotationPanel {
+      min-width: 0;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .annotation-header,
+    .annotation-batch,
+    .annotation-footer {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .65rem .7rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .annotation-header strong { font-size: .86rem; }
+    #annotationCount { color: var(--muted); font-size: .72rem; }
+    #annotationBridgeState { margin-left: auto; color: var(--muted); font-size: .7rem; }
+    #annotationBridgeState.ready { color: var(--resolved); font-weight: 750; }
+    .annotation-batch { flex-wrap: wrap; background: var(--panel-2); }
+    .annotation-batch button,
+    .annotation-footer button { min-height: 30px; padding: .25rem .48rem; font-size: .74rem; }
+    #annotationFilter {
+      margin: .6rem .7rem 0;
+      padding: .3rem .45rem;
+      min-height: 32px;
+      font-size: .76rem;
+    }
+
+    #annotationList {
+      min-height: 0;
+      overflow: auto;
+      padding: .65rem;
+      scrollbar-width: thin;
+    }
+
+    .annotation-empty { margin: .4rem; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+    .annotation-card {
+      margin-bottom: .65rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--comment);
+      border-radius: 8px;
+      background: var(--panel-2);
+    }
+    .annotation-card.proposed { border-left-color: var(--proposal); }
+    .annotation-card.resolved { border-left-color: var(--resolved); opacity: .86; }
+    .annotation-card.detached { border-left-color: var(--danger); }
+    .annotation-card.active { box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 28%, transparent); }
+    .annotation-card-head { display: flex; align-items: center; gap: .4rem; padding: .5rem .55rem .25rem; }
+    .annotation-state {
+      padding: .13rem .38rem;
+      border-radius: 999px;
+      background: var(--comment-soft);
+      color: var(--comment);
+      font-size: .66rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .annotation-card.proposed .annotation-state { background: var(--proposal-soft); color: var(--proposal); }
+    .annotation-card.resolved .annotation-state { background: var(--resolved-soft); color: var(--resolved); }
+    .annotation-card.detached .annotation-state { background: color-mix(in srgb, var(--danger) 13%, transparent); color: var(--danger); }
+    .annotation-location { margin-left: auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: .68rem; }
+    .annotation-quote,
+    .annotation-comment,
+    .annotation-rationale { margin: 0; padding: .35rem .55rem; font-size: .76rem; line-height: 1.42; }
+    .annotation-quote { color: var(--muted); font-style: italic; }
+    .annotation-comment { color: var(--text); font-weight: 650; }
+    .annotation-rationale { color: var(--muted); }
+    .annotation-actions { display: flex; flex-wrap: wrap; gap: .35rem; padding: .4rem .55rem .55rem; }
+    .annotation-actions button { min-height: 28px; padding: .2rem .42rem; font-size: .7rem; }
+    .annotation-actions .accept { background: var(--resolved); color: #fff; border-color: transparent; }
+    .annotation-actions .danger-action { color: var(--danger); }
+    .proposal-compare { display: grid; gap: .35rem; padding: .35rem .55rem; }
+    .proposal-pane { padding: .45rem; border-radius: 6px; background: var(--panel); border: 1px solid var(--border); }
+    .proposal-pane strong { display: block; margin-bottom: .2rem; color: var(--muted); font-size: .64rem; text-transform: uppercase; }
+    .proposal-pane div { font-size: .75rem; line-height: 1.45; }
+    .annotation-footer { border-top: 1px solid var(--border); border-bottom: 0; background: var(--panel-2); flex-wrap: wrap; }
+
+    #annotationDialog textarea {
+      width: 100%;
+      min-height: 130px;
+      resize: vertical;
+      padding: .65rem;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      font: inherit;
+    }
+    #annotationDialogQuote {
+      margin: 0 0 .75rem;
+      padding: .6rem .7rem;
+      border-left: 4px solid var(--comment);
+      background: var(--comment-soft);
+      color: var(--text);
+      font-size: .8rem;
+      line-height: 1.45;
     }
 
     #visualEditor, #sourceEditor {
@@ -559,6 +690,12 @@
         z-index: 10;
         width: min(290px, calc(100% - .9rem));
       }
+      #annotationPanel {
+        position: absolute;
+        inset: .45rem .45rem .45rem auto;
+        z-index: 10;
+        width: min(360px, calc(100% - .9rem));
+      }
     }
   </style>
 </head>
@@ -575,6 +712,7 @@
     </div>
 
     <button id="outlineToggleBtn" type="button" aria-expanded="true" title="Show or hide the document outline">Outline</button>
+    <button id="annotationToggleBtn" type="button" aria-expanded="true" title="Show or hide comments and agent proposals">Comments</button>
 
     <button id="newBtn" type="button">New</button>
     <button id="openBtn" type="button" title="Open one HTML file; Chrome and Edge can grant direct-save access">Open HTML</button>
@@ -585,6 +723,7 @@
     <input id="fileInput" type="file" accept=".html,.htm,text/html" hidden>
     <input id="folderInput" type="file" webkitdirectory directory multiple hidden>
     <input id="imageInput" type="file" accept="image/*" hidden>
+    <input id="annotationInput" type="file" accept=".json,application/json" hidden>
   </header>
 
   <div id="toolbar" aria-label="Formatting toolbar">
@@ -618,6 +757,7 @@
     <button id="linkBtn" type="button" title="Insert link">Link</button>
     <button id="unlinkBtn" type="button" title="Remove link">Unlink</button>
     <button id="footnoteBtn" type="button" title="Insert a numbered footnote">Footnote</button>
+    <button id="commentBtn" type="button" title="Comment on selected text (Ctrl+Alt+M)">Comment</button>
     <button id="imageBtn" type="button" title="Insert an image using a relative file path">Image</button>
     <button id="hrBtn" type="button" title="Horizontal rule">Rule</button>
     <span class="separator"></span>
@@ -663,6 +803,31 @@
         spellcheck="false"
       ></textarea>
     </div>
+    <aside id="annotationPanel" aria-label="Comments and agent proposals">
+      <div class="annotation-header">
+        <strong>Comments</strong>
+        <span id="annotationCount">0 open</span>
+        <span id="annotationBridgeState">Local mode</span>
+      </div>
+      <div class="annotation-batch">
+        <button id="runAllClaudeBtn" type="button">Run all with Claude</button>
+        <button id="copyAllCodexBtn" type="button">Copy all for Codex</button>
+      </div>
+      <select id="annotationFilter" aria-label="Filter comments">
+        <option value="active">Open and proposed</option>
+        <option value="open">Open only</option>
+        <option value="proposed">Proposed only</option>
+        <option value="resolved">Resolved</option>
+        <option value="detached">Detached</option>
+        <option value="all">All comments</option>
+      </select>
+      <div id="annotationList"><p class="annotation-empty">Select text in Visual mode and choose Comment.</p></div>
+      <div class="annotation-footer">
+        <button id="importAnnotationsBtn" type="button">Import sidecar</button>
+        <button id="exportAnnotationsBtn" type="button">Export sidecar</button>
+        <button id="importProposalBtn" type="button">Import proposal</button>
+      </div>
+    </aside>
   </main>
 
   <footer>
@@ -705,6 +870,23 @@
       <div class="dialog-actions">
         <button id="cancelStructureBtn" type="button">Cancel</button>
         <button id="insertStructureBtn" class="primary" type="submit">Insert</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="annotationDialog" aria-labelledby="annotationDialogTitle">
+    <form id="annotationForm">
+      <div class="panel-header">
+        <h2 id="annotationDialogTitle">Comment on selected text</h2>
+      </div>
+      <div class="dialog-body">
+        <blockquote id="annotationDialogQuote"></blockquote>
+        <label for="annotationComment"><strong>Instruction for the editor or agent</strong></label>
+        <textarea id="annotationComment" required placeholder="For example: Make this clearer and less repetitive."></textarea>
+      </div>
+      <div class="dialog-actions">
+        <button id="cancelAnnotationBtn" type="button">Cancel</button>
+        <button id="saveAnnotationBtn" class="primary" type="submit">Save comment</button>
       </div>
     </form>
   </dialog>
@@ -778,6 +960,18 @@
       const previewFrame = document.getElementById("previewFrame");
       const previewFrameWrap = document.getElementById("previewFrameWrap");
       const previewReport = document.getElementById("previewReport");
+      const annotationPanel = document.getElementById("annotationPanel");
+      const annotationList = document.getElementById("annotationList");
+      const annotationFilter = document.getElementById("annotationFilter");
+      const annotationCount = document.getElementById("annotationCount");
+      const annotationToggleBtn = document.getElementById("annotationToggleBtn");
+      const annotationBridgeState = document.getElementById("annotationBridgeState");
+      const annotationInput = document.getElementById("annotationInput");
+      const annotationDialog = document.getElementById("annotationDialog");
+      const annotationForm = document.getElementById("annotationForm");
+      const annotationDialogTitle = document.getElementById("annotationDialogTitle");
+      const annotationDialogQuote = document.getElementById("annotationDialogQuote");
+      const annotationComment = document.getElementById("annotationComment");
 
       let currentMode = "visual";
       let currentFilename = "untitled.html";
@@ -805,6 +999,20 @@
       let historyCaptureTimer = null;
       let applyingHistory = false;
       let visualHistoryBaselineHtml = "";
+      let annotations = [];
+      let annotationSidecarHandle = null;
+      let annotationSaveTimer = null;
+      let pendingAnnotationRange = null;
+      let editingAnnotationId = "";
+      let activeAnnotationId = "";
+      let annotationBatchRunning = false;
+      let annotationWebMcpReady = false;
+      let annotationClaudeReady = false;
+
+      const annotationSchemaVersion = 1;
+      const annotationBlockSelector = "p,h1,h2,h3,h4,h5,h6,li,blockquote,pre,td,th,figcaption,summary";
+      const annotationUrlParams = new URLSearchParams(location.search);
+      const annotationBridgeToken = annotationUrlParams.get("bridgeToken") || "";
 
       const projectFiles = new Map();
       const projectFileHandles = new Map();
@@ -999,6 +1207,12 @@
         setCurrentFileHandle(null);
         currentDocumentPath = "";
         projectRootName = "";
+        clearTimeout(annotationSaveTimer);
+        annotationSaveTimer = null;
+        annotationSidecarHandle = null;
+        annotations = [];
+        activeAnnotationId = "";
+        renderAnnotations();
       }
 
       function getAssetObjectUrl(path) {
@@ -1291,6 +1505,7 @@
         }
 
         restoreMachineOwnedSections(clone);
+        cleanAnnotationArtifacts(clone);
 
         for (const element of clone.querySelectorAll("[data-lw-caret-format]")) {
           if (!element.textContent && !element.children.length) element.remove();
@@ -1315,6 +1530,8 @@
           doc.body?.setAttribute("contenteditable", "true");
           const lockedCount = lockMachineOwnedSections(doc);
           updateTextbookMode(doc);
+          ensureAnnotationEditorStyles(doc);
+          reattachAnnotations(doc);
           resetVisualHistory(doc);
           updateFormattingToolbarState(doc);
 
@@ -1345,6 +1562,7 @@
 
           doc.addEventListener("input", () => {
             normaliseEmptyFormattingCaret(doc);
+            syncAnnotationAnchors(doc);
             markDirty();
             scheduleCountUpdate();
             scheduleOutlineRefresh();
@@ -1363,6 +1581,11 @@
             updateFormattingToolbarState(doc);
           });
           doc.addEventListener("keydown", event => {
+            if ((event.ctrlKey || event.metaKey) && event.altKey && event.key.toLowerCase() === "m") {
+              event.preventDefault();
+              openNewAnnotationDialog();
+              return;
+            }
             if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
               event.preventDefault();
               saveFile();
@@ -1515,7 +1738,8 @@
       }
 
       function visualHistoryEntry(doc) {
-        return { html: doc.body.innerHTML, selection: visualSelectionBookmark(doc) };
+        // Annotation wrappers are excluded from history, so live node paths are not stable here.
+        return { html: cleanBodyHtmlForHistory(doc), selection: null };
       }
 
       function updateHistoryButtons() {
@@ -1559,7 +1783,7 @@
       }
 
       function acceptVisualHistoryBaseline() {
-        if (currentMode === "visual") visualHistoryBaselineHtml = editorDocument()?.body?.innerHTML || "";
+        if (currentMode === "visual") visualHistoryBaselineHtml = cleanBodyHtmlForHistory(editorDocument());
       }
 
       function changeVisualHistory(direction) {
@@ -1576,10 +1800,12 @@
           visualHistoryIndex = next;
           doc.body.innerHTML = visualHistory[next].html;
           lockMachineOwnedSections(doc);
+          ensureAnnotationEditorStyles(doc);
+          reattachAnnotations(doc);
           restoreVisualBookmark(doc, visualHistory[next].selection);
           refreshOutline(doc);
           updateCount();
-          markDirty(doc.body.innerHTML !== visualHistoryBaselineHtml);
+          markDirty(cleanBodyHtmlForHistory(doc) !== visualHistoryBaselineHtml);
           setStatus(direction < 0 ? "Undid the last edit." : "Redid the edit.");
         } finally {
           applyingHistory = false;
@@ -3730,6 +3956,1080 @@
         }
       }
 
+      function annotationNow() {
+        return new Date().toISOString();
+      }
+
+      function annotationUuid() {
+        if (crypto.randomUUID) return crypto.randomUUID();
+        return "ann-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
+      }
+
+      function cleanAnnotationArtifacts(root) {
+        if (!root?.querySelectorAll) return root;
+        for (const element of [...root.querySelectorAll("[data-lw-annotation-id]")]) {
+          element.replaceWith(...element.childNodes);
+        }
+        root.querySelectorAll("[data-lw-editor-only]").forEach(element => element.remove());
+        return root;
+      }
+
+      function cleanBodyHtmlForHistory(doc) {
+        if (!doc?.body) return "";
+        const clone = doc.body.cloneNode(true);
+        cleanAnnotationArtifacts(clone);
+        return clone.innerHTML;
+      }
+
+      function annotationSidecarPath() {
+        const path = currentDocumentPath || currentFilename || "untitled.html";
+        const name = basename(path).replace(/\.html?$/i, "") + ".annotations.json";
+        const directory = dirname(path);
+        return normalisePath((directory ? directory + "/" : "") + name);
+      }
+
+      function annotationStorageKey() {
+        return "lw-annotations:" + (projectRootName || "standalone") + ":" +
+          (currentDocumentPath || currentFilename || "untitled.html");
+      }
+
+      function annotationPayload() {
+        return {
+          version: annotationSchemaVersion,
+          documentPath: currentDocumentPath || currentFilename,
+          updatedAt: annotationNow(),
+          annotations: annotations.map(annotation => {
+            const copy = JSON.parse(JSON.stringify(annotation));
+            delete copy.runtimeJobId;
+            delete copy.runtimeError;
+            return copy;
+          })
+        };
+      }
+
+      function normaliseImportedAnnotations(payload) {
+        if (!payload || payload.version !== annotationSchemaVersion || !Array.isArray(payload.annotations)) {
+          throw new Error("This is not a supported annotation sidecar (expected version 1).");
+        }
+        return payload.annotations.map(item => {
+          if (!item?.id || typeof item.comment !== "string" || !item.selector?.exact) {
+            throw new Error("The sidecar contains an invalid annotation.");
+          }
+          return {
+            id: String(item.id),
+            comment: item.comment,
+            status: item.status === "resolved" ? "resolved" : "open",
+            detached: Boolean(item.detached),
+            selector: { ...item.selector },
+            headingPath: Array.isArray(item.headingPath) ? item.headingPath.map(String) : [],
+            createdAt: item.createdAt || annotationNow(),
+            updatedAt: item.updatedAt || item.createdAt || annotationNow(),
+            proposals: Array.isArray(item.proposals) ? item.proposals : [],
+            resolution: item.resolution || null,
+            resolutionHistory: Array.isArray(item.resolutionHistory) ? item.resolutionHistory : []
+          };
+        });
+      }
+
+      async function loadAnnotationsForCurrentDocument() {
+        clearTimeout(annotationSaveTimer);
+        annotationSaveTimer = null;
+        annotationSidecarHandle = null;
+        annotations = [];
+        const sidecarPath = annotationSidecarPath();
+        let payload = null;
+        try {
+          const sidecarFile = getProjectFile(sidecarPath);
+          if (sidecarFile) {
+            payload = JSON.parse(await sidecarFile.text());
+            annotationSidecarHandle = projectFileHandles.get(sidecarPath) || null;
+          } else {
+            const stored = localStorage.getItem(annotationStorageKey());
+            if (stored) payload = JSON.parse(stored);
+          }
+          if (payload) annotations = normaliseImportedAnnotations(payload);
+        } catch (error) {
+          setStatus("Could not load annotations: " + error.message, true);
+          annotations = [];
+        }
+        renderAnnotations();
+      }
+
+      async function writeAnnotationSidecar(payload) {
+        if (!projectDirectoryHandle) return false;
+        const path = annotationSidecarPath();
+        const parts = path.split("/").filter(Boolean);
+        const filename = parts.pop();
+        let directory = projectDirectoryHandle;
+        for (const part of parts) directory = await directory.getDirectoryHandle(part);
+        const handle = await directory.getFileHandle(filename, { create: true });
+        await writeHtmlToHandle(handle, JSON.stringify(payload, null, 2) + "\n");
+        annotationSidecarHandle = handle;
+        registerProjectFile(path, await handle.getFile(), handle);
+        return true;
+      }
+
+      async function saveAnnotationsNow() {
+        clearTimeout(annotationSaveTimer);
+        annotationSaveTimer = null;
+        const payload = annotationPayload();
+        try {
+          localStorage.setItem(annotationStorageKey(), JSON.stringify(payload));
+        } catch {
+          // Browser storage is a fallback; folder-backed sidecars remain preferred.
+        }
+        try {
+          const wroteSidecar = await writeAnnotationSidecar(payload);
+          if (wroteSidecar) {
+            annotationBridgeState.textContent = "Sidecar saved";
+            annotationBridgeState.classList.add("ready");
+          }
+        } catch (error) {
+          annotationBridgeState.textContent = "Browser storage";
+          annotationBridgeState.classList.remove("ready");
+          setStatus("Could not write the annotation sidecar: " + error.message, true);
+        }
+      }
+
+      function scheduleAnnotationSave() {
+        clearTimeout(annotationSaveTimer);
+        annotationSaveTimer = setTimeout(saveAnnotationsNow, 350);
+      }
+
+      function downloadJson(payload, filename) {
+        const blob = new Blob([JSON.stringify(payload, null, 2) + "\n"], {
+          type: "application/json;charset=utf-8"
+        });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+      }
+
+      function exportAnnotationSidecar() {
+        downloadJson(annotationPayload(), basename(annotationSidecarPath()));
+        setStatus("Exported " + basename(annotationSidecarPath()) + ".");
+      }
+
+      async function importAnnotationSidecar(file) {
+        if (!file) return;
+        try {
+          const payload = JSON.parse(await file.text());
+          annotations = normaliseImportedAnnotations(payload);
+          reattachAnnotations(editorDocument());
+          renderAnnotations();
+          scheduleAnnotationSave();
+          setStatus("Imported " + annotations.length + " annotation" +
+            (annotations.length === 1 ? "" : "s") + ".");
+        } catch (error) {
+          setStatus("Could not import annotations: " + error.message, true);
+        } finally {
+          annotationInput.value = "";
+        }
+      }
+
+      function ensureAnnotationEditorStyles(doc) {
+        if (!doc?.head || doc.head.querySelector("[data-lw-editor-only='annotation-style']")) return;
+        const style = doc.createElement("style");
+        style.dataset.lwEditorOnly = "annotation-style";
+        style.textContent =
+          ".lw-annotation-anchor{background:#ffe39a;border-bottom:2px solid #a65d00;border-radius:2px;" +
+          "box-decoration-break:clone;-webkit-box-decoration-break:clone;}" +
+          ".lw-annotation-anchor.lw-proposed{background:#e8ddff;border-bottom-color:#6b45c6;}" +
+          ".lw-annotation-anchor.lw-resolved{background:#dff2e8;border-bottom-color:#1f7a55;}" +
+          ".lw-annotation-anchor.lw-active{outline:2px solid #2457d6;outline-offset:2px;}";
+        doc.head.appendChild(style);
+      }
+
+      function annotationAnchorClass(annotation) {
+        const pending = latestPendingProposal(annotation);
+        return "lw-annotation-anchor" +
+          (annotation.status === "resolved" ? " lw-resolved" : "") +
+          (pending ? " lw-proposed" : "") +
+          (annotation.id === activeAnnotationId ? " lw-active" : "");
+      }
+
+      function annotationBlockForRange(range) {
+        const start = elementForNode(range?.startContainer)?.closest(annotationBlockSelector);
+        const end = elementForNode(range?.endContainer)?.closest(annotationBlockSelector);
+        return start && start === end ? start : null;
+      }
+
+      function textOffsetWithin(root, node, offset) {
+        const range = root.ownerDocument.createRange();
+        range.selectNodeContents(root);
+        range.setEnd(node, clampRangeOffset(node, offset));
+        return range.toString().length;
+      }
+
+      function rangeFromTextOffsets(root, startOffset, endOffset) {
+        const doc = root.ownerDocument;
+        const walker = doc.createTreeWalker(root, 4);
+        const range = doc.createRange();
+        let position = 0;
+        let startNode = null;
+        let endNode = null;
+        let start = 0;
+        let end = 0;
+        let node;
+        while ((node = walker.nextNode())) {
+          const next = position + node.data.length;
+          if (!startNode && startOffset >= position && startOffset <= next) {
+            startNode = node;
+            start = startOffset - position;
+          }
+          if (endOffset >= position && endOffset <= next) {
+            endNode = node;
+            end = endOffset - position;
+            break;
+          }
+          position = next;
+        }
+        if (!startNode || !endNode) return null;
+        range.setStart(startNode, start);
+        range.setEnd(endNode, end);
+        return range;
+      }
+
+      function nearestHeadingPath(block) {
+        const path = [];
+        const section = block.closest("section");
+        if (section) {
+          const ownHeading = [...section.children].find(child => /^H[1-6]$/.test(child.tagName));
+          if (ownHeading?.textContent.trim()) path.push(ownHeading.textContent.trim());
+        }
+        const headings = [...block.ownerDocument.querySelectorAll("h1,h2,h3,h4,h5,h6")];
+        const preceding = headings.filter(heading =>
+          heading === block || Boolean(heading.compareDocumentPosition(block) & Node.DOCUMENT_POSITION_FOLLOWING)
+        ).pop();
+        const text = preceding?.textContent.trim();
+        if (text && !path.includes(text)) path.push(text);
+        return path;
+      }
+
+      function annotationBlockOrdinal(block, section) {
+        const scope = section || block.ownerDocument.body;
+        return [...scope.querySelectorAll(annotationBlockSelector)].indexOf(block);
+      }
+
+      function selectorFromRange(range) {
+        const block = annotationBlockForRange(range);
+        if (!block) return null;
+        const section = block.closest("section");
+        const start = textOffsetWithin(block, range.startContainer, range.startOffset);
+        const end = textOffsetWithin(block, range.endContainer, range.endOffset);
+        const blockText = block.textContent || "";
+        return {
+          exact: range.toString(),
+          prefix: blockText.slice(Math.max(0, start - 64), start),
+          suffix: blockText.slice(end, end + 64),
+          blockTag: block.tagName.toLowerCase(),
+          blockId: block.id || "",
+          sectionId: section?.id || "",
+          blockOrdinal: annotationBlockOrdinal(block, section)
+        };
+      }
+
+      function selectedHtmlFromRange(range) {
+        const holder = range.startContainer.ownerDocument.createElement("div");
+        holder.appendChild(range.cloneContents());
+        cleanAnnotationArtifacts(holder);
+        return holder.innerHTML;
+      }
+
+      function annotationRangeInBlock(block, selector, requireContext = true) {
+        const text = block.textContent || "";
+        const exact = selector.exact || "";
+        if (!exact) return [];
+        const ranges = [];
+        let index = text.indexOf(exact);
+        while (index !== -1) {
+          const before = text.slice(0, index);
+          const after = text.slice(index + exact.length);
+          const prefixMatches = !selector.prefix || before.endsWith(selector.prefix);
+          const suffixMatches = !selector.suffix || after.startsWith(selector.suffix);
+          if (!requireContext || (prefixMatches && suffixMatches)) {
+            const range = rangeFromTextOffsets(block, index, index + exact.length);
+            if (range) ranges.push(range);
+          }
+          index = text.indexOf(exact, index + Math.max(1, exact.length));
+        }
+        return ranges;
+      }
+
+      function rangeForAnnotation(doc, annotation) {
+        const selector = annotation.selector || {};
+        const preferred = [];
+        if (selector.blockId) {
+          const byId = doc.getElementById(selector.blockId);
+          if (byId?.matches(annotationBlockSelector)) preferred.push(byId);
+        }
+        if (selector.sectionId) {
+          const section = doc.getElementById(selector.sectionId);
+          const blocks = section ? [...section.querySelectorAll(annotationBlockSelector)] : [];
+          const ordinal = Number(selector.blockOrdinal);
+          if (blocks[ordinal] && !preferred.includes(blocks[ordinal])) preferred.push(blocks[ordinal]);
+        }
+        let matches = preferred.flatMap(block => annotationRangeInBlock(block, selector, true));
+        if (matches.length === 1) return matches[0];
+        const sameTag = [...doc.querySelectorAll(selector.blockTag || annotationBlockSelector)]
+          .filter(block => block.matches(annotationBlockSelector));
+        matches = sameTag.flatMap(block => annotationRangeInBlock(block, selector, true));
+        if (matches.length === 1) return matches[0];
+        matches = [...doc.querySelectorAll(annotationBlockSelector)]
+          .flatMap(block => annotationRangeInBlock(block, selector, false));
+        return matches.length === 1 ? matches[0] : null;
+      }
+
+      function wrapAnnotationRange(doc, annotation, range) {
+        if (!range || range.collapsed) return null;
+        const anchor = doc.createElement("span");
+        anchor.dataset.lwAnnotationId = annotation.id;
+        anchor.className = annotationAnchorClass(annotation);
+        const fragment = range.extractContents();
+        anchor.appendChild(fragment);
+        range.insertNode(anchor);
+        annotation.detached = false;
+        return anchor;
+      }
+
+      function unwrapAnnotationAnchor(anchor) {
+        if (!anchor?.parentNode) return;
+        const parent = anchor.parentNode;
+        anchor.replaceWith(...anchor.childNodes);
+        parent.normalize();
+      }
+
+      function annotationAnchor(doc, id) {
+        const escaped = globalThis.CSS?.escape ? CSS.escape(id) : String(id).replace(/[\\']/g, "\\$&");
+        return doc?.querySelector("[data-lw-annotation-id='" + escaped + "']") || null;
+      }
+
+      function reattachAnnotations(doc = editorDocument()) {
+        if (!doc?.body) return;
+        ensureAnnotationEditorStyles(doc);
+        [...doc.querySelectorAll("[data-lw-annotation-id]")].forEach(unwrapAnnotationAnchor);
+        let changed = false;
+        for (const annotation of annotations) {
+          const range = rangeForAnnotation(doc, annotation);
+          if (annotation.detached === Boolean(range)) changed = true;
+          annotation.detached = !range;
+          if (range) wrapAnnotationRange(doc, annotation, range);
+        }
+        renderAnnotations();
+        if (changed) scheduleAnnotationSave();
+      }
+
+      function syncAnnotationAnchors(doc = editorDocument()) {
+        if (!doc?.body || !annotations.length) return;
+        let changed = false;
+        for (const annotation of annotations) {
+          const anchor = annotationAnchor(doc, annotation.id);
+          if (!anchor || !anchor.textContent) {
+            if (!annotation.detached) {
+              annotation.detached = true;
+              changed = true;
+            }
+            continue;
+          }
+          const range = doc.createRange();
+          range.selectNodeContents(anchor);
+          const selector = selectorFromRange(range);
+          if (selector) {
+            annotation.selector = selector;
+            annotation.headingPath = nearestHeadingPath(anchor);
+            annotation.detached = false;
+            annotation.updatedAt = annotationNow();
+            changed = true;
+          }
+        }
+        if (changed) scheduleAnnotationSave();
+        renderAnnotations();
+      }
+
+      function latestPendingProposal(annotation) {
+        return [...(annotation?.proposals || [])].reverse().find(proposal => proposal.outcome === "pending") || null;
+      }
+
+      function annotationDisplayState(annotation) {
+        if (annotation.detached) return "detached";
+        if (annotation.status === "resolved") return "resolved";
+        if (latestPendingProposal(annotation)) return "proposed";
+        return "open";
+      }
+
+      function annotationMatchesFilter(annotation) {
+        const state = annotationDisplayState(annotation);
+        const filter = annotationFilter.value;
+        if (filter === "all") return true;
+        if (filter === "active") return state === "open" || state === "proposed" || state === "detached";
+        return state === filter;
+      }
+
+      function annotationButton(label, action, id, className = "") {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = label;
+        button.dataset.annotationAction = action;
+        button.dataset.annotationId = id;
+        if (className) button.className = className;
+        return button;
+      }
+
+      function renderAnnotations() {
+        if (!annotationList) return;
+        annotationList.replaceChildren();
+        const visible = annotations.filter(annotationMatchesFilter);
+        const openCount = annotations.filter(annotation => annotation.status !== "resolved").length;
+        annotationCount.textContent = openCount + " open";
+        document.getElementById("runAllClaudeBtn").disabled = !openCount || annotationBatchRunning || !annotationClaudeReady;
+        document.getElementById("copyAllCodexBtn").disabled = !openCount;
+        if (!visible.length) {
+          const empty = document.createElement("p");
+          empty.className = "annotation-empty";
+          empty.textContent = annotations.length
+            ? "No comments match this filter."
+            : "Select text in Visual mode and choose Comment.";
+          annotationList.appendChild(empty);
+          return;
+        }
+        for (const annotation of visible) {
+          const state = annotationDisplayState(annotation);
+          const card = document.createElement("article");
+          card.className = "annotation-card " + state +
+            (annotation.id === activeAnnotationId ? " active" : "");
+          card.dataset.annotationId = annotation.id;
+
+          const head = document.createElement("div");
+          head.className = "annotation-card-head";
+          const badge = document.createElement("span");
+          badge.className = "annotation-state";
+          badge.textContent = state;
+          const locationLabel = document.createElement("span");
+          locationLabel.className = "annotation-location";
+          locationLabel.textContent = annotation.headingPath?.join(" › ") ||
+            annotation.selector?.sectionId || annotation.selector?.blockTag || "Text";
+          head.append(badge, locationLabel);
+
+          const quote = document.createElement("p");
+          quote.className = "annotation-quote";
+          quote.textContent = "“" + annotation.selector.exact.slice(0, 220) +
+            (annotation.selector.exact.length > 220 ? "…" : "") + "”";
+          const comment = document.createElement("p");
+          comment.className = "annotation-comment";
+          comment.textContent = annotation.comment;
+          card.append(head, quote, comment);
+
+          const proposal = latestPendingProposal(annotation);
+          if (proposal) {
+            const compare = document.createElement("div");
+            compare.className = "proposal-compare";
+            const original = document.createElement("div");
+            original.className = "proposal-pane";
+            const originalLabel = document.createElement("strong");
+            originalLabel.textContent = "Original";
+            const originalBody = document.createElement("div");
+            originalBody.textContent = proposal.baseText;
+            original.append(originalLabel, originalBody);
+            const replacement = document.createElement("div");
+            replacement.className = "proposal-pane";
+            const replacementLabel = document.createElement("strong");
+            replacementLabel.textContent = "Proposed";
+            const replacementBody = document.createElement("div");
+            replacementBody.innerHTML = proposal.replacementHtml;
+            replacement.append(replacementLabel, replacementBody);
+            compare.append(original, replacement);
+            card.appendChild(compare);
+            if (proposal.rationale) {
+              const rationale = document.createElement("p");
+              rationale.className = "annotation-rationale";
+              rationale.textContent = proposal.rationale;
+              card.appendChild(rationale);
+            }
+            const liveAnchor = annotationAnchor(editorDocument(), annotation.id);
+            const proposalStale = Boolean(proposal.stale || !liveAnchor || liveAnchor.textContent !== proposal.baseText);
+            if (proposalStale) {
+              const warning = document.createElement("p");
+              warning.className = "annotation-rationale";
+              warning.textContent = "Stale proposal: the selected text changed. Retry before accepting.";
+              card.appendChild(warning);
+            }
+          }
+
+          const actions = document.createElement("div");
+          actions.className = "annotation-actions";
+          if (!annotation.detached) actions.appendChild(annotationButton("Jump", "jump", annotation.id));
+          if (state === "proposed") {
+            const accept = annotationButton("Accept", "accept", annotation.id, "accept");
+            const liveAnchor = annotationAnchor(editorDocument(), annotation.id);
+            accept.disabled = Boolean(proposal?.stale || !liveAnchor || liveAnchor.textContent !== proposal?.baseText);
+            actions.append(
+              accept,
+              annotationButton(annotation.runtimeJobId ? "Claude running…" : "Retry Claude", "claude", annotation.id),
+              annotationButton("Copy for Codex", "copy", annotation.id),
+              annotationButton("Dismiss proposal", "dismiss", annotation.id)
+            );
+          } else if (state === "resolved") {
+            actions.appendChild(annotationButton("Reopen", "reopen", annotation.id));
+          } else {
+            actions.append(
+              annotationButton(annotation.runtimeJobId ? "Claude running…" : "Run Claude", "claude", annotation.id),
+              annotationButton("Copy for Codex", "copy", annotation.id),
+              annotationButton("Resolve", "resolve", annotation.id)
+            );
+          }
+          actions.querySelectorAll("[data-annotation-action='claude']").forEach(button => {
+            button.disabled = Boolean(annotation.runtimeJobId) || !annotationClaudeReady || annotation.detached;
+          });
+          actions.append(
+            annotationButton("Edit", "edit", annotation.id),
+            annotationButton("Delete", "delete", annotation.id, "danger-action")
+          );
+          card.appendChild(actions);
+          annotationList.appendChild(card);
+        }
+      }
+
+      function validateAnnotationRange(doc, range) {
+        if (!range || range.collapsed || !range.toString().trim()) {
+          throw new Error("Select the text you want to comment on first.");
+        }
+        const block = annotationBlockForRange(range);
+        if (!block) throw new Error("Keep one comment within a single paragraph, heading, list item, caption or table cell.");
+        if (block.closest("[data-lw-editor-lock]")) {
+          throw new Error("Generated sections cannot be annotated. Comment on their source content instead.");
+        }
+        for (const anchor of doc.querySelectorAll("[data-lw-annotation-id]")) {
+          if (range.intersectsNode(anchor)) throw new Error("Comments cannot overlap an existing annotation.");
+        }
+        return block;
+      }
+
+      function openNewAnnotationDialog() {
+        if (currentMode !== "visual") {
+          setStatus("Switch to Visual mode and select text before commenting.", true);
+          return;
+        }
+        const doc = editorDocument();
+        const range = editableVisualRange(doc);
+        try {
+          validateAnnotationRange(doc, range);
+        } catch (error) {
+          setStatus(error.message, true);
+          return;
+        }
+        pendingAnnotationRange = range.cloneRange();
+        editingAnnotationId = "";
+        annotationDialogTitle.textContent = "Comment on selected text";
+        annotationDialogQuote.textContent = range.toString();
+        annotationComment.value = "";
+        annotationDialog.showModal();
+        annotationComment.focus();
+      }
+
+      function openEditAnnotationDialog(annotation) {
+        editingAnnotationId = annotation.id;
+        pendingAnnotationRange = null;
+        annotationDialogTitle.textContent = "Edit comment";
+        annotationDialogQuote.textContent = annotation.selector.exact;
+        annotationComment.value = annotation.comment;
+        annotationDialog.showModal();
+        annotationComment.focus();
+      }
+
+      function closeAnnotationDialog() {
+        editingAnnotationId = "";
+        pendingAnnotationRange = null;
+        annotationForm.reset();
+        if (annotationDialog.open) annotationDialog.close();
+      }
+
+      function saveAnnotationFromDialog(event) {
+        event.preventDefault();
+        const comment = annotationComment.value.trim();
+        if (!comment) return;
+        if (editingAnnotationId) {
+          const annotation = annotations.find(item => item.id === editingAnnotationId);
+          if (annotation) {
+            annotation.comment = comment;
+            annotation.updatedAt = annotationNow();
+          }
+        } else {
+          const doc = editorDocument();
+          const range = pendingAnnotationRange;
+          try {
+            validateAnnotationRange(doc, range);
+            const selector = selectorFromRange(range);
+            const annotation = {
+              id: annotationUuid(),
+              comment,
+              status: "open",
+              detached: false,
+              selector,
+              headingPath: nearestHeadingPath(annotationBlockForRange(range)),
+              selectedHtml: selectedHtmlFromRange(range),
+              createdAt: annotationNow(),
+              updatedAt: annotationNow(),
+              proposals: [],
+              resolution: null
+            };
+            annotations.push(annotation);
+            wrapAnnotationRange(doc, annotation, range);
+            activeAnnotationId = annotation.id;
+            document.body.classList.remove("annotations-collapsed");
+            annotationToggleBtn.setAttribute("aria-expanded", "true");
+          } catch (error) {
+            setStatus(error.message, true);
+            return;
+          }
+        }
+        closeAnnotationDialog();
+        renderAnnotations();
+        scheduleAnnotationSave();
+        setStatus("Comment saved outside the publishable HTML.");
+      }
+
+      function jumpToAnnotation(annotation) {
+        if (currentMode !== "visual") {
+          switchMode("visual").then(() => setTimeout(() => jumpToAnnotation(annotation), 80));
+          return;
+        }
+        const doc = editorDocument();
+        const anchor = annotationAnchor(doc, annotation.id);
+        if (!anchor) {
+          setStatus("This comment is detached from the current text.", true);
+          return;
+        }
+        activeAnnotationId = annotation.id;
+        doc.querySelectorAll("[data-lw-annotation-id]").forEach(element => {
+          const item = annotations.find(candidate => candidate.id === element.dataset.lwAnnotationId);
+          if (item) element.className = annotationAnchorClass(item);
+        });
+        anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+        const range = doc.createRange();
+        range.selectNodeContents(anchor);
+        restoreVisualRange(doc, range);
+        renderAnnotations();
+      }
+
+      function deleteAnnotation(annotation) {
+        if (!confirm("Delete this comment and its proposal history? The document text will remain.")) return;
+        const anchor = annotationAnchor(editorDocument(), annotation.id);
+        unwrapAnnotationAnchor(anchor);
+        annotations = annotations.filter(item => item.id !== annotation.id);
+        if (activeAnnotationId === annotation.id) activeAnnotationId = "";
+        renderAnnotations();
+        scheduleAnnotationSave();
+        setStatus("Comment deleted; document text was unchanged.");
+      }
+
+      function setAnnotationResolved(annotation, resolved) {
+        annotation.status = resolved ? "resolved" : "open";
+        annotation.updatedAt = annotationNow();
+        const doc = editorDocument();
+        let anchor = annotationAnchor(doc, annotation.id);
+        if (!resolved && !anchor && annotation.detached) {
+          const original = [...(annotation.resolutionHistory || [])].reverse()
+            .find(entry => entry.originalSelector)?.originalSelector;
+          if (original) {
+            const originalRange = rangeForAnnotation(doc, { selector: original });
+            if (originalRange) {
+              annotation.selector = JSON.parse(JSON.stringify(original));
+              anchor = wrapAnnotationRange(doc, annotation, originalRange);
+            }
+          }
+        }
+        if (anchor) anchor.className = annotationAnchorClass(annotation);
+        renderAnnotations();
+        scheduleAnnotationSave();
+        setStatus(resolved ? "Comment resolved." : "Comment reopened.");
+      }
+
+      const proposalInlineTags = new Set([
+        "A", "ABBR", "B", "BDI", "BDO", "BR", "CITE", "CODE", "DEL", "DFN",
+        "EM", "I", "INS", "KBD", "MARK", "Q", "S", "SAMP", "SMALL", "SPAN",
+        "STRONG", "SUB", "SUP", "TIME", "U", "VAR", "WBR"
+      ]);
+
+      function safeProposalUrl(value) {
+        const url = String(value || "").trim();
+        if (!url) return "";
+        if (/^(https?:|mailto:|tel:|#|\/)/i.test(url)) return url;
+        return "";
+      }
+
+      function sanitizeProposalHtml(value) {
+        const template = document.createElement("template");
+        template.innerHTML = String(value || "");
+        for (const element of [...template.content.querySelectorAll("*")]) {
+          if (!proposalInlineTags.has(element.tagName)) {
+            if (["SCRIPT", "STYLE", "IFRAME", "OBJECT", "EMBED", "SVG", "MATH"].includes(element.tagName)) {
+              element.remove();
+            } else {
+              element.replaceWith(...element.childNodes);
+            }
+            continue;
+          }
+          for (const attribute of [...element.attributes]) {
+            const name = attribute.name.toLowerCase();
+            const keep = element.tagName === "A" && ["href", "title"].includes(name) ||
+              element.tagName === "TIME" && name === "datetime" ||
+              element.tagName === "Q" && name === "cite";
+            if (!keep || name.startsWith("on") || name === "style" || name === "id" || name.startsWith("data-")) {
+              element.removeAttribute(attribute.name);
+            }
+          }
+          if (element.tagName === "A") {
+            const href = safeProposalUrl(element.getAttribute("href"));
+            if (href) element.setAttribute("href", href);
+            else element.removeAttribute("href");
+          }
+          if (element.tagName === "Q") {
+            const cite = safeProposalUrl(element.getAttribute("cite"));
+            if (cite) element.setAttribute("cite", cite);
+            else element.removeAttribute("cite");
+          }
+        }
+        return template.innerHTML.trim();
+      }
+
+      function boundedText(value, limit = 1600) {
+        const text = String(value || "").replace(/\s+/g, " ").trim();
+        return text.length > limit ? text.slice(0, limit) + "…" : text;
+      }
+
+      function contextForAnnotation(annotation) {
+        const doc = editorDocument();
+        const anchor = annotationAnchor(doc, annotation.id);
+        if (!anchor) throw new Error("This annotation is detached from the document.");
+        const block = anchor.closest(annotationBlockSelector);
+        const blocks = [...doc.querySelectorAll(annotationBlockSelector)];
+        const index = blocks.indexOf(block);
+        const cleanBlock = block.cloneNode(true);
+        cleanAnnotationArtifacts(cleanBlock);
+        return {
+          annotationId: annotation.id,
+          instruction: annotation.comment,
+          selectedText: anchor.textContent || "",
+          selectedHtml: (() => {
+            const copy = anchor.cloneNode(true);
+            copy.removeAttribute("data-lw-annotation-id");
+            copy.removeAttribute("class");
+            return copy.innerHTML;
+          })(),
+          containingBlock: {
+            tag: block.tagName.toLowerCase(),
+            id: block.id || "",
+            text: boundedText(block.textContent),
+            html: boundedText(cleanBlock.outerHTML, 3000)
+          },
+          headingBreadcrumb: annotation.headingPath || [],
+          previousBlock: index > 0 ? boundedText(blocks[index - 1].textContent, 700) : "",
+          nextBlock: index >= 0 && index + 1 < blocks.length
+            ? boundedText(blocks[index + 1].textContent, 700) : ""
+        };
+      }
+
+      function validateProposalContract(raw, expectedId = "") {
+        const proposal = raw?.proposal || raw?.structured_output || raw;
+        if (!proposal || typeof proposal !== "object") throw new Error("The proposal must be a JSON object.");
+        const annotationId = String(proposal.annotationId || "");
+        if (!annotationId || expectedId && annotationId !== expectedId) {
+          throw new Error("The proposal annotation ID does not match this comment.");
+        }
+        const annotation = annotations.find(item => item.id === annotationId);
+        if (!annotation) throw new Error("The proposal refers to an unknown annotation.");
+        const baseText = String(proposal.baseText ?? proposal.selectedText ?? "");
+        if (!baseText) throw new Error("The proposal must include the selected text as baseText.");
+        const replacementHtml = sanitizeProposalHtml(proposal.replacementHtml);
+        const replacementTextHolder = document.createElement("div");
+        replacementTextHolder.innerHTML = replacementHtml;
+        if (!replacementTextHolder.textContent?.trim()) {
+          throw new Error("The sanitized replacement is empty. Submit replacement text, not a deletion.");
+        }
+        return {
+          annotation,
+          baseText,
+          replacementHtml,
+          rationale: boundedText(proposal.rationale, 1200)
+        };
+      }
+
+      function addAnnotationProposal(raw, provider = "import", expectedId = "") {
+        const validated = validateProposalContract(raw, expectedId);
+        const liveAnchor = annotationAnchor(editorDocument(), validated.annotation.id);
+        const stale = !liveAnchor || liveAnchor.textContent !== validated.baseText;
+        for (const existing of validated.annotation.proposals) {
+          if (existing.outcome === "pending") {
+            existing.outcome = "superseded";
+            existing.supersededAt = annotationNow();
+          }
+        }
+        const proposal = {
+          id: annotationUuid(),
+          provider,
+          baseText: validated.baseText,
+          replacementHtml: validated.replacementHtml,
+          rationale: validated.rationale,
+          outcome: "pending",
+          stale,
+          createdAt: annotationNow(),
+          updatedAt: annotationNow()
+        };
+        validated.annotation.proposals.push(proposal);
+        validated.annotation.updatedAt = annotationNow();
+        renderAnnotations();
+        scheduleAnnotationSave();
+        setStatus(stale
+          ? "Proposal imported, but its source text has changed. Retry before accepting."
+          : "Proposal added for review. The document was not changed.", stale);
+        return proposal;
+      }
+
+      function dismissAnnotationProposal(annotation) {
+        const proposal = latestPendingProposal(annotation);
+        if (!proposal) return;
+        proposal.outcome = "dismissed";
+        proposal.dismissedAt = annotationNow();
+        proposal.updatedAt = annotationNow();
+        annotation.updatedAt = annotationNow();
+        renderAnnotations();
+        scheduleAnnotationSave();
+        setStatus("Proposal dismissed; document text was unchanged.");
+      }
+
+      function acceptAnnotationProposal(annotation) {
+        const proposal = latestPendingProposal(annotation);
+        const doc = editorDocument();
+        const anchor = annotationAnchor(doc, annotation.id);
+        if (!proposal || !anchor) {
+          setStatus("This proposal is no longer attached to editable text.", true);
+          return;
+        }
+        if (proposal.stale || anchor.textContent !== proposal.baseText) {
+          proposal.stale = true;
+          setStatus("The selected text changed after this proposal was created. Retry it first.", true);
+          renderAnnotations();
+          return;
+        }
+        commitVisualHistory(doc);
+        const previousSelector = JSON.parse(JSON.stringify(annotation.selector));
+        const previousHtml = anchor.innerHTML;
+        const replacement = doc.createElement("template");
+        replacement.innerHTML = sanitizeProposalHtml(proposal.replacementHtml);
+        anchor.replaceChildren(replacement.content.cloneNode(true));
+        const range = doc.createRange();
+        range.selectNodeContents(anchor);
+        annotation.selector = selectorFromRange(range);
+        annotation.headingPath = nearestHeadingPath(anchor);
+        annotation.status = "resolved";
+        annotation.detached = false;
+        annotation.updatedAt = annotationNow();
+        annotation.resolutionHistory = annotation.resolutionHistory || [];
+        annotation.resolutionHistory.push({
+          proposalId: proposal.id,
+          provider: proposal.provider,
+          originalSelector: previousSelector,
+          originalHtml: previousHtml,
+          acceptedHtml: proposal.replacementHtml,
+          acceptedAt: annotationNow()
+        });
+        proposal.outcome = "accepted";
+        proposal.acceptedAt = annotationNow();
+        proposal.updatedAt = annotationNow();
+        anchor.className = annotationAnchorClass(annotation);
+        finishFormattingMutation(doc, "Proposal accepted and comment resolved. Undo restores the document edit.");
+        renderAnnotations();
+        scheduleAnnotationSave();
+      }
+
+      function codexProposalPrompt(annotation) {
+        const context = contextForAnnotation(annotation);
+        return "Revise only the annotated range described below. Preserve the surrounding meaning and return JSON only " +
+          "with keys annotationId, baseText, replacementHtml, and rationale. replacementHtml may contain semantic " +
+          "inline HTML only; do not include a block wrapper. Do not change any surrounding text.\n\n" +
+          JSON.stringify(context, null, 2);
+      }
+
+      async function copyText(value) {
+        if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(value);
+        const area = document.createElement("textarea");
+        area.value = value;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+      }
+
+      async function copyAnnotationForCodex(annotation) {
+        try {
+          await copyText(codexProposalPrompt(annotation));
+          setStatus("Copied a structured Codex prompt. Import its JSON response to review it.");
+        } catch (error) {
+          setStatus("Could not copy the Codex prompt: " + error.message, true);
+        }
+      }
+
+      async function copyAllForCodex() {
+        const active = annotations.filter(item => item.status !== "resolved" && !item.detached);
+        if (!active.length) return;
+        const prompt = "Create one independent proposal for each annotation. Return a JSON array only; each item must " +
+          "contain annotationId, baseText, replacementHtml, and rationale. Never combine annotations or alter text " +
+          "outside a selected range.\n\n" + active.map(codexProposalPrompt).join("\n\n---\n\n");
+        try {
+          await copyText(prompt);
+          setStatus("Copied " + active.length + " independent annotation prompts for Codex.");
+        } catch (error) {
+          setStatus("Could not copy the Codex prompts: " + error.message, true);
+        }
+      }
+
+      function importProposalJson() {
+        const value = prompt("Paste a proposal JSON object or array:");
+        if (value === null) return;
+        try {
+          const parsed = JSON.parse(value);
+          const proposals = Array.isArray(parsed) ? parsed : [parsed];
+          proposals.forEach(item => addAnnotationProposal(item, "import"));
+        } catch (error) {
+          setStatus("Could not import the proposal: " + error.message, true);
+        }
+      }
+
+      function bridgeHeaders(json = false) {
+        const headers = { Authorization: "Bearer " + annotationBridgeToken };
+        if (json) headers["Content-Type"] = "application/json";
+        return headers;
+      }
+
+      async function checkAnnotationBridge() {
+        if (!annotationBridgeToken) {
+          annotationClaudeReady = false;
+          annotationBridgeState.textContent = "Claude helper off";
+          annotationBridgeState.classList.remove("ready");
+          renderAnnotations();
+          return false;
+        }
+        try {
+          const response = await fetch("/api/health", { headers: bridgeHeaders() });
+          const result = await response.json();
+          if (!response.ok || !result.claudeReady) throw new Error(result.error || "Claude CLI unavailable");
+          annotationClaudeReady = true;
+          annotationBridgeState.textContent = "Claude ready";
+          annotationBridgeState.classList.add("ready");
+          renderAnnotations();
+          return true;
+        } catch (error) {
+          annotationClaudeReady = false;
+          annotationBridgeState.textContent = "Claude unavailable";
+          annotationBridgeState.classList.remove("ready");
+          renderAnnotations();
+          return false;
+        }
+      }
+
+      async function runClaudeForAnnotation(annotation) {
+        if (!annotationBridgeToken || annotation.detached || annotation.runtimeJobId) return;
+        let response;
+        try {
+          annotation.runtimeError = "";
+          response = await fetch("/api/claude/jobs", {
+            method: "POST",
+            headers: bridgeHeaders(true),
+            body: JSON.stringify({ context: contextForAnnotation(annotation) })
+          });
+          const created = await response.json();
+          if (!response.ok) throw new Error(created.error || "Could not start Claude");
+          annotation.runtimeJobId = created.id;
+          renderAnnotations();
+          setStatus("Claude is drafting a proposal for review…");
+          while (annotation.runtimeJobId) {
+            await new Promise(resolve => setTimeout(resolve, 900));
+            response = await fetch("/api/jobs/" + encodeURIComponent(created.id), { headers: bridgeHeaders() });
+            const job = await response.json();
+            if (!response.ok) throw new Error(job.error || "Could not read Claude job");
+            if (job.status === "completed") {
+              addAnnotationProposal(job.result, "claude", annotation.id);
+              break;
+            }
+            if (["failed", "cancelled", "timed_out"].includes(job.status)) {
+              throw new Error(job.error || "Claude did not return a proposal");
+            }
+          }
+        } catch (error) {
+          annotation.runtimeError = error.message;
+          setStatus("Claude proposal failed: " + error.message, true);
+        } finally {
+          delete annotation.runtimeJobId;
+          renderAnnotations();
+        }
+      }
+
+      async function runAllWithClaude() {
+        if (annotationBatchRunning) return;
+        annotationBatchRunning = true;
+        renderAnnotations();
+        try {
+          const queue = annotations.filter(item => item.status !== "resolved" && !item.detached);
+          for (const annotation of queue) await runClaudeForAnnotation(annotation);
+        } finally {
+          annotationBatchRunning = false;
+          renderAnnotations();
+        }
+      }
+
+      function registerAnnotationWebMcpTools() {
+        const modelContext = document.modelContext;
+        if (!modelContext?.registerTool) return;
+        const register = (definition, handler) => {
+          try {
+            Promise.resolve(modelContext.registerTool({ ...definition, execute: handler }))
+              .catch(error => console.warn("Could not register WebMCP tool", definition.name, error));
+          }
+          catch (error) { console.warn("Could not register WebMCP tool", definition.name, error); }
+        };
+        register({
+          name: "list_editor_annotations",
+          description: "List annotations in the live HTML editor without changing the document.",
+          inputSchema: { type: "object", properties: { status: { type: "string", enum: ["open", "resolved", "all"] } }, additionalProperties: false },
+          annotations: { readOnlyHint: true }
+        }, async ({ status = "open" } = {}) => annotations
+          .filter(item => status === "all" || item.status === status)
+          .map(item => ({ id: item.id, instruction: item.comment, status: item.status,
+            state: annotationDisplayState(item), quote: item.selector.exact, headingBreadcrumb: item.headingPath })));
+        register({
+          name: "get_editor_annotation_context",
+          description: "Get bounded live context for one editor annotation without changing the document.",
+          inputSchema: { type: "object", properties: { annotationId: { type: "string" } }, required: ["annotationId"], additionalProperties: false },
+          annotations: { readOnlyHint: true }
+        }, async ({ annotationId }) => {
+          const annotation = annotations.find(item => item.id === annotationId);
+          if (!annotation) throw new Error("Unknown annotation ID");
+          return contextForAnnotation(annotation);
+        });
+        register({
+          name: "propose_editor_revision",
+          description: "Submit an independently reviewable proposal for an annotation. This never changes document text.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              annotationId: { type: "string" }, baseText: { type: "string" },
+              replacementHtml: { type: "string" }, rationale: { type: "string" }
+            },
+            required: ["annotationId", "baseText", "replacementHtml", "rationale"],
+            additionalProperties: false
+          }
+        }, async input => {
+          const proposal = addAnnotationProposal(input, "codex-webmcp");
+          return { proposalId: proposal.id, outcome: proposal.outcome, documentChanged: false };
+        });
+        annotationWebMcpReady = true;
+      }
+
       async function saveFile() {
         if (saveInProgress || saveReviewDialog.open) return;
         if (currentMode === "source") {
@@ -3776,6 +5076,7 @@
         currentFilename = fileName.replace(/\.(html?)$/i, "") + ".html";
         updateSaveButton();
         currentDocumentPath = normalisePath(documentPath);
+        await loadAnnotationsForCurrentDocument();
         storedDoctype = extractDoctype(html);
         sourceEditor.value = html;
 
@@ -3987,6 +5288,8 @@
         currentFilename = "untitled.html";
         updateSaveButton();
         currentDocumentPath = "untitled.html";
+        annotations = [];
+        renderAnnotations();
         storedDoctype = "<!doctype html>";
         sourceEditor.value = starterDocument;
         if (currentMode === "source") {
@@ -4005,6 +5308,42 @@
 
       visualModeBtn.addEventListener("click", () => switchMode("visual"));
       sourceModeBtn.addEventListener("click", () => switchMode("source"));
+      document.getElementById("commentBtn").addEventListener("click", openNewAnnotationDialog);
+      annotationToggleBtn.addEventListener("click", () => {
+        const collapsed = document.body.classList.toggle("annotations-collapsed");
+        annotationToggleBtn.setAttribute("aria-expanded", String(!collapsed));
+      });
+      annotationFilter.addEventListener("input", renderAnnotations);
+      annotationForm.addEventListener("submit", saveAnnotationFromDialog);
+      document.getElementById("cancelAnnotationBtn").addEventListener("click", closeAnnotationDialog);
+      annotationDialog.addEventListener("cancel", event => {
+        event.preventDefault();
+        closeAnnotationDialog();
+      });
+      annotationList.addEventListener("click", event => {
+        const button = event.target.closest("button[data-annotation-action]");
+        if (!button) return;
+        const annotation = annotations.find(item => item.id === button.dataset.annotationId);
+        if (!annotation) return;
+        const actions = {
+          jump: () => jumpToAnnotation(annotation),
+          accept: () => acceptAnnotationProposal(annotation),
+          claude: () => runClaudeForAnnotation(annotation),
+          copy: () => copyAnnotationForCodex(annotation),
+          dismiss: () => dismissAnnotationProposal(annotation),
+          reopen: () => setAnnotationResolved(annotation, false),
+          resolve: () => setAnnotationResolved(annotation, true),
+          edit: () => openEditAnnotationDialog(annotation),
+          delete: () => deleteAnnotation(annotation)
+        };
+        actions[button.dataset.annotationAction]?.();
+      });
+      document.getElementById("runAllClaudeBtn").addEventListener("click", runAllWithClaude);
+      document.getElementById("copyAllCodexBtn").addEventListener("click", copyAllForCodex);
+      document.getElementById("importProposalBtn").addEventListener("click", importProposalJson);
+      document.getElementById("exportAnnotationsBtn").addEventListener("click", exportAnnotationSidecar);
+      document.getElementById("importAnnotationsBtn").addEventListener("click", () => annotationInput.click());
+      annotationInput.addEventListener("change", () => importAnnotationSidecar(annotationInput.files[0]));
       outlineToggleBtn.addEventListener("click", () => {
         setOutlineExpanded(document.body.classList.contains("outline-collapsed"));
       });
@@ -4218,6 +5557,11 @@
       });
 
       document.addEventListener("keydown", event => {
+        if ((event.ctrlKey || event.metaKey) && event.altKey && event.key.toLowerCase() === "m") {
+          event.preventDefault();
+          openNewAnnotationDialog();
+          return;
+        }
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "o") {
           event.preventDefault();
           openHtmlFile();
@@ -4249,6 +5593,8 @@
       sourceEditor.value = starterDocument;
       baselineHtml = starterDocument;
       updateSaveButton();
+      registerAnnotationWebMcpTools();
+      checkAnnotationBridge();
       loadVisual(starterDocument);
       markDirty(false);
     })();
