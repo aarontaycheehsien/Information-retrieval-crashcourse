@@ -40,3 +40,8 @@
 - Left TOCs, chapter navigation, chapter heads, all Chapter 5/8 judged references, external-work titles, and every non-shifting exclusion untouched.
 - Verification: the output is exactly reproducible from the Phase 2 snapshot; all six exclusion strings retain their baseline counts; Appendix F remains within its 0.5% word-count guard, all six F.x label blocks are byte-identical, and all 13 textual `Appendix F` references remain.
 - Snapshot audit: `phase3-audit.json`.
+
+## Phase 4 — proposal gate
+
+- Emitted `phase4-proposal.md` with all seven original Chapter 5 occurrences, all 18 original Chapter 8 occurrences, the three newly correct Chapter 8 results created by Phase 3, all 13 Appendix E occurrences, all 13 protected Appendix F occurrences, and the currency paragraph.
+- No Phase 4 substitutions have been applied; G4 approval is pending.
