@@ -12,8 +12,8 @@ Status: **Gate G0 pending. No edits have been made to `search-textbook.html`.**
 
 | Check | Actual | Plan expectation | Result |
 |---|---:|---:|---|
-| Visible chapter/appendix references | 154 | about 200 | variance: −23% |
-| References including markup attributes | 224 | about 200 | variance: +12% |
+| Visible chapter/appendix references | 200 | about 200 | exact |
+| References including markup attributes | 285 | diagnostic only | recorded |
 | Chapter asset occurrences | 149 | 149 | exact |
 | Appendix asset occurrences | 46 | 46 from the supplied prefix counts | exact |
 | Labelled figure/table objects | 96 | not separately stated | recorded |
@@ -25,7 +25,9 @@ Status: **Gate G0 pending. No edits have been made to `search-textbook.html`.**
 
 The asset-prefix counts are exact for every supplied prefix: Chapters 1–13 contribute 149 occurrences, and Appendices A–F contribute 46, for 195 total occurrences. The count includes labels, prose references, and the back-matter asset index. There are 96 physical labelled figure/table objects.
 
-The exact high-risk textual counts also match the plan: `Chapter 5` occurs 7 times, `Chapter 8` 18 times, `Appendix E` 13 times, and `Appendix F` 13 times. This indicates that the approximate total-reference expectation is probably based on a different counting convention or document revision, but its greater-than-10% variance must still be approved at G0.
+The exact high-risk textual counts also match the plan: `Chapter 5` occurs 7 times, `Chapter 8` 18 times, `Appendix E` 13 times, and `Appendix F` 13 times.
+
+Audit correction recorded during Phase 3 preparation: the supplied sketch regex used a single-character number class and therefore omitted Chapters 10–13. `audit.py` uses the intended multi-digit form. The corrected visible total is exactly 200; all snapshot audits were regenerated from their Git commits.
 
 ## Structure and word-count reconnaissance
 
@@ -96,4 +98,4 @@ All existing IDs are unique, all current internal hrefs resolve, and the 36 curr
 
 ## G0 conclusion
 
-Phase 0 is complete. The plan's structural targets exist and its exact sensitive-reference, asset-prefix, legacy-anchor, and inbound-link counts match. Structural editing is paused because the approximate total-reference count and the Appendix F word-count estimate differ by more than 10%. Gate approval should explicitly adopt the actual visible-text baseline of 154 references and the actual Appendix F baseline of 3,474 words.
+Phase 0 is complete. The plan's structural targets exist and its sensitive-reference, total-reference, asset-prefix, legacy-anchor, and inbound-link counts match. Structural editing was paused because the Appendix F word-count estimate differs by more than 10%. G0 approval adopted the actual Appendix F baseline of 3,474 words.

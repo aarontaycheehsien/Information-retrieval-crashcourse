@@ -1,19 +1,20 @@
 {
   "metadata": {
-    "generated_at": "2026-09-02T17:09:41.101459+00:00",
+    "generated_at": "2026-09-02T17:12:38.513727+00:00",
     "book": "search-textbook.html",
+    "git_ref": "7b38db9",
     "characters": 812924,
     "utf8_bytes": 816405,
     "sha256": "5dc695ede8df207dd0a870b3bc0195d09c1fcf13b0d5fc53aca880d7f794327e"
   },
   "summary": {
-    "textual_reference_count": 154,
-    "markup_inclusive_reference_count": 234,
+    "textual_reference_count": 200,
+    "markup_inclusive_reference_count": 297,
     "reference_zone_counts": {
-      "chapter-head": 17,
-      "end-matter": 27,
-      "prose": 80,
-      "toc": 30
+      "chapter-head": 21,
+      "end-matter": 38,
+      "prose": 101,
+      "toc": 40
     },
     "reference_match_counts": {
       "Appendix A": 6,
@@ -23,6 +24,10 @@
       "Appendix E": 13,
       "Appendix F": 13,
       "Chapter 1": 9,
+      "Chapter 10": 8,
+      "Chapter 11": 8,
+      "Chapter 12": 12,
+      "Chapter 13": 15,
       "Chapter 2": 7,
       "Chapter 3": 5,
       "Chapter 4": 12,
@@ -32,6 +37,7 @@
       "Chapter 8": 18,
       "Chapter 9": 9,
       "Chapters 1": 3,
+      "Chapters 11": 3,
       "Chapters 2": 3,
       "Chapters 3": 3,
       "Chapters 5": 2,
@@ -213,8 +219,8 @@
   "expected_baseline_comparison": {
     "textual_references": {
       "expected_approx": 200,
-      "actual_visible_text": 154,
-      "actual_including_markup_attributes": 234
+      "actual_visible_text": 200,
+      "actual_including_markup_attributes": 297
     },
     "assets": {
       "expected_chapter_occurrences": 149,
@@ -357,6 +363,46 @@
       "context": "ine differently</a></li></ol></li><li class=\"toc-ch\" data-ch=\"query-transformation\"><a href=\"#query-transformation\"><em>Chapter 9</em>Understanding, transforming and routing queries</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#before-phrasi"
     },
     {
+      "match": "Chapter 10",
+      "position": 57292,
+      "utf8_byte_position": 57333,
+      "line": 1007,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "l, failure and professional judgement</a></li><li class=\"toc-ch\" data-ch=\"agentic-search\"><a href=\"#agentic-search\"><em>Chapter 10</em>Agentic search</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#fixed-adaptive-and-agentic-are-not-the-same-th"
+    },
+    {
+      "match": "Chapter 11",
+      "position": 58270,
+      "utf8_byte_position": 58311,
+      "line": 1007,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "hat the loop is for</a></li></ol></li><li class=\"toc-ch\" data-ch=\"diagnosing-failure\"><a href=\"#diagnosing-failure\"><em>Chapter 11</em>Diagnosing retrieval failure</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#vocabulary-mismatch\">Vocabulary"
+    },
+    {
+      "match": "Chapter 12",
+      "position": 59134,
+      "utf8_byte_position": 59175,
+      "line": 1007,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "ent first-stage approaches preserve</a></li></ol></li><li class=\"toc-ch\" data-ch=\"evaluation\"><a href=\"#evaluation\"><em>Chapter 12</em>Measuring whether retrieval worked</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#relevance-is-a-judgement\">"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 59940,
+      "utf8_byte_position": 59981,
+      "line": 1007,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "a number cannot settle</a></li></ol></li><li class=\"toc-ch\" data-ch=\"library-practice\"><a href=\"#library-practice\"><em>Chapter 13</em>Implications for library practice and tool evaluation</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#reprodu"
+    },
+    {
       "match": "Appendix A",
       "position": 60712,
       "utf8_byte_position": 60755,
@@ -415,6 +461,16 @@
       "h2": null,
       "h3": null,
       "context": "out either method</a></li></ol></li><li class=\"toc-ch\"><a href=\"#appendix-evidence-synthesis-high-recall-retrieval\"><em>Appendix F</em>Evidence synthesis as a high-recall retrieval problem</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#systema"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 65945,
+      "utf8_byte_position": 66002,
+      "line": 1007,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "ncountered in TAR research</a></li><li class=\"toc-sec\"><a href=\"#reproducibility-of-active-learning-screening\">Applying Chapter 13 to active learning</a></li><li class=\"toc-sec\"><a href=\"#controlled-tar-comparison\">A controlled TAR comparison</a></li"
     },
     {
       "match": "Chapter 1",
@@ -507,6 +563,46 @@
       "context": "ine differently</a></li></ol></li><li class=\"toc-ch\" data-ch=\"query-transformation\"><a href=\"#query-transformation\"><em>Chapter 9</em>Understanding, transforming and routing queries</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#before-phrasi"
     },
     {
+      "match": "Chapter 10",
+      "position": 76687,
+      "utf8_byte_position": 76779,
+      "line": 1013,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "l, failure and professional judgement</a></li><li class=\"toc-ch\" data-ch=\"agentic-search\"><a href=\"#agentic-search\"><em>Chapter 10</em>Agentic search</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#fixed-adaptive-and-agentic-are-not-the-same-th"
+    },
+    {
+      "match": "Chapter 11",
+      "position": 77665,
+      "utf8_byte_position": 77757,
+      "line": 1013,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "hat the loop is for</a></li></ol></li><li class=\"toc-ch\" data-ch=\"diagnosing-failure\"><a href=\"#diagnosing-failure\"><em>Chapter 11</em>Diagnosing retrieval failure</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#vocabulary-mismatch\">Vocabulary"
+    },
+    {
+      "match": "Chapter 12",
+      "position": 78529,
+      "utf8_byte_position": 78621,
+      "line": 1013,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "ent first-stage approaches preserve</a></li></ol></li><li class=\"toc-ch\" data-ch=\"evaluation\"><a href=\"#evaluation\"><em>Chapter 12</em>Measuring whether retrieval worked</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#relevance-is-a-judgement\">"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 79335,
+      "utf8_byte_position": 79427,
+      "line": 1013,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "a number cannot settle</a></li></ol></li><li class=\"toc-ch\" data-ch=\"library-practice\"><a href=\"#library-practice\"><em>Chapter 13</em>Implications for library practice and tool evaluation</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#reprodu"
+    },
+    {
       "match": "Appendix A",
       "position": 80107,
       "utf8_byte_position": 80201,
@@ -565,6 +661,16 @@
       "h2": null,
       "h3": null,
       "context": "out either method</a></li></ol></li><li class=\"toc-ch\"><a href=\"#appendix-evidence-synthesis-high-recall-retrieval\"><em>Appendix F</em>Evidence synthesis as a high-recall retrieval problem</a><ol class=\"toc-subs\"><li class=\"toc-sec\"><a href=\"#systema"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 85340,
+      "utf8_byte_position": 85448,
+      "line": 1013,
+      "zone": "toc",
+      "h2": null,
+      "h3": null,
+      "context": "ncountered in TAR research</a></li><li class=\"toc-sec\"><a href=\"#reproducibility-of-active-learning-screening\">Applying Chapter 13 to active learning</a></li><li class=\"toc-sec\"><a href=\"#controlled-tar-comparison\">A controlled TAR comparison</a></li"
     },
     {
       "match": "Chapter 4",
@@ -632,6 +738,19 @@
       "context": "in the retrieval pipeline, or simply a capability someone wants to market. <a href=\"#appendix-search-terminology\">Appendix D, A librarian’s map of search terminology</a>, tries to sort some of this out.</p><p>In other words, the words on"
     },
     {
+      "match": "Chapter 13",
+      "position": 93643,
+      "utf8_byte_position": 93789,
+      "line": 1034,
+      "zone": "prose",
+      "h2": {
+        "id": "preface",
+        "text": "Why this book exists"
+      },
+      "h3": null,
+      "context": "ooking-at-academic\">AI Search Is Rebundling Everything Libraries Know About Discovery</a>.” <a href=\"#library-practice\">Chapter 13</a> sets out what that takes in practice.</p> <p>I have spent the years since 2022 learning this the slow way: intro"
+    },
+    {
       "match": "Appendix D",
       "position": 97808,
       "utf8_byte_position": 97958,
@@ -664,6 +783,22 @@
       "context": "sequence is the default. For a shorter route, protect <a href=\"#part1\">Part I</a>, then <a href=\"#query-transformation\">Chapter 9</a> on query transformation and <a href=\"#diagnosing-failure\">Chapters 11</a>–<a href=\"#library-practice\">13</a> on fai"
     },
     {
+      "match": "Chapters 11",
+      "position": 102206,
+      "utf8_byte_position": 102372,
+      "line": 1072,
+      "zone": "prose",
+      "h2": {
+        "id": "preface",
+        "text": "Why this book exists"
+      },
+      "h3": {
+        "id": "what-this-book-is",
+        "text": "What this book is, and what it is not"
+      },
+      "context": "art I</a>, then <a href=\"#query-transformation\">Chapter 9</a> on query transformation and <a href=\"#diagnosing-failure\">Chapters 11</a>–<a href=\"#library-practice\">13</a> on failure, evaluation and professional practice.</li> <li><strong>Working in e"
+    },
+    {
       "match": "Chapter 2",
       "position": 102403,
       "utf8_byte_position": 102571,
@@ -694,6 +829,22 @@
         "text": "What this book is, and what it is not"
       },
       "context": "ng in evidence synthesis?</strong> Focus on <a href=\"#boolean-admission\">Chapter 2</a>, <a href=\"#query-transformation\">Chapter 9</a> and <a href=\"#diagnosing-failure\">Chapters 11</a>–<a href=\"#library-practice\">13</a>, then read <a href=\"#appendix-"
+    },
+    {
+      "match": "Chapters 11",
+      "position": 102498,
+      "utf8_byte_position": 102666,
+      "line": 1073,
+      "zone": "prose",
+      "h2": {
+        "id": "preface",
+        "text": "Why this book exists"
+      },
+      "h3": {
+        "id": "what-this-book-is",
+        "text": "What this book is, and what it is not"
+      },
+      "context": "ref=\"#boolean-admission\">Chapter 2</a>, <a href=\"#query-transformation\">Chapter 9</a> and <a href=\"#diagnosing-failure\">Chapters 11</a>–<a href=\"#library-practice\">13</a>, then read <a href=\"#appendix-evidence-synthesis-high-recall-retrieval\">Appendix"
     },
     {
       "match": "Appendix F",
@@ -774,6 +925,22 @@
         "text": "What this book is, and what it is not"
       },
       "context": "gain, and they sit inside the appendices rather than the chapters. The exception is the evidence-synthesis route, where Appendix F is core. The footnotes are there mostly to qualify claims, add evidence, or say “yes, I know it is more complicated tha"
+    },
+    {
+      "match": "Chapter 11",
+      "position": 104617,
+      "utf8_byte_position": 104797,
+      "line": 1077,
+      "zone": "prose",
+      "h2": {
+        "id": "preface",
+        "text": "Why this book exists"
+      },
+      "h3": {
+        "id": "what-this-book-is",
+        "text": "What this book is, and what it is not"
+      },
+      "context": "<code dir=\"ltr\">rizz</code>. That is deliberate. Unfamiliar words make useful stress tests for search systems. But when Chapter 11 returns to these failures, it starts from the kinds of diagnostic moves librarians already make before attaching the st"
     },
     {
       "match": "Chapter 1",
@@ -1341,6 +1508,22 @@
       "context": "ranking-and-hybrid\"><span id=\"ch5\" class=\"legacy-anchor\"></span><header class=\"chapter-head\"><p class=\"chapter-eyebrow\">Chapter 8</p><p class=\"chapter-meta\">About 24 min</p><h2 id=\"reranking-and-hybrid\">Reranking and multi-stage retrieval</h2><p cla"
     },
     {
+      "match": "Chapter 12",
+      "position": 335191,
+      "utf8_byte_position": 336229,
+      "line": 1976,
+      "zone": "prose",
+      "h2": {
+        "id": "reranking-and-hybrid",
+        "text": "Reranking and multi-stage retrieval"
+      },
+      "h3": {
+        "id": "why-search-systems-use-multiple-stages",
+        "text": "Why search systems use multiple stages"
+      },
+      "context": "cannot rescue a relevant document that no earlier route allowed into the candidate set. <a href=\"#precision-and-recall\">Chapter 12</a> gives recall and precision their exact meanings, and explains why only the first of them is settled here.</p> <p><"
+    },
+    {
       "match": "Chapter 6",
       "position": 335397,
       "utf8_byte_position": 336435,
@@ -1419,6 +1602,22 @@
         "text": "Cross-encoder reranking"
       },
       "context": "ainst <em>you performed well</em>—a difference in what the passage does with the topic rather than in the topic itself. Chapter 5 used that pair to explain what training has to teach a model. It is the same pair, and the same difficulty, at query ti"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 344576,
+      "utf8_byte_position": 345634,
+      "line": 2016,
+      "zone": "prose",
+      "h2": {
+        "id": "reranking-and-hybrid",
+        "text": "Reranking and multi-stage retrieval"
+      },
+      "h3": {
+        "id": "where-colbert-style-late-interaction-fits",
+        "text": "Where ColBERT-style late interaction fits"
+      },
+      "context": "at the scoring layer without being transparent end to end. <a href=\"#interpretability-requires-an-inspectable-pipeline\">Chapter 13</a> returns to what that distinction buys. For a visual, in-depth introduction, see <a href=\"https://meet.ameliechatela"
     },
     {
       "match": "Appendix E",
@@ -1533,6 +1732,22 @@
       "context": "ifier or model may make that choice; routing alone therefore does not establish agency. <a href=\"#query-transformation\">Chapter 9</a> separates the interpretation that may inform a route from the route itself, and <a href=\"#agentic-search-who-choose"
     },
     {
+      "match": "Chapter 10",
+      "position": 372145,
+      "utf8_byte_position": 373287,
+      "line": 2127,
+      "zone": "prose",
+      "h2": {
+        "id": "hybrid-and-fusion",
+        "text": "Hybrid retrieval and rank fusion"
+      },
+      "h3": {
+        "id": "two-hybrids-that-combine-differently",
+        "text": "Two hybrids that combine differently"
+      },
+      "context": "tion that may inform a route from the route itself, and <a href=\"#agentic-search-who-chooses-the-next-retrieval-action\">Chapter 10</a> asks who chooses subsequent actions.</p> <p>“Hybrid” is therefore not one architecture or a guarantee of quality."
+    },
+    {
       "match": "Chapter 9",
       "position": 374576,
       "utf8_byte_position": 375732,
@@ -1607,6 +1822,90 @@
       "context": "etrievers, then combines their lists through the <a href=\"#why-hybrid-retrieval-remains-attractive\">fusion machinery of Chapter 8</a>.</td> <td>Around retrieval</td> <td>One path may be overrepresented, while hidden fusion rules obscure why a reco"
     },
     {
+      "match": "Chapter 10",
+      "position": 397586,
+      "utf8_byte_position": 398824,
+      "line": 2258,
+      "zone": "prose",
+      "h2": {
+        "id": "query-transformation",
+        "text": "Understanding, transforming and routing queries"
+      },
+      "h3": {
+        "id": "common-query-understanding-techniques",
+        "text": "What a system can do with your query"
+      },
+      "context": "the results, while the sequence was prescribed in advance. <a href=\"#fixed-adaptive-and-agentic-are-not-the-same-thing\">Chapter 10</a> separates that content adaptation from the question of who chooses the next action.</p> <p>A system might identify"
+    },
+    {
+      "match": "Chapter 10",
+      "position": 407673,
+      "utf8_byte_position": 408925,
+      "line": 2295,
+      "zone": "prose",
+      "h2": {
+        "id": "query-transformation",
+        "text": "Understanding, transforming and routing queries"
+      },
+      "h3": {
+        "id": "query-understanding-in-current-discovery-products",
+        "text": "Query interpretation and transformation in current discovery products"
+      },
+      "context": "in advance. Even a two-pass PRF workflow can be fixed in its sequence while adapting the contents of its second query. Chapter 10 asks the separate question: who chooses what happens next?</p> <aside class=\"chapter-close\" aria-label=\"Chapter summ"
+    },
+    {
+      "match": "Chapter 11",
+      "position": 413935,
+      "utf8_byte_position": 415207,
+      "line": 2297,
+      "zone": "prose",
+      "h2": {
+        "id": "",
+        "text": "Control, failure and professional judgement"
+      },
+      "h3": null,
+      "context": "searches — an abstract, a section, a passage — which need not be a whole document. It is <a href=\"#diagnosing-failure\">Chapter 11’s</a> first diagnostic question.</dd><dt>The candidate boundary</dt><dd>Where recall is decided. No reranker, fusion st"
+    },
+    {
+      "match": "Chapter 12",
+      "position": 414169,
+      "utf8_byte_position": 415443,
+      "line": 2297,
+      "zone": "prose",
+      "h2": {
+        "id": "",
+        "text": "Control, failure and professional judgement"
+      },
+      "h3": null,
+      "context": "anker, fusion stage or generated answer recovers a record that no earlier route let in; <a href=\"#precision-and-recall\">Chapter 12</a> gives that its exact meaning.</dd><dt>Reranker</dt><dd>A later, more expensive stage reordering a shortlist an earl"
+    },
+    {
+      "match": "Chapter 10",
+      "position": 414539,
+      "utf8_byte_position": 415813,
+      "line": 2297,
+      "zone": "prose",
+      "h2": {
+        "id": "",
+        "text": "Control, failure and professional judgement"
+      },
+      "h3": null,
+      "context": "e-generation routes; multi-stage means later operations process what an earlier one supplied. <a href=\"#agentic-search\">Chapter 10</a> adds a third, independent property: who chose the order.</dd></dl><p>Part II’s chapter summaries restate each of th"
+    },
+    {
+      "match": "Chapter 10",
+      "position": 414914,
+      "utf8_byte_position": 416190,
+      "line": 2297,
+      "zone": "chapter-head",
+      "h2": {
+        "id": "",
+        "text": "Control, failure and professional judgement"
+      },
+      "h3": null,
+      "context": "sec-agentic-search\"><span id=\"ch7\" class=\"legacy-anchor\"></span><header class=\"chapter-head\"><p class=\"chapter-eyebrow\">Chapter 10</p><p class=\"chapter-meta\">About 21 min</p><h2 id=\"agentic-search\">Agentic search</h2><p class=\"chapter-question\"><span"
+    },
+    {
       "match": "Chapters 8",
       "position": 417185,
       "utf8_byte_position": 418479,
@@ -1665,6 +1964,22 @@
       "context": "t applied some operationalisation of relevance to results the user has not seen. <a href=\"#distinction-match-relevance\">Chapter 1 separated matching from relevance</a>; the loop is where that separation acquires teeth, because the system is no longe"
     },
     {
+      "match": "Chapter 12",
+      "position": 441555,
+      "utf8_byte_position": 442973,
+      "line": 2412,
+      "zone": "prose",
+      "h2": {
+        "id": "agentic-search",
+        "text": "Agentic search"
+      },
+      "h3": {
+        "id": "what-agency-costs-and-what-it-buys",
+        "text": "What agency costs, and what it buys"
+      },
+      "context": "thing in the interface states the criterion, and two runs may apply it differently. <a href=\"#relevance-is-a-judgement\">Chapter 12</a> gives this its proper name and <a href=\"#when-is-it-safe-to-stop-screening\">Appendix F</a> shows what a defensible"
+    },
+    {
       "match": "Appendix F",
       "position": 441646,
       "utf8_byte_position": 443064,
@@ -1695,6 +2010,38 @@
         "text": "What the loop is for"
       },
       "context": "oncept, shift granularity and try again. This is the strongest evidence in the book for a claim <a href=\"#bm25-ranking\">Chapters 3</a> and <a href=\"#lexical-search-does-not-have-to-mean-boolean-search\">4</a> made on other grounds: lexical retrieval i"
+    },
+    {
+      "match": "Chapter 12",
+      "position": 445529,
+      "utf8_byte_position": 446967,
+      "line": 2419,
+      "zone": "prose",
+      "h2": {
+        "id": "agentic-search",
+        "text": "Agentic search"
+      },
+      "h3": {
+        "id": "what-the-loop-is-for",
+        "text": "What the loop is for"
+      },
+      "context": "nd becomes <em>does it recover when the query is poor</em>—which is a different property, and one <a href=\"#evaluation\">Chapter 12</a> has to find a way to measure.</p> <p>The limits fall exactly where a library’s knowledge does. The loop works beca"
+    },
+    {
+      "match": "Chapter 11",
+      "position": 451160,
+      "utf8_byte_position": 452622,
+      "line": 2425,
+      "zone": "chapter-head",
+      "h2": {
+        "id": "agentic-search",
+        "text": "Agentic search"
+      },
+      "h3": {
+        "id": "what-the-loop-is-for",
+        "text": "What the loop is for"
+      },
+      "context": "diagnosing-failure\"><span id=\"ch8\" class=\"legacy-anchor\"></span><header class=\"chapter-head\"><p class=\"chapter-eyebrow\">Chapter 11</p><p class=\"chapter-meta\">About 17 min</p><h2 id=\"diagnosing-failure\">Diagnosing retrieval failure</h2><p class=\"chapt"
     },
     {
       "match": "Chapter 4",
@@ -1806,6 +2153,22 @@
       "context": "ery little. The same holds for most of the vocabulary a vendor is likely to use: <a href=\"#appendix-search-terminology\">Appendix D</a> sets out which labels name a representation, which name a matching method, which name a pipeline stage, and which n"
     },
     {
+      "match": "Chapter 12",
+      "position": 482345,
+      "utf8_byte_position": 483883,
+      "line": 2556,
+      "zone": "chapter-head",
+      "h2": {
+        "id": "diagnosing-failure",
+        "text": "Diagnosing retrieval failure"
+      },
+      "h3": {
+        "id": "comparing-the-three-first-stage-approaches",
+        "text": "What different first-stage approaches preserve"
+      },
+      "context": "/a></nav></section><section class=\"chapter\" id=\"sec-evaluation\"><header class=\"chapter-head\"><p class=\"chapter-eyebrow\">Chapter 12</p><p class=\"chapter-meta\">About 20 min</p><h2 id=\"evaluation\">Measuring whether retrieval worked</h2><p class=\"chapter"
+    },
+    {
       "match": "Chapter 1",
       "position": 485822,
       "utf8_byte_position": 487380,
@@ -1902,6 +2265,38 @@
       "context": "se four measures still treat each record’s judgement independently. <a href=\"#appendix-diversity-aware-ranking-metrics\">Appendix E explains diversity-aware metrics</a> for tasks that value coverage of several known aspects rather than repeated eviden"
     },
     {
+      "match": "Chapter 11",
+      "position": 511161,
+      "utf8_byte_position": 512795,
+      "line": 2724,
+      "zone": "prose",
+      "h2": {
+        "id": "evaluation",
+        "text": "Measuring whether retrieval worked"
+      },
+      "h3": {
+        "id": "what-a-number-cannot-settle",
+        "text": "What a number cannot settle"
+      },
+      "context": "s, which system ranked better. It does not explain why one lost; that is the diagnosis of <a href=\"#diagnosing-failure\">Chapter 11</a>. A metric will happily report a decline without indicating whether the cause was vocabulary mismatch, an OOV or rep"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 515834,
+      "utf8_byte_position": 517480,
+      "line": 2734,
+      "zone": "chapter-head",
+      "h2": {
+        "id": "evaluation",
+        "text": "Measuring whether retrieval worked"
+      },
+      "h3": {
+        "id": "what-a-number-cannot-settle",
+        "text": "What a number cannot settle"
+      },
+      "context": "c-library-practice\"><span id=\"ch9\" class=\"legacy-anchor\"></span><header class=\"chapter-head\"><p class=\"chapter-eyebrow\">Chapter 13</p><p class=\"chapter-meta\">About 18 min</p><h2 id=\"library-practice\">Implications for library practice and tool evaluat"
+    },
+    {
       "match": "Appendix F",
       "position": 527708,
       "utf8_byte_position": 529398,
@@ -1934,6 +2329,71 @@
       "context": "ement and evaluation questions. Vendor answers will arrive in vendor vocabulary; <a href=\"#appendix-search-terminology\">Appendix D</a> is a crosswalk from those labels to the mechanisms below, and is worth having to hand while the questions are being"
     },
     {
+      "match": "Chapter 11",
+      "position": 546585,
+      "utf8_byte_position": 548307,
+      "line": 2975,
+      "zone": "prose",
+      "h2": {
+        "id": "",
+        "text": "Application exercise III — Diagnose a failure, then try to document it"
+      },
+      "h3": null,
+      "context": "III</p><h2>Application exercise III — Diagnose a failure, then try to document it</h2><p>Part III supplied a diagnosis (Chapter 11), a way to measure (Chapter 12) and a record (Chapter 13). This exercise runs all three against a search that genuinely"
+    },
+    {
+      "match": "Chapter 12",
+      "position": 546616,
+      "utf8_byte_position": 548338,
+      "line": 2975,
+      "zone": "prose",
+      "h2": {
+        "id": "",
+        "text": "Application exercise III — Diagnose a failure, then try to document it"
+      },
+      "h3": null,
+      "context": "III — Diagnose a failure, then try to document it</h2><p>Part III supplied a diagnosis (Chapter 11), a way to measure (Chapter 12) and a record (Chapter 13). This exercise runs all three against a search that genuinely disappointed you.</p><ol><li>F"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 546642,
+      "utf8_byte_position": 548364,
+      "line": 2975,
+      "zone": "prose",
+      "h2": {
+        "id": "",
+        "text": "Application exercise III — Diagnose a failure, then try to document it"
+      },
+      "h3": null,
+      "context": "then try to document it</h2><p>Part III supplied a diagnosis (Chapter 11), a way to measure (Chapter 12) and a record (Chapter 13). This exercise runs all three against a search that genuinely disappointed you.</p><ol><li>Find a search where a produ"
+    },
+    {
+      "match": "Chapter 11",
+      "position": 546912,
+      "utf8_byte_position": 548636,
+      "line": 2975,
+      "zone": "prose",
+      "h2": {
+        "id": "",
+        "text": "Application exercise III — Diagnose a failure, then try to document it"
+      },
+      "h3": null,
+      "context": "esult for a topic you know well enough to judge—ideally one where you can name a relevant record it missed.</li><li>Use Chapter 11’s diagnostic questions to determine whether the evidence points to a query–record vocabulary mismatch, a vocabulary or"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 547714,
+      "utf8_byte_position": 549444,
+      "line": 2975,
+      "zone": "prose",
+      "h2": {
+        "id": "",
+        "text": "Application exercise III — Diagnose a failure, then try to document it"
+      },
+      "h3": null,
+      "context": "for the remedied one. Note whether the number agrees with your impression of which was better.</li><li>Now attempt the Chapter 13 record: query interpretation, candidate retrieval, ranking and fusion, and agentic control if any. Fill in everything t"
+    },
+    {
       "match": "Chapter 1",
       "position": 550428,
       "utf8_byte_position": 552168,
@@ -1958,6 +2418,19 @@
       },
       "h3": null,
       "context": "the interface, and the third could be explained only because somebody wrote the architecture down. What changed between Chapter 1 and here is not that the screens became legible. It is that you now know which questions a screen was never going to an"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 553646,
+      "utf8_byte_position": 555397,
+      "line": 2992,
+      "zone": "prose",
+      "h2": {
+        "id": "what-you-can-now-ask",
+        "text": "What you can now ask"
+      },
+      "h3": null,
+      "context": "ation, not result screens. Most vendors will not answer <a href=\"#choosing-and-governing-search-tools\">the questions in Chapter 13</a>, and a refusal is itself something you can record. Every claim here about a named product carries a date because it"
     },
     {
       "match": "Appendix A",
@@ -2082,6 +2555,38 @@
       "context": "to-be-dense-or-semantic\">vector, dense and semantic are separate properties</a>. <a href=\"#vector-similarity-explained\">Chapter 6 explains the comparison</a>, and the <a href=\"vector-similarity-lab.html\">Vector Similarity Lab</a> makes the distincti"
     },
     {
+      "match": "Chapter 10",
+      "position": 621767,
+      "utf8_byte_position": 623830,
+      "line": 3349,
+      "zone": "end-matter",
+      "h2": {
+        "id": "appendix-search-terminology",
+        "text": "A librarian’s map of search terminology"
+      },
+      "h3": {
+        "id": "appendix-misleading-overlaps",
+        "text": "The most misleading overlaps"
+      },
+      "context": "oper, and it grants no access a licence did not already grant. <a href=\"#agency-changes-the-sequence-not-the-retrieval\">Chapter 10</a> shows what does and does not change when a vendor exposes its search this way.</p></div> <div class=\"terminology-o"
+    },
+    {
+      "match": "Chapter 12",
+      "position": 622382,
+      "utf8_byte_position": 624451,
+      "line": 3350,
+      "zone": "end-matter",
+      "h2": {
+        "id": "appendix-search-terminology",
+        "text": "A librarian’s map of search terminology"
+      },
+      "h3": {
+        "id": "appendix-misleading-overlaps",
+        "text": "The most misleading overlaps"
+      },
+      "context": "th getting systematically worse on the queries a particular library cares about. <a href=\"#what-a-number-cannot-settle\">Chapter 12</a> sets out what to ask of such a claim.</p></div> </div> <hr> </section><section class=\"chapter appendix\" id=\"app-"
+    },
+    {
       "match": "Appendix E",
       "position": 622571,
       "utf8_byte_position": 624640,
@@ -2122,6 +2627,38 @@
       },
       "h3": null,
       "context": "9\">Learning about Learning to Rank: A Librarian’s Understanding</a>” and contains the method and evaluation detail that Chapter 8 deliberately leaves out. Links back to the relevant chapter sections keep the model architectures there rather than rep"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 630095,
+      "utf8_byte_position": 632187,
+      "line": 3383,
+      "zone": "end-matter",
+      "h2": {
+        "id": "appendix-rank-fusion-and-learning-to-rank",
+        "text": "Rank fusion, diversification, learning to rank and rerankers"
+      },
+      "h3": {
+        "id": "appendix-ltr-toy-mixture",
+        "text": "A toy mixture—and why raw scores cannot simply be added"
+      },
+      "context": "al research; a citation feature imports field, age and coverage effects. <a href=\"#choosing-and-governing-search-tools\">Chapter 13’s governance questions</a> apply to those choices, not just to the final model.</p> <h3 id=\"appendix-ltr-training-ch"
+    },
+    {
+      "match": "Chapter 12",
+      "position": 635008,
+      "utf8_byte_position": 637128,
+      "line": 3403,
+      "zone": "end-matter",
+      "h2": {
+        "id": "appendix-rank-fusion-and-learning-to-rank",
+        "text": "Rank fusion, diversification, learning to rank and rerankers"
+      },
+      "h3": {
+        "id": "appendix-ltr-clicks",
+        "text": "What click logs teach—and what they cannot"
+      },
+      "context": "arns what the supplied evidence rewards, not relevance in the abstract. This is why <a href=\"#relevance-is-a-judgement\">Chapter 12’s account of relevance judgements</a> applies as strongly to training data as to evaluation data.</p> <h3 id=\"append"
     },
     {
       "match": "Chapter 8",
@@ -2186,6 +2723,54 @@
         "text": "What to ask about either method"
       },
       "context": "> <hr> </section><section class=\"chapter appendix\" id=\"app-F\"><header class=\"chapter-head\"><p class=\"chapter-eyebrow\">Appendix F</p><p class=\"chapter-meta\">About 29 min · core for the evidence-synthesis route</p><h2 id=\"appendix-evidence-synthesis-"
+    },
+    {
+      "match": "Chapter 12",
+      "position": 652810,
+      "utf8_byte_position": 655016,
+      "line": 3483,
+      "zone": "end-matter",
+      "h2": {
+        "id": "appendix-evidence-synthesis-high-recall-retrieval",
+        "text": "Evidence synthesis as a high-recall retrieval problem"
+      },
+      "h3": {
+        "id": "systematic-reviews-stress-test-retrieval",
+        "text": "Why systematic reviews stress-test retrieval systems"
+      },
+      "context": "satisfy one information need quickly.</p> <p>This is the precision–recall choice from <a href=\"#precision-and-recall\">Chapter 12</a> under unusually demanding conditions. Searchers aim for high sensitivity, commonly accepting a large screening burd"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 677180,
+      "utf8_byte_position": 679472,
+      "line": 3611,
+      "zone": "end-matter",
+      "h2": {
+        "id": "appendix-evidence-synthesis-high-recall-retrieval",
+        "text": "Evidence synthesis as a high-recall retrieval problem"
+      },
+      "h3": {
+        "id": "reproducibility-of-active-learning-screening",
+        "text": "Applying Chapter 13 to active learning"
+      },
+      "context": "% has been reached.</td></tr> </tbody></table></div> <h3 id=\"reproducibility-of-active-learning-screening\">Applying Chapter 13 to active learning<a aria-label=\"Link to Applying Chapter 13 to active learning\" class=\"heading-anchor\" href=\"#reproduc"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 677408,
+      "utf8_byte_position": 679700,
+      "line": 3612,
+      "zone": "end-matter",
+      "h2": {
+        "id": "appendix-evidence-synthesis-high-recall-retrieval",
+        "text": "Evidence synthesis as a high-recall retrieval problem"
+      },
+      "h3": {
+        "id": "reproducibility-of-active-learning-screening",
+        "text": "Applying Chapter 13 to active learning"
+      },
+      "context": "nchor\" href=\"#reproducibility-of-active-learning-screening\">#</a></h3> <p><a href=\"#reproducibility-implication-title\">Chapter 13’s principle</a> still applies: reproducibility depends on what was fixed, documented, exportable and versioned. TAR add"
     },
     {
       "match": "Appendix D",
@@ -2348,6 +2933,22 @@
       "context": "ce. Part II”</a>.</strong> The fuller account behind the system-oriented and user-oriented manifestations simplified in Chapters 1 and 12.</li> </ul> <h3 id=\"deeper-evaluation\">Evaluation<a aria-label=\"Link to Evaluation\" class=\"heading-anchor\" h"
     },
     {
+      "match": "Chapter 12",
+      "position": 719005,
+      "utf8_byte_position": 721482,
+      "line": 3782,
+      "zone": "end-matter",
+      "h2": {
+        "id": "where-to-go-deeper",
+        "text": "Where to go deeper"
+      },
+      "h3": {
+        "id": "deeper-evaluation",
+        "text": "Evaluation"
+      },
+      "context": "ections and question styles were used is what makes the transfer argument in <a href=\"#test-collections-and-benchmarks\">Chapter 12</a> concrete.</li> </ul> <h3 id=\"deeper-evidence-synthesis\">Evidence synthesis and TAR<a aria-label=\"Link to Eviden"
+    },
+    {
       "match": "Chapter 4",
       "position": 719380,
       "utf8_byte_position": 721857,
@@ -2364,6 +2965,22 @@
       "context": "leagues, <a href=\"https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-04\">Cochrane Handbook Chapter 4</a>.</strong> The current methodological baseline for searching and selecting studies in Cochrane intervention reviews."
     },
     {
+      "match": "Chapter 13",
+      "position": 721076,
+      "utf8_byte_position": 723578,
+      "line": 3796,
+      "zone": "end-matter",
+      "h2": {
+        "id": "where-to-go-deeper",
+        "text": "Where to go deeper"
+      },
+      "h3": {
+        "id": "deeper-practice",
+        "text": "Library practice"
+      },
+      "context": "strategies in evidence syntheses, and the closest existing answer to what <a href=\"#reproducibility-implication-title\">Chapter 13</a> asks a library to record. Note what it already concedes about proprietary and similarity-based operations.</li> </"
+    },
+    {
       "match": "Chapters 1",
       "position": 724177,
       "utf8_byte_position": 726687,
@@ -2378,6 +2995,38 @@
         "text": "Using part of it in teaching"
       },
       "context": "Three combinations have been designed to hold together without the rest:</p> <ol> <li><strong>Part I alone</strong> (Chapters 1 to 4, plus Application exercise I) is a self-contained unit on retrieval foundations and lexical search, and ends with"
+    },
+    {
+      "match": "Chapters 11",
+      "position": 724366,
+      "utf8_byte_position": 726876,
+      "line": 3816,
+      "zone": "end-matter",
+      "h2": {
+        "id": "how-to-cite-and-reuse",
+        "text": "How to cite and reuse this book"
+      },
+      "h3": {
+        "id": "reuse-teaching",
+        "text": "Using part of it in teaching"
+      },
+      "context": "t on retrieval foundations and lexical search, and ends with the category error it exists to correct.</li> <li><strong>Chapters 11 and 12</strong> work together as a unit on failure and measurement for a class that already knows what an index is.</li"
+    },
+    {
+      "match": "Chapter 13",
+      "position": 724512,
+      "utf8_byte_position": 727022,
+      "line": 3817,
+      "zone": "end-matter",
+      "h2": {
+        "id": "how-to-cite-and-reuse",
+        "text": "How to cite and reuse this book"
+      },
+      "h3": {
+        "id": "reuse-teaching",
+        "text": "Using part of it in teaching"
+      },
+      "context": "> work together as a unit on failure and measurement for a class that already knows what an index is.</li> <li><strong>Chapter 13 with Appendix D</strong> is the procurement and evaluation material, and needs the least technical preparation.</li> <"
     },
     {
       "match": "Appendix D",

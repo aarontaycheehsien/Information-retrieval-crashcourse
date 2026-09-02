@@ -17,6 +17,7 @@ import io
 import json
 import os
 import re
+import subprocess
 import sys
 from datetime import datetime, timezone
 
@@ -24,9 +25,16 @@ from datetime import datetime, timezone
 REPO = os.path.dirname(os.path.abspath(__file__))
 BOOK = os.path.join(REPO, "search-textbook.html")
 OUTPUT = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.join(REPO, "baseline.json")
+GIT_REF = sys.argv[2] if len(sys.argv) > 2 else ""
 
-with open(BOOK, "rb") as handle:
-    source_bytes = handle.read()
+if GIT_REF:
+    source_bytes = subprocess.check_output(
+        ["git", "cat-file", "--filters", "--path=search-textbook.html", "%s:search-textbook.html" % GIT_REF],
+        cwd=REPO,
+    )
+else:
+    with open(BOOK, "rb") as handle:
+        source_bytes = handle.read()
 source = source_bytes.decode("utf-8")
 
 
@@ -168,7 +176,7 @@ def zone_for(position: int) -> str:
     return "prose"
 
 
-reference_re = re.compile(r"\b(Chapter|Chapters|Appendix|Appendices)\s+[0-9A-F]\b")
+reference_re = re.compile(r"\b(Chapter|Chapters|Appendix|Appendices)\s+(?:\d+|[A-F])\b")
 markup_reference_count = len(list(reference_re.finditer(text_pass)))
 references = []
 for match in reference_re.finditer(visible):
@@ -358,6 +366,7 @@ report = {
     "metadata": {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "book": os.path.relpath(BOOK, REPO).replace(os.sep, "/"),
+        "git_ref": GIT_REF,
         "characters": len(source),
         "utf8_bytes": len(source_bytes),
         "sha256": hashlib.sha256(source_bytes).hexdigest(),
