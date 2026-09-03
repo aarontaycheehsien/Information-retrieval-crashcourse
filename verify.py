@@ -19,6 +19,7 @@ BASELINE_JSON = os.path.join(REPO, "baseline.json")
 BASELINE_COMMIT = "65469bbd4e7aa811db0f0511ae10a4386299308f"
 PHASE2_COMMIT = "7b38db9"
 PHASE3_COMMIT = "51e644c"
+PHASE4_COMMIT = "1f3ab69"
 
 
 def element_range(text: str, start: int, tag: str) -> tuple[int, int]:
@@ -78,7 +79,7 @@ def require(condition: bool, message: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--phase", choices=("1", "2", "3", "4", "final"), required=True)
+    parser.add_argument("--phase", choices=("1", "2", "3", "4", "5", "final"), required=True)
     parser.add_argument("--audit", required=True)
     args = parser.parse_args()
 
@@ -273,6 +274,55 @@ def main() -> None:
             == ["%%NEW10%%", "%%NEW6%%", "%%TIME10%%", "%%TIME6%%"],
             "only the four planned structural tokens remain",
         )
+
+    if args.phase == "5":
+        from restructure import phase5
+
+        phase4_bytes = subprocess.check_output(
+            [
+                "git", "cat-file", "--filters", "--path=search-textbook.html",
+                "%s:search-textbook.html" % PHASE4_COMMIT,
+            ],
+            cwd=REPO,
+        )
+        expected = phase5(phase4_bytes.decode("utf-8"), baseline)
+        require(current == expected, "Phase 5 output is exactly reproducible from the Phase 4 snapshot")
+        eyebrows = [int(value) for value in re.findall(
+            r'<p class="chapter-eyebrow">Chapter (\d+)</p>', current
+        )]
+        require(eyebrows == list(range(1, 16)), "chapter eyebrows run from 1 through 15")
+        appendices = re.findall(r'<p class="chapter-eyebrow">Appendix ([A-F])</p>', current)
+        require(appendices == list("ABCDEF"), "appendix eyebrows remain A through F")
+        require("%%" not in current, "no placeholder tokens remain")
+        require(current.count('data-ch="retrieval-encoder"') == 2,
+                "both TOCs contain the new Chapter 6")
+        require(current.count('data-ch="hybrid-and-fusion"') == 2,
+                "both TOCs contain the new Chapter 10")
+        require(current.count('<li class="toc-sec"><a href="#appendix-how-rrf-combines-ranked-lists"') == 0,
+                "the slimmed Appendix E TOC no longer lists the moved RRF heading")
+        stale_stage_text = [
+            "Chapter 9 — the words you typed may be rewritten",
+            "Chapter 9 — retrieval inputs may be rewritten",
+            "Chapters 3 and 5–7 — one fast pass",
+            "Chapter 8 — several candidate lists are combined",
+            "Chapter 8 — a shortlist is compared again",
+            "Chapter 13 — what the reader is finally shown",
+            'class="stage-ch">Ch 5–7',
+        ]
+        require(not [text for text in stale_stage_text if text in current],
+                "all stage-map numbering uses the fifteen-chapter map")
+        with open(os.path.join(REPO, "phase4-audit.json"), encoding="utf-8") as handle:
+            phase4_audit = json.load(handle)
+        app_f = next(item for item in audit["h2_sections"] if item["section_id"] == "app-F")
+        old_app_f = next(item for item in phase4_audit["h2_sections"] if item["section_id"] == "app-F")
+        require(app_f["source_sha256"] == old_app_f["source_sha256"],
+                "Phase 5 leaves Appendix F byte-identical to Phase 4")
+        require(audit["summary"]["appendix_f_textual_reference_count"] == 13,
+                "all 13 textual Appendix F references remain")
+        with open(os.path.join(REPO, "phase2-audit.json"), encoding="utf-8") as handle:
+            phase2_audit = json.load(handle)
+        require(audit["summary"]["asset_prefix_counts"] == phase2_audit["summary"]["asset_prefix_counts"],
+                "Phase 2 asset numbering is unchanged")
 
     print("verification complete for phase", args.phase)
 

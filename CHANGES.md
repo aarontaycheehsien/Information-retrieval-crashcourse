@@ -50,3 +50,14 @@
 - Updated the learnt-sparse comparison link to the Chapter 10 hybrid section so its target agrees with its new visible chapter number.
 - Verification: the output is exactly reproducible from the Phase 3 snapshot; IDs, hrefs, footnotes, assets, styles, scripts, exclusions, and the Appendix F guard all pass.
 - Snapshot audit: `phase4-audit.json`.
+
+## Phase 5 — structural regeneration
+
+- Resolved the four deferred new-chapter and reading-time tokens and set the chapter-eyebrow sequence to 1–15; appendix eyebrows remain A–F.
+- Recomputed the split chapters at approximately 210 words per minute, consistent with neighbouring chapter labels: Chapters 5, 6, 9, and 10 are currently 14, 8, 19, and 6 minutes. The new prose pass will trigger one final time check.
+- Regenerated both static TOCs directly from top-level sections and headings. They now include Chapters 6 and 10, the two split section lists, and a slimmed Appendix E list without the moved RRF heading.
+- Updated every repeated stage map to Chapter 11 for query transformation, Chapters 5–8 for first-stage retrieval, Chapter 10 for fusion, Chapter 9 for reranking, Chapter 8 for indexed-unit analysis in the Part II map, and Chapter 15 for presentation.
+- Rewrote the Part II overview for seven chapters, updated its aggregate reading time to 97 minutes, identified Chapters 5–11 explicitly in Exercise II, and extended the Appendix A bi-encoder range to Chapters 5–8.
+- Ran the global footnote-ordering script. All 55 footnotes were already sequential after the moves, so it made no byte change.
+- Verification: both TOCs contain the new chapters; all structural tokens are gone; chapter and appendix sequences, anchors, assets, scripts, styles, and the Appendix F guard pass.
+- Snapshot audit: `phase5-audit.json`.

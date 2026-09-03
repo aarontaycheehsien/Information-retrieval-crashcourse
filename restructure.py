@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import collections
 import hashlib
+import html
 import json
 import os
 import re
@@ -21,6 +22,7 @@ BOOK = os.path.join(REPO, "search-textbook.html")
 BASELINE = os.path.join(REPO, "baseline.json")
 PHASE2_AUDIT = os.path.join(REPO, "phase2-audit.json")
 PHASE3_AUDIT = os.path.join(REPO, "phase3-audit.json")
+PHASE4_AUDIT = os.path.join(REPO, "phase4-audit.json")
 
 
 def read_bytes(path: str) -> tuple[bytes, str]:
@@ -646,9 +648,205 @@ def phase4(document: str, baseline: dict) -> str:
     return document
 
 
+def replace_nested_list(document: str, list_id: str, inner: str) -> str:
+    opening = '<ol id="%s">' % list_id
+    start = unique_index(document, opening, list_id) + len(opening)
+    depth = 1
+    for match in re.finditer(r"<ol\b[^>]*>|</ol>", document[start:]):
+        depth += -1 if match.group(0) == "</ol>" else 1
+        if depth == 0:
+            return document[:start] + inner + document[start + match.start() :]
+    raise RuntimeError("unclosed TOC list: " + list_id)
+
+
+def top_level_sections(document: str, low: int, high: int) -> list[tuple[int, int, str]]:
+    result = []
+    depth = 0
+    start = None
+    opening = None
+    for match in re.finditer(r"<section\b([^>]*)>|</section>", document[low:high]):
+        if match.group(0).startswith("</"):
+            depth -= 1
+            if depth == 0 and start is not None:
+                result.append((start, low + match.end(), opening or ""))
+        else:
+            if depth == 0:
+                start = low + match.start()
+                opening = match.group(1)
+            depth += 1
+    return result
+
+
+def attr(opening: str, name: str) -> str:
+    match = re.search(r'%s="([^"]*)"' % name, opening)
+    return match.group(1) if match else ""
+
+
+def visible_heading(raw: str) -> str:
+    raw = re.sub(r'<a aria-label[^>]*class="heading-anchor"[^>]*>#</a>\s*$', "", raw)
+    raw = re.sub(r"<[^>]+>", "", raw)
+    return re.sub(r"\s+", " ", html.unescape(raw)).strip()
+
+
+def regenerate_tocs(document: str) -> str:
+    article_start = unique_index(document, '<article id="article">', "article")
+    article_end = unique_index(document, '<section class="footnotes">', "footnotes")
+    rows = []
+    appendix_index = 0
+    for start, end, opening in top_level_sections(document, article_start, article_end):
+        classes = attr(opening, "class")
+        section_id = attr(opening, "id")
+        block = document[start:end]
+        h2 = re.search(r'<h2[^>]*\bid="([^"]+)"[^>]*>(.*?)</h2>', block, re.S)
+        if "part-divider" in classes:
+            tag = re.search(r'<p class="part-tag">(.*?)</p>', block, re.S)
+            title = re.search(r"<h2[^>]*>(.*?)</h2>", block, re.S)
+            shown_tag = visible_heading(tag.group(1)) if tag else ""
+            shown_title = visible_heading(title.group(1)) if title else ""
+            shown = shown_tag if "backmatter-divider" in classes else shown_tag + " · " + shown_title
+            rows.append('<li class="toc-part"><a href="#%s">%s</a></li>' % (section_id, shown))
+            continue
+        if "exercise" in classes:
+            title = re.search(r"<h2[^>]*>(.*?)</h2>", block, re.S)
+            shown = visible_heading(title.group(1)).split("—")[0].strip()
+            rows.append('<li class="toc-ex"><a href="#%s">%s</a></li>' % (section_id, shown))
+            continue
+        if not h2:
+            continue
+        eyebrow = re.search(r'<p class="chapter-eyebrow">(.*?)</p>', block, re.S)
+        eyebrow_text = visible_heading(eyebrow.group(1)) if eyebrow else ""
+        if "appendix" in classes:
+            appendix_index += 1
+            eyebrow_text = "Appendix " + chr(64 + appendix_index)
+        subs = []
+        if "chapter" in classes and "backsection" not in classes:
+            hidden = [(m.start(), m.end()) for m in re.finditer(r'<(figure|aside|details)\b.*?</\1>', block, re.S)]
+            for h3 in re.finditer(r'<h3[^>]*\bid="([^"]+)"[^>]*>(.*?)</h3>', block, re.S):
+                if "group-title" in h3.group(0) or any(a <= h3.start() < b for a, b in hidden):
+                    continue
+                subs.append('<li class="toc-sec"><a href="#%s">%s</a></li>' %
+                            (h3.group(1), visible_heading(h3.group(2))))
+        data = ' data-ch="%s"' % section_id[4:] if section_id.startswith("sec-") else ""
+        title = visible_heading(h2.group(2))
+        inner = "<em>%s</em>%s" % (eyebrow_text, title) if eyebrow_text else title
+        sublist = '<ol class="toc-subs">%s</ol>' % "".join(subs) if subs else ""
+        rows.append('<li class="toc-ch"%s><a href="#%s">%s</a>%s</li>' %
+                    (data, h2.group(1), inner, sublist))
+    toc = "".join(rows)
+    document = replace_nested_list(document, "toc-list", toc)
+    return replace_nested_list(document, "mobile-toc-list", toc)
+
+
+def phase5(document: str, baseline: dict) -> str:
+    """Resolve numbering and rebuild machine-owned structural surfaces."""
+    with open(PHASE4_AUDIT, encoding="utf-8") as handle:
+        phase4_audit = json.load(handle)
+    current_hash = hashlib.sha256(document.encode("utf-8")).hexdigest()
+    if current_hash != phase4_audit["metadata"]["sha256"]:
+        raise RuntimeError("Phase 5 input does not match the Phase 4 snapshot")
+
+    chapters = [
+        ("sec-intro", 1, 13), ("sec-boolean-admission", 2, 13),
+        ("sec-bm25-ranking", 3, 11), ("sec-beyond-boolean", 4, 10),
+        ("sec-embeddings", 5, 14), ("sec-retrieval-encoder", 6, 8),
+        ("sec-dense-at-scale", 7, 16), ("sec-representations-and-units", 8, 15),
+        ("sec-reranking-and-hybrid", 9, 19), ("sec-hybrid-and-fusion", 10, 6),
+        ("sec-query-transformation", 11, 19), ("sec-agentic-search", 12, 21),
+        ("sec-diagnosing-failure", 13, 17), ("sec-evaluation", 14, 20),
+        ("sec-library-practice", 15, 18),
+    ]
+    for section_id, number, minutes in chapters:
+        start, end = section_range(document, section_id)
+        block = document[start:end]
+        block, eyebrow_count = re.subn(
+            r'(<p class="chapter-eyebrow">)Chapter\s+(?:\d+|%%NEW\d+%%)(</p>)',
+            r"\g<1>Chapter %d\g<2>" % number,
+            block,
+            count=1,
+        )
+        if eyebrow_count != 1:
+            raise RuntimeError("Phase 5 could not set eyebrow for " + section_id)
+        block, time_count = re.subn(
+            r'(<p class="chapter-meta">)About\s+(?:\d+|%%TIME\d+%%)\s+min(</p>)',
+            r"\g<1>About %d min\g<2>" % minutes,
+            block,
+            count=1,
+        )
+        if time_count != 1:
+            raise RuntimeError("Phase 5 could not set reading time for " + section_id)
+        document = document[:start] + block + document[end:]
+
+    stage_replacements = [
+        ("Chapter 9 — the words you typed may be rewritten, expanded or split before retrieval sees them.",
+         "Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them."),
+        ("Chapter 9 — retrieval inputs may be rewritten, expanded or constructed again before a retrieval pass.",
+         "Chapter 11 — retrieval inputs may be rewritten, expanded or constructed again before a retrieval pass."),
+        ("Chapters 3 and 5–7 — one fast pass over the whole collection produces the candidate set.",
+         "Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set."),
+        ('href="#reranking-and-hybrid" title="Chapter 8 — several candidate lists are combined into one."',
+         'href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one."'),
+        ("Chapter 8 — a shortlist is compared again, more carefully than collection scale allowed.",
+         "Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed."),
+        ("Chapter 13 — what the reader is finally shown, and what can be recorded about it.",
+         "Chapter 15 — what the reader is finally shown, and what can be recorded about it."),
+        ("Chapter 13, in Part III — what the reader is finally shown, and what can be recorded about it.",
+         "Chapter 15, in Part III — what the reader is finally shown, and what can be recorded about it."),
+        ("Chapter 9 — what a system may infer from your request, change about it, and where it sends the result.",
+         "Chapter 11 — what a system may infer from your request, change about it, and where it sends the result."),
+        ("Chapter 7 — what one stored item actually is, and how finely the collection was cut up.",
+         "Chapter 8 — what one stored item actually is, and how finely the collection was cut up."),
+        ("Chapters 5 to 7 — the encoder, the search over a whole collection, and the representation underneath both.",
+         "Chapters 5 to 8 — the encoder, the search over a whole collection, and the representation underneath both."),
+        ('<span class="stage-ch">Ch 9</span>', '<span class="stage-ch">Ch 11</span>'),
+        ('<span class="stage-ch">Ch 7</span>', '<span class="stage-ch">Ch 8</span>'),
+        ('<span class="stage-ch">Ch 5–7</span>', '<span class="stage-ch">Ch 5–8</span>'),
+    ]
+    for item in stage_replacements:
+        old, new = item[:2]
+        expected = item[2] if len(item) == 3 else None
+        count = document.count(old)
+        if count == 0 or (expected is not None and count != expected):
+            raise RuntimeError("Phase 5 stage-map match count for %r is %d" % (old, count))
+        document = document.replace(old, new)
+    fusion_badge = 'Fusion<span class="stage-ch">Ch 8</span>'
+    unique_index(document, fusion_badge, "Part II fusion badge")
+    document = document.replace(fusion_badge, 'Fusion<span class="stage-ch">Ch 10</span>')
+    rerank_badge = 'Reranking<span class="stage-ch">Ch 8</span>'
+    unique_index(document, rerank_badge, "Part II reranking badge")
+    document = document.replace(rerank_badge, 'Reranking<span class="stage-ch">Ch 9</span>')
+
+    old_part2 = ('Part II builds the pipeline from the middle outwards. Chapters 5 to 7 construct a retriever that '
+                 'compares learnt representations instead of strings; Chapter 8 opens the stored object both of them '
+                 'assume; <a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> add '
+                 'the stages that run after a candidate set exists; and Chapter 11 returns to what happens to your '
+                 'query before any of it starts.')
+    new_part2 = ('Part II builds the pipeline from the middle outwards. Chapters 5 to 8 move from learnt geometry to '
+                 'a retrieval encoder, collection-scale search and the indexed units underneath them; Chapters 9 and '
+                 '10 divide the later work between reranking and combining candidate lists; and Chapter 11 returns '
+                 'to what happens to your query before any of it starts.')
+    unique_index(document, old_part2, "Part II overview")
+    document = document.replace(old_part2, new_part2)
+    unique_index(document, "Reading time: about 95 min", "Part II reading time")
+    document = document.replace("Reading time: about 95 min", "Reading time: about 97 min")
+
+    exercise2_old = "Part II assembled a pipeline: query interpretation and transformation, first-stage retrieval, fusion, reranking and presentation."
+    exercise2_new = "Across Chapters 5 to 11, Part II assembled a pipeline: query interpretation and transformation, first-stage retrieval, fusion, reranking and presentation."
+    unique_index(document, exercise2_old, "Exercise II Part II description")
+    document = document.replace(exercise2_old, exercise2_new)
+    unique_index(document, "the bi-encoders of Chapters 5–7", "Appendix A chapter range")
+    document = document.replace("the bi-encoders of Chapters 5–7", "the bi-encoders of Chapters 5–8")
+
+    document = regenerate_tocs(document)
+    if "%%" in document:
+        raise RuntimeError("Phase 5 left unresolved placeholder tokens")
+    validate_common(document, baseline, require_app_f_exact=False)
+    print("chapter structural records:", len(chapters))
+    return document
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("phase1", "phase2", "phase3", "phase4"))
+    parser.add_argument("phase", choices=("phase1", "phase2", "phase3", "phase4", "phase5"))
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -664,6 +862,8 @@ def main() -> None:
         updated = phase3(document, baseline)
     elif args.phase == "phase4":
         updated = phase4(document, baseline)
+    elif args.phase == "phase5":
+        updated = phase5(document, baseline)
     else:
         raise AssertionError(args.phase)
 
