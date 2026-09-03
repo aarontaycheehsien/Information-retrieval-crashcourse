@@ -1,6 +1,6 @@
 # Phase 4 judged-reference proposal
 
-Status: **Gate G4 pending. None of the edits below have been applied.**
+Status: **Gate G4 approved by the user on 2026-09-03. The edits below were applied in Phase 4.**
 
 Positions refer to the Phase 3 snapshot (`phase3-audit.json`). Context cues, not numeric positions or occurrence counts, will be used when applying approved edits.
 

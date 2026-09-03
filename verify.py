@@ -18,6 +18,7 @@ BOOK = os.path.join(REPO, "search-textbook.html")
 BASELINE_JSON = os.path.join(REPO, "baseline.json")
 BASELINE_COMMIT = "65469bbd4e7aa811db0f0511ae10a4386299308f"
 PHASE2_COMMIT = "7b38db9"
+PHASE3_COMMIT = "51e644c"
 
 
 def element_range(text: str, start: int, tag: str) -> tuple[int, int]:
@@ -77,7 +78,7 @@ def require(condition: bool, message: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--phase", choices=("1", "2", "3", "final"), required=True)
+    parser.add_argument("--phase", choices=("1", "2", "3", "4", "final"), required=True)
     parser.add_argument("--audit", required=True)
     args = parser.parse_args()
 
@@ -235,6 +236,38 @@ def main() -> None:
             audit["summary"]["asset_prefix_counts"] == phase2_audit["summary"]["asset_prefix_counts"],
             "Phase 2 asset numbering is unchanged",
         )
+        require(
+            sorted(set(re.findall(r"%%[A-Z0-9]+%%", current)))
+            == ["%%NEW10%%", "%%NEW6%%", "%%TIME10%%", "%%TIME6%%"],
+            "only the four planned structural tokens remain",
+        )
+
+    if args.phase == "4":
+        from restructure import phase4
+
+        phase3_bytes = subprocess.check_output(
+            [
+                "git", "cat-file", "--filters", "--path=search-textbook.html",
+                "%s:search-textbook.html" % PHASE3_COMMIT,
+            ],
+            cwd=REPO,
+        )
+        expected = phase4(phase3_bytes.decode("utf-8"), baseline)
+        require(current == expected, "Phase 4 output is exactly reproducible from the Phase 3 snapshot")
+        app_f = next(item for item in audit["h2_sections"] if item["section_id"] == "app-F")
+        baseline_words = baseline["guards"]["appendix_f"]["word_count"]
+        require(
+            abs(app_f["word_count"] - baseline_words) / baseline_words <= 0.005,
+            "Appendix F word count remains within the 0.5% guard",
+        )
+        require(audit["summary"]["appendix_f_textual_reference_count"] == 13,
+                "all 13 textual Appendix F references remain")
+        with open(os.path.join(REPO, "phase2-audit.json"), encoding="utf-8") as handle:
+            phase2_audit = json.load(handle)
+        require(audit["summary"]["asset_prefix_counts"] == phase2_audit["summary"]["asset_prefix_counts"],
+                "Phase 2 asset numbering is unchanged")
+        for phrase, expected_count in baseline["guards"]["exclusion_exact_text_counts"].items():
+            require(current.count(phrase) == expected_count, "exclusion remains exact: %s" % phrase)
         require(
             sorted(set(re.findall(r"%%[A-Z0-9]+%%", current)))
             == ["%%NEW10%%", "%%NEW6%%", "%%TIME10%%", "%%TIME6%%"],

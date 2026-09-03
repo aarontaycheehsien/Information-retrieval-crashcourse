@@ -41,7 +41,12 @@
 - Verification: the output is exactly reproducible from the Phase 2 snapshot; all six exclusion strings retain their baseline counts; Appendix F remains within its 0.5% word-count guard, all six F.x label blocks are byte-identical, and all 13 textual `Appendix F` references remain.
 - Snapshot audit: `phase3-audit.json`.
 
-## Phase 4 — proposal gate
+## Phase 4 — judged chapter references
 
 - Emitted `phase4-proposal.md` with all seven original Chapter 5 occurrences, all 18 original Chapter 8 occurrences, the three newly correct Chapter 8 results created by Phase 3, all 13 Appendix E occurrences, all 13 protected Appendix F occurrences, and the currency paragraph.
-- No Phase 4 substitutions have been applied; G4 approval is pending.
+- G4 was approved by the user on 2026-09-03.
+- Applied 19 uniquely guarded substitutions: the retrieval-training reference now points to Chapter 6; old Chapter 8 references were distributed across Chapters 9 and 10; the preface reading path and currency list now include the new chapter sequence; and the stale Appendix E RRF cross-reference was replaced because the worked example now follows in Chapter 10.
+- Kept the three newly correct Chapter 8 references, the conceptual Chapter 5 references, all LTR/diversification Appendix E references, and all 13 protected `Appendix F` strings.
+- Updated the learnt-sparse comparison link to the Chapter 10 hybrid section so its target agrees with its new visible chapter number.
+- Verification: the output is exactly reproducible from the Phase 3 snapshot; IDs, hrefs, footnotes, assets, styles, scripts, exclusions, and the Appendix F guard all pass.
+- Snapshot audit: `phase4-audit.json`.

@@ -10,10 +10,10 @@ The user approved G0 with the following baseline interpretations:
 
 The separate G4 gate remains required before judged reference substitutions.
 
-## G4 — pending
+## G4 — approved 2026-09-03
 
 Review `phase4-proposal.md`. Approval authorises the context-specific Chapter 5, Chapter 8, Appendix E, currency-paragraph, and related link-target changes listed there. All 13 `Appendix F` strings remain verbatim.
 
 One proposal deserves particular attention: the learnt-sparse sentence using the cue `main alternative to running a lexical and a dense retriever side by side` changes its chapter text to Chapter 10 as directed by the plan, but its current link target is the neural-IR umbrella section retained in Chapter 9. The application will update that link to the Chapter 10 hybrid section so text and target agree.
 
-Replying **“Approve G4”** will authorise the listed judged substitutions and allow Phases 4–7 to continue.
+The user approved the proposal. Phase 4 applied the listed judged substitutions and Phases 5–7 may proceed.

@@ -20,6 +20,7 @@ REPO = os.path.dirname(os.path.abspath(__file__))
 BOOK = os.path.join(REPO, "search-textbook.html")
 BASELINE = os.path.join(REPO, "baseline.json")
 PHASE2_AUDIT = os.path.join(REPO, "phase2-audit.json")
+PHASE3_AUDIT = os.path.join(REPO, "phase3-audit.json")
 
 
 def read_bytes(path: str) -> tuple[bytes, str]:
@@ -523,9 +524,131 @@ def phase3(document: str, baseline: dict) -> str:
     return document
 
 
+def phase4(document: str, baseline: dict) -> str:
+    """Apply the context-judged Chapter 5/8 and Appendix E decisions approved at G4."""
+    with open(PHASE3_AUDIT, encoding="utf-8") as handle:
+        phase3_audit = json.load(handle)
+    current_hash = hashlib.sha256(document.encode("utf-8")).hexdigest()
+    if current_hash != phase3_audit["metadata"]["sha256"]:
+        raise RuntimeError("Phase 4 input does not match the Phase 3 snapshot")
+
+    original_tokens = sorted(set(re.findall(r"%%[A-Z0-9]+%%", document)))
+    replacements = [
+        (
+            '<a href="#reranking-and-hybrid">Chapter 8</a> shows how sparse, reranking and hybrid arrangements can contribute',
+            '<a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> show how sparse, reranking and hybrid arrangements can contribute',
+            "preface reranking/hybrid route",
+        ),
+        (
+            'use <a href="#appendix-rank-fusion-and-learning-to-rank">Appendix E</a> when a system combines or reranks candidate lists',
+            'use <a href="#hybrid-and-fusion">Chapter 10</a> and <a href="#appendix-rank-fusion-and-learning-to-rank">Appendix E</a> when a system combines or reranks candidate lists',
+            "preface Chapter 10 and Appendix E route",
+        ),
+        (
+            'the product examples in <a href="#intro">Chapter 1</a>, <a href="#bm25-ranking">3</a>, <a href="#dense-at-scale">6</a>, <a href="#reranking-and-hybrid">8</a>, <a href="#query-transformation">9</a> and <a href="#agentic-search">10</a>',
+            'the product examples in <a href="#intro">Chapter 1</a>, <a href="#bm25-ranking">3</a>, <a href="#dense-at-scale">7</a>, <a href="#reranking-and-hybrid">9</a>, <a href="#hybrid-and-fusion">10</a>, <a href="#query-transformation">11</a> and <a href="#agentic-search">12</a>',
+            "currency paragraph chapter list",
+        ),
+        (
+            'Chapter 8 adds the stages that run after a candidate set exists',
+            '<a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> add the stages that run after a candidate set exists',
+            "Part II post-candidate stages",
+        ),
+        (
+            '<a href="#reranking-in-two-documented-academic-pipelines">Chapter 8</a> shows a 30-record reranker budget',
+            '<a href="#reranking-in-two-documented-academic-pipelines">Chapter 9</a> shows a 30-record reranker budget',
+            "Primo reranker budget",
+        ),
+        (
+            '<a href="#why-search-systems-use-multiple-stages">Chapter 8 returns to the LightGBM stage</a>',
+            '<a href="#why-search-systems-use-multiple-stages">Chapter 9 returns to the LightGBM stage</a>',
+            "LightGBM stage",
+        ),
+        (
+            '<a href="#neural-ir-broader-than-dense-retrieval">Chapter 8’s</a> subject',
+            '<a href="#why-hybrid-retrieval-remains-attractive">Chapter 10’s</a> subject',
+            "learnt sparse hybrid comparison",
+        ),
+        (
+            'Chapter 8 then added several retrievers, fusion and route selection',
+            'Chapters 9 and 10 then added several retrievers, fusion and route selection',
+            "query-transformation opener",
+        ),
+        (
+            'fusion machinery of Chapter 8',
+            'fusion machinery of Chapter 10',
+            "query-understanding fusion machinery",
+        ),
+        (
+            '<a href="#neural-ir-broader-than-dense-retrieval">Chapter 8</a> explained',
+            '<a href="#neural-ir-broader-than-dense-retrieval">Chapter 9</a> explained',
+            "diagnostic first-stage methods",
+        ),
+        (
+            '<a href="#why-search-systems-use-multiple-stages">Chapter 8</a>. A first-stage retriever is fast, shallow and broad',
+            '<a href="#why-search-systems-use-multiple-stages">Chapter 9</a>. A first-stage retriever is fast, shallow and broad',
+            "evaluation first-stage contrast",
+        ),
+        (
+            '<a href="#reranking-and-hybrid">Chapter 8</a> introduced four ideas',
+            '<a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> introduced four ideas',
+            "Appendix E four ideas",
+        ),
+        (
+            'method and evaluation detail that Chapter 8 deliberately leaves out',
+            'method and evaluation detail that Chapters 9 and 10 deliberately leave out',
+            "Appendix E omitted detail",
+        ),
+        (
+            '<a href="#llms-as-rerankers">Chapter 8’s LLM discussion</a>',
+            '<a href="#llms-as-rerankers">Chapter 9’s LLM discussion</a>',
+            "Appendix E LLM discussion",
+        ),
+        (
+            '<a href="#ranking-a-useful-set-not-only-relevant-items">Chapter 8 introduces result diversification</a>',
+            '<a href="#ranking-a-useful-set-not-only-relevant-items">Chapter 9 introduces result diversification</a>',
+            "Appendix E diversification",
+        ),
+        (
+            'pipeline from <a href="#why-search-systems-use-multiple-stages">Chapter 8</a>: retrieve a high-recall shortlist cheaply',
+            'pipeline from <a href="#why-search-systems-use-multiple-stages">Chapter 9</a>: retrieve a high-recall shortlist cheaply',
+            "Appendix E production pipeline",
+        ),
+        (
+            'three arrangements of <a href="#reranking-and-hybrid">Chapter 8</a>',
+            'three arrangements of <a href="#reranking-and-hybrid">Chapter 9</a>',
+            "deeper-reading neural arrangements",
+        ),
+        (
+            '<a href="#how-a-contextual-encoder-becomes-a-retrieval-encoder">Chapter 5’s retrieval-training story</a>',
+            '<a href="#how-a-contextual-encoder-becomes-a-retrieval-encoder">Chapter 6’s retrieval-training story</a>',
+            "OOD retrieval-training story",
+        ),
+        (
+            '<a href="#appendix-how-rrf-combines-ranked-lists">Appendix E</a> gives the formula and a worked example.',
+            'The formula and a worked example follow.',
+            "RRF formula now follows",
+        ),
+    ]
+    for old, new, label in replacements:
+        unique_index(document, old, label)
+        document = document.replace(old, new)
+
+    if sorted(set(re.findall(r"%%[A-Z0-9]+%%", document))) != original_tokens:
+        raise RuntimeError("Phase 4 changed structural placeholder tokens")
+    for phrase, expected in baseline["guards"]["exclusion_exact_text_counts"].items():
+        if document.count(phrase) != expected:
+            raise RuntimeError("exclusion changed: %r" % phrase)
+    if document.count("Appendix F") != 13:
+        raise RuntimeError("Phase 4 changed the 13 textual Appendix F strings")
+    validate_common(document, baseline, require_app_f_exact=False)
+    print("judged substitutions:", len(replacements))
+    return document
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("phase1", "phase2", "phase3"))
+    parser.add_argument("phase", choices=("phase1", "phase2", "phase3", "phase4"))
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -539,6 +662,8 @@ def main() -> None:
         updated = phase2(document, baseline)
     elif args.phase == "phase3":
         updated = phase3(document, baseline)
+    elif args.phase == "phase4":
+        updated = phase4(document, baseline)
     else:
         raise AssertionError(args.phase)
 
