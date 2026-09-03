@@ -11,6 +11,7 @@ import json
 import os
 import re
 import subprocess
+from html.parser import HTMLParser
 
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -353,6 +354,119 @@ def main() -> None:
         require(audit["summary"]["appendix_f_textual_reference_count"] == 13,
                 "all 13 textual Appendix F references remain")
         require("%%" not in current, "no placeholder tokens remain")
+
+    if args.phase == "final":
+        from restructure import phase6
+
+        phase5_bytes = subprocess.check_output(
+            [
+                "git", "cat-file", "--filters", "--path=search-textbook.html",
+                "%s:search-textbook.html" % PHASE5_COMMIT,
+            ],
+            cwd=REPO,
+        )
+        expected = phase6(phase5_bytes.decode("utf-8"), baseline)
+        require(current == expected, "final book is exactly reproducible from the Phase 5 snapshot")
+
+        require(audit["summary"]["legacy_anchor_count"] == 37,
+                "all 37 legacy anchors, including the moved RRF alias, remain")
+        for anchor in ("reranking-and-hybrid", "why-hybrid-retrieval-remains-attractive",
+                       "two-hybrids-that-combine-differently",
+                       "appendix-how-rrf-combines-ranked-lists"):
+            require(current.count('id="%s"' % anchor) == 1, "legacy target is unique: " + anchor)
+
+        cues = [
+            "Chapter 8</a> shows a 30-record reranker budget",
+            "Chapter 8 returns to the LightGBM stage",
+            "fusion machinery of Chapter 8",
+            "Chapter 8’s LLM discussion",
+            "Chapter 8 introduces result diversification",
+            "Chapter 5’s retrieval-training story",
+            "Appendix E</a> gives the formula and a worked example",
+        ]
+        require(not [cue for cue in cues if cue in current],
+                "no retired Chapter 5/8 or RRF cross-reference cue remains")
+        require(audit["summary"]["reference_match_counts"].get("Chapter 8") == 5,
+                "the only Chapter 8 strings are two TOCs, its eyebrow, and three judged references")
+        require(audit["summary"]["reference_match_counts"].get("Appendix E") == 12,
+                "12 retained Appendix E references remain after replacing the moved RRF reference")
+
+        for phrase, expected_count in baseline["guards"]["exclusion_exact_text_counts"].items():
+            require(current.count(phrase) == expected_count, "exclusion remains exact: %s" % phrase)
+        require(audit["summary"]["appendix_f_textual_reference_count"] == 13,
+                "all 13 textual Appendix F references remain")
+
+        with open(os.path.join(REPO, "phase2-audit.json"), encoding="utf-8") as handle:
+            phase2_audit = json.load(handle)
+        require(audit["summary"]["numbered_asset_count"] == 195,
+                "all 195 audited asset occurrences remain")
+        require(audit["summary"]["labelled_asset_object_count"] == 96,
+                "all 96 physical figure/table labels remain")
+        require(audit["summary"]["asset_prefix_counts"] == phase2_audit["summary"]["asset_prefix_counts"],
+                "asset prefixes match the approved Phase 2 map")
+        labels = audit["labelled_asset_objects"]
+        require(len({item["label"] for item in labels}) == 96, "all physical asset labels are unique")
+        for kind, list_id in (("Figure", "figure-index"), ("Table", "table-index")):
+            expected_ids = [item["id"] for item in labels if item["kind"] == kind]
+            list_match = re.search(r'<ol id="%s">(.*?)</ol>' % list_id, current, re.S)
+            require(list_match is not None, "%s exists" % list_id)
+            actual_ids = re.findall(r'<li><a href="#([^"]+)">', list_match.group(1))
+            require(actual_ids == expected_ids, "%s is complete and in reading order" % list_id)
+        baseline_f_labels = {
+            item["label"]: item["source_sha256"]
+            for item in baseline["guards"]["appendix_f"]["label_objects"]
+        }
+        current_f_labels = {
+            item["label"]: item["source_sha256"] for item in labels if item["section_id"] == "app-F"
+        }
+        require(current_f_labels == baseline_f_labels, "all Appendix F asset-label blocks are byte-identical")
+
+        require("%%" not in current, "no placeholder token remains")
+        require("<!-- TODO-PROSE -->" not in current, "no empty prose placeholder remains")
+        require(current.count("<!-- TODO-PROSE-REVIEW -->") == 11,
+                "the final TODO inventory contains 11 review markers")
+
+        ref_numbers = [int(number) for number in re.findall(
+            r'<sup id="fnref:[^"]+"><a class="footnote-ref" href="#fn:[^"]+">(\d+)</a></sup>', current
+        )]
+        require(ref_numbers == list(range(1, 56)), "footnote references are globally sequential 1–55")
+        back_numbers = [int(number) for number in re.findall(r'title="Jump back to footnote (\d+) in the text"', current)]
+        require(back_numbers == list(range(1, 56)), "footnote back-reference labels are globally sequential 1–55")
+
+        expected_navs = [
+            ["intro"],
+            ["preface", "boolean-admission"], ["intro", "bm25-ranking"],
+            ["boolean-admission", "beyond-boolean"], ["bm25-ranking", "exercise1"],
+            ["beyond-boolean", "embeddings"], ["exercise1", "retrieval-encoder"],
+            ["embeddings", "dense-at-scale"], ["retrieval-encoder", "representations-and-units"],
+            ["dense-at-scale", "reranking-and-hybrid"],
+            ["representations-and-units", "hybrid-and-fusion"],
+            ["reranking-and-hybrid", "query-transformation"],
+            ["hybrid-and-fusion", "exercise2"], ["query-transformation", "agentic-search"],
+            ["exercise2", "diagnosing-failure"], ["agentic-search", "evaluation"],
+            ["diagnosing-failure", "library-practice"], ["evaluation", "exercise3"],
+            ["library-practice", "what-you-can-now-ask"], ["exercise3", "backmatter"],
+        ]
+        actual_navs = [re.findall(r'href="#([^"]+)"', body) for body in re.findall(
+            r'<nav class="chapter-nav"[^>]*>(.*?)</nav>', current, re.S
+        )]
+        require(actual_navs == expected_navs,
+                "chapter navigation walks the 15 chapters, three exercises, and closing recap in order")
+        eyebrows = [int(value) for value in re.findall(r'<p class="chapter-eyebrow">Chapter (\d+)</p>', current)]
+        require(eyebrows == list(range(1, 16)), "chapter eyebrows run from 1 through 15")
+        require(re.findall(r'<p class="chapter-eyebrow">Appendix ([A-F])</p>', current) == list("ABCDEF"),
+                "appendix eyebrows remain A through F")
+
+        HTMLParser().feed(current)
+        require(current.count("Three parts, fifteen chapters") == 1,
+                "hero identifies the fifteen-chapter structure")
+        app_f = next(item for item in audit["h2_sections"] if item["section_id"] == "app-F")
+        baseline_words = baseline["guards"]["appendix_f"]["word_count"]
+        require(abs(app_f["word_count"] - baseline_words) / baseline_words <= 0.005,
+                "Appendix F word count remains within the 0.5% guard")
+        require("Applying Chapter 15 to active learning" in section(current, "app-F"),
+                "Appendix F contains the one approved renamed heading")
+        print("PASS HTML token stream parses without an exception")
 
     print("verification complete for phase", args.phase)
 

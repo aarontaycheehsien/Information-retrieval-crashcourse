@@ -939,6 +939,9 @@ def phase6(document: str, baseline: dict) -> str:
     document = document.replace(recap_anchor, recap_insert)
 
     document = finalize_phase6_times(document)
+    unique_index(document, "Three parts, thirteen chapters", "hero chapter count")
+    document = document.replace("Three parts, thirteen chapters", "Three parts, fifteen chapters")
+    document = reorder_asset_index(document, "table-index", "Table")
 
     if "<!-- TODO-PROSE -->" in document:
         raise RuntimeError("Phase 6 left an unreviewed Phase 1 prose placeholder")
@@ -958,9 +961,28 @@ def finalize_phase6_times(document: str) -> str:
     return document.replace("Reading time: about 97 min", "Reading time: about 99 min")
 
 
+def reorder_asset_index(document: str, list_id: str, kind: str) -> str:
+    opening = '<ol id="%s">' % list_id
+    start = unique_index(document, opening, list_id) + len(opening)
+    end = document.index("</ol>", start)
+    inner = document[start:end]
+    items = re.findall(r"<li><a href=\"#([^\"]+)\">.*?</li>", inner, re.S)
+    blocks = re.findall(r"<li><a href=\"#[^\"]+\">.*?</li>", inner, re.S)
+    if len(items) != len(blocks) or len(items) != len(set(items)):
+        raise RuntimeError("asset index entries are missing or duplicated: " + list_id)
+    by_id = dict(zip(items, blocks))
+    if kind == "Table":
+        expected = re.findall(r'<p class="asset-label[^"]*" id="([^"]+)">Table\s+[0-9A-Z]+\.\d+', document)
+    else:
+        expected = re.findall(r'<span class="asset-label-inline[^"]*" id="([^"]+)">Figure\s+[0-9A-Z]+\.\d+', document)
+    if set(expected) != set(items):
+        raise RuntimeError("asset index membership differs from physical labels: " + list_id)
+    return document[:start] + "".join(by_id[item] for item in expected) + document[end:]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("phase1", "phase2", "phase3", "phase4", "phase5", "phase6", "phase6times"))
+    parser.add_argument("phase", choices=("phase1", "phase2", "phase3", "phase4", "phase5", "phase6", "phase6times", "phase6indexes"))
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -982,6 +1004,8 @@ def main() -> None:
         updated = phase6(document, baseline)
     elif args.phase == "phase6times":
         updated = finalize_phase6_times(document)
+    elif args.phase == "phase6indexes":
+        updated = reorder_asset_index(document, "table-index", "Table")
     else:
         raise AssertionError(args.phase)
 

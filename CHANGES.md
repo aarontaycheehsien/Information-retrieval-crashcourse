@@ -72,3 +72,13 @@
 - TODO inventory: 11 `TODO-PROSE-REVIEW` markers and zero empty `TODO-PROSE` placeholders.
 - Verification: Phase 6 is exactly reproducible from the Phase 5 snapshot; all self-check, anchor, footnote, script/style, token, and Appendix F guards pass.
 - Snapshot audit: `phase6-audit.json`.
+
+## Phase 7 — final verification
+
+- Added a comprehensive `verify.py --phase final` pass covering the approved reference dispositions, legacy anchors, exclusions, assets and indexes, TODO inventory, footnotes, navigation, chapter/appendix sequences, HTML parsing, script/style hashes, and the Appendix F guard.
+- The rendered smoke test found and corrected one stale hero string (`thirteen chapters` → `fifteen chapters`). It also found that moved Table 10.1 remained in its former Appendix E position in the back-matter table index; the index is now regenerated into physical reading order without changing labels or captions.
+- Browser smoke test: the desktop and mobile TOCs each render Preface plus Chapters 1–15; Chapters 6 and 10 are present; representative Part I, II, and III links navigated to Chapters 3, 10, and 12; the hero reports fifteen chapters; Table 10.1 precedes Chapter 11 tables in the index; and the browser console reported no warnings or errors. The local preview server and temporary tab were closed afterwards.
+- Navigation follows the book’s established model: the 20 chapter-nav blocks form the mirrored sequence across Preface, all 15 chapters, three exercises, and the closing recap, ending at the End matter band. Part dividers are encountered in document order and reached from the TOC; they do not carry chapter-nav controls in the baseline design.
+- Baseline variance retained rather than forced: the plan estimated 149 labels, while the audited source has 96 physical labels and 195 total label/reference/index occurrences. G0 approved those audited counts; final verification preserves all 96 physical objects and all 195 occurrences, with both indexes complete and ordered.
+- Final audit: `final-audit.json` records 215 textual chapter/appendix references, 530 unique IDs, zero duplicate IDs, zero broken internal hrefs, 55 globally sequential footnotes, 37 legacy anchors, 11 prose-review markers, and zero placeholder tokens.
+- Appendix F remains within the approved 0.5% word-count guard; every F.x label block is byte-identical to baseline; all 13 textual `Appendix F` references remain; and its only authorised heading change is `Applying Chapter 15 to active learning`.
