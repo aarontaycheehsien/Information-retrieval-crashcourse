@@ -61,3 +61,14 @@
 - Ran the global footnote-ordering script. All 55 footnotes were already sequential after the moves, so it made no byte change.
 - Verification: both TOCs contain the new chapters; all structural tokens are gone; chapter and appendix sequences, anchors, assets, scripts, styles, and the Appendix F guard pass.
 - Snapshot audit: `phase5-audit.json`.
+
+## Phase 6 — review-quarantined prose
+
+- Replaced all six empty `TODO-PROSE` placeholders with chapter-opening, chapter-closing, or self-check prose and marked every new item `TODO-PROSE-REVIEW`.
+- Added a Chapter 5 closing that hands the encoder to Chapter 6, a Chapter 6 opening that restates the status of the `delulu` example, a Chapter 9 closing that points to candidate-list combination, and a Chapter 10 opening and closing that distinguish blend, route, and rank fusion.
+- Added two Chapter 5 self-checks and a second Chapter 9 self-check. Each of Chapters 5, 6, 9, and 10 now has at least two questions.
+- Marked the revised Appendix E introduction for review and added two review-marked paragraphs to “What you can now ask” that explicitly distinguish Chapters 5/6 and Chapters 9/10.
+- Final split-chapter reading times, rounded at the calibrated rate, are 15, 8, 19, and 7 minutes for Chapters 5, 6, 9, and 10. Part II totals about 99 minutes.
+- TODO inventory: 11 `TODO-PROSE-REVIEW` markers and zero empty `TODO-PROSE` placeholders.
+- Verification: Phase 6 is exactly reproducible from the Phase 5 snapshot; all self-check, anchor, footnote, script/style, token, and Appendix F guards pass.
+- Snapshot audit: `phase6-audit.json`.

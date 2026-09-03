@@ -23,6 +23,7 @@ BASELINE = os.path.join(REPO, "baseline.json")
 PHASE2_AUDIT = os.path.join(REPO, "phase2-audit.json")
 PHASE3_AUDIT = os.path.join(REPO, "phase3-audit.json")
 PHASE4_AUDIT = os.path.join(REPO, "phase4-audit.json")
+PHASE5_AUDIT = os.path.join(REPO, "phase5-audit.json")
 
 
 def read_bytes(path: str) -> tuple[bytes, str]:
@@ -844,9 +845,122 @@ def phase5(document: str, baseline: dict) -> str:
     return document
 
 
+def replace_in_section(document: str, section_id: str, old: str, new: str, label: str) -> str:
+    start, end = section_range(document, section_id)
+    block = document[start:end]
+    unique_index(block, old, label)
+    block = block.replace(old, new)
+    return document[:start] + block + document[end:]
+
+
+def phase6(document: str, baseline: dict) -> str:
+    """Fill the split-chapter prose placeholders, retaining review markers."""
+    with open(PHASE5_AUDIT, encoding="utf-8") as handle:
+        phase5_audit = json.load(handle)
+    current_hash = hashlib.sha256(document.encode("utf-8")).hexdigest()
+    if current_hash != phase5_audit["metadata"]["sha256"]:
+        raise RuntimeError("Phase 6 input does not match the Phase 5 snapshot")
+    eol = "\r\n" if "\r\n" in document else "\n"
+
+    document = replace_in_section(
+        document, "sec-embeddings", "</ol>" + eol + "<!-- TODO-PROSE -->",
+        ("<li>Context changes a token’s representation, but contextualisation alone does not decide what evidence "
+         "retrieval should reward.</li><li>Pretraining supplies broad language patterns; domain pretraining changes "
+         "the text and vocabulary behind those patterns; neither by itself creates a retriever.</li><li>A model name "
+         "such as BERT therefore leaves both its task training and its place in the search pipeline unknown.</li></ol>" +
+         eol + "<!-- TODO-PROSE-REVIEW -->" + eol +
+         '<p class="chapter-transition">The encoder now exists, but it is not yet retrieval infrastructure. Chapter 6 turns its contextual representations into comparable query and document vectors, and asks which training examples make closeness mean relevance rather than merely linguistic similarity.</p>'),
+        "Chapter 5 closing",
+    )
+    document = replace_in_section(
+        document, "sec-embeddings",
+        '<p class="self-check-label">Check yourself</p><!-- TODO-PROSE -->',
+        ('<p class="self-check-label">Check yourself</p>' + eol +
+         '<!-- TODO-PROSE-REVIEW -->' + eol +
+         '<details class="self-check-q"><summary>BERT produces contextual representations. Why does that not make generic BERT a retriever?</summary><p>Contextualisation lets a token representation depend on surrounding words, but masked-language pretraining does not teach independently encoded queries and passages to rank together. Retrieval needs an architecture and task training whose positives, negatives and labels reward the relationships the search should recover.</p></details>' + eol +
+         '<!-- TODO-PROSE-REVIEW -->' + eol +
+         '<details class="self-check-q"><summary>A vendor says its search “uses BERT”. Which two questions remain unanswered?</summary><p>Ask how the model was trained for the retrieval task and where it sits in the pipeline. The same model family can interpret or transform a query, encode first-stage candidates, or compare an existing shortlist as a reranker.</p></details>'),
+        "Chapter 5 self-checks",
+    )
+    document = replace_in_section(
+        document, "sec-retrieval-encoder", '<div class="chapter-orient"><!-- TODO-PROSE --></div>',
+        ('<div class="chapter-orient"><!-- TODO-PROSE-REVIEW -->' + eol +
+         '<p>Chapter 5 ended with a contextual language model and two unanswered retrieval questions: what should one vector represent, and what training makes nearby vectors useful for search? This chapter follows those decisions from model tokens through pooling, separate query and document encoding, similarity, and retrieval-oriented examples.</p>' + eol +
+         '<p>The <code>delulu</code> example remains a teaching case, not evidence that a pretrained model already understands the query. Its point is to make the desired ranking explicit. Positive pairs, hard negatives and labels must teach the encoder that the relevant passage addresses unrealistic expectations while the superficially similar passage does not. Only then can the resulting vectors become retrieval infrastructure that a collection-scale index can use.</p></div>'),
+        "Chapter 6 opening",
+    )
+    document = replace_in_section(
+        document, "sec-reranking-and-hybrid", "</ol>" + eol + "<!-- TODO-PROSE -->",
+        ("<li>Joint encoding, late interaction and learnt sparse retrieval preserve different amounts of query–document "
+         "evidence and can occupy different pipeline stages.</li></ol>" + eol +
+         "<!-- TODO-PROSE-REVIEW -->" + eol +
+         '<p class="chapter-transition">A later stage can spend more computation, but only on candidates an earlier stage admitted. Chapter 10 turns to a different design decision: running more than one candidate-generation route, deciding whether to blend or route them, and combining ranked lists whose scores may not share a scale.</p>'),
+        "Chapter 9 closing",
+    )
+    document = replace_in_section(
+        document, "sec-reranking-and-hybrid", "<!-- TODO-PROSE -->" + eol + "</section>",
+        ('<!-- TODO-PROSE-REVIEW -->' + eol +
+         '<details class="self-check-q"><summary>Why can a stronger reranker improve precision without raising the recall ceiling set by the first stage?</summary><p>The reranker receives a fixed shortlist and can only reorder its members. Better comparisons may move relevant candidates upwards, improving the visible ranking, but a relevant record omitted by every candidate-generation route is unavailable to every later stage.</p></details>' + eol + "</section>"),
+        "Chapter 9 second self-check",
+    )
+    document = replace_in_section(
+        document, "sec-hybrid-and-fusion", '<div class="chapter-orient"><!-- TODO-PROSE --></div>',
+        ('<div class="chapter-orient"><!-- TODO-PROSE-REVIEW -->' + eol +
+         '<p>Choosing retrievers and combining their answers are separate design decisions. A lexical route may preserve an identifier that a dense representation blurs; a dense route may recover a paraphrase that shares no useful indexed term. Running both creates two candidate lists, not one answer. The system must still decide which routes run, how deep each list is, how duplicate records are treated, and how evidence from unlike scoring scales becomes one order.</p>' + eol +
+         '<p>This chapter separates <em>blending</em> from <em>routing</em>. A blend runs prescribed routes and combines their outputs; a route chooses which path or paths to use for this query. It then treats reciprocal rank fusion as a deliberately simple baseline: RRF uses positions rather than incompatible raw scores, rewards agreement near the top, and exposes the cut-offs and weighting choices that a label such as “hybrid search” otherwise hides.</p></div>'),
+        "Chapter 10 opening",
+    )
+    old_transition = '<p class="chapter-transition">Routing is a retrieval-control decision, not a query transformation and not by itself evidence of agency. The next chapter separates what a system interprets, what it changes and where it sends the result.</p>'
+    new_transition = ('<!-- TODO-PROSE-REVIEW -->' + eol +
+        '<p class="chapter-transition">Hybrid retrieval is not a quality guarantee. Its result depends on the evidence each route preserves, the candidate depth allowed to each, and the rule used to combine them. RRF is a useful neutral baseline because it avoids pretending unlike scores are commensurable, but its rank-only view also discards score gaps and inherits every input cut-off. Routing adds another decision: which evidence was allowed to compete at all. Chapter 11 therefore separates interpretation, transformation and routing before Chapter 12 asks who chooses the next action.</p>')
+    document = replace_in_section(document, "sec-hybrid-and-fusion", old_transition, new_transition,
+                                  "Chapter 10 closing")
+
+    app_e_open = '<p><a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> introduced four ideas'
+    document = replace_in_section(document, "app-E", app_e_open,
+                                  '<!-- TODO-PROSE-REVIEW -->' + eol + app_e_open,
+                                  "Appendix E revised introduction")
+
+    recap_anchor = ('<p><a href="#three-familiar-search-results-and-three-puzzles">The three opening puzzles</a> '
+                    'are worth reading as a set')
+    recap_insert = (
+        '<!-- TODO-PROSE-REVIEW -->' + eol +
+        '<p><a href="#embeddings">Chapter 5</a> and <a href="#retrieval-encoder">Chapter 6</a> now let you ask two '
+        'questions where one vague claim about embeddings used to suffice: what relationships the learnt geometry '
+        'encodes, and what architecture, pooling and retrieval training turn that geometry into a searchable index? '
+        'A product that answers only the first has not yet described its retriever.</p>' + eol +
+        '<!-- TODO-PROSE-REVIEW -->' + eol +
+        '<p><a href="#reranking-and-hybrid">Chapter 9</a> and <a href="#hybrid-and-fusion">Chapter 10</a> likewise '
+        'separate spending more computation on one shortlist from combining several candidate-generation routes. '
+        'You can now ask what retrieved each candidate, what the cut-offs excluded, whether routes were blended or '
+        'selected, and whether fusion used ranks, normalised scores or a learnt rule.</p>' + eol + recap_anchor
+    )
+    unique_index(document, recap_anchor, "What you can now ask insertion")
+    document = document.replace(recap_anchor, recap_insert)
+
+    document = finalize_phase6_times(document)
+
+    if "<!-- TODO-PROSE -->" in document:
+        raise RuntimeError("Phase 6 left an unreviewed Phase 1 prose placeholder")
+    if document.count("<!-- TODO-PROSE-REVIEW -->") != 11:
+        raise RuntimeError("Phase 6 expected 11 review markers")
+    validate_common(document, baseline, require_app_f_exact=False)
+    print("review markers:", document.count("<!-- TODO-PROSE-REVIEW -->"))
+    return document
+
+
+def finalize_phase6_times(document: str) -> str:
+    document = replace_in_section(document, "sec-embeddings", "About 14 min", "About 15 min",
+                                  "Chapter 5 final reading time")
+    document = replace_in_section(document, "sec-hybrid-and-fusion", "About 6 min", "About 7 min",
+                                  "Chapter 10 final reading time")
+    unique_index(document, "Reading time: about 97 min", "Part II final reading time")
+    return document.replace("Reading time: about 97 min", "Reading time: about 99 min")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("phase1", "phase2", "phase3", "phase4", "phase5"))
+    parser.add_argument("phase", choices=("phase1", "phase2", "phase3", "phase4", "phase5", "phase6", "phase6times"))
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -864,6 +978,10 @@ def main() -> None:
         updated = phase4(document, baseline)
     elif args.phase == "phase5":
         updated = phase5(document, baseline)
+    elif args.phase == "phase6":
+        updated = phase6(document, baseline)
+    elif args.phase == "phase6times":
+        updated = finalize_phase6_times(document)
     else:
         raise AssertionError(args.phase)
 

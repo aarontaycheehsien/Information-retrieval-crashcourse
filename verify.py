@@ -20,6 +20,7 @@ BASELINE_COMMIT = "65469bbd4e7aa811db0f0511ae10a4386299308f"
 PHASE2_COMMIT = "7b38db9"
 PHASE3_COMMIT = "51e644c"
 PHASE4_COMMIT = "1f3ab69"
+PHASE5_COMMIT = "5d9575a"
 
 
 def element_range(text: str, start: int, tag: str) -> tuple[int, int]:
@@ -79,7 +80,7 @@ def require(condition: bool, message: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--phase", choices=("1", "2", "3", "4", "5", "final"), required=True)
+    parser.add_argument("--phase", choices=("1", "2", "3", "4", "5", "6", "final"), required=True)
     parser.add_argument("--audit", required=True)
     args = parser.parse_args()
 
@@ -323,6 +324,35 @@ def main() -> None:
             phase2_audit = json.load(handle)
         require(audit["summary"]["asset_prefix_counts"] == phase2_audit["summary"]["asset_prefix_counts"],
                 "Phase 2 asset numbering is unchanged")
+
+    if args.phase == "6":
+        from restructure import phase6
+
+        phase5_bytes = subprocess.check_output(
+            [
+                "git", "cat-file", "--filters", "--path=search-textbook.html",
+                "%s:search-textbook.html" % PHASE5_COMMIT,
+            ],
+            cwd=REPO,
+        )
+        expected = phase6(phase5_bytes.decode("utf-8"), baseline)
+        require(current == expected, "Phase 6 output is exactly reproducible from the Phase 5 snapshot")
+        require("<!-- TODO-PROSE -->" not in current, "all empty prose placeholders are filled")
+        require(current.count("<!-- TODO-PROSE-REVIEW -->") == 11,
+                "all 11 new prose items are quarantined for author review")
+        for section_id in ("sec-embeddings", "sec-retrieval-encoder",
+                           "sec-reranking-and-hybrid", "sec-hybrid-and-fusion"):
+            require(self_check_count(section(current, section_id)) >= 2,
+                    "%s has at least two self-check questions" % section_id)
+        with open(os.path.join(REPO, "phase5-audit.json"), encoding="utf-8") as handle:
+            phase5_audit = json.load(handle)
+        app_f = next(item for item in audit["h2_sections"] if item["section_id"] == "app-F")
+        old_app_f = next(item for item in phase5_audit["h2_sections"] if item["section_id"] == "app-F")
+        require(app_f["source_sha256"] == old_app_f["source_sha256"],
+                "Phase 6 leaves Appendix F byte-identical to Phase 5")
+        require(audit["summary"]["appendix_f_textual_reference_count"] == 13,
+                "all 13 textual Appendix F references remain")
+        require("%%" not in current, "no placeholder tokens remain")
 
     print("verification complete for phase", args.phase)
 
