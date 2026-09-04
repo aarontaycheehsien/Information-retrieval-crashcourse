@@ -3823,6 +3823,7 @@ $$</div>
 <dt>API (application programming interface)</dt><dd>A published contract by which one program offers a service to another, written for a developer to build against.</dd>
 <dt>Bi-encoder</dt><dd>A model encoding query and document separately, so document vectors can be computed in advance.</dd>
 <dt>Blending / routing</dt><dd>Two ways to run more than one retrieval path. A blend runs prescribed paths on every query and combines them; a route decides per query which path or paths run. The difference shows up when you try to explain one result: with a route, “was this lexical or vector?” can have a different answer each time.</dd>
+<dt>BM25</dt><dd>The long-standing default ranking function for lexical retrieval. It scores a document from how often a query term occurs in it, how rare the term is in the collection, and how long the document is.</dd>
 <dt>Chunk</dt><dd>An indexed unit produced by splitting a longer source document.</dd>
 <dt>Cognitive relevance (pertinence)</dt><dd>Whether an item is informative to this reader given what they already know.</dd>
 <dt>Controlled vocabulary</dt><dd>A curated set of preferred labels assigned to records and used in searching, so the query addresses an annotation layer rather than relying only on words found in the text.</dd>
@@ -3887,6 +3888,7 @@ $$</div>
 <dt>Term</dt><dd>What a token becomes after analysis, and what a lexical index actually stores and matches.</dd>
 <dt>Test collection</dt><dd>A fixed set of documents, topics and relevance judgements, which is what makes two systems comparable at all.</dd>
 <dt>tf (term frequency)</dt><dd>How often a term occurs within one document.</dd>
+<dt>TF-IDF</dt><dd>An earlier family of lexical weighting schemes, multiplying term frequency by inverse document frequency. BM25 refines the same two signals, which is why it largely replaced TF-IDF for ranked retrieval.</dd>
 <dt>Token</dt><dd>A unit of text produced by splitting a string—often a word, but possibly punctuation or part of a word.</dd>
 <dt>Tool (agent sense)</dt><dd>One operation a model has been given permission to invoke, such as running a search or fetching a record’s references—not a product a library licenses.</dd>
 <dt>top-<em>k</em></dt><dd>A request for the <em>k</em> highest-scoring results rather than a complete ordering. A result boundary, not a retrieval method.</dd>
@@ -4453,7 +4455,7 @@ t("Unbelievable scenes!")["input_ids"]</code></pre>
     // Order matters: longer RAG phrases must precede “RAG” so an acronym
     // cannot be marked inside an already-marked phrase.
     const MARKED_CASED = [
-      'IDF', 'ANN', 'nDCG', 'MRR', 'MAP',
+      'BM25', 'IDF', 'ANN', 'nDCG', 'MRR', 'MAP',
       'RRF', 'LTR', 'OOV', 'OOD',
       'Agentic RAG', 'RAG Fusion', 'RAG', 'MCP', 'API'
     ];
