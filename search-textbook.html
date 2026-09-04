@@ -4431,8 +4431,9 @@ t("Unbelievable scenes!")["input_ids"]</code></pre>
     // "term", "analysis", "vector" or "chunk" would match ordinary prose.
     const MARKED = [
       // index & analysis
-      'inverted index', 'posting list', 'term frequency', 'document frequency',
-      'inverse document frequency', 'controlled vocabulary', 'indexed unit',
+      'inverted index', 'posting list', 'term frequency',
+      'inverse document frequency', 'document frequency',
+      'controlled vocabulary', 'indexed unit',
       // representations & models
       'bi-encoder', 'cross-encoder', 'late interaction',
       'approximate nearest neighbour', 'dense retrieval',
@@ -4498,12 +4499,36 @@ t("Unbelievable scenes!")["input_ids"]</code></pre>
                  '.asset-label, .asset-label-inline, .glossary, .stage-map, ' +
                  '.stage-key, .chapter-meta, .figure-title';
 
+    const escapeRe = (s) => s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+    // A listed term must not be marked inside a longer listed one: "RAG" inside
+    // "RAG Fusion", "document frequency" inside "inverse document frequency".
+    // Listing the longer phrase first is not enough on its own, because that
+    // only protects its first occurrence; every later occurrence is still bare
+    // text that the shorter term would otherwise claim, splitting the phrase
+    // and attaching the neighbouring definition to half of it.
+    const ALL_TERMS = MARKED.concat(MARKED_CASED);
+    const enclosing = (phrase) => ALL_TERMS
+      .filter((t) => t.length > phrase.length &&
+        new RegExp('(?<![\\w-])' + escapeRe(phrase) + '(?![\\w-])', 'i').test(t))
+      .map((t) => new RegExp('(?<![\\w-])' + escapeRe(t) + '(?![\\w-])', 'gi'));
+
     const markTerm = (root, phrase, cased) => {
       const flags = cased ? 'g' : 'gi';
       // A hyphen counts as part of the word here, so that "IDF" does not match
       // inside "TF-IDF" and split a compound term the glossary treats as one.
-      const re = new RegExp('(?<![\\w-])' + phrase.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') +
+      const re = new RegExp('(?<![\\w-])' + escapeRe(phrase) +
                             (cased ? '' : 's?') + '(?![\\w-])', flags);
+      const longer = enclosing(phrase);
+      const insideLonger = (text, start, end) => longer.some((lr) => {
+        lr.lastIndex = 0;
+        let lm;
+        while ((lm = lr.exec(text))) {
+          if (lm.index > start) break;
+          if (lm.index <= start && end <= lm.index + lm[0].length) return true;
+        }
+        return false;
+      });
       const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
         acceptNode(node) {
           if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
@@ -4514,7 +4539,12 @@ t("Unbelievable scenes!")["input_ids"]</code></pre>
       let node;
       while ((node = walker.nextNode())) {
         re.lastIndex = 0;
-        const m = re.exec(node.nodeValue);
+        let m;
+        // Take the first match this node offers that is not part of a longer
+        // listed phrase; a node may hold both, as "RAG Fusion ... RAG" does.
+        while ((m = re.exec(node.nodeValue))) {
+          if (!insideLonger(node.nodeValue, m.index, m.index + m[0].length)) break;
+        }
         if (!m) continue;
         const entry = lookup(phrase);
         if (!entry) return false;
