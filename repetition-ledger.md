@@ -3,7 +3,8 @@
 Status: **APPLIED — scripted verification complete**
 Source audited: `search-textbook.html` at commit `9030f75`  
 Scope: claims A–E only  
-Inventory date: 2026-08-26
+Inventory date: 2026-08-26  
+Later amendments: one entry (L1 / E11), added 2026-09-04 after this inventory closed — see the final section
 
 ## Method and guardrails
 
@@ -141,8 +142,11 @@ Disposition: **no edits**. These are progressive definitions, compact summaries,
 | E08 | `#app-D` terminology table definition | .14 | Reference/index wording — KEEP | A goal or capability claim that the system goes beyond literal term matching, usually contrasted with lexical search. Dense retrieval over embeddings is the most familiar contemporary implementation, but the labels reveal little about architecture: lexical retrieval may supply candidates, while ontology or query expansion, learnt-sparse retrieval, dense retrieval and neural reranking may contribute meaning-oriented evidence at different stages. |
 | E09 | `#app-D` terminology table link cell | .31 | Reference/index wording — KEEP | Semantic search is a goal, not an architecture; vector, dense and semantic are different properties. |
 | E10 | `#app-D` body, “The association is understandable…” | .15 | Explicit terminology reminder — KEEP | The association is understandable: dense retrieval over vector embeddings is the most familiar contemporary implementation of semantic search. It is not an equivalence. Chapter 6 establishes the main distinction: semantic describes a goal, usually contrasted with lexical matching, while BM25, ontology expansion, dense retrieval and neural reranking describe mechanisms that may contribute to it at different stages. Learnt sparse retrieval and query expansion can support meaning-oriented matching, while another system may apply a semantic model only when reranking a lexical shortlist. This appendix is a terminology reminder, not where the argument is introduced. |
+| E11 | `#sec-preface` body, “Two products can both claim…” | .14 | Added 2026-09-04, not seen at inventory — EDITED, see L1 | Two products can both claim to offer “semantic search” while doing quite different things under the hood. One might be BM25 with query expansion. Another might use dense-vector retrieval, learnt sparse retrieval, lexical–dense fusion, or a neural reranker over a lexical shortlist. Those are not implementation details in the trivial sense. They affect how you should enter your search query, which papers even make it into the candidate set and which ones rise high enough for the user to see. |
 
 Disposition: **no edits**. The current Chapter 6 prose is progressive rather than two consecutive duplicated bold paragraphs, and the supposed Chapter 8/10 echoes are absent.
+
+**Amended 2026-09-04.** The disposition above stands for E01–E10. E11 was found later and edited; it restates E01’s mechanism list four lines above it, and neither instrument in this workstream could have flagged it. See L1 under *Later amendments*.
 
 ## Approved and applied reversible edits
 
@@ -315,3 +319,62 @@ No reading-time chip changes were warranted after proportional scaling and neare
 - PASS — `git diff --check`
 - PASS — affected HTML elements and new link targets parse correctly in the DOM
 - NOT AVAILABLE — in-app visual inspection; the local browser plugin could not initialise its trusted runtime path. No alternate browser surface was substituted. Because every edit shortens existing prose without changing element structure or CSS classes, this is recorded as a non-blocking tooling limitation.
+
+## Later amendments
+
+Everything above describes the workstream that closed at `9030f75`. Entries here were found after that inventory and are kept separate so the two are not confused. The counts, approval record and verification above are not restated or revised.
+
+### L1 — Preface mechanism list restated by its own key-definition aside
+
+Found 2026-09-04, applied on top of `906fe1a`. Inventoried as E11.
+
+The preface body paragraph and the `.common-confusion` aside four lines below it name the same five mechanisms in the same order, with the wording substituted throughout:
+
+| E11 — preface body | E01 — key-definition aside |
+|---|---|
+| BM25 with query expansion | Query or ontology expansion layered onto lexical retrieval |
+| dense-vector retrieval | commonly implemented with dense retrieval |
+| learnt sparse retrieval | learnt sparse retrieval |
+| lexical–dense fusion | hybrid combinations |
+| a neural reranker over a lexical shortlist | semantic reranking of a lexical shortlist |
+
+**Why neither instrument flagged it.** Both scored the pair far below their thresholds:
+
+| Comparison | J | Instrument | Outcome |
+|---|---:|---|---|
+| E11 best-matching sentence vs the Claim E fixed wording | .14 | Claim E scan | not flagged |
+| E11 enumeration vs E01 enumeration, compared directly | .21 | Book-wide sweep at ≥ .80 | not flagged |
+
+Only seven tokens are shared between the two lists — `a`, `learnt`, `lexical`, `or`, `retrieval`, `shortlist`, `sparse`. The repetition is in the referents, not the words, so no token-overlap threshold could have caught it: lowering the cut-off far enough to surface a .21 pair would return most of the book. This is a limit of the method rather than a lapse in applying it. Jaccard remains a sound discovery aid for verbatim and near-verbatim echo, as the guardrails section already states; conceptual restatement of this kind has to be found by reading.
+
+**Disposition: trim E11, keep E01.** E01 is the landing definition and is written to stand alone for a reader who skips the body or returns to it later; the guardrails already exempt that role from the echo budget. E11’s unique work is the stake (“I’m not sure it does anymore”) and the consequence sentence, neither of which appears anywhere else. Only the enumeration was cut.
+
+Before:
+
+```html
+<p>Two products can both claim to offer “semantic search” while doing quite different things under the hood. One might be BM25 with query expansion. Another might use dense-vector retrieval, learnt sparse retrieval, lexical–dense fusion, or a neural reranker over a lexical shortlist. Those are not implementation details in the trivial sense. They affect how you should enter your search query, which papers even make it into the candidate set and which ones rise high enough for the user to see.</p>
+```
+
+After:
+
+```html
+<p>Two products can both claim to offer “semantic search” while doing quite different things under the hood. One might be BM25 with query expansion. Another might compare learnt vectors instead, with no lexical stage anywhere. Those are not implementation details in the trivial sense. They affect how you should enter your search query, which papers even make it into the candidate set and which ones rise high enough for the user to see.</p>
+```
+
+Two constraints shaped the replacement wording:
+
+- The quoted phrase “semantic search” is retained verbatim. It is the first markable occurrence in the preface, so the glossary term-mark and its tooltip still attach to this paragraph; rewording it would have moved the mark to the aside, which `SKIP` does not exclude.
+- “returns a paper that shares none of your words” was rejected. Chapter 1 already says a record “can come back missing one of your words while the system is still scoring on nothing but words” — a different claim, about ranked lexical retrieval rather than dense, that the book keeps deliberately apart. Near-identical wording ten lines away would blur two distinctions the argument depends on separating.
+
+**Accompanying change, not a repetition finding.** Five glossary entries were added in the same pass — *neural search*, *vector search*, *embedding search*, *agentic search* and *AI-powered search* — so that the preface’s list of vendor labels has definitions behind it. The glossary is a fully exempt zone under the guardrails, and none of the five were added to the `MARKED` list, so no new term-marks appear and no echo budget is affected. This also closes a dangling reference: the existing *Agentic RAG* entry described itself as “a narrower case of agentic search”, a term the glossary did not define.
+
+Word delta: the edited paragraph goes from 80 to 73 words (**−7**). The book-wide core-count above is not recomputed; this entry is not part of that measurement.
+
+Verification:
+
+- PASS — `python tools/maintain.py`: no changes needed; no problems found
+- PASS — HTML parses with every tag balanced and no unclosed elements
+- PASS — the `before` snippet occurred exactly once before editing and is absent afterwards; the `after` snippet occurs exactly once
+- PASS — first-use term-mark simulation still resolves “semantic search” to the edited paragraph
+- PASS — glossary integrity: 79 entries, no duplicate `<dt>` labels, no collisions with `MARKED` or `MARKED_CASED`
+- NOT AVAILABLE — in-app visual inspection; the browser surface in this session could not open local files. Recorded as non-blocking for the same reason as above: the edit shortens existing prose without changing element structure or CSS classes.
