@@ -119,8 +119,12 @@ new collection every chapter. Each has a job, and they are not interchangeable:
   stress tests. It runs from the Preface through Chapters 2–7, 9 and 13, and
   Appendix C's BM25 walkthrough. Use it where the point is analysis,
   tokenisation, out-of-vocabulary behaviour or a term the system may not know.
-  Do not use it where relevance has to be judged: its relevance judgements are
-  too ambiguous to carry precision, recall or reranking examples.
+  Do not use it where relevance has to be judged against a real information
+  need: its relevance judgements are too ambiguous to carry precision or
+  recall examples. It may carry training labels the text explicitly
+  stipulates. Chapters 6 and 9 use it that way: they state the assumed need
+  and present the positive and the hard negative as labels rather than as
+  facts about the passages.
 - **The open-access citation advantage** — realistic academic searching. It is
   the question behind Puzzle 3, the worked need in Chapter 11's eight query
   objects, and the search used in Chapters 1 and 7. Use it where the point is
