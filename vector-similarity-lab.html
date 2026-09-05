@@ -180,9 +180,10 @@ input[type=range]:disabled{opacity:.42}
 <header class="hero"><div class="hero-inner">
   <p class="kicker">Interactive companion</p>
   <h1>The Vector Similarity Lab</h1>
-  <p class="subtitle">Vector search needs a rule for comparing the query with stored vectors. Move a few toy vectors to separate cosine similarity, dot product and relevance, and watch the arithmetic change as you do.</p>
+  <p class="subtitle">Vector search needs a rule for comparing the query with stored vectors. The document descriptions and coordinates here are assigned teaching examples; no embedding model generated them. Follow the fixed prediction tour, then move vectors in the sandbox to compare cosine, dot product and relevance. Copy the sandbox URL to share your settings.</p>
   <p class="backlink"><a href="search-textbook.html#single-vector-dense-retrieval-compress-first-compare-later">← Back to “Single-vector dense retrieval”</a> · <a href="search-textbook.html#representations-and-units">On to “Representations and indexed units”</a></p>
 </div></header>
+<p class="hint" style="max-width:70rem;margin:1rem auto;padding:0 1rem">Signed angles control clockwise or anticlockwise placement; similarity depends on angular separation. The tour fixes the geometry and metric so its answers match the display. Use the sandbox for experiments. A production model’s comparison rule should match its training.</p>
 
 <main class="wrap">
   <div class="modebar">
@@ -196,7 +197,7 @@ input[type=range]:disabled{opacity:.42}
 
   <section class="tour" id="tour" aria-labelledby="tour-title">
     <div class="tour-head">
-      <span class="tour-step" id="tour-step">Step 1 of 8</span>
+      <span class="tour-step" id="tour-step">Step 1 of 5</span>
       <div class="dots" id="tour-dots" aria-hidden="true"></div>
     </div>
     <h2 id="tour-title"></h2>
@@ -356,7 +357,7 @@ input[type=range]:disabled{opacity:.42}
       </section>
       <section aria-labelledby="negative-title">
         <h3 id="negative-title">Can cosine or dot-product scores be negative?</h3>
-        <p>Yes. Cosine similarity is 1 for the same direction, 0 at 90°, and negative when the angle is greater than 90°, reaching −1 for exactly opposite directions. Candidate C begins in that negative region. A dot product can also be negative; without normalisation it has no fixed minimum or maximum because vector length also contributes.</p>
+        <p>Yes. Cosine similarity is 1 for the same direction, 0 at 90°, and negative when the angle is greater than 90°, reaching −1 for exactly opposite directions. Candidate C is in that negative region from tour step 2 onwards; step 1 starts it at 82°. A dot product can also be negative; without normalisation it has no fixed minimum or maximum because vector length also contributes.</p>
         <p>Negative does not automatically mean “opposite in meaning”. It describes geometry in the representation the model learnt. Some text-embedding models produce mostly positive scores for ordinary inputs or occupy only a narrow part of the mathematical range. Even when every candidate scores below zero, the highest score is still the nearest or best available under that rule.</p>
       </section>
     </div>
@@ -427,7 +428,9 @@ function renderControls(){
   candidateButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.id===selected)));
   angle.value=candidates[selected].angle;
   magnitude.value=candidates[selected].magnitude;
-  magnitude.disabled=normalised;
+  magnitude.disabled=normalised || inTour;
+  angle.disabled=inTour;
+  metricCos.disabled=inTour; metricDot.disabled=inTour; normalise.disabled=inTour;
   $('angle-val').textContent=displayAngle(candidates[selected].angle);
   $('magnitude-val').textContent=normalised?'1.00 (normalised)':candidates[selected].magnitude.toFixed(2);
   $('candidate-copy').textContent=COPIES[selected];
@@ -487,7 +490,7 @@ function renderPlot(){
 }
 
 function barStyle(value){
-  const limit=metric==='cosine'?1:4;
+  const limit=metric==='cosine'?1:Math.max(1,effectiveQueryMagnitude()*Math.max(...Object.keys(candidates).map(effectiveMagnitude)));
   const bounded=Math.max(-limit,Math.min(limit,value));
   const width=Math.abs(bounded)/limit*50;
   return bounded>=0?`left:50%;width:${width}%`:`right:50%;width:${width}%`;
@@ -506,7 +509,21 @@ function renderRanking(){
   $('live-summary').textContent=`Using ${metric==='cosine'?'cosine similarity':'dot product'}, Candidate ${order[0]} ranks first with score ${f(score(order[0]))}, followed by ${order[1]} and ${order[2]}.`;
 }
 
-function render(){renderControls();renderPlot();renderRanking();}
+function render(){renderControls();renderPlot();renderRanking();writeHash();}
+function writeHash(){
+  if(inTour)return;
+  const p=new URLSearchParams({metric,normalised:String(normalised),selected});
+  Object.keys(candidates).forEach(id=>{p.set(id+'a',candidates[id].angle);p.set(id+'m',candidates[id].magnitude);});
+  history.replaceState(null,'','#'+p.toString());
+}
+function readHash(){
+  const p=new URLSearchParams(location.hash.slice(1));
+  if(!p.has('metric'))return false;
+  const read=(key,fallback,min,max)=>{const n=Number(p.get(key));return p.has(key)&&Number.isFinite(n)?Math.max(min,Math.min(max,n)):fallback;};
+  Object.keys(candidates).forEach(id=>{candidates[id].angle=read(id+'a',DEFAULTS[id].angle,Number(angle.min),Number(angle.max));candidates[id].magnitude=read(id+'m',DEFAULTS[id].magnitude,Number(magnitude.min),Number(magnitude.max));});
+  metric=p.get('metric')==='dot'?'dot':'cosine';normalised=p.get('normalised')==='true';selected=['A','B','C'].includes(p.get('selected'))?p.get('selected'):'A';
+  return true;
+}
 
 const TOURS=[
   {
@@ -592,7 +609,7 @@ function setMode(tourMode){
   $('mode-tour').setAttribute('aria-pressed',String(inTour));
   $('mode-sandbox').setAttribute('aria-pressed',String(!inTour));
   $('tour').hidden=!inTour;
-  if(inTour){tourIndex=0;applyTour(0);}else{candidates=clone(DEFAULTS);metric='cosine';normalised=false;selected='A';render();}
+  if(inTour){tourIndex=0;applyTour(0);}else{render();}
 }
 
 metricCos.addEventListener('click',()=>setMetric('cosine'));
@@ -608,8 +625,7 @@ $('tour-choices').addEventListener('click',event=>{const button=event.target.clo
 $('tour-prev').addEventListener('click',()=>{if(tourIndex>0){tourIndex-=1;applyTour(tourIndex);}});
 $('tour-next').addEventListener('click',()=>{if(tourIndex<TOURS.length-1){tourIndex+=1;applyTour(tourIndex);}else setMode(false);});
 
-document.querySelector('.wrap').classList.add('in-tour');
-applyTour(0);
+if(readHash()){setMode(false);}else{document.querySelector('.wrap').classList.add('in-tour');applyTour(0);}
 })();
 </script>
 </body></html>

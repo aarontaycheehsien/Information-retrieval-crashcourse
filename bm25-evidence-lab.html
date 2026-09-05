@@ -235,6 +235,7 @@ table.full tr:last-child td{border-bottom:0}
   .modebar,.tour-nav,#tip{display:none}
   .panel,.tour,.pipe{box-shadow:none;break-inside:avoid}
 }
+[role="button"]:focus-visible { outline:3px solid var(--teal); outline-offset:3px; }
 </style>
 </head>
 <body>
@@ -242,7 +243,7 @@ table.full tr:last-child td{border-bottom:0}
 <header class="hero"><div class="hero-inner">
   <p class="kicker">Interactive companion</p>
   <h1>The BM25 Evidence Lab</h1>
-  <p class="subtitle">BM25 treats matching words as weighted clues and adds their contributions into a graded score. This laboratory lets you change one source of evidence at a time and watch the ranking respond.</p>
+  <p class="subtitle">BM25 treats matching words as weighted clues and adds their contributions into a graded score. This laboratory lets you change the evidence and watch the ranking respond. Editing a record changes its length and the collection average, so other records’ scores can change too.</p>
   <p class="backlink"><a href="search-textbook.html#bm25-words-as-weighted-clues">← Back to “BM25: words as weighted clues”</a></p>
 </div></header>
 
@@ -265,7 +266,7 @@ table.full tr:last-child td{border-bottom:0}
       <div class="dots" id="tour-dots"></div>
     </div>
     <h2 id="tour-title"></h2>
-    <div id="tour-intro"></div>
+    <p class="ctrl-note">The tour fixes query and scoring parameters; use its prescribed controls, then switch to the sandbox to experiment freely.</p><div id="tour-intro"></div>
     <div class="predict" id="tour-predict">
       <p id="tour-question"></p>
       <div class="choices" id="tour-choices"></div>
@@ -307,7 +308,7 @@ table.full tr:last-child td{border-bottom:0}
     <section class="panel" aria-labelledby="h-res">
       <h3 id="h-res">Ranked results</h3>
 
-      <label class="switch"><input type="checkbox" id="strict"> Strict <code>AND</code> instead of BM25 ranking</label>
+      <label class="switch"><input type="checkbox" id="strict"> Require all active terms, then rank with BM25</label>
       <div class="andnote" id="andnote" hidden></div>
 
       <div id="results"></div>
@@ -566,9 +567,13 @@ addEventListener('scroll', hideTip, {passive:true});
 let A = null;
 
 function render(){
+  const focused = document.activeElement;
+  const focusKey = focused && focused.dataset.focusKey;
   A = analyse();
   renderTerms(); renderCorpus(); renderResults(); renderWhy(); renderTable();
   renderSaturation(); renderSynonyms(); syncControls(); writeHash();
+  if(focusKey){ const next = [...document.querySelectorAll('[data-focus-key]')].find(el=>el.dataset.focusKey===focusKey); if(next) next.focus(); }
+
 }
 
 function syncControls(){
@@ -578,11 +583,16 @@ function syncControls(){
   $('#pad').value = state.pad; $('#pad-val').textContent = state.pad;
   $('#k1').value = state.k1; $('#k1-val').textContent = state.k1.toFixed(2);
   $('#b').value = state.b; $('#b-val').textContent = state.b.toFixed(2);
+  const guided = state.mode === 'tour';
+  ['#query','#k1','#b'].forEach(id=>$(id).disabled=guided);
+  $('#strict').disabled = guided && tourStep !== 0;
+  $('#repeat').disabled = guided && tourStep !== 2;
+  $('#pad').disabled = guided && ![3,4].includes(tourStep);
   const note = $('#andnote');
   if(state.strict){
     const kept = A.ranked.length;
     note.hidden = false;
-    note.innerHTML = 'Every query term is compulsory. <b>' + kept + ' of 6</b> records qualif' + (kept===1?'ies':'y') +
+    note.innerHTML = 'Every active query term is compulsory; eligible records are ranked by BM25. AND alone specifies membership, not order. <b>' + kept + ' of 6</b> records qualif' + (kept===1?'ies':'y') +
       (kept < 6 ? '. The rest are excluded outright, however much evidence they carry.' : '.');
   } else { note.hidden = true; }
 }
@@ -597,6 +607,9 @@ function renderTerms(){
     const b = document.createElement('button');
     b.className = 'term' + (off ? ' off' : '');
     b.type = 'button';
+    b.dataset.focusKey = 'term-' + t;
+    b.disabled = state.mode === 'tour';
+    b.title = 'Appears in ' + st.df + ' of 6 records; IDF ' + fmt(st.idf);
     b.setAttribute('aria-pressed', String(!off));
     b.innerHTML =
       '<span class="swatch" style="background:' + colourOf(t) + '"></span>' +
@@ -611,7 +624,7 @@ function renderTerms(){
     b.addEventListener('mousemove', function(ev){
       showTip('<b>' + esc(t) + '</b><br>Appears in <span class="tval">' + st.df + '</span> of 6 records<br>' +
               'Rarity weight (IDF): <span class="tval">' + fmt(st.idf) + '</span><br>' +
-              '<span style="opacity:.75">' + (off ? 'Currently switched off' : 'Click to switch this evidence off') + '</span>');
+              '<span style="opacity:.75">' + (off ? 'Currently switched off' : 'Click to switch this evidence off') + '</span>', ev);
     });
     b.addEventListener('mouseleave', hideTip);
     li.appendChild(b); ul.appendChild(li);
@@ -630,18 +643,27 @@ function highlight(text){
   }).join('');
 }
 
+function makeSelectable(el, id, group){
+  el.tabIndex = 0;
+  el.setAttribute('role','button');
+  el.setAttribute('aria-pressed',String(state.sel === id));
+  el.setAttribute('aria-label','Inspect record ' + id);
+  el.dataset.focusKey = group + '-' + id;
+  el.addEventListener('click',function(){ state.sel=id; render(); });
+  el.addEventListener('keydown',function(ev){ if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();state.sel=id;render();} });
+}
 function renderCorpus(){
   const host = $('#corpus'); host.innerHTML = '';
   A.docs.forEach(function(d){
     const el = document.createElement('div');
     el.className = 'rec' + (state.sel === d.id ? ' sel' : '') + (state.strict && !d.eligible ? ' excluded' : '');
-    const shown = d.text.length > 320 ? d.text.slice(0,300) + ' …' : d.text;
+    const shown = d.text;
     el.innerHTML =
       '<div class="rec-top"><span class="rec-id">' + d.id + '</span>' +
       '<span class="rec-len">' + d.len + ' words</span></div>' +
       '<p class="rec-text">' + highlight(shown) + '</p>' +
-      '<p class="rec-note">' + esc(d.rec.note) + '</p>';
-    el.addEventListener('click', function(){ state.sel = d.id; render(); });
+      '<p class="rec-note">' + esc('Matches ' + d.matched.length + ' of ' + A.terms.length + ' active terms. ' + (d.eligible ? 'Eligible under the current admission rule.' : 'Not eligible under the current admission rule.')) + '</p>';
+    makeSelectable(el, d.id, 'corpus');
     host.appendChild(el);
   });
 }
@@ -657,12 +679,10 @@ function renderResults(){
   A.ranked.forEach(function(d, i){
     const row = document.createElement('div');
     row.className = 'res' + (state.sel === d.id ? ' sel' : '');
-    const widthPct = state.strict ? 100 : (d.total / max * 100);
+    const widthPct = d.total / max * 100;
 
     let segs = '';
-    if(state.strict){
-      segs = '<div class="seg-m" style="width:100%;background:var(--teal)"></div>';
-    } else {
+    {
       const parts = A.terms.filter(function(t){ return d.parts[t] > 0; });
       const barPx = (host.clientWidth || 520) * widthPct / 100;
       parts.forEach(function(t, j){
@@ -682,11 +702,11 @@ function renderResults(){
         '<span class="res-rank">' + (i+1) + '</span>' +
         '<span class="res-id">' + d.id + '</span>' +
         '<span class="res-title">' + esc(d.rec.title) + '</span>' +
-        '<span class="res-score">' + (state.strict ? 'eligible' : fmt(d.total)) + '</span>' +
+        '<span class="res-score">' + fmt(d.total) + '</span>' +
       '</div>' +
       '<div class="bar" style="width:' + widthPct + '%">' + segs + '</div>';
 
-    row.addEventListener('click', function(){ state.sel = d.id; render(); });
+    makeSelectable(row, d.id, 'result');
     row.querySelectorAll('.seg-m[data-term]').forEach(function(seg){
       seg.addEventListener('mousemove', function(ev){
         const t = seg.dataset.term, st = A.stats[t];
@@ -769,7 +789,7 @@ function explain(d){
 
   const unmatched = A.terms.filter(function(t){ return !(d.tf[t] > 0); });
   if(unmatched.length) bits.push('It matches ' + d.matched.length + ' of ' + A.terms.length +
-    ' active terms; missing <code>' + unmatched.map(esc).join('</code>, <code>') + '</code> costs it evidence but does not exclude it.');
+    ' active terms; missing <code>' + unmatched.map(esc).join('</code>, <code>') + (state.strict ? '</code> excludes it under the current AND rule.' : '</code> costs it evidence but does not exclude it under any-match admission.'));
 
   return bits.join(' ');
 }
@@ -799,12 +819,17 @@ function renderSaturation(){
   const docs = A.docs, D = docs.filter(function(x){ return x.id === 'D'; })[0];
   const xs = []; for(let n = 1; n <= 20; n++) xs.push(n);
 
-  const curve = xs.map(function(n){ return st.idf * (n * (state.k1+1)) / (n + D.norm); });
+  const curve = xs.map(function(n){
+    const length = D.len - state.repeat + n;
+    const average = A.avgdl + (n - state.repeat) / A.N;
+    const norm = state.k1 * (1 - state.b + state.b * length / average);
+    return st.idf * (n * (state.k1+1)) / (n + norm);
+  });
   const linear = xs.map(function(n){ return curve[0] * n; });
 
   host.innerHTML =
     chart('If repetition counted in full', xs, linear, Math.max.apply(null, linear), '--s2') +
-    chart('What BM25 actually does', xs, curve, Math.max.apply(null, curve) * 1.12, '--s1');
+    chart('BM25 with length and average recomputed', xs, curve, Math.max.apply(null, curve) * 1.12, '--s1');
 }
 
 function chart(caption, xs, ys, ymax, series){
@@ -847,15 +872,16 @@ function renderSynonyms(){
   const host = $('#syn-chips');
   host.innerHTML = SYNONYMS.map(function(s){
     const on = queryTerms().indexOf(s.word) !== -1;
-    return '<button class="chip' + (on ? ' on' : '') + '" data-syn="' + s.word + '">' +
+    return '<button data-focus-key="syn-' + s.word + '" class="chip' + (on ? ' on' : '') + '" data-syn="' + s.word + '">' +
       (on ? '− ' : '+ ') + s.word + '</button>';
   }).join('');
   host.querySelectorAll('[data-syn]').forEach(function(btn){
     btn.addEventListener('click', function(){
       const w = btn.dataset.syn, terms = queryTerms();
+      btn.dataset.focusKey = 'syn-' + w;
       state.query = terms.indexOf(w) !== -1
         ? terms.filter(function(t){ return t !== w; }).join(' ')
-        : state.query.trim() + ' ' + w;
+        : (state.mode === 'tour' ? terms.filter(t=>!SYNONYMS.some(s=>s.word===t)).join(' ') : state.query.trim()) + ' ' + w;
       render();
     });
   });
@@ -867,21 +893,21 @@ const STEPS = [
   {
     title:'From admission rules to weighted clues',
     intro:'<p>The query is <code>delulu job interview expectations</code>. Six records sit in the collection, and you can read every one of them.</p>' +
-          '<p>A strict Boolean system treats each word as a compulsory condition. BM25 does not.</p>',
+          '<p>Strict AND makes each active term compulsory in this example. Boolean also supports OR and NOT. Admission rules and BM25 scoring are separate controls.</p>',
     q:'Under strict <code>AND</code>, how many of the six records survive?',
     choices:['1','3','6'], answer:0,
-    answerText:'<p>Only <b>Record A</b> contains all four words. The other five are excluded outright — including Record B, which any librarian would call relevant.</p>' +
+    answerText:'<p>Only <b>Record A</b> contains all four words. The other five are excluded outright — including Record B, which may be useful for a search about unrealistic job expectations.</p>' +
                '<p>Switch the toggle off again and all six are back, each scoring from whatever it does match.</p>',
-    takeaway:'<b>BM25 still requires lexical overlap, but not total overlap.</b> A record can score from two matching words instead of four.',
+    takeaway:'<b>With any-match admission, BM25 requires lexical overlap, but not total overlap.</b> A record can score from two matching words instead of four.',
     apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:true,repeat:3,pad:0,off:[],sel:'A'}); }
   },
   {
     title:'Not every matching word is worth the same',
     intro:'<p>Look at the query terms on the left. Each one carries a bar showing how unusual it is in this collection, and a count of how many records contain it.</p>' +
           '<p><code>job</code> is nearly everywhere. <code>delulu</code> is not.</p>',
-    q:'Which contributes more to a score — matching <code>job</code>, or matching <code>delulu</code>?',
+    q:'Which has the greater rarity weight (IDF), before frequency and length are considered — <code>job</code> or <code>delulu</code>?' ,
     choices:['job','delulu','they are equal'], answer:1,
-    answerText:'<p>Matching <code>delulu</code> is worth roughly four times as much as matching <code>job</code>. A word appearing in 5 of 6 records barely distinguishes anything; a word in 2 of 6 does real work.</p>' +
+    answerText:'<p>The IDF of <code>delulu</code> is roughly four times that of <code>job</code>. A word appearing in 5 of 6 records barely distinguishes anything; a word in 2 of 6 does real work.</p>' +
                '<p>Click Record D in the results and compare its two segments.</p>',
     takeaway:'<b>Rarity increases discriminating power, not truth.</b> BM25 weights an unusual word heavily whether or not it is the right word.',
     apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'D'}); }
@@ -899,7 +925,7 @@ const STEPS = [
   },
   {
     title:'The same matches mean more in a short document',
-    intro:'<p>The second slider appends unrelated appendix paragraphs to Record A. It adds no query words whatsoever — only length.</p>',
+    intro:'<p>The second slider appends unrelated appendix paragraphs to Record A. For this prescribed query it adds no matching words. It changes A’s length and the collection average; other records’ scores can therefore change too.</p>',
     q:'What happens to Record A’s score as the appendix grows?',
     choices:['it stays the same — the matches are unchanged','it falls','it rises'], answer:1,
     answerText:'<p>It falls steadily. Four matches in a 20-word record suggest the record is <i>about</i> those words; the same four matches in a 200-word record suggest they were mentioned in passing.</p>' +
@@ -920,12 +946,12 @@ const STEPS = [
   },
   {
     title:'What BM25 cannot understand',
-    intro:'<p>The query is now <code>delulu about getting a job</code>. Record B — “Managing unrealistic expectations during a job search” — is plainly relevant, but shares only the word <code>job</code>.</p>' +
+    intro:'<p>The query is now <code>delulu about getting a job</code>. Record B — “Managing unrealistic expectations during a job search” — is plainly relevant, but shares <code>about</code>, <code>a</code> and <code>job</code>; this lab does not remove stop words.</p>' +
           '<p>Use the synonym buttons on the left to expand the query, one at a time.</p>',
-    q:'Both <code>unrealistic</code> and <code>foolish</code> occur in exactly one record. Which does BM25 weight more heavily?',
-    choices:['unrealistic — it is the better paraphrase','foolish — it is the worse paraphrase','neither — they are equally rare, so they weigh the same'], answer:2,
+    q:'Both <code>unrealistic</code> and <code>foolish</code> occur in exactly one record. Which receives the higher rarity weight (IDF), before term frequency and length are considered?',
+    choices:['unrealistic — it is the better paraphrase','foolish — it is the worse paraphrase','neither — they are equally rare, so their IDF is identical'], answer:2,
     answerText:'<p>Both occur in exactly one of the six records, so BM25 gives them an identical rarity weight. It has no mechanism whatsoever for telling a good paraphrase from a bad one.</p>' +
-               '<p>Adding <code>unrealistic</code> lifts Record B to first place, which it deserves. Adding <code>foolish</code> lifts Record F to first place just as decisively — and Record F is about something else entirely. If anything <code>foolish</code> does <i>more</i> damage, purely because Record F happens to use the word twice.</p>',
+               '<p>Adding <code>unrealistic</code> lifts Record B to first place, which it deserves. Adding <code>foolish</code> lifts Record F to first place just as decisively — but this does not establish that F is a better answer. Its interview assumptions may overlap the need, while “foolish” adds a judgement the request did not make. F uses the word twice; frequency and length explain why equal IDF does not mean equal total contribution.</p>',
     takeaway:'<b>BM25 can weight lexical evidence intelligently. It cannot decide whether the vocabulary it was given expresses the right concept.</b> It is lexical evidence made less binary — not semantic understanding.',
     apply:function(){ Object.assign(state,{query:'delulu about getting a job',strict:false,repeat:3,pad:0,off:[],sel:'B'}); }
   }
@@ -981,6 +1007,7 @@ function gotoStep(i){
   if(i < 0) return;
   if(i >= STEPS.length){ setMode('sandbox'); return; }
   tourStep = i;
+  Object.assign(state, DEFAULTS, {off:[],mode:"tour"});
   STEPS[i].apply();
   renderTour(); render();
 }
@@ -990,6 +1017,7 @@ function gotoStep(i){
 state.mode = 'tour';
 function setMode(m){
   state.mode = m;
+  if(m === 'tour'){ tourStep=0; answered=[]; Object.assign(state,DEFAULTS,{off:[],mode:m}); STEPS[0].apply(); renderTour(); }
   $('#mode-tour').setAttribute('aria-pressed', String(m==='tour'));
   $('#mode-sandbox').setAttribute('aria-pressed', String(m==='sandbox'));
   $('#tour').style.display = m === 'tour' ? '' : 'none';
@@ -1017,10 +1045,15 @@ function readHash(){
   if(!p.has('q')) return false;
   state.query = p.get('q');
   state.strict = p.get('and') === '1';
-  state.repeat = +(p.get('r') || 3);
-  state.pad = +(p.get('p') || 0);
-  state.k1 = +(p.get('k') || 1.2);
-  state.b = +(p.get('b') || 0.75);
+  const read = (key, fallback, min, max, integer=false)=>{
+    if(!p.has(key)) return fallback;
+    const value=Number(p.get(key));
+    return Number.isFinite(value) ? Math.max(min,Math.min(max,integer?Math.round(value):value)) : fallback;
+  };
+  state.repeat = read('r',3,1,20,true);
+  state.pad = read('p',0,0,8,true);
+  state.k1 = read('k',1.2,0,3);
+  state.b = read('b',0.75,0,1);
   state.off = p.get('off') ? p.get('off').split(',') : [];
   return true;
 }
