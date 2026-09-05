@@ -9,20 +9,6 @@ entry here.
 
 ## 1.1 — 5 September 2026
 
-### Consistency and readability revision
-
-- Correct computed embedding outputs versus learnt model parameters, RAG evidence boundaries, iteration versus agency, indexed units versus supplied context, and candidate-pool recall versus recall at a displayed depth.
-- Correct the BERT base uncased tokenisation example, average-precision and relative-recall denominators, and the judgement procedure in application exercise III.
-- Replace Figure 5.1 with an accessible HTML explanation; clarify training signals, causal attention, pruning, product-mode dates, terminology and third-party figure attribution.
-- Synchronise the teaching notes and README with fifteen chapters and seven appendices. Add worked exercise responses, evidence-based marking guidance, public-access options and both lab pairings.
-- Shorten repeated framing, make the second opening product comparison optional, add a six-distinction checklist and a minimal search record, and distinguish the RRF constant from result depth.
-- In the BM25 lab, show BM25 scores under AND admission, recompute the saturation curve with changing collection statistics, constrain guided scenarios, correct overlap/IDF explanations and add keyboard-operable cards.
-- In the vector lab, preserve sandbox state, support shareable URLs, constrain guided scenarios and scale dot-product bars without clipping valid scores.
-
-Validation: maintenance and footnote checks; cross-file fragment and asset checks; JavaScript syntax and numerical regression tests in `tools/test-labs.cjs`. Browser rendering could not be verified in this environment because the browser download timed out.
-
-## Unreleased
-
 ### Added
 
 - **The book now has an ending.** It opened on a personal frame — library
@@ -477,6 +463,18 @@ Validation: maintenance and footnote checks; cross-file fragment and asset check
 - **The earlier single-flow web article has been retired.** Its former public
   URL now redirects to the textbook, preserving shared fragment links; the
   article itself remains available through Git history.
+
+### Consistency and readability revision
+
+- Correct computed embedding outputs versus learnt model parameters, RAG evidence boundaries, iteration versus agency, indexed units versus supplied context, and candidate-pool recall versus recall at a displayed depth.
+- Correct the BERT base uncased tokenisation example, average-precision and relative-recall denominators, and the judgement procedure in application exercise III.
+- Replace Figure 5.1 with an accessible HTML explanation; clarify training signals, causal attention, pruning, product-mode dates, terminology and third-party figure attribution.
+- Synchronise the teaching notes and README with fifteen chapters and seven appendices. Add worked exercise responses, evidence-based marking guidance, public-access options and both lab pairings.
+- Shorten repeated framing, make the second opening product comparison optional, add a six-distinction checklist and a minimal search record, and distinguish the RRF constant from result depth.
+- In the BM25 lab, show BM25 scores under AND admission, recompute the saturation curve with changing collection statistics, constrain guided scenarios, correct overlap/IDF explanations and add keyboard-operable cards.
+- In the vector lab, preserve sandbox state, support shareable URLs, constrain guided scenarios and scale dot-product bars without clipping valid scores.
+
+Validation: maintenance and footnote checks; cross-file fragment and asset checks; JavaScript syntax and numerical regression tests in `tools/test-labs.cjs`. Browser rendering could not be verified in this environment because the browser download timed out.
 
 ## Version 1.0 — August 2026
 
