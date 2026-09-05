@@ -110,6 +110,27 @@ definition list. To add a term mark, add the term to the glossary and, if it is
 unambiguous enough to match safely in prose, to the `MARKED` list in the page
 script.
 
+### The two recurring example families
+
+Worked examples come from two standing families, so a reader is not learning a
+new collection every chapter. Each has a job, and they are not interchangeable:
+
+- **`delulu`** (and occasionally `rizz`) — unfamiliar terminology and lexical
+  stress tests. It runs from the Preface through Chapters 2–7, 9 and 13, and
+  Appendix C's BM25 walkthrough. Use it where the point is analysis,
+  tokenisation, out-of-vocabulary behaviour or a term the system may not know.
+  Do not use it where relevance has to be judged: its relevance judgements are
+  too ambiguous to carry precision, recall or reranking examples.
+- **The open-access citation advantage** — realistic academic searching. It is
+  the question behind Puzzle 3, the worked need in Chapter 11's eight query
+  objects, and the search used in Chapters 1 and 7. Use it where the point is
+  what a real searcher is trying to find.
+
+Where an example needs judged relevance, reuse the `AI academic libraries` need
+already worked in Chapters 1 and 13 rather than inventing records. The book
+sources its examples to systems that are named and dated; a fictional corpus
+would cost that.
+
 ## Historical edition
 
 Until August 2026 the textbook was generated from
