@@ -1,0 +1,74 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Aaron Tay Chee Hsien
+
+"How Search Decides What You See: A librarian's guide to Boolean search, BM25,
+embeddings, reranking, and the retrieval pipelines behind hybrid and agentic
+search"
+
+------------------------------------------------------------------------------
+WHAT THIS LICENCE COVERS
+------------------------------------------------------------------------------
+
+The prose, tables, diagrams, explanatory illustrations, HTML, CSS, JavaScript
+and Python in this repository are licensed under the Creative Commons
+Attribution 4.0 International licence.
+
+You are free to:
+
+  * Share  - copy and redistribute the material in any medium or format
+  * Adapt  - remix, transform and build upon the material for any purpose,
+             including commercially
+
+under one condition:
+
+  * Attribution - you must give appropriate credit, provide a link to the
+    licence, and indicate if changes were made. You may do so in any reasonable
+    manner, but not in any way that suggests the licensor endorses you or your
+    use.
+
+No additional restrictions may be applied. You may not apply legal terms or
+technological measures that legally restrict others from doing anything the
+licence permits.
+
+Licence deed:  https://creativecommons.org/licenses/by/4.0/
+Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+The legal code at the URL above is the authoritative text of this licence. The
+summary above is a convenience and does not replace it.
+
+------------------------------------------------------------------------------
+WHAT THIS LICENCE DOES NOT COVER
+------------------------------------------------------------------------------
+
+1. Third-party screenshots. Images reproducing the interfaces of commercial
+   products - including scite, Google Scholar and Web of Science - are not the
+   author's to license. They are reproduced here for the purposes of comment
+   and criticism. Anyone reusing this work must assess their own basis for
+   including them, or remove them.
+
+2. Product names and trademarks. These remain the property of their respective
+   owners. Nothing here grants any trademark rights, and nothing here implies
+   endorsement by any vendor named in the text.
+
+3. Cited works. Quotations from and links to third-party publications remain
+   subject to their own terms.
+
+4. Figures reproduced from published works. Where a figure from a third-party
+   publication is reproduced - including the country-and-capital PCA figure in
+   the embeddings chapter, taken from Mikolov, Sutskever, Chen, Corrado and
+   Dean, "Distributed representations of words and phrases and their
+   compositionality" (NIPS 2013) - it is not the author's to license. It is
+   reproduced here for the purposes of comment and criticism, with attribution
+   in the figure caption. Anyone reusing this work must assess their own basis
+   for including it, or remove it.
+
+------------------------------------------------------------------------------
+SUGGESTED ATTRIBUTION
+------------------------------------------------------------------------------
+
+Tay, A. C. H. (2026). "How search decides what you see: A librarian's guide to
+Boolean search, BM25, embeddings, reranking, and the retrieval pipelines behind
+hybrid and agentic search" (Version 1.0).
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/
+Licensed under CC BY 4.0.

@@ -1,0 +1,1025 @@
+# -*- coding: utf-8 -*-
+"""Controlled, byte-preserving restructuring passes for search-textbook.html.
+
+Each phase uses exact unique anchors, edits only named source ranges, validates
+the result in memory, and writes only after all checks pass. Use --dry-run to
+exercise a phase without changing the book.
+"""
+
+from __future__ import annotations
+
+import argparse
+import collections
+import hashlib
+import html
+import json
+import os
+import re
+
+
+REPO = os.path.dirname(os.path.abspath(__file__))
+BOOK = os.path.join(REPO, "search-textbook.html")
+BASELINE = os.path.join(REPO, "baseline.json")
+PHASE2_AUDIT = os.path.join(REPO, "phase2-audit.json")
+PHASE3_AUDIT = os.path.join(REPO, "phase3-audit.json")
+PHASE4_AUDIT = os.path.join(REPO, "phase4-audit.json")
+PHASE5_AUDIT = os.path.join(REPO, "phase5-audit.json")
+
+
+def read_bytes(path: str) -> tuple[bytes, str]:
+    with open(path, "rb") as handle:
+        raw = handle.read()
+    return raw, raw.decode("utf-8")
+
+
+def unique_index(text: str, needle: str, label: str | None = None) -> int:
+    count = text.count(needle)
+    if count != 1:
+        raise RuntimeError("%s: expected one match, found %d" % (label or needle, count))
+    return text.index(needle)
+
+
+def element_range(text: str, start: int, tag: str) -> tuple[int, int]:
+    open_end = text.index(">", start) + 1
+    depth = 1
+    token_re = re.compile(r"<%s\b[^>]*>|</%s\s*>" % (tag, tag), re.I)
+    for match in token_re.finditer(text, open_end):
+        if match.group(0).startswith("</"):
+            depth -= 1
+            if depth == 0:
+                return start, match.end()
+        else:
+            depth += 1
+    raise RuntimeError("unclosed <%s> at character %d" % (tag, start))
+
+
+def section_range(text: str, section_id: str) -> tuple[int, int]:
+    match = re.search(r'<section\b[^>]*\bid="%s"[^>]*>' % re.escape(section_id), text)
+    if not match:
+        raise RuntimeError("section not found: " + section_id)
+    if len(re.findall(r'<section\b[^>]*\bid="%s"[^>]*>' % re.escape(section_id), text)) != 1:
+        raise RuntimeError("section id is not unique: " + section_id)
+    return element_range(text, match.start(), "section")
+
+
+def section_text(text: str, section_id: str) -> str:
+    start, end = section_range(text, section_id)
+    return text[start:end]
+
+
+def first_element(block: str, opening: str, tag: str, after: int = 0) -> tuple[int, int, str]:
+    start = block.index(opening, after)
+    low, high = element_range(block, start, tag)
+    return low, high, block[low:high]
+
+
+def stage_map_from(section: str) -> str:
+    start = section.index('<div class="stage-map"')
+    low, high = element_range(section, start, "div")
+    return section[low:high]
+
+
+def close_parts(block: str) -> tuple[str, list[str], str]:
+    ol_start = unique_index(block, "<ol>", "chapter-close <ol>")
+    ol_end = block.index("</ol>", ol_start)
+    items = re.findall(r"<li>.*?</li>", block[ol_start:ol_end], re.S)
+    if not items:
+        raise RuntimeError("chapter close contains no list items")
+    prefix = block[: ol_start + len("<ol>")]
+    suffix = block[ol_end + len("</ol>") :]
+    return prefix, items, suffix
+
+
+def build_close(block: str, indexes: list[int], eol: str, keep_suffix: bool) -> str:
+    prefix, items, suffix = close_parts(block)
+    selected = "".join(items[index] for index in indexes)
+    if keep_suffix:
+        return prefix + selected + "</ol>" + suffix
+    return prefix + selected + "</ol>" + eol + "<!-- TODO-PROSE -->" + eol + "</aside>"
+
+
+def self_check_parts(block: str) -> tuple[str, list[str], str]:
+    details = list(re.finditer(r'<details class="self-check-q">.*?</details>', block, re.S))
+    if not details:
+        raise RuntimeError("self-check contains no questions")
+    return block[: details[0].start()], [match.group(0) for match in details], block[details[-1].end() :]
+
+
+def build_self_check(block: str, indexes: list[int], eol: str, mark_todo: bool = False) -> str:
+    prefix, questions, suffix = self_check_parts(block)
+    selected = eol.join(questions[index] for index in indexes)
+    marker = (eol + "<!-- TODO-PROSE -->") if mark_todo else ""
+    if selected:
+        selected += marker
+    else:
+        selected = "<!-- TODO-PROSE -->"
+    return prefix + selected + eol + suffix.lstrip("\r\n")
+
+
+def chapter_nav(prev_href: str, prev_text: str, next_href: str, next_text: str) -> str:
+    return (
+        '<nav class="chapter-nav" aria-label="Chapter navigation">'
+        '<a class="cnav prev" href="#%s"><span>Previous</span>%s</a>'
+        '<a class="cnav next" href="#%s"><span>Next</span>%s</a>'
+        "</nav>"
+    ) % (prev_href, prev_text, next_href, next_text)
+
+
+def replace_nav(section: str, replacement: str) -> str:
+    low, high, _ = first_element(section, '<nav class="chapter-nav"', "nav")
+    return section[:low] + replacement + section[high:]
+
+
+def new_header(
+    eyebrow_token: str,
+    time_token: str,
+    heading_id: str,
+    title: str,
+    question: str,
+    stage_map: str,
+    eol: str,
+) -> str:
+    return eol.join(
+        [
+            '<header class="chapter-head"><p class="chapter-eyebrow">Chapter %s</p>' % eyebrow_token,
+            '<p class="chapter-meta">About %s min</p>' % time_token,
+            '<h2 id="%s">%s</h2>' % (heading_id, title),
+            '<p class="chapter-question"><span>Central question</span>%s</p>' % question,
+            stage_map,
+            '<div class="chapter-orient"><!-- TODO-PROSE --></div></header>',
+        ]
+    )
+
+
+def hash_element_bodies(document: str, tag: str) -> list[str]:
+    return [
+        hashlib.sha256(match.group(1).encode("utf-8")).hexdigest()
+        for match in re.finditer(r'<%s\b[^>]*>(.*?)</%s\s*>' % (tag, tag), document, re.I | re.S)
+    ]
+
+
+def validate_common(document: str, baseline: dict, require_app_f_exact: bool) -> None:
+    ids = re.findall(r'\bid="([^"]+)"', document)
+    duplicates = sorted(key for key, count in __import__("collections").Counter(ids).items() if count > 1)
+    if duplicates:
+        raise RuntimeError("duplicate ids: " + ", ".join(duplicates))
+    hrefs = re.findall(r'href="#([^"]+)"', document)
+    broken = sorted(set(hrefs) - set(ids))
+    if broken:
+        raise RuntimeError("broken internal hrefs: " + ", ".join(broken))
+
+    ref_keys = re.findall(r'<sup id="fnref:([^"]+)"><a class="footnote-ref" href="#fn:[^"]+">\d+</a></sup>', document)
+    note_keys = re.findall(r'<li id="fn:([^"]+)">', document)
+    if len(ref_keys) != len(set(ref_keys)) or set(ref_keys) != set(note_keys):
+        raise RuntimeError("footnote ref/note pairs are incomplete or duplicated")
+
+    expected_styles = [item["sha256"] for item in baseline["styles"]]
+    expected_scripts = [item["sha256"] for item in baseline["scripts"]]
+    if hash_element_bodies(document, "style") != expected_styles:
+        raise RuntimeError("style blocks changed")
+    if hash_element_bodies(document, "script") != expected_scripts:
+        raise RuntimeError("script blocks changed")
+
+    if require_app_f_exact:
+        app_f = section_text(document, "app-F")
+        actual = hashlib.sha256(app_f.encode("utf-8")).hexdigest()
+        expected = baseline["guards"]["appendix_f"]["source_sha256"]
+        if actual != expected:
+            raise RuntimeError("Appendix F changed during a phase that must leave it byte-identical")
+
+
+def phase1(document: str, baseline: dict) -> str:
+    if 'id="sec-retrieval-encoder"' in document or 'id="sec-hybrid-and-fusion"' in document:
+        raise RuntimeError("Phase 1 appears to have been applied already")
+    eol = "\r\n" if "\r\n" in document else "\n"
+
+    ch5_start, ch5_end = section_range(document, "sec-embeddings")
+    ch5 = document[ch5_start:ch5_end]
+    ch5_split_marker = '<span id="how-dense-models-receive-text" class="legacy-anchor"></span><h3 id="model-tokens-are-not-indexed-terms">'
+    ch5_split = unique_index(ch5, ch5_split_marker, "Chapter 5 split boundary")
+    close5_start, close5_end, close5 = first_element(ch5, '<aside class="chapter-close"', "aside", ch5_split)
+    self5_start, self5_end, self5 = first_element(ch5, '<section class="self-check"', "section", close5_end)
+    _, _, nav5 = first_element(ch5, '<nav class="chapter-nav"', "nav", self5_end)
+    stage5 = stage_map_from(ch5)
+    if len(close_parts(close5)[1]) != 3 or len(self_check_parts(self5)[1]) != 3:
+        raise RuntimeError("unexpected Chapter 5 close/self-check structure")
+
+    ch5_prefix = ch5[:ch5_split]
+    old_title5 = '<h2 id="embeddings">Embeddings and the retrieval encoder</h2>'
+    if ch5_prefix.count(old_title5) != 1:
+        raise RuntimeError("Chapter 5 title did not match uniquely")
+    ch5_prefix = ch5_prefix.replace(
+        old_title5,
+        '<h2 id="embeddings">Embeddings: what the learnt geometry encodes</h2>',
+    )
+    ch5_close = build_close(close5, [0], eol, keep_suffix=False)
+    ch5_checks = build_self_check(self5, [], eol)
+    ch5_nav = chapter_nav(
+        "exercise1", "Application exercise I", "retrieval-encoder", "From language model to retrieval encoder"
+    )
+    new_ch5 = ch5_prefix + ch5_close + eol + ch5_checks + eol + ch5_nav + "</section>"
+
+    ch6_header = new_header(
+        "%%NEW6%%",
+        "%%TIME6%%",
+        "retrieval-encoder",
+        "From language model to retrieval encoder",
+        "How does a language model's internal representation become something a search index can use?",
+        stage5,
+        eol,
+    )
+    ch6_body = ch5[ch5_split:close5_start]
+    ch6_close = build_close(close5, [1, 2], eol, keep_suffix=True)
+    ch6_checks = build_self_check(self5, [0, 1, 2], eol)
+    ch6_nav = chapter_nav(
+        "embeddings", "Embeddings: what the learnt geometry encodes", "dense-at-scale", "Dense retrieval at collection scale"
+    )
+    new_ch6 = (
+        '<section class="chapter" id="sec-retrieval-encoder">'
+        + ch6_header
+        + eol
+        + ch6_body
+        + ch6_close
+        + eol
+        + ch6_checks
+        + eol
+        + ch6_nav
+        + "</section>"
+    )
+
+    ch8_start, ch8_end = section_range(document, "sec-reranking-and-hybrid")
+    ch8 = document[ch8_start:ch8_end]
+    hybrid_marker = '<h3 id="why-hybrid-retrieval-remains-attractive">'
+    hybrid_start = unique_index(ch8, hybrid_marker, "Chapter 8 hybrid split boundary")
+    close8_start, close8_end, close8 = first_element(ch8, '<aside class="chapter-close"', "aside", hybrid_start)
+    self8_start, self8_end, self8 = first_element(ch8, '<section class="self-check"', "section", close8_end)
+    stage8 = stage_map_from(ch8)
+    if len(close_parts(close8)[1]) != 5 or len(self_check_parts(self8)[1]) != 3:
+        raise RuntimeError("unexpected Chapter 8 close/self-check structure")
+
+    app_e_start, app_e_end = section_range(document, "app-E")
+    app_e = document[app_e_start:app_e_end]
+    rrf_start = unique_index(app_e, '<h3 id="appendix-how-rrf-combines-ranked-lists">', "RRF section")
+    rrf_end = app_e.index('<h3 id="appendix-learning-to-rank">', rrf_start)
+    rrf = app_e[rrf_start:rrf_end]
+    old_rrf_id = "appendix-how-rrf-combines-ranked-lists"
+    new_rrf_id = "how-reciprocal-rank-fusion-combines-ranked-lists"
+    if rrf.count(old_rrf_id) != 2:
+        raise RuntimeError("RRF heading id/href structure was not the expected pair")
+    moved_rrf = rrf.replace(old_rrf_id, new_rrf_id)
+    app_e_alias = '<span id="%s" class="legacy-anchor"></span>%s' % (old_rrf_id, eol)
+    new_app_e = app_e[:rrf_start] + app_e_alias + app_e[rrf_end:]
+
+    ch9_prefix = ch8[:hybrid_start]
+    old_title8 = '<h2 id="reranking-and-hybrid">Reranking, multi-stage and hybrid retrieval</h2>'
+    if ch9_prefix.count(old_title8) != 1:
+        raise RuntimeError("Chapter 8 title did not match uniquely")
+    ch9_prefix = ch9_prefix.replace(
+        old_title8,
+        '<h2 id="reranking-and-hybrid">Reranking and multi-stage retrieval</h2>',
+    )
+    ch9_close = build_close(close8, [0, 1, 2], eol, keep_suffix=False)
+    ch9_checks = build_self_check(self8, [0], eol, mark_todo=True)
+    ch9_nav = chapter_nav(
+        "representations-and-units",
+        "Representations and indexed units",
+        "hybrid-and-fusion",
+        "Hybrid retrieval and rank fusion",
+    )
+    new_ch9 = ch9_prefix + ch9_close + eol + ch9_checks + eol + ch9_nav + "</section>"
+
+    hybrid_body = ch8[hybrid_start:close8_start]
+    two_hybrids = unique_index(
+        hybrid_body, '<h3 id="two-hybrids-that-combine-differently">', "two-hybrids insertion point"
+    )
+    hybrid_body = hybrid_body[:two_hybrids] + moved_rrf + hybrid_body[two_hybrids:]
+    ch10_header = new_header(
+        "%%NEW10%%",
+        "%%TIME10%%",
+        "hybrid-and-fusion",
+        "Hybrid retrieval and rank fusion",
+        "When a system runs more than one retriever, how are their answers combined—and what does the combination hide?",
+        stage8,
+        eol,
+    )
+    ch10_close = build_close(close8, [3, 4], eol, keep_suffix=True)
+    ch10_checks = build_self_check(self8, [1, 2], eol)
+    ch10_nav = chapter_nav(
+        "reranking-and-hybrid",
+        "Reranking and multi-stage retrieval",
+        "query-transformation",
+        "Understanding, transforming and routing queries",
+    )
+    new_ch10 = (
+        '<section class="chapter" id="sec-hybrid-and-fusion">'
+        + ch10_header
+        + eol
+        + hybrid_body
+        + ch10_close
+        + eol
+        + ch10_checks
+        + eol
+        + ch10_nav
+        + "</section>"
+    )
+
+    dense_start, dense_end = section_range(document, "sec-dense-at-scale")
+    dense = document[dense_start:dense_end]
+    new_dense = replace_nav(
+        dense,
+        chapter_nav(
+            "retrieval-encoder",
+            "From language model to retrieval encoder",
+            "representations-and-units",
+            "Representations and indexed units",
+        ),
+    )
+
+    query_start, query_end = section_range(document, "sec-query-transformation")
+    query = document[query_start:query_end]
+    new_query = replace_nav(
+        query,
+        chapter_nav(
+            "hybrid-and-fusion",
+            "Hybrid retrieval and rank fusion",
+            "exercise2",
+            "Application exercise II",
+        ),
+    )
+
+    replacements = [
+        (ch5_start, ch5_end, new_ch5 + new_ch6),
+        (dense_start, dense_end, new_dense),
+        (ch8_start, ch8_end, new_ch9 + new_ch10),
+        (query_start, query_end, new_query),
+        (app_e_start, app_e_end, new_app_e),
+    ]
+    for start, end, replacement in sorted(replacements, reverse=True):
+        document = document[:start] + replacement + document[end:]
+
+    for required in (
+        'id="sec-retrieval-encoder"',
+        'id="retrieval-encoder"',
+        'id="sec-hybrid-and-fusion"',
+        'id="hybrid-and-fusion"',
+        'id="how-reciprocal-rank-fusion-combines-ranked-lists"',
+        'id="appendix-how-rrf-combines-ranked-lists" class="legacy-anchor"',
+    ):
+        if document.count(required) != 1:
+            raise RuntimeError("required Phase 1 marker is missing or duplicated: " + required)
+    validate_common(document, baseline, require_app_f_exact=True)
+    return document
+
+
+def phase2(document: str, baseline: dict) -> str:
+    if 'id="sec-retrieval-encoder"' not in document or 'id="sec-hybrid-and-fusion"' not in document:
+        raise RuntimeError("Phase 2 requires the Phase 1 structure")
+    if "%%ASSET" in document:
+        raise RuntimeError("unresolved asset token found before Phase 2")
+    original_tokens = sorted(set(re.findall(r"%%[A-Z0-9]+%%", document)))
+    substitutions: list[tuple[str, int]] = []
+
+    def exact(old: str, token: str, label: str) -> None:
+        nonlocal document
+        count = document.count(old)
+        if count == 0:
+            raise RuntimeError("Phase 2 target not found: " + label)
+        document = document.replace(old, token)
+        substitutions.append((label, count))
+
+    # The second half of old Chapter 5 becomes the new Chapter 6.
+    exact("Table 5.1", "Table %%ASSETT61%%", "Table 5.1 -> 6.1")
+    exact("tbl-5-1", "%%ASSETIDT61%%", "tbl-5-1 -> tbl-6-1")
+    for old_index, new_index in ((7, 1), (8, 2), (9, 3)):
+        exact(
+            "Figure 5.%d" % old_index,
+            f"Figure %%ASSETF6{new_index}%%",
+            "Figure 5.%d -> 6.%d" % (old_index, new_index),
+        )
+        exact(
+            "fig-5-%d" % old_index,
+            f"%%ASSETIDF6{new_index}%%",
+            "fig-5-%d -> fig-6-%d" % (old_index, new_index),
+        )
+
+    # Existing chapter prefixes shift around the two inserted chapters.
+    for old_prefix, new_prefix in ((13, 15), (12, 14), (11, 13), (10, 12), (9, 11), (8, 9), (7, 8), (6, 7)):
+        text_pattern = re.compile(r"\b(Figure|Table) %d\.(\d+)\b" % old_prefix)
+        id_pattern = re.compile(r"\b(fig|tbl)-%d-(\d+)\b" % old_prefix)
+        text_matches = len(text_pattern.findall(document))
+        id_matches = len(id_pattern.findall(document))
+        if text_matches == 0 or id_matches == 0:
+            raise RuntimeError("no asset text/id matches for Chapter %d" % old_prefix)
+        document = text_pattern.sub(
+            lambda match: f"{match.group(1)} %%ASSETP{new_prefix}%%.{match.group(2)}",
+            document,
+        )
+        document = id_pattern.sub(
+            lambda match: f"{match.group(1)}-%%ASSETIDP{new_prefix}%%-{match.group(2)}",
+            document,
+        )
+        substitutions.append(("asset prefix %d -> %d" % (old_prefix, new_prefix), text_matches + id_matches))
+
+    # The worked RRF table moved out of Appendix E with its section.
+    exact("Table E.1", "Table %%ASSETT101%%", "Table E.1 -> 10.1")
+    exact("tbl-e-1", "%%ASSETIDT101%%", "tbl-e-1 -> tbl-10-1")
+
+    resolutions = {
+        "%%ASSETT61%%": "6.1",
+        "%%ASSETIDT61%%": "tbl-6-1",
+        "%%ASSETF61%%": "6.1",
+        "%%ASSETF62%%": "6.2",
+        "%%ASSETF63%%": "6.3",
+        "%%ASSETIDF61%%": "fig-6-1",
+        "%%ASSETIDF62%%": "fig-6-2",
+        "%%ASSETIDF63%%": "fig-6-3",
+        "%%ASSETT101%%": "10.1",
+        "%%ASSETIDT101%%": "tbl-10-1",
+    }
+    for new_prefix in (15, 14, 13, 12, 11, 9, 8, 7):
+        resolutions[f"%%ASSETP{new_prefix}%%"] = str(new_prefix)
+        resolutions[f"%%ASSETIDP{new_prefix}%%"] = str(new_prefix)
+    for token, value in resolutions.items():
+        if token in document:
+            document = document.replace(token, value)
+    if "%%ASSET" in document:
+        raise RuntimeError("Phase 2 left unresolved asset tokens")
+    if sorted(set(re.findall(r"%%[A-Z0-9]+%%", document))) != original_tokens:
+        raise RuntimeError("Phase 2 changed non-asset placeholder tokens")
+
+    print("asset substitutions:")
+    for label, count in substitutions:
+        print("  ", label, count)
+    validate_common(document, baseline, require_app_f_exact=True)
+    return document
+
+
+def phase3(document: str, baseline: dict) -> str:
+    with open(PHASE2_AUDIT, encoding="utf-8") as handle:
+        phase2_audit = json.load(handle)
+    current_hash = hashlib.sha256(document.encode("utf-8")).hexdigest()
+    if current_hash != phase2_audit["metadata"]["sha256"]:
+        raise RuntimeError("Phase 3 input does not match the Phase 2 snapshot")
+
+    original_tokens = sorted(set(re.findall(r"%%[A-Z0-9]+%%", document)))
+    simple_map = {6: 7, 7: 8, 9: 11, 10: 12, 11: 13, 12: 14, 13: 15}
+    expected_counts = {6: 7, 7: 3, 9: 6, 10: 5, 11: 5, 12: 9, 13: 10}
+    edits = []
+    observed = collections.Counter()
+    for reference in phase2_audit["textual_references"]:
+        match = re.fullmatch(r"Chapter (\d+)", reference["match"])
+        if not match or reference["zone"] not in ("prose", "end-matter"):
+            continue
+        old_number = int(match.group(1))
+        if old_number not in simple_map:
+            continue
+        start = int(reference["position"])
+        old_text = "Chapter %d" % old_number
+        if document[start : start + len(old_text)] != old_text:
+            raise RuntimeError("Phase 3 position drift at %d for %s" % (start, old_text))
+        token = f"%%CHAPTER{simple_map[old_number]}%%"
+        edits.append((start, start + len(old_text), token))
+        observed[old_number] += 1
+    if dict(observed) != expected_counts:
+        raise RuntimeError("Phase 3 simple-reference counts changed: %r" % dict(observed))
+    for start, end, token in sorted(edits, reverse=True):
+        document = document[:start] + token + document[end:]
+
+    ranges = [
+        ("Chapters 5 and 6", "%%RANGE5TO7%%", "Chapters 5 to 7", 1),
+        ("Chapters 5–6", "%%RANGE5DASH7%%", "Chapters 5–7", 1),
+        ("Chapters 8 and 9", "%%RANGE9TO11%%", "Chapters 9 to 11", 1),
+        (
+            '<a href="#diagnosing-failure">Chapters 11</a>–<a href="#library-practice">13</a>',
+            "%%RANGE13TO15LINKED%%",
+            '<a href="#diagnosing-failure">Chapters 13</a> to <a href="#library-practice">15</a>',
+            2,
+        ),
+        ("Chapters 11 and 12", "%%RANGE13AND14%%", "Chapters 13 and 14", 1),
+        ("Chapters 1 and 12", "%%RANGE1AND14%%", "Chapters 1 and 14", 1),
+    ]
+    for old, token, _, expected in ranges:
+        count = document.count(old)
+        if count != expected:
+            raise RuntimeError("Phase 3 range %r: expected %d, found %d" % (old, expected, count))
+        document = document.replace(old, token)
+
+    app_f_aria_old = 'aria-label="Link to Applying Chapter 13 to active learning"'
+    app_f_aria_token = 'aria-label="Link to Applying %%APPFCH15%% to active learning"'
+    if document.count(app_f_aria_old) != 1:
+        raise RuntimeError("Appendix F heading aria-label did not match uniquely")
+    document = document.replace(app_f_aria_old, app_f_aria_token)
+
+    for new_number in simple_map.values():
+        document = document.replace(f"%%CHAPTER{new_number}%%", "Chapter %d" % new_number)
+    for _, token, replacement, _ in ranges:
+        document = document.replace(token, replacement)
+    document = document.replace("%%APPFCH15%%", "Chapter 15")
+
+    if sorted(set(re.findall(r"%%[A-Z0-9]+%%", document))) != original_tokens:
+        raise RuntimeError("Phase 3 changed or left non-structural placeholder tokens")
+    for phrase, expected in baseline["guards"]["exclusion_exact_text_counts"].items():
+        if document.count(phrase) != expected:
+            raise RuntimeError("exclusion changed: %r" % phrase)
+    validate_common(document, baseline, require_app_f_exact=False)
+    print("simple Chapter substitutions:", dict(sorted(observed.items())))
+    print("range substitutions:", sum(item[3] for item in ranges))
+    return document
+
+
+def phase4(document: str, baseline: dict) -> str:
+    """Apply the context-judged Chapter 5/8 and Appendix E decisions approved at G4."""
+    with open(PHASE3_AUDIT, encoding="utf-8") as handle:
+        phase3_audit = json.load(handle)
+    current_hash = hashlib.sha256(document.encode("utf-8")).hexdigest()
+    if current_hash != phase3_audit["metadata"]["sha256"]:
+        raise RuntimeError("Phase 4 input does not match the Phase 3 snapshot")
+
+    original_tokens = sorted(set(re.findall(r"%%[A-Z0-9]+%%", document)))
+    replacements = [
+        (
+            '<a href="#reranking-and-hybrid">Chapter 8</a> shows how sparse, reranking and hybrid arrangements can contribute',
+            '<a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> show how sparse, reranking and hybrid arrangements can contribute',
+            "preface reranking/hybrid route",
+        ),
+        (
+            'use <a href="#appendix-rank-fusion-and-learning-to-rank">Appendix E</a> when a system combines or reranks candidate lists',
+            'use <a href="#hybrid-and-fusion">Chapter 10</a> and <a href="#appendix-rank-fusion-and-learning-to-rank">Appendix E</a> when a system combines or reranks candidate lists',
+            "preface Chapter 10 and Appendix E route",
+        ),
+        (
+            'the product examples in <a href="#intro">Chapter 1</a>, <a href="#bm25-ranking">3</a>, <a href="#dense-at-scale">6</a>, <a href="#reranking-and-hybrid">8</a>, <a href="#query-transformation">9</a> and <a href="#agentic-search">10</a>',
+            'the product examples in <a href="#intro">Chapter 1</a>, <a href="#bm25-ranking">3</a>, <a href="#dense-at-scale">7</a>, <a href="#reranking-and-hybrid">9</a>, <a href="#hybrid-and-fusion">10</a>, <a href="#query-transformation">11</a> and <a href="#agentic-search">12</a>',
+            "currency paragraph chapter list",
+        ),
+        (
+            'Chapter 8 adds the stages that run after a candidate set exists',
+            '<a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> add the stages that run after a candidate set exists',
+            "Part II post-candidate stages",
+        ),
+        (
+            '<a href="#reranking-in-two-documented-academic-pipelines">Chapter 8</a> shows a 30-record reranker budget',
+            '<a href="#reranking-in-two-documented-academic-pipelines">Chapter 9</a> shows a 30-record reranker budget',
+            "Primo reranker budget",
+        ),
+        (
+            '<a href="#why-search-systems-use-multiple-stages">Chapter 8 returns to the LightGBM stage</a>',
+            '<a href="#why-search-systems-use-multiple-stages">Chapter 9 returns to the LightGBM stage</a>',
+            "LightGBM stage",
+        ),
+        (
+            '<a href="#neural-ir-broader-than-dense-retrieval">Chapter 8’s</a> subject',
+            '<a href="#why-hybrid-retrieval-remains-attractive">Chapter 10’s</a> subject',
+            "learnt sparse hybrid comparison",
+        ),
+        (
+            'Chapter 8 then added several retrievers, fusion and route selection',
+            'Chapters 9 and 10 then added several retrievers, fusion and route selection',
+            "query-transformation opener",
+        ),
+        (
+            'fusion machinery of Chapter 8',
+            'fusion machinery of Chapter 10',
+            "query-understanding fusion machinery",
+        ),
+        (
+            '<a href="#neural-ir-broader-than-dense-retrieval">Chapter 8</a> explained',
+            '<a href="#neural-ir-broader-than-dense-retrieval">Chapter 9</a> explained',
+            "diagnostic first-stage methods",
+        ),
+        (
+            '<a href="#why-search-systems-use-multiple-stages">Chapter 8</a>. A first-stage retriever is fast, shallow and broad',
+            '<a href="#why-search-systems-use-multiple-stages">Chapter 9</a>. A first-stage retriever is fast, shallow and broad',
+            "evaluation first-stage contrast",
+        ),
+        (
+            '<a href="#reranking-and-hybrid">Chapter 8</a> introduced four ideas',
+            '<a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> introduced four ideas',
+            "Appendix E four ideas",
+        ),
+        (
+            'method and evaluation detail that Chapter 8 deliberately leaves out',
+            'method and evaluation detail that Chapters 9 and 10 deliberately leave out',
+            "Appendix E omitted detail",
+        ),
+        (
+            '<a href="#llms-as-rerankers">Chapter 8’s LLM discussion</a>',
+            '<a href="#llms-as-rerankers">Chapter 9’s LLM discussion</a>',
+            "Appendix E LLM discussion",
+        ),
+        (
+            '<a href="#ranking-a-useful-set-not-only-relevant-items">Chapter 8 introduces result diversification</a>',
+            '<a href="#ranking-a-useful-set-not-only-relevant-items">Chapter 9 introduces result diversification</a>',
+            "Appendix E diversification",
+        ),
+        (
+            'pipeline from <a href="#why-search-systems-use-multiple-stages">Chapter 8</a>: retrieve a high-recall shortlist cheaply',
+            'pipeline from <a href="#why-search-systems-use-multiple-stages">Chapter 9</a>: retrieve a high-recall shortlist cheaply',
+            "Appendix E production pipeline",
+        ),
+        (
+            'three arrangements of <a href="#reranking-and-hybrid">Chapter 8</a>',
+            'three arrangements of <a href="#reranking-and-hybrid">Chapter 9</a>',
+            "deeper-reading neural arrangements",
+        ),
+        (
+            '<a href="#how-a-contextual-encoder-becomes-a-retrieval-encoder">Chapter 5’s retrieval-training story</a>',
+            '<a href="#how-a-contextual-encoder-becomes-a-retrieval-encoder">Chapter 6’s retrieval-training story</a>',
+            "OOD retrieval-training story",
+        ),
+        (
+            '<a href="#appendix-how-rrf-combines-ranked-lists">Appendix E</a> gives the formula and a worked example.',
+            'The formula and a worked example follow.',
+            "RRF formula now follows",
+        ),
+    ]
+    for old, new, label in replacements:
+        unique_index(document, old, label)
+        document = document.replace(old, new)
+
+    if sorted(set(re.findall(r"%%[A-Z0-9]+%%", document))) != original_tokens:
+        raise RuntimeError("Phase 4 changed structural placeholder tokens")
+    for phrase, expected in baseline["guards"]["exclusion_exact_text_counts"].items():
+        if document.count(phrase) != expected:
+            raise RuntimeError("exclusion changed: %r" % phrase)
+    if document.count("Appendix F") != 13:
+        raise RuntimeError("Phase 4 changed the 13 textual Appendix F strings")
+    validate_common(document, baseline, require_app_f_exact=False)
+    print("judged substitutions:", len(replacements))
+    return document
+
+
+def replace_nested_list(document: str, list_id: str, inner: str) -> str:
+    opening = '<ol id="%s">' % list_id
+    start = unique_index(document, opening, list_id) + len(opening)
+    depth = 1
+    for match in re.finditer(r"<ol\b[^>]*>|</ol>", document[start:]):
+        depth += -1 if match.group(0) == "</ol>" else 1
+        if depth == 0:
+            return document[:start] + inner + document[start + match.start() :]
+    raise RuntimeError("unclosed TOC list: " + list_id)
+
+
+def top_level_sections(document: str, low: int, high: int) -> list[tuple[int, int, str]]:
+    result = []
+    depth = 0
+    start = None
+    opening = None
+    for match in re.finditer(r"<section\b([^>]*)>|</section>", document[low:high]):
+        if match.group(0).startswith("</"):
+            depth -= 1
+            if depth == 0 and start is not None:
+                result.append((start, low + match.end(), opening or ""))
+        else:
+            if depth == 0:
+                start = low + match.start()
+                opening = match.group(1)
+            depth += 1
+    return result
+
+
+def attr(opening: str, name: str) -> str:
+    match = re.search(r'%s="([^"]*)"' % name, opening)
+    return match.group(1) if match else ""
+
+
+def visible_heading(raw: str) -> str:
+    raw = re.sub(r'<a aria-label[^>]*class="heading-anchor"[^>]*>#</a>\s*$', "", raw)
+    raw = re.sub(r"<[^>]+>", "", raw)
+    return re.sub(r"\s+", " ", html.unescape(raw)).strip()
+
+
+def regenerate_tocs(document: str) -> str:
+    article_start = unique_index(document, '<article id="article">', "article")
+    article_end = unique_index(document, '<section class="footnotes">', "footnotes")
+    rows = []
+    appendix_index = 0
+    for start, end, opening in top_level_sections(document, article_start, article_end):
+        classes = attr(opening, "class")
+        section_id = attr(opening, "id")
+        block = document[start:end]
+        h2 = re.search(r'<h2[^>]*\bid="([^"]+)"[^>]*>(.*?)</h2>', block, re.S)
+        if "part-divider" in classes:
+            tag = re.search(r'<p class="part-tag">(.*?)</p>', block, re.S)
+            title = re.search(r"<h2[^>]*>(.*?)</h2>", block, re.S)
+            shown_tag = visible_heading(tag.group(1)) if tag else ""
+            shown_title = visible_heading(title.group(1)) if title else ""
+            shown = shown_tag if "backmatter-divider" in classes else shown_tag + " · " + shown_title
+            rows.append('<li class="toc-part"><a href="#%s">%s</a></li>' % (section_id, shown))
+            continue
+        if "exercise" in classes:
+            title = re.search(r"<h2[^>]*>(.*?)</h2>", block, re.S)
+            shown = visible_heading(title.group(1)).split("—")[0].strip()
+            rows.append('<li class="toc-ex"><a href="#%s">%s</a></li>' % (section_id, shown))
+            continue
+        if not h2:
+            continue
+        eyebrow = re.search(r'<p class="chapter-eyebrow">(.*?)</p>', block, re.S)
+        eyebrow_text = visible_heading(eyebrow.group(1)) if eyebrow else ""
+        if "appendix" in classes:
+            appendix_index += 1
+            eyebrow_text = "Appendix " + chr(64 + appendix_index)
+        subs = []
+        if "chapter" in classes and "backsection" not in classes:
+            hidden = [(m.start(), m.end()) for m in re.finditer(r'<(figure|aside|details)\b.*?</\1>', block, re.S)]
+            for h3 in re.finditer(r'<h3[^>]*\bid="([^"]+)"[^>]*>(.*?)</h3>', block, re.S):
+                if "group-title" in h3.group(0) or any(a <= h3.start() < b for a, b in hidden):
+                    continue
+                subs.append('<li class="toc-sec"><a href="#%s">%s</a></li>' %
+                            (h3.group(1), visible_heading(h3.group(2))))
+        data = ' data-ch="%s"' % section_id[4:] if section_id.startswith("sec-") else ""
+        title = visible_heading(h2.group(2))
+        inner = "<em>%s</em>%s" % (eyebrow_text, title) if eyebrow_text else title
+        sublist = '<ol class="toc-subs">%s</ol>' % "".join(subs) if subs else ""
+        rows.append('<li class="toc-ch"%s><a href="#%s">%s</a>%s</li>' %
+                    (data, h2.group(1), inner, sublist))
+    toc = "".join(rows)
+    document = replace_nested_list(document, "toc-list", toc)
+    return replace_nested_list(document, "mobile-toc-list", toc)
+
+
+def phase5(document: str, baseline: dict) -> str:
+    """Resolve numbering and rebuild machine-owned structural surfaces."""
+    with open(PHASE4_AUDIT, encoding="utf-8") as handle:
+        phase4_audit = json.load(handle)
+    current_hash = hashlib.sha256(document.encode("utf-8")).hexdigest()
+    if current_hash != phase4_audit["metadata"]["sha256"]:
+        raise RuntimeError("Phase 5 input does not match the Phase 4 snapshot")
+
+    chapters = [
+        ("sec-intro", 1, 13), ("sec-boolean-admission", 2, 13),
+        ("sec-bm25-ranking", 3, 11), ("sec-beyond-boolean", 4, 10),
+        ("sec-embeddings", 5, 14), ("sec-retrieval-encoder", 6, 8),
+        ("sec-dense-at-scale", 7, 16), ("sec-representations-and-units", 8, 15),
+        ("sec-reranking-and-hybrid", 9, 19), ("sec-hybrid-and-fusion", 10, 6),
+        ("sec-query-transformation", 11, 19), ("sec-agentic-search", 12, 21),
+        ("sec-diagnosing-failure", 13, 17), ("sec-evaluation", 14, 20),
+        ("sec-library-practice", 15, 18),
+    ]
+    for section_id, number, minutes in chapters:
+        start, end = section_range(document, section_id)
+        block = document[start:end]
+        block, eyebrow_count = re.subn(
+            r'(<p class="chapter-eyebrow">)Chapter\s+(?:\d+|%%NEW\d+%%)(</p>)',
+            r"\g<1>Chapter %d\g<2>" % number,
+            block,
+            count=1,
+        )
+        if eyebrow_count != 1:
+            raise RuntimeError("Phase 5 could not set eyebrow for " + section_id)
+        block, time_count = re.subn(
+            r'(<p class="chapter-meta">)About\s+(?:\d+|%%TIME\d+%%)\s+min(</p>)',
+            r"\g<1>About %d min\g<2>" % minutes,
+            block,
+            count=1,
+        )
+        if time_count != 1:
+            raise RuntimeError("Phase 5 could not set reading time for " + section_id)
+        document = document[:start] + block + document[end:]
+
+    stage_replacements = [
+        ("Chapter 9 — the words you typed may be rewritten, expanded or split before retrieval sees them.",
+         "Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them."),
+        ("Chapter 9 — retrieval inputs may be rewritten, expanded or constructed again before a retrieval pass.",
+         "Chapter 11 — retrieval inputs may be rewritten, expanded or constructed again before a retrieval pass."),
+        ("Chapters 3 and 5–7 — one fast pass over the whole collection produces the candidate set.",
+         "Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set."),
+        ('href="#reranking-and-hybrid" title="Chapter 8 — several candidate lists are combined into one."',
+         'href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one."'),
+        ("Chapter 8 — a shortlist is compared again, more carefully than collection scale allowed.",
+         "Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed."),
+        ("Chapter 13 — what the reader is finally shown, and what can be recorded about it.",
+         "Chapter 15 — what the reader is finally shown, and what can be recorded about it."),
+        ("Chapter 13, in Part III — what the reader is finally shown, and what can be recorded about it.",
+         "Chapter 15, in Part III — what the reader is finally shown, and what can be recorded about it."),
+        ("Chapter 9 — what a system may infer from your request, change about it, and where it sends the result.",
+         "Chapter 11 — what a system may infer from your request, change about it, and where it sends the result."),
+        ("Chapter 7 — what one stored item actually is, and how finely the collection was cut up.",
+         "Chapter 8 — what one stored item actually is, and how finely the collection was cut up."),
+        ("Chapters 5 to 7 — the encoder, the search over a whole collection, and the representation underneath both.",
+         "Chapters 5 to 8 — the encoder, the search over a whole collection, and the representation underneath both."),
+        ('<span class="stage-ch">Ch 9</span>', '<span class="stage-ch">Ch 11</span>'),
+        ('<span class="stage-ch">Ch 7</span>', '<span class="stage-ch">Ch 8</span>'),
+        ('<span class="stage-ch">Ch 5–7</span>', '<span class="stage-ch">Ch 5–8</span>'),
+    ]
+    for item in stage_replacements:
+        old, new = item[:2]
+        expected = item[2] if len(item) == 3 else None
+        count = document.count(old)
+        if count == 0 or (expected is not None and count != expected):
+            raise RuntimeError("Phase 5 stage-map match count for %r is %d" % (old, count))
+        document = document.replace(old, new)
+    fusion_badge = 'Fusion<span class="stage-ch">Ch 8</span>'
+    unique_index(document, fusion_badge, "Part II fusion badge")
+    document = document.replace(fusion_badge, 'Fusion<span class="stage-ch">Ch 10</span>')
+    rerank_badge = 'Reranking<span class="stage-ch">Ch 8</span>'
+    unique_index(document, rerank_badge, "Part II reranking badge")
+    document = document.replace(rerank_badge, 'Reranking<span class="stage-ch">Ch 9</span>')
+
+    old_part2 = ('Part II builds the pipeline from the middle outwards. Chapters 5 to 7 construct a retriever that '
+                 'compares learnt representations instead of strings; Chapter 8 opens the stored object both of them '
+                 'assume; <a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> add '
+                 'the stages that run after a candidate set exists; and Chapter 11 returns to what happens to your '
+                 'query before any of it starts.')
+    new_part2 = ('Part II builds the pipeline from the middle outwards. Chapters 5 to 8 move from learnt geometry to '
+                 'a retrieval encoder, collection-scale search and the indexed units underneath them; Chapters 9 and '
+                 '10 divide the later work between reranking and combining candidate lists; and Chapter 11 returns '
+                 'to what happens to your query before any of it starts.')
+    unique_index(document, old_part2, "Part II overview")
+    document = document.replace(old_part2, new_part2)
+    unique_index(document, "Reading time: about 95 min", "Part II reading time")
+    document = document.replace("Reading time: about 95 min", "Reading time: about 97 min")
+
+    exercise2_old = "Part II assembled a pipeline: query interpretation and transformation, first-stage retrieval, fusion, reranking and presentation."
+    exercise2_new = "Across Chapters 5 to 11, Part II assembled a pipeline: query interpretation and transformation, first-stage retrieval, fusion, reranking and presentation."
+    unique_index(document, exercise2_old, "Exercise II Part II description")
+    document = document.replace(exercise2_old, exercise2_new)
+    unique_index(document, "the bi-encoders of Chapters 5–7", "Appendix A chapter range")
+    document = document.replace("the bi-encoders of Chapters 5–7", "the bi-encoders of Chapters 5–8")
+
+    document = regenerate_tocs(document)
+    if "%%" in document:
+        raise RuntimeError("Phase 5 left unresolved placeholder tokens")
+    validate_common(document, baseline, require_app_f_exact=False)
+    print("chapter structural records:", len(chapters))
+    return document
+
+
+def replace_in_section(document: str, section_id: str, old: str, new: str, label: str) -> str:
+    start, end = section_range(document, section_id)
+    block = document[start:end]
+    unique_index(block, old, label)
+    block = block.replace(old, new)
+    return document[:start] + block + document[end:]
+
+
+def phase6(document: str, baseline: dict) -> str:
+    """Fill the split-chapter prose placeholders, retaining review markers."""
+    with open(PHASE5_AUDIT, encoding="utf-8") as handle:
+        phase5_audit = json.load(handle)
+    current_hash = hashlib.sha256(document.encode("utf-8")).hexdigest()
+    if current_hash != phase5_audit["metadata"]["sha256"]:
+        raise RuntimeError("Phase 6 input does not match the Phase 5 snapshot")
+    eol = "\r\n" if "\r\n" in document else "\n"
+
+    document = replace_in_section(
+        document, "sec-embeddings", "</ol>" + eol + "<!-- TODO-PROSE -->",
+        ("<li>Context changes a token’s representation, but contextualisation alone does not decide what evidence "
+         "retrieval should reward.</li><li>Pretraining supplies broad language patterns; domain pretraining changes "
+         "the text and vocabulary behind those patterns; neither by itself creates a retriever.</li><li>A model name "
+         "such as BERT therefore leaves both its task training and its place in the search pipeline unknown.</li></ol>" +
+         eol + "<!-- TODO-PROSE-REVIEW -->" + eol +
+         '<p class="chapter-transition">The encoder now exists, but it is not yet retrieval infrastructure. Chapter 6 turns its contextual representations into comparable query and document vectors, and asks which training examples make closeness mean relevance rather than merely linguistic similarity.</p>'),
+        "Chapter 5 closing",
+    )
+    document = replace_in_section(
+        document, "sec-embeddings",
+        '<p class="self-check-label">Check yourself</p><!-- TODO-PROSE -->',
+        ('<p class="self-check-label">Check yourself</p>' + eol +
+         '<!-- TODO-PROSE-REVIEW -->' + eol +
+         '<details class="self-check-q"><summary>BERT produces contextual representations. Why does that not make generic BERT a retriever?</summary><p>Contextualisation lets a token representation depend on surrounding words, but masked-language pretraining does not teach independently encoded queries and passages to rank together. Retrieval needs an architecture and task training whose positives, negatives and labels reward the relationships the search should recover.</p></details>' + eol +
+         '<!-- TODO-PROSE-REVIEW -->' + eol +
+         '<details class="self-check-q"><summary>A vendor says its search “uses BERT”. Which two questions remain unanswered?</summary><p>Ask how the model was trained for the retrieval task and where it sits in the pipeline. The same model family can interpret or transform a query, encode first-stage candidates, or compare an existing shortlist as a reranker.</p></details>'),
+        "Chapter 5 self-checks",
+    )
+    document = replace_in_section(
+        document, "sec-retrieval-encoder", '<div class="chapter-orient"><!-- TODO-PROSE --></div>',
+        ('<div class="chapter-orient"><!-- TODO-PROSE-REVIEW -->' + eol +
+         '<p>Chapter 5 ended with a contextual language model and two unanswered retrieval questions: what should one vector represent, and what training makes nearby vectors useful for search? This chapter follows those decisions from model tokens through pooling, separate query and document encoding, similarity, and retrieval-oriented examples.</p>' + eol +
+         '<p>The <code>delulu</code> example remains a teaching case, not evidence that a pretrained model already understands the query. Its point is to make the desired ranking explicit. Positive pairs, hard negatives and labels must teach the encoder that the relevant passage addresses unrealistic expectations while the superficially similar passage does not. Only then can the resulting vectors become retrieval infrastructure that a collection-scale index can use.</p></div>'),
+        "Chapter 6 opening",
+    )
+    document = replace_in_section(
+        document, "sec-reranking-and-hybrid", "</ol>" + eol + "<!-- TODO-PROSE -->",
+        ("<li>Joint encoding, late interaction and learnt sparse retrieval preserve different amounts of query–document "
+         "evidence and can occupy different pipeline stages.</li></ol>" + eol +
+         "<!-- TODO-PROSE-REVIEW -->" + eol +
+         '<p class="chapter-transition">A later stage can spend more computation, but only on candidates an earlier stage admitted. Chapter 10 turns to a different design decision: running more than one candidate-generation route, deciding whether to blend or route them, and combining ranked lists whose scores may not share a scale.</p>'),
+        "Chapter 9 closing",
+    )
+    document = replace_in_section(
+        document, "sec-reranking-and-hybrid", "<!-- TODO-PROSE -->" + eol + "</section>",
+        ('<!-- TODO-PROSE-REVIEW -->' + eol +
+         '<details class="self-check-q"><summary>Why can a stronger reranker improve precision without raising the recall ceiling set by the first stage?</summary><p>The reranker receives a fixed shortlist and can only reorder its members. Better comparisons may move relevant candidates upwards, improving the visible ranking, but a relevant record omitted by every candidate-generation route is unavailable to every later stage.</p></details>' + eol + "</section>"),
+        "Chapter 9 second self-check",
+    )
+    document = replace_in_section(
+        document, "sec-hybrid-and-fusion", '<div class="chapter-orient"><!-- TODO-PROSE --></div>',
+        ('<div class="chapter-orient"><!-- TODO-PROSE-REVIEW -->' + eol +
+         '<p>Choosing retrievers and combining their answers are separate design decisions. A lexical route may preserve an identifier that a dense representation blurs; a dense route may recover a paraphrase that shares no useful indexed term. Running both creates two candidate lists, not one answer. The system must still decide which routes run, how deep each list is, how duplicate records are treated, and how evidence from unlike scoring scales becomes one order.</p>' + eol +
+         '<p>This chapter separates <em>blending</em> from <em>routing</em>. A blend runs prescribed routes and combines their outputs; a route chooses which path or paths to use for this query. It then treats reciprocal rank fusion as a deliberately simple baseline: RRF uses positions rather than incompatible raw scores, rewards agreement near the top, and exposes the cut-offs and weighting choices that a label such as “hybrid search” otherwise hides.</p></div>'),
+        "Chapter 10 opening",
+    )
+    old_transition = '<p class="chapter-transition">Routing is a retrieval-control decision, not a query transformation and not by itself evidence of agency. The next chapter separates what a system interprets, what it changes and where it sends the result.</p>'
+    new_transition = ('<!-- TODO-PROSE-REVIEW -->' + eol +
+        '<p class="chapter-transition">Hybrid retrieval is not a quality guarantee. Its result depends on the evidence each route preserves, the candidate depth allowed to each, and the rule used to combine them. RRF is a useful neutral baseline because it avoids pretending unlike scores are commensurable, but its rank-only view also discards score gaps and inherits every input cut-off. Routing adds another decision: which evidence was allowed to compete at all. Chapter 11 therefore separates interpretation, transformation and routing before Chapter 12 asks who chooses the next action.</p>')
+    document = replace_in_section(document, "sec-hybrid-and-fusion", old_transition, new_transition,
+                                  "Chapter 10 closing")
+
+    app_e_open = '<p><a href="#reranking-and-hybrid">Chapters 9</a> and <a href="#hybrid-and-fusion">10</a> introduced four ideas'
+    document = replace_in_section(document, "app-E", app_e_open,
+                                  '<!-- TODO-PROSE-REVIEW -->' + eol + app_e_open,
+                                  "Appendix E revised introduction")
+
+    recap_anchor = ('<p><a href="#three-familiar-search-results-and-three-puzzles">The three opening puzzles</a> '
+                    'are worth reading as a set')
+    recap_insert = (
+        '<!-- TODO-PROSE-REVIEW -->' + eol +
+        '<p><a href="#embeddings">Chapter 5</a> and <a href="#retrieval-encoder">Chapter 6</a> now let you ask two '
+        'questions where one vague claim about embeddings used to suffice: what relationships the learnt geometry '
+        'encodes, and what architecture, pooling and retrieval training turn that geometry into a searchable index? '
+        'A product that answers only the first has not yet described its retriever.</p>' + eol +
+        '<!-- TODO-PROSE-REVIEW -->' + eol +
+        '<p><a href="#reranking-and-hybrid">Chapter 9</a> and <a href="#hybrid-and-fusion">Chapter 10</a> likewise '
+        'separate spending more computation on one shortlist from combining several candidate-generation routes. '
+        'You can now ask what retrieved each candidate, what the cut-offs excluded, whether routes were blended or '
+        'selected, and whether fusion used ranks, normalised scores or a learnt rule.</p>' + eol + recap_anchor
+    )
+    unique_index(document, recap_anchor, "What you can now ask insertion")
+    document = document.replace(recap_anchor, recap_insert)
+
+    document = finalize_phase6_times(document)
+    unique_index(document, "Three parts, thirteen chapters", "hero chapter count")
+    document = document.replace("Three parts, thirteen chapters", "Three parts, fifteen chapters")
+    document = reorder_asset_index(document, "table-index", "Table")
+
+    if "<!-- TODO-PROSE -->" in document:
+        raise RuntimeError("Phase 6 left an unreviewed Phase 1 prose placeholder")
+    if document.count("<!-- TODO-PROSE-REVIEW -->") != 11:
+        raise RuntimeError("Phase 6 expected 11 review markers")
+    validate_common(document, baseline, require_app_f_exact=False)
+    print("review markers:", document.count("<!-- TODO-PROSE-REVIEW -->"))
+    return document
+
+
+def finalize_phase6_times(document: str) -> str:
+    document = replace_in_section(document, "sec-embeddings", "About 14 min", "About 15 min",
+                                  "Chapter 5 final reading time")
+    document = replace_in_section(document, "sec-hybrid-and-fusion", "About 6 min", "About 7 min",
+                                  "Chapter 10 final reading time")
+    unique_index(document, "Reading time: about 97 min", "Part II final reading time")
+    return document.replace("Reading time: about 97 min", "Reading time: about 99 min")
+
+
+def reorder_asset_index(document: str, list_id: str, kind: str) -> str:
+    opening = '<ol id="%s">' % list_id
+    start = unique_index(document, opening, list_id) + len(opening)
+    end = document.index("</ol>", start)
+    inner = document[start:end]
+    items = re.findall(r"<li><a href=\"#([^\"]+)\">.*?</li>", inner, re.S)
+    blocks = re.findall(r"<li><a href=\"#[^\"]+\">.*?</li>", inner, re.S)
+    if len(items) != len(blocks) or len(items) != len(set(items)):
+        raise RuntimeError("asset index entries are missing or duplicated: " + list_id)
+    by_id = dict(zip(items, blocks))
+    if kind == "Table":
+        expected = re.findall(r'<p class="asset-label[^"]*" id="([^"]+)">Table\s+[0-9A-Z]+\.\d+', document)
+    else:
+        expected = re.findall(r'<span class="asset-label-inline[^"]*" id="([^"]+)">Figure\s+[0-9A-Z]+\.\d+', document)
+    if set(expected) != set(items):
+        raise RuntimeError("asset index membership differs from physical labels: " + list_id)
+    return document[:start] + "".join(by_id[item] for item in expected) + document[end:]
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("phase", choices=("phase1", "phase2", "phase3", "phase4", "phase5", "phase6", "phase6times", "phase6indexes"))
+    parser.add_argument("--dry-run", action="store_true")
+    args = parser.parse_args()
+
+    raw, document = read_bytes(BOOK)
+    with open(BASELINE, encoding="utf-8") as handle:
+        baseline = json.load(handle)
+
+    if args.phase == "phase1":
+        updated = phase1(document, baseline)
+    elif args.phase == "phase2":
+        updated = phase2(document, baseline)
+    elif args.phase == "phase3":
+        updated = phase3(document, baseline)
+    elif args.phase == "phase4":
+        updated = phase4(document, baseline)
+    elif args.phase == "phase5":
+        updated = phase5(document, baseline)
+    elif args.phase == "phase6":
+        updated = phase6(document, baseline)
+    elif args.phase == "phase6times":
+        updated = finalize_phase6_times(document)
+    elif args.phase == "phase6indexes":
+        updated = reorder_asset_index(document, "table-index", "Table")
+    else:
+        raise AssertionError(args.phase)
+
+    before_hash = hashlib.sha256(raw).hexdigest()
+    updated_raw = updated.encode("utf-8")
+    after_hash = hashlib.sha256(updated_raw).hexdigest()
+    print("phase:", args.phase)
+    print("bytes:", len(raw), "->", len(updated_raw))
+    print("sha256:", before_hash, "->", after_hash)
+    print("mode:", "dry-run" if args.dry_run else "write")
+    if not args.dry_run:
+        with open(BOOK, "wb") as handle:
+            handle.write(updated_raw)
+
+
+if __name__ == "__main__":
+    main()
