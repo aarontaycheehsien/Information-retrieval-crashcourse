@@ -145,6 +145,7 @@
 
     <h3>A thirteen-week course</h3>
     <p>Cover all fifteen chapters in thirteen weeks by pairing Chapters 5–6 in one week and Chapters 9–10 in another. Keep one chapter per week elsewhere. Pair Appendix A (Transformers) with Chapter 6; Appendix B (tokenisation) with Chapters 5–6; Appendix C (index execution) with Chapters 2–3; Appendix D (terminology) with Chapter 15 or keep it open throughout; and Appendix E (learning to rank) with Chapters 9–10. Treat <a href="search-textbook.html#appendix-evidence-synthesis-high-recall-retrieval">Appendix F</a> as required for evidence-synthesis cohorts alongside Chapters 13–15. Appendix G is an optional application of the pipeline to RAG after Chapter 12.</p>
+    <p>The three application exercises remain the summative assessment, one per part, which leaves ten weeks without one. Two things fill that gap without inventing new material. The <em>Check yourself</em> questions closing every chapter work as a weekly formative check — they are short, they have answers, and printing reveals them. And the re-verification task in the last section of these notes deserves promoting from an aside to an assessed piece: there are eight items in that table, so a cohort of any size can be given one each, asked to check it against current vendor documentation, and asked to report what changed and how they established it. It teaches the documentation-reading skill the whole book depends on, it produces something the next cohort can use, and it is the one assignment that cannot be answered from the book alone. For evidence-synthesis cohorts, Appendix F’s controlled TAR comparison is a fourth assessable task; guidance for marking it is with the exercises below.</p>
     <p>This shape leaves room for the thing the book cannot supply: students running searches in systems your institution actually licenses, and reporting back. Chapters 13, 14 and 15 are considerably more useful to someone who has spent a week failing to make a discovery layer behave.</p>
 
     <h2>Using the two labs</h2>
@@ -170,6 +171,13 @@
     <p><strong>Tests:</strong> diagnosis using Chapter 13’s workflow, a measurement from Chapter 14, and the record from Chapter 15.</p>
     <p><strong>A strong answer</strong> applies the remedy the diagnosis implies rather than the one the student would have reached for first, and reports honestly when it did not work. The second deliverable — a list of everything the product would not let them record — is the institutionally useful half, and worth weighting accordingly.</p>
     <p><strong>Common wrong turn:</strong> treating Chapter 13’s diagnostic lenses as four equivalent categories, or diagnosing every failure as vocabulary mismatch because that is the relationship librarians are most accustomed to seeing.</p>
+
+    <h3>Appendix F’s controlled TAR comparison — for evidence-synthesis cohorts</h3>
+    <p>Not one of the three application exercises, but the only assessable task aimed squarely at the cohort for whom Appendix F is core reading. It fixes a labelled corpus, varies the feature representation between two active learners, and applies four stopping procedures to the same runs.</p>
+    <p><strong>Tests:</strong> whether the student can separate an effect of the representation from an effect of the stopping rule. Those are different mechanisms and the exercise is built so they can be told apart.</p>
+    <p><strong>A strong answer</strong> attributes recall differences to the stopping rule rather than the feature extractor where the evidence supports that, reports for each simulated stop how many known relevant records were left unseen, and says plainly that a live review cannot inspect that tail without doing the work it hoped to save. The numerical thresholds in the appendix are experimental conditions, not recommendations, and a strong answer says so.</p>
+    <p><strong>Common wrong turn:</strong> reading a WSS@95 improvement as evidence that a live reviewer could have stopped safely. It measures ranking efficiency against a labelled set at a fixed target; it says nothing about knowing when that target has been reached.</p>
+    <p><strong>Without coding:</strong> the appendix describes a non-coding route, and most cohorts will take it. Give students screening logs from two prepared runs, have them plot relevant records found against records screened, and compare at fixed screening budgets. The four marking criteria below apply unchanged.</p>
 
     <h2>Worked responses and a short rubric</h2>
 <p>These examples illustrate reasoning, not observations about a particular live product.</p>
@@ -225,7 +233,7 @@
       </tbody>
     </table></div>
 
-    <p>A useful exercise in itself: assign a student the job of re-checking one of these tables against current vendor documentation and reporting what changed. It teaches the documentation-reading skill the whole book depends on, and it dates the material for you.</p>
+    <p>Handing these rows out one per student is also the assessed task suggested for the thirteen-week course above. It dates the material for you, and the filled-in table is worth more to the next cohort than another essay would be.</p>
 
     <h2>Figures, and reusing them in slides</h2>
 
