@@ -6,10 +6,11 @@ this is mainly a proposal document: most of it asks for substantive additions
 and structural changes that need an author decision before anyone edits the
 source of truth.
 
-**Status.** The items marked **Applied** below have been made: the five that
-needed no decision, plus the Chapter 12 apparatus (§4.4) once the author
-supplied its source. Everything else is still a proposal. Each applied item is
-marked at its own heading, so this file stays usable as a working list.
+**Status.** Fifteen items marked **Applied** below have been made: the five that
+needed no decision, the Chapter 12 apparatus (§4.4) once the author supplied its
+source, and a further eight approved as a batch because none of them changes an
+argument. Everything else is still a proposal. Each applied item is marked at its
+own heading, so this file stays usable as a working list.
 
 ## What was checked, and what passed
 
@@ -55,14 +56,14 @@ arithmetic or link rot.
 | # | Change | Where | Effort |
 |---|---|---|---|
 | 1 | Give appendices the chapter furniture they lack: Previous/Next navigation, and *Check yourself* for D, E, F and G | All appendices | Medium |
-| 2 | Recalibrate the appendix reading times, or document the convention | Appendices F (29 min) and G (12 min) | Small |
+| 2 | ~~Recalibrate the appendix reading times, or document the convention~~ **Applied** | Appendices F (29 min) and G (12 min) | Small |
 | 3 | Rerun Appendix B's worked example on a string that actually splits | Appendix B, Figure B.1 | Small |
 | 4 | Add a `top-k` boundary control to the BM25 lab | `bm25-evidence-lab.html` | Medium |
-| 5 | Add Table 14.3: one filled-in row of a local evaluation set | Chapter 14 | Small |
+| 5 | ~~Add Table 14.3: one filled-in row of a local evaluation set~~ **Applied** | Chapter 14 | Small |
 | 6 | Draw the RAG Fusion pipeline as Figure G.1 | Appendix G | Medium |
 | 7 | ~~Fix two links that resolve to a "this moved" stub rather than to the content~~ **Applied** | Appendices D and E | Trivial |
 | 8 | ~~Give Chapter 12's Primo experiment the evidentiary apparatus the rest of the book uses~~ **Applied** | Chapter 12 | Small |
-| 9 | Add a cost, quota and deprecation question to the procurement checklist | Chapter 15 | Small |
+| 9 | ~~Add a cost, quota and deprecation question to the procurement checklist~~ **Applied** | Chapter 15 | Small |
 | 10 | ~~Cross-link Appendix C and the BM25 lab in both directions~~ **Applied** | Appendix C, `bm25-evidence-lab.html` | Trivial |
 
 ---
@@ -106,7 +107,7 @@ Three candidate questions for Appendix F, to show the register:
 > *Which of the three boundaries in Figure F.3 can a downstream stage repair?*
 > None. Each is upstream of everything that follows it.
 
-### 1.2 Two appendix reading times are out by roughly a factor of two
+### 1.2 Two appendix reading times are out by roughly a factor of two — **Applied**
 
 Measured against visible word counts, the book's reading-time convention is
 tight: fifteen chapters plus the Preface run at 199–270 words per minute, median
@@ -265,7 +266,7 @@ I was unable to confirm DOIs for these from this environment — the available
 literature tool returned a Wiley-only corpus with nothing relevant — so treat
 these as leads to check, not as verified references.
 
-### 1.8 Appendix F: three smaller points
+### 1.8 Appendix F: three smaller points — **Table F.3 applied; the other two open**
 
 **Deduplication is treated as bookkeeping when it is a fourth boundary.** The
 appendix lists "deduplication and any removal or enrichment before screening"
@@ -311,7 +312,7 @@ seven words. The parallel-training-under-a-causal-mask correction is worth
 making, but it is prose, not a table cell, and it currently destroys the
 table's scannability.
 
-### 1.10 PubMed gets one sentence where Semantic Scholar gets a five-row table
+### 1.10 PubMed gets one sentence where Semantic Scholar gets a five-row table — **Applied**
 
 Appendix E gives the 2020 Semantic Scholar system a full worked table (Table
 E.4) and PubMed a single sentence: "BM25 supplies 500 candidates and LambdaMART
@@ -405,7 +406,7 @@ turns from a warning into the book's argument. It is the same admission-versus-
 ranking distinction the BM25 lab teaches, arriving in the dense setting where
 students least expect it.
 
-### 2.5 The vector lab's dot-product step is knife-edge
+### 2.5 The vector lab's dot-product step is knife-edge — **Applied**
 
 Step 3 demonstrates magnitude outweighing angle with A at 1.736 against B at
 1.798 — a 3.6% margin. The claim is correct and the test suite guards it, but a
@@ -567,7 +568,7 @@ The two strongest candidates:
   query → candidate source → matched evidence → scoring → fusion → trajectory.
   It is currently a seven-item bullet list of exactly this sequence.
 
-### 4.2 Chapter 14 tells the reader to build an evaluation set and shows them no example
+### 4.2 Chapter 14 tells the reader to build an evaluation set and shows them no example — **Applied**
 
 *What you can now ask* ends on it: "If you do one thing with it, make it the
 evaluation set." Chapter 14 gives the recipe — thirty to fifty queries, known
@@ -588,7 +589,7 @@ One row is enough. It shows that the probe type is a column, that runs are
 compared side by side, that the note records *why* rather than *what*, and that
 the whole thing fits in a spreadsheet.
 
-### 4.3 The same gap for per-query analysis
+### 4.3 The same gap for per-query analysis — **Applied**
 
 Chapter 14 makes per-query difference its central practical advice — "The
 per-query differences are where the information is: a handful of queries that
@@ -653,7 +654,7 @@ The model-tier claim checked out and is now specific: a mini model at low
 reasoning effort against the frontier model at extra-high effort, with little
 difference in output.
 
-### 4.5 Chapter 15's procurement checklist asks nothing about cost, quota or deprecation
+### 4.5 Chapter 15's procurement checklist asks nothing about cost, quota or deprecation — **Applied**
 
 Table 12.4 makes "Cost and speed" the *first* row of the agency trade: agentic
 search is "slower and dearer. A model is invoked to choose, and often to justify,
@@ -691,7 +692,7 @@ that is a real hole. Two adjacent gaps in the same list:
 > given? A search documented under a mode that no longer exists is not
 > reproducible in any sense the library can act on.
 
-### 4.6 Table 15.1 flattens the distinction Chapter 12 exists to draw
+### 4.6 Table 15.1 flattens the distinction Chapter 12 exists to draw — **Applied**
 
 Table 15.1, the four-row summary a librarian will actually copy, has a row
 labelled "Agentic control". Chapter 12 spends its first third establishing that
@@ -709,7 +710,7 @@ the observations returned, the sequence and the stopping point.* Otherwise the
 record cannot distinguish a workflow whose branch varied from one whose sequence
 was planned — which is the distinction the whole chapter was written to enable.
 
-### 4.7 Chapter 13's eligibility checks are prose where they should be a checklist
+### 4.7 Chapter 13's eligibility checks are prose where they should be a checklist — **Applied**
 
 Chapter 13 is explicit that eligibility comes first: "Before any of that,
 establish that the record could have been returned at all." What follows is a
@@ -750,10 +751,21 @@ the test fixture bounds, the Appendix E retitle. All were small and none
 changed an argument. `maintain.py`, `renumber_footnotes.py` and `test-labs.cjs`
 all pass afterwards, and both tables of contents were rebuilt for the retitle.
 
-**Needs an author decision on scope** (items 1, 2, 3, 5, 9): appendix navigation
-and self-checks, the reading-time recalibration, the Appendix B example, Table
-14.3, the procurement additions. Each is confined to one section, and each closes
-a gap the book's own standards create.
+**Needs an author decision on scope** (items 1 and 3): appendix navigation and
+self-checks, and the Appendix B example, which is waiting on tokeniser output.
+
+**Applied as a batch of eight**, none of which changes an argument: the reading
+times (§1.2), Table F.3's redundant rows (§1.8), PubMed in Appendix E (§1.10),
+the vector lab's dot-product margin (§2.5), Table 14.3 and its per-query note
+(§4.2, §4.3), the sixth procurement group (§4.5), Table 15.1's control row (§4.6)
+and Chapter 13's eligibility pre-check (§4.7).
+
+Three decisions taken inside that batch, each reversible: reading times were
+recalculated rather than the convention documented; Appendix E was left at 19
+minutes, since 179 wpm is close to the band's floor and its tables and formulas
+plausibly justify the rest; and the procurement additions became a sixth group
+rather than being folded into an existing one, which required renumbering the
+last group from 15 to 17.
 
 **Larger, worth a separate pass** (items 4 and 6, plus §1.4, §4.1): the lab's
 top-k control, Figure G.1, Appendix D's filter, and the Part III figures. These
