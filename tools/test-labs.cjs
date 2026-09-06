@@ -41,7 +41,23 @@ for(const [term,winner] of [['unrealistic','B'],['foolish','F']]){
 reset();b.state.query='unrealistic foolish';a=b.analyse();assert.equal(a.stats.unrealistic.idf,a.stats.foolish.idf);
 reset();b.state.b=0;const score=doc(b.analyse(),'A').total;b.state.pad=8;assert.equal(doc(b.analyse(),'A').total,score);
 const vector=read('vector-similarity-lab.html');
-const controls={angle:{min:'-170',max:'170'},magnitude:{min:'.25',max:'2.5'}};
+// Slider bounds come from the page, not from this file, so the fixture cannot
+// drift away from the lab the way it had.
+const bound=(id,attr)=>{
+  const m=new RegExp('<input[^>]*id="'+id+'"[^>]*'+attr+'="([^"]*)"').exec(vector);
+  assert.ok(m,'no '+attr+' on #'+id);
+  return m[1];
+};
+const controls={
+  angle:{min:bound('angle','min'),max:bound('angle','max')},
+  magnitude:{min:bound('magnitude','min'),max:bound('magnitude','max')}
+};
+// Two bounds the page's own prose depends on: the appendix says 180 degrees is
+// "exactly opposite, where cosine similarity reaches -1", and the page says it
+// avoids a zero-length vector because its cosine is undefined.
+assert.equal(Number(controls.angle.max),180);
+assert.equal(Number(controls.angle.min),-180);
+assert.ok(Number(controls.magnitude.min)>0);
 const vctx=vm.createContext({document:{getElementById:id=>controls[id]||{},querySelectorAll:()=>[]}});
 const vcode=vector.slice(vector.indexOf('const COLOURS'),vector.indexOf('function setMetric'))
   +vector.slice(vector.indexOf('function barStyle'),vector.indexOf('function renderRanking'))

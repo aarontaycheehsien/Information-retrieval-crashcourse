@@ -1,10 +1,15 @@
 # Appendices, labs, teaching notes and Part III: proposed improvements
 
-Reviewed 6 September 2026 against commit `2675662`, version 1.1. **Nothing here has
-been applied.** Unlike `part-iii-review.md`, which was a consistency pass with
-repairs already made, this is a proposal document: it asks for substantive
-additions and structural changes that need an author decision before anyone
-edits the source of truth.
+Reviewed 6 September 2026 against commit `2675662`, version 1.1. Unlike
+`part-iii-review.md`, which was a consistency pass with repairs already made,
+this is mainly a proposal document: most of it asks for substantive additions
+and structural changes that need an author decision before anyone edits the
+source of truth.
+
+**Status.** The five items marked **Applied** below have been made — they were
+the group that needed no decision. Everything else is still a proposal. Each
+applied item is marked at its own heading, so this file stays usable as a
+working list.
 
 ## What was checked, and what passed
 
@@ -55,10 +60,10 @@ arithmetic or link rot.
 | 4 | Add a `top-k` boundary control to the BM25 lab | `bm25-evidence-lab.html` | Medium |
 | 5 | Add Table 14.3: one filled-in row of a local evaluation set | Chapter 14 | Small |
 | 6 | Draw the RAG Fusion pipeline as Figure G.1 | Appendix G | Medium |
-| 7 | Fix two links that resolve to a "this moved" stub rather than to the content | Appendices D and E | Trivial |
+| 7 | ~~Fix two links that resolve to a "this moved" stub rather than to the content~~ **Applied** | Appendices D and E | Trivial |
 | 8 | Give Chapter 12's Primo experiment the evidentiary apparatus the rest of the book uses | Chapter 12 | Small |
 | 9 | Add a cost, quota and deprecation question to the procurement checklist | Chapter 15 | Small |
-| 10 | Cross-link Appendix C and the BM25 lab in both directions | Appendix C, `bm25-evidence-lab.html` | Trivial |
+| 10 | ~~Cross-link Appendix C and the BM25 lab in both directions~~ **Applied** | Appendix C, `bm25-evidence-lab.html` | Trivial |
 
 ---
 
@@ -184,7 +189,7 @@ hears "hybrid semantic reranking" has to scan four tables.
    "semantic search", "agentic", "generative retrieval" — showing two sources
    using the term differently. Five or six citations would carry the point.
 
-### 1.5 Appendix E's title leads with material that is no longer in it
+### 1.5 Appendix E's title leads with material that is no longer in it — **Applied**
 
 Appendix E is titled "Rank fusion, diversification, learning to rank and
 rerankers". Following the G0 decision, the worked RRF explanation moved to
@@ -196,7 +201,7 @@ explanation of reciprocal rank fusion is now in Chapter 10."
 stand as the distinction they now are (fusion and reranking solve different
 problems) rather than as a placeholder for a section that left.
 
-### 1.6 Two links land on a "this moved" stub instead of the content
+### 1.6 Two links land on a "this moved" stub instead of the content — **Applied**
 
 `search-textbook.html:3442` places a `legacy-anchor` span,
 `#appendix-how-rrf-combines-ranked-lists`, immediately before the sentence
@@ -349,7 +354,7 @@ This would also make Appendix C's `θ` threshold tangible: the top-two min-heap 
 Figure C.3 is precisely this control, and the lab could display the threshold as
 the cut-off moves.
 
-### 2.2 Tour step 3 attributes to saturation an effect that is partly length
+### 2.2 Tour step 3 attributes to saturation an effect that is partly length — **Applied**
 
 The repeat slider raises Record D's `delulu` count, but it also lengthens D from
 10 tokens to 27 and lifts the collection average from 29.0 to 31.8. The displayed
@@ -411,7 +416,7 @@ the lesson was wrong.
 against 1.736. Nothing else changes: step 2's cosine claim (0.914 against 0.574)
 is magnitude-independent, and step 4's normalisation identity is unaffected.
 
-### 2.6 Appendix C and the BM25 lab do not know about each other
+### 2.6 Appendix C and the BM25 lab do not know about each other — **Applied**
 
 Appendix C reproduces the same worked BM25 arithmetic the lab implements — the
 same Lucene IDF form, the same `k1` = 1.2 and `b` = 0.75, the same
@@ -426,7 +431,7 @@ and a "the machinery underneath" link from the lab's advanced-parameters panel
 back to Appendix C. Two lines, and it turns two isolated treatments of the same
 arithmetic into a progression.
 
-### 2.7 Small: the test fixture states slider bounds the page does not have
+### 2.7 Small: the test fixture states slider bounds the page does not have — **Applied**
 
 `tools/test-labs.cjs:44` mocks the vector lab's controls as
 `angle:{min:'-170',max:'170'}`; the page declares `min="-180" max="180"`. Nothing
@@ -715,10 +720,11 @@ they eliminate.
 
 ## Suggested sequencing
 
-**Do first, needs no decision** (items 7 and 10 above, plus §2.2, §2.7, §1.5):
-the three RRF link repairs, the Appendix C ↔ lab cross-links, the step 3 clause
-in the BM25 lab, the test fixture bounds, the Appendix E retitle. All are small,
-none changes an argument.
+**Done** (items 7 and 10 above, plus §2.2, §2.7, §1.5): the three RRF link
+repairs, the Appendix C ↔ lab cross-links, the step 3 clause in the BM25 lab,
+the test fixture bounds, the Appendix E retitle. All were small and none
+changed an argument. `maintain.py`, `renumber_footnotes.py` and `test-labs.cjs`
+all pass afterwards, and both tables of contents were rebuilt for the retitle.
 
 **Needs an author decision on scope** (items 1, 2, 3, 5, 8, 9): appendix
 navigation and self-checks, the reading-time recalibration, the Appendix B

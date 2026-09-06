@@ -381,6 +381,7 @@ table.full tr:last-child td{border-bottom:0}
       </div>
 
       <p class="ctrl-note" style="margin-top:1rem">This lab uses the Lucene inverse-document-frequency form, <code>ln(1 + (N − df + 0.5) ÷ (df + 0.5))</code>, which stays positive. Other implementations use variants that can go negative for very common terms, so two systems both described as “using BM25” can rank differently.</p>
+      <p class="ctrl-note" style="margin-top:.6rem">What the engine does underneath these numbers — the term dictionary, the posting traversal, the top-<em>k</em> heap and the threshold θ that lets it skip work — is walked through in <a href="search-textbook.html#appendix-advanced-inverted-index-execution">Appendix C</a>, using the same scoring form as this page.</p>
     </div>
   </details>
 
@@ -919,6 +920,7 @@ const STEPS = [
     q:'Take <code>delulu</code> from 3 occurrences to 20. Roughly how much does its contribution grow?',
     choices:['about 7 times','about double','about 15 per cent'], answer:2,
     answerText:'<p>From 1.88 to about 2.15 — roughly 15 per cent, for nearly seven times the repetition. The first two or three occurrences do almost all the work.</p>' +
+               '<p>Part of that shortfall is length rather than saturation: the extra words also lengthen Record D, from ten tokens to twenty-seven, and BM25 charges for that. Hold D’s length fixed and the same change gives about 17 per cent instead of 15.</p>' +
                '<p>Notice too that Record D never overtakes Record A this way, no matter how far you push the slider.</p>',
     takeaway:'<b>Keyword stuffing does not pay proportionately.</b> Term-frequency saturation limits the benefit of repetition — though it cannot judge whether the term belonged in the query at all.',
     apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'D'}); }
