@@ -22,8 +22,9 @@ const bctx=vm.createContext({A:null,$:()=>({style:{display:''},innerHTML:''}),ch
 vm.runInContext(bcode,bctx);
 const b=bctx.api;
 const reset=()=>Object.assign(b.state,b.DEFAULTS,{off:[]});
+const step=title=>{const s=b.STEPS.find(x=>x.title===title);assert.ok(s,'no tour step titled '+title);return s;};
 const doc=(a,id)=>a.docs.find(d=>d.id===id);
-reset();b.STEPS[0].apply();assert.equal(b.analyse().ranked.map(d=>d.id).join(','),'A');
+reset();step('From admission rules to weighted clues').apply();assert.equal(b.analyse().ranked.map(d=>d.id).join(','),'A');
 b.state.strict=false;assert.equal(b.analyse().ranked.length,6);
 reset();let a=b.analyse();const first=doc(a,'D').parts.delulu;
 assert.ok(Math.abs(first-1.882)<.002);
@@ -34,10 +35,19 @@ for(const repeat of [1,3,10,20]){
   reset();b.state.repeat=repeat;a=b.analyse();b.setAnalysis(a);charts.length=0;b.renderSaturation();
   assert.ok(Math.abs(charts[1].ys[repeat-1]-doc(a,'D').parts.delulu)<1e-12);
 }
-reset();b.STEPS[5].apply();a=b.analyse();assert.equal(doc(a,'B').matched.join(','),'about,a,job');
+reset();step('What BM25 cannot understand').apply();a=b.analyse();assert.equal(doc(a,'B').matched.join(','),'about,a,job');
 for(const [term,winner] of [['unrealistic','B'],['foolish','F']]){
-  reset();b.STEPS[5].apply();b.state.query+=' '+term;assert.equal(b.analyse().ranked[0].id,winner);
+  reset();step('What BM25 cannot understand').apply();b.state.query+=' '+term;assert.equal(b.analyse().ranked[0].id,winner);
 }
+// The boundary step must actually cut a record that outscores nothing below it.
+reset();step('The boundary that scoring cannot cross').apply();a=b.analyse();
+assert.equal(b.state.topk,1);
+assert.equal(a.ranked.slice(0,2).map(d=>d.id).join(','),'D,A');
+assert.ok(doc(a,'A').total>0,'Record A is scored, just not passed on');
+// Every other step restores the full list, so the boundary is only in play at its own step.
+for(const st of b.STEPS){reset();st.apply();
+  assert.ok(st.title==='The boundary that scoring cannot cross'?b.state.topk===1:b.state.topk===6,
+    'topk not reset by step: '+st.title);}
 reset();b.state.query='unrealistic foolish';a=b.analyse();assert.equal(a.stats.unrealistic.idf,a.stats.foolish.idf);
 reset();b.state.b=0;const score=doc(b.analyse(),'A').total;b.state.pad=8;assert.equal(doc(b.analyse(),'A').total,score);
 const vector=read('vector-similarity-lab.html');
@@ -70,4 +80,4 @@ v.set('dot',false);v.candidates.A.angle=0;v.candidates.A.magnitude=2.5;
 assert.ok(Math.abs(v.values('A').dot-4.75)<1e-12);
 const width=value=>Number(/width:([0-9.]+)%/.exec(v.barStyle(value))[1]);
 assert.ok(width(4.75)>width(4));assert.equal(width(4.75),50);
-console.log('PASS: script syntax, BM25 admission/ranking and all tour examples, chart/slider agreement, cosine/dot ranking, normalisation and unclipped bars.');
+console.log('PASS: script syntax, BM25 admission/ranking and all tour examples, the candidate boundary and its reset across steps, chart/slider agreement, cosine/dot ranking, normalisation and unclipped bars.');

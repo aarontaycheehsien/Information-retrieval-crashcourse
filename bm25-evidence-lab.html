@@ -137,6 +137,9 @@ h1{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.06;letter-spacing:-.035em;ma
 .seg-m:last-child{border-radius:0 4px 4px 0}
 .seg-m span{position:absolute;inset:0;display:flex;align-items:center;padding:0 6px;font:700 .68rem/1 var(--sans);white-space:nowrap}
 .bar-empty{font:.78rem/1.4 var(--sans);color:var(--muted);font-style:italic;padding:.15rem 0}
+.res.below-k{opacity:.4}
+.cutline{display:flex;align-items:center;gap:.6rem;margin:.55rem 0 .7rem;font:800 .68rem/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.cutline::before,.cutline::after{content:"";height:2px;background:var(--accent);opacity:.5;flex:1}
 .andnote{background:var(--code);border-radius:8px;padding:.6rem .8rem;font:.8rem/1.55 var(--sans);color:var(--muted);margin:0 0 .9rem}
 
 /* explain */
@@ -262,7 +265,7 @@ table.full tr:last-child td{border-bottom:0}
   <!-- guided tour -->
   <section class="tour" id="tour" aria-live="polite">
     <div class="tour-head">
-      <span class="tour-step" id="tour-step">Step 1 of 6</span>
+      <span class="tour-step" id="tour-step">Step 1 of 7</span>
       <div class="dots" id="tour-dots"></div>
     </div>
     <h2 id="tour-title"></h2>
@@ -310,6 +313,12 @@ table.full tr:last-child td{border-bottom:0}
 
       <label class="switch"><input type="checkbox" id="strict"> Require all active terms, then rank with BM25</label>
       <div class="andnote" id="andnote" hidden></div>
+
+      <div class="ctrl">
+        <div class="ctrl-top"><label class="ctrl-name" for="topk">Candidates passed onward, k</label><span class="ctrl-val" id="topk-val">6</span></div>
+        <input type="range" id="topk" min="1" max="6" value="6">
+        <p class="ctrl-note">A real pipeline hands only the first k records to whatever comes next. Records below the line were retrieved and scored; they were simply not passed on.</p>
+      </div>
 
       <div id="results"></div>
 
@@ -442,7 +451,7 @@ const FILLER = 'This appendix reproduces supplementary material about department
 
 const SERIES = ['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8'];
 
-const DEFAULTS = { query:'delulu job interview expectations', strict:false, k1:1.2, b:0.75, repeat:3, pad:0, off:[], sel:'A' };
+const DEFAULTS = { query:'delulu job interview expectations', strict:false, k1:1.2, b:0.75, repeat:3, pad:0, topk:6, off:[], sel:'A' };
 
 const state = Object.assign({}, DEFAULTS, { off:[] });
 
@@ -582,13 +591,15 @@ function syncControls(){
   $('#strict').checked = state.strict;
   $('#repeat').value = state.repeat; $('#repeat-val').textContent = state.repeat;
   $('#pad').value = state.pad; $('#pad-val').textContent = state.pad;
+  $('#topk').value = state.topk; $('#topk-val').textContent = state.topk;
   $('#k1').value = state.k1; $('#k1-val').textContent = state.k1.toFixed(2);
   $('#b').value = state.b; $('#b-val').textContent = state.b.toFixed(2);
   const guided = state.mode === 'tour';
   ['#query','#k1','#b'].forEach(id=>$(id).disabled=guided);
-  $('#strict').disabled = guided && tourStep !== 0;
+  $('#strict').disabled = guided && ![0,6].includes(tourStep);
   $('#repeat').disabled = guided && tourStep !== 2;
   $('#pad').disabled = guided && ![3,4].includes(tourStep);
+  $('#topk').disabled = guided && tourStep !== 5;
   const note = $('#andnote');
   if(state.strict){
     const kept = A.ranked.length;
@@ -678,8 +689,14 @@ function renderResults(){
   const max = A.ranked[0].total || 1;
 
   A.ranked.forEach(function(d, i){
+    if(i === state.topk && i < A.ranked.length){
+      const cut = document.createElement('div');
+      cut.className = 'cutline';
+      cut.textContent = 'candidate boundary · k = ' + state.topk;
+      host.appendChild(cut);
+    }
     const row = document.createElement('div');
-    row.className = 'res' + (state.sel === d.id ? ' sel' : '');
+    row.className = 'res' + (state.sel === d.id ? ' sel' : '') + (i >= state.topk ? ' below-k' : '');
     const widthPct = d.total / max * 100;
 
     let segs = '';
@@ -900,7 +917,7 @@ const STEPS = [
     answerText:'<p>Only <b>Record A</b> contains all four words. The other five are excluded outright — including Record B, which may be useful for a search about unrealistic job expectations.</p>' +
                '<p>Switch the toggle off again and all six are back, each scoring from whatever it does match.</p>',
     takeaway:'<b>With any-match admission, BM25 requires lexical overlap, but not total overlap.</b> A record can score from two matching words instead of four.',
-    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:true,repeat:3,pad:0,off:[],sel:'A'}); }
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:true,repeat:3,pad:0,topk:6,off:[],sel:'A'}); }
   },
   {
     title:'Not every matching word is worth the same',
@@ -911,7 +928,7 @@ const STEPS = [
     answerText:'<p>The IDF of <code>delulu</code> is roughly four times that of <code>job</code>. A word appearing in 5 of 6 records barely distinguishes anything; a word in 2 of 6 does real work.</p>' +
                '<p>Click Record D in the results and compare its two segments.</p>',
     takeaway:'<b>Rarity increases discriminating power, not truth.</b> BM25 weights an unusual word heavily whether or not it is the right word.',
-    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'D'}); }
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,topk:6,off:[],sel:'D'}); }
   },
   {
     title:'Repetition helps, then stops helping',
@@ -923,7 +940,7 @@ const STEPS = [
                '<p>Part of that shortfall is length rather than saturation: the extra words also lengthen Record D, from ten tokens to twenty-seven, and BM25 charges for that. Hold D’s length fixed and the same change gives about 17 per cent instead of 15.</p>' +
                '<p>Notice too that Record D never overtakes Record A this way, no matter how far you push the slider.</p>',
     takeaway:'<b>Keyword stuffing does not pay proportionately.</b> Term-frequency saturation limits the benefit of repetition — though it cannot judge whether the term belonged in the query at all.',
-    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'D'}); }
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,topk:6,off:[],sel:'D'}); }
   },
   {
     title:'The same matches mean more in a short document',
@@ -933,7 +950,7 @@ const STEPS = [
     answerText:'<p>It falls steadily. Four matches in a 20-word record suggest the record is <i>about</i> those words; the same four matches in a 200-word record suggest they were mentioned in passing.</p>' +
                '<p>Compare Record C as well: it matches <code>job</code> and <code>interview</code> several times, but at 75 words it still ranks below the much shorter Record F.</p>',
     takeaway:'<b>Length normalisation rescales the evidence.</b> Five occurrences in a short abstract are stronger evidence than five in a long article.',
-    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'A'}); }
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,topk:6,off:[],sel:'A'}); }
   },
   {
     title:'BM25 adds the clues together',
@@ -944,7 +961,18 @@ const STEPS = [
     answerText:'<p>At six appendix paragraphs, Record D overtakes Record A. D matches half as many terms and wins anyway, because the terms it does match are rarer, repeated, and concentrated in ten words rather than diluted across a hundred and seventy.</p>' +
                '<p>This is the single most important thing to take from the lab, and the point where an implicit Boolean model of search breaks down.</p>',
     takeaway:'<b>BM25 ranks by accumulating unequal, saturating, length-adjusted pieces of lexical evidence.</b> Matching more of the query usually helps — but it is evidence being weighed, not conditions being met.',
-    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,off:[],sel:'D'}); }
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,topk:6,off:[],sel:'D'}); }
+  },
+  {
+    title:'The boundary that scoring cannot cross',
+    intro:'<p>Everything so far has been about the <i>order</i>. A real pipeline does something else as well: it hands only the first <i>k</i> records to whatever comes next \u2014 a reranker, a fusion stage, a model writing an answer.</p>' +
+          '<p>The appendix slider is still at <b>6</b>, so Record D sits above Record A. Use the new <b>k</b> slider under the results and set it to <b>1</b>.</p>',
+    q:'Record A matches all four query terms. With <code>k</code> at 1, what could an expensive reranker downstream do for it?',
+    choices:['Rescore it and lift it back above D','Nothing \u2014 it was never passed on','That depends on how good the reranker is'], answer:1,
+    answerText:'<p>Nothing. Record A was retrieved and scored \u2014 you can still see it, greyed, below the line \u2014 but only Record D crossed the boundary. A later stage receives the candidates it is given and no others.</p>' +
+               '<p>Slide <code>k</code> back up and A returns. That is the asymmetry: widening the boundary can add records, and no amount of rescoring below it can.</p>',
+    takeaway:'<b>Candidate generation sets a ceiling that later stages cannot lift.</b> Reranking, fusion and generated answers all reorder or summarise what crossed the boundary; only another retrieval pass or route can add to it.',
+    apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:6,topk:1,off:[],sel:'A'}); }
   },
   {
     title:'What BM25 cannot understand',
@@ -953,9 +981,10 @@ const STEPS = [
     q:'Both <code>unrealistic</code> and <code>foolish</code> occur in exactly one record. Which receives the higher rarity weight (IDF), before term frequency and length are considered?',
     choices:['unrealistic — it is the better paraphrase','foolish — it is the worse paraphrase','neither — they are equally rare, so their IDF is identical'], answer:2,
     answerText:'<p>Both occur in exactly one of the six records, so BM25 gives them an identical rarity weight. It has no mechanism whatsoever for telling a good paraphrase from a bad one.</p>' +
-               '<p>Adding <code>unrealistic</code> lifts Record B to first place, which it deserves. Adding <code>foolish</code> lifts Record F to first place just as decisively — but this does not establish that F is a better answer. Its interview assumptions may overlap the need, while “foolish” adds a judgement the request did not make. F uses the word twice; frequency and length explain why equal IDF does not mean equal total contribution.</p>',
+               '<p>Adding <code>unrealistic</code> lifts Record B to first place, which it deserves. Adding <code>foolish</code> lifts Record F to first place just as decisively — but this does not establish that F is a better answer. Its interview assumptions may overlap the need, while “foolish” adds a judgement the request did not make. F uses the word twice; frequency and length explain why equal IDF does not mean equal total contribution.</p>' +
+               '<p>The admission toggle is unlocked again here. Switch it on with any of these queries and every record disappears, because <code>getting</code> occurs in none of them. Under <code>AND</code> a single absent word empties the set however strong the rest of the evidence is; under BM25 the same word simply contributes nothing. That is the whole difference between an admission rule and a weighted clue.</p>',
     takeaway:'<b>BM25 can weight lexical evidence intelligently. It cannot decide whether the vocabulary it was given expresses the right concept.</b> It is lexical evidence made less binary — not semantic understanding.',
-    apply:function(){ Object.assign(state,{query:'delulu about getting a job',strict:false,repeat:3,pad:0,off:[],sel:'B'}); }
+    apply:function(){ Object.assign(state,{query:'delulu about getting a job',strict:false,repeat:3,pad:0,topk:6,off:[],sel:'B'}); }
   }
 ];
 
@@ -1066,6 +1095,7 @@ $('#query').addEventListener('input', function(e){ state.query = e.target.value;
 $('#strict').addEventListener('change', function(e){ state.strict = e.target.checked; render(); });
 $('#repeat').addEventListener('input', function(e){ state.repeat = +e.target.value; render(); });
 $('#pad').addEventListener('input', function(e){ state.pad = +e.target.value; render(); });
+$('#topk').addEventListener('input', function(e){ state.topk = +e.target.value; render(); });
 $('#k1').addEventListener('input', function(e){ state.k1 = +e.target.value; lite('#f-frac'); render(); });
 $('#b').addEventListener('input', function(e){ state.b = +e.target.value; lite('#f-frac'); render(); });
 

@@ -149,6 +149,8 @@
 
     <h2>Using the two labs</h2>
 <p>Use the <a href="bm25-evidence-lab.html">BM25 Evidence Lab</a> after Chapter 3, then revisit its admission control after Chapter 4. Ask students to predict the ranking before moving the prescribed slider. The tour fixes other inputs; the sandbox allows independent experiments. Changes to document length also change the collection average.</p>
+<p>Budget roughly fifteen minutes for the BM25 tour and ten for the vector tour, plus whatever sandbox time you want; the tours are seven and five prediction steps. The application exercises are the opposite shape — each needs a searching session plus written-up findings, so allow a week rather than a class. Reading-time estimates in the book exclude all of this.</p>
+<p>The BM25 tour ends on the candidate boundary: a <code>k</code> slider that cuts records the ranking already scored. That step is the one interactive demonstration of the claim the whole book turns on, so it is worth not running out of time before reaching it.</p>
 <p>Use the vector lab after Chapter 7. The text descriptions and coordinates are assigned teaching examples, not outputs of an embedding model. Compare direction, magnitude and unit normalisation, then ask why the highest similarity need not satisfy the date and study-design criteria. Students can share a sandbox example by copying its URL.</p>
 <h2>The application exercises</h2>
 
@@ -198,6 +200,7 @@
       <li>Agency is a trade. Name a task in your service where a fixed workflow is clearly the better buy.</li>
       <li>Your library builds a 40-query evaluation set. Who judges relevance, and what happens when two judges disagree?</li>
       <li>PRISMA-S concedes that some proprietary and similarity-based operations may not be fully replicable. Is that a reporting problem or a procurement one?</li>
+      <li>A vendor demonstrates an agentic mode that answers your test question well. What could you ask to find out what it <em>could not</em> have done? This is Chapter 12’s invisible menu, and it is the hardest of its three difficulties to probe from outside.</li>
     </ul>
 
     <h2>Before you teach it: what will have moved</h2>
@@ -206,18 +209,21 @@
       <p>The mechanisms in this book are stable. The product descriptions are not, and they are the parts a student will most enjoy catching you out on.</p>
     </div>
 
-    <p>Record the product, mode, date of the documented architecture and date checked separately. A recent check of an old document does not establish that the architecture is current. Re-verify these before teaching:</p>
+    <p>Record the product, mode, date of the documented architecture and date checked separately. A recent check of an old document does not establish that the architecture is current. Fill in the last column before you teach, and hand the table on to whoever teaches it next — the book argues for exactly this practice in Chapter 15, so it is worth modelling.</p>
 
-    <ul>
-      <li><strong>Chapter 3 and its infrastructure footnotes</strong> — which scholarly systems run on Lucene-family infrastructure.</li>
-      <li><strong>Table 7.2</strong> — where Semantic Scholar and OpenAlex Alice place candidate retrieval. Each vendor describes its own architecture, and either could change route without changing the interface.</li>
-      <li><strong>Table 9.2 and Figure 9.5</strong> — the Primo Research Assistant pipeline traced end to end. This is the book's most load-bearing product example; if its documented cut-offs change, the argument still holds but the numbers do not.</li>
-      <li><strong>Chapter 10’s blending and routing examples</strong> — Web of Science Smart Search as a blend, Scopus AI as a route. Whether a product blends or routes is the kind of detail a release note changes quietly.</li>
-      <li><strong>Tables 11.4 and 11.5</strong> — query transformation and natural-language filter extraction across products. Vendors add supported fields steadily.</li>
-      <li><strong>Table 12.3</strong> — where academic tools sat by control arrangement, tested April 2026. The book already warns this will date quickly, and the same vendor appears on two different rows, so brand-level generalisations were wrong even then.</li>
-      <li><strong>Appendix G’s Scopus AI and RAG Fusion walkthrough</strong> — already labelled historical in the text. Check whether the documented account still matches current modes before presenting it as anything other than a worked example of reading documentation.</li>
-      <li><strong>Figure 1.3</strong> — the two-by-two of AI academic search. Products migrate between quadrants.</li>
-    </ul>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Where</th><th>Product or claim</th><th>Documented as of</th><th>Last checked</th><th>What would change it</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Chapter 3 and its infrastructure footnotes</strong></td><td>Scholarly systems on Lucene-family infrastructure</td><td>—</td><td></td><td>A vendor migrating its search stack</td></tr>
+        <tr><td><strong>Table 7.2</strong></td><td>Semantic Scholar and OpenAlex Alice</td><td>—</td><td></td><td>Either could change route without changing the interface</td></tr>
+        <tr><td><strong>Table 9.2, Figure 9.5</strong></td><td>Primo Research Assistant, traced end to end</td><td>—</td><td></td><td>Documented cut-offs. The book's most load-bearing product example: if the numbers move the argument holds but the figures do not</td></tr>
+        <tr><td><strong>Chapter 10's examples</strong></td><td>Web of Science Smart Search (blend), Scopus AI (route)</td><td>—</td><td></td><td>Whether a product blends or routes, which a release note changes quietly</td></tr>
+        <tr><td><strong>Tables 11.4, 11.5</strong></td><td>Query transformation and filter extraction across products</td><td>—</td><td></td><td>Vendors add supported fields steadily</td></tr>
+        <tr><td><strong>Table 12.3</strong></td><td>Six academic tools by control arrangement</td><td>April 2026</td><td></td><td>A vendor renaming or re-scoping a mode. The same vendor already appears on two rows, so brand-level generalisations were wrong even then</td></tr>
+        <tr><td><strong>Appendix G</strong></td><td>Scopus AI and RAG Fusion walkthrough</td><td>2024</td><td></td><td>Already labelled historical. Check before presenting it as anything but a worked example of reading documentation</td></tr>
+        <tr><td><strong>Figure 1.3</strong></td><td>The two-by-two of AI academic search</td><td>—</td><td></td><td>Products migrate between quadrants</td></tr>
+      </tbody>
+    </table></div>
 
     <p>A useful exercise in itself: assign a student the job of re-checking one of these tables against current vendor documentation and reporting what changed. It teaches the documentation-reading skill the whole book depends on, and it dates the material for you.</p>
 
@@ -228,6 +234,14 @@
     <p>The numbered figures built as HTML rather than images — the BM25 scoring walkthrough, the pruning panels, the WordPiece pipeline — are in the page itself and are easiest to capture by screenshot at a wide window. Each has a stable anchor, so you can also just link to it.</p>
 
     <p>Commercial screenshots and reproduced research figures are <strong>not</strong> covered by the book’s licence. They are third-party material reproduced for comment and criticism. If you are redistributing adapted material, take your own or leave them out.</p>
+
+    <h2>Two things worth pointing students at, and one for you</h2>
+
+    <p>The <a href="search-textbook.html#glossary">glossary</a> is the most directly assignable thing in the book for an information-literacy cohort: around a hundred short definitions, each written to separate a mechanism from the label usually attached to it. It sits in a collapsed panel in the end matter, so students who never open it will not find it. Assigning twenty terms and asking which ones name a representation, which a pipeline stage and which only an interface is a reasonable first seminar. <a href="search-textbook.html#appendix-search-terminology">Appendix D</a> is the same move at greater length, and reads well alongside it.</p>
+
+    <p>The <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/main/CHANGELOG.md">changelog</a> records what changed between versions. If you assigned a chapter last term and it reads differently this term, that is where to look — and it is what makes the version number in the citation below worth recording.</p>
+
+    <p>When a student does catch the book out on a product claim, which the section above predicts they will, the correction is welcome: open an issue on <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/issues">the repository</a>. A dated note of what the vendor documentation now says is more useful than a report that something looks wrong.</p>
 
     <h2>Citing it</h2>
 

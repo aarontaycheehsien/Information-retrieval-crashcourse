@@ -58,7 +58,7 @@ arithmetic or link rot.
 | 1 | Give appendices the chapter furniture they lack: Previous/Next navigation, and *Check yourself* for D, E, F and G | All appendices | Medium |
 | 2 | ~~Recalibrate the appendix reading times, or document the convention~~ **Applied** | Appendices F (29 min) and G (12 min) | Small |
 | 3 | Rerun Appendix B's worked example on a string that actually splits | Appendix B, Figure B.1 | Small |
-| 4 | Add a `top-k` boundary control to the BM25 lab | `bm25-evidence-lab.html` | Medium |
+| 4 | ~~Add a `top-k` boundary control to the BM25 lab~~ **Applied** | `bm25-evidence-lab.html` | Medium |
 | 5 | ~~Add Table 14.3: one filled-in row of a local evaluation set~~ **Applied** | Chapter 14 | Small |
 | 6 | ~~Draw the RAG Fusion pipeline as Figure G.1~~ **Applied** | Appendix G | Medium |
 | 7 | ~~Fix two links that resolve to a "this moved" stub rather than to the content~~ **Applied** | Appendices D and E | Trivial |
@@ -357,7 +357,7 @@ guards the exact tour numbers (including the 1.882 baseline and the 1.143
 ratio), and both pages state their own limits honestly. The suggestions below
 are about what the labs *do not yet let a student do*.
 
-### 2.1 The book's central claim has no interactive demonstration
+### 2.1 The book's central claim has no interactive demonstration — **Applied**
 
 *What you can now ask* nominates one thing to carry out of the book: "candidate
 generation sets the ceiling on a fixed pool. Reranking and display cut-offs can
@@ -399,7 +399,7 @@ change and enough. The lab's stated principle is that every number on the page
 can be checked by hand, and this is the one number whose cause is not what the
 step says it is.
 
-### 2.3 The strict-AND toggle is used once and then locked
+### 2.3 The strict-AND toggle is used once and then locked — **Applied**
 
 Admission and ranking as separate controls is the lab's opening point and Part
 I's central one. The toggle is exercised in step 1 and disabled for the remaining
@@ -472,7 +472,7 @@ you teach it: what will have moved" is the best section in it. Every asset it
 names — Table 7.2, Table 9.2, Figure 9.5, Tables 11.4 and 11.5, Table 12.3,
 Figure 1.3 — exists and is correctly numbered. The gaps are all of omission.
 
-### 3.1 The re-verification list is a bullet list where the book would demand a table
+### 3.1 The re-verification list is a bullet list where the book would demand a table — **Applied**
 
 The notes tell instructors to "record the product, mode, date of the documented
 architecture and date checked separately", then present the nine items to
@@ -524,7 +524,7 @@ vendor documentation" — is the obvious candidate and is currently buried at th
 end of a section as an aside. It deserves promotion to an assessed exercise, with
 one item per student and nine items available.
 
-### 3.4 The notes never mention the glossary, the CHANGELOG or how to report an error
+### 3.4 The notes never mention the glossary, the CHANGELOG or how to report an error — **Applied**
 
 Three omissions, each small, each with an easy fix:
 
@@ -539,7 +539,7 @@ Three omissions, each small, each with an easy fix:
   instructor out on product claims, and the licence invites reuse. Nothing says
   where a correction should go.
 
-### 3.5 The Part III discussion prompts skip Chapter 12
+### 3.5 The Part III discussion prompts skip Chapter 12 — **Applied**
 
 Chapter 12 is the longest chapter in Part III at 21 minutes, carries the table
 the notes single out as dating fastest, and contains the book's only original
@@ -552,7 +552,7 @@ test question well. What could you ask to find out what it could not have done?*
 That is the "invisible menu" problem, and it is the one distinction in Chapter 12
 that has no discussion prompt anywhere.
 
-### 3.6 No time estimate for the labs or exercises
+### 3.6 No time estimate for the labs or exercises — **Applied**
 
 The notes say reading-time estimates exclude lab and exercise work, and then give
 no estimate for either. Someone planning the three-hour workshop has no number
@@ -566,7 +566,7 @@ prediction steps, the vector tour five — would help.
 The `part-iii-review.md` pass fixed the compressed restatements. What follows is
 about coverage rather than consistency.
 
-### 4.1 Part III has two figures across four chapters
+### 4.1 Part III has two figures across four chapters — **Chapter 15 applied; Chapter 13 declined**
 
 | Part | Chapters | Figures | Tables |
 |---|---|---|---|
@@ -587,9 +587,19 @@ The two strongest candidates:
   is "what separates the four lenses from a list of complaints about products".
   A single panel with the query on one side, the record on the other, and four
   labelled points of loss between them would do it.
-- **Chapter 15**, the inspection trail as a trace: original query → transformed
-  query → candidate source → matched evidence → scoring → fusion → trajectory.
-  It is currently a seven-item bullet list of exactly this sequence.
+- **Chapter 15**, the inspection trail as a trace. **Applied as Figure 15.1**,
+  but walked *backwards* from the record rather than forwards, because the
+  forward order is what the seven-item list already gives. The chapter's own
+  test is whether a librarian can "move from the displayed record backwards",
+  and where that trail stops is what a product is actually selling.
+
+**Chapter 13's figure was considered and declined.** The chapter now carries
+Table 13.1 (four lenses), Table 13.3 (what three first-stage methods preserve)
+and, since §4.7, a five-item eligibility pre-check. A fourth restatement of the
+same four lenses would be repetition rather than illustration, which is what
+`repetition-ledger.md` exists to catch. Part III now has three figures across
+four chapters; Chapter 13 is the one without, and it is also the chapter with
+the most scaffolding in other forms.
 
 ### 4.2 Chapter 14 tells the reader to build an evaluation set and shows them no example — **Applied**
 
@@ -790,10 +800,9 @@ plausibly justify the rest; and the procurement additions became a sixth group
 rather than being folded into an existing one, which required renumbering the
 last group from 15 to 17.
 
-**Larger, worth a separate pass** (item 4, plus §1.4, §4.1): the lab's top-k
-control, Appendix D's citations and filter, and the Part III figures. These are
-new artefacts rather than repairs, and each is a piece of work in itself.
-Figures G.1, A.1 and E.1 (items 6 and §1.9) are done.
+**Larger, worth a separate pass:** only §1.4 remains — Appendix D's citations
+and filter box, and the citations half is a genuine editorial question rather
+than a task. Items 4 and 6, §1.9 and the Chapter 15 half of §4.1 are done.
 
 The Appendix F deduplication gap (§1.8) sits awkwardly across those groups: it is
 a genuine content gap in the appendix the teaching notes call core, but writing
