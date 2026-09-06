@@ -119,6 +119,8 @@ input[type=range]:disabled{opacity:.42}
 
 .rank-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
 .rank-card{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:.65rem .7rem}
+.rank-card.excluded{opacity:.5;border-style:dashed}
+.rank-why{font:700 .7rem/1.3 var(--sans);color:var(--accent);margin:.3rem 0 0}
 .rank-top{display:flex;gap:.55rem;align-items:baseline;font-family:var(--sans)}
 .rank-number{font-weight:800;color:var(--muted)}
 .rank-id{font-weight:800;color:var(--candidate)}
@@ -197,7 +199,7 @@ input[type=range]:disabled{opacity:.42}
 
   <section class="tour" id="tour" aria-labelledby="tour-title">
     <div class="tour-head">
-      <span class="tour-step" id="tour-step">Step 1 of 5</span>
+      <span class="tour-step" id="tour-step">Step 1 of 6</span>
       <div class="dots" id="tour-dots" aria-hidden="true"></div>
     </div>
     <h2 id="tour-title"></h2>
@@ -234,6 +236,12 @@ input[type=range]:disabled{opacity:.42}
       <div class="control-block">
         <label class="switch" for="normalise"><input type="checkbox" id="normalise"> Normalise the query and every candidate to length one</label>
         <p class="hint">With unit-length vectors, cosine similarity and dot product are numerically identical.</p>
+      </div>
+
+      <div class="control-block">
+        <label class="switch" for="filter-recent"><input type="checkbox" id="filter-recent"> Published 2024 or later</label>
+        <label class="switch" for="filter-empirical"><input type="checkbox" id="filter-empirical"> Empirical studies only</label>
+        <p class="hint">The query asks for both. These are metadata constraints applied before ranking, not part of the similarity score. Excluded candidates stay listed so you can see what the rule removed.</p>
       </div>
 
       <div class="control-block">
@@ -315,7 +323,7 @@ input[type=range]:disabled{opacity:.42}
         <thead><tr><th>Candidate</th><th>Rel. angle</th><th>Length</th><th>Cosine</th><th>Dot</th></tr></thead>
         <tbody id="score-body"></tbody>
       </table>
-      <p class="warning"><strong>Best available is not necessarily relevant.</strong> Candidate A can be the nearest vector while failing the query’s date limit; Candidate B is a commentary rather than an empirical study. The score never observes those human criteria unless the representation and retrieval pipeline preserve them.</p>
+      <p class="warning"><strong>Best available is not necessarily relevant.</strong> Candidate A can be the nearest vector while failing the query’s date limit; Candidate B is a commentary rather than an empirical study. The score never observes those human criteria unless the representation and retrieval pipeline preserve them. The two filters above show what happens when they do: the date rule removes A and promotes B, which still fails the query, and only applying both criteria leaves C — on eligibility, not on score.</p>
     </section>
   </div>
 
@@ -378,7 +386,20 @@ const COPIES={
   B:'A 2025 commentary on open access and citation practice — current, but not an empirical study.',
   C:'A 2025 empirical study of repositories and citation advantage — the only record meeting both stated criteria.'
 };
+const META={A:{year:2012,empirical:true},B:{year:2025,empirical:false},C:{year:2025,empirical:true}};
 const DEFAULTS={A:{angle:24,magnitude:1},B:{angle:55,magnitude:1.9},C:{angle:122,magnitude:1.35}};
+let filters={recent:false,empirical:false};
+function eligible(id){
+  if(filters.recent&&META[id].year<2024)return false;
+  if(filters.empirical&&!META[id].empirical)return false;
+  return true;
+}
+function excludedBy(id){
+  const why=[];
+  if(filters.recent&&META[id].year<2024)why.push('published '+META[id].year);
+  if(filters.empirical&&!META[id].empirical)why.push('not an empirical study');
+  return why.join('; ');
+}
 let candidates=clone(DEFAULTS);
 let metric='cosine';
 let normalised=false;
@@ -413,7 +434,8 @@ function values(id){
   return {x,y,length,cosine,dot};
 }
 function score(id){const v=values(id);return metric==='cosine'?v.cosine:v.dot;}
-function ranked(){return ['A','B','C'].sort((a,b)=>score(b)-score(a)||a.localeCompare(b));}
+function ranked(){return ['A','B','C'].filter(eligible).sort((a,b)=>score(b)-score(a)||a.localeCompare(b));}
+function excluded(){return ['A','B','C'].filter(id=>!eligible(id));}
 function f(value){return (Math.abs(value)<.0005?0:value).toFixed(3);}
 function displayAngle(value){return value+'°';}
 
@@ -425,6 +447,10 @@ function renderControls(){
   metricDot.setAttribute('aria-pressed',String(metric==='dot'));
   $('metric-hint').textContent=metric==='cosine'?'Cosine compares direction and ignores length.':'Dot product responds to direction and vector length.';
   normalise.checked=normalised;
+  $('filter-recent').checked=filters.recent;
+  $('filter-empirical').checked=filters.empirical;
+  $('filter-recent').disabled=inTour&&tourIndex!==5;
+  $('filter-empirical').disabled=inTour&&tourIndex!==5;
   candidateButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.id===selected)));
   angle.value=candidates[selected].angle;
   magnitude.value=candidates[selected].magnitude;
@@ -501,12 +527,18 @@ function renderRanking(){
   $('rank-list').innerHTML=order.map((id,index)=>{
     const active=score(id);
     return `<li class="rank-card" style="--candidate:${COLOURS[id]}"><div class="rank-top"><span class="rank-number">${index+1}</span><span class="rank-id">Candidate ${id}</span><span class="rank-score">${f(active)}</span></div><p class="rank-copy">${COPIES[id]}</p><div class="score-track" aria-hidden="true"><i class="score-bar" style="${barStyle(active)}"></i></div></li>`;
-  }).join('');
+  }).concat(excluded().map(id=>
+    `<li class="rank-card excluded" style="--candidate:${COLOURS[id]}"><div class="rank-top"><span class="rank-number">—</span><span class="rank-id">Candidate ${id}</span><span class="rank-score">${f(score(id))}</span></div><p class="rank-copy">${COPIES[id]}</p><p class="rank-why">Excluded before ranking: ${excludedBy(id)}</p></li>`
+  )).join('');
   $('score-body').innerHTML=['A','B','C'].map(id=>{
     const v=values(id);
     return `<tr><th scope="row">${id}</th><td>${displayAngle(candidates[id].angle)}</td><td>${v.length.toFixed(2)}</td><td>${f(v.cosine)}</td><td>${f(v.dot)}</td></tr>`;
   }).join('');
-  $('live-summary').textContent=`Using ${metric==='cosine'?'cosine similarity':'dot product'}, Candidate ${order[0]} ranks first with score ${f(score(order[0]))}, followed by ${order[1]} and ${order[2]}.`;
+  const rule=metric==='cosine'?'cosine similarity':'dot product';
+  $('live-summary').textContent = order.length
+    ? `Using ${rule}, ${order.length} of 3 candidates are eligible. Candidate ${order[0]} ranks first with score ${f(score(order[0]))}` +
+      (order.length>1?`, followed by ${order.slice(1).join(' and ')}.`:', and is the only one left.')
+    : 'No candidate satisfies the active filters.';
 }
 
 function render(){renderControls();renderPlot();renderRanking();writeHash();}
@@ -570,12 +602,22 @@ const TOURS=[
     answer:'No. The score describes alignment in this toy space. It does not observe the complete information need, and it is not calibrated as a probability.',
     takeaway:'Nearest means best available under the chosen representation and rule. A person still judges whether the result satisfies the need.',
     metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
+  },
+  {
+    title:'Criteria the score never saw',
+    intro:'The two criteria in the query — since 2024, empirical — are metadata, not geometry. Both switches are unlocked. Turn on <b>Published 2024 or later</b> only, and leave the other off.',
+    question:'With Candidate A excluded by the date rule, which record now ranks first?',
+    choices:[['C, the only one meeting both criteria','c'],['B, which is still a commentary','b'],['Neither — the list is empty','none']],correct:'b',
+    answer:'B. Removing A promotes the next-highest score, and that is the 2025 commentary. One criterion expressed as a filter, one left to the ranking, and the ranking still gets it wrong. Now switch on <b>Empirical studies only</b> as well: C is all that remains — and its cosine is still −0.530.',
+    takeaway:'A similarity score cannot enforce a criterion nobody encoded. Where a criterion exists as metadata it can be made an admission rule, which is a different mechanism from ranking; where it does not, no amount of reordering supplies it.',
+    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS,filters:{recent:false,empirical:false}
   }
 ];
 
 function applyTour(index){
   const step=TOURS[index];
   metric=step.metric;normalised=step.normalised;selected=step.selected;candidates=clone(step.vectors);
+  filters=Object.assign({recent:false,empirical:false},step.filters||{});
   $('tour-step').textContent=`Step ${index+1} of ${TOURS.length}`;
   $('tour-title').textContent=step.title;
   $('tour-intro').innerHTML=`<p>${step.intro}</p>`;
@@ -615,6 +657,8 @@ function setMode(tourMode){
 metricCos.addEventListener('click',()=>setMetric('cosine'));
 metricDot.addEventListener('click',()=>setMetric('dot'));
 normalise.addEventListener('change',()=>{normalised=normalise.checked;render();});
+$('filter-recent').addEventListener('change',e=>{filters.recent=e.target.checked;render();});
+$('filter-empirical').addEventListener('change',e=>{filters.empirical=e.target.checked;render();});
 candidateButtons.forEach(button=>button.addEventListener('click',()=>setSelected(button.dataset.id)));
 angle.addEventListener('input',()=>{candidates[selected].angle=Number(angle.value);render();});
 magnitude.addEventListener('input',()=>{candidates[selected].magnitude=Number(magnitude.value);render();});

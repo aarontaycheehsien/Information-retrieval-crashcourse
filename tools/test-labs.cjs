@@ -71,7 +71,8 @@ assert.ok(Number(controls.magnitude.min)>0);
 const vctx=vm.createContext({document:{getElementById:id=>controls[id]||{},querySelectorAll:()=>[]}});
 const vcode=vector.slice(vector.indexOf('const COLOURS'),vector.indexOf('function setMetric'))
   +vector.slice(vector.indexOf('function barStyle'),vector.indexOf('function renderRanking'))
-  + '\nglobalThis.api={values,ranked,barStyle,set:(m,n)=>{metric=m;normalised=n;},candidates};';
+  + '\nglobalThis.api={values,ranked,excluded,excludedBy,barStyle,set:(m,n)=>{metric=m;normalised=n;},'
+  + 'setFilters:f=>{filters=Object.assign({recent:false,empirical:false},f);},candidates};';
 vm.runInContext(vcode,vctx);const v=vctx.api;
 assert.equal(v.ranked()[0],'A');v.set('dot',false);assert.equal(v.ranked()[0],'B');
 v.set('dot',true);for(const id of ['A','B','C'])assert.equal(v.values(id).dot,v.values(id).cosine);
@@ -80,4 +81,19 @@ v.set('dot',false);v.candidates.A.angle=0;v.candidates.A.magnitude=2.5;
 assert.ok(Math.abs(v.values('A').dot-4.75)<1e-12);
 const width=value=>Number(/width:([0-9.]+)%/.exec(v.barStyle(value))[1]);
 assert.ok(width(4.75)>width(4));assert.equal(width(4.75),50);
-console.log('PASS: script syntax, BM25 admission/ranking and all tour examples, the candidate boundary and its reset across steps, chart/slider agreement, cosine/dot ranking, normalisation and unclipped bars.');
+
+// Filters are an admission rule applied before ranking. The date rule alone is the
+// point of tour step 6: it removes A and promotes B, which still fails the query.
+v.candidates.A={angle:24,magnitude:1};v.candidates.B={angle:55,magnitude:1.9};v.candidates.C={angle:122,magnitude:1.35};
+v.set('cosine',false);
+v.setFilters({});assert.equal(v.ranked().join(','),'A,B,C');assert.equal(v.excluded().length,0);
+v.setFilters({recent:true});
+assert.equal(v.ranked()[0],'B','date filter alone must promote the commentary');
+assert.equal(v.excluded().join(','),'A');
+assert.match(v.excludedBy('A'),/2012/);
+v.setFilters({recent:true,empirical:true});
+assert.equal(v.ranked().join(','),'C','both criteria leave only C');
+assert.equal(v.excluded().join(','),'A,B');
+assert.ok(v.values('C').cosine<0,'C wins on eligibility, not on score');
+v.setFilters({});
+console.log('PASS: script syntax, BM25 admission/ranking and all tour examples, the candidate boundary and its reset across steps, chart/slider agreement, cosine/dot ranking, normalisation, unclipped bars and the vector lab\'s metadata filters.');

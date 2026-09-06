@@ -468,7 +468,7 @@ and expansion becomes visible and surprising.
 no record holds all six terms.) That single result is the OR-versus-AND lesson
 that Chapter 2 and Appendix F both depend on.
 
-### 2.4 The vector lab warns and then offers no remedy
+### 2.4 The vector lab warns and then offers no remedy — **Applied, with the proposal corrected**
 
 The lab's final step is excellent: Candidate A scores highest, Candidate C is the
 only record satisfying the date and study-design criteria, and C scores worst.
@@ -479,10 +479,29 @@ this is a fixable design choice: filters, metadata, hybrid routes, a different
 indexed unit.
 
 **Proposed:** add one control, "apply the 2024-or-later limit as a hard
-constraint before ranking". Candidate A drops out, C wins, and the final step
-turns from a warning into the book's argument. It is the same admission-versus-
-ranking distinction the BM25 lab teaches, arriving in the dense setting where
-students least expect it.
+constraint before ranking". Candidate A drops out, C wins.
+
+**That proposal was wrong, and checking the geometry before building it caught
+the error.** Removing A leaves B at cosine 0.574 against C at −0.530, so a date
+filter alone promotes B — the commentary — and the ranking is still incorrect.
+One filter cannot deliver C, because the query states *two* criteria and only one
+of them was being encoded.
+
+**Applied instead:** two switches, matching the query's two criteria — published
+2024 or later, and empirical studies only. Excluded candidates stay on screen,
+greyed and dashed, labelled with the rule that removed them, so students see
+retrieval-then-exclusion rather than disappearance. A sixth tour step turns the
+error into the lesson: it asks what ranks first once the date rule removes A, and
+the answer is B. One criterion expressed as a filter, one left to the ranking, and
+the ranking still gets it wrong. Switching on the second leaves C alone — with a
+cosine of −0.530, so it wins on eligibility, not on score.
+
+This is a better outcome than the original proposal. It teaches the
+admission-versus-ranking distinction the BM25 lab teaches, and it adds something
+the book argues but had not shown: a criterion that exists as metadata can become
+an admission rule, and a criterion that does not exist anywhere cannot be
+supplied by reordering. `test-labs.cjs` now asserts the counter-intuitive middle
+step, so a future edit cannot quietly turn it into the obvious one.
 
 ### 2.5 The vector lab's dot-product step is knife-edge — **Applied**
 
