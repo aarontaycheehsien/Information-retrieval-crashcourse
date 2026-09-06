@@ -6,11 +6,21 @@ this is mainly a proposal document: most of it asks for substantive additions
 and structural changes that need an author decision before anyone edits the
 source of truth.
 
-**Status.** Fifteen items marked **Applied** below have been made: the five that
-needed no decision, the Chapter 12 apparatus (§4.4) once the author supplied its
-source, and a further eight approved as a batch because none of them changes an
-argument. Everything else is still a proposal. Each applied item is marked at its
-own heading, so this file stays usable as a working list.
+**Status.** Of the 29 findings, 24 are applied, 3 are declined by the author
+with the reasoning kept, and 2 remain. Each is marked at its own heading, so
+this file stays usable as a working list.
+
+**Declined, deliberately:** *Check yourself* for any appendix (§1.1), and both
+halves of §1.4 — Appendix D's lack of citations is a design choice, now stated
+in the appendix itself, and the filter box would make one section of the book
+depend on JavaScript.
+
+**Still open:** Previous/Next navigation on the appendices (the other half of
+§1.1); Appendix B's worked example (§1.3), which is blocked on tokeniser output
+rather than on a decision; and the vector lab's ending (§2.4). Outside the
+review's scope, `CHANGELOG.md`'s chapter and appendix counts and the
+`NEEDS-DECISION.md` G4 entry both need the author's memory of the restructure
+sequence.
 
 ## What was checked, and what passed
 
@@ -293,7 +303,7 @@ inserted unverified.
 Appendix G's stated time moves from 6 to 7 minutes: the figure took it from
 1,332 to 1,559 visible words.
 
-### 1.8 Appendix F: three smaller points — **Table F.3 and deduplication applied; exercise marking open**
+### 1.8 Appendix F: three smaller points — **All three applied**
 
 **Deduplication is treated as bookkeeping. — Applied as an aside, not a fourth boundary.** The
 appendix lists "deduplication and any removal or enrichment before screening"
@@ -325,7 +335,7 @@ better, by Table F.1. Dropping the two rows would tighten a table that is
 otherwise the appendix's best summary.
 
 **The controlled TAR comparison is the only exercise in the book with no marking
-guidance.** It specifies a corpus, what to fix, what to vary and what to record,
+guidance. — Applied, in the teaching notes, under §3.2.** It specifies a corpus, what to fix, what to vary and what to record,
 which is more rigour than most textbook exercises get. But the teaching notes
 give worked responses and a four-criterion rubric for Application exercises I–III
 and say nothing about this one — so the cohort for whom Appendix F is *core* has
