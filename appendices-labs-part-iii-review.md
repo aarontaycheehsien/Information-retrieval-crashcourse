@@ -6,10 +6,10 @@ this is mainly a proposal document: most of it asks for substantive additions
 and structural changes that need an author decision before anyone edits the
 source of truth.
 
-**Status.** The five items marked **Applied** below have been made — they were
-the group that needed no decision. Everything else is still a proposal. Each
-applied item is marked at its own heading, so this file stays usable as a
-working list.
+**Status.** The items marked **Applied** below have been made: the five that
+needed no decision, plus the Chapter 12 apparatus (§4.4) once the author
+supplied its source. Everything else is still a proposal. Each applied item is
+marked at its own heading, so this file stays usable as a working list.
 
 ## What was checked, and what passed
 
@@ -61,7 +61,7 @@ arithmetic or link rot.
 | 5 | Add Table 14.3: one filled-in row of a local evaluation set | Chapter 14 | Small |
 | 6 | Draw the RAG Fusion pipeline as Figure G.1 | Appendix G | Medium |
 | 7 | ~~Fix two links that resolve to a "this moved" stub rather than to the content~~ **Applied** | Appendices D and E | Trivial |
-| 8 | Give Chapter 12's Primo experiment the evidentiary apparatus the rest of the book uses | Chapter 12 | Small |
+| 8 | ~~Give Chapter 12's Primo experiment the evidentiary apparatus the rest of the book uses~~ **Applied** | Chapter 12 | Small |
 | 9 | Add a cost, quota and deprecation question to the procurement checklist | Chapter 15 | Small |
 | 10 | ~~Cross-link Appendix C and the BM25 lab in both directions~~ **Applied** | Appendix C, `bm25-evidence-lab.html` | Trivial |
 
@@ -597,7 +597,7 @@ per-query comparison. If Table 14.3 is added, three or four rows with one query
 moving sharply against a flat average would make the point arithmetically rather
 than by assertion. It is the same table, extended.
 
-### 4.4 Chapter 12's Primo experiment is the book's best evidence and its least documented
+### 4.4 Chapter 12's Primo experiment is the book's best evidence and its least documented — **Applied**
 
 *What the loop is for* is the most original section in the book. It reports:
 pointing a model at the author's own Primo index over MCP, replaying real
@@ -628,6 +628,30 @@ depend on a success rate.
 The section is currently the one place a hostile reader could say the book
 applies a lower standard to its author's evidence than to a vendor's. That is
 worth closing, and it is a paragraph of work.
+
+**Applied, using the source supplied by the author:** “What Changes When an LLM
+Agent Searches Your Library Catalogue?”, 24 June 2026. The section now records
+the query set (database searches from the institution's 2023 zero-result logs),
+the template used, the citation and date, and the author's own framing that these
+are exploratory demonstrations of failure recovery rather than a measured success
+rate. Two things the source corrected rather than merely documented:
+
+1. **The quoted NLS expansion was half its real length.** The book gave
+   `(autism) OR (autistic disorder) OR (ASD)` with no ellipsis. The post records
+   six terms — the three above plus `(autism spectrum)`, `(neurodevelopmental
+   disorder)` and `(pervasive developmental disorder)` — all returning zero. Six
+   synonyms failing is a stronger version of the book's own argument than three,
+   so the correction pays for itself. The full string is now quoted, along with
+   the post's footnote that both runs searched the same index, which pre-empts
+   the obvious objection to the comparison.
+2. **The book cited the example its own source flags as weakest.** The post
+   singles out `refinituv` → LSEG as the clearest case of 2026 models answering
+   2023 queries, since the rebrand postdates the query. The book used it as one
+   of four illustrations with no caveat. The caveat now travels with it.
+
+The model-tier claim checked out and is now specific: a mini model at low
+reasoning effort against the frontier model at extra-high effort, with little
+difference in output.
 
 ### 4.5 Chapter 15's procurement checklist asks nothing about cost, quota or deprecation
 
@@ -726,10 +750,10 @@ the test fixture bounds, the Appendix E retitle. All were small and none
 changed an argument. `maintain.py`, `renumber_footnotes.py` and `test-labs.cjs`
 all pass afterwards, and both tables of contents were rebuilt for the retitle.
 
-**Needs an author decision on scope** (items 1, 2, 3, 5, 8, 9): appendix
-navigation and self-checks, the reading-time recalibration, the Appendix B
-example, Table 14.3, the Chapter 12 apparatus, the procurement additions. Each is
-confined to one section, and each closes a gap the book's own standards create.
+**Needs an author decision on scope** (items 1, 2, 3, 5, 9): appendix navigation
+and self-checks, the reading-time recalibration, the Appendix B example, Table
+14.3, the procurement additions. Each is confined to one section, and each closes
+a gap the book's own standards create.
 
 **Larger, worth a separate pass** (items 4 and 6, plus §1.4, §4.1): the lab's
 top-k control, Figure G.1, Appendix D's filter, and the Part III figures. These
