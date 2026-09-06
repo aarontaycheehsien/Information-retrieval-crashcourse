@@ -166,7 +166,7 @@ segmentation must be taken from the actual vocabulary file, not predicted, and
 the existing IDs (23653, 5019, 999, 101, 102) are worth re-checking at the same
 time.
 
-### 1.4 Appendix D has no external citations, and cannot be used the way it is described
+### 1.4 Appendix D has no external citations, and cannot be used the way it is described — **Citations declined by design; filter still open**
 
 Appendix D is the only appendix with **zero external links**. Four tables of
 roughly forty rows assert what each label "usually describes" across research,
@@ -186,9 +186,14 @@ hears "hybrid semantic reranking" has to scan four tables.
    the user types. It is perhaps thirty lines of vanilla JavaScript in the style
    the labs already use, and it converts the appendix from something you read
    into something you use.
-2. Add one citation per row family where usage genuinely diverges — "hybrid",
-   "semantic search", "agentic", "generative retrieval" — showing two sources
-   using the term differently. Five or six citations would carry the point.
+2. ~~Add one citation per row family where usage genuinely diverges.~~
+   **Declined by the author: the absence of citations is a design choice.** The
+   appendix is a practitioner's reading of usage, not a survey of it, and citing
+   it would misrepresent what it is. What was applied instead is one sentence in
+   the framing paragraph saying so, because the choice was previously invisible
+   — a reader could only read it as an omission in a book that cites everything
+   else. Each entry is now framed as a prompt to check what a particular vendor
+   or paper means, not a finding about what a word must mean.
 
 ### 1.5 Appendix E's title leads with material that is no longer in it — **Applied**
 
@@ -504,7 +509,7 @@ An instructor then fills the "last checked" column and hands it to the next
 person teaching the module. It also models the practice Chapter 15 argues for,
 which is worth more than the table itself.
 
-### 3.2 Appendix F's exercise has no marking guidance, for the cohort the notes centre
+### 3.2 Appendix F's exercise has no marking guidance, for the cohort the notes centre — **Applied**
 
 The notes give Application exercises I–III a paragraph each of what is being
 tested, what a strong answer does, and the common wrong turn — plus worked
@@ -522,7 +527,7 @@ already describes — hand students two prepared screening logs and have them pl
 recall against records screened — should be named here too, since most cohorts
 will take it.
 
-### 3.3 The thirteen-week course has three assessments for fifteen chapters
+### 3.3 The thirteen-week course has three assessments for fifteen chapters — **Applied**
 
 The six-week module maps each fortnight onto one application exercise, which
 works. The thirteen-week course inherits the same three exercises and says
