@@ -6,8 +6,8 @@ this is mainly a proposal document: most of it asks for substantive additions
 and structural changes that need an author decision before anyone edits the
 source of truth.
 
-**Status.** Of the 29 findings, 24 are applied, 3 are declined by the author
-with the reasoning kept, and 2 remain. Each is marked at its own heading, so
+**Status.** Of the 29 findings, 25 are applied, 3 are declined by the author
+with the reasoning kept, and 1 remains. Each is marked at its own heading, so
 this file stays usable as a working list.
 
 **Declined, deliberately:** *Check yourself* for any appendix (§1.1), and both
@@ -15,9 +15,8 @@ halves of §1.4 — Appendix D's lack of citations is a design choice, now state
 in the appendix itself, and the filter box would make one section of the book
 depend on JavaScript.
 
-**Still open:** Previous/Next navigation on the appendices (the other half of
-§1.1); Appendix B's worked example (§1.3), which is blocked on tokeniser output
-rather than on a decision; and the vector lab's ending (§2.4). Outside the
+**Still open:** Appendix B's worked example (§1.3), which is blocked on tokeniser
+output rather than on a decision, and the vector lab's ending (§2.4). Outside the
 review's scope, `CHANGELOG.md`'s chapter and appendix counts and the
 `NEEDS-DECISION.md` G4 entry both need the author's memory of the restructure
 sequence.
@@ -65,7 +64,7 @@ arithmetic or link rot.
 
 | # | Change | Where | Effort |
 |---|---|---|---|
-| 1 | Give appendices the chapter furniture they lack: Previous/Next navigation, and *Check yourself* for D, E, F and G | All appendices | Medium |
+| 1 | ~~Previous/Next navigation on the appendices~~ **Applied**; *Check yourself* declined | All appendices | Medium |
 | 2 | ~~Recalibrate the appendix reading times, or document the convention~~ **Applied** | Appendices F (29 min) and G (12 min) | Small |
 | 3 | Rerun Appendix B's worked example on a string that actually splits | Appendix B, Figure B.1 | Small |
 | 4 | ~~Add a `top-k` boundary control to the BM25 lab~~ **Applied** | `bm25-evidence-lab.html` | Medium |
@@ -80,7 +79,7 @@ arithmetic or link rot.
 
 ## 1. The appendices
 
-### 1.1 Appendices are missing the furniture that makes chapters assignable — **Check yourself declined; navigation still open**
+### 1.1 Appendices are missing the furniture that makes chapters assignable — **Navigation applied; Check yourself declined**
 
 Every one of the fifteen chapters carries a `chapter-nav` (Previous/Next) and a
 *Check yourself* block. **No appendix carries either.** No appendix carries a
@@ -98,6 +97,23 @@ self-check questions.
 **Proposed:** add `chapter-nav` to all seven appendices (A→B→…→G, with A's
 Previous pointing at *What you can now ask* and G's Next at the glossary). Add
 *Check yourself* to D, E, F and G.
+
+**Navigation applied.** Seven `chapter-nav` blocks in letter order, A's Previous
+pointing at *What you can now ask* and G's Next at the glossary, using the
+component the chapters already use so there is no new CSS. Two deliberate
+departures from copying the chapter pattern: the labels read "Previous appendix"
+and "Next appendix" rather than bare Previous/Next, and the `aria-label` is
+"Appendix navigation" — both because appendices are a shelf rather than a path,
+which was the main objection to giving them a linear control at all. Link text
+names the destination appendix by letter, which `maintain.py`'s
+stale-cross-reference check validates against the anchor.
+
+On the reasoning: on a wide screen the sticky sidebar already makes a reader
+unstrandable, so this buys little there. Below 880px that sidebar is replaced by
+a non-sticky `<details>` at the top of the page, so a reader at the end of
+Appendix F was ~3,700 words into a section inside a 92,000-word page with no
+visible way out. That, plus deep links from a reading list, is what the change is
+for.
 
 **Author's decision: no appendix gets *Check yourself*, Appendix D included.**
 The device belongs to chapters, which carry an argument the reader is meant to
