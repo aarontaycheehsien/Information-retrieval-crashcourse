@@ -171,7 +171,7 @@ segmentation must be taken from the actual vocabulary file, not predicted, and
 the existing IDs (23653, 5019, 999, 101, 102) are worth re-checking at the same
 time.
 
-### 1.4 Appendix D has no external citations, and cannot be used the way it is described — **Citations declined by design; filter still open**
+### 1.4 Appendix D has no external citations, and cannot be used the way it is described — **Both halves declined**
 
 Appendix D is the only appendix with **zero external links**. Four tables of
 roughly forty rows assert what each label "usually describes" across research,
@@ -187,10 +187,16 @@ hears "hybrid semantic reranking" has to scan four tables.
 
 **Proposed, in order of value:**
 
-1. Add a filter box above the Appendix D tables that hides non-matching rows as
-   the user types. It is perhaps thirty lines of vanilla JavaScript in the style
-   the labs already use, and it converts the appendix from something you read
-   into something you use.
+1. ~~Add a filter box above the Appendix D tables.~~ **Declined by the author.**
+   The case for it was real — the book is one 851KB page of 92,283 words, so a
+   browser find for "hybrid" searches all fifteen chapters rather than the 28
+   rows of this appendix, which is exactly the lookup the appendix is described
+   as supporting. The case against it is that this would be the only part of the
+   book whose intended use depends on JavaScript, and it carries print, no-JS,
+   accessibility and anchor obligations that the rest of the text does not. A
+   cheaper alternative was offered and also not taken: per-table anchors and a
+   one-line jump row, which survives printing and saving. Appendix D stays a
+   text.
 2. ~~Add one citation per row family where usage genuinely diverges.~~
    **Declined by the author: the absence of citations is a design choice.** The
    appendix is a practitioner's reading of usage, not a survey of it, and citing
