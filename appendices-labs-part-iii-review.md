@@ -303,7 +303,7 @@ and say nothing about this one — so the cohort for whom Appendix F is *core* h
 an unassessed exercise, while the three exercises aimed at everyone are fully
 supported. See §3.2.
 
-### 1.9 Appendix A and E would each be transformed by one figure
+### 1.9 Appendix A and E would each be transformed by one figure — **Applied**
 
 Appendix A explains self-attention and has **no figure**. Its own worked contrast
 — `bank` drawing on `loan` and `refused` in one sentence, on `river` in another —
@@ -318,10 +318,22 @@ with the click-to-propensity correction shown as a separate input. It would also
 make visible the appendix's best point, that the model was learnt offline while
 the order is computed on the fly.
 
-*Also:* Table A.1's decoder row runs to three sentences against the encoder row's
-seven words. The parallel-training-under-a-causal-mask correction is worth
-making, but it is prose, not a table cell, and it currently destroys the
-table's scannability.
+*Also:* Table A.1's decoder row ran to three sentences against the encoder row's
+seven words. **Applied:** the cell is now "Causal attention: each position sees
+only earlier positions and itself", and the parallel-training-under-a-causal-mask
+point moved below the table as prose, where it can be made properly — reading
+left to right constrains what each position sees but does not force training to
+proceed one position at a time; generation is the sequential part.
+
+**Applied.** Figure A.1 uses the `score-grid` / `score-card` / `score-line`
+components from Figure C.3, so the only new CSS is one colour rule beside the
+existing `score-*` colours. Bar widths are qualitative and the caption says so
+outright — they illustrate the mechanism and are not measurements from a model,
+which is the same disclaimer the Vector Similarity Lab makes about its
+coordinates. Figure E.1 uses the two-track `query-flow` component from Figure
+14.1 to separate what is learnt offline from what happens per query, which is the
+section's own best point and was previously only a sentence. Appendix A's stated
+time moves from 5 to 6 minutes; Appendix E stays at 19.
 
 ### 1.10 PubMed gets one sentence where Semantic Scholar gets a five-row table — **Applied**
 
@@ -778,10 +790,10 @@ plausibly justify the rest; and the procurement additions became a sixth group
 rather than being folded into an existing one, which required renumbering the
 last group from 15 to 17.
 
-**Larger, worth a separate pass** (item 4, plus §1.4, §1.9, §4.1): the lab's
-top-k control, Appendix D's citations and filter, figures for Appendices A and E,
-and the Part III figures. These are new artefacts rather than repairs, and each
-is a piece of work in itself. Figure G.1 (item 6) is done.
+**Larger, worth a separate pass** (item 4, plus §1.4, §4.1): the lab's top-k
+control, Appendix D's citations and filter, and the Part III figures. These are
+new artefacts rather than repairs, and each is a piece of work in itself.
+Figures G.1, A.1 and E.1 (items 6 and §1.9) are done.
 
 The Appendix F deduplication gap (§1.8) sits awkwardly across those groups: it is
 a genuine content gap in the appendix the teaching notes call core, but writing
