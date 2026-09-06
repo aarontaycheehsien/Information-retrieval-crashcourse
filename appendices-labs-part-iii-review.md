@@ -70,7 +70,7 @@ arithmetic or link rot.
 
 ## 1. The appendices
 
-### 1.1 Appendices are missing the furniture that makes chapters assignable
+### 1.1 Appendices are missing the furniture that makes chapters assignable — **Check yourself declined; navigation still open**
 
 Every one of the fifteen chapters carries a `chapter-nav` (Previous/Next) and a
 *Check yourself* block. **No appendix carries either.** No appendix carries a
@@ -87,9 +87,14 @@ self-check questions.
 
 **Proposed:** add `chapter-nav` to all seven appendices (A→B→…→G, with A's
 Previous pointing at *What you can now ask* and G's Next at the glossary). Add
-*Check yourself* to D, E, F and G, which are the four long enough and
-argumentative enough to need it. A and B are short expansions and can stay as
-they are; C is a mechanism walkthrough whose figures already do that work.
+*Check yourself* to D, E, F and G.
+
+**Author's decision: no appendix gets *Check yourself*, Appendix D included.**
+The device belongs to chapters, which carry an argument the reader is meant to
+have followed; appendices are expansions and references, and a self-check would
+imply a test the appendix is not setting. The candidate questions below stay in
+this file as a record of what was considered, not as pending work. The
+navigation half is untouched by that decision and remains available.
 
 Three candidate questions for Appendix F, to show the register:
 
