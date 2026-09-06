@@ -60,7 +60,7 @@ arithmetic or link rot.
 | 3 | Rerun Appendix B's worked example on a string that actually splits | Appendix B, Figure B.1 | Small |
 | 4 | Add a `top-k` boundary control to the BM25 lab | `bm25-evidence-lab.html` | Medium |
 | 5 | ~~Add Table 14.3: one filled-in row of a local evaluation set~~ **Applied** | Chapter 14 | Small |
-| 6 | Draw the RAG Fusion pipeline as Figure G.1 | Appendix G | Medium |
+| 6 | ~~Draw the RAG Fusion pipeline as Figure G.1~~ **Applied** | Appendix G | Medium |
 | 7 | ~~Fix two links that resolve to a "this moved" stub rather than to the content~~ **Applied** | Appendices D and E | Trivial |
 | 8 | ~~Give Chapter 12's Primo experiment the evidentiary apparatus the rest of the book uses~~ **Applied** | Chapter 12 | Small |
 | 9 | ~~Add a cost, quota and deprecation question to the procurement checklist~~ **Applied** | Chapter 15 | Small |
@@ -233,7 +233,7 @@ book. Twenty-two are harmless, because the legacy span sits immediately before
 the current heading and the reader lands in the right place. The two above are
 not, and only a rule distinguishes them cheaply.
 
-### 1.7 Appendix G has no figure, no table, and hedges the one pointer a librarian needs
+### 1.7 Appendix G has no figure, no table, and hedges the one pointer a librarian needs — **Applied**
 
 Appendix G is the only appendix with neither a figure nor a table. It also
 contains the book's cleanest stage-by-stage mapping of a product onto its own
@@ -262,9 +262,20 @@ which the book's own practice requires in any case:
   (Bohnet et al.).
 - The **TREC RAG track**, if a shared-task anchor is wanted.
 
-I was unable to confirm DOIs for these from this environment — the available
-literature tool returned a Wiley-only corpus with nothing relevant — so treat
-these as leads to check, not as verified references.
+**Applied.** Figure G.1 is a five-step `query-flow` track reusing the component
+Figures 12.1 and 14.1 already use, so no new CSS. Two frameworks are named
+rather than four, and both were verified against ACL Anthology before insertion:
+RAGAs (Es et al., EACL 2024 system demonstrations) for faithfulness, answer
+relevance and context relevance, and Attributable to Identified Sources (Rashkin
+et al., *Computational Linguistics* 49(4), 2023) for attribution. The pair was
+chosen because it maps onto the two questions the paragraph already asks —
+faithful, and attributable — and because the contrast between them is the useful
+part: one is a model-prompted metric a pipeline computes, the other a human
+annotation protocol. ARES and the TREC RAG track were dropped rather than
+inserted unverified.
+
+Appendix G's stated time moves from 6 to 7 minutes: the figure took it from
+1,332 to 1,559 visible words.
 
 ### 1.8 Appendix F: three smaller points — **Table F.3 applied; the other two open**
 
@@ -767,9 +778,10 @@ plausibly justify the rest; and the procurement additions became a sixth group
 rather than being folded into an existing one, which required renumbering the
 last group from 15 to 17.
 
-**Larger, worth a separate pass** (items 4 and 6, plus §1.4, §4.1): the lab's
-top-k control, Figure G.1, Appendix D's filter, and the Part III figures. These
-are new artefacts rather than repairs, and each is a piece of work in itself.
+**Larger, worth a separate pass** (item 4, plus §1.4, §1.9, §4.1): the lab's
+top-k control, Appendix D's citations and filter, figures for Appendices A and E,
+and the Part III figures. These are new artefacts rather than repairs, and each
+is a piece of work in itself. Figure G.1 (item 6) is done.
 
 The Appendix F deduplication gap (§1.8) sits awkwardly across those groups: it is
 a genuine content gap in the appendix the teaching notes call core, but writing
