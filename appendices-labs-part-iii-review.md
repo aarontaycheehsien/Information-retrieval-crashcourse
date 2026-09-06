@@ -277,9 +277,9 @@ inserted unverified.
 Appendix G's stated time moves from 6 to 7 minutes: the figure took it from
 1,332 to 1,559 visible words.
 
-### 1.8 Appendix F: three smaller points — **Table F.3 applied; the other two open**
+### 1.8 Appendix F: three smaller points — **Table F.3 and deduplication applied; exercise marking open**
 
-**Deduplication is treated as bookkeeping when it is a fourth boundary.** The
+**Deduplication is treated as bookkeeping. — Applied as an aside, not a fourth boundary.** The
 appendix lists "deduplication and any removal or enrichment before screening"
 among the things to record, and Figure F.2's candidate pool is described as
 "already retrieved and deduplicated", but nothing explains that near-duplicate
@@ -288,6 +288,19 @@ records without a human eligibility judgement. Figure F.3 names three boundaries
 — coverage, retrieval, stopping. On the appendix's own logic there are four.
 This is a genuine content gap, not a presentational one, and it is the boundary
 evidence-synthesis librarians manage most often in practice.
+
+**Author's decision, and the right one:** deduplication is too minor and too
+contingent to sit on Figure F.3 beside coverage, retrieval and stopping, where it
+would carry equal visual weight. It is now an `orientation` aside after Figure
+F.2 — the point in the text where the pool is first described as arriving
+"deduplicated" — and it says explicitly that this is *not* a fourth boundary in
+the sense of the three that follow, because it removes records thought to be
+copies of ones already in the pool rather than records the workflow never
+reached. The three-boundary argument is untouched. What the aside adds is the
+mechanism (fields compared, at what tolerance), the failure in both directions
+(a conference abstract absorbed into its journal article; a tighter rule raising
+the screening burden), and the reason deduplication already appears in the
+reporting list rather than only in a methods sentence.
 
 **Table F.3 has four cells that all say "Yes".** The "Sparse possible?" and
 "Dense possible?" rows read Yes/Yes and Yes/Yes. The point they carry — that
@@ -804,7 +817,6 @@ last group from 15 to 17.
 and filter box, and the citations half is a genuine editorial question rather
 than a task. Items 4 and 6, §1.9 and the Chapter 15 half of §4.1 are done.
 
-The Appendix F deduplication gap (§1.8) sits awkwardly across those groups: it is
-a genuine content gap in the appendix the teaching notes call core, but writing
-it properly means a new subsection and probably a fourth boundary in Figure F.3.
-It is the one item here that might warrant its own gate.
+The Appendix F deduplication gap (§1.8) is closed as an aside rather than a
+fourth boundary, on the author's judgement that it does not carry the weight of
+the other three. Figure F.3 is unchanged.
