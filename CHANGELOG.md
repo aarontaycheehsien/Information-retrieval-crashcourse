@@ -7,6 +7,160 @@ which text they were working from.
 The version shown in the page header and footer always matches the most recent
 entry here.
 
+## 1.2 — 7 September 2026
+
+A review pass over the seven appendices, both interactive labs, the teaching
+notes and Part III, recorded in `appendices-labs-part-iii-review.md`. Thirty
+findings: twenty-seven applied in full, two applied in part, one declined. No
+chapter, appendix or figure was added or removed, so the book is still three
+parts, fifteen chapters and seven appendices.
+
+### Added
+
+- **Four figures, in the parts that had none.** Figure A.1 shows the same token
+  in *the bank refused the loan* and *the river bank* as weighted bars, so the
+  claim that attention weights come from content rather than from distance or
+  grammar is visible rather than asserted; its widths are illustrative and the
+  caption says so. Figure E.1 separates what a learning-to-rank system learns
+  offline from what happens per query, which was the section's best point and
+  was carrying it in one sentence. Figure G.1 draws the Scopus AI RAG Fusion
+  pipeline with each stage attributed to the chapter that explains it, leaving
+  only generation unattributed. Figure 15.1 walks the inspection trail
+  *backwards* from a record, since the forward order is what the existing list
+  already gives.
+- **Table 14.3.** The book ends by asking readers to build a local evaluation
+  set and showed no example of one. Three rows, judged to a fixed depth before
+  and after an update, chosen so the mean rises from 0.30 to 0.33 while the
+  identifier row loses two thirds of its precision — which makes the chapter's
+  per-query argument arithmetic rather than assertion.
+- **A sixth procurement group in Chapter 15, on cost, limits and continuity.**
+  Table 12.4 makes cost the first row of the agency trade and Table 12.3 records
+  two products re-scoping a mode inside a year, yet the checklist asked about
+  neither. Two questions: pricing and what happens when a rate or iteration
+  limit is reached, and export and notice when a mode is retired.
+- **Previous/Next navigation on all seven appendices.** Chapters had it and
+  appendices did not, so a reader at the end of an appendix on a narrow screen —
+  where the sticky sidebar is replaced by a collapsed panel at the top of the
+  page — had no visible way out. Labelled "Previous appendix" and "Next
+  appendix", because appendices are a shelf rather than a path.
+- **A candidate-boundary control in the BM25 Evidence Lab.** A `k` slider beside
+  the admission toggle, with records past `k` dimmed below a labelled cut line
+  rather than removed. A seventh tour step uses it: with Record D above Record A
+  and `k` at one, the question is what a downstream reranker could do for A. The
+  answer is nothing. The claim the book turns on had no interactive
+  demonstration anywhere.
+- **Metadata filters in the Vector Similarity Lab.** The lab showed that the
+  only record satisfying the query scores worst and stopped there. Two switches
+  matching the query's two criteria now act before ranking, with excluded
+  candidates left on screen and labelled with the rule that removed them. A
+  sixth tour step makes the point: applying the date rule alone promotes the
+  commentary, because one criterion was expressed as a filter and one was left
+  to the ranking.
+- **Named evaluation frameworks in Appendix G**, which previously said such
+  frameworks exist and named none — the one place the book withheld a pointer it
+  gives everywhere else. RAGAs for faithfulness and answer relevance,
+  Attributable to Identified Sources for attribution; the contrast between a
+  computed metric and a human annotation protocol is the useful part.
+
+### Changed
+
+- **Appendix B's worked example now splits a word.** It followed *Unbelievable
+  scenes!* through six stages while no word split, so the caption explained a
+  `##` marker the figure never displayed. It now follows *Unbelievable rizzlord
+  scenes!*. The pieces and IDs were derived from the published vocabulary by
+  `tools/wordpiece_example.py` and then checked a second time against the file:
+  this vocabulary holds no `rizz` piece at all, so BERT produces `ri`, `##zz`
+  and `##lord` — representable without being meaningful. Chapter 13's claim
+  about the same string was correctly hedged but purely hypothetical, and now
+  links to the demonstration and names the outcome.
+- **Chapter 12's Primo experiment carries its evidence.** It reported an
+  experiment with no date, source, query set or statement of limits, while every
+  other empirical claim in the book carries all four. It now cites *What Changes
+  When an LLM Agent Searches Your Library Catalogue?* (June 2026), names the
+  query set and template, and repeats that source's own framing of the results
+  as exploratory. Reading the source also corrected two things: the quoted
+  Natural Language Search expansion was half its real length, and the
+  `refinituv` example is the one the source flags as most affected by 2026
+  models answering 2023 queries.
+- **Reading times recalculated** at the book's own median of 211 words per
+  minute: Appendix F from 29 to 17 minutes, Appendix G from 12 to 7, Chapter 4
+  from 10 to 13, Appendix A from 5 to 6. The teaching notes build three course
+  shapes on these numbers.
+- **Table 15.1's row is now *Retrieval control*** and records which arrangement
+  applies, the branch and rule for an adaptive workflow, and the trace for an
+  agentic one. It previously said only "Agentic control", collapsing the
+  distinction Chapter 12 spends its first third drawing.
+- **Chapter 13's eligibility checks are a numbered pre-check.** The chapter says
+  to run them first, then buried them in one dense paragraph while the four
+  diagnostic lenses had a table.
+- **Appendix E retitled** to *Learning to rank, diversification and rerankers*,
+  since the worked rank-fusion explanation moved to Chapter 10 in 1.1 and the
+  old title led with material the appendix no longer contains. Its account of
+  PubMed's Best Match ranking is expanded from a subordinate clause to a
+  paragraph, PubMed being the ranked retrieval this book's readers actually use.
+- **Appendix D states what it is:** a practitioner's reading of how these words
+  are used rather than a sourced survey, which is why its entries carry no
+  citations. The absence was deliberate and previously invisible.
+- **Appendix F gains an aside on deduplication**, which removes records without
+  a human eligibility judgement. It is deliberately not a fourth boundary in
+  Figure F.3, and says so, because it removes records thought to be copies of
+  ones already in the pool rather than records the workflow never reached.
+- **The teaching notes** turn the re-verification list into a table with
+  "documented as of" and an empty "last checked" column to fill in and hand on;
+  say what carries the ten weeks of the thirteen-week course the three
+  application exercises do not; add marking guidance for Appendix F's controlled
+  TAR comparison; add a Part III discussion prompt on Chapter 12's invisible
+  menu; give timings for both lab tours and the exercises; and point students at
+  the glossary and this changelog, and instructors at where to send a
+  correction.
+
+### Fixed
+
+- **Three links that resolved to a signpost rather than to the content.** Table
+  D.2's rank-fusion cell and Appendix E's "RRF attractive" both targeted a
+  legacy anchor sitting beside the sentence announcing that the explanation had
+  moved to Chapter 10, and that sentence pointed at Chapter 10's opening section
+  rather than the rank-fusion section. All three now reach the explanation.
+  `maintain.py` could not catch this, because the anchor exists and the link
+  text names no chapter number.
+- **Appendix C and the BM25 lab now link to each other.** They implement the
+  same arithmetic — the same Lucene IDF form, the same parameters, the same
+  document-at-a-time traversal — and neither mentioned the other, while the
+  vector lab was already linked from Appendix D.
+- **BM25 lab tour step 3 names its confound.** The repeat slider lengthens
+  Record D from ten tokens to twenty-seven, so the displayed change is
+  saturation minus a length penalty; at fixed length it would be about 17 per
+  cent rather than 15. Step 4 already named this effect for the other slider.
+- **Table A.1's decoder row** no longer carries three sentences against the
+  encoder row's seven words. The parallel-training-under-a-causal-mask
+  correction moved below the table, where it can be made properly.
+- **Table F.3** loses two rows that answered "Yes" four times; Table F.1 already
+  makes the point.
+- **The vector lab's dot-product step** is no longer knife-edge. It
+  demonstrated magnitude outweighing angle on a 3.6 per cent margin that any
+  sandbox nudge would flip; Candidate B's magnitude moves from 1.65 to 1.9,
+  making it 19 per cent. Candidate A is unchanged, so it remains the shorter
+  vector the step's premise needs.
+
+### Tooling
+
+- `tools/wordpiece_example.py` derives Figure B.1's pieces and IDs from the
+  published vocabulary instead of trusting anyone's memory. It validates the
+  file before use — 30,522 entries with the special tokens at their known
+  indices — and checks the IDs the figure prints, exiting non-zero on a
+  mismatch, so the figure cannot drift from the vocabulary unnoticed.
+- `tools/test-labs.cjs` finds tour steps by title rather than by index, so
+  inserting a step cannot silently retarget an assertion; asserts the new
+  candidate boundary cuts a scored record and that every other step restores the
+  full list; asserts the vector lab's filters, including the counter-intuitive
+  middle case where the date rule alone promotes the wrong record; and reads the
+  vector lab's slider bounds from the page rather than hard-coding them, where
+  they had drifted to a range the page does not have.
+
+Validation: `tools/maintain.py` and `tools/renumber_footnotes.py` report no
+problems, `node tools/test-labs.cjs` passes, and the inline scripts in all four
+pages parse. Browser rendering was not verified in this environment.
+
 ## 1.1 — 5 September 2026
 
 ### Added

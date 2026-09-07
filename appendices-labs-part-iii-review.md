@@ -6,20 +6,21 @@ this is mainly a proposal document: most of it asks for substantive additions
 and structural changes that need an author decision before anyone edits the
 source of truth.
 
-**Status.** Closed. Of the 29 findings, 26 are applied and 3 are declined by the
-author with the reasoning kept. Each is marked at its own heading, so this file
-remains the record of what was changed, what was not, and why.
+**Status.** Closed, and published as version 1.2 on 7 September 2026. Of the 30
+findings, 27 are applied in full, 2 are applied in part, and 1 is declined in
+full. Each is marked at its own heading, so this file remains the record of what
+was changed, what was not, and why.
 
-**Declined, deliberately:** *Check yourself* for any appendix (§1.1), and both
-halves of §1.4 — Appendix D's lack of citations is a design choice, now stated
-in the appendix itself, and the filter box would make one section of the book
-depend on JavaScript.
+The two out-of-scope observations — `CHANGELOG.md`'s inconsistent chapter and
+appendix counts, and the `NEEDS-DECISION.md` G4 entry that reads as a live gate —
+were reviewed and deliberately left as they are.
 
-**Nothing open.** All 29 findings are settled: 27 applied, 3 declined by the
-author with the reasoning kept below. The two out-of-scope observations —
-`CHANGELOG.md`'s inconsistent chapter and appendix counts and the
-`NEEDS-DECISION.md` G4 entry that reads as a live gate — were also reviewed and
-deliberately left as they are.
+**Declined, in whole or in part:** §1.4 entirely — Appendix D's lack of
+citations is a design choice, now stated in the appendix itself, and the filter
+box would make one section of the book depend on JavaScript. *Check yourself*
+for any appendix (§1.1, whose navigation half was applied). And Chapter 13's
+figure (§4.1, whose Chapter 15 figure was applied), which would have restated
+material Table 13.1, Table 13.3 and the new eligibility pre-check already carry.
 
 ## What was checked, and what passed
 
