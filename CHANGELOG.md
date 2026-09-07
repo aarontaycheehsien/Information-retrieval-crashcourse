@@ -71,6 +71,13 @@ parts, fifteen chapters and seven appendices.
 
 ### Changed
 
+- **Chapters 5–9 now follow a clearer teaching sequence.** Concrete examples
+  introduce embeddings, retrieval training, collection search, indexed units
+  and reranking. Optional drawers retain detailed mechanisms and comparisons;
+  revised diagrams and self-checks clarify representation choices and the path
+  from a retrieved passage to model context. Terminology and cross-references
+  remain aligned with the other chapters and appendices. Chapter 7's figures
+  are renumbered to follow their new order, with internal references updated.
 - **Chapter 11 now teaches through a worked request.** The open-access citation
   example introduces understanding, transformation and routing before the wider
   input taxonomy. Three starting points, a two-pass feedback example and a shared
