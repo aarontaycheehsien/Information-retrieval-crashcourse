@@ -26,7 +26,11 @@ a{color:var(--accent-dark);text-decoration-thickness:.08em;text-underline-offset
 a:hover{color:var(--accent)}
 :focus-visible{outline:3px solid rgba(157,63,43,.38);outline-offset:3px;border-radius:3px}
 code{font-family:var(--mono);font-size:.86em;background:var(--code);border:1px solid #e2dacf;border-radius:.32em;padding:.09em .3em}
-button,input{font:inherit}
+button,input,select{font:inherit}
+.sandbox-tools{margin-bottom:1.2rem}
+.sandbox-tools select{max-width:100%;padding:.4rem}
+.change-note{font:.84rem/1.5 var(--sans);background:var(--teal-soft);padding:.8rem;border-radius:8px}
+.prediction-note{font:.85rem/1.5 var(--sans);color:var(--muted)}
 
 .hero{border-bottom:1px solid rgba(23,32,31,.15);padding:3.4rem clamp(1.1rem,4vw,3.5rem) 2.4rem}
 .hero-inner{max-width:1240px;margin:0 auto}
@@ -185,7 +189,7 @@ input[type=range]:disabled{opacity:.42}
   <p class="subtitle">Vector search needs a rule for comparing the query with stored vectors. The document descriptions and coordinates here are assigned teaching examples; no embedding model generated them. Follow the fixed prediction tour, then move vectors in the sandbox to compare cosine, dot product and relevance. Copy the sandbox URL to share your settings.</p>
   <p class="backlink"><a href="search-textbook.html#single-vector-dense-retrieval-compress-first-compare-later">← Back to “Single-vector dense retrieval”</a> · <a href="search-textbook.html#representations-and-units">On to “Representations and indexed units”</a></p>
 </div></header>
-<p class="hint" style="max-width:70rem;margin:1rem auto;padding:0 1rem">Signed angles control clockwise or anticlockwise placement; similarity depends on angular separation. The tour fixes the geometry and metric so its answers match the display. Use the sandbox for experiments. A production model’s comparison rule should match its training.</p>
+<p class="hint" style="max-width:70rem;margin:1rem auto;padding:0 1rem">Signed angles control clockwise or anticlockwise placement; similarity depends on angular separation. The tour reveals scores after your prediction and applies each filter at its reveal. Use the sandbox for experiments. A production model’s comparison rule should match its training.</p>
 
 <main class="wrap">
   <div class="modebar">
@@ -199,7 +203,7 @@ input[type=range]:disabled{opacity:.42}
 
   <section class="tour" id="tour" aria-labelledby="tour-title">
     <div class="tour-head">
-      <span class="tour-step" id="tour-step">Step 1 of 6</span>
+      <span class="tour-step" id="tour-step">Step 1 of 7</span>
       <div class="dots" id="tour-dots" aria-hidden="true"></div>
     </div>
     <h2 id="tour-title"></h2>
@@ -220,6 +224,26 @@ input[type=range]:disabled{opacity:.42}
     </div>
   </section>
 
+  <section class="panel sandbox-tools" id="sandbox-tools" hidden aria-labelledby="experiments-title">
+    <h2 id="experiments-title">Try a controlled experiment</h2>
+    <div class="choices">
+      <button class="btn" type="button" data-challenge="length">1 · Change length, keep direction</button>
+      <button class="btn" type="button" data-challenge="metric">2 · Change the comparison rule</button>
+      <button class="btn" type="button" data-challenge="filters">3 · Apply the criteria</button>
+    </div>
+    <p id="challenge-task">Choose a challenge to load a fresh starting state, or explore freely below.</p>
+    <p id="challenge-status" aria-live="polite"></p>
+    <details><summary>What kind of change did you make?</summary><p>Moving an arrow changes the toy <strong>representation</strong>. Switching cosine to dot product changes the <strong>comparison rule</strong>. Applying metadata filters changes the <strong>admission rule</strong>. Normalisation transforms the vectors before comparison.</p></details>
+    <details id="cutoff-experiment"><summary>Optional: can the relevant record reach the next stage?</summary>
+      <p>Use the default cosine geometry: A, then B, then C. C meets both metadata criteria but is outside the first two. Apply both filters, then compare their position relative to the cutoff.</p>
+      <button class="btn" type="button" id="cutoff-start">Load cutoff experiment</button>
+      <label for="top-k">Candidate limit</label> <select id="top-k"><option value="1">Top 1</option><option value="2">Top 2</option><option value="3" selected>All 3</option></select>
+      <label for="filter-order">Apply active filters</label> <select id="filter-order"><option value="before">Before selecting top k</option><option value="after">After selecting top k</option></select>
+      <p id="pipeline-summary" aria-live="polite"></p>
+      <p class="hint">This toy scores all three records exactly. It illustrates a candidate boundary, not approximate nearest-neighbour search. Filtering after the cutoff does not refill the list here; real products may behave differently.</p>
+    </details>
+  </section>
+  <p class="change-note" id="change-note" hidden aria-live="polite"></p>
   <div class="lab">
     <section class="panel" aria-labelledby="controls-title">
       <h2 id="controls-title">Comparison controls</h2>
@@ -241,7 +265,7 @@ input[type=range]:disabled{opacity:.42}
       <div class="control-block">
         <label class="switch" for="filter-recent"><input type="checkbox" id="filter-recent"> Published 2024 or later</label>
         <label class="switch" for="filter-empirical"><input type="checkbox" id="filter-empirical"> Empirical studies only</label>
-        <p class="hint">The query asks for both. These are metadata constraints applied before ranking, not part of the similarity score. Excluded candidates stay listed so you can see what the rule removed.</p>
+        <p class="hint">The query asks for both. These are metadata constraints, not part of the similarity score. In the sandbox’s optional experiment, choose whether they act before or after the candidate cutoff. Excluded candidates stay listed so you can see what the rule removed.</p>
       </div>
 
       <div class="control-block">
@@ -252,6 +276,7 @@ input[type=range]:disabled{opacity:.42}
           <button type="button" data-id="C" aria-pressed="false">C</button>
         </div>
         <p class="candidate-copy" id="candidate-copy"></p>
+        <p class="hint">Moving an arrow explores a hypothetical model output. It does not show how editing an abstract or retraining an embedding model would move a real vector.</p>
       </div>
 
       <div class="control-block">
@@ -263,7 +288,7 @@ input[type=range]:disabled{opacity:.42}
         <div class="ctrl">
           <div class="ctrl-top"><label for="magnitude">Vector length</label><span class="ctrl-val" id="magnitude-val">1.00</span></div>
           <input type="range" id="magnitude" min="0.25" max="2.5" step="0.05" value="1">
-          <p class="hint">Length affects dot product but not cosine similarity.</p>
+          <p class="hint">Length affects dot product but not cosine similarity. Vector length is not article length, citation count, quality or confidence.</p>
         </div>
       </div>
     </section>
@@ -317,19 +342,20 @@ input[type=range]:disabled{opacity:.42}
 
     <section class="panel rank-panel" aria-labelledby="ranking-title">
       <h2 id="ranking-title">Ranked candidates</h2>
-      <ol class="rank-list" id="rank-list"></ol>
+      <p id="prediction-note" class="prediction-note">Predict first; then the scores and order will appear here.</p>
+      <div id="ranking-results"><ol class="rank-list" id="rank-list"></ol>
       <table class="score-table">
         <caption class="sr-only">Exact cosine and dot-product scores for every candidate</caption>
         <thead><tr><th>Candidate</th><th>Rel. angle</th><th>Length</th><th>Cosine</th><th>Dot</th></tr></thead>
         <tbody id="score-body"></tbody>
       </table>
-      <p class="warning"><strong>Best available is not necessarily relevant.</strong> Candidate A can be the nearest vector while failing the query’s date limit; Candidate B is a commentary rather than an empirical study. The score never observes those human criteria unless the representation and retrieval pipeline preserve them. The two filters above show what happens when they do: the date rule removes A and promotes B, which still fails the query, and only applying both criteria leaves C — on eligibility, not on score.</p>
+      </div><p class="warning" id="eligibility-note"><strong>Metadata eligibility is not a final relevance judgement.</strong> C meets both stipulated metadata criteria. That does not establish methodological quality or fully answer the question. This lab assumes the date and study-type fields are accurate and complete; a librarian still assesses the evidence.</p>
     </section>
   </div>
 
   <p id="live-summary" class="sr-only" aria-live="polite"></p>
 
-  <details class="adv" open>
+  <details class="adv" id="formulas">
     <summary>Dot product and cosine similarity: formulas and worked example</summary>
     <div class="adv-body">
       <div class="formula-grid">
@@ -384,11 +410,12 @@ const QUERY={angle:22,magnitude:1.9};
 const COPIES={
   A:'A 2012 empirical study of open-access articles and citation counts — topically close, but outside the date limit.',
   B:'A 2025 commentary on open access and citation practice — current, but not an empirical study.',
-  C:'A 2025 empirical study of repositories and citation advantage — the only record meeting both stated criteria.'
+  C:'A 2025 empirical study of repositories and citation advantage — meets both metadata criteria; relevance and quality still require assessment.'
 };
 const META={A:{year:2012,empirical:true},B:{year:2025,empirical:false},C:{year:2025,empirical:true}};
 const DEFAULTS={A:{angle:24,magnitude:1},B:{angle:55,magnitude:1.9},C:{angle:122,magnitude:1.35}};
 let filters={recent:false,empirical:false};
+let topK=3,filterOrder='before',answered=false,challenge=null;
 function eligible(id){
   if(filters.recent&&META[id].year<2024)return false;
   if(filters.empirical&&!META[id].empirical)return false;
@@ -434,12 +461,24 @@ function values(id){
   return {x,y,length,cosine,dot};
 }
 function score(id){const v=values(id);return metric==='cosine'?v.cosine:v.dot;}
-function ranked(){return ['A','B','C'].filter(eligible).sort((a,b)=>score(b)-score(a)||a.localeCompare(b));}
+function allRanked(){return ['A','B','C'].sort((a,b)=>score(b)-score(a)||a.localeCompare(b));}
+function ranked(){const all=allRanked();return filterOrder==='before'?all.filter(eligible).slice(0,topK):all.slice(0,topK).filter(eligible);}
+function omittedReason(id){
+  if(filterOrder==='after'&&!allRanked().slice(0,topK).includes(id))return 'Outside the candidate cutoff; not passed to filtering.';
+  if(!eligible(id))return 'Removed by metadata filter: '+excludedBy(id);
+  return 'Outside the candidate cutoff.';
+}
 function excluded(){return ['A','B','C'].filter(id=>!eligible(id));}
 function f(value){return (Math.abs(value)<.0005?0:value).toFixed(3);}
 function displayAngle(value){return value+'°';}
 
-function setMetric(next){metric=next;render();}
+function comparisonChange(action,label){
+  const before=ranked().join(' → ')||'no records';
+  action();render();
+  $('change-note').hidden=inTour;
+  $('change-note').textContent=label+'. Before: '+before+'. After: '+(ranked().join(' → ')||'no records')+'. The papers and metadata eligibility stayed the same; '+(label==='Normalisation'?'the vector lengths changed before comparison.':'the comparison rule changed.');
+}
+function setMetric(next){comparisonChange(()=>{metric=next;},'Comparison rule');}
 function setSelected(id){selected=id;render();}
 
 function renderControls(){
@@ -449,8 +488,8 @@ function renderControls(){
   normalise.checked=normalised;
   $('filter-recent').checked=filters.recent;
   $('filter-empirical').checked=filters.empirical;
-  $('filter-recent').disabled=inTour&&tourIndex!==5;
-  $('filter-empirical').disabled=inTour&&tourIndex!==5;
+  $('filter-recent').disabled=inTour;
+  $('filter-empirical').disabled=inTour;
   candidateButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.id===selected)));
   angle.value=candidates[selected].angle;
   magnitude.value=candidates[selected].magnitude;
@@ -460,6 +499,19 @@ function renderControls(){
   $('angle-val').textContent=displayAngle(candidates[selected].angle);
   $('magnitude-val').textContent=normalised?'1.00 (normalised)':candidates[selected].magnitude.toFixed(2);
   $('candidate-copy').textContent=COPIES[selected];
+  // The tour introduces one mechanism at a time; sandbox exposes all controls.
+  metricCos.closest('.control-block').hidden=inTour&&tourIndex<1;
+  normalise.closest('.control-block').hidden=inTour&&tourIndex<3;
+  $('filter-recent').closest('.control-block').hidden=inTour&&tourIndex<5;
+  magnitude.closest('.ctrl').hidden=inTour&&tourIndex<2;
+  $('top-k').value=String(topK);$('filter-order').value=filterOrder;
+  $('sandbox-tools').hidden=inTour;
+  $('ranking-results').hidden=inTour&&!answered;
+  $('prediction-note').hidden=!inTour||answered;
+  $('selected-detail').hidden=inTour&&!answered;
+  $('eligibility-note').hidden=inTour&&(!answered||tourIndex<4);
+  $('formulas').hidden=inTour&&!answered;
+  $('tour-next').disabled=inTour&&!answered;
   $('query-meta').textContent=normalised?`Toy display: ${displayAngle(QUERY.angle)} from the horizontal axis; length 1.00 after normalisation.`:`Toy display: ${displayAngle(QUERY.angle)} from the horizontal axis; length ${QUERY.magnitude.toFixed(2)}.`;
 }
 
@@ -512,7 +564,7 @@ function renderPlot(){
     +`<p class="work-line">q = [${f(q.x)}, ${f(q.y)}]&nbsp;&nbsp;&nbsp;d = [${f(v.x)}, ${f(v.y)}]</p>`
     +`<p class="work-line${dotActive?' on':''}">q · d = (${f(q.x)} × ${f(v.x)}) + (${f(q.y)} × ${f(v.y)}) ≈ ${f(v.dot)}</p>`
     +`<p class="work-line${dotActive?'':' on'}">cos = ${f(v.dot)} ÷ (${q.length.toFixed(2)} × ${v.length.toFixed(2)}) ≈ ${f(v.cosine)}</p>`;
-  $('svg-desc').textContent=`The query points diagonally at ${displayAngle(QUERY.angle)} with length ${effectiveQueryMagnitude().toFixed(2)}. Candidate ${selected} is selected at ${displayAngle(candidates[selected].angle)} relative to the query, with length ${v.length.toFixed(2)}. Using ${metric==='cosine'?'cosine similarity':'dot product'}, the ranking is ${ranked().join(', ')}.`;
+  $('svg-desc').textContent=`The query points diagonally at ${displayAngle(QUERY.angle)} with length ${effectiveQueryMagnitude().toFixed(2)}. Candidate ${selected} is selected at ${displayAngle(candidates[selected].angle)} relative to the query, with length ${v.length.toFixed(2)}. Using ${metric==='cosine'?'cosine similarity':'dot product'}, the ranking is ${inTour&&!answered?'hidden until your prediction':ranked().join(', ')}.`;
 }
 
 function barStyle(value){
@@ -527,24 +579,25 @@ function renderRanking(){
   $('rank-list').innerHTML=order.map((id,index)=>{
     const active=score(id);
     return `<li class="rank-card" style="--candidate:${COLOURS[id]}"><div class="rank-top"><span class="rank-number">${index+1}</span><span class="rank-id">Candidate ${id}</span><span class="rank-score">${f(active)}</span></div><p class="rank-copy">${COPIES[id]}</p><div class="score-track" aria-hidden="true"><i class="score-bar" style="${barStyle(active)}"></i></div></li>`;
-  }).concat(excluded().map(id=>
-    `<li class="rank-card excluded" style="--candidate:${COLOURS[id]}"><div class="rank-top"><span class="rank-number">—</span><span class="rank-id">Candidate ${id}</span><span class="rank-score">${f(score(id))}</span></div><p class="rank-copy">${COPIES[id]}</p><p class="rank-why">Excluded before ranking: ${excludedBy(id)}</p></li>`
+  }).concat(['A','B','C'].filter(id=>!order.includes(id)).map(id=>
+    `<li class="rank-card excluded" style="--candidate:${COLOURS[id]}"><div class="rank-top"><span class="rank-number">—</span><span class="rank-id">Candidate ${id}</span><span class="rank-score">${f(score(id))}</span></div><p class="rank-copy">${COPIES[id]}</p><p class="rank-why">${omittedReason(id)}</p></li>`
   )).join('');
   $('score-body').innerHTML=['A','B','C'].map(id=>{
     const v=values(id);
     return `<tr><th scope="row">${id}</th><td>${displayAngle(candidates[id].angle)}</td><td>${v.length.toFixed(2)}</td><td>${f(v.cosine)}</td><td>${f(v.dot)}</td></tr>`;
   }).join('');
   const rule=metric==='cosine'?'cosine similarity':'dot product';
-  $('live-summary').textContent = order.length
-    ? `Using ${rule}, ${order.length} of 3 candidates are eligible. Candidate ${order[0]} ranks first with score ${f(score(order[0]))}` +
+  $('pipeline-summary').textContent=(filterOrder==='before'?'Filter → select top '+topK:'Select top '+topK+' → filter')+': returns '+(order.join(', ')||'no records')+'. '+(order.includes('C')?'C reaches the next stage.':'C does not reach the next stage.');
+  $('live-summary').textContent = inTour&&!answered?'Scores and order hidden until your prediction.':order.length
+    ? `Using ${rule}, ${order.length} of 3 candidates are returned. Candidate ${order[0]} ranks first with score ${f(score(order[0]))}` +
       (order.length>1?`, followed by ${order.slice(1).join(' and ')}.`:', and is the only one left.')
-    : 'No candidate satisfies the active filters.';
+    : 'No records are returned under the current filters and candidate cutoff.';
 }
 
-function render(){renderControls();renderPlot();renderRanking();writeHash();}
+function render(){renderControls();renderPlot();renderRanking();renderChallenge();writeHash();}
 function writeHash(){
   if(inTour)return;
-  const p=new URLSearchParams({metric,normalised:String(normalised),selected});
+  const p=new URLSearchParams({metric,normalised:String(normalised),selected,recent:String(filters.recent),empirical:String(filters.empirical),topk:String(topK),filterOrder});
   Object.keys(candidates).forEach(id=>{p.set(id+'a',candidates[id].angle);p.set(id+'m',candidates[id].magnitude);});
   history.replaceState(null,'','#'+p.toString());
 }
@@ -553,6 +606,7 @@ function readHash(){
   if(!p.has('metric'))return false;
   const read=(key,fallback,min,max)=>{const n=Number(p.get(key));return p.has(key)&&Number.isFinite(n)?Math.max(min,Math.min(max,n)):fallback;};
   Object.keys(candidates).forEach(id=>{candidates[id].angle=read(id+'a',DEFAULTS[id].angle,Number(angle.min),Number(angle.max));candidates[id].magnitude=read(id+'m',DEFAULTS[id].magnitude,Number(magnitude.min),Number(magnitude.max));});
+  filters={recent:p.get('recent')==='true',empirical:p.get('empirical')==='true'};topK=Math.round(read('topk',3,1,3));filterOrder=p.get('filterOrder')==='after'?'after':'before';
   metric=p.get('metric')==='dot'?'dot':'cosine';normalised=p.get('normalised')==='true';selected=['A','B','C'].includes(p.get('selected'))?p.get('selected'):'A';
   return true;
 }
@@ -604,18 +658,30 @@ const TOURS=[
     metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
   },
   {
-    title:'Criteria the score never saw',
-    intro:'The two criteria in the query — since 2024, empirical — are metadata, not geometry. Both switches are unlocked. Turn on <b>Published 2024 or later</b> only, and leave the other off.',
-    question:'With Candidate A excluded by the date rule, which record now ranks first?',
-    choices:[['C, the only one meeting both criteria','c'],['B, which is still a commentary','b'],['Neither — the list is empty','none']],correct:'b',
-    answer:'B. Removing A promotes the next-highest score, and that is the 2025 commentary. One criterion expressed as a filter, one left to the ranking, and the ranking still gets it wrong. Now switch on <b>Empirical studies only</b> as well: C is all that remains — and its cosine is still −0.530.',
-    takeaway:'A similarity score cannot enforce a criterion nobody encoded. Where a criterion exists as metadata it can be made an admission rule, which is a different mechanism from ranking; where it does not, no amount of reordering supplies it.',
-    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS,filters:{recent:false,empirical:false}
+    title:'Apply the date criterion',
+    intro:'A leads under cosine. Predict what will happen when we apply Published 2024 or later. Your answer applies the filter and reveals the result.',
+    question:'After the date filter removes A, which record will rank first?',
+    choices:[['C, because it meets both criteria','c'],['B, which is still a commentary','b'],['No records','none']],correct:'b',
+    answer:'B now leads. The date filter removed A; it did not change any similarity score. B still fails the empirical-study criterion.',
+    takeaway:'One metadata filter enforces one criterion. It does not supply the other.',
+    metric:'cosine',normalised:false,selected:'B',vectors:DEFAULTS,
+    filters:{recent:false,empirical:false},revealFilters:{recent:true,empirical:false}
+  },
+  {
+    title:'Apply the study-type criterion',
+    intro:'The date filter is already active. Predict the effect of also requiring empirical studies. Your answer applies the second filter.',
+    question:'Which record remains after both metadata filters?',
+    choices:[['A','a'],['B','b'],['C','c']],correct:'c',
+    answer:'C is the only record left. Its cosine is still −0.530. It meets both metadata criteria; this alone does not establish its quality or whether its findings answer the question.',
+    takeaway:'Admission rules change which records survive, not their similarity scores. These rules assume accurate, complete metadata.',
+    metric:'cosine',normalised:false,selected:'C',vectors:DEFAULTS,
+    filters:{recent:true,empirical:false},revealFilters:{recent:true,empirical:true}
   }
 ];
 
 function applyTour(index){
   const step=TOURS[index];
+  answered=false;topK=3;filterOrder='before';challenge=null;$('change-note').hidden=true;
   metric=step.metric;normalised=step.normalised;selected=step.selected;candidates=clone(step.vectors);
   filters=Object.assign({recent:false,empirical:false},step.filters||{});
   $('tour-step').textContent=`Step ${index+1} of ${TOURS.length}`;
@@ -637,12 +703,14 @@ function applyTour(index){
 
 function chooseAnswer(button){
   const step=TOURS[tourIndex];
+  answered=true;if(step.revealFilters)filters=clone(step.revealFilters);
   [...$('tour-choices').querySelectorAll('button')].forEach(choice=>{
     choice.disabled=true;
     choice.classList.toggle('right',choice.dataset.value===step.correct);
   });
   if(button.dataset.value!==step.correct)button.classList.add('wrong');
   $('tour-reveal').hidden=false;
+  render();
 }
 
 function setMode(tourMode){
@@ -651,25 +719,48 @@ function setMode(tourMode){
   $('mode-tour').setAttribute('aria-pressed',String(inTour));
   $('mode-sandbox').setAttribute('aria-pressed',String(!inTour));
   $('tour').hidden=!inTour;
-  if(inTour){tourIndex=0;applyTour(0);}else{render();}
+  if(inTour){tourIndex=0;applyTour(0);}else{resetSandbox();}
 }
+
+function resetSandbox(){
+  candidates=clone(DEFAULTS);metric='cosine';normalised=false;selected='A';
+  filters={recent:false,empirical:false};topK=3;filterOrder='before';challenge=null;
+  $('change-note').hidden=true;
+  $('challenge-task').textContent='Choose a challenge to load a fresh starting state, or explore freely below.';
+  render();
+}
+function renderChallenge(){
+  if(!challenge){$('challenge-status').textContent='';return;}
+  let achieved=false;
+  if(challenge==='length')achieved=metric==='cosine'&&!normalised&&candidates.B.angle===55&&candidates.B.magnitude>1.9;
+  if(challenge==='metric')achieved=metric==='dot'&&!normalised&&ranked()[0]==='B';
+  if(challenge==='filters')achieved=filters.recent&&filters.empirical&&ranked().join(',')==='C';
+  $('challenge-status').textContent=(achieved?'Goal reached. ':'Keep experimenting. ')+(challenge==='length'?'B cosine: '+f(values('B').cosine)+'; dot product: '+f(values('B').dot)+'. Starting values: 0.574 and 2.071.':challenge==='metric'?'Current order: '+ranked().join(' → ')+'. Starting cosine order: A → B → C.':'Returned: '+ranked().join(', ')+'. Check whether the scores themselves changed.');
+}
+document.querySelectorAll('[data-challenge]').forEach(button=>button.addEventListener('click',()=>{
+  resetSandbox();challenge=button.dataset.challenge;selected='B';
+  $('challenge-task').textContent=challenge==='length'?'Lengthen B while keeping its direction at 55° and cosine selected. Watch both scores: which one changes?':challenge==='metric'?'Switch cosine to dot product without moving any arrow. Which paper becomes first, and did its eligibility change?':'Apply the date filter, observe B, then apply the empirical-study filter. Did you change representation, comparison or admission?';render();
+}));
+$('top-k').addEventListener('change',()=>{topK=Number($('top-k').value);$('change-note').hidden=true;render();});
+$('filter-order').addEventListener('change',()=>{filterOrder=$('filter-order').value;$('change-note').hidden=true;render();});
+$('cutoff-start').addEventListener('click',()=>{resetSandbox();topK=2;filters={recent:true,empirical:true};render();});
 
 metricCos.addEventListener('click',()=>setMetric('cosine'));
 metricDot.addEventListener('click',()=>setMetric('dot'));
-normalise.addEventListener('change',()=>{normalised=normalise.checked;render();});
-$('filter-recent').addEventListener('change',e=>{filters.recent=e.target.checked;render();});
-$('filter-empirical').addEventListener('change',e=>{filters.empirical=e.target.checked;render();});
+normalise.addEventListener('change',()=>comparisonChange(()=>{normalised=normalise.checked;},'Normalisation'));
+$('filter-recent').addEventListener('change',e=>{filters.recent=e.target.checked;$('change-note').hidden=true;render();});
+$('filter-empirical').addEventListener('change',e=>{filters.empirical=e.target.checked;$('change-note').hidden=true;render();});
 candidateButtons.forEach(button=>button.addEventListener('click',()=>setSelected(button.dataset.id)));
-angle.addEventListener('input',()=>{candidates[selected].angle=Number(angle.value);render();});
-magnitude.addEventListener('input',()=>{candidates[selected].magnitude=Number(magnitude.value);render();});
+angle.addEventListener('input',()=>{candidates[selected].angle=Number(angle.value);$('change-note').hidden=true;render();});
+magnitude.addEventListener('input',()=>{candidates[selected].magnitude=Number(magnitude.value);$('change-note').hidden=true;render();});
 $('mode-tour').addEventListener('click',()=>setMode(true));
 $('mode-sandbox').addEventListener('click',()=>setMode(false));
-$('btn-reset').addEventListener('click',()=>{if(inTour)applyTour(tourIndex);else{candidates=clone(DEFAULTS);metric='cosine';normalised=false;selected='A';render();}});
+$('btn-reset').addEventListener('click',()=>{if(inTour)applyTour(tourIndex);else{resetSandbox();}});
 $('tour-choices').addEventListener('click',event=>{const button=event.target.closest('button');if(button)chooseAnswer(button);});
 $('tour-prev').addEventListener('click',()=>{if(tourIndex>0){tourIndex-=1;applyTour(tourIndex);}});
 $('tour-next').addEventListener('click',()=>{if(tourIndex<TOURS.length-1){tourIndex+=1;applyTour(tourIndex);}else setMode(false);});
 
-if(readHash()){setMode(false);}else{document.querySelector('.wrap').classList.add('in-tour');applyTour(0);}
+if(readHash()){inTour=false;$('tour').hidden=true;$('mode-tour').setAttribute('aria-pressed','false');$('mode-sandbox').setAttribute('aria-pressed','true');render();}else{document.querySelector('.wrap').classList.add('in-tour');applyTour(0);}
 })();
 </script>
 </body></html>

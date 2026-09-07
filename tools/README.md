@@ -145,3 +145,11 @@ above are the only current authoring tools.
 The earlier single-flow article has been retired. Its content can be recovered
 from Git history, while `how-search-decides-what-you-see.html` is retained only
 as a redirect to the textbook.
+
+## Interactive lab checks
+
+Run `node tools/test-labs.cjs` for scoring and existing lab examples, then
+`node tools/test-vector-tour.cjs` for the vector lab’s prediction/reveal flow,
+cutoff/filter ordering, sandbox challenges and complete shared-state reset.
+The latter executes the page script with a small DOM fixture; it does not
+replace a rendered-browser layout check.
