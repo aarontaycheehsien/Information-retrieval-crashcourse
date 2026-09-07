@@ -66,7 +66,7 @@ arithmetic or link rot.
 |---|---|---|---|
 | 1 | ~~Previous/Next navigation on the appendices~~ **Applied**; *Check yourself* declined | All appendices | Medium |
 | 2 | ~~Recalibrate the appendix reading times, or document the convention~~ **Applied** | Appendices F (29 min) and G (12 min) | Small |
-| 3 | Rerun Appendix B's worked example on a string that actually splits | Appendix B, Figure B.1 | Small |
+| 3 | ~~Rerun Appendix B's worked example on a string that actually splits~~ **Applied** | Appendix B, Figure B.1 | Small |
 | 4 | ~~Add a `top-k` boundary control to the BM25 lab~~ **Applied** | `bm25-evidence-lab.html` | Medium |
 | 5 | ~~Add Table 14.3: one filled-in row of a local evaluation set~~ **Applied** | Chapter 14 | Small |
 | 6 | ~~Draw the RAG Fusion pipeline as Figure G.1~~ **Applied** | Appendix G | Medium |
@@ -167,7 +167,7 @@ than reading) so an instructor knows the two numbers are not comparable.
 stated 10 minutes — which is the outlier in the other direction. Out of scope
 for this review, but the same recalculation would catch it.
 
-### 1.3 Appendix B's worked example never exercises the mechanism it exists to explain
+### 1.3 Appendix B's worked example never exercises the mechanism it exists to explain — **Applied**
 
 Appendix B follows "Unbelievable scenes!" through six stages. The text concedes
 the problem itself: "Here all three items are complete vocabulary tokens, so no
@@ -190,12 +190,24 @@ second panel, or replace the current example outright. The `##` caption then
 earns its place, Chapter 13's compositionality claim acquires evidence, and
 Appendix B connects to the OOV diagnosis instead of sitting beside it.
 
-**One caveat on execution:** the current pieces and IDs are stated to follow the
-published `google-bert/bert-base-uncased` vocabulary, and I could not verify them
-— outbound access to huggingface.co is blocked in this environment. Any new
-segmentation must be taken from the actual vocabulary file, not predicted, and
-the existing IDs (23653, 5019, 999, 101, 102) are worth re-checking at the same
-time.
+**Applied, on verified output.** `curl` could not reach huggingface.co from this
+environment, but the vocabulary was retrievable through a different fetch route,
+and `tools/wordpiece_example.py` was run against the real 30,522-entry file. Every
+ID was then checked a second time straight out of the file rather than trusting
+the script.
+
+The existing IDs were all correct: `unbelievable` 23653, `scenes` 5019, `!` 999.
+
+The segmentation came back messier than the review predicted, and that is the
+best part of the result. **This vocabulary contains no `rizz` piece at all** —
+neither `rizz` nor `##rizz` — so BERT cannot recover the parts a reader sees. It
+produces `ri` · `##zz` · `##lord` (15544, 13213, 19980). The figure therefore
+demonstrates Chapter 13's caveat that "another model may split the same string
+very differently" rather than its optimistic case, which is more honest and more
+useful. Chapter 13's sentence, which was correctly hedged but purely
+hypothetical, now links to the demonstration and names the result.
+
+Appendix B goes from 683 to 767 words, so the stated 3 minutes still holds.
 
 ### 1.4 Appendix D has no external citations, and cannot be used the way it is described — **Both halves declined**
 
