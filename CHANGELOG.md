@@ -71,6 +71,16 @@ parts, fifteen chapters and seven appendices.
 
 ### Changed
 
+- **Chapter 11 now teaches through a worked request.** The open-access citation
+  example introduces understanding, transformation and routing before the wider
+  input taxonomy. Three starting points, a two-pass feedback example and a shared
+  Query2doc/HyDE illustration carry the main explanation. Detailed input and
+  product comparisons remain in optional reference drawers, with direct links
+  that open them. Existing anchors and table numbers are preserved; the chapter
+  retains its connections to Chapters 4, 8–10 and 12–15 and Appendices F and G.
+- **The query-transformation glossary definition** now distinguishes a changed
+  retrieval input from a necessarily changed candidate set.
+
 - **Appendix B's worked example now splits a word.** It followed *Unbelievable
   scenes!* through six stages while no word split, so the caption explained a
   `##` marker the figure never displayed. It now follows *Unbelievable rizzlord
