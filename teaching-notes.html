@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Teaching notes — How Search Decides What You See</title>
   <link rel="canonical" href="teaching-notes.html">
-  <meta name="description" content="Notes for instructors using How Search Decides What You See: course shapes, exercise guidance, discussion prompts and what to re-check before teaching.">
+  <meta name="description" content="Teach search diagnosis with a one-hour workshop, participant handout and worked answers, plus audience routes, longer course plans and assessment guidance for academic librarians.">
   <style>
     :root {
       --paper: #f4f0e8;
@@ -23,7 +23,7 @@
     * { box-sizing: border-box; }
     body {
       margin: 0; background: var(--paper); color: var(--ink);
-      font: 400 1.02rem/1.7 var(--serif);
+      font: 400 1.02rem/1.7 var(--serif); overflow-wrap: anywhere;
     }
     .hero {
       padding: 3.2rem 1.5rem 2.4rem; border-bottom: 1px solid var(--line);
@@ -49,6 +49,16 @@
     p, li { margin: 1rem 0; }
     ul, ol { padding-left: 1.3rem; }
     a { color: var(--accent-dark); }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+    [id] { scroll-margin-top: 1rem; }
+    .quick-nav { margin: 1.5rem 0 2rem; padding: 1rem 1.2rem; border: 1px solid var(--line); font-family: var(--sans); }
+    .quick-nav p { margin: 0; font-weight: 700; }
+    .quick-nav ul { margin: .5rem 0 0; }
+    .quick-nav li { margin: .3rem 0; }
+    .case, details { margin: 1.5rem 0; padding: 1rem 1.2rem; border: 1px solid var(--line); border-radius: 8px; background: var(--paper-2); }
+    .case h3 { margin-top: 0; }
+    summary { cursor: pointer; color: var(--teal); font: 700 1rem/1.5 var(--sans); }
+    caption { text-align: left; font-weight: 700; margin-bottom: .6rem; }
     strong { color: #111817; }
     code {
       padding: .1rem .3rem; border-radius: 4px; background: #ece7dd;
@@ -76,23 +86,94 @@
       font: 400 .84rem/1.6 var(--sans);
     }
     @media (max-width: 620px) { body { font-size: .98rem; } }
+    @media print {
+      @page { margin: 16mm; }
+      body { background: white; color: black; font-size: 10pt; }
+      .hero, main, footer { max-width: none; padding: 0; background: white; }
+      .hero { margin-bottom: 1.5rem; }
+      .quick-nav { display: none; }
+      h2, h3, summary { break-after: avoid; }
+      tr { break-inside: avoid; }
+      .table-wrap { overflow: visible; }
+      table { min-width: 0; font-size: 8.5pt; overflow-wrap: anywhere; }
+      a { color: inherit; }
+    }
   </style>
 </head>
 <body>
   <header class="hero"><div class="inner">
     <p class="kicker">Teaching notes · Version 1.2</p>
-    <h1>Using <em>How Search Decides What You See</em> in a course</h1>
-    <p class="subtitle">Course shapes, exercise guidance, discussion prompts, and what to re-check before you teach it.</p>
+    <h1>Teaching with <em>How Search Decides What You See</em></h1>
+    <p class="subtitle">A one-hour workshop you can run with colleagues, followed by routes through the book for longer teaching.</p>
   </div></header>
 
   <main>
     <div class="lede">
-      <p>The book is <a href="search-textbook.html">here</a>, and it is licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. You may excerpt, adapt, translate and redistribute it, including commercially, with credit and without asking. Third-party screenshots and reproduced research figures, including Figure 5.5 from Mikolov and colleagues, retain their original rights and attribution.</p>
-      <p>These notes are for someone deciding what to assign. They are not part of the book and can be ignored entirely.</p>
-      <p>The main teaching audiences are information literacy librarians and evidence synthesis librarians. A smaller secondary audience consists of systems/discovery librarians responsible for configuring, evaluating or procuring search products. The same chapters serve all three groups, but the emphasis and the status of Appendix F change with the cohort.</p>
+      <p>Start with the one-hour workshop below to use <a href="search-textbook.html">the textbook</a> at a staff meeting or professional-development session. The case, participant handout, timings and worked answers are supplied. Participants need no advance reading or subscription access.</p>
+      <p>The main audiences are information literacy and evidence synthesis librarians, with systems/discovery librarians as a secondary audience. The routes below connect each group’s work to suitable reading and an outcome they can demonstrate.</p>
+      <p>You may adapt these notes and the handout with credit under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. See <a href="#reuse">reuse guidance</a> for the book’s third-party figures.</p>
     </div>
 
-    <h2>What it covers, and what it deliberately does not</h2>
+    <nav class="quick-nav" aria-label="Teaching notes contents">
+      <p>Choose what you need</p>
+      <ul>
+        <li><a href="#one-hour-workshop">Run the one-hour workshop</a> · <a href="teaching-workshop-handout.html">participant handout</a></li>
+        <li><a href="#audience-routes">Choose an audience and outcome</a></li>
+        <li><a href="#course-shapes">Plan a half-day, six-week or thirteen-week course</a></li>
+        <li><a href="#labs">Use the labs</a> · <a href="#exercises">set the exercises</a> · <a href="#rubric">mark the work</a></li>
+        <li><a href="#discussion">Lead a discussion</a> · <a href="#currency">check product claims</a> · <a href="#reuse">reuse figures</a></li>
+        <li><a href="#after-teaching">Record what worked for the next instructor</a></li>
+      </ul>
+    </nav>
+
+    <h2 id="one-hour-workshop">One hour: why did this search miss a paper?</h2>
+    <p><strong>For:</strong> academic librarians who teach searching or support research consultations. Familiarity with ordinary database searching is enough. <strong>Outcome:</strong> participants can distinguish a missing citation from a missing candidate, choose a check that would narrow the diagnosis, and explain a sensible next action to a researcher.</p>
+    <p>This is a short introduction to <a href="search-textbook.html#exercise3">Application Exercise III</a>. The full exercise adds live searching, relevance judgements and measurement; those need time beyond this hour. The timings below are a suggested first-run plan and have not yet been validated in an external teaching pilot.</p>
+
+    <h3>Prepare the session</h3>
+    <ul>
+      <li><strong>Facilitator preparation:</strong> allow about 20–30 minutes to read the case and worked answers, then the book’s <a href="search-textbook.html#anatomy-of-a-cited-answer">anatomy of a cited answer</a>, <a href="search-textbook.html#diagnose-before-choosing-a-remedy">diagnostic questions</a> and opening of <a href="search-textbook.html#library-practice">Chapter 15</a>. Allow longer if these distinctions are new to you.</li>
+      <li><strong>Materials:</strong> share or print the <a href="teaching-workshop-handout.html">two-page participant handout</a>. It contains the case, response spaces and a transfer check, with no answer key. Participants can write on paper or copy the prompts into a document. This page supplies your facilitation notes; a slide deck is unnecessary.</li>
+      <li><strong>Access:</strong> use pairs or small groups, with individual writing before discussion. Read the case aloud as well as providing it in text. A printed handout is sufficient; the session does not depend on a live product, login or network connection.</li>
+    </ul>
+
+    <div class="case" id="workshop-case">
+      <h3>The prepared case</h3>
+      <p><strong>Teaching scenario:</strong> this uses the book’s open-access citation-advantage question. The observations and trace below are stipulated for practice; they are not findings from a new test of a named product.</p>
+      <p>A researcher asks an academic search assistant, “Is there an open access citation advantage?” Its answer cites five papers. The researcher identifies another relevant paper that is not cited. An exact-title search in the service’s ordinary discovery mode finds that paper.</p>
+      <p>The service’s documentation describes this assistant mode: it transforms the question into a lexical query, retrieves up to 30 candidates, reranks them, and supplies up to five to the answer writer. Initially, the researcher can see only the answer and its citations.</p>
+      <p><strong>Ask participants:</strong> what is established, what remains possible, and which additional evidence would best distinguish those possibilities? Then have them propose one next action. Finding the paper in another mode does not establish that this assistant searched the same index, fields or route.</p>
+    </div>
+
+    <h3>Run of session</h3>
+    <div class="table-wrap"><table>
+      <caption>A 60-minute session, including individual work and discussion</caption>
+      <thead><tr><th scope="col">Minutes</th><th scope="col">Facilitator action</th><th scope="col">Participant output</th></tr></thead>
+      <tbody>
+        <tr><td>0–5</td><td>Read the case. Ask everyone to write their first explanation before discussing it.</td><td>An initial diagnosis and next action to revisit at the end.</td></tr>
+        <tr><td>5–12</td><td>Explain three distinctions: entering a candidate set; ranking and passing a smaller set onward; choosing what to cite in an answer. A paper can disappear at each boundary.</td><td>A simple pipeline annotated with possible exclusion points.</td></tr>
+        <tr><td>12–25</td><td>Pairs separate observations from hypotheses and choose one discriminating check. Ask what each proposed check could actually establish.</td><td>Two plausible explanations, with the evidence needed to distinguish them.</td></tr>
+        <tr><td>25–35</td><td>Reveal the trace in the facilitator answer below. Ask participants to revise their diagnosis and select an intervention.</td><td>A diagnosis tied to a specific boundary, with a testable next action.</td></tr>
+        <tr><td>35–47</td><td>Ask for a short explanation suitable for a researcher. Partners check that it preserves the limits of the evidence.</td><td>Three to five sentences: what happened, what to try, and what that would leave unknown.</td></tr>
+        <tr><td>47–55</td><td>Use the new case on page two of the handout, individually, before discussing the answer.</td><td>A diagnosis for a different exclusion point.</td></tr>
+        <tr><td>55–60</td><td>Return to the initial explanation. Ask each participant to identify one revision and one place they could use the method at work.</td><td>A corrected explanation and a concrete next use.</td></tr>
+      </tbody>
+    </table></div>
+
+    <details id="workshop-answers">
+      <summary>Facilitator answers and the trace to reveal at minute 25</summary>
+      <p><strong>Before the reveal:</strong> the missing citation establishes absence from the answer’s cited set. It does not locate the failure. The paper may be absent from the assistant’s candidates, excluded by reranking and its cut-off, or supplied to the writer and left uncited. A trace of the actual run, including the candidates and writer’s input, distinguishes these. Documentation describes the intended pipeline; it is not a trace of this particular search.</p>
+      <p><strong>Read this new evidence aloud:</strong> “A saved trace of the original assistant run is now available. The paper was among the 30 first-stage candidates, ranked eighteenth. After reranking it was eighth. Only the first five were supplied to the answer writer.”</p>
+      <p><strong>Diagnosis:</strong> the paper entered the first-stage candidate set but did not cross the later five-paper boundary. Generation could not cite it from its supplied evidence. The trace locates the exclusion; it does not explain why the reranker placed the paper eighth.</p>
+      <p><strong>Reasonable next actions:</strong> inspect the paper directly for the immediate research need; try a targeted reformulation or another retrieval route, preserving the original run for comparison; or test a larger downstream candidate budget if that control exists. Explain what the action tests. A new query can change the candidate set and ranking, but recovery is not guaranteed. Asking the writer to reconsider the same five papers cannot add the missing one to its supplied evidence.</p>
+      <p><strong>Example explanation to the researcher:</strong> “The saved trace shows that the search found this paper, but it was eighth after reranking and only five papers reached the answer writer. We can inspect it directly and try a more targeted search, saving both runs to see what changes. Recovering this paper would help with your question, but would not establish that we had found every relevant study.”</p>
+      <p><strong>Transfer-check answer:</strong> in the second case, the paper reached the writer’s input. Its absence from the answer therefore points to generation or citation selection, rather than exclusion by the retrieval stages in that run. Compare the relevant source passage with the answer and inspect any available citation-selection record. Inclusion in the input does not prove that the writer used it faithfully; one recovered paper does not establish complete retrieval.</p>
+      <p><strong>Look for:</strong> a revised diagnosis after new evidence, an intervention suited to the boundary, and an explicit limit on the conclusion. If participants keep treating a missing citation as proof of failed retrieval, return to the writer’s input before adding terminology.</p>
+    </details>
+
+    <p><strong>After the session:</strong> invite participants to apply the same observation–hypothesis–check–action record to one real enquiry. Use the <a href="search-textbook.html#exercise3">full exercise</a> when the aim is to compare retrieval quality, and the <a href="#after-teaching">short teaching record</a> to improve the next delivery.</p>
+
+    <h2 id="scope">What the book covers</h2>
 
     <p>The book is about the retrieval half of a search system: how text becomes searchable, how records become candidates, how they are ranked, how the pieces are assembled into a pipeline, who decides what to search next, how retrieval fails, how you would measure it, and what a library must record and require. It assumes no prior information-retrieval knowledge and no mathematics — formulas and worked examples are accompanied by explanations in words. No calculation is required to follow the main argument.</p>
 
@@ -107,9 +188,19 @@
 
     <p>The running examples deliberately use recent internet slang — <em>delulu</em>, <em>rizz</em>, <em>cooked</em>, <em>touch grass</em>. This is not decoration: words a system has never seen, or has seen only in another sense, are where retrieval breaks in instructive ways. Some students will find it either funny or grating, and it is worth naming the reason in advance.</p>
 
-    <h2>Choose the emphasis for the cohort</h2>
+    <h2 id="audience-routes">Choose the emphasis for the cohort</h2>
 
-    <p>These are routes through the same book, not separate curricula:</p>
+    <p>Choose the professional task first, then assign the supporting reading. These routes use the same book; a short session needs only the passages relevant to its outcome.</p>
+
+    <div class="table-wrap"><table>
+      <caption>A useful outcome for each audience</caption>
+      <thead><tr><th scope="col">Audience</th><th scope="col">Task to practise</th><th scope="col">Evidence of learning</th></tr></thead>
+      <tbody>
+        <tr><td>Information literacy</td><td>Explain an unexpected result and choose the next search action.</td><td>A short explanation a student could use, with observation separated from hypothesis.</td></tr>
+        <tr><td>Evidence synthesis</td><td>Distinguish finding candidates from prioritising an existing screening pool.</td><td>A search or screening record that identifies the boundary, what was tested and what remains unknown about recall.</td></tr>
+        <tr><td>Systems/discovery</td><td>Investigate a product claim or changed result list.</td><td>An annotated pipeline or local comparison, with a specific question supported by evidence for the vendor.</td></tr>
+      </tbody>
+    </table></div>
 
     <ul>
       <li><strong>Information literacy:</strong> use the full progression where time allows. If you need to cut, protect Part I, Chapter 11 on query transformation, and Chapters 13–15 on failure, evaluation and professional practice.</li>
@@ -117,18 +208,18 @@
       <li><strong>Systems/discovery:</strong> emphasise the distinctions in Chapters 4 and 6–11, the diagnostic and governance work in Chapters 13–15, Appendix D for terminology, and Appendix E when products combine or rerank candidate lists.</li>
     </ul>
 
-    <h2>Three course shapes</h2>
+    <h2 id="course-shapes">Three longer course shapes</h2>
 
     <p>Chapters have stable links: use the <strong>Copy link</strong> control in a chapter heading. Each chapter ends with <em>Check yourself</em> questions, with answers hidden until opened. They can serve as reading quizzes; printing reveals the answers. Reading-time estimates exclude lab and exercise work.</p>
 
     <h3>A half-day workshop (about three hours)</h3>
-    <p>For practising librarians who need the vocabulary rather than the mechanism.</p>
+    <p>For practising librarians who want to connect retrieval concepts to a search problem. Use the one-hour workshop as the practical core and add explanations and lab work around it.</p>
     <ol>
       <li><a href="search-textbook.html#intro">Chapters 1</a>–<a href="search-textbook.html#beyond-boolean">4</a> — the whole of Part I. It ends by resolving the category error it exists to correct, so it stands alone better than any other segment.</li>
       <li><a href="search-textbook.html#diagnosing-failure">Chapter 13</a> on retrieval failure, which needs surprisingly little of Part II to follow.</li>
       <li><a href="search-textbook.html#library-practice">Chapter 15</a> with <a href="search-textbook.html#appendix-search-terminology">Appendix D</a> — the procurement and evaluation material.</li>
     </ol>
-    <p>Skip Part II entirely. Participants will not be able to explain <em>why</em> dense retrieval bridges paraphrase, but they will be able to ask a vendor the right questions, which is the point of a workshop.</p>
+    <p><strong>A workable 180-minute allocation:</strong> 35 minutes on selected Part I explanations; 20 minutes for the BM25 tour and debrief; a 10-minute break; the 60-minute workshop above; 35 minutes adapting its record to a local enquiry or vendor question; and 20 minutes for reporting back and next steps. Treat the chapters listed above as supporting reading, rather than attempting to read all of them during the session. Part II can be assigned later when participants need the fuller account of representations and reranking.</p>
 
     <h3>A six-week module</h3>
     <p>One part a fortnight, with the application exercise as the assessment for each.</p>
@@ -145,31 +236,36 @@
 
     <h3>A thirteen-week course</h3>
     <p>Cover all fifteen chapters in thirteen weeks by pairing Chapters 5–6 in one week and Chapters 9–10 in another. Keep one chapter per week elsewhere. Pair Appendix A (Transformers) with Chapter 6; Appendix B (tokenisation) with Chapters 5–6; Appendix C (index execution) with Chapters 2–3; Appendix D (terminology) with Chapter 15 or keep it open throughout; and Appendix E (learning to rank) with Chapters 9–10. Treat <a href="search-textbook.html#appendix-evidence-synthesis-high-recall-retrieval">Appendix F</a> as required for evidence-synthesis cohorts alongside Chapters 13–15. Appendix G is an optional application of the pipeline to RAG after Chapter 12.</p>
-    <p>The three application exercises remain the summative assessment, one per part, which leaves ten weeks without one. Two things fill that gap without inventing new material. The <em>Check yourself</em> questions closing every chapter work as a weekly formative check — they are short, they have answers, and printing reveals them. And the re-verification task in the last section of these notes deserves promoting from an aside to an assessed piece: there are eight items in that table, so a cohort of any size can be given one each, asked to check it against current vendor documentation, and asked to report what changed and how they established it. It teaches the documentation-reading skill the whole book depends on, it produces something the next cohort can use, and it is the one assignment that cannot be answered from the book alone. For evidence-synthesis cohorts, Appendix F’s controlled TAR comparison is a fourth assessable task; guidance for marking it is with the exercises below.</p>
+    <p>Use the three application exercises as summative assessments, one per part, and the chapter <em>Check yourself</em> questions for weekly formative checks. Add the <a href="#currency">product-claim verification task</a> as an assessed piece: assign its eight items across individuals or groups, have them consult current documentation, and ask what changed and how they established it. The resulting record is useful to the next cohort. For evidence-synthesis cohorts, Appendix F’s controlled TAR comparison is a fourth assessable task; check its preparation requirements below before assigning it.</p>
     <p>This shape leaves room for the thing the book cannot supply: students running searches in systems your institution actually licenses, and reporting back. Chapters 13, 14 and 15 are considerably more useful to someone who has spent a week failing to make a discovery layer behave.</p>
 
-    <h2>Using the two labs</h2>
+    <h2 id="labs">Using the two labs</h2>
 <p>Use the <a href="bm25-evidence-lab.html">BM25 Evidence Lab</a> after Chapter 3, then revisit its admission control after Chapter 4. Ask students to predict the ranking before moving the prescribed slider. The tour fixes other inputs; the sandbox allows independent experiments. Changes to document length also change the collection average.</p>
 <p>Budget roughly fifteen minutes for the BM25 tour and ten for the vector tour, plus whatever sandbox time you want; the tours are seven and five prediction steps. The application exercises are the opposite shape — each needs a searching session plus written-up findings, so allow a week rather than a class. Reading-time estimates in the book exclude all of this.</p>
-<p>The BM25 tour ends on the candidate boundary: a <code>k</code> slider that cuts records the ranking already scored. That step is the one interactive demonstration of the claim the whole book turns on, so it is worth not running out of time before reaching it.</p>
+<p>The BM25 tour’s sixth step, <em>The boundary that scoring cannot cross</em>, uses a <code>k</code> slider that cuts records the ranking already scored. Protect time for this step and its debrief: ask which records the next stage receives and whether rescoring that fixed input could recover anything outside it. The seventh step returns to vocabulary and admission rules.</p>
 <p>Use the vector lab after Chapter 7. The text descriptions and coordinates are assigned teaching examples, not outputs of an embedding model. Compare direction, magnitude and unit normalisation, then ask why the highest similarity need not satisfy the date and study-design criteria. Students can share a sandbox example by copying its URL.</p>
-<h2>The application exercises</h2>
+<h2 id="exercises">The application exercises</h2>
 
     <p>There are three application exercises, one per part. Prefer an institutional system when local evaluation is the goal. For public access, adapt Exercises I and III to PubMed, OpenAlex or another open search system with suitable features. Exercise II can use public technical documentation plus a recorded behavioural probe. All ask for a written deliverable; access to internal vendor settings is not required.</p>
+    <p><strong>Before assigning:</strong> check that the chosen product supports the required query forms and exposes enough results for the task. Supply a recorded example if access fails. State the product and mode, required output, judgement depth where applicable, and deadline. A short in-class version should use a supplied case and one decision; reserve the full searching and write-up for work between sessions.</p>
 
-    <h3>Exercise I — Explain a result list without invoking meaning</h3>
+    <h3 id="exercise-i">Exercise I — Explain a result list without invoking meaning</h3>
+    <p><a href="search-textbook.html#exercise1">Assign the full instructions</a>. Output: a one-page account of four observations, plausible explanations and the next evidence needed.</p>
     <p><strong>Tests:</strong> whether the student can resist reaching for “semantic” as an explanation. They run a natural-language query, record four observations, and must account for each using only query analysis, the execution rule, or query transformation.</p>
     <p><strong>A strong answer</strong> identifies plausible layers, gives evidence, considers alternatives and marks what remains uncertain. A fully lexical account can be correct; unexplained residue is not a requirement. Do not require students to rule out alternatives the interface cannot distinguish.</p>
     <p><strong>Common wrong turn:</strong> concluding that a missing query term proves semantic retrieval. That is precisely the inference Chapter 4 dismantles, and it is worth marking as a failure of the exercise rather than a minor error.</p>
 
-    <h3>Exercise II — Map a product onto the pipeline</h3>
+    <h3 id="exercise-ii">Exercise II — Map a product onto the pipeline</h3>
+    <p><a href="search-textbook.html#exercise2">Assign the full instructions</a>. Output: a six-stage map labelled by evidence type, with one question for the vendor.</p>
     <p><strong>Tests:</strong> whether the student can distinguish what a vendor documents from what they inferred. Every stage must be labelled <em>documented</em>, <em>inferred</em> or <em>unknown</em>.</p>
     <p><strong>A strong answer</strong> justifies each label on the six-stage map. Mark the evidence, not the number of <em>unknown</em> entries. Use <em>documented: not used</em> for an explicitly absent stage. Keep documentation-based claims separate from observations and inferences from the behavioural probe.</p>
     <p><strong>Common wrong turn:</strong> treating a named model as an architecture. “It uses BERT” fills no stage on the map.</p>
 
-    <h3>Exercise III — Diagnose a failure, then try to document it</h3>
+    <h3 id="exercise-iii">Exercise III — Diagnose a failure, then try to document it</h3>
+    <p><a href="search-textbook.html#exercise3">Assign the full instructions</a>. Output: the diagnosis and intervention, a comparison of the two runs, and a record of what could not be established. The <a href="#one-hour-workshop">one-hour workshop</a> prepares participants for the diagnostic part.</p>
     <p><strong>Tests:</strong> diagnosis using Chapter 13’s workflow, a measurement from Chapter 14, and the record from Chapter 15.</p>
-    <p><strong>A strong answer</strong> applies the remedy the diagnosis implies rather than the one the student would have reached for first, and reports honestly when it did not work. The second deliverable — a list of everything the product would not let them record — is the institutionally useful half, and worth weighting accordingly.</p>
+    <p><strong>A strong answer</strong> tests a remedy suited to the diagnosis and reports honestly when it did not work. It also explains why each missing piece of the search record matters. Assess that gap list under evidence and explicit limits in the shared rubric below.</p>
+    <p><strong>Keep the comparison fair:</strong> write the relevance criteria first; pool and deduplicate both top tens; judge every pooled record against the same criteria, ideally without knowing its source run; then calculate precision@10 for each. Report recovery of the five known relevant seeds separately. Neither measure establishes complete recall. If fewer than ten results are returned, require the count and denominator convention.</p>
     <p><strong>Common wrong turn:</strong> treating Chapter 13’s diagnostic lenses as four equivalent categories, or diagnosing every failure as vocabulary mismatch because that is the relationship librarians are most accustomed to seeing.</p>
 
     <h3>Appendix F’s controlled TAR comparison — for evidence-synthesis cohorts</h3>
@@ -177,9 +273,9 @@
     <p><strong>Tests:</strong> whether the student can separate an effect of the representation from an effect of the stopping rule. Those are different mechanisms and the exercise is built so they can be told apart.</p>
     <p><strong>A strong answer</strong> attributes recall differences to the stopping rule rather than the feature extractor where the evidence supports that, reports for each simulated stop how many known relevant records were left unseen, and says plainly that a live review cannot inspect that tail without doing the work it hoped to save. The numerical thresholds in the appendix are experimental conditions, not recommendations, and a strong answer says so.</p>
     <p><strong>Common wrong turn:</strong> reading a WSS@95 improvement as evidence that a live reviewer could have stopped safely. It measures ranking efficiency against a labelled set at a fixed target; it says nothing about knowing when that target has been reached.</p>
-    <p><strong>Without coding:</strong> the appendix describes a non-coding route, and most cohorts will take it. Give students screening logs from two prepared runs, have them plot relevant records found against records screened, and compare at fixed screening budgets. The four marking criteria below apply unchanged.</p>
+    <p><strong>Preparation required:</strong> <a href="search-textbook.html#controlled-tar-comparison">Appendix F specifies the experiment</a>; these notes do not supply prepared runs or screening logs. To teach it without asking learners to code, prepare the runs yourself and supply their ordered record identifiers, relevance labels and configurations, with outputs needed for the stopping procedures you assign. Preserve the random-order baseline as well as the two active learners. Have learners compare relevant records found at fixed screening budgets. If you provide only ranking logs, restrict the task to comparisons those logs support; do not ask learners to reconstruct an estimated-recall stopping procedure from them alone.</p>
 
-    <h2>Worked responses and a short rubric</h2>
+    <h2 id="rubric">Worked responses and a short rubric</h2>
 <p>These examples illustrate reasoning, not observations about a particular live product.</p>
 <ul>
 <li><strong>Exercise I:</strong> “The added rare string did not empty the results. It may have been removed during analysis or rewriting, or retained as an optional unmatched term. The visible list cannot distinguish these. A documented analyser or an inspectable processed query would help.” Award credit for the observation, plausible mechanism, alternatives and a discriminating next check.</li>
@@ -187,7 +283,18 @@
 <li><strong>Exercise III:</strong> “After pooling and judging both top tens, the original has four relevant results and the revised run has six: precision@10 rises from 0.4 to 0.6. Recovery of five seeds rises from two to three. That is encouraging for this need, but does not establish complete recall or general superiority.” Award credit for a testable diagnosis, controlled intervention, complete judgements at the stated depth and an honest record of missing information.</li>
 </ul>
 <p>For each exercise, use four equally weighted criteria: accurate observation, sound reasoning, adequate evidence and explicit limits. Do not award marks merely for confidence or for reporting many unknowns.</p>
-<h2>Discussion prompts</h2>
+<div class="table-wrap"><table>
+  <caption>Score each criterion 0–2, for a total of 8; use the same criteria for formative feedback</caption>
+  <thead><tr><th scope="col">Criterion</th><th scope="col">0 — absent or misleading</th><th scope="col">1 — developing</th><th scope="col">2 — demonstrated</th></tr></thead>
+  <tbody>
+    <tr><td>Observation</td><td>Invents a result or treats a claim as an observation.</td><td>Records the main result but omits relevant conditions.</td><td>Accurately records the result and conditions, separating observation from documentation.</td></tr>
+    <tr><td>Reasoning</td><td>Names a mechanism without support or proposes an unrelated remedy.</td><td>Offers a plausible explanation and action but overlooks alternatives.</td><td>Considers alternatives and chooses a check or intervention that can distinguish them.</td></tr>
+    <tr><td>Evidence</td><td>Supplies no traceable support.</td><td>Provides some sources or run details, but the comparison cannot be followed.</td><td>Links each claim to the supplied case, dated documentation or recorded run; supports any measurement with its judgements.</td></tr>
+    <tr><td>Limits</td><td>Claims certainty or completeness the evidence cannot establish.</td><td>Mentions uncertainty without explaining its consequence.</td><td>States what remains unknown, why it matters and what further evidence would help.</td></tr>
+  </tbody>
+</table></div>
+<p>For the prepared workshop, the supplied case and revealed trace are the evidence; external research is unnecessary. For live exercises, require dates, modes and source or result identifiers. Give feedback on the weakest criterion and allow a revision after new evidence.</p>
+<h2 id="discussion">Discussion prompts</h2>
 
     <h3>After Part I</h3>
     <ul>
@@ -211,13 +318,13 @@
       <li>A vendor demonstrates an agentic mode that answers your test question well. What could you ask to find out what it <em>could not</em> have done? This is Chapter 12’s invisible menu, and it is the hardest of its three difficulties to probe from outside.</li>
     </ul>
 
-    <h2>Before you teach it: what will have moved</h2>
+    <h2 id="currency">Before you teach it: what will have moved</h2>
 
     <div class="warn">
-      <p>The mechanisms in this book are stable. The product descriptions are not, and they are the parts a student will most enjoy catching you out on.</p>
+      <p>Product descriptions age faster than the mechanisms they illustrate. Re-check the examples you intend to use; the prepared one-hour case is explicitly hypothetical and requires no current product claim.</p>
     </div>
 
-    <p>Record the product, mode, date of the documented architecture and date checked separately. A recent check of an old document does not establish that the architecture is current. Fill in the last column before you teach, and hand the table on to whoever teaches it next — the book argues for exactly this practice in Chapter 15, so it is worth modelling.</p>
+    <p>Use the table below to choose claims to verify. In a copy, complete <em>Documented as of</em> and <em>Last checked</em>, then attach the source URL, product mode, relevant passage and your finding: unchanged, changed or not established. A recent check of an old document does not establish that the architecture is current. If it cannot be verified, present it as a dated example. Pass that record to the next instructor.</p>
 
     <div class="table-wrap"><table>
       <thead><tr><th>Where</th><th>Product or claim</th><th>Documented as of</th><th>Last checked</th><th>What would change it</th></tr></thead>
@@ -235,7 +342,9 @@
 
     <p>Handing these rows out one per student is also the assessed task suggested for the thirteen-week course above. It dates the material for you, and the filled-in table is worth more to the next cohort than another essay would be.</p>
 
-    <h2>Figures, and reusing them in slides</h2>
+    <h2 id="reuse">Figures, and reusing them in slides</h2>
+
+    <p>The book’s original text, figures and these teaching materials are licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. You may excerpt, adapt, translate and redistribute them, including commercially, with credit and without asking. Third-party screenshots and reproduced research figures, including Figure 5.5 from Mikolov and colleagues, retain their original rights and attribution.</p>
 
     <p>The original explanatory illustrations live in <code>images/</code> in the <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse">repository</a> and are CC BY 4.0 along with the rest of the text — use them in slides with credit. They were generated with AI assistance, as the book's <a href="search-textbook.html#generative-ai-use-disclosure">disclosure</a> records.</p>
 
@@ -243,15 +352,20 @@
 
     <p>Commercial screenshots and reproduced research figures are <strong>not</strong> covered by the book’s licence. They are third-party material reproduced for comment and criticism. If you are redistributing adapted material, take your own or leave them out.</p>
 
-    <h2>Two things worth pointing students at, and one for you</h2>
+    <h2 id="reference-tools">Reference tools for learners and instructors</h2>
 
     <p>The <a href="search-textbook.html#glossary">glossary</a> is the most directly assignable thing in the book for an information-literacy cohort: around a hundred short definitions, each written to separate a mechanism from the label usually attached to it. It sits in a collapsed panel in the end matter, so students who never open it will not find it. Assigning twenty terms and asking which ones name a representation, which a pipeline stage and which only an interface is a reasonable first seminar. <a href="search-textbook.html#appendix-search-terminology">Appendix D</a> is the same move at greater length, and reads well alongside it.</p>
 
     <p>The <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/main/CHANGELOG.md">changelog</a> records what changed between versions. If you assigned a chapter last term and it reads differently this term, that is where to look — and it is what makes the version number in the citation below worth recording.</p>
 
-    <p>When a student does catch the book out on a product claim, which the section above predicts they will, the correction is welcome: open an issue on <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/issues">the repository</a>. A dated note of what the vendor documentation now says is more useful than a report that something looks wrong.</p>
+    <p>Corrections are welcome through <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/issues">the repository</a>. Include the affected passage, product and mode, source URL and date, and what the current documentation establishes.</p>
 
-    <h2>Citing it</h2>
+    <h2 id="after-teaching">Leave a teaching record for the next instructor</h2>
+    <p>After the first delivery, record the audience, number of participants, material used, preparation time and actual session length. Note where learners needed help, how their initial explanations changed, and whether they could handle the transfer case independently. Use anonymised examples and omit confidential enquiry details.</p>
+    <p>Ask participants a week or two later whether they used the method in a consultation, class or evaluation, and what helped or prevented that use. Record any actual reuse of the session by a colleague. These observations help distinguish an enjoyable session from a resource that changes practice.</p>
+    <p><strong>Copyable record:</strong> audience and date; preparation minutes; session minutes; most difficult distinction; evidence from the transfer check; one change for next time; later use reported. Treat the proposed timings as provisional until you have this evidence.</p>
+
+    <h2 id="citation">Citing it</h2>
 
     <p>Cite the version as well as the date. The page is live and will change; the version number is what lets a student say afterwards which text they read.</p>
 

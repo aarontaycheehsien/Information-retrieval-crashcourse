@@ -17,6 +17,13 @@ parts, fifteen chapters and seven appendices.
 
 ### Added
 
+- **A one-hour workshop in the teaching notes**, with a prepared missing-paper
+  case, timed facilitation, a trace reveal, worked answers and a transfer check.
+  A separate two-page HTML participant handout prints without the answer key.
+  Audience outcomes, an eight-point rubric, clearer exercise preparation and a
+  teaching feedback record support reuse. The scenario is explicitly
+  hypothetical and the proposed timings await teaching experience. The notes
+  also correct the BM25 tour step guidance and add mobile and print styles.
 - **Four figures, in the parts that had none.** Figure A.1 shows the same token
   in *the bank refused the loan* and *the river bank* as weighted bars, so the
   claim that attention weights come from content rather than from distance or
