@@ -71,6 +71,16 @@ parts, fifteen chapters and seven appendices.
 
 ### Changed
 
+- **Chapters 1–4 now develop their explanations through shared examples.**
+  The opening open-access question follows the evidence through selection and
+  generation; the four-record collection carries Boolean eligibility, BM25
+  scoring and alternative admission rules. Three new figures show possible
+  evidence losses, Boolean sets and a worked score comparison; two replacement
+  figures isolate BM25 inputs and compare admission policies. Optional reading
+  retains the detailed terminology and product comparisons. Chapter 4 separates
+  Boolean logic from strict AND and distinguishes reported result counts from
+  unknown scoring work. Figure/table references and teaching notes follow the
+  revised order, and the numerical example agrees with Appendix C.
 - **Chapters 5–9 now follow a clearer teaching sequence.** Concrete examples
   introduce embeddings, retrieval training, collection search, indexed units
   and reranking. Optional drawers retain detailed mechanisms and comparisons;
