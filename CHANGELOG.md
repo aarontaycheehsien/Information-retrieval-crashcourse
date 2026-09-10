@@ -71,33 +71,6 @@ parts, fifteen chapters and seven appendices.
 
 ### Changed
 
-- **Chapters 1–4 now develop their explanations through shared examples.**
-  The opening open-access question follows the evidence through selection and
-  generation; the four-record collection carries Boolean eligibility, BM25
-  scoring and alternative admission rules. Three new figures show possible
-  evidence losses, Boolean sets and a worked score comparison; two replacement
-  figures isolate BM25 inputs and compare admission policies. Optional reading
-  retains the detailed terminology and product comparisons. Chapter 4 separates
-  Boolean logic from strict AND and distinguishes reported result counts from
-  unknown scoring work. Figure/table references and teaching notes follow the
-  revised order, and the numerical example agrees with Appendix C.
-- **Chapters 5–9 now follow a clearer teaching sequence.** Concrete examples
-  introduce embeddings, retrieval training, collection search, indexed units
-  and reranking. Optional drawers retain detailed mechanisms and comparisons;
-  revised diagrams and self-checks clarify representation choices and the path
-  from a retrieved passage to model context. Terminology and cross-references
-  remain aligned with the other chapters and appendices. Chapter 7's figures
-  are renumbered to follow their new order, with internal references updated.
-- **Chapter 11 now teaches through a worked request.** The open-access citation
-  example introduces understanding, transformation and routing before the wider
-  input taxonomy. Three starting points, a two-pass feedback example and a shared
-  Query2doc/HyDE illustration carry the main explanation. Detailed input and
-  product comparisons remain in optional reference drawers, with direct links
-  that open them. Existing anchors and table numbers are preserved; the chapter
-  retains its connections to Chapters 4, 8–10 and 12–15 and Appendices F and G.
-- **The query-transformation glossary definition** now distinguishes a changed
-  retrieval input from a necessarily changed candidate set.
-
 - **Appendix B's worked example now splits a word.** It followed *Unbelievable
   scenes!* through six stages while no word split, so the caption explained a
   `##` marker the figure never displayed. It now follows *Unbelievable rizzlord

@@ -126,8 +126,8 @@ new collection every chapter. Each has a job, and they are not interchangeable:
   and present the positive and the hard negative as labels rather than as
   facts about the passages.
 - **The open-access citation advantage** — realistic academic searching. It is
-  the question behind Puzzle 3, the worked request and search inputs in
-  Chapter 11, and the search used in Chapters 1 and 7. Use it where the point is
+  the question behind Puzzle 3, the worked need in Chapter 11's eight query
+  objects, and the search used in Chapters 1 and 7. Use it where the point is
   what a real searcher is trying to find.
 
 Where an example needs judged relevance, reuse the `AI academic libraries` need
