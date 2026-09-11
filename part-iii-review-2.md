@@ -1,6 +1,8 @@
 # Part III (Chapters 12–15): second consistency review
 
-Reviewed 9 September 2026 against commit `6f95554` ("Improve Part III readability and continuity with Part II"). Nothing has been applied; this is a findings list. Line numbers refer to `search-textbook.html` at that commit.
+Reviewed 9 September 2026 against commit `6f95554` ("Improve Part III readability and continuity with Part II"). Line numbers refer to `search-textbook.html` at that commit.
+
+**Status, 11 September 2026.** All twelve findings are now closed. Finding 1 was introduced by `6f95554` and disappeared when that commit was reverted in `2200b26`. Findings 2, 3, 5, 6, 7, 9, 10 and 11 were applied in `66e7061`. Findings 4 and 8 were applied afterwards: Chapter 12 now places Web of Science Research Assistant from Clarivate's April 2026 product post, which is what Chapter 1 had promised, and the single-task caveat now names the probe it belongs to. Finding 12 is a process note and needs no textual change. Because the readability passes were reverted, the line numbers below no longer resolve; the section and table names still do.
 
 The first Part III review (`part-iii-review.md`, 6 September) found compressed restatements that dropped a qualification. This pass finds a different failure mode: the readability rewrite in `6f95554` shortened or relocated several passages and left four cross-references pointing at things that are no longer there — or never were. Two of the four were introduced by that commit.
 
