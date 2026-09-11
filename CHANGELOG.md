@@ -41,8 +41,8 @@ parts, fifteen chapters and seven appendices.
   identifier row loses two thirds of its precision — which makes the chapter's
   per-query argument arithmetic rather than assertion.
 - **A sixth procurement group in Chapter 15, on cost, limits and continuity.**
-  Table 12.4 makes cost the first row of the agency trade and Table 12.3 records
-  two products re-scoping a mode inside a year, yet the checklist asked about
+  Table 12.4 makes cost the first row of the agency trade and Chapter 12 records
+  two products renaming or re-scoping a mode, yet the checklist asked about
   neither. Two questions: pricing and what happens when a rate or iteration
   limit is reached, and export and notice when a mode is retired.
 - **Previous/Next navigation on all seven appendices.** Chapters had it and
