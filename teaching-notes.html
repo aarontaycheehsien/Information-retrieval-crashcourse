@@ -102,7 +102,7 @@
 </head>
 <body>
   <header class="hero"><div class="inner">
-    <p class="kicker">Teaching notes · Version 1.2</p>
+    <p class="kicker">Teaching notes · Version 1.2.1</p>
     <h1>Teaching with <em>How Search Decides What You See</em></h1>
     <p class="subtitle">A one-hour workshop you can run with colleagues, followed by routes through the book for longer teaching.</p>
   </div></header>
@@ -241,7 +241,7 @@
 
     <h2 id="labs">Using the two labs</h2>
 <p>Use the <a href="bm25-evidence-lab.html">BM25 Evidence Lab</a> after Chapter 3, then revisit its admission control after Chapter 4. Ask students to predict the ranking before moving the prescribed slider. The tour fixes other inputs; the sandbox allows independent experiments. Changes to document length also change the collection average.</p>
-<p>Budget roughly fifteen minutes for the BM25 tour and ten for the vector tour, plus whatever sandbox time you want; the tours are seven and five prediction steps. The application exercises are the opposite shape — each needs a searching session plus written-up findings, so allow a week rather than a class. Reading-time estimates in the book exclude all of this.</p>
+<p>Budget roughly fifteen minutes for the BM25 tour and ten for the vector tour, plus whatever sandbox time you want; both tours have seven prediction steps. These timings are provisional; allow longer for discussion. The application exercises are the opposite shape — each needs a searching session plus written-up findings, so allow a week rather than a class. Reading-time estimates in the book exclude all of this.</p>
 <p>The BM25 tour’s sixth step, <em>The boundary that scoring cannot cross</em>, uses a <code>k</code> slider that cuts records the ranking already scored. Protect time for this step and its debrief: ask which records the next stage receives and whether rescoring that fixed input could recover anything outside it. The seventh step returns to vocabulary and admission rules.</p>
 <p>Use the vector lab after Chapter 7. The text descriptions and coordinates are assigned teaching examples, not outputs of an embedding model. Compare direction, magnitude and unit normalisation, then ask why the highest similarity need not satisfy the date and study-design criteria. Students can share a sandbox example by copying its URL.</p>
 <h2 id="exercises">The application exercises</h2>
@@ -300,7 +300,7 @@
     <ul>
       <li>Systematic review search strategies are published so they can be inspected and rerun. What exactly is being reproduced — and what is not, given that indexes and analysers change underneath?</li>
       <li>If a database silently made every query term optional tomorrow, how would your users find out? How would you?</li>
-      <li>Early Google was non-Boolean and non-semantic at the same time. Which current product do you suspect is being misread the same way?</li>
+      <li>Why does a result missing a typed term not establish semantic retrieval? Use the historical Google example to distinguish strict AND, other admission rules and matching evidence outside the visible page. Which current product would you investigate this way?</li>
     </ul>
 
     <h3>After Part II</h3>
@@ -370,12 +370,12 @@
     <p>Cite the version as well as the date. The page is live and will change; the version number is what lets a student say afterwards which text they read.</p>
 
     <div class="lede">
-      <p>Tay, A. C. H. (2026). <em>How search decides what you see: A librarian’s guide to Boolean search, BM25, embeddings, reranking, and the retrieval pipelines behind hybrid and agentic search</em> (Version 1.2). https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/</p>
+      <p>Tay, A. C. H. (2026). <em>How search decides what you see: A librarian’s guide to Boolean search, BM25, embeddings, reranking, and the retrieval pipelines behind hybrid and agentic search</em> (Version 1.2.1). https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/</p>
     </div>
   </main>
 
   <footer>
-    Teaching notes for <a href="search-textbook.html">How Search Decides What You See</a>, version 1.2 ·
+    Teaching notes for <a href="search-textbook.html">How Search Decides What You See</a>, version 1.2.1 ·
     <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> ·
     <a href="search-textbook.html#how-to-cite-and-reuse">How to cite and reuse</a>
   </footer>

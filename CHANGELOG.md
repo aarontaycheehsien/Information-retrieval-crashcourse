@@ -7,6 +7,27 @@ which text they were working from.
 The version shown in the page header and footer always matches the most recent
 entry here.
 
+## 1.2.1 — 12 September 2026
+
+Consistency corrections across the textbook, teaching notes and labs. The
+three-part, fifteen-chapter, seven-appendix scope is unchanged.
+
+- Align the missing-term explanations, self-checks and teaching prompts with
+  Boolean admission, query processing and evidence outside visible excerpts.
+- Distinguish documented mechanisms, observations and causal hypotheses in
+  the generation, domain-mismatch, agentic-search and diagnosis discussions.
+- Date the Scopus RAG Fusion example to its 2024 source and distinguish source
+  dates, documentation checks and the current edition date.
+- Add a sourced Elicit footnote connecting its June 2024 SPLADE development
+  account with July 2024 unlimited search and removal of credits. The possible
+  cost connection is explicitly an inference, not deployment confirmation.
+- Synchronise lab tour counts and timings, qualify the BM25 padding
+  explanation, and move TAR preparation before the activity.
+- Clarify local evaluation judgements, precision denominators and the
+  illustrative before/after table; align glossary definitions and recaps.
+- Repair inline mathematics delimiters and clarify third-party figure rights.
+- Synchronise edition numbers across the book, README and teaching materials.
+
 ## 1.2 — 7 September 2026
 
 A review pass over the seven appendices, both interactive labs, the teaching

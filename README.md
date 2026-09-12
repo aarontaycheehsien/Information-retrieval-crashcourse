@@ -2,7 +2,7 @@
 
 A practical introduction to information retrieval architecture, written primarily for information literacy and evidence synthesis librarians, with a smaller secondary audience of systems/discovery librarians. It covers Boolean search, BM25, dense retrieval, hybrid search, reranking, query understanding, agentic search, retrieval failure and evaluation.
 
-[**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.2, three parts, fifteen chapters and seven appendices.
+[**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.2.1, three parts, fifteen chapters and seven appendices.
 
 The repository also includes two interactive companions: the [BM25 Evidence Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/bm25-evidence-lab.html) and the [Vector Similarity Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/vector-similarity-lab.html).
 
@@ -22,7 +22,7 @@ Chapters and appendices are written to be assignable on their own, and each has 
 
 ### Suggested citation
 
-> Tay, A. C. H. (2026). *How search decides what you see: A librarian's guide to Boolean search, BM25, embeddings, reranking, and the retrieval pipelines behind hybrid and agentic search* (Version 1.2). https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/
+> Tay, A. C. H. (2026). *How search decides what you see: A librarian's guide to Boolean search, BM25, embeddings, reranking, and the retrieval pipelines behind hybrid and agentic search* (Version 1.2.1). https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/
 
 ## Generative AI use
 
