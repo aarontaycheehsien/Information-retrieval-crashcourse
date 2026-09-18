@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A spreadsheet template, completed example and practical guide for comparing two retrieval runs with local relevance judgements.">
+  <title>Local retrieval evaluation kit — How Search Decides What You See</title>
+  <style>
+    :root { --paper:#f4f0e8; --ink:#17201f; --muted:#596462; --line:#d5d0c5; --teal:#1d5b59; --rust:#6f291d; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font:1.05rem/1.65 Georgia,'Times New Roman',serif; overflow-wrap:anywhere; }
+    header,main,footer { max-width:64rem; margin:auto; padding:2rem clamp(1rem,4vw,3rem); }
+    header { padding-bottom:1rem; }
+    main { padding-top:0; }
+    nav,.kicker,.downloads,.note,footer { font-family:system-ui,sans-serif; }
+    nav,.kicker,footer { font-size:.85rem; color:var(--muted); }
+    nav { display:flex; flex-wrap:wrap; gap:1rem; }
+    h1 { font-size:clamp(2rem,5vw,3.2rem); line-height:1.12; letter-spacing:-.025em; margin:.6rem 0 1rem; }
+    h2 { color:var(--teal); font-size:1.5rem; line-height:1.3; margin-top:0; }
+    h3 { font-size:1.15rem; margin-bottom:.25rem; }
+    a { color:var(--rust); text-underline-offset:.18em; }
+    a:focus-visible { outline:3px solid var(--teal); outline-offset:4px; }
+    section { margin:1.5rem 0; padding:1.5rem; background:#fbf9f4; border:1px solid var(--line); border-radius:.5rem; }
+    p { margin:.7rem 0; }
+    li { margin:.65rem 0; }
+    .downloads { display:flex; flex-wrap:wrap; gap:.8rem; margin:1.3rem 0; }
+    .downloads a { display:inline-block; padding:.8rem 1rem; border:1px solid var(--teal); border-radius:.35rem; text-decoration:none; font-weight:650; }
+    .downloads a:first-child { background:var(--teal); color:white; }
+    .note { font-size:.9rem; color:var(--muted); }
+    .callout { border-left:3px solid var(--teal); padding-left:1rem; }
+    .table-scroll { overflow-x:auto; }
+    table { border-collapse:collapse; width:100%; font:.95rem/1.5 system-ui,sans-serif; }
+    caption { text-align:left; font-weight:650; margin-bottom:.65rem; }
+    th,td { text-align:left; vertical-align:top; padding:.65rem; border-bottom:1px solid var(--line); }
+    th { color:var(--teal); }
+    th:first-child { min-width:8rem; overflow-wrap:normal; }
+    code { font-size:.9em; }
+    footer { border-top:1px solid var(--line); }
+    @media(max-width:600px) { section { padding:1rem; } .downloads a { width:100%; } }
+    @media print { body { background:white; font-size:10pt; } header,main,footer { max-width:none; padding:.5rem 0; } section { border:0; padding:.5rem 0; } h2,h3 { break-after:avoid; } tr { break-inside:avoid; } .downloads a:first-child { background:white; color:var(--ink); } }
+  </style>
+</head>
+<body>
+<header>
+  <nav aria-label="Companion navigation"><a href="search-textbook.html#building-a-local-evaluation-set">Chapter 14</a><a href="teaching-notes.html">Teaching notes</a><a href="#workflow">How to use the workbook</a><a href="#example">Worked example</a></nav>
+  <p class="kicker">How Search Decides What You See · Practical companion</p>
+  <h1>Local retrieval evaluation kit</h1>
+  <p>Compare two search runs against your library’s own information needs. Record what each run returned, judge the pooled records once, and see which queries improved or deteriorated.</p>
+  <div class="downloads"><a href="downloads/evaluation-template.xlsx" download>Download the template · XLSX</a><a href="downloads/evaluation-worked-example.xlsx" download>Download the worked example · XLSX</a></div>
+  <p class="note">Portable spreadsheets, with Excel as the primary target. No macros, accounts or external data connections. Download and save your own copy; entries stay in that file. Google Sheets import is not a tested workflow for this release.</p>
+</header>
+<main>
+  <section aria-labelledby="start">
+    <h2 id="start">Start with one comparison</h2>
+    <p>Open the completed example first, then use the template for a search you know well enough to judge. It contains five prompts covering four deliberate probes: an exact identifier, evidence found only in full text, vocabulary mismatch, and two queries with opposite meanings. Replace the prompts with local needs and criteria; the template supplies no product results or relevance labels.</p>
+    <p>A useful institutional set can grow to thirty to fifty queries. Constructing needs and judging hundreds of results takes time. An afternoon may be enough to rerun an established set; it is not a promise for building one.</p>
+    <div class="table-scroll"><table>
+      <caption>Where to work</caption>
+      <thead><tr><th scope="col">Worksheet</th><th scope="col">What it holds</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Comparison</th><td>Choose the shared cutoff in B4. Each query shows counts, precision, seed recovery, differences and any action still needed.</td></tr>
+        <tr><th scope="row">Queries</th><td>Write the need and relevance criteria, record both queries and filters, confirm capture depth and counts, then explain the difference.</td></tr>
+        <tr><th scope="row">Records</th><td>Keep one row per query–record pair, with a single relevance judgement, seed status and a rank for each run that returned it. The columns after Rank B calculate validation and counts.</td></tr>
+        <tr><th scope="row">Runs</th><td>Record the product, mode, date, available model/index information, change being tested and locations of saved exports. Write “unknown” for unavailable details.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Pale yellow cells are inputs; grey cells calculate. Use unique text IDs without surrounding spaces. IDs are compared without case sensitivity: A and a identify the same record. Use one canonical DOI, PMID or local ID consistently across both runs.</p>
+  </section>
+  <section aria-labelledby="workflow">
+    <h2 id="workflow">Six steps to a repeatable comparison</h2>
+    <ol>
+      <li><strong>Define relevance before looking at the scores.</strong> In Queries, write a specific need and criteria another person could apply. Enter both exact queries; record filters as “None” where appropriate. Select known relevant seeds before inspecting the comparison. In Records, mark them Seed = Yes, including seeds that neither run found. A seed need not be in either captured list.</li>
+      <li><strong>Choose the cutoff and record the conditions.</strong> Use 10 or 20 in Comparison B4, shared by both runs and every query. Complete Runs and retain each query’s transformed input, or mark it unknown. A comparison can test a query intervention, an update or a different product; record which conditions changed.</li>
+      <li><strong>Capture each list through that depth.</strong> Save the original output. Record the requested capture depth in Queries, the number of distinct records retained and whether capture is complete. A complete empty list has count 0 and Complete = Yes; an unperformed run stays incomplete. If the product returns only three results when ten were requested, depth is still 10 and count is 3.</li>
+      <li><strong>Pool the records, preserving ranks.</strong> Match identifiers manually across the two lists. For each query–record pair, enter its original position in Rank A and/or Rank B. Leave a rank blank when absent; do not use zero. If a record repeats within a run, retain its first occurrence and leave the resulting gap in the ranks. Do not pull a record from below the cutoff into that gap. Record the duplicate in Evidence or notes; the captured count is the distinct count after this step.</li>
+      <li><strong>Judge every pooled record inside the cutoff once.</strong> Use Relevant or Not relevant against the written criteria and record the basis where needed. Unjudged and blank both mean work remains. Hide the Seed and Rank A/B columns, and the calculated columns to their right, while judging; avoid opening Comparison. This reduces visible cues but is not a fully blinded assessment. Discuss disagreements and record the agreed judgement.</li>
+      <li><strong>Inspect individual queries.</strong> Fix any status message, then compare A and B. Negative differences are highlighted, without claiming statistical significance. Use Queries to record an explanation, alternatives and the next check. The workbook does not infer a mechanism or recommend a vendor.</li>
+    </ol>
+    <p class="callout">The four probe types test different possibilities. Failure to retrieve a full-text-only phrase is evidence to investigate the indexed unit, not proof of its architecture. Judge the two opposite-meaning queries separately. Consult <a href="search-textbook.html#diagnosing-failure">Chapter 13’s diagnosis frame</a> before attributing a change to a mechanism.</p>
+  </section>
+  <section aria-labelledby="scores">
+    <h2 id="scores">What the scores count</h2>
+    <p><strong>Precision@k = relevant distinct records within k ÷ k.</strong> The denominator stays fixed, even for a short list or duplicate positions. Two relevant records from a complete three-result run at depth ten give 2/10 = 0.20. The separate “Records A/B at k” columns show how many distinct records were actually captured inside the cutoff.</p>
+    <p><strong>Known-seed recovery@k = listed seeds found within k ÷ all listed seeds for that query.</strong> Include missed seeds in Records with both ranks blank. The numerator and denominator are shown alongside the rate. Without a seed set the workbook says “No seeds specified”; precision can still be calculated. Seed recovery is not an estimate of complete recall.</p>
+    <p>The precision comparison stays blank until every pooled record within the cutoff has been judged. Seed recovery can be available before those judgements are complete, because its denominator was fixed in advance. A seed marked Not relevant is an inconsistency to resolve.</p>
+    <p>Incomplete captures, missing criteria or exact queries, mismatched counts, duplicate IDs or ranks, and invalid input withhold affected scores. Blank cells are not silently turned into successful zero-result runs. Records with missing or unknown query IDs must be assigned before any query can be reported.</p>
+    <p>Changing k from 10 to 20 requires captures through twenty for both runs. Increasing the setting alone will show “Extend capture to the selected cutoff”. Capture depth records the depth requested, not the largest rank returned. Additional results beyond the active cutoff do not affect scores until the cutoff reaches them.</p>
+  </section>
+  <section aria-labelledby="example">
+    <h2 id="example">A completed, controlled example</h2>
+    <p>The example reproduces the two rankings in <a href="search-textbook.html#fig-14-1">Figure 14.1</a>: twenty stipulated records, with A–J relevant and K–T not relevant. Both runs contain all twenty. These are teaching labels and rankings, not observations from a live product.</p>
+    <p>The kit adds a declared five-record seed subset: <strong>A, C, E, G and J</strong>. This subset is not specified in the figure.</p>
+    <div class="table-scroll"><table>
+      <caption>Expected results at depth ten</caption>
+      <thead><tr><th scope="col">Measure</th><th scope="col">Run A</th><th scope="col">Run B</th><th scope="col">B − A</th></tr></thead>
+      <tbody><tr><th scope="row">Precision@10</th><td>2/10 = 0.20</td><td>6/10 = 0.60</td><td>+0.40</td></tr><tr><th scope="row">Known-seed recovery@10</th><td>1/5 = 0.20</td><td>3/5 = 0.60</td><td>+0.40</td></tr></tbody>
+    </table></div>
+    <p>Try setting k to 20. Both runs have precision 10/20 = 0.50 and seed recovery 5/5 = 1.00. Reranking changes which records reach the first ten; it adds no candidate. Here complete relevance is stipulated, but the workbook deliberately reports the selected seeds separately.</p>
+  </section>
+  <section aria-labelledby="reuse">
+    <h2 id="reuse">Add records, extend the set and rerun it</h2>
+    <p>The template has room for fifty queries and starts with one hundred Records rows. In Excel, add rows <em>inside the Records table</em> or press Tab in its last cell to extend it; copy the calculated columns I–Q from the preceding row if your spreadsheet application does not fill them automatically. Check that Row status and counts respond before continuing. Pasting underneath an unextended table does not add records to the calculation.</p>
+    <p>To exceed fifty queries, extend the Queries table and copy its T–U formulas into the new rows. Extend Comparison by the same number of rows and copy all A–Q formulas down. Keep the two tables in corresponding row order when extending them. Use Comparison’s filters to inspect declines; sort Queries or Records as whole tables, never isolated input columns. Record matching uses query IDs, not row order.</p>
+    <p>For a new comparison, save a new workbook copy. Keep the same needs, criteria, seed set and cutoff. Replace ranks, captured counts and run metadata with the new observations and reconfirm completeness. Reuse judgements only where the record identity and criteria remain the same; judge newly retrieved records before interpreting the comparison. Changing the need or criteria starts a new evaluation baseline.</p>
+    <p>Use the kit with <a href="search-textbook.html#exercise3">Application Exercise III</a>. Pair the measured change with <a href="search-textbook.html#library-practice">Chapter 15’s search record</a> and a list of what the product would not let you establish. For maintainers, the <a href="tools/README.md">repository tooling notes</a> describe rebuilding the downloads.</p>
+  </section>
+</main>
+<footer><p>Companion to <a href="search-textbook.html">How Search Decides What You See</a> · Kit version 1.0 · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Adapt with credit.</p></footer>
+</body>
+</html>

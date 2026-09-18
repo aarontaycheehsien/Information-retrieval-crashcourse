@@ -9,6 +9,13 @@ entry here.
 
 ## Unreleased
 
+- **Local retrieval evaluation kit.** Add a portable XLSX template, a completed
+  Figure 14.1 example and a companion guide. The workbooks compare per-query
+  precision at a fixed cutoff and known-seed recovery, with explicit capture
+  and judgement checks. Add a shared builder, fixture data and scoring checks;
+  connect the kit to Chapter 14, Exercise III, the closing recommendation and
+  teaching notes. The browser lab remains outside this release.
+
 Five review passes on the `fable-1` branch, each recorded in a review file at the
 repository root. The scope is unchanged: three parts, fifteen chapters, seven
 appendices and two labs.

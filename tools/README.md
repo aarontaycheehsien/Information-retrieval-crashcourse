@@ -1,5 +1,44 @@
 # Tooling
 
+## Local retrieval evaluation kit
+
+`evaluation-kit.html` is the reader guide. Its two downloads are generated from
+one layout and formula definition in `tools/build-evaluation-kit.mjs`, with the
+controlled Figure 14.1 rankings, seed subset and five probe prompts in
+`tools/fixtures/evaluation-kit.json`. Edit those sources, then regenerate both
+workbooks together. Do not hand-edit the distributed XLSX files.
+
+Use the bundled Node runtime and `@oai/artifact-tool` dependencies returned by
+the workspace dependency loader. Set `EVALUATION_NODE_MODULES` to that runtime's
+`node_modules` directory, then run:
+
+```powershell
+node tools/build-evaluation-kit.mjs
+python tools/test-evaluation-kit.py
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/test-evaluation-kit.ps1
+node tools/check-evaluation-guide.mjs
+```
+
+The builder stages XLSX files and worksheet previews in the ignored
+`outputs/evaluation-kit/` directory and copies the two workbooks into
+`downloads/`. The local dependency junction is also confined to that staging
+directory. No runtime dependencies are needed by readers.
+
+The Python check uses only the standard library. It checks saved values,
+formula errors, table structure, links and the example against the book's actual
+Figure 14.1. The PowerShell check requires desktop Excel and opens a disposable
+copy in a separate hidden instance. It tests recalculation, short/empty runs,
+missing judgements and seeds, invalid input, edits, table extension and
+save/reopen. The browser check uses bundled Playwright with headless Edge,
+checks the guide and downloads, and saves desktop/mobile previews for review.
+
+The workbook holds two runs and fifty query slots. Records are an expandable
+Excel table. Formula-owned columns are Records I–Q, Queries T–U and Comparison
+A–Q; Comparison B4 is the editable shared cutoff. Capture counts are distinct
+records at the recorded capture depth, not raw duplicate positions. Blank
+judgements stay unjudged, and changing the cutoff cannot silently relabel an
+incomplete capture as complete. The guide explains extension and rerun steps.
+
 ## Canvas-style annotation helper
 
 Run `tools\start-annotation-editor.cmd` from Windows Explorer, Command Prompt, or PowerShell. It starts a server bound only to `127.0.0.1`, prints a tokenized editor URL, and serves this repository. Keep that terminal open and use the printed URL for Claude proposal controls. Opening the HTML file directly still supports comments, browser storage, sidecar import/export, and Codex copy/import, but not the Claude button.
