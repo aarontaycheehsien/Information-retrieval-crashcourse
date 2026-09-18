@@ -7,6 +7,35 @@ which text they were working from.
 The version shown in the page header and footer always matches the most recent
 entry here.
 
+## Unreleased
+
+Five review passes on the `fable-1` branch, each recorded in a review file at the
+repository root. The scope is unchanged: three parts, fifteen chapters, seven
+appendices and two labs.
+
+- **Readability passes over Parts I, II and III** (`part-i-readability-review.md`,
+  `part-ii-readability-review.md`, `part-iii-readability-review.md`). Content held
+  fixed: duplicated statements consolidated to one home, misplaced blocks moved,
+  long sentences split, and every link text that did not name its destination
+  ("Discussed later", "the advanced appendix", "Where it was left") replaced with
+  the chapter, appendix or section it points at, so `maintain.py` can verify it.
+  Chapter 6's longest section gained three subheadings. Consistency repairs found
+  on the way: Figure 7.1's caption no longer claims values the lab's defaults have
+  moved away from; Chapter 9's opening no longer promises the hybrid material that
+  moved to Chapter 10; a stale "Figure 9.5" is now Figure 9.7; Chapters 13 and 14
+  now point at the lab steps built to demonstrate their claims.
+- **Teaching notes and labs** (`teaching-and-labs-review.md`). The re-verification
+  table's stale Table 9.2 / Figure 9.5, two claims about the book that were not
+  true of it, a row for Chapter 12's Web of Science Research Assistant claim, and
+  documentation dates prefilled where the book states them; one sentence moved in
+  the Vector Similarity Lab.
+- **Whole-book consistency audit** (`whole-book-consistency-review.md`). The
+  Preface's reading totals for Parts II and III; footnote 51's tokeniser example;
+  three glossary entries the book promised and lacked, and a TF-IDF definition that
+  contradicted Chapter 3; the reuse section aligned with the README; nine reference
+  entries for sources the text cites, and nine reference entries moved into
+  alphabetical order; six vague back-references in the appendices and footnotes.
+
 ## 1.2.1 — 12 September 2026
 
 Consistency corrections across the textbook, teaching notes and labs. The

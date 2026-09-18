@@ -66,8 +66,8 @@ Then it reports what it cannot fix and exits non-zero:
   Checked: `Chapter 7`, `Chapters 10 to 12`, `Appendix D`, a bare number used
   as chapter link text (the Preface currency warning links `3`, `7`, `8`, `9`
   that way), and `Figure 6.2` / `Table 8.1`. A link whose text is exactly its
-  target's own heading is exempt, so Appendix F's section *Applying Chapter 12
-  to active learning* is not read as a claim about Chapter 12.
+  target's own heading is exempt, so Appendix F's section *Applying Chapter 15
+  to active learning* is not read as a claim about Chapter 15.
 
   Only *linked* mentions can be checked — currently 50 of the book's 91
   `Chapter N` mentions, and all 87 figure and table references. The other 41
