@@ -9,6 +9,12 @@ entry here.
 
 ## Unreleased
 
+- **Read-this-first digest.** Generate a five-stage, provisional 45-minute
+  reading-and-reflection route from all fifteen chapter summaries, the two
+  distinction panels, opening puzzles and closing recommendation. Preserve
+  excerpt wording and source/evidence links; keep route guidance separate.
+  Add reproducible generation, drift checks and browser/layout verification.
+
 - **Glossary hub.** Add stable links and reviewed explanation destinations for
   all 84 existing entries without changing their definitions. Inline term marks
   now link to the glossary while retaining definition tooltips. Add local lookup

@@ -16,6 +16,8 @@ The [**glossary**](search-textbook.html#glossary) links all 84 terms to their ex
 
 `search-textbook.html` is the sole maintained edition and the source of truth for authored prose, including glossary definitions. Marked product-evidence blocks, glossary navigation and the lookup index are generated from maintained mappings. The retired single-flow edition can be recovered from Git history, and its former public URL redirects to the textbook. See [`tools/README.md`](tools/README.md) for the maintenance passes, and [`CHANGELOG.md`](CHANGELOG.md) for what changed between versions.
 
+For a short introduction, start with [**Read this first**](read-this-first.html): a generated digest of the fifteen chapter summaries, key distinction panels and closing puzzle map. Its provisional 45-minute route includes reflection, not an evaluation exercise; all excerpts link back to the maintained book.
+
 ## Licence and reuse
 
 The text, tables, diagrams and code are licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — copy, excerpt, translate, adapt and redistribute for any purpose, including commercially, with credit. No permission request is needed.

@@ -1,5 +1,46 @@
 # Tooling
 
+## Read-this-first digest
+
+`read-this-first.html` is generated, not a separately authored edition. Run:
+
+```powershell
+python -X utf8 tools/build-digest.py
+python -X utf8 tools/build-digest.py --check
+python -X utf8 tools/test-digest.py
+$env:DIGEST_NODE_MODULES = 'PATH-TO-node_modules'
+node tools/check-digest.mjs
+```
+
+The builder uses only Python's standard library. The browser check uses
+Playwright and installed Microsoft Edge, following the other companion checks.
+Screenshots go to ignored `outputs/digest/`.
+
+Edit excerpt prose only in `search-textbook.html`. The manifest
+`data/digest-selections.json` defines source anchors, ordering, stage budgets
+and reflection prompts; `tools/digest-template.html` owns the introduction and
+next-step guidance. `assets/digest.css` owns presentation. Each chapter summary
+is selected uniquely within its stable chapter section, so it does not depend
+on chapter numbers or line offsets. Panels use their existing heading anchors.
+The three opening puzzle paragraphs and two closing recommendation paragraphs
+have guarded selectors: missing, duplicate or renamed source patterns fail
+rather than silently omit an excerpt. If the source shape changes, update the
+selector and tests deliberately.
+
+The fifteen summaries must occur once each in book order. Labels and chapter
+titles are taken from the book. Excerpt words remain unchanged; copied IDs are
+namespaced, and fragment links point to the original book, including footnotes
+and the dated evidence register. No screenshots or third-party figures are
+copied. Source links provide their context. The two distinction panels are not
+the separate Part II/III recap panels.
+
+Run this builder after other book generators and `maintain.py`, then run
+`--check` to detect stale output without writing. Generation has no current-time
+dependency. The displayed word count includes main reading content and prompts,
+not menus/footer. Reading time uses 200 words/minute, separately from the
+provisional 45-minute reading-and-reflection schedule. No evaluation activity
+is claimed to fit within that schedule.
+
 ## Glossary hub and local lookup
 
 Definitions remain authored in the book's `#glossary` definition list. Edit only

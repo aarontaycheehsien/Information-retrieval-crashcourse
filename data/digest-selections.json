@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "stages": [
+    {"id":"problem","title":"The problem","minutes":5,"prompt":"For one search you know, distinguish what the screen shows from what you would need documentation to establish.","items":[
+      {"id":"opening-puzzles","kind":"puzzles","source":"three-familiar-search-results-and-three-puzzles"}
+    ]},
+    {"id":"foundations","title":"Foundations","minutes":10,"prompt":"If a result lacks one of your query words, what different mechanisms could explain it? What evidence would separate them?","items":[
+      {"id":"chapter-1","kind":"summary","source":"sec-intro"},
+      {"id":"chapter-2","kind":"summary","source":"sec-boolean-admission"},
+      {"id":"chapter-3","kind":"summary","source":"sec-bm25-ranking"},
+      {"id":"chapter-4","kind":"summary","source":"sec-beyond-boolean"},
+      {"id":"interface-panel","kind":"panel","source":"distinction-map-interface"}
+    ]},
+    {"id":"mechanisms","title":"Mechanisms","minutes":15,"prompt":"Choose a familiar product. Which retrieval stages can you document, and which are still assumptions? A label such as semantic or AI is not an answer.","items":[
+      {"id":"vocabulary-panel","kind":"panel","source":"distinction-map-vocabulary"},
+      {"id":"chapter-5","kind":"summary","source":"sec-embeddings"},
+      {"id":"chapter-6","kind":"summary","source":"sec-retrieval-encoder"},
+      {"id":"chapter-7","kind":"summary","source":"sec-dense-at-scale"},
+      {"id":"chapter-8","kind":"summary","source":"sec-representations-and-units"},
+      {"id":"chapter-9","kind":"summary","source":"sec-reranking-and-hybrid"},
+      {"id":"chapter-10","kind":"summary","source":"sec-hybrid-and-fusion"},
+      {"id":"chapter-11","kind":"summary","source":"sec-query-transformation"},
+      {"id":"chapter-12","kind":"summary","source":"sec-agentic-search"}
+    ]},
+    {"id":"practice","title":"Professional practice","minutes":10,"prompt":"Name a missed record and a possible explanation. Record an alternative explanation and the next check before choosing an intervention.","items":[
+      {"id":"chapter-13","kind":"summary","source":"sec-diagnosing-failure"},
+      {"id":"chapter-14","kind":"summary","source":"sec-evaluation"},
+      {"id":"chapter-15","kind":"summary","source":"sec-library-practice"}
+    ]},
+    {"id":"next-action","title":"Next action","minutes":5,"prompt":"Choose one information need and write its relevance criteria. Which known relevant records should a good search find? Collecting and judging the runs is a separate next step.","items":[
+      {"id":"puzzle-verdicts","kind":"panel","source":"closing-puzzle-map-title"},
+      {"id":"evaluation-next","kind":"recommendation","source":"what-you-can-now-ask"}
+    ]}
+  ]
+}
