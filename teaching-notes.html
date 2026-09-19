@@ -97,6 +97,8 @@
       .table-wrap { overflow: visible; }
       table { min-width: 0; font-size: 8.5pt; overflow-wrap: anywhere; }
       a { color: inherit; }
+      .claim-teaching-groups details::details-content { content-visibility: visible; }
+      .claim-teaching-groups details > * { display: block; }
     }
   </style>
 </head>
@@ -111,6 +113,7 @@
     <div class="lede">
       <p>Start with the one-hour workshop below to use <a href="search-textbook.html">the textbook</a> at a staff meeting or professional-development session. The case, participant handout, timings and worked answers are supplied. Participants need no advance reading or subscription access.</p>
       <p>For the evaluation activity in Chapter 14 and Application Exercise III, use the <a href="evaluation-kit.html">Local retrieval evaluation kit</a>: an XLSX template, completed Figure 14.1 example and guide. Learners pool two runs, judge relevance once, and report precision and known-seed recovery separately. Try the completed example before gathering live results; constructing a full local evaluation set takes longer than a teaching session.</p>
+      <p>For a product-review activity, use the <a href="vendor-questionnaire.html">printable vendor questionnaire</a>. Assign a relevant group of questions, ask learners to distinguish vendor answers from verified evidence, and carry unanswered questions into its follow-up record. Optional sections cover ranking methods and generated answers.</p>
       <p>The main audiences are information literacy and evidence synthesis librarians, with systems/discovery librarians as a secondary audience. The routes below connect each group’s work to suitable reading and an outcome they can demonstrate.</p>
       <p>You may adapt these notes and the handout with credit under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. See <a href="#reuse">reuse guidance</a> for the book’s third-party figures.</p>
     </div>
@@ -237,7 +240,7 @@
 
     <h3>A thirteen-week course</h3>
     <p>Cover all fifteen chapters in thirteen weeks by pairing Chapters 5–6 in one week and Chapters 9–10 in another. Keep one chapter per week elsewhere. Pair Appendix A (Transformers) with Chapter 6; Appendix B (tokenisation) with Chapters 5–6; Appendix C (index execution) with Chapters 2–3; Appendix D (terminology) with Chapter 15 or keep it open throughout; and Appendix E (learning to rank) with Chapters 9–10. Treat <a href="search-textbook.html#appendix-evidence-synthesis-high-recall-retrieval">Appendix F</a> as required for evidence-synthesis cohorts alongside Chapters 13–15. Appendix G is an optional application of the pipeline to RAG after Chapter 12.</p>
-    <p>Use the three application exercises as summative assessments, one per part, and the chapter <em>Check yourself</em> questions for weekly formative checks. Add the <a href="#currency">product-claim verification task</a> as an assessed piece: assign its nine items across individuals or groups, have them consult current documentation, and ask what changed and how they established it. The resulting record is useful to the next cohort. For evidence-synthesis cohorts, Appendix F’s controlled TAR comparison is a fourth assessable task; check its preparation requirements below before assigning it.</p>
+    <p>Use the three application exercises as summative assessments, one per part, and the chapter <em>Check yourself</em> questions for weekly formative checks. Add the <a href="#currency">product-claim verification task</a> as an assessed piece: assign its nine groups or selected claim IDs across individuals or groups, have them consult current documentation, and ask what changed and how they established it. The resulting record is useful to the next cohort. For evidence-synthesis cohorts, Appendix F’s controlled TAR comparison is a fourth assessable task; check its preparation requirements below before assigning it.</p>
     <p>This shape leaves room for the thing the book cannot supply: students running searches in systems your institution actually licenses, and reporting back. Chapters 13, 14 and 15 are considerably more useful to someone who has spent a week failing to make a discovery layer behave.</p>
 
     <h2 id="labs">Using the two labs</h2>
@@ -325,24 +328,123 @@
       <p>Product descriptions age faster than the mechanisms they illustrate. Re-check the examples you intend to use; the prepared one-hour case is explicitly hypothetical and requires no current product claim.</p>
     </div>
 
-    <p>Use the table below to choose claims to verify. In a copy, complete <em>Documented as of</em> and <em>Last checked</em>, then attach the source URL, product mode, relevant passage and your finding: unchanged, changed or not established. A recent check of an old document does not establish that the architecture is current. If it cannot be verified, present it as a dated example. Pass that record to the next instructor.</p>
-
-    <div class="table-wrap"><table>
-      <thead><tr><th>Where</th><th>Product or claim</th><th>Documented as of</th><th>Last checked</th><th>What would change it</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Chapter 3 and its infrastructure footnotes</strong></td><td>Scholarly systems on Lucene-family infrastructure</td><td>—</td><td></td><td>A vendor migrating its search stack</td></tr>
-        <tr><td><strong>Table 7.2</strong></td><td>Semantic Scholar and OpenAlex Alice</td><td>2025 (Semantic Scholar); 2026 (OpenAlex)</td><td></td><td>Either could change route without changing the interface</td></tr>
-        <tr><td><strong>Table 9.3, Figure 9.7</strong></td><td>Primo Research Assistant, traced end to end</td><td>August 2026 (Table 9.3); September 2026 (Chapter 1)</td><td></td><td>Documented cut-offs. The book's most load-bearing product example: if the numbers move the argument holds but the figures do not</td></tr>
-        <tr><td><strong>Chapter 10's examples</strong></td><td>Web of Science Smart Search (blend), Scopus AI (route)</td><td>—</td><td></td><td>Whether a product blends or routes, which a release note changes quietly</td></tr>
-        <tr><td><strong>Tables 11.4, 11.5</strong></td><td>Query transformation and filter extraction across products</td><td>August 2026</td><td></td><td>Vendors add supported fields steadily</td></tr>
-        <tr><td><strong>Table 12.3</strong></td><td>Six academic tools by control arrangement</td><td>April 2026</td><td></td><td>A vendor renaming or re-scoping a mode. The same vendor already appears on two rows, so brand-level generalisations were wrong even then</td></tr>
-        <tr><td><strong>Chapter 12</strong></td><td>Web of Science Research Assistant described as fully agentic, with an approval gate before retrieval</td><td>April 2026</td><td></td><td>A later post naming the routes, or the approval gate being removed or made optional</td></tr>
-        <tr><td><strong>Appendix G</strong></td><td>Scopus AI and RAG Fusion walkthrough</td><td>2024</td><td></td><td>Already labelled historical. Check before presenting it as anything but a worked example of reading documentation</td></tr>
-        <tr><td><strong>Figure 1.3</strong></td><td>The two-by-two of AI academic search</td><td>August 2026</td><td></td><td>Products migrate between quadrants</td></tr>
-      </tbody>
-    </table></div>
-
-    <p>Handing these rows out one per student is also the assessed task suggested for the thirteen-week course above. It dates the material for you, and the filled-in table is worth more to the next cohort than another essay would be.</p>
+    <!-- BEGIN PRODUCT CLAIMS TEACHING -->
+<div class="claim-teaching-groups">
+<p>Choose from nine verification groups below. Each group contains independently checkable claims, rather than one assertion about an entire product. Assign a group or selected claim IDs. In a copy, record the product mode, source and relevant passage, evidence date, date checked, finding (supported within scope, changed or not established), and limitations. Pass the record to the next instructor.</p>
+<p>These views share the <a href="search-textbook.html#product-evidence-currency">book’s evidence register</a>. Currency snapshot: 2026-09-19. Rechecking a historical source does not make the architecture current. Unknown dates are not fresh checks.</p>
+<details id="claims-group-infrastructure"><summary>Lucene-family infrastructure</summary>
+<p>Which products still document these engines, and what does that establish about ranking?</p>
+<ul>
+<li><a href="search-textbook.html#claim-apache-lucene-bm25">apache-lucene-bm25</a> — BM25 is documented as the default text similarity; configuration and later stages may change final ranking.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-elasticsearch-bm25">elasticsearch-bm25</a> — BM25 is documented as the default text similarity; configuration and later stages may change final ranking.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-apache-solr-bm25">apache-solr-bm25</a> — BM25 is documented as the default text similarity; configuration and later stages may change final ranking.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-opensearch-bm25">opensearch-bm25</a> — BM25 is documented as the default text similarity; configuration and later stages may change final ranking.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-lucene-idf">lucene-idf</a> — The documented implementation uses a non-negative log(1 + ratio) IDF variant.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-cdi-solr">cdi-solr</a> — The cited CDI documentation identifies Solr alongside Cassandra.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-scite-elasticsearch">scite-elasticsearch</a> — The API documentation describes searches against an Elasticsearch index.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-blacklight-solr">blacklight-solr</a> — The discovery interface uses Solr as its search backend.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+</ul></details>
+<details id="claims-group-candidate-routes"><summary>Semantic Scholar and OpenAlex Alice</summary>
+<p>Has either candidate route changed without a visible interface change?</p>
+<ul>
+<li><a href="search-textbook.html#claim-semantic-scholar-question-counts">semantic-scholar-question-counts</a> — The question returned 13 results; the unquoted keyword query returned about 35,300.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-s2-lexical-candidates">s2-lexical-candidates</a> — The 2025 account describes keyword retrieval over titles, abstracts and author names in Elasticsearch.<br>Evidence: 2025-04-25; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-s2-candidate-budget">s2-candidate-budget</a> — The 2025 relevance endpoint limits keyword candidates to 1,000.<br>Evidence: 2025-04-25; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-s2-lightgbm">s2-lightgbm</a> — The 2025 relevance endpoint reranks candidates with LightGBM.<br>Evidence: 2025-04-25; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-s2-ranker-signals">s2-ranker-signals</a> — The described ranker emphasises direct title matches, citations and recency.<br>Evidence: 2025-04-25; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-s2-other-embeddings">s2-other-embeddings</a> — SPECTER-family embeddings are documented for disambiguation and recommendations, not first-stage main relevance retrieval.<br>Evidence: 2025-04-25; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-alice-release">alice-release</a> — OpenAlex says Alice shipped in February 2026.<br>Evidence: 2026-02; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-alice-vectors">alice-vectors</a> — Titles and abstracts use 1,024-dimensional GTE Large EN embeddings; queries use the same model.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-alice-cosine">alice-cosine</a> — Semantic search returns nearest works by cosine similarity.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-alice-index-count">alice-index-count</a> — The April account describes an Elasticsearch vector index with 413 million embeddings, including title-only works.<br>Evidence: 2026-04-25; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-alice-api-exclusion">alice-api-exclusion</a> — search, search.exact and search.semantic are alternative request modes; only one is permitted per request.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+</ul></details>
+<details id="claims-group-pipeline"><summary>Primo Research Assistant pipeline</summary>
+<p>Have the 30-candidate and five-source boundaries, model or indexed inputs changed?</p>
+<ul>
+<li><a href="search-textbook.html#claim-primo-answer-surface">primo-answer-surface</a> — The supplied answer surface shows five article cards and an overview with numbered citations.<br>Evidence: Unknown / not recorded; supporting check: 2026-09; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-primo-query-conversion">primo-query-conversion</a> — An LLM converts a question to Boolean variations connected with OR.<br>Evidence: 2026-09; supporting check: 2026-09; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-primo-candidate-budget">primo-candidate-budget</a> — CDI retrieval supplies up to 30 results to the subsequent stages.<br>Evidence: 2026-09; supporting check: 2026-09; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-primo-embedding-rerank">primo-embedding-rerank</a> — The documented reranking step uses embeddings.<br>Evidence: 2026-09; supporting check: 2026-09; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-primo-five-source-budget">primo-five-source-budget</a> — Five selected sources form the working set passed to the answer writer.<br>Evidence: 2026-09; supporting check: 2026-09; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-primo-generation-model">primo-generation-model</a> — GPT-4.1 Mini writes the overview from the five abstracts.<br>Evidence: 2026-09; supporting check: 2026-09; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-primo-lexical-candidates">primo-lexical-candidates</a> — CDI candidate retrieval is described as largely lexical over an inverted index.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+</ul></details>
+<details id="claims-group-blend-route"><summary>Blending versus routing</summary>
+<p>Does the named mode combine paths or choose between them, and on which evidence?</p>
+<ul>
+<li><a href="search-textbook.html#claim-wos-smart-blend">wos-smart-blend</a> — Document search can combine Boolean keyword and semantic-vector results.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-scopus-route">scopus-route</a> — The product can choose lexical retrieval, vector retrieval or both per question.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Changed / unresolved; Supporting check date unknown.</li>
+</ul></details>
+<details id="claims-group-transformation"><summary>Query transformation and filter extraction</summary>
+<p>Which fields and relationships are supported, visible and editable now?</p>
+<ul>
+<li><a href="search-textbook.html#claim-wos-smart-parser">wos-smart-parser</a> — An NLP parser constructs a structured Boolean query; the interpretation is visible and editable.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-ebsco-ai-parsing">ebsco-ai-parsing</a> — AI parses input into keyword and noun phrases for the established search engine.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-ebsco-model-undisclosed">ebsco-model-undisclosed</a> — The cited public product page does not identify the parsing model as an LLM.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-nde-query-model">nde-query-model</a> — ChatGPT 4.1 Mini identifies fields and generates a basic Boolean query plus six OR-connected permutations.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-nde-visible-query">nde-visible-query</a> — The resulting Advanced Search query is inspectable and editable.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-nde-filter-list">nde-filter-list</a> — Recognition covers a defined list of identifiers, author/title fields, type, availability, peer review, open access, holdings, date and language.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-nde-filter-failures">nde-filter-failures</a> — Documentation reports author-detection failures and cases of OR joining instead of the intended relationship.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-wos-ra-filters">wos-ra-filters</a> — Document requests can express institution, geography, date/recency and highly cited or seminal-paper constraints.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-wos-ra-boolean-limit">wos-ra-boolean-limit</a> — Guidance lists complex field-tagged Boolean queries as unsupported.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-primo-ra-refinement">primo-ra-refinement</a> — Auto-refinement recognises availability, books, articles, peer-reviewed material and supported date ranges.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+<li><a href="search-textbook.html#claim-primo-ra-manual-refinement">primo-ra-manual-refinement</a> — Manually changing a refinement switches that field out of automatic inference.<br>Evidence: 2026-08; supporting check: 2026-08; finding: Supported within stated scope. Supporting check within 365 days (not a current-product guarantee) · approximate age.</li>
+</ul></details>
+<details id="claims-group-control"><summary>Academic tool control arrangements</summary>
+<p>Does a later mode or trace change the dated classification?</p>
+<ul>
+<li><a href="search-textbook.html#claim-asta-renaming">asta-renaming</a> — Paper Finder became Asta Find Paper.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-asta-semirigid">asta-semirigid</a> — The cited description is of a semi-rigid predefined flow shaped at key points by model decisions.<br>Evidence: 2026-04; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-undermind-original">undermind-original</a> — The April comparison places original deep search in a predefined adaptive structure.<br>Evidence: 2026-04; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-consensus-control">consensus-control</a> — The April comparison places Deep Search in a predefined adaptive structure.<br>Evidence: 2026-04; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-elicit-agents">elicit-agents</a> — The April comparison describes flexible tool/workflow combination, with web search sometimes needing an explicit request.<br>Evidence: 2026-04; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-undermind-projects">undermind-projects</a> — The account describes three agents that select and chain tools dynamically and can call one another.<br>Evidence: 2026-04; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-scispace-agents">scispace-agents</a> — The account describes flexible tool access across a connector library.<br>Evidence: 2026-04; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-asta-probe">asta-probe</a> — In the uncited-references probe, the tool located the target article and stopped.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-consensus-probe">consensus-probe</a> — In the probe, papers already cited by the target were returned despite four sub-agents.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-undermind-probe">undermind-probe</a> — Related work was found, mostly already in the reference list.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-elicit-probe">elicit-probe</a> — The described pipeline offered no step for checking whether candidates were already cited.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-scispace-probe">scispace-probe</a> — The tool attempted the comparison but ran into metadata matching problems.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-general-assistants-probe">general-assistants-probe</a> — The author reports success on the selected task without an academic connector.<br>Evidence: Unknown / not recorded; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+</ul></details>
+<details id="claims-group-approval"><summary>Web of Science approval and control</summary>
+<p>Is approval still required, and does new evidence establish the available routes?</p>
+<ul>
+<li><a href="search-textbook.html#claim-wos-ra-agentic-label">wos-ra-agentic-label</a> — Clarivate called the assistant fully agentic and described automatic choice among task routes.<br>Evidence: 2026-04-09; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-wos-ra-control-inference">wos-ra-control-inference</a> — The described route selection is compatible with adaptive control; the post does not settle whether novel sequences can be composed.<br>Evidence: 2026-04-09; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-wos-ra-approval">wos-ra-approval</a> — The announcement describes user approval of the proposed strategy before retrieval.<br>Evidence: 2026-04-09; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+<li><a href="search-textbook.html#claim-wos-ra-export-query">wos-ra-export-query</a> — The announcement says the executed query is returned in Advanced Search syntax.<br>Evidence: 2026-04-09; supporting check: Unknown / not recorded; finding: No recorded verification finding. Supporting check date unknown.</li>
+</ul></details>
+<details id="claims-group-rag"><summary>Historical Scopus AI RAG Fusion</summary>
+<p>Does the 2024 account still support the historical illustration? Do not present it as current architecture.</p>
+<ul>
+<li><a href="search-textbook.html#claim-scopus-rag-variants">scopus-rag-variants</a> — The 2024 account describes LLM-generated query variants.<br>Evidence: 2024; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-scopus-rag-vector">scopus-rag-vector</a> — Vector retrieval runs against each generated variant.<br>Evidence: 2024; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-scopus-rag-rrf">scopus-rag-rrf</a> — Reciprocal rank fusion merges the variant result lists.<br>Evidence: 2024; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-scopus-rag-generation">scopus-rag-generation</a> — Summaries use top merged results with references required for claims.<br>Evidence: 2024; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+</ul></details>
+<details id="claims-group-quadrants"><summary>The two-by-two product snapshot</summary>
+<p>Have outputs or iteration changed? Keep the August 2026 illustration dated.</p>
+<ul>
+<li><a href="search-textbook.html#claim-placement-scopus-search">placement-scopus-search</a> — Figure 1.3 places this mode in quick search.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-google-scholar-search">placement-google-scholar-search</a> — Figure 1.3 places this mode in quick search.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-web-of-science-smart-search">placement-web-of-science-smart-search</a> — Figure 1.3 places this mode in quick search.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-primo-nde-natural-language-search">placement-primo-nde-natural-language-search</a> — Figure 1.3 places this mode in quick search.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-ebscohost-natural-language-search">placement-ebscohost-natural-language-search</a> — Figure 1.3 places this mode in quick search.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-scopus-ai-answer-mode">placement-scopus-ai-answer-mode</a> — Figure 1.3 places this mode in quick answer.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-web-of-science-research-assistant">placement-web-of-science-research-assistant</a> — Figure 1.3 places this mode in quick answer.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-primo-research-assistant">placement-primo-research-assistant</a> — Figure 1.3 places this mode in quick answer.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-consensus-pro-mode">placement-consensus-pro-mode</a> — Figure 1.3 places this mode in quick answer.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-ai2-asta-find-paper">placement-ai2-asta-find-paper</a> — Figure 1.3 places this mode in iterative search.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-google-scholar-labs">placement-google-scholar-labs</a> — Figure 1.3 places this mode in iterative search.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-undermind-august-snapshot">placement-undermind-august-snapshot</a> — Figure 1.3 places this mode in deep research.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-scispace-deep-review-and-agents">placement-scispace-deep-review-and-agents</a> — Figure 1.3 places this mode in deep research.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+<li><a href="search-textbook.html#claim-placement-consensus-deep-search">placement-consensus-deep-search</a> — Figure 1.3 places this mode in deep research.<br>Evidence: 2026-08; supporting check: Unknown / not recorded; finding: No recorded verification finding. Historical example.</li>
+</ul></details>
+<p>The full register also covers claims outside these nine groups, including API controls, commercial changes and screening software.</p>
+</div>
+<!-- END PRODUCT CLAIMS TEACHING -->
 
     <h2 id="reuse">Figures, and reusing them in slides</h2>
 
@@ -379,7 +481,8 @@
   <footer>
     Teaching notes for <a href="search-textbook.html">How Search Decides What You See</a>, version 1.2.1 ·
     <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> ·
-    <a href="search-textbook.html#how-to-cite-and-reuse">How to cite and reuse</a>
+    <a href="search-textbook.html#how-to-cite-and-reuse">How to cite and reuse</a> ·
+    <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/issues">Report an error</a>
   </footer>
 </body>
 </html>

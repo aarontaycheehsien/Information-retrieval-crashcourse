@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 *.annotations.json
 outputs/evaluation-kit/
+outputs/vendor-questionnaire/
+outputs/product-claims/

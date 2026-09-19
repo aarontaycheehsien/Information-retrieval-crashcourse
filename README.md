@@ -8,7 +8,11 @@ The repository also includes two interactive companions: the [BM25 Evidence Lab]
 
 The [**Local retrieval evaluation kit**](evaluation-kit.html) adds a downloadable spreadsheet template, completed example and guide for comparing two runs using local relevance judgements, precision at a fixed depth and known-seed recovery. Start with one query, then build a reusable institutional set.
 
-`search-textbook.html` is the sole maintained edition and source of truth. The retired single-flow edition can be recovered from Git history, and its former public URL redirects to the textbook. See [`tools/README.md`](tools/README.md) for the maintenance passes, and [`CHANGELOG.md`](CHANGELOG.md) for what changed between versions.
+The [**Vendor questionnaire**](vendor-questionnaire.html) brings Chapter 15's nineteen questions into a printable review record, with optional ranking-method and RAG sections. It keeps vendor answers, supporting evidence and the library's verification separate.
+
+The [**Product evidence and currency register**](search-textbook.html#product-evidence-currency) tracks dated product assertions, evidence, recorded checks and unresolved gaps. Its [JSON source](data/product-claims.json) also generates the teaching notes' nine verification groups. Migration preserves the book's existing evidence; it is not fresh product verification. [Report an error](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/issues) with the claim ID and supporting evidence.
+
+`search-textbook.html` is the sole maintained edition and the source of truth for authored prose. Its marked product-evidence blocks are generated from the register. The retired single-flow edition can be recovered from Git history, and its former public URL redirects to the textbook. See [`tools/README.md`](tools/README.md) for the maintenance passes, and [`CHANGELOG.md`](CHANGELOG.md) for what changed between versions.
 
 ## Licence and reuse
 

@@ -9,6 +9,20 @@ entry here.
 
 ## Unreleased
 
+- **Product evidence register.** Inventory 118 separately checkable assertions
+  across 221 book locations, with evidence type, temporal scope, sources,
+  limitations and inherited check dates. Generate the book register, nearby
+  evidence links and nine teaching verification groups from one JSON source.
+  Add an offline currency report, source-drift/date tests and prominent error
+  links. Historical evidence stays historical; missing verification dates stay
+  unknown. This migration is not a fresh product fact-check.
+
+- **Vendor questionnaire.** Add a printable companion with Chapter 15's nineteen
+  core questions and optional sections for Appendix E's four ranking-method
+  prompts and Appendix G's seven RAG prompts. Separate vendor answers, supporting
+  evidence, library verification and follow-up. Generate the questions from
+  stable textbook anchors, with explicit mappings and print-layout checks.
+
 - **Local retrieval evaluation kit.** Add a portable XLSX template, a completed
   Figure 14.1 example and a companion guide. The workbooks compare per-query
   precision at a fixed cutoff and known-seed recovery, with explicit capture

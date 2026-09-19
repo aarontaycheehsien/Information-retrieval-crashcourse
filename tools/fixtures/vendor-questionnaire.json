@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "intake": {
+    "source_id": "vendor-inputs",
+    "omit_after": " An attractive text box may conceal"
+  },
+  "sections": [
+    {
+      "key": "core",
+      "label": "Core questionnaire",
+      "source_section": "choosing-and-governing-search-tools",
+      "source_label": "Chapter 15",
+      "groups": [
+        {"heading_id": "vendor-group-1", "questions": ["Q01", "Q02"]},
+        {"heading_id": "vendor-group-2", "questions": ["Q03", "Q04", "Q05", "Q06", "Q07"]},
+        {"heading_id": "vendor-group-3", "questions": ["Q08", "Q09", "Q10", "Q11"]},
+        {"heading_id": "vendor-group-4", "questions": ["Q12", "Q13", "Q14"]},
+        {"heading_id": "vendor-group-5", "questions": ["Q15", "Q16"]},
+        {"heading_id": "vendor-group-6", "questions": ["Q17", "Q18", "Q19"]}
+      ]
+    },
+    {
+      "key": "e",
+      "label": "Ranking methods",
+      "source_section": "appendix-questions-for-fusion-and-ltr",
+      "source_label": "Appendix E",
+      "applicability": "Include when discussing rank fusion, learning to rank or reranking. Mark individual methods not used by this product as Not applicable and record the reason.",
+      "groups": [{"heading": "Ranking methods", "questions": ["E01", "E02", "E03", "E04"]}]
+    },
+    {
+      "key": "g",
+      "label": "Generated answers (RAG)",
+      "source_section": "appendix-rag-questions",
+      "source_label": "Appendix G",
+      "applicability": "Include when the product generates answers from retrieved material. Record the specific answer-generating mode being reviewed.",
+      "groups": [{"heading": "Generated answers (RAG)", "questions": ["G01", "G02", "G03", "G04", "G05", "G06", "G07"]}]
+    }
+  ],
+  "questions": [
+    {"id": "Q01", "source_id": "vendor-q01"},
+    {"id": "Q02", "source_id": "vendor-q02"},
+    {"id": "Q03", "source_id": "vendor-q03"},
+    {"id": "Q04", "source_id": "vendor-q04"},
+    {"id": "Q05", "source_id": "vendor-q05"},
+    {"id": "Q06", "source_id": "vendor-q06"},
+    {"id": "Q07", "source_id": "vendor-q07"},
+    {"id": "Q08", "source_id": "vendor-q08"},
+    {"id": "Q09", "source_id": "vendor-q09"},
+    {"id": "Q10", "source_id": "vendor-q10"},
+    {"id": "Q11", "source_id": "vendor-q11"},
+    {"id": "Q12", "source_id": "vendor-q12"},
+    {"id": "Q13", "source_id": "vendor-q13"},
+    {"id": "Q14", "source_id": "vendor-q14"},
+    {"id": "Q15", "source_id": "vendor-q15", "omit_after": " <a href=\"#what-agency-costs-and-what-it-buys\">Chapter 12</a>"},
+    {"id": "Q16", "source_id": "vendor-q16", "omit_after": " Chapter 12 records both kinds of change:"},
+    {"id": "Q17", "source_id": "vendor-q17"},
+    {"id": "Q18", "source_id": "vendor-q18"},
+    {"id": "Q19", "source_id": "vendor-q19"},
+    {"id": "E01", "source_id": "vendor-e01", "related": ["Q03", "Q07"]},
+    {"id": "E02", "source_id": "vendor-e02", "related": ["Q04", "Q11", "Q17"]},
+    {"id": "E03", "source_id": "vendor-e03", "related": ["Q03", "Q05", "Q06"]},
+    {"id": "E04", "source_id": "vendor-e04", "related": ["Q17", "Q18", "Q19"]},
+    {"id": "G01", "source_id": "vendor-g01", "related": ["Q03", "Q07"]},
+    {"id": "G02", "source_id": "vendor-g02", "related": ["Q05", "Q06"]},
+    {"id": "G03", "source_id": "vendor-g03", "related": ["Q01", "Q13"]},
+    {"id": "G04", "source_id": "vendor-g04", "related": ["Q03", "Q05"]},
+    {"id": "G05", "source_id": "vendor-g05", "related": ["Q02"]},
+    {"id": "G06", "source_id": "vendor-g06", "related": ["Q17"]},
+    {"id": "G07", "source_id": "vendor-g07", "related": ["Q12", "Q18"]}
+  ]
+}
