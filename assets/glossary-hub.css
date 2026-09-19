@@ -1,0 +1,32 @@
+.glossary-entry-nav { margin: .6rem 0 1.2rem; padding: .5rem .7rem; border-left: 2px solid var(--line); font: .8rem/1.5 var(--sans); }
+.glossary-entry-nav p { margin: .2rem 0; }
+.glossary-entry-nav ul { margin: .25rem 0 .5rem; padding-left: 1.1rem; }
+.glossary-entry-nav li { margin: .2rem 0; }
+.glossary dt { scroll-margin-top: 1.5rem; align-self: start; }
+.glossary dt:target, .glossary dt:focus { outline: 2px solid var(--teal); outline-offset: 4px; }
+.glossary dt:target + dd { background: var(--paper-2); }
+.term-mark { color: inherit; text-decoration: none; cursor: pointer; }
+#glossary-tip { max-width: min(22rem, calc(100vw - 24px)); }
+.hub-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.book-lookup { margin: 2rem 0; padding: 1rem 1.25rem; border: 1px solid var(--line); border-top: 4px solid var(--teal); border-radius: 8px; background: var(--paper-2); scroll-margin-top: 1.5rem; overflow-wrap: anywhere; }
+.book-lookup[hidden], .book-lookup [hidden], .lookup-trigger[hidden] { display: none !important; }
+.book-lookup label { display: block; font: 800 1.2rem/1.4 var(--sans); color: var(--teal); }
+.book-lookup p { font: .9rem/1.55 var(--sans); margin: .6rem 0; }
+.lookup-controls { display: flex; gap: .5rem; }
+.book-lookup input { flex: 1; min-width: 0; width: 100%; padding: .6rem; border: 1px solid #687673; border-radius: 4px; font: 1rem/1.5 var(--sans); color: var(--ink); background: white; }
+.book-lookup button { min-height: 44px; padding: .5rem .8rem; border: 1px solid var(--teal); border-radius: 4px; background: var(--teal); color: white; font: 700 .9rem/1.4 var(--sans); cursor: pointer; }
+.book-lookup :is(input,button,a):focus-visible, .glossary-entry-nav a:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 3px; }
+#book-lookup-results { padding-left: 1.4rem; }
+#book-lookup-results li { padding: .6rem 0; border-top: 1px solid var(--line); }
+#book-lookup-results a { font: 700 1rem/1.5 var(--sans); }
+.lookup-context { display: block; color: var(--muted); font: .8rem/1.5 var(--sans); }
+@media print {
+  .book-lookup, .lookup-trigger, .term-permalink { display: none !important; }
+  .glossary { break-inside: auto !important; }
+  .glossary dl { display: block; }
+  .glossary dt { break-after: avoid; margin-top: .8rem; }
+  .glossary dd { break-inside: avoid; }
+  .glossary::details-content { content-visibility: visible; }
+  .glossary > * { display: block; }
+  .glossary-entry-nav { margin-bottom: .7rem; }
+}

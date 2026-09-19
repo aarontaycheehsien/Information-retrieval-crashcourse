@@ -1,5 +1,60 @@
 # Tooling
 
+## Glossary hub and local lookup
+
+Definitions remain authored in the book's `#glossary` definition list. Edit only
+the text inside each `.glossary-definition` span. The builder wraps definitions
+without changing their wording and regenerates `GLOSSARY NAV` and `GLOSSARY
+LOOKUP` blocks, term anchors and definition IDs. Do not edit those generated
+parts by hand.
+
+`data/glossary-map.json` maps each exact visible glossary label to a stable ID,
+search aliases, one or more reviewed explanation headings, and optional related
+terms. It does not duplicate definitions. Keep IDs stable when renaming a label;
+update the label in both the glossary and mapping. New entries need a mapping.
+Destinations are editorial choices, not automatic first-occurrence matches.
+For combined entries, order the explanation destinations meaningfully. The
+builder derives chapter/appendix labels and heading titles from the book.
+
+Aliases are case/diacritic-insensitive with punctuation treated as spaces in
+lookup. Shared aliases must be declared explicitly: `pooling` intentionally
+returns both qualified entries. Unreviewed collisions fail the build. Aliases
+may include useful lookup terms such as ColBERT for late interaction; they do
+not license marking an ambiguous word throughout the prose.
+
+```powershell
+python tools/maintain.py
+python tools/build-glossary-hub.py
+python tools/build-glossary-hub.py --check
+python tools/test-glossary-hub.py
+node tools/check-glossary-hub.mjs
+```
+
+Run the glossary builder after heading edits and renumbering. The `--check`
+command is read-only and detects stale navigation or search data. Python uses
+only the standard library. For browser checks, set `GLOSSARY_NODE_MODULES` to
+the bundled runtime's `node_modules` directory. Screenshots go to the ignored
+`outputs/glossary-hub/` directory; inspect desktop, mobile, tooltip, no-JavaScript
+and print-media views before release. The browser check also exercises keyboard
+links, fragment history, ambiguous aliases and `file://` use without external
+requests. Run the existing product-claims, questionnaire and evaluation-kit
+checks after integration.
+
+`assets/glossary-hub.js` enhances the page using its embedded JSON index; no
+fetch, server, dependency, storage or search telemetry is involved. It indexes
+glossary definitions/aliases and anchored authored headings, not chapter body
+text, generated claim cards or repeated navigation. Exact terms/aliases rank
+before prefixes and token matches. Results are shown twenty at a time with a
+native Show more button. Text is inserted with DOM text APIs, never interpreted
+as HTML. Keep the CSS and JavaScript assets beside the book when copying it
+for offline use.
+
+The glossary is open in source markup for direct links without JavaScript.
+Enhancement may collapse it on ordinary page loads, but opens it for term links
+and printing. The local lookup and navigation triggers stay hidden when scripts
+are unavailable, with browser Find offered as a fallback. Printing retains all
+definitions and explanation references, hiding search controls and tooltips.
+
 ## Product evidence and currency
 
 `data/product-claims.json` maintains the claim register. The HTML remains the
@@ -265,9 +320,10 @@ The `data-ch` attribute on a TOC chapter row must match its section id minus the
 Two things the page does at runtime rather than in the markup, so nothing needs
 maintaining by hand: the **Copy link** control on every chapter heading, and the
 first-use **term marks**, whose definitions are read out of the `#glossary`
-definition list. To add a term mark, add the term to the glossary and, if it is
-unambiguous enough to match safely in prose, to the `MARKED` list in the page
-script.
+definition spans. To add a term mark, add the term and mapping first and rebuild;
+then, only if it is unambiguous enough to match safely in prose, add it to the
+`MARKED` or `MARKED_CASED` list in the page script. Marking remains deliberately
+conservative. Shared aliases are searchable but do not get arbitrary tooltips.
 
 ### The two recurring example families
 

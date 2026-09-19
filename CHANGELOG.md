@@ -9,6 +9,13 @@ entry here.
 
 ## Unreleased
 
+- **Glossary hub.** Add stable links and reviewed explanation destinations for
+  all 84 existing entries without changing their definitions. Inline term marks
+  now link to the glossary while retaining definition tooltips. Add local lookup
+  across terms, aliases and authored headings, with explicit ambiguous matches,
+  keyboard navigation and offline/no-JavaScript fallbacks. Generate navigation
+  and the embedded index from one maintained mapping, with regression checks.
+
 - **Product evidence register.** Inventory 118 separately checkable assertions
   across 221 book locations, with evidence type, temporal scope, sources,
   limitations and inherited check dates. Generate the book register, nearby
