@@ -404,6 +404,36 @@ as a redirect to the textbook.
 
 ## Interactive lab checks
 
+The Chapter 10 companion is `rank-fusion-lab.html`. Its pure calculation and
+guided fixtures live in `assets/rank-fusion-core.js`, and its presentation in
+`assets/rank-fusion-lab.js` and `.css`. Keep the book fixture and the static
+no-JavaScript table aligned with Table 10.1; the calculation test checks both.
+
+```powershell
+node tools/test-rank-fusion.cjs
+$env:RRF_NODE_MODULES = 'PATH-TO-node_modules'
+node tools/check-rank-fusion.mjs
+```
+
+The first check uses no dependencies. The second uses Playwright and installed
+Microsoft Edge, with screenshots in ignored `outputs/rank-fusion/`. It verifies
+live edits, all experiment resets, validation, ties and cutoff messaging,
+keyboard use, mobile/touch, print styling, no-JavaScript and file-based use.
+
+The constant is an integer from 0 to 100; ranks begin at 1. Input depths are
+independent integers from 0 to 20. Output depth is 1 to 40 and affects display
+only. BigInt fraction cross-products order results and identify true ties;
+five-decimal output never controls sorting. Ties share competition ranks and
+use deterministic JavaScript identifier order for display. A cutoff splitting
+a tied group is explicitly disclosed. IDs are case-sensitive, trimmed, limited
+to 80 characters, and rendered as text. Blank lines are ignored; within-list
+duplicates and more than 20 entries are rejected. A malformed input withholds
+results instead of leaving an apparently current, stale calculation.
+
+All routes have equal weight. No raw-score fusion, automatic relevance labels,
+network requests, persistent storage or external runtime dependencies are used
+by the lab. For offline use, keep the HTML and its three asset files together.
+
 Run `node tools/test-labs.cjs` for scoring and existing lab examples, then
 `node tools/test-vector-tour.cjs` for the vector lab’s prediction/reveal flow,
 cutoff/filter ordering, sandbox challenges and complete shared-state reset.

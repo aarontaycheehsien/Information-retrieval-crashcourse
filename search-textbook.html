@@ -2438,6 +2438,7 @@ intersection → D1</code></pre>
 
 <p>The arrangement and the combination method both matter. A system may merge ranked lists with <strong>reciprocal rank fusion (RRF)</strong>, combine normalised scores, or combine parallel retrieval with a later reranker. <a href="#common-query-understanding-techniques">Routing is a different decision</a>: it chooses which path or paths run. If several lists result, a later fusion rule still has to combine them. RRF is a fusion rule, not a relevance model or reranker; the formula and a worked example follow.</p>
 <h3 id="how-reciprocal-rank-fusion-combines-ranked-lists">How reciprocal rank fusion combines ranked lists<a aria-label="Link to How reciprocal rank fusion combines ranked lists" class="heading-anchor" href="#how-reciprocal-rank-fusion-combines-ranked-lists">#</a></h3>
+<p class="practice-callout">Try the <a href="rank-fusion-lab.html">Rank Fusion Lab</a> alongside the worked calculation below. Follow each record’s contribution, change the constant, and distinguish input cutoffs from output depth. The lab uses schematic records, not relevance judgements.</p>
 <p><strong>Reciprocal rank fusion (RRF)</strong> is an unsupervised rule introduced by <a href="https://doi.org/10.1145/1571941.1572114">Cormack, Clarke and Büttcher (2009)</a>. It ignores the raw score produced by each retriever and uses only each record’s rank position. For a document <var>d</var>, its fused score is:</p>
 <p>$$
 \operatorname{RRF}(d)=\sum_{r \in R}\frac{1}{c+r(d)}

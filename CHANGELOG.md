@@ -9,6 +9,12 @@ entry here.
 
 ## Unreleased
 
+- **Rank Fusion Lab.** Add an offline, editable companion to Chapter 10's
+  worked RRF example. Show each route's rank and contribution, exact-score ties,
+  the constant's effect, independent input depths and output depth. Include four
+  prediction experiments, full resets, input validation, a static no-JavaScript
+  example and calculation/browser regression checks. Scores are not judgements.
+
 - **Read-this-first digest.** Generate a five-stage, provisional 45-minute
   reading-and-reflection route from all fifteen chapter summaries, the two
   distinction panels, opening puzzles and closing recommendation. Preserve

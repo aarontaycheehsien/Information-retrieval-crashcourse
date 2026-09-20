@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Merge two ranked lists, inspect reciprocal rank fusion contributions, and distinguish the fusion constant from input and output cutoffs.">
+<title>The Rank Fusion Lab</title>
+<link rel="stylesheet" href="assets/rank-fusion-lab.css">
+<script defer src="assets/rank-fusion-core.js"></script>
+<script defer src="assets/rank-fusion-lab.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the lab</a>
+<header>
+  <nav aria-label="Companion navigation"><a href="search-textbook.html#how-reciprocal-rank-fusion-combines-ranked-lists">Chapter 10</a><a href="bm25-evidence-lab.html">BM25 lab</a><a href="vector-similarity-lab.html">Vector lab</a><a href="teaching-notes.html#labs">Teaching notes</a></nav>
+  <p class="kicker">How Search Decides What You See · Interactive companion</p>
+  <h1>The Rank Fusion Lab</h1>
+  <p class="lede">Two ranked lists. One merged order. Follow every contribution.</p>
+  <p>Reciprocal rank fusion (RRF) combines positions, not raw retrieval scores. For each record, add <strong>1 / (c + rank)</strong> from each supplied list that contains it. Ranks start at 1; an absent record contributes zero.</p>
+  <p class="note">These are schematic records, not a live product evaluation or relevance judgements. The starting lists reproduce <a href="search-textbook.html#tbl-10-1">Table 10.1</a> and <a href="search-textbook.html#rrf-record-journey-title">Figure 10.2</a>. Both lists have equal weight. The conventional constant 60 is not a result count or a universal optimum.</p>
+</header>
+<main id="main" tabindex="-1">
+  <section id="static-example" aria-labelledby="static-title">
+    <h2 id="static-title">The book’s worked example</h2>
+    <p>List A (lexical): A, B, C. List B (dense): C, A, D. Both input depths are 3; c = 60; output depth is 4.</p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Static fusion calculation">
+    <table><caption>Table 10.1 — the static calculation</caption><thead><tr><th scope="col">Record</th><th scope="col">A rank</th><th scope="col">B rank</th><th scope="col">Contributions and total</th><th scope="col">Fused rank</th></tr></thead><tbody>
+      <tr><th scope="row">A</th><td>1</td><td>2</td><td>1/61 + 1/62 = 0.03252</td><td>1</td></tr>
+      <tr><th scope="row">C</th><td>3</td><td>1</td><td>1/63 + 1/61 = 0.03227</td><td>2</td></tr>
+      <tr><th scope="row">B</th><td>2</td><td>—</td><td>1/62 = 0.01613</td><td>3</td></tr>
+      <tr><th scope="row">D</th><td>—</td><td>3</td><td>1/63 = 0.01587</td><td>4</td></tr>
+    </tbody></table></div>
+    <p>Interactive controls require JavaScript. If they are unavailable, this calculation and the <a href="search-textbook.html#how-reciprocal-rank-fusion-combines-ranked-lists">chapter explanation</a> remain usable.</p>
+  </section>
+  <div id="interactive" hidden>
+    <section class="tour" aria-labelledby="tour-title">
+      <h2 id="tour-title">Predict, change, explain</h2>
+      <p>Choose an experiment. Each button restores its complete starting state, including both lists and all controls.</p>
+      <div id="steps" class="buttons" aria-label="Guided experiments"></div>
+      <h3 id="step-title"></h3><p id="prediction"></p>
+      <button id="try-change" type="button">Reveal the explanation</button>
+      <p id="explanation" class="callout" hidden></p>
+      <p id="tour-state" class="note">The experiment is at its starting state.</p>
+    </section>
+    <section aria-labelledby="sandbox-title">
+      <div class="section-head"><h2 id="sandbox-title">Try your own ranked lists</h2><button id="reset" type="button">Reset to book example</button></div>
+      <p id="list-help">One stable identifier per line, highest-ranked first, at most 20 per list. Blank lines are ignored and surrounding spaces trimmed; identifiers are case-sensitive. A shared identifier means the same record across lists. Duplicates within a list are errors. Empty lists are allowed. All processing stays on this page.</p>
+      <div class="lists">
+        <div><label for="list-a">List A <span>(lexical in the book example)</span></label><textarea id="list-a" rows="5" aria-describedby="list-help" spellcheck="false">A
+B
+C</textarea><label for="depth-a">Input depth A · 0–20</label><input id="depth-a" type="number" min="0" max="20" step="1" value="3"><p id="count-a" class="note"></p><ol id="ranks-a" class="ranks" aria-label="List A entered ranks"></ol></div>
+        <div><label for="list-b">List B <span>(dense in the book example)</span></label><textarea id="list-b" rows="5" aria-describedby="list-help" spellcheck="false">C
+A
+D</textarea><label for="depth-b">Input depth B · 0–20</label><input id="depth-b" type="number" min="0" max="20" step="1" value="3"><p id="count-b" class="note"></p><ol id="ranks-b" class="ranks" aria-label="List B entered ranks"></ol></div>
+      </div>
+      <div class="controls">
+        <div><label for="constant">Fusion constant c · 0–100</label><input id="constant" type="number" min="0" max="100" step="1" value="60" aria-describedby="constant-help"><p id="constant-help" class="note">Softens the advantage of the earliest positions. Larger is not automatically better.</p><div id="presets" class="buttons" aria-label="Constant presets"></div></div>
+        <div><label for="output-depth">Output depth · 1–40</label><input id="output-depth" type="number" min="1" max="40" step="1" value="4" aria-describedby="output-help"><p id="output-help" class="note">How many merged records to show. This does not change scores. Input depths above determine which records can contribute.</p></div>
+      </div>
+      <p id="error" class="error" role="alert" hidden></p>
+    </section>
+    <section aria-labelledby="results-title">
+      <h2 id="results-title">Follow the contributions</h2>
+      <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div id="results" hidden>
+        <p class="note">On a small screen, scroll the table sideways to see both contributions and the total. Keyboard users can focus the table region and use the arrow keys.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Fused results; scroll horizontally on small screens">
+          <table><caption id="results-caption">Fused records and their contributions</caption><thead><tr><th scope="col">Fused rank</th><th scope="col">Record</th><th scope="col">A rank</th><th scope="col">A contribution</th><th scope="col">B rank</th><th scope="col">B contribution</th><th scope="col">Total</th></tr></thead><tbody id="result-rows"></tbody></table>
+        </div>
+        <p id="tie-note" class="callout" hidden></p>
+        <p class="note">Scores are displayed to five decimal places. Ordering and tie detection use exact fractions, not displayed rounding. Equal scores share a rank (for example 1, 1, 3); ties are displayed in deterministic identifier order, not relevance order.</p>
+      </div>
+    </section>
+  </div>
+  <section class="limits" aria-labelledby="limits-title">
+    <h2 id="limits-title">What this cannot tell you</h2>
+    <p>RRF discards raw-score gaps and inherits every input cutoff. “List only” means outside the other supplied list, not irrelevant. Neither a larger fused score nor agreement between routes proves that a record meets an information need.</p>
+    <p>Use the <a href="evaluation-kit.html">local retrieval evaluation kit</a> to compare actual runs with written relevance criteria and human judgements. Return to <a href="search-textbook.html#hybrid-and-fusion">Chapter 10</a> for fusion, routing and their limits.</p>
+  </section>
+</main>
+<footer>Part of <a href="search-textbook.html">How Search Decides What You See</a> by Aaron Tay. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. <a href="search-textbook.html#generative-ai-use-disclosure">Generative-AI disclosure</a>.</footer>
+</body></html>

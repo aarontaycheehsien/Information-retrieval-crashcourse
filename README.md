@@ -4,7 +4,7 @@ A practical introduction to information retrieval architecture, written primaril
 
 [**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.2.1, three parts, fifteen chapters and seven appendices.
 
-The repository also includes two interactive companions: the [BM25 Evidence Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/bm25-evidence-lab.html) and the [Vector Similarity Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/vector-similarity-lab.html).
+The repository also includes three interactive companions: the [BM25 Evidence Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/bm25-evidence-lab.html), the [Vector Similarity Lab](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/vector-similarity-lab.html) and the [Rank Fusion Lab](rank-fusion-lab.html). The fusion lab makes Chapter 10’s worked example editable and separates the fusion constant from input and output cutoffs.
 
 The [**Local retrieval evaluation kit**](evaluation-kit.html) adds a downloadable spreadsheet template, completed example and guide for comparing two runs using local relevance judgements, precision at a fixed depth and known-seed recovery. Start with one query, then build a reusable institutional set.
 
