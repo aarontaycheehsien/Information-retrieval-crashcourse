@@ -374,3 +374,34 @@ established pattern: HTML parses with balanced tags; every internal `href`
 resolves; glossary entry count and `MARKED` list unchanged; and for R1, that
 Chapter 14's `#relevance-is-a-judgement` is byte-identical, since the whole
 point is that it is already correct.
+
+## Chapter 1 line edit — 2026-09-23
+
+Sentence-level only, keeping to the "do not restructure Chapter 1" decision
+above: no IDs, headings, figures or footnotes changed (all 36 IDs checked
+identical).
+
+- Opening: the scenario now starts with the student; the documentation date
+  moves to a trailing clause.
+- Pipeline list: the hedge "Counting these steps does not measure their relative
+  cost or importance" is gone; the paragraph ends on what steps 1–4 do.
+- Scopus AI: three caveats merged into one ("a 2024 snapshot… goes no further
+  than the documentation does").
+- Stage strip: the duplicated "no stage is guaranteed to be present" is cut.
+- Controller paragraph: now defines the controller before using it, and swaps
+  "adaptive routing" for plain wording.
+- "Ceiling" paragraph: the jargon sentence about source-supported coverage is
+  now plain English; the shortlist-bottleneck link and footnote 2 are kept.
+- Common-confusion list: the "Discussed later" links now name Chapter 11 and
+  Chapter 9 (same hrefs); the second Appendix G restatement of "consumer, not
+  rival" is now a back-reference to the RAG definition.
+- "The score" (undefined) is now "the ranking behind that choice".
+- The Boolean lead-in paragraph moves from the tail of the relevance section to
+  sit under the puzzles heading.
+- Map section: long sentences split; the closing sentence about product
+  descriptions is rewritten.
+
+Chapter 1: 3,538 → 3,536 words. The reading time does not change.
+`maintain.py` and `renumber_footnotes.py` report nothing to fix. No internal
+links are broken, no tags are left unclosed, and the browser console shows no
+errors.
