@@ -544,7 +544,7 @@
           "excerpt": "Query conversion. The user’s natural-language question is sent to an LLM, which converts it to a Boolean query containing several variations connected with OR ."
         },
         {
-          "anchor": "semantic-scholar-opening-caption",
+          "anchor": "puzzles-under-answer-layers",
           "excerpt": "The puzzles carry extra weight because systems like these can sit underneath an answer-generating layer. Primo Research Assistant converts questions to Boolean queries, so Puzzle 3—natural language meets a query parser—is not academic. A reranker chooses five survivors from thirty, so Puzzle 2—which fraction of the reported results was ever scored—is not academic either."
         },
         {
@@ -598,7 +598,7 @@
           "excerpt": "Retrieval. That query runs against the Central Discovery Index (CDI) and returns up to 30 results."
         },
         {
-          "anchor": "semantic-scholar-opening-caption",
+          "anchor": "puzzles-under-answer-layers",
           "excerpt": "The puzzles carry extra weight because systems like these can sit underneath an answer-generating layer. Primo Research Assistant converts questions to Boolean queries, so Puzzle 3—natural language meets a query parser—is not academic. A reranker chooses five survivors from thirty, so Puzzle 2—which fraction of the reported results was ever scored—is not academic either."
         },
         {
@@ -714,7 +714,7 @@
           "excerpt": "When Primo Research Assistant selects five sources, the score is an estimate based on the evidence and training available to the system. It does not establish that the sources answer this reader’s need. A study may concern open access and citations yet fail a requirement for recent empirical evidence. Keep the need, the submitted query and the computed match separate."
         },
         {
-          "anchor": "semantic-scholar-opening-caption",
+          "anchor": "puzzles-under-answer-layers",
           "excerpt": "The puzzles carry extra weight because systems like these can sit underneath an answer-generating layer. Primo Research Assistant converts questions to Boolean queries, so Puzzle 3—natural language meets a query parser—is not academic. A reranker chooses five survivors from thirty, so Puzzle 2—which fraction of the reported results was ever scored—is not academic either."
         },
         {
@@ -836,7 +836,7 @@
       "limitations": "Run date is not stated. A reported count is not proof of exhaustive scoring or relevance.",
       "locations": [
         {
-          "anchor": "scite-opening-caption",
+          "anchor": "scholar-opening-caption",
           "excerpt": "Puzzle 2. Search open access in Google Scholar and it reports about 9.4 million results. Now try to see them. The interface stops at page 100—one thousand records—and Google’s own help documentation confirms that no more than 1,000 results will ever be shown for a single query. So what are the other 9,399,000 “results”? Were they ranked? Were they even scored?"
         },
         {
@@ -875,7 +875,7 @@
       "limitations": "The display boundary does not establish an exhaustively ranked global top 1,000.",
       "locations": [
         {
-          "anchor": "scite-opening-caption",
+          "anchor": "scholar-opening-caption",
           "excerpt": "Puzzle 2. Search open access in Google Scholar and it reports about 9.4 million results. Now try to see them. The interface stops at page 100—one thousand records—and Google’s own help documentation confirms that no more than 1,000 results will ever be shown for a single query. So what are the other 9,399,000 “results”? Were they ranked? Were they even scored?"
         },
         {
@@ -923,7 +923,7 @@
       "limitations": "Observed counts do not establish query parsing, relevance or the exact cause; 2025 architecture is separate evidence.",
       "locations": [
         {
-          "anchor": "scholar-opening-caption",
+          "anchor": "semantic-scholar-opening-caption",
           "excerpt": "Puzzle 3. The name Semantic Scholar promises search by meaning—so a natural-language question ought to be exactly the query it handles best. It is not. In August 2026, Is there an open access citation advantage returned just 13 results, for a topic with hundreds of relevant papers. Strip the question down to its keywords— open access citation advantage —and the same system returned about 35,300. Same information need, same words at its core, a 2,700-fold difference in results. Why did the more natural query retrieve dramatically less?"
         },
         {
@@ -4006,7 +4006,7 @@
       "locations": [
         {
           "anchor": "anatomy-of-a-cited-answer",
-          "excerpt": "Strip away the product names and a general shape emerges. The strip below shows the stages an AI search pipeline can contain, in the order they run. Not every product uses all six stages, and no stage is guaranteed to be present: Primo Research Assistant fills five of the six boxes and skips fusion; Scopus AI’s 2024 documented “RAG Fusion” fills precisely the box Primo skips. Reading a product against this map—which stages exist, which are absent, which are documented and which are guesswork—is the core skill this book teaches."
+          "excerpt": "Scopus AI is documented more thinly. In Elsevier’s 2024 account, it expands a question into multiple query variants, fuses the retrieved lists using what Elsevier calls “RAG Fusion”, and generates a Topic Summary or Expanded Summary with references required for claims."
         },
         {
           "anchor": "rrf-record-journey-title",
@@ -4057,7 +4057,7 @@
       "locations": [
         {
           "anchor": "anatomy-of-a-cited-answer",
-          "excerpt": "Strip away the product names and a general shape emerges. The strip below shows the stages an AI search pipeline can contain, in the order they run. Not every product uses all six stages, and no stage is guaranteed to be present: Primo Research Assistant fills five of the six boxes and skips fusion; Scopus AI’s 2024 documented “RAG Fusion” fills precisely the box Primo skips. Reading a product against this map—which stages exist, which are absent, which are documented and which are guesswork—is the core skill this book teaches."
+          "excerpt": "Scopus AI is documented more thinly. In Elsevier’s 2024 account, it expands a question into multiple query variants, fuses the retrieved lists using what Elsevier calls “RAG Fusion”, and generates a Topic Summary or Expanded Summary with references required for claims."
         },
         {
           "anchor": "rrf-record-journey-title",
@@ -4108,7 +4108,7 @@
       "locations": [
         {
           "anchor": "anatomy-of-a-cited-answer",
-          "excerpt": "Strip away the product names and a general shape emerges. The strip below shows the stages an AI search pipeline can contain, in the order they run. Not every product uses all six stages, and no stage is guaranteed to be present: Primo Research Assistant fills five of the six boxes and skips fusion; Scopus AI’s 2024 documented “RAG Fusion” fills precisely the box Primo skips. Reading a product against this map—which stages exist, which are absent, which are documented and which are guesswork—is the core skill this book teaches."
+          "excerpt": "Scopus AI is documented more thinly. In Elsevier’s 2024 account, it expands a question into multiple query variants, fuses the retrieved lists using what Elsevier calls “RAG Fusion”, and generates a Topic Summary or Expanded Summary with references required for claims."
         },
         {
           "anchor": "rrf-record-journey-title",
@@ -4159,7 +4159,7 @@
       "locations": [
         {
           "anchor": "anatomy-of-a-cited-answer",
-          "excerpt": "Strip away the product names and a general shape emerges. The strip below shows the stages an AI search pipeline can contain, in the order they run. Not every product uses all six stages, and no stage is guaranteed to be present: Primo Research Assistant fills five of the six boxes and skips fusion; Scopus AI’s 2024 documented “RAG Fusion” fills precisely the box Primo skips. Reading a product against this map—which stages exist, which are absent, which are documented and which are guesswork—is the core skill this book teaches."
+          "excerpt": "Scopus AI is documented more thinly. In Elsevier’s 2024 account, it expands a question into multiple query variants, fuses the retrieved lists using what Elsevier calls “RAG Fusion”, and generates a Topic Summary or Expanded Summary with references required for claims."
         },
         {
           "anchor": "rrf-record-journey-title",

@@ -261,9 +261,11 @@ def backlinks(book, data):
         if not match:
             raise ValueError(f'Cannot place register links at {anchor}')
         pos = match.end() if match[1] == 'li' else book.index('</'+match[1]+'>',match.end())+len(match[1])+3
-        links = ''.join(f'<p><a href="#claim-{c["id"]}">{escape(c["claim"])}</a></p>' for c in claims.values())
+        # Name the product and mode: several claims share wording across products.
+        links = ''.join(f'<p><a href="#claim-{c["id"]}"><strong>{escape(c["product"])} · {escape(c["mode"])}.</strong> {escape(c["claim"])}</a></p>' for c in claims.values())
+        count = f'{len(claims)} claim' + ('' if len(claims) == 1 else 's')
         block = (f'<!-- BEGIN PRODUCT CLAIMS LINKS {anchor} -->\n'
-                 f'<details class="claim-links"><summary>Evidence register · {len(claims)} claim(s)</summary>{links}</details>\n'
+                 f'<details class="claim-links"><summary>Evidence register · {count}</summary>{links}</details>\n'
                  f'<!-- END PRODUCT CLAIMS LINKS {anchor} -->\n')
         book = book[:pos]+block+book[pos:]
     return book
