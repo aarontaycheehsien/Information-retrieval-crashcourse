@@ -75,5 +75,5 @@ for name,page in pages.items():
             assert unquote(url.fragment) in dest.ids, (name,href)
 assert pages['search-textbook.html'].hrefs.count('vendor-questionnaire.html')==3
 assert 'vendor-questionnaire.html' in pages['teaching-notes.html'].hrefs
-assert '(vendor-questionnaire.html)' in (ROOT/'README.md').read_text(encoding='utf-8')
+assert re.search(r'\((?:https://[^)]*/)?vendor-questionnaire\.html\)', (ROOT/'README.md').read_text(encoding='utf-8'))
 print('PASS: all 30 questions, six core groups, response fields, declared omissions, source drift guards and local links.')
