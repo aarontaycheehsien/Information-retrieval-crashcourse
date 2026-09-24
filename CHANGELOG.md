@@ -9,6 +9,18 @@ entry here.
 
 ## Unreleased
 
+- **Companion readability.** Teaching notes open with their contents menu, give
+  the labs as one table and show the product-claim groups as one-line claims
+  with short status and per-group counts. Read this first drops the book's
+  chapter-to-chapter hand-offs and panel paragraphs that referred to absent
+  context, splits Mechanisms into Representations and Pipelines, and labels its
+  source links. The vendor questionnaire adds a "Listen for" cue to every
+  question, letters multi-question prompts and hides answer spaces on screen
+  (print unchanged). The evaluation guide puts its worked example first and
+  separates each step's action from its edge cases. Lab introductions and two
+  tour answers are shorter, the README leads with Read this first, and visible
+  lab text uses the book's "cut-off". Book text is unchanged.
+
 - **Rank Fusion Lab.** Add an offline, editable companion to Chapter 10's
   worked RRF example. Show each route's rank and contribution, exact-score ties,
   the constant's effect, independent input depths and output depth. Include four

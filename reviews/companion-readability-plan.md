@@ -2,8 +2,8 @@
 
 Drafted 25 September 2026 on branch `fable-1` against commit `1d4f344`, with the
 uncommitted README, CHANGELOG and `reviews/` reorganisation present in the working
-tree. **This is a plan, not a record of applied changes.** Nothing below has been
-edited yet.
+tree. The plan was applied the same day; see [Applied](#applied) at the end for
+what changed, what was done differently and what was left.
 
 Scope is everything a reader or instructor meets outside `search-textbook.html`:
 
@@ -323,3 +323,54 @@ After the in-progress README edits are committed:
 5. Browser preview at desktop and 375 px widths, and print preview for the handout,
    questionnaire and teaching notes.
 6. Record applied changes in `CHANGELOG.md` and append an *Applied* section here.
+
+## Applied
+
+Applied 25 September 2026 on `fable-1`, in seven commits after `e69ba00`:
+
+| Commit | Item | Result |
+|---|---|---|
+| `b7af628` | P1, P2 | Teaching notes: menu first; the six-paragraph preamble folded into the menu, *Choose the emphasis* and *The application exercises* (new `#product-review` anchor); one timing caveat; labs as a table; claim groups as one-line claims with a status line and a per-group count in the summary. Page 7,642 → 6,771 words. |
+| `0b73ba3` | P3 | Read this first: hand-offs dropped except Chapter 10's substantive one; interface and vocabulary panels lose the paragraphs that referred to absent context, with a short authored `lead` in their place; six stages (5 + 9 + 9 + 9 + 8 + 5 minutes); descriptive link text; evidence register moved below the puzzle verdicts. Reading text 4,260 → 3,593 words (page 4,530 → 3,850). |
+| `b808bae` | P4 | Questionnaire: authored "Listen for" cue on all 30 questions; bodies made only of questions lettered (Q01, Q02, Q03, Q12, Q13, Q15); answer spaces hidden on screen behind a toggle, always printed; question-only list for sending ahead; intake headed "Before Q01". Print still 13 pages (core) and 19 (all sections). |
+| `a7b64b9` | P5 | Evaluation guide: worked example before the six steps; each step one action plus edge-case bullets; short-list arithmetic left only in *What the scores count*. |
+| `887e036` | P6 | Vector lab intro, hints and cut-off experiment reordered; step 7 notes C is least similar. BM25 step 1 intro and takeaway, step 3 aside as a disclosure, step 7 closing experiment set apart. Rank Fusion example settings as a list. Step counts unchanged. |
+| `64a4109` | P7 | README: Read this first straight after the textbook link, companions as a list, maintenance notes under their own heading, *For instructors* promoted and moved before the licence. Committed around the other author's uncommitted repository-map block, which is untouched. |
+| `72d5e7a` | P8 | Visible lab text uses "cut-off", the book's majority spelling (31 uses to 8); BM25 and vector labs link to the other labs and teaching notes. |
+
+A final commit adds the changelog entry and this record.
+
+### Done differently
+
+- **Links in the README are absolute, not relative.** P7 proposed relative links,
+  but the README is read on GitHub, where a relative `.html` link opens source, not
+  the page. The test that required `(vendor-questionnaire.html)` now accepts either.
+- **The questionnaire's intake is not numbered Q00.** Numbering it would change
+  the "nineteen core questions" quoted in the book, README and notes; it is headed
+  "Before Q01" instead.
+- **Only whole paragraphs are dropped from the digest.** The builder's `omit`
+  names paragraphs by their opening words and fails if one no longer matches, as
+  the other selectors do.
+
+### Not done
+
+- **"Start here" worksheet in the XLSX files.** Both workbooks already carry a
+  guide link and a banner, and adding a sheet changes the four-sheet structure the
+  tests and guide assume. Left for a workbook release.
+- **Evaluation kit keeps "cutoff".** Its guide quotes workbook labels ("Cutoff k");
+  changing one without the other would mismatch.
+
+Identical claims about several products (the four Lucene-family BM25 claims)
+now share one row in the teaching notes, as P1 proposed.
+
+### Verification
+
+`build-product-claims.py --check`, `test-product-claims.py`, `check-product-claims.mjs`;
+`build-digest.py --check`, `test-digest.py` (new checks for dropped hand-offs,
+orphaned phrases, link text, register order and a missing `omit` target),
+`check-digest.mjs`; `build-vendor-questionnaire.py --check`,
+`test-vendor-questionnaire.py` (word-for-word check of lettered bodies),
+`check-vendor-questionnaire.mjs` with PDF page counts; `test-evaluation-kit.py`,
+`check-evaluation-guide.mjs`; `test-labs.cjs`, `test-vector-tour.cjs`,
+`test-rank-fusion.cjs`, `check-rank-fusion.mjs`. All pass. Browser checks ran
+with the bundled Playwright runtime and Microsoft Edge.
