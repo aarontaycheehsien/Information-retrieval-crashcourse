@@ -1090,7 +1090,7 @@
       "locations": [
         {
           "anchor": "how-boolean-search-uses-an-inverted-index",
-          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives. It instead uses an inverted index : a structure that starts with searchable terms and points to the records containing them. Before examining how Boolean operators use that structure, we need to see how text becomes searchable terms."
+          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives."
         }
       ],
       "teaching_groups": [],
@@ -1111,7 +1111,7 @@
       "locations": [
         {
           "anchor": "how-boolean-search-uses-an-inverted-index",
-          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives. It instead uses an inverted index : a structure that starts with searchable terms and points to the records containing them. Before examining how Boolean operators use that structure, we need to see how text becomes searchable terms."
+          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives."
         }
       ],
       "teaching_groups": [],
@@ -1132,7 +1132,7 @@
       "locations": [
         {
           "anchor": "how-boolean-search-uses-an-inverted-index",
-          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives. It instead uses an inverted index : a structure that starts with searchable terms and points to the records containing them. Before examining how Boolean operators use that structure, we need to see how text becomes searchable terms."
+          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives."
         }
       ],
       "teaching_groups": [],
