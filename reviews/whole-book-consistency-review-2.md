@@ -60,7 +60,7 @@ highlighting, anchors, and every main-text external link against the reference l
   PubMed User Guide. The list holds 150 entries in alphabetical order.
 - **Dead link.** Chapter 12's Wiley AI Gateway link (`wiley.com/en-us/ai`) returned
   404. It now points to Wiley's AI Gateway documentation at `docs.scholargateway.ai`,
-  in the text and in the `scite-mcp` and `wiley-mcp` register evidence.
+  in the text and in the `scite-mcp`, `wiley-mcp` and `scite-interface-equivalence` register evidence.
 
 ## Checked and consistent
 
