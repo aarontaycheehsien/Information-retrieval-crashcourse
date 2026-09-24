@@ -319,7 +319,9 @@
     .table-wrap {
       overflow-x: auto; margin: 2rem 0; border: 1px solid var(--line); border-radius: 10px;
     }
-    table { border-collapse: collapse; width: 100%; min-width: 620px; font: .88rem/1.45 var(--sans); }
+    table { border-collapse: collapse; width: 100%; font: .88rem/1.45 var(--sans); }
+    /* Tables fit the text column; only phones get a scrolling minimum width. */
+    @media (max-width: 620px) { table { min-width: 620px; } }
     th, td { padding: .85rem .9rem; vertical-align: top; text-align: left; border-bottom: 1px solid var(--line); }
     th { background: #e8e1d3; color: #283230; font-size: .78rem; letter-spacing: .025em; text-transform: uppercase; }
     tr:last-child td { border-bottom: 0; }
