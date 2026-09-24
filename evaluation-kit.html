@@ -23,6 +23,8 @@
     section { margin:1.5rem 0; padding:1.5rem; background:#fbf9f4; border:1px solid var(--line); border-radius:.5rem; }
     p { margin:.7rem 0; }
     li { margin:.65rem 0; }
+    .steps > li > ul { margin:.35rem 0 0; padding-left:1.2rem; font-size:.95em; color:var(--muted); }
+    .steps > li > ul li { margin:.25rem 0; }
     .downloads { display:flex; flex-wrap:wrap; gap:.8rem; margin:1.3rem 0; }
     .downloads a { display:inline-block; padding:.8rem 1rem; border:1px solid var(--teal); border-radius:.35rem; text-decoration:none; font-weight:650; }
     .downloads a:first-child { background:var(--teal); color:white; }
@@ -42,7 +44,7 @@
 </head>
 <body>
 <header>
-  <nav aria-label="Companion navigation"><a href="search-textbook.html#building-a-local-evaluation-set">Chapter 14</a><a href="teaching-notes.html">Teaching notes</a><a href="#workflow">How to use the workbook</a><a href="#example">Worked example</a></nav>
+  <nav aria-label="Companion navigation"><a href="search-textbook.html#building-a-local-evaluation-set">Chapter 14</a><a href="teaching-notes.html">Teaching notes</a><a href="#example">Worked example</a><a href="#workflow">How to use the workbook</a></nav>
   <p class="kicker">How Search Decides What You See · Practical companion</p>
   <h1>Local retrieval evaluation kit</h1>
   <p>Compare two search runs against your library’s own information needs. Record what each run returned, judge the pooled records once, and see which queries improved or deteriorated.</p>
@@ -66,26 +68,6 @@
     </table></div>
     <p class="note">Pale yellow cells are inputs; grey cells calculate. Use unique text IDs without surrounding spaces. IDs are compared without case sensitivity: A and a identify the same record. Use one canonical DOI, PMID or local ID consistently across both runs.</p>
   </section>
-  <section aria-labelledby="workflow">
-    <h2 id="workflow">Six steps to a repeatable comparison</h2>
-    <ol>
-      <li><strong>Define relevance before looking at the scores.</strong> In Queries, write a specific need and criteria another person could apply. Enter both exact queries; record filters as “None” where appropriate. Select known relevant seeds before inspecting the comparison. In Records, mark them Seed = Yes, including seeds that neither run found. A seed need not be in either captured list.</li>
-      <li><strong>Choose the cutoff and record the conditions.</strong> Use 10 or 20 in Comparison B4, shared by both runs and every query. Complete Runs and retain each query’s transformed input, or mark it unknown. A comparison can test a query intervention, an update or a different product; record which conditions changed.</li>
-      <li><strong>Capture each list through that depth.</strong> Save the original output. Record the requested capture depth in Queries, the number of distinct records retained and whether capture is complete. A complete empty list has count 0 and Complete = Yes; an unperformed run stays incomplete. If the product returns only three results when ten were requested, depth is still 10 and count is 3.</li>
-      <li><strong>Pool the records, preserving ranks.</strong> Match identifiers manually across the two lists. For each query–record pair, enter its original position in Rank A and/or Rank B. Leave a rank blank when absent; do not use zero. If a record repeats within a run, retain its first occurrence and leave the resulting gap in the ranks. Do not pull a record from below the cutoff into that gap. Record the duplicate in Evidence or notes; the captured count is the distinct count after this step.</li>
-      <li><strong>Judge every pooled record inside the cutoff once.</strong> Use Relevant or Not relevant against the written criteria and record the basis where needed. Unjudged and blank both mean work remains. Hide the Seed and Rank A/B columns, and the calculated columns to their right, while judging; avoid opening Comparison. This reduces visible cues but is not a fully blinded assessment. Discuss disagreements and record the agreed judgement.</li>
-      <li><strong>Inspect individual queries.</strong> Fix any status message, then compare A and B. Negative differences are highlighted, without claiming statistical significance. Use Queries to record an explanation, alternatives and the next check. The workbook does not infer a mechanism or recommend a vendor.</li>
-    </ol>
-    <p class="callout">The four probe types test different possibilities. Failure to retrieve a full-text-only phrase is evidence to investigate the indexed unit, not proof of its architecture. Judge the two opposite-meaning queries separately. Consult <a href="search-textbook.html#diagnosing-failure">Chapter 13’s diagnosis frame</a> before attributing a change to a mechanism.</p>
-  </section>
-  <section aria-labelledby="scores">
-    <h2 id="scores">What the scores count</h2>
-    <p><strong>Precision@k = relevant distinct records within k ÷ k.</strong> The denominator stays fixed, even for a short list or duplicate positions. Two relevant records from a complete three-result run at depth ten give 2/10 = 0.20. The separate “Records A/B at k” columns show how many distinct records were actually captured inside the cutoff.</p>
-    <p><strong>Known-seed recovery@k = listed seeds found within k ÷ all listed seeds for that query.</strong> Include missed seeds in Records with both ranks blank. The numerator and denominator are shown alongside the rate. Without a seed set the workbook says “No seeds specified”; precision can still be calculated. Seed recovery is not an estimate of complete recall.</p>
-    <p>The precision comparison stays blank until every pooled record within the cutoff has been judged. Seed recovery can be available before those judgements are complete, because its denominator was fixed in advance. A seed marked Not relevant is an inconsistency to resolve.</p>
-    <p>Incomplete captures, missing criteria or exact queries, mismatched counts, duplicate IDs or ranks, and invalid input withhold affected scores. Blank cells are not silently turned into successful zero-result runs. Records with missing or unknown query IDs must be assigned before any query can be reported.</p>
-    <p>Changing k from 10 to 20 requires captures through twenty for both runs. Increasing the setting alone will show “Extend capture to the selected cutoff”. Capture depth records the depth requested, not the largest rank returned. Additional results beyond the active cutoff do not affect scores until the cutoff reaches them.</p>
-  </section>
   <section aria-labelledby="example">
     <h2 id="example">A completed, controlled example</h2>
     <p>The example reproduces the two rankings in <a href="search-textbook.html#fig-14-1">Figure 14.1</a>: twenty stipulated records, with A–J relevant and K–T not relevant. Both runs contain all twenty. These are teaching labels and rankings, not observations from a live product.</p>
@@ -96,6 +78,50 @@
       <tbody><tr><th scope="row">Precision@10</th><td>2/10 = 0.20</td><td>6/10 = 0.60</td><td>+0.40</td></tr><tr><th scope="row">Known-seed recovery@10</th><td>1/5 = 0.20</td><td>3/5 = 0.60</td><td>+0.40</td></tr></tbody>
     </table></div>
     <p>Try setting k to 20. Both runs have precision 10/20 = 0.50 and seed recovery 5/5 = 1.00. Reranking changes which records reach the first ten; it adds no candidate. Here complete relevance is stipulated, but the workbook deliberately reports the selected seeds separately.</p>
+  </section>
+  <section aria-labelledby="workflow">
+    <h2 id="workflow">Six steps to a repeatable comparison</h2>
+    <ol class="steps">
+      <li><strong>Define relevance before looking at any results.</strong> In Queries, write a specific need and criteria another person could apply, and enter both exact queries. Choose the known relevant seeds now, and mark them Seed = Yes in Records.
+        <ul>
+          <li>Record filters as “None” where none were used.</li>
+          <li>List seeds that neither run found too; a seed need not appear in either captured list.</li>
+        </ul></li>
+      <li><strong>Choose one cutoff and record the conditions.</strong> Enter 10 or 20 in Comparison B4; it applies to both runs and every query. Complete Runs, including each query’s transformed input.
+        <ul>
+          <li>If the transformed input is not visible, write “unknown”.</li>
+          <li>Record what changed between the runs: a query intervention, an update or a different product.</li>
+        </ul></li>
+      <li><strong>Capture each list through that depth.</strong> Save the original output, then record in Queries the depth requested, the number of distinct records retained and whether capture is complete.
+        <ul>
+          <li>A run that returned nothing has count 0 and Complete = Yes; a run not yet performed stays incomplete.</li>
+          <li>A short list keeps the requested depth: see <a href="#scores">What the scores count</a>.</li>
+        </ul></li>
+      <li><strong>Pool the records, keeping their ranks.</strong> Match identifiers across the two lists by hand. For each query–record pair, enter its original position in Rank A and/or Rank B.
+        <ul>
+          <li>If a record is absent from a run, leave that rank blank; do not use zero.</li>
+          <li>If a record repeats within a run, keep its first occurrence and leave the gap in the ranks; do not pull a record up from below the cutoff. Note the duplicate in Evidence or notes. The captured count is the distinct count.</li>
+        </ul></li>
+      <li><strong>Judge every pooled record inside the cutoff, once.</strong> Mark it Relevant or Not relevant against the written criteria, recording the basis where needed. Blank and Unjudged both mean work remains.
+        <ul>
+          <li>While judging, hide the Seed, Rank A/B and calculated columns, and keep Comparison closed. This removes visible cues; it is not full blinding.</li>
+          <li>If judges disagree, discuss and record the agreed judgement.</li>
+        </ul></li>
+      <li><strong>Inspect individual queries.</strong> Fix any status message, then compare A and B. In Queries, record an explanation, alternatives and the next check.
+        <ul>
+          <li>Negative differences are highlighted; no statistical significance is claimed.</li>
+          <li>The workbook does not infer a mechanism or recommend a vendor.</li>
+        </ul></li>
+    </ol>
+    <p class="callout">The four probe types test different possibilities. Failure to retrieve a full-text-only phrase is evidence to investigate the indexed unit, not proof of its architecture. Judge the two opposite-meaning queries separately. Consult <a href="search-textbook.html#diagnosing-failure">Chapter 13’s diagnosis frame</a> before attributing a change to a mechanism.</p>
+  </section>
+  <section aria-labelledby="scores">
+    <h2 id="scores">What the scores count</h2>
+    <p><strong>Precision@k = relevant distinct records within k ÷ k.</strong> The denominator stays fixed, even for a short list or duplicate positions. Two relevant records from a complete three-result run at depth ten give 2/10 = 0.20. The separate “Records A/B at k” columns show how many distinct records were actually captured inside the cutoff.</p>
+    <p><strong>Known-seed recovery@k = listed seeds found within k ÷ all listed seeds for that query.</strong> Include missed seeds in Records with both ranks blank. The numerator and denominator are shown alongside the rate. Without a seed set the workbook says “No seeds specified”; precision can still be calculated. Seed recovery is not an estimate of complete recall.</p>
+    <p>The precision comparison stays blank until every pooled record within the cutoff has been judged. Seed recovery can be available before those judgements are complete, because its denominator was fixed in advance. A seed marked Not relevant is an inconsistency to resolve.</p>
+    <p>Incomplete captures, missing criteria or exact queries, mismatched counts, duplicate IDs or ranks, and invalid input withhold affected scores. Blank cells are not silently turned into successful zero-result runs. Records with missing or unknown query IDs must be assigned before any query can be reported.</p>
+    <p>Changing k from 10 to 20 requires captures through twenty for both runs. Increasing the setting alone will show “Extend capture to the selected cutoff”. Capture depth records the depth requested, not the largest rank returned. Additional results beyond the active cutoff do not affect scores until the cutoff reaches them.</p>
   </section>
   <section aria-labelledby="reuse">
     <h2 id="reuse">Add records, extend the set and rerun it</h2>
