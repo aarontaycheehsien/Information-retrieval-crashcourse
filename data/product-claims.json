@@ -936,7 +936,7 @@
         },
         {
           "anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
-          "excerpt": "Puzzle 3 began with an expectation created by a name and an interface. Semantic Scholar sounds as though it searches by meaning, perhaps through dense retrieval over embeddings, so a natural-language question seems like the query the system should handle best. Yet in August 2026, Is there an open access citation advantage returned only 13 results—far fewer than the hundreds of relevant papers expected for this established topic—while the compact keyword query open access citation advantage returned about 35,300. Why did the supposedly more natural query retrieve dramatically less?"
+          "excerpt": "Puzzle 3 set a name against two result counts. Semantic Scholar sounds as though it searches by meaning, perhaps through dense retrieval, yet in August 2026 the question Is there an open access citation advantage returned only 13 results—far fewer than the hundreds of relevant papers on this established topic—while the keyword query open access citation advantage returned about 35,300."
         },
         {
           "anchor": "closing-puzzle-map-title",
