@@ -84,6 +84,8 @@ h1{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.06;letter-spacing:-.035em;ma
 .choice.wrong{background:#f2ded8;border-color:#c58c7c;color:#6f291d}
 .reveal{margin-top:.85rem;padding-top:.85rem;border-top:1px solid var(--line)}
 .reveal[hidden]{display:none}
+.reveal details{margin:.6rem 0}.reveal details summary{cursor:pointer;font-weight:600}
+.try-this{border-top:1px dashed var(--line);padding-top:.7rem}
 .takeaway{background:var(--gold-soft);border-radius:8px;padding:.7rem .95rem;margin:.8rem 0 0;font-family:var(--sans);font-size:.9rem;line-height:1.6}
 .takeaway b{color:var(--accent-dark)}
 .tour-nav{display:flex;gap:.6rem;margin-top:1rem;align-items:center}
@@ -911,12 +913,12 @@ const STEPS = [
   {
     title:'From admission rules to weighted clues',
     intro:'<p>The query is <code>delulu job interview expectations</code>. Six records sit in the collection, and you can read every one of them.</p>' +
-          '<p>Strict AND makes each active term compulsory in this example. Boolean also supports OR and NOT. Admission rules and BM25 scoring are separate controls.</p>',
+          '<p>The toggle at the top of the results applies strict <code>AND</code>, which makes every active term compulsory (Boolean also offers <code>OR</code> and <code>NOT</code>). Admission and BM25 scoring are separate controls: one decides which records compete, the other orders them.</p>',
     q:'Under strict <code>AND</code>, how many of the six records survive?',
     choices:['1','3','6'], answer:0,
     answerText:'<p>Only <b>Record A</b> contains all four words. The other five are excluded outright — including Record B, which may be useful for a search about unrealistic job expectations.</p>' +
                '<p>Switch the toggle off again and all six are back, each scoring from whatever it does match.</p>',
-    takeaway:'<b>With any-match admission, BM25 requires lexical overlap, but not total overlap.</b> A record can score from two matching words instead of four.',
+    takeaway:'<b>With the toggle off, BM25 requires lexical overlap, but not total overlap.</b> A record can score from two matching words instead of four.',
     apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:true,repeat:3,pad:0,topk:6,off:[],sel:'A'}); }
   },
   {
@@ -937,7 +939,7 @@ const STEPS = [
     q:'Take <code>delulu</code> from 3 occurrences to 20. Roughly how much does its contribution grow?',
     choices:['about 7 times','about double','about 15 per cent'], answer:2,
     answerText:'<p>From 1.88 to about 2.15 — roughly 15 per cent, for nearly seven times the repetition. The first two or three occurrences do almost all the work.</p>' +
-               '<p>Part of that shortfall is length rather than saturation: the extra words also lengthen Record D, from ten tokens to twenty-seven, and BM25 charges for that. Hold D’s length fixed and the same change gives about 17 per cent instead of 15.</p>' +
+               '<details><summary>Why not exactly the saturation curve?</summary><p>Part of that shortfall is length rather than saturation: the extra words also lengthen Record D, from ten tokens to twenty-seven, and BM25 charges for that. Hold D’s length fixed and the same change gives about 17 per cent instead of 15.</p></details>' +
                '<p>Notice too that Record D never overtakes Record A this way, no matter how far you push the slider.</p>',
     takeaway:'<b>Keyword stuffing does not pay proportionately.</b> Term-frequency saturation limits the benefit of repetition — though it cannot judge whether the term belonged in the query at all.',
     apply:function(){ Object.assign(state,{query:DEFAULTS.query,strict:false,repeat:3,pad:0,topk:6,off:[],sel:'D'}); }
@@ -982,7 +984,7 @@ const STEPS = [
     choices:['unrealistic — it is the better paraphrase','foolish — it is the worse paraphrase','neither — they are equally rare, so their IDF is identical'], answer:2,
     answerText:'<p>Both occur in exactly one of the six records, so BM25 gives them an identical rarity weight. It has no mechanism whatsoever for telling a good paraphrase from a bad one.</p>' +
                '<p>Adding <code>unrealistic</code> lifts Record B to first place, which it deserves. Adding <code>foolish</code> lifts Record F to first place just as decisively — but this does not establish that F is a better answer. Its interview assumptions may overlap the need, while “foolish” adds a judgement the request did not make. F uses the word twice; frequency and length explain why equal IDF does not mean equal total contribution.</p>' +
-               '<p>The admission toggle is unlocked again here. Switch it on with any of these queries and every record disappears, because <code>getting</code> occurs in none of them. Under <code>AND</code> a single absent word empties the set however strong the rest of the evidence is; under BM25 the same word simply contributes nothing. That is the whole difference between an admission rule and a weighted clue.</p>',
+               '<p class="try-this"><b>One last thing to try.</b> The admission toggle is unlocked again here. Switch it on with any of these queries and every record disappears, because <code>getting</code> occurs in none of them. Under <code>AND</code> a single absent word empties the set however strong the rest of the evidence is; under BM25 the same word simply contributes nothing. That is the whole difference between an admission rule and a weighted clue.</p>',
     takeaway:'<b>BM25 can weight lexical evidence intelligently. It cannot decide whether the vocabulary it was given expresses the right concept.</b> It is lexical evidence made less binary — not semantic understanding.',
     apply:function(){ Object.assign(state,{query:'delulu about getting a job',strict:false,repeat:3,pad:0,topk:6,off:[],sel:'B'}); }
   }
