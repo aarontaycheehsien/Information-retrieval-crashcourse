@@ -22,10 +22,13 @@ assert re.findall(r'data-question="([QEG]\d+)"', output) == ids
 for q in mapping['questions']:
     card = re.search(rf'<article[^>]*data-question="{q["id"]}".*?</article>', output, re.S).group()
     source = builder.source_content(book, q)
-    # The generated heading moves the leading strong text without rewriting it.
-    match = re.match(r'<strong>(.*?)</strong>\s*(.*)', source, re.S)
-    title, body = (match[1], match[2]) if match else (source, '')
-    assert title in card and body in card, q['id']
+    # The generated heading moves the leading strong text without rewriting it;
+    # lettering a body of questions keeps every word in order.
+    title, body = builder.split_title(source)
+    assert title in card, q['id']
+    detail = re.search(r'class="question-detail[^"]*"[^>]*>(.*?)</(?:p|ol)>', card, re.S)
+    assert builder.prose(body) == (builder.prose(detail[1]) if detail else ''), q['id']
+    assert q['listen_for'] and 'class="listen-for"' in card, q['id']
     for field in ['Vendor answer / existing answer reference', 'Vendor supporting evidence',
                   'Library verification', 'Date checked', 'Reason if not applicable', 'Unresolved follow-up']:
         assert field in card, (q['id'], field)
@@ -35,6 +38,8 @@ for q in mapping['questions']:
 assert 'id="section-e" hidden' in output and 'id="section-g" hidden' in output
 assert 'localStorage' not in output and 'fetch(' not in output
 assert output.count('class="question-page"') == 17
+assert re.findall(r'<li id="(q13[a-z])">', output) == ['q13a', 'q13b']
+assert output.count('<ul class="question-list">') == 3
 
 # Source edits update the generated copy; structural drift must stop generation.
 changed = book.replace('What does the system infer, change and decide?', 'What does this system infer, change and decide?', 1)

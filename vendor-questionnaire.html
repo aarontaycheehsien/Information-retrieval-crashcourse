@@ -42,6 +42,16 @@
     .response-status .field-label { margin:0; }
     .tick { display:inline-block; width:.65rem; height:.65rem; border:1px solid var(--ink); margin-right:.15rem; }
     .continued { font-size:.7em; font-weight:400; }
+    .listen-for { font:.88rem/1.5 system-ui,sans-serif; padding:.5rem .75rem; margin:.6rem 0; border-left:3px solid var(--teal); background:#e5eeea; }
+    .sub-prompts { margin:.5rem 0; padding-left:1.6rem; }
+    .sub-prompts li { margin:.3rem 0; }
+    .question-overview { margin:1rem 0 0; font-family:system-ui,sans-serif; font-size:.92rem; }
+    .question-overview summary { cursor:pointer; font-weight:650; }
+    .question-overview h3 { font-size:.95rem; margin:1rem 0 .3rem; }
+    .question-list { list-style:none; padding:0; margin:0; }
+    .question-list li { margin:.2rem 0; }
+    .question-list a { font-weight:650; margin-right:.3rem; }
+    @media screen { .hide-fields .response-block { display:none; } }
     .section-note { font-size:.85rem; color:var(--muted); }
     .input-question { margin:1.2rem 0; }
     .intake-source { font-size:.85rem; }
@@ -84,6 +94,8 @@
       .response-status { gap:1mm 3mm; margin:2mm 0 1mm; }
       .writing-line { height:5.5mm; }
       .question-detail { margin:1.5mm 0; }
+      .sub-prompts li { margin:.5mm 0; }
+      .listen-for { font-size:8.5pt; line-height:1.3; padding:1mm 2mm; margin:1.5mm 0; background:none; }
       .selection { background:none; border:1px solid var(--line); font-size:9pt; padding:2mm; }
       .input-question { margin:4mm 0; }
       .note, .intake-source { font-size:9pt; }
@@ -95,18 +107,24 @@
     }
   </style>
 </head>
-<body>
+<body class="hide-fields">
 <header>
   <nav aria-label="Companion navigation"><a href="search-textbook.html#choosing-and-governing-search-tools">Chapter 15</a><a href="evaluation-kit.html">Evaluation kit</a><a href="teaching-notes.html">Teaching notes</a></nav>
   <p class="kicker">How Search Decides What You See · Practical companion</p>
   <h1>Vendor questionnaire</h1>
   <p>Take the book’s questions into a demonstration, procurement discussion or renewal review. Record the vendor’s answer and supporting evidence, then record separately what your library could verify.</p>
-  <p>Use the nineteen core questions for every review. Add the specialist sections that match the product’s capabilities. Where an earlier answer covers a later prompt, cite its question ID and answer the remaining parts.</p>
+  <p>Use the nineteen core questions for every review. Add the specialist sections that match the product’s capabilities. Each question says what to listen for in the answer. Sub-questions are lettered, so an answer can cite Q13b; where an earlier answer covers a later prompt, cite its question ID and answer the remaining parts.</p>
+  <details class="question-overview screen-only"><summary>Question list only, for sending to a vendor in advance</summary><h3>Core questionnaire</h3><ul class="question-list"><li><a href="#q01">Q01</a> What does the system infer, change and decide?</li><li><a href="#q02">Q02</a> <a href="search-textbook.html#agentic-search-who-chooses-the-next-retrieval-action">Who controls the retrieval trajectory?</a></li><li><a href="#q03">Q03</a> Which retrieval and ranking components are used?</li><li><a href="#q04">Q04</a> What role does the neural model perform?</li><li><a href="#q05">Q05</a> What is the indexed unit?</li><li><a href="#q06">Q06</a> How are passage results assembled?</li><li><a href="#q07">Q07</a> <a href="search-textbook.html#why-hybrid-retrieval-remains-attractive">How is the hybrid combined?</a></li><li><a href="#q08">Q08</a> Is exact lexical matching retained?</li><li><a href="#q09">Q09</a> How is text tokenised and analysed?</li><li><a href="#q10">Q10</a> How are exactness, negation and exclusions tested?</li><li><a href="#q11">Q11</a> What trained the relevance model?</li><li><a href="#q12">Q12</a> Can users inspect why a result appeared?</li><li><a href="#q13">Q13</a> Can the search be documented and rerun?</li><li><a href="#q14">Q14</a> Are model, index and ranking changes disclosed?</li><li><a href="#q15">Q15</a> What does a search cost, and what limits apply?</li><li><a href="#q16">Q16</a> What happens when a mode is retired?</li><li><a href="#q17">Q17</a> How is performance evaluated, and on whose queries?</li><li><a href="#q18">Q18</a> Are failure cases part of the evaluation?</li><li><a href="#q19">Q19</a> Can the library compare behaviour across an update?</li></ul>
+<h3>Ranking methods</h3><ul class="question-list"><li><a href="#e01">E01</a> Before RRF</li><li><a href="#e02">E02</a> Before LTR</li><li><a href="#e03">E03</a> Before reranking</li><li><a href="#e04">E04</a> For evaluation</li></ul>
+<h3>Generated answers (RAG)</h3><ul class="question-list"><li><a href="#g01">G01</a> What is the retriever—lexical, dense, sparse, hybrid—and is the choice fixed, <a href="search-textbook.html#two-hybrids-that-combine-differently">blended or routed per query</a>?</li><li><a href="#g02">G02</a> What is the indexed unit, and what unit reaches the model’s context (<a href="search-textbook.html#one-document-one-chunk-and-one-vector-are-not-the-same-thing">Chapter 8</a>)?</li><li><a href="#g03">G03</a> Is the query transformed before retrieval, and can the transformation be inspected (<a href="search-textbook.html#query-transformation">Chapter 11</a>)?</li><li><a href="#g04">G04</a> How many retrieved items reach the context, and how were they selected from the candidate set (<a href="search-textbook.html#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Chapter 7 on top-<em>k</em> boundaries</a>)?</li><li><a href="#g05">G05</a> Does the model choose retrieval actions, or execute a fixed sequence (<a href="search-textbook.html#agentic-search">Chapter 12</a>)?</li><li><a href="#g06">G06</a> How is faithfulness evaluated—and, separately, how is retrieval evaluated (<a href="search-textbook.html#evaluation">Chapter 14</a>)?</li><li><a href="#g07">G07</a> When the answer is wrong, can retrieval failure be distinguished from generation failure (<a href="search-textbook.html#diagnosing-failure">Chapter 13</a>)?</li></ul></details>
   <div class="print-controls">
     <fieldset><legend>Include in this questionnaire</legend>
       <p>Core questions Q01–Q19 are always included.</p>
       <label class="option"><input type="checkbox" id="include-e" aria-controls="section-e"><span>Ranking methods · E01–E04<br><small>Rank fusion, learning to rank and reranking</small></span></label>
       <label class="option"><input type="checkbox" id="include-g" aria-controls="section-g"><span>Generated answers (RAG) · G01–G07<br><small>Retrieval, model context, faithfulness and diagnosis</small></span></label>
+    </fieldset>
+    <fieldset><legend>On screen</legend>
+      <label class="option"><input type="checkbox" id="show-fields"><span>Show answer spaces<br><small>Hidden on screen so the questions are easier to scan. They always print.</small></span></label>
     </fieldset>
     <button type="button" id="print-questionnaire">Print selected sections</button>
     <p class="note">Print on A4 at 100% scale with browser headers and footers off. The questionnaire provides writing space on paper. To type answers, copy the selected content into your document editor. Responses are not entered or saved on this page.</p>
@@ -121,7 +139,7 @@
     <p>Identify the specific product and mode. Keep vendor claims separate from your own observations. Mark unanswered questions explicitly; for Not applicable, record why.</p>
     <div class="intake-fields"><div class="response-field "><p class="field-label">Institution</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Library reviewer</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Vendor contact</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Review date (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Product</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Specific mode</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Version / unknown</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Intended library use</p><span class="writing-line" aria-hidden="true"></span></div></div>
     <div class="input-question">
-      <h3 id="supported-inputs">Supported retrieval inputs</h3>
+      <h3 id="supported-inputs">Before Q01: supported retrieval inputs</h3>
       <p>Before comparing query boxes, ask what the product accepts as a retrieval starting point. Only text, or also controlled fields, a seed record, citation links, saved judgements and API predicates? For an agentic mode, ask whether both the task brief and the queries generated from it can be exported.</p>
       <p class="intake-source"><a href="search-textbook.html#vendor-inputs">Chapter 15: supported starting points</a></p>
       <div class="response-field"><p class="field-label">Supported inputs and export capabilities / evidence reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
@@ -135,27 +153,33 @@
   
   <article class="question" data-question="Q01" aria-labelledby="q01">
   <h3 id="q01"><span class="question-id">Q01</span> What does the system infer, change and decide?</h3>
-  <p class="question-detail">Does it recognise fields, filters or intent without changing the input; correct, map, expand or generate retrieval inputs; choose retrieval routes; or construct a later query from earlier results? Can users inspect and export the interpretation, every transformed input, each route and any feedback records?</p>
+  <ol class="question-detail sub-prompts" type="a"><li id="q01a">Does it recognise fields, filters or intent without changing the input; correct, map, expand or generate retrieval inputs; choose retrieval routes; or construct a later query from earlier results?</li><li id="q01b">Can users inspect and export the interpretation, every transformed input, each route and any feedback records?</li></ol>
+  <p class="listen-for"><strong>Listen for</strong> what is recognised, what is rewritten or added, and whether each change can be seen and exported. “Our AI understands your question” describes none of them.</p>
   <p class="source"><a href="search-textbook.html#vendor-q01">Chapter 15 source · Q01</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="Q02" aria-labelledby="q02">
   <h3 id="q02"><span class="question-id">Q02</span> <a href="search-textbook.html#agentic-search-who-chooses-the-next-retrieval-action">Who controls the retrieval trajectory?</a></h3>
-  <p class="question-detail">Is the sequence fixed in advance, chosen from branches the designer enumerated—whether a rule, a classifier or a model picks the branch—or planned by a model from what it has observed? If a model chooses, what tools, sources and iteration limits bound it? Can users see every query it ran, every source it consulted, every route it took and the point at which it decided to stop?</p>
+  <ol class="question-detail sub-prompts" type="a"><li id="q02a">Is the sequence fixed in advance, chosen from branches the designer enumerated—whether a rule, a classifier or a model picks the branch—or planned by a model from what it has observed?</li><li id="q02b">If a model chooses, what tools, sources and iteration limits bound it?</li><li id="q02c">Can users see every query it ran, every source it consulted, every route it took and the point at which it decided to stop?</li></ol>
+  <p class="listen-for"><strong>Listen for</strong> who picks the next step (a fixed sequence, a choice among named branches, or a model’s plan) and the limits on tools, sources and rounds. “Agentic” on its own does not answer this.</p>
   <p class="source"><a href="search-textbook.html#vendor-q02">Chapter 15 source · Q02</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-2">
@@ -164,27 +188,33 @@
   
   <article class="question" data-question="Q03" aria-labelledby="q03">
   <h3 id="q03"><span class="question-id">Q03</span> Which retrieval and ranking components are used?</h3>
-  <p class="question-detail">Is there Boolean retrieval, BM25-like lexical ranking, dense retrieval or reranking? Do the components operate <a href="search-textbook.html#why-search-systems-use-multiple-stages">in parallel, sequentially or both</a>, how many candidates survive each cut-off, and does the system select components by query or always combine them?</p>
+  <ol class="question-detail sub-prompts" type="a"><li id="q03a">Is there Boolean retrieval, BM25-like lexical ranking, dense retrieval or reranking?</li><li id="q03b">Do the components operate <a href="search-textbook.html#why-search-systems-use-multiple-stages">in parallel, sequentially or both</a>, how many candidates survive each cut-off, and does the system select components by query or always combine them?</li></ol>
+  <p class="listen-for"><strong>Listen for</strong> the components, the order they run in and the number of candidates kept at each cut-off. “Hybrid” or “semantic” without numbers is a label, not an answer.</p>
   <p class="source"><a href="search-textbook.html#vendor-q03">Chapter 15 source · Q03</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="Q04" aria-labelledby="q04">
   <h3 id="q04"><span class="question-id">Q04</span> What role does the neural model perform?</h3>
   <p class="question-detail">Naming a model does not describe an architecture. Is it parsing or rewriting the query, producing the first-stage query and passage vectors, expanding the vocabulary of a sparse index, jointly reranking candidates, or generating the final answer? These are <a href="search-textbook.html#how-a-contextual-encoder-becomes-a-retrieval-encoder">different jobs with different failure modes</a>, and a model can be present without doing the one you assumed.</p>
+  <p class="listen-for"><strong>Listen for</strong> a job for each named model: parsing, first-stage retrieval, sparse expansion, reranking or writing. “Powered by BERT” names a model, not a stage.</p>
   <p class="source"><a href="search-textbook.html#vendor-q04">Chapter 15 source · Q04</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-3">
@@ -194,26 +224,32 @@
   <article class="question" data-question="Q05" aria-labelledby="q05">
   <h3 id="q05"><span class="question-id">Q05</span> What is the indexed unit?</h3>
   <p class="question-detail">Is the system retrieving titles, abstracts, passages, sections or complete articles? A product whose index holds only abstracts cannot match evidence that occurs only in the full text at that retrieval stage, however sophisticated its vectors are. Ask separately whether it later fetches the full text, and what it passes on as context.</p>
+  <p class="listen-for"><strong>Listen for</strong> the unit at each stage: what is indexed for retrieval and what is passed on later. “We search full text” should say at which stage.</p>
   <p class="source"><a href="search-textbook.html#vendor-q05">Chapter 15 source · Q05</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="Q06" aria-labelledby="q06">
   <h3 id="q06"><span class="question-id">Q06</span> How are passage results assembled?</h3>
   <p class="question-detail">If five chunks from the same paper match, are their scores combined, is only the best retained, or are five near-duplicate results shown?</p>
+  <p class="listen-for"><strong>Listen for</strong> one stated rule (combined, best passage only, or shown separately) and whether several passages from one paper can crowd out other papers.</p>
   <p class="source"><a href="search-textbook.html#vendor-q06">Chapter 15 source · Q06</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-4">
@@ -223,14 +259,17 @@
   <article class="question" data-question="Q07" aria-labelledby="q07">
   <h3 id="q07"><span class="question-id">Q07</span> <a href="search-textbook.html#why-hybrid-retrieval-remains-attractive">How is the hybrid combined?</a></h3>
   <p class="question-detail">A product may call itself hybrid because it contains two retrievers even when one signal rarely affects the final ranking. Ask where component lists are fused, whether a later stage reranks the merged candidates, what cut-offs apply, and whether users can inspect, compare or control the component result sets.</p>
+  <p class="listen-for"><strong>Listen for</strong> where the lists meet, the combining rule and the depth of each list. Two modes demonstrated side by side do not show how they are combined.</p>
   <p class="source"><a href="search-textbook.html#vendor-q07">Chapter 15 source · Q07</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-5">
@@ -240,26 +279,32 @@
   <article class="question" data-question="Q08" aria-labelledby="q08">
   <h3 id="q08"><span class="question-id">Q08</span> Is exact lexical matching retained?</h3>
   <p class="question-detail">Can users search identifiers, chemical strings, gene names, dataset titles and quoted phrases without semantic expansion quietly changing the task?</p>
+  <p class="listen-for"><strong>Listen for</strong> a way to switch expansion off, or a mode that matches the string exactly, demonstrated on your own identifiers rather than described.</p>
   <p class="source"><a href="search-textbook.html#vendor-q08">Chapter 15 source · Q08</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="Q09" aria-labelledby="q09">
   <h3 id="q09"><span class="question-id">Q09</span> How is text tokenised and analysed?</h3>
   <p class="question-detail">Ask how the lexical path treats case, punctuation, hyphens and identifiers, and whether query and document analysis are compatible. For a dense model, ask whether it uses word, subword, character or byte inputs and how unfamiliar or newly coined strings are tested.</p>
+  <p class="listen-for"><strong>Listen for</strong> concrete treatment of case, hyphens and identifiers on the lexical path, and a test of new or unusual strings on the dense path. “The model handles any vocabulary” is not a test.</p>
   <p class="source"><a href="search-textbook.html#vendor-q09">Chapter 15 source · Q09</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-6">
@@ -269,26 +314,32 @@
   <article class="question" data-question="Q10" aria-labelledby="q10">
   <h3 id="q10"><span class="question-id">Q10</span> How are exactness, negation and exclusions tested?</h3>
   <p class="question-detail">Ask for examples involving identifiers, contradictory claims, <code>NOT</code>-like intent and near-duplicate names — not only attractive paraphrase demonstrations.</p>
+  <p class="listen-for"><strong>Listen for</strong> failure cases the vendor has tested, including ones that went wrong. A demonstration made only of successful paraphrases does not answer this.</p>
   <p class="source"><a href="search-textbook.html#vendor-q10">Chapter 15 source · Q10</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="Q11" aria-labelledby="q11">
   <h3 id="q11"><span class="question-id">Q11</span> What trained the relevance model?</h3>
   <p class="question-detail">Web queries, question–answer pairs, citation links and scholarly relevance judgements teach different behaviours. How was the model adapted to the disciplines and document types being searched?</p>
+  <p class="listen-for"><strong>Listen for</strong> the kinds of training data and how the model was adapted to scholarly material. “Trained on millions of papers” says what it read, not what it was taught to rank.</p>
   <p class="source"><a href="search-textbook.html#vendor-q11">Chapter 15 source · Q11</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-7">
@@ -297,27 +348,33 @@
   
   <article class="question" data-question="Q12" aria-labelledby="q12">
   <h3 id="q12"><span class="question-id">Q12</span> Can users inspect why a result appeared?</h3>
-  <p class="question-detail">Can they move from the displayed record backwards through the retrieval route, transformed inputs, inferred constraints, any feedback records, matched evidence, ranking or reranking stages, and final fusion or display rules? Does the product distinguish a faithful execution trace from a helpful but post-hoc explanation?</p>
+  <ol class="question-detail sub-prompts" type="a"><li id="q12a">Can they move from the displayed record backwards through the retrieval route, transformed inputs, inferred constraints, any feedback records, matched evidence, ranking or reranking stages, and final fusion or display rules?</li><li id="q12b">Does the product distinguish a faithful execution trace from a helpful but post-hoc explanation?</li></ol>
+  <p class="listen-for"><strong>Listen for</strong> whether the explanation records what actually ran or is written afterwards. A fluent “why this result” paragraph may be the second.</p>
   <p class="source"><a href="search-textbook.html#vendor-q12">Chapter 15 source · Q12</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="Q13" aria-labelledby="q13">
   <h3 id="q13"><span class="question-id">Q13</span> Can the search be documented and rerun?</h3>
-  <p class="question-detail">Can users export the original input; exact generated Boolean query, filters, expansions, subqueries or hypothetical text; retrieval route; ranking mode; model version; index date; <em>k</em> or threshold; and retrieved identifiers? When the same search is rerun, does the system reuse the saved transformation or ask an LLM to generate it again?</p>
+  <ol class="question-detail sub-prompts" type="a"><li id="q13a">Can users export the original input; exact generated Boolean query, filters, expansions, subqueries or hypothetical text; retrieval route; ranking mode; model version; index date; <em>k</em> or threshold; and retrieved identifiers?</li><li id="q13b">When the same search is rerun, does the system reuse the saved transformation or ask an LLM to generate it again?</li></ol>
+  <p class="listen-for"><strong>Listen for</strong> a list of what an export actually contains, and whether a rerun reuses the saved query or generates a new one.</p>
   <p class="source"><a href="search-textbook.html#vendor-q13">Chapter 15 source · Q13</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-8">
@@ -327,14 +384,17 @@
   <article class="question" data-question="Q14" aria-labelledby="q14">
   <h3 id="q14"><span class="question-id">Q14</span> Are model, index and ranking changes disclosed?</h3>
   <p class="question-detail">Does the vendor announce when an update may change results a user previously obtained, and is there any way to tell after the fact which version produced a saved search?</p>
+  <p class="listen-for"><strong>Listen for</strong> a change log or version identifier that can be tied to a saved search. “We continuously improve the model” means results can change without notice.</p>
   <p class="source"><a href="search-textbook.html#vendor-q14">Chapter 15 source · Q14</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-9">
@@ -343,27 +403,33 @@
   
   <article class="question" data-question="Q15" aria-labelledby="q15">
   <h3 id="q15"><span class="question-id">Q15</span> What does a search cost, and what limits apply?</h3>
-  <p class="question-detail">Is pricing per seat, per query or per token? What are the rate and iteration limits, and what happens when one is reached — a refusal, a truncated result, or a silently shallower search? Does an agentic mode cost differently from the ordinary one, and can the library see per-query consumption?</p>
+  <ol class="question-detail sub-prompts" type="a"><li id="q15a">Is pricing per seat, per query or per token?</li><li id="q15b">What are the rate and iteration limits, and what happens when one is reached — a refusal, a truncated result, or a silently shallower search?</li><li id="q15c">Does an agentic mode cost differently from the ordinary one, and can the library see per-query consumption?</li></ol>
+  <p class="listen-for"><strong>Listen for</strong> prices and limits in numbers, and what the user sees when a limit is reached. A search that silently becomes shallower is the answer to watch for.</p>
   <p class="source"><a href="search-textbook.html#vendor-q15">Chapter 15 source · Q15</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="Q16" aria-labelledby="q16">
   <h3 id="q16"><span class="question-id">Q16</span> What happens when a mode is retired?</h3>
   <p class="question-detail">Can saved searches, saved sets and stored traces be exported before a mode is withdrawn, and how much notice is given?</p>
+  <p class="listen-for"><strong>Listen for</strong> a notice period and an export route that covers stored traces as well as saved searches.</p>
   <p class="source"><a href="search-textbook.html#vendor-q16">Chapter 15 source · Q16</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-10">
@@ -373,26 +439,32 @@
   <article class="question" data-question="Q17" aria-labelledby="q17">
   <h3 id="q17"><span class="question-id">Q17</span> How is performance evaluated, and on whose queries?</h3>
   <p class="question-detail">Average benchmark scores can hide failures on the query types that matter locally. A serious evaluation uses the institution’s own disciplines, vocabulary, languages, document types and known relevant records.</p>
+  <p class="listen-for"><strong>Listen for</strong> evaluation on queries like yours, with results broken down by query type. A single benchmark average or leaderboard rank does not answer this.</p>
   <p class="source"><a href="search-textbook.html#vendor-q17">Chapter 15 source · Q17</a></p>
   <p class="related">Local comparison: <a href="evaluation-kit.html">evaluation kit</a>.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="Q18" aria-labelledby="q18">
   <h3 id="q18"><span class="question-id">Q18</span> Are failure cases part of the evaluation?</h3>
   <p class="question-detail">A vendor’s demonstration shows what the system does well. The searches that matter for procurement are the ones a library already knows to be difficult.</p>
+  <p class="listen-for"><strong>Listen for</strong> willingness to run searches your library already knows are difficult. A vendor that offers only its own demonstration queries has not answered.</p>
   <p class="source"><a href="search-textbook.html#vendor-q18">Chapter 15 source · Q18</a></p>
   
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="core" aria-labelledby="core-page-11">
@@ -402,14 +474,17 @@
   <article class="question" data-question="Q19" aria-labelledby="q19">
   <h3 id="q19"><span class="question-id">Q19</span> Can the library compare behaviour across an update?</h3>
   <p class="question-detail">If a saved set of local test queries can be rerun after a model, index or ranking change, a library can detect a regression that no release note mentions.</p>
+  <p class="listen-for"><strong>Listen for</strong> a way to rerun a saved query set after an update and compare the results. If the only record is a release note, regressions will go unseen.</p>
   <p class="source"><a href="search-textbook.html#vendor-q19">Chapter 15 source · Q19</a></p>
   <p class="related">Local comparison: <a href="evaluation-kit.html">evaluation kit</a>.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 </div>
@@ -419,28 +494,34 @@
   <h2 id="e-page-1">Ranking methods</h2>
   <p class="section-note">Include when discussing rank fusion, learning to rank or reranking. Mark individual methods not used by this product as Not applicable and record the reason.</p>
   <article class="question" data-question="E01" aria-labelledby="e01">
-  <h3 id="e01"><span class="question-id">E01</span> Before RRF:</h3>
+  <h3 id="e01"><span class="question-id">E01</span> Before RRF</h3>
   <p class="question-detail">which retrievers supplied lists, how deep was each list, were they weighted equally, and how were duplicates handled?</p>
+  <p class="listen-for"><strong>Listen for</strong> the contributing lists, their depths and any weights. “We use RRF” on its own leaves every part of this open.</p>
   <p class="source"><a href="search-textbook.html#vendor-e01">Appendix E source · E01</a></p>
   <p class="related">Already covered? Cite <a href="#q03">Q03</a>, <a href="#q07">Q07</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="E02" aria-labelledby="e02">
-  <h3 id="e02"><span class="question-id">E02</span> Before LTR:</h3>
+  <h3 id="e02"><span class="question-id">E02</span> Before LTR</h3>
   <p class="question-detail">which features and transformations were available, what supplied the labels, how were click and exposure biases handled, which objective and model were used, and when was it last retrained?</p>
+  <p class="listen-for"><strong>Listen for</strong> the features, where the labels came from and when the model was last retrained. Click labels without bias correction reward whatever was already shown first.</p>
   <p class="source"><a href="search-textbook.html#vendor-e02">Appendix E source · E02</a></p>
   <p class="related">Already covered? Cite <a href="#q04">Q04</a>, <a href="#q11">Q11</a>, <a href="#q17">Q17</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="e" aria-labelledby="e-page-2">
@@ -448,28 +529,34 @@
   <h2 id="e-page-2">Ranking methods <span class="continued">(continued)</span></h2>
   
   <article class="question" data-question="E03" aria-labelledby="e03">
-  <h3 id="e03"><span class="question-id">E03</span> Before reranking:</h3>
+  <h3 id="e03"><span class="question-id">E03</span> Before reranking</h3>
   <p class="question-detail">which retriever produced the candidates, how many reached each later stage, what text and metadata did each stage see, and what was the latency budget?</p>
+  <p class="listen-for"><strong>Listen for</strong> candidate counts at each stage and what text each stage saw. A reranker cannot recover what the first stage did not return.</p>
   <p class="source"><a href="search-textbook.html#vendor-e03">Appendix E source · E03</a></p>
   <p class="related">Already covered? Cite <a href="#q03">Q03</a>, <a href="#q05">Q05</a>, <a href="#q06">Q06</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="E04" aria-labelledby="e04">
-  <h3 id="e04"><span class="question-id">E04</span> For evaluation:</h3>
+  <h3 id="e04"><span class="question-id">E04</span> For evaluation</h3>
   <p class="question-detail">which metric and cut-off were used, did the test candidate distribution match deployment, which queries or groups worsened, and was the complete pipeline tested on this collection and user task?</p>
+  <p class="listen-for"><strong>Listen for</strong> metrics at a stated cut-off, measured on this collection and task, with the queries that got worse. An average gain can hide them.</p>
   <p class="source"><a href="search-textbook.html#vendor-e04">Appendix E source · E04</a></p>
   <p class="related">Already covered? Cite <a href="#q17">Q17</a>, <a href="#q18">Q18</a>, <a href="#q19">Q19</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 </div>
@@ -481,26 +568,32 @@
   <article class="question" data-question="G01" aria-labelledby="g01">
   <h3 id="g01"><span class="question-id">G01</span> What is the retriever—lexical, dense, sparse, hybrid—and is the choice fixed, <a href="search-textbook.html#two-hybrids-that-combine-differently">blended or routed per query</a>?</h3>
   
+  <p class="listen-for"><strong>Listen for</strong> a named retriever for this mode, and whether the choice changes from query to query.</p>
   <p class="source"><a href="search-textbook.html#vendor-g01">Appendix G source · G01</a></p>
   <p class="related">Already covered? Cite <a href="#q03">Q03</a>, <a href="#q07">Q07</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="G02" aria-labelledby="g02">
   <h3 id="g02"><span class="question-id">G02</span> What is the indexed unit, and what unit reaches the model’s context (<a href="search-textbook.html#one-document-one-chunk-and-one-vector-are-not-the-same-thing">Chapter 8</a>)?</h3>
   
+  <p class="listen-for"><strong>Listen for</strong> two answers, not one: the indexed unit and the unit the model reads. They are often different.</p>
   <p class="source"><a href="search-textbook.html#vendor-g02">Appendix G source · G02</a></p>
   <p class="related">Already covered? Cite <a href="#q05">Q05</a>, <a href="#q06">Q06</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="g" aria-labelledby="g-page-2">
@@ -510,26 +603,32 @@
   <article class="question" data-question="G03" aria-labelledby="g03">
   <h3 id="g03"><span class="question-id">G03</span> Is the query transformed before retrieval, and can the transformation be inspected (<a href="search-textbook.html#query-transformation">Chapter 11</a>)?</h3>
   
+  <p class="listen-for"><strong>Listen for</strong> a rewritten query you can see and export, not only a description of the rewriting.</p>
   <p class="source"><a href="search-textbook.html#vendor-g03">Appendix G source · G03</a></p>
   <p class="related">Already covered? Cite <a href="#q01">Q01</a>, <a href="#q13">Q13</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="G04" aria-labelledby="g04">
   <h3 id="g04"><span class="question-id">G04</span> How many retrieved items reach the context, and how were they selected from the candidate set (<a href="search-textbook.html#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Chapter 7 on top-<em>k</em> boundaries</a>)?</h3>
   
+  <p class="listen-for"><strong>Listen for</strong> a number, and the rule that chose those items from the candidate set.</p>
   <p class="source"><a href="search-textbook.html#vendor-g04">Appendix G source · G04</a></p>
   <p class="related">Already covered? Cite <a href="#q03">Q03</a>, <a href="#q05">Q05</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="g" aria-labelledby="g-page-3">
@@ -539,26 +638,32 @@
   <article class="question" data-question="G05" aria-labelledby="g05">
   <h3 id="g05"><span class="question-id">G05</span> Does the model choose retrieval actions, or execute a fixed sequence (<a href="search-textbook.html#agentic-search">Chapter 12</a>)?</h3>
   
+  <p class="listen-for"><strong>Listen for</strong> fixed steps or model-chosen actions, with the limits on rounds and tools.</p>
   <p class="source"><a href="search-textbook.html#vendor-g05">Appendix G source · G05</a></p>
   <p class="related">Already covered? Cite <a href="#q02">Q02</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 <article class="question" data-question="G06" aria-labelledby="g06">
   <h3 id="g06"><span class="question-id">G06</span> How is faithfulness evaluated—and, separately, how is retrieval evaluated (<a href="search-textbook.html#evaluation">Chapter 14</a>)?</h3>
   
+  <p class="listen-for"><strong>Listen for</strong> two separate evaluations. A faithfulness score says nothing about what retrieval missed.</p>
   <p class="source"><a href="search-textbook.html#vendor-g06">Appendix G source · G06</a></p>
   <p class="related">Already covered? Cite <a href="#q17">Q17</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 <section class="question-page" data-section="g" aria-labelledby="g-page-4">
@@ -568,14 +673,17 @@
   <article class="question" data-question="G07" aria-labelledby="g07">
   <h3 id="g07"><span class="question-id">G07</span> When the answer is wrong, can retrieval failure be distinguished from generation failure (<a href="search-textbook.html#diagnosing-failure">Chapter 13</a>)?</h3>
   
+  <p class="listen-for"><strong>Listen for</strong> a trace of what reached the model’s input. Without one, a missing citation cannot be located.</p>
   <p class="source"><a href="search-textbook.html#vendor-g07">Appendix G source · G07</a></p>
   <p class="related">Already covered? Cite <a href="#q12">Q12</a>, <a href="#q18">Q18</a> and answer any remaining parts here.</p>
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   <div class="response-field "><p class="field-label">Vendor answer / existing answer reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Vendor supporting evidence: document, URL or demonstration reference</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="response-field "><p class="field-label">Library verification: what was checked, observed or remains unverified</p><span class="writing-line" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></div>
   <div class="field-pair"><div class="response-field "><p class="field-label">Date checked (YYYY-MM-DD)</p><span class="writing-line" aria-hidden="true"></span></div><div class="response-field "><p class="field-label">Reason if not applicable</p><span class="writing-line" aria-hidden="true"></span></div></div>
   <div class="response-field "><p class="field-label">Unresolved follow-up / action-log reference</p><span class="writing-line" aria-hidden="true"></span></div>
+  </div>
 </article>
 </section>
 </div>
@@ -608,6 +716,8 @@
       document.getElementById('selection-summary').textContent = 'Included: ' + included.join('; ') + '.';
     }
     for (const key of choices) document.getElementById('include-' + key).addEventListener('change', updateSections);
+    const showFields = document.getElementById('show-fields');
+    showFields.addEventListener('change', () => document.body.classList.toggle('hide-fields', !showFields.checked));
     document.getElementById('print-questionnaire').addEventListener('click', () => window.print());
     updateSections();
   })();

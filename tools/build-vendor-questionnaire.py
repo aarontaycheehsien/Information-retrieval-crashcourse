@@ -44,11 +44,28 @@ def writing_field(label, lines=1, extra_class=""):
     return f'<div class="response-field {extra_class}"><p class="field-label">{label}</p>{rules}</div>'
 
 
+def split_title(source):
+    match = re.match(r"<strong>(.*?)</strong>\s*(.*)", source, re.S)
+    title, body = (match[1], match[2]) if match else (source, "")
+    # Appendix E titles end in a colon that introduces the body; the heading does not need it.
+    return title.rstrip().removesuffix(":"), body
+
+
+def detail(ident, body):
+    """Letter a body made only of questions, so answers can cite Q13b; words are unchanged."""
+    if not body:
+        return ''
+    parts = [p for p in re.split(r'(?<=\?)\s+(?=[A-Z])', body.strip()) if p]
+    if len(parts) < 2 or not all(p.endswith('?') for p in parts):
+        return f'<p class="question-detail">{body}</p>'
+    items = ''.join(f'<li id="{ident.lower()}{chr(97 + i)}">{p}</li>' for i, p in enumerate(parts))
+    return f'<ol class="question-detail sub-prompts" type="a">{items}</ol>'
+
+
 def card(book, spec, section):
     ident = spec["id"]
     source = source_content(book, spec)
-    match = re.match(r"<strong>(.*?)</strong>\s*(.*)", source, re.S)
-    title, body = (match[1], match[2]) if match else (source, "")
+    title, body = split_title(source)
     related = spec.get("related", [])
     reference = ""
     if related:
@@ -59,15 +76,18 @@ def card(book, spec, section):
         local_evaluation = '<p class="related">Local comparison: <a href="evaluation-kit.html">evaluation kit</a>.</p>'
     return f'''<article class="question" data-question="{ident}" aria-labelledby="{ident.lower()}">
   <h3 id="{ident.lower()}"><span class="question-id">{ident}</span> {title}</h3>
-  {f'<p class="question-detail">{body}</p>' if body else ''}
+  {detail(ident, body)}
+  <p class="listen-for"><strong>Listen for</strong> {escape(spec['listen_for'])}</p>
   <p class="source"><a href="search-textbook.html#{spec['source_id']}">{section['source_label']} source · {ident}</a></p>
   {reference}{local_evaluation}
+  <div class="response-block">
   <div class="response-status"><span class="field-label">Vendor response:</span> <span><i class="tick"></i> Answered</span> <span><i class="tick"></i> Partly answered</span> <span><i class="tick"></i> Unanswered</span> <span><i class="tick"></i> Not applicable</span></div>
   {writing_field('Vendor answer / existing answer reference', 2)}
   {writing_field('Vendor supporting evidence: document, URL or demonstration reference', 2)}
   {writing_field('Library verification: what was checked, observed or remains unverified', 2)}
   <div class="field-pair">{writing_field('Date checked (YYYY-MM-DD)')}{writing_field('Reason if not applicable')}</div>
   {writing_field('Unresolved follow-up / action-log reference')}
+  </div>
 </article>'''
 
 
@@ -91,7 +111,11 @@ def render(book, mapping, template):
         mapped_count = sum(len(group["questions"]) for group in section["groups"])
         if count != mapped_count:
             raise ValueError(f"{section['source_section']}: {count} source questions but {mapped_count} mapped")
-    fragments = []
+    fragments, overview = [], []
+    for section in mapping["sections"]:
+        entries = ''.join(f'<li><a href="#{q.lower()}">{q}</a> {split_title(source_content(book, questions[q]))[0]}</li>'
+                          for group in section["groups"] for q in group["questions"])
+        overview.append(f'<h3>{escape(section["label"])}</h3><ul class="question-list">{entries}</ul>')
     for section in mapping["sections"]:
         key = section["key"]
         pages = []
@@ -116,7 +140,8 @@ def render(book, mapping, template):
     fields = ''.join(writing_field(label) for label in ["Institution", "Library reviewer", "Vendor contact", "Review date (YYYY-MM-DD)", "Product", "Specific mode", "Version / unknown", "Intended library use"])
     followups = ''.join(f'<tr><th scope="row">{i}</th><td></td><td></td><td></td><td></td></tr>' for i in range(1, 6))
     replacements = {"VERSION": escape(mapping["version"]), "INTAKE_FIELDS": fields, "INPUT_QUESTION": intake,
-                    "QUESTION_PAGES": '\n'.join(fragments), "FOLLOWUP_ROWS": followups}
+                    "QUESTION_PAGES": '\n'.join(fragments), "FOLLOWUP_ROWS": followups,
+                    "QUESTION_LIST": '\n'.join(overview)}
     for key, value in replacements.items():
         placeholder = '{{' + key + '}}'
         if placeholder not in template:

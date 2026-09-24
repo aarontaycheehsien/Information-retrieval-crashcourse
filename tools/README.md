@@ -200,8 +200,16 @@ question bodies consumed by the questionnaire builder.
 - `tools/fixtures/vendor-questionnaire.json`, the explicit mapping of groups,
   questions, related core answers and three declared narrative omissions. The
   omissions remove commentary after the intake prompt and Q15/Q16; they do not
-  remove any requested vendor information.
+  remove any requested vendor information. Each question also carries an
+  authored `listen_for` cue, rendered apart from the book's wording, saying what a
+  documented answer contains and what a non-answer sounds like.
 - `tools/templates/vendor-questionnaire.html`, the page layout and print controls.
+
+A question body made only of two or more questions is rendered as a lettered
+list (Q13a, Q13b) with its words unchanged; any other body stays one paragraph.
+Appendix E headings drop the colon that introduced their body. On screen the
+answer spaces are hidden behind a toggle so the questions can be scanned; print
+always includes them.
 
 Do not edit the generated page by hand. Build and check with Python's standard
 library, then inspect browser/print output with the bundled Node/Playwright runtime:
