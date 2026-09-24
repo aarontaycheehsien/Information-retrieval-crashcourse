@@ -1179,7 +1179,7 @@
       "locations": [
         {
           "anchor": "bm25-words-as-weighted-clues",
-          "excerpt": "Most academic databases allow a relevance sort, under user-facing labels such as Relevance or Best Match . Scopus and Web of Science , for example, let a searcher choose relevance rather than date or citation-based ordering. The label tells us that records will be ordered, but not how: PubMed calls its default relevance sort Best Match , while its documented architecture combines an initial BM25 ranking with a learning-to-rank stage ."
+          "excerpt": "Most academic databases allow a relevance sort, under user-facing labels such as Relevance or Best Match . Scopus and Web of Science , for example, let a searcher choose relevance rather than date or citation-based ordering. The label tells us that records will be ordered, but not how: PubMed calls its default relevance sort Best Match , a label whose documented architecture this chapter opens up below."
         }
       ],
       "teaching_groups": [],
@@ -1221,7 +1221,7 @@
       "locations": [
         {
           "anchor": "bm25-words-as-weighted-clues",
-          "excerpt": "Most academic databases allow a relevance sort, under user-facing labels such as Relevance or Best Match . Scopus and Web of Science , for example, let a searcher choose relevance rather than date or citation-based ordering. The label tells us that records will be ordered, but not how: PubMed calls its default relevance sort Best Match , while its documented architecture combines an initial BM25 ranking with a learning-to-rank stage ."
+          "excerpt": "Most academic databases allow a relevance sort, under user-facing labels such as Relevance or Best Match . Scopus and Web of Science , for example, let a searcher choose relevance rather than date or citation-based ordering. The label tells us that records will be ordered, but not how: PubMed calls its default relevance sort Best Match , a label whose documented architecture this chapter opens up below."
         }
       ],
       "teaching_groups": [],
@@ -1263,7 +1263,7 @@
       "locations": [
         {
           "anchor": "bm25-words-as-weighted-clues",
-          "excerpt": "Most academic databases allow a relevance sort, under user-facing labels such as Relevance or Best Match . Scopus and Web of Science , for example, let a searcher choose relevance rather than date or citation-based ordering. The label tells us that records will be ordered, but not how: PubMed calls its default relevance sort Best Match , while its documented architecture combines an initial BM25 ranking with a learning-to-rank stage ."
+          "excerpt": "Most academic databases allow a relevance sort, under user-facing labels such as Relevance or Best Match . Scopus and Web of Science , for example, let a searcher choose relevance rather than date or citation-based ordering. The label tells us that records will be ordered, but not how: PubMed calls its default relevance sort Best Match , a label whose documented architecture this chapter opens up below."
         }
       ],
       "teaching_groups": [],
@@ -1709,10 +1709,6 @@
       "reviews": [],
       "limitations": "The architecture paper dates to 2018. Current help is cited separately, but no fresh verification date for this assertion is recorded. Do not substitute a source publication date for a check date.",
       "locations": [
-        {
-          "anchor": "bm25-words-as-weighted-clues",
-          "excerpt": "Most academic databases allow a relevance sort, under user-facing labels such as Relevance or Best Match . Scopus and Web of Science , for example, let a searcher choose relevance rather than date or citation-based ordering. The label tells us that records will be ordered, but not how: PubMed calls its default relevance sort Best Match , while its documented architecture combines an initial BM25 ranking with a learning-to-rank stage ."
-        },
         {
           "anchor": "bm25-academic-search-title",
           "excerpt": "PubMed offers an unusually clear documented BM25 example . Its published multi-stage architecture for Best Match first retrieves and orders matching records with BM25, then uses LambdaMART to rerank the top 500. PubMed’s current help still describes a weighted term-frequency stage followed by machine-learning reranking. It therefore shows both BM25’s continuing role and why a production ranking pipeline should not be reduced to one formula."
