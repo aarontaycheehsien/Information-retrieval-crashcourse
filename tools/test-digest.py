@@ -40,7 +40,15 @@ class DigestTests(unittest.TestCase):
     def test_coverage_and_budget(self):
         self.assertEqual(self.output.count('class="chapter-close"'), 15)
         self.assertEqual(self.output.count('class="distinction-map"'), 3)
-        self.assertEqual(self.output.count('class="reflection"'), 5)
+        self.assertEqual(self.output.count('class="reflection"'), len(self.manifest['stages']))
+        # Hand-offs to the next chapter are dropped unless the manifest keeps one.
+        kept = sum(1 for s in self.manifest['stages'] for i in s['items'] if i.get('keep_transition'))
+        self.assertEqual(self.output.count('class="chapter-transition"'), kept)
+        self.assertNotIn('The verdict above', self.output)
+        self.assertNotIn('Five confusions are left', self.output)
+        self.assertNotIn('>Read the full explanation and evidence<', self.output)
+        verdicts = self.output[self.output.index('id="puzzle-verdicts"'):]
+        self.assertLess(verdicts.index('Two of the three could not be settled'), verdicts.index('class="claim-links"'))
         self.assertEqual(sum(s['minutes'] for s in self.manifest['stages']), 45)
         self.assertIn('at 200 words per minute', self.output)
         self.assertIn('not tested completion times', self.output)
@@ -68,12 +76,13 @@ class DigestTests(unittest.TestCase):
                     self.assertIn(unquote(u.fragment), target_ids, value)
 
     def test_reject_bad_sources_and_manifest(self):
-        for mutation in ('missing', 'duplicate', 'order', 'timing'):
+        for mutation in ('missing', 'duplicate', 'order', 'timing', 'omit'):
             m = copy.deepcopy(self.manifest)
             if mutation == 'missing': m['stages'][0]['items'][0]['source'] = 'no-such-anchor'
             if mutation == 'duplicate': m['stages'][1]['items'][0]['id'] = 'opening-puzzles'
             if mutation == 'order': m['stages'][1]['items'].reverse()
             if mutation == 'timing': m['stages'][0]['minutes'] = 6
+            if mutation == 'omit': m['stages'][1]['items'][-1]['omit'] = ['No such paragraph']
             with self.assertRaises(ValueError): d.build(self.book, m, self.template)
         for bad in (self.book.replace('class="chapter-close"', 'class="renamed-close"', 1),
                     self.book.replace('<strong>Puzzle 1.</strong>', '<strong>Renamed puzzle.</strong>', 1),

@@ -2,34 +2,36 @@
   "schema_version": 1,
   "stages": [
     {"id":"problem","title":"The problem","minutes":5,"prompt":"For one search you know, distinguish what the screen shows from what you would need documentation to establish.","items":[
-      {"id":"opening-puzzles","kind":"puzzles","source":"three-familiar-search-results-and-three-puzzles"}
+      {"id":"opening-puzzles","kind":"puzzles","source":"three-familiar-search-results-and-three-puzzles","link_text":"Read the puzzles in Chapter 1"}
     ]},
-    {"id":"foundations","title":"Foundations","minutes":10,"prompt":"If a result lacks one of your query words, what different mechanisms could explain it? What evidence would separate them?","items":[
+    {"id":"foundations","title":"Foundations","minutes":9,"prompt":"If a result lacks one of your query words, what different mechanisms could explain it? What evidence would separate them?","items":[
       {"id":"chapter-1","kind":"summary","source":"sec-intro"},
       {"id":"chapter-2","kind":"summary","source":"sec-boolean-admission"},
       {"id":"chapter-3","kind":"summary","source":"sec-bm25-ranking"},
       {"id":"chapter-4","kind":"summary","source":"sec-beyond-boolean"},
-      {"id":"interface-panel","kind":"panel","source":"distinction-map-interface"}
+      {"id":"interface-panel","kind":"panel","source":"distinction-map-interface","lead":"One confusion can be settled from a result screen alone, without any vendor documentation:","omit":["This is the one collapse of this kind","The second puzzle points the same way","Neither observation required a claim"]}
     ]},
-    {"id":"mechanisms","title":"Mechanisms","minutes":15,"prompt":"Choose a familiar product. Which retrieval stages can you document, and which are still assumptions? A label such as semantic or AI is not an answer.","items":[
-      {"id":"vocabulary-panel","kind":"panel","source":"distinction-map-vocabulary"},
+    {"id":"representations","title":"Representations","minutes":9,"prompt":"Pick a product that calls itself semantic. What would you need to know to tell whether it uses dense vectors, learnt sparse vectors or lexical matching with query expansion?","items":[
+      {"id":"vocabulary-panel","kind":"panel","source":"distinction-map-vocabulary","lead":"Five more confusions cannot be settled by watching a system behave; each needs a mechanism first, which Chapters 5–9 supply.","omit":["Five confusions are left."]},
       {"id":"chapter-5","kind":"summary","source":"sec-embeddings"},
       {"id":"chapter-6","kind":"summary","source":"sec-retrieval-encoder"},
       {"id":"chapter-7","kind":"summary","source":"sec-dense-at-scale"},
-      {"id":"chapter-8","kind":"summary","source":"sec-representations-and-units"},
+      {"id":"chapter-8","kind":"summary","source":"sec-representations-and-units"}
+    ]},
+    {"id":"pipelines","title":"Pipelines","minutes":9,"prompt":"Choose a familiar product. Which retrieval stages can you document, and which are still assumptions? A label such as semantic or AI is not an answer.","items":[
       {"id":"chapter-9","kind":"summary","source":"sec-reranking-and-hybrid"},
-      {"id":"chapter-10","kind":"summary","source":"sec-hybrid-and-fusion"},
+      {"id":"chapter-10","kind":"summary","source":"sec-hybrid-and-fusion","keep_transition":true},
       {"id":"chapter-11","kind":"summary","source":"sec-query-transformation"},
       {"id":"chapter-12","kind":"summary","source":"sec-agentic-search"}
     ]},
-    {"id":"practice","title":"Professional practice","minutes":10,"prompt":"Name a missed record and a possible explanation. Record an alternative explanation and the next check before choosing an intervention.","items":[
+    {"id":"practice","title":"Professional practice","minutes":8,"prompt":"Name a missed record and a possible explanation. Record an alternative explanation and the next check before choosing an intervention.","items":[
       {"id":"chapter-13","kind":"summary","source":"sec-diagnosing-failure"},
       {"id":"chapter-14","kind":"summary","source":"sec-evaluation"},
       {"id":"chapter-15","kind":"summary","source":"sec-library-practice"}
     ]},
     {"id":"next-action","title":"Next action","minutes":5,"prompt":"Choose one information need and write its relevance criteria. Which known relevant records should a good search find? Collecting and judging the runs is a separate next step.","items":[
-      {"id":"puzzle-verdicts","kind":"panel","source":"closing-puzzle-map-title"},
-      {"id":"evaluation-next","kind":"recommendation","source":"what-you-can-now-ask"}
+      {"id":"puzzle-verdicts","kind":"panel","source":"closing-puzzle-map-title","link_text":"Read this in Chapter 15"},
+      {"id":"evaluation-next","kind":"recommendation","source":"what-you-can-now-ask","link_text":"Read Chapter 15’s closing advice"}
     ]}
   ]
 }

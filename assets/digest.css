@@ -34,6 +34,8 @@ dd { margin:.4rem 0 0; }
 .reflection { padding:1rem 1.3rem; border-left:4px solid var(--teal); background:#e5ede9; font-size:.95rem; }
 .reflection p { margin:.3rem 0; }
 .claim-links { font-size:.85rem; }
+.route-note { font:italic .95rem/1.6 system-ui,sans-serif; color:var(--muted); }
+.excerpt .claim-links { margin-top:1rem; }
 .claim-links summary { cursor:pointer; }
 .source-link { margin-bottom:0; }
 .continue { border-top:3px solid var(--teal); padding-top:1rem; }

@@ -34,16 +34,16 @@ try{
   assert.equal(new URL(page.url()).hash,'#main');
   await page.goto(base+'/read-this-first.html');
   await page.screenshot({path:path.join(out,'desktop-top.png')});
-  for(const id of ['problem','foundations','mechanisms','practice','next-action']){
+  for(const id of ['problem','foundations','representations','pipelines','practice','next-action']){
     await page.locator('#'+id).evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));
     await page.screenshot({path:path.join(out,`desktop-${id}.png`)});
   }
-  await page.locator('.contents a[href="#mechanisms"]').click();
-  assert.equal(new URL(page.url()).hash,'#mechanisms');
+  await page.locator('.contents a[href="#pipelines"]').click();
+  assert.equal(new URL(page.url()).hash,'#pipelines');
   await page.locator('#puzzle-verdicts .claim-links summary').click();
   assert.ok(await page.locator('#puzzle-verdicts a[href*="#claim-scite-nonsense-query"]').isVisible());
   await page.setViewportSize({width:390,height:844});
-  for(const id of ['problem','mechanisms','next-action']){
+  for(const id of ['problem','representations','next-action']){
     await page.locator('#'+id).evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     await page.screenshot({path:path.join(out,`mobile-${id}.png`)});

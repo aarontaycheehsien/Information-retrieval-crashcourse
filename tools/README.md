@@ -34,6 +34,15 @@ and the dated evidence register. No screenshots or third-party figures are
 copied. Source links provide their context. The two distinction panels are not
 the separate Part II/III recap panels.
 
+Selection may drop whole elements but never rewords them. A summary's closing
+hand-off (`p.chapter-transition`) is omitted unless its manifest item sets
+`keep_transition`. A panel item may list `omit` prefixes, each of which must match
+exactly one of the panel's own paragraphs, and may add an authored `lead`,
+rendered as `.route-note` so it reads apart from the excerpt. A panel's generated
+evidence-register links move to its end. `link_text` overrides the source-link
+label; summaries default to "Read Chapter N in full". The route has five or six
+stages totalling 45 minutes.
+
 Run this builder after other book generators and `maintain.py`, then run
 `--check` to detect stale output without writing. Generation has no current-time
 dependency. The displayed word count includes main reading content and prompts,

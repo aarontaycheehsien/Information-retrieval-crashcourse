@@ -76,6 +76,18 @@ def plain(value):
     return re.sub(r'\s+', ' ', unescape(re.sub(r'<[^>]+>', ' ', value))).strip()
 
 
+CLAIM_LINKS = re.compile(r'\n?<!-- BEGIN PRODUCT CLAIMS LINKS [^>]+ -->.*?<!-- END PRODUCT CLAIMS LINKS [^>]+ -->\n?', re.S)
+
+
+def omit_paragraphs(doc, container, raw, starts):
+    """Drop whole child paragraphs named by their opening words; never reword what remains."""
+    children = [n for n in doc.nodes if n.parent is container and n.tag == 'p']
+    for start in starts:
+        match = one([n for n in children if plain(doc.raw(n)).startswith(start)], f'paragraph starting {start!r}')
+        raw = raw.replace(doc.raw(match), '', 1)
+    return raw
+
+
 def select(doc, item):
     source = doc.by_id(item['source'])
     kind = item['kind']
@@ -86,7 +98,13 @@ def select(doc, item):
         eyebrow = one([n for n in inside if n.has_class('chapter-eyebrow')], 'chapter label')
         # Ignore decorative heading permalinks when deriving titles.
         title = plain(re.sub(r'<a\b[^>]*class="heading-anchor"[^>]*>.*?</a>', '', doc.raw(heading), flags=re.S))
-        return plain(doc.raw(eyebrow)) + ' · ' + title, doc.raw(summary), heading.attrs['id']
+        raw = doc.raw(summary)
+        # The book's hand-off to the next chapter repeats the digest's next heading.
+        if not item.get('keep_transition'):
+            for n in doc.inside(summary):
+                if n.has_class('chapter-transition'):
+                    raw = raw.replace(doc.raw(n), '', 1)
+        return plain(doc.raw(eyebrow)) + ' · ' + title, raw, heading.attrs['id']
     if kind == 'panel':
         panel = source.parent
         if panel is None or not panel.has_class('distinction-map'):
@@ -94,6 +112,12 @@ def select(doc, item):
         # The generated article supplies an h3; remove only the original heading.
         raw = doc.raw(panel).replace(doc.raw(source), '', 1)
         raw = raw.replace(f' aria-labelledby="{item["source"]}"', '')
+        raw = omit_paragraphs(doc, panel, raw, item.get('omit', []))
+        # Evidence links follow the panel's findings rather than preceding them.
+        links = CLAIM_LINKS.search(raw)
+        if links:
+            raw = raw.replace(links[0], '\n', 1)
+            raw = raw[:raw.rindex('</aside>')] + links[0].strip() + '\n</aside>'
         return plain(doc.raw(source)), raw, item['source']
     if kind == 'puzzles':
         following = [n for n in doc.nodes if n.start > source.start and n.tag in ('h2','h3')]
@@ -124,14 +148,22 @@ def adapt(raw, prefix):
     return raw
 
 
+def link_text(item, label):
+    if item.get('link_text'):
+        return item['link_text']
+    if item['kind'] == 'summary':
+        return 'Read ' + label.split(' · ')[0] + ' in full'
+    return 'Read this in the book'
+
+
 def build(book, manifest, template):
     if manifest.get('schema_version') != 1: raise ValueError('Unsupported manifest version')
     doc = Document(book)
     if any(c != 1 for c in Counter(n.attrs['id'] for n in doc.nodes if 'id' in n.attrs).values()):
         raise ValueError('Duplicate book IDs')
     stages = manifest['stages']
-    if len(stages) != 5 or sum(s['minutes'] for s in stages) != 45:
-        raise ValueError('Expected five stages totalling 45 minutes')
+    if not 5 <= len(stages) <= 6 or sum(s['minutes'] for s in stages) != 45:
+        raise ValueError('Expected five or six stages totalling 45 minutes')
     items = [i for s in stages for i in s['items']]
     ids = [s['id'] for s in stages] + [i['id'] for i in items]
     if len(set(ids)) != len(ids) or any(not re.fullmatch('[a-z][a-z0-9-]*', i) for i in ids):
@@ -149,9 +181,11 @@ def build(book, manifest, template):
         articles = []
         for item in stage['items']:
             label, raw, anchor = select(doc, item)
+            # Route guidance is authored here and styled apart from the verbatim excerpt.
+            lead = f'<p class="route-note">{escape(item["lead"])}</p>\n' if item.get('lead') else ''
             articles.append(f'<article class="excerpt" id="{item["id"]}" aria-labelledby="{item["id"]}-title">\n'
-                            f'<h3 id="{item["id"]}-title">{escape(label)}</h3>\n{adapt(raw,item["id"])}\n'
-                            f'<p class="source-link"><a href="search-textbook.html#{anchor}">Read the full explanation and evidence</a></p>\n</article>')
+                            f'<h3 id="{item["id"]}-title">{escape(label)}</h3>\n{lead}{adapt(raw,item["id"])}\n'
+                            f'<p class="source-link"><a href="search-textbook.html#{anchor}">{escape(link_text(item, label))}</a></p>\n</article>')
         blocks.append(f'<section class="digest-stage" id="{key}" aria-labelledby="{key}-title">\n'
                       f'<h2 id="{key}-title">{number}. {title}<span class="stage-budget">{stage["minutes"]} minutes · reading and reflection</span></h2>\n'
                       + '\n'.join(articles) + f'\n<aside class="reflection" aria-label="Reflection prompt"><p><strong>Pause and reflect</strong></p><p>{escape(stage["prompt"])}</p></aside>\n</section>')
