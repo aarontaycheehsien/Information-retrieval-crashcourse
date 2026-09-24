@@ -552,7 +552,7 @@
           "excerpt": "The book has met it twice already: as one of the four stories above, and as the first step of Primo Research Assistant’s pipeline in Chapter 1 ."
         },
         {
-          "anchor": "tbl-11-5",
+          "anchor": "when-a-system-writes-the-boolean-query",
           "excerpt": "Primo VE NDE Natural Language Search is distinct from the Primo Research Assistant discussed earlier, which documents an LLM converting a question into Boolean variations before CDI retrieval and embedding reranking in a multi-stage pipeline ."
         },
         {
@@ -664,7 +664,7 @@
           "excerpt": "The five documented stages of Primo Research Assistant, each mapped to the chapter that explains it. The two budgets—30 candidates reranked, five abstracts passed to generation—are the ones discussed above."
         },
         {
-          "anchor": "tbl-11-5",
+          "anchor": "when-a-system-writes-the-boolean-query",
           "excerpt": "Primo VE NDE Natural Language Search is distinct from the Primo Research Assistant discussed earlier, which documents an LLM converting a question into Boolean variations before CDI retrieval and embedding reranking in a multi-stage pipeline ."
         },
         {
