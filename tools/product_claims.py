@@ -228,18 +228,43 @@ def book_html(data):
     return '\n'.join(out)
 
 
+def notes_status(state):
+    """Short status for the teaching view; the register keeps the full wording."""
+    labels = {'overdue': 'check overdue', 'unknown': 'not yet checked', 'historical': 'historical example',
+              'unresolved': 'changed or unresolved'}
+    # A recent check is shown by its date alone.
+    return '; '.join(labels[f] for f in state['flags'] if f in labels)
+
+
 def notes_html(data):
     as_of = date.fromisoformat(data['currency_as_of'])
     out = ['<div class="claim-teaching-groups">',
-      '<p>Choose from nine verification groups below. Each group contains independently checkable claims, rather than one assertion about an entire product. Assign a group or selected claim IDs. In a copy, record the product mode, source and relevant passage, evidence date, date checked, finding (supported within scope, changed or not established), and limitations. Pass the record to the next instructor.</p>',
-      f'<p>These views share the <a href="search-textbook.html#product-evidence-currency">book’s evidence register</a>. Currency snapshot: {data["currency_as_of"]}. Rechecking a historical source does not make the architecture current. Unknown dates are not fresh checks.</p>']
+      '<p>Nine groups of independently checkable claims follow. Assign a group or selected claims. For each, record the product mode, source and relevant passage, evidence date, date checked, finding (supported within scope, changed or not established) and limitations, then pass the record to the next instructor.</p>',
+      f'<p>Each claim links to its entry in the <a href="search-textbook.html#product-evidence-currency">book’s evidence register</a> (currency snapshot {data["currency_as_of"]}). A dash means no date is recorded. Rechecking a historical source does not make the architecture current.</p>']
     for g in data['teaching_groups']:
-        out.extend([f'<details id="claims-group-{g["id"]}"><summary>{escape(g["title"])}</summary>',f'<p>{escape(g["question"])}</p>', '<ul>'])
+        rows = {}
         for c in data['claims']:
             if g['id'] not in c['teaching_groups']:
                 continue
-            st=currency(c,as_of)
-            out.append(f'<li><a href="search-textbook.html#claim-{c["id"]}">{c["id"]}</a> — {escape(c["claim"])}<br>Evidence: {date_label(c["evidence_date"])}; supporting check: {date_label(st["last_support"])}; finding: {escape(st["finding"])}. {escape(status_text(st))}.</li>')
+            st = currency(c, as_of)
+            parts = [f'Evidence {escape(c["evidence_date"]) if c["evidence_date"] else "—"}']
+            if st['last_support']:
+                parts.append(f'checked {escape(st["last_support"])}')
+            if notes_status(st):
+                parts.append(escape(notes_status(st)))
+            if not st['last_support'] and 'unknown' not in st['flags']:
+                parts.append('no recorded check')
+            meta = ' · '.join(parts)
+            # Identical claims about several products share one row.
+            rows.setdefault((c['claim'], meta), []).append(c)
+        total = sum(len(v) for v in rows.values())
+        checked = sum(1 for v in rows.values() for c in v if currency(c, as_of)['last_support'])
+        count = f'{total} claim' + ('' if total == 1 else 's') + (f', {checked} with a recorded check' if checked else ', none yet checked')
+        out.extend([f'<details id="claims-group-{g["id"]}"><summary>{escape(g["title"])} <span class="claim-count">· {count}</span></summary>',
+                    f'<p>{escape(g["question"])}</p>', '<ul class="claim-rows">'])
+        for (claim, meta), claims in rows.items():
+            links = ', '.join(f'<a href="search-textbook.html#claim-{c["id"]}" title="Claim ID: {c["id"]}">{escape(c["product"])} · {escape(c["mode"])}</a>' for c in claims)
+            out.append(f'<li>{links}: {escape(claim)} <span class="claim-meta">{meta}</span></li>')
         out.append('</ul></details>')
     out.extend(['<p>The full register also covers claims outside these nine groups, including API controls, commercial changes and screening software.</p>', '</div>'])
     return '\n'.join(out)
