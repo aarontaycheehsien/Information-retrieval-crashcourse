@@ -96,8 +96,12 @@ and hedges that ended paragraphs on a qualification.
   sentence; the key-definition box still defines it. The Preface gained a
   *dense retrieval* mark from P4.
 
-## Noted, not changed
+## Follow-up: table width
 
-- At a 1280px viewport, 48 of 49 tables overflow by 28px. The global rule
-  `table { min-width: 620px }` is wider than the 592px text column. This was
-  true before this pass.
+At a 1280px viewport, 48 of 49 tables overflowed. The global rule
+`table { min-width: 620px }` was wider than the text column, which measures
+444–613px at every desktop width. Fixed in `cb93f5c`: the 620px minimum now
+applies only at viewports of 620px and below, so phones keep sideways scrolling.
+From 700px to 1920px, the only tables that still overflow are Table 14.3, whose
+six columns overflow on their own content, and Appendix D's deliberately wide
+tables. No tables overflow in print media.
