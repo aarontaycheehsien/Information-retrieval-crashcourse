@@ -330,7 +330,7 @@ Applied 25 September 2026 on `fable-1`, in seven commits after `e69ba00`:
 
 | Commit | Item | Result |
 |---|---|---|
-| `b7af628` | P1, P2 | Teaching notes: menu first; the six-paragraph preamble folded into the menu, *Choose the emphasis* and *The application exercises* (new `#product-review` anchor); one timing caveat; labs as a table; claim groups as one-line claims with a status line and a per-group count in the summary. Page 7,642 → 6,771 words. |
+| `b7af628` | P1, P2 | Teaching notes: menu first; the six-paragraph preamble folded into the menu, *Choose the emphasis* and *The application exercises* (new `#product-review` anchor); one timing caveat; labs as a table; claim groups as one-line claims with a status line and a per-group count in the summary; the four identical Lucene-family claims share one row. Page 7,642 → 6,771 words. |
 | `0b73ba3` | P3 | Read this first: hand-offs dropped except Chapter 10's substantive one; interface and vocabulary panels lose the paragraphs that referred to absent context, with a short authored `lead` in their place; six stages (5 + 9 + 9 + 9 + 8 + 5 minutes); descriptive link text; evidence register moved below the puzzle verdicts. Reading text 4,260 → 3,593 words (page 4,530 → 3,850). |
 | `b808bae` | P4 | Questionnaire: authored "Listen for" cue on all 30 questions; bodies made only of questions lettered (Q01, Q02, Q03, Q12, Q13, Q15); answer spaces hidden on screen behind a toggle, always printed; question-only list for sending ahead; intake headed "Before Q01". Print still 13 pages (core) and 19 (all sections). |
 | `a7b64b9` | P5 | Evaluation guide: worked example before the six steps; each step one action plus edge-case bullets; short-list arithmetic left only in *What the scores count*. |
@@ -359,9 +359,6 @@ A final commit adds the changelog entry and this record.
   tests and guide assume. Left for a workbook release.
 - **Evaluation kit keeps "cutoff".** Its guide quotes workbook labels ("Cutoff k");
   changing one without the other would mismatch.
-
-Identical claims about several products (the four Lucene-family BM25 claims)
-now share one row in the teaching notes, as P1 proposed.
 
 ### Verification
 
