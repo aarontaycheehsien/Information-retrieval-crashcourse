@@ -2630,7 +2630,7 @@
       "id": "nde-query-model",
       "product": "Primo VE",
       "mode": "NDE Natural Language Search",
-      "claim": "ChatGPT 4.1 Mini identifies fields and generates a basic Boolean query plus six OR-connected permutations.",
+      "claim": "GPT-4.1 Mini identifies fields and generates a basic Boolean query plus six OR-connected permutations.",
       "temporal_scope": "current-facing",
       "evidence_basis": "documentation",
       "evidence_date": "2026-08",
@@ -2660,7 +2660,7 @@
         },
         {
           "anchor": "tbl-11-4",
-          "excerpt": "Primo VE NDE Natural Language Search ChatGPT 4.1 Mini identifies fields and filters, generates a basic Boolean query, then creates six related OR-connected permutations. Primo’s Advanced Search receives the resulting structured Boolean query; users can inspect and edit the generated query. Generative AI can produce an auditable Boolean search rather than directly replacing lexical retrieval."
+          "excerpt": "Primo VE NDE Natural Language Search GPT-4.1 Mini identifies fields and filters, generates a basic Boolean query, then creates six related OR-connected permutations. Primo’s Advanced Search receives the resulting structured Boolean query; users can inspect and edit the generated query. Generative AI can produce an auditable Boolean search rather than directly replacing lexical retrieval."
         }
       ],
       "teaching_groups": [
@@ -2702,7 +2702,7 @@
         },
         {
           "anchor": "tbl-11-4",
-          "excerpt": "Primo VE NDE Natural Language Search ChatGPT 4.1 Mini identifies fields and filters, generates a basic Boolean query, then creates six related OR-connected permutations. Primo’s Advanced Search receives the resulting structured Boolean query; users can inspect and edit the generated query. Generative AI can produce an auditable Boolean search rather than directly replacing lexical retrieval."
+          "excerpt": "Primo VE NDE Natural Language Search GPT-4.1 Mini identifies fields and filters, generates a basic Boolean query, then creates six related OR-connected permutations. Primo’s Advanced Search receives the resulting structured Boolean query; users can inspect and edit the generated query. Generative AI can produce an auditable Boolean search rather than directly replacing lexical retrieval."
         }
       ],
       "teaching_groups": [
@@ -3483,8 +3483,8 @@
           "locator": "Reference linked in the book; exact source passage not transcribed during migration."
         },
         {
-          "url": "https://www.wiley.com/en-us/ai",
-          "title": "Wiley AI Gateway",
+          "url": "https://docs.scholargateway.ai/",
+          "title": "Wiley AI Gateway: Getting Connected and Troubleshooting",
           "locator": "Reference linked in the book; exact source passage not transcribed during migration."
         }
       ],
@@ -3515,8 +3515,8 @@
           "locator": "Reference linked in the book; exact source passage not transcribed during migration."
         },
         {
-          "url": "https://www.wiley.com/en-us/ai",
-          "title": "Wiley AI Gateway",
+          "url": "https://docs.scholargateway.ai/",
+          "title": "Wiley AI Gateway: Getting Connected and Troubleshooting",
           "locator": "Reference linked in the book; exact source passage not transcribed during migration."
         }
       ],
@@ -3547,8 +3547,8 @@
           "locator": "Reference linked in the book; exact source passage not transcribed during migration."
         },
         {
-          "url": "https://www.wiley.com/en-us/ai",
-          "title": "Wiley AI Gateway",
+          "url": "https://docs.scholargateway.ai/",
+          "title": "Wiley AI Gateway: Getting Connected and Troubleshooting",
           "locator": "Reference linked in the book; exact source passage not transcribed during migration."
         }
       ],

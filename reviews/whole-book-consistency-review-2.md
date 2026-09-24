@@ -41,6 +41,27 @@ highlighting, anchors, and every main-text external link against the reference l
   those are the author's to state.
 - **CHANGELOG.** Not updated: it carries uncommitted repository-organisation edits.
 
+## Follow-up applied the same day, at the author's request
+
+- **Model name.** Table 11.4 and the matching register entry now say "GPT-4.1 Mini",
+  as Chapter 1 does. The regenerated teaching notes follow.
+- **Disclosure.** It now names all three labs and the newer companion pages: the
+  evaluation kit and its workbooks, the vendor questionnaire, the Read this first
+  digest and the glossary lookup.
+- **Documentation references.** Sixteen entries were added after each linked page was
+  fetched to confirm its title: ASReview's *Simulate a review*, Chatelain (2026), the
+  Web of Science *Advanced Search* page, Cohan et al. (2020, SPECTER), Elastic, Elsevier
+  (2025), Faiss, the Hugging Face BERT card, Google Scholar search help, PubMed Advanced
+  Search Builder, PostgreSQL, Scite, Tay (2026c), the GTE card, Weaviate and Wiley.
+  Same-author entries were relettered (ASReview n.d.-a/b, Clarivate n.d.-a/b, Tay
+  2026a–e); nothing in the text cites by those labels. The ten main-text links still
+  without a matching URL all point to works already listed under another URL, for
+  example DrQA, PubMed Best Match, *Introduction to Information Retrieval* and the
+  PubMed User Guide. The list holds 150 entries in alphabetical order.
+- **Dead link.** Chapter 12's Wiley AI Gateway link (`wiley.com/en-us/ai`) returned
+  404. It now points to Wiley's AI Gateway documentation at `docs.scholargateway.ai`,
+  in the text and in the `scite-mcp` and `wiley-mcp` register evidence.
+
 ## Checked and consistent
 
 Part reading times (67, 107, 82) against the chapter labels. Every other Previous/Next
