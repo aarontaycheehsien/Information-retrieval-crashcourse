@@ -115,7 +115,7 @@ link still lands on the section; print preview expands `<details>`.
 
 ## P2 — Teaching notes: menu first, preamble second
 
-**Problem.** Five paragraphs (digest, workshop, evaluation kit, questionnaire,
+**Problem.** Six paragraphs (digest, workshop, evaluation kit, questionnaire,
 audiences, licence) precede "Choose what you need". Most restate what the menu
 links to.
 
