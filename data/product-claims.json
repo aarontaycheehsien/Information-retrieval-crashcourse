@@ -549,7 +549,7 @@
         },
         {
           "anchor": "words-sent-to-retrieval-may-not-be-the-words-you-typed",
-          "excerpt": "Explicit rewriting deserves its own section. Like analysis, it can change what reaches retrieval, but it does so by reformulating the request. So far this book has treated rewriting only in passing: as one of the four stories above, and as the first step of Primo Research Assistant’s pipeline in Chapter 1 . Now drop the assumption that the words reaching the index are the words you typed: many systems first interpret what you typed, and then build a different internal query—one better suited to the index behind it."
+          "excerpt": "The book has met it twice already: as one of the four stories above, and as the first step of Primo Research Assistant’s pipeline in Chapter 1 ."
         },
         {
           "anchor": "tbl-11-5",
@@ -932,7 +932,7 @@
         },
         {
           "anchor": "returning-to-the-opening-puzzles",
-          "excerpt": "Semantic Scholar remains unresolved: the August 2026 result counts tell us what happened, not where meaning entered the pipeline. We do not yet have the distinctions needed to ask whether retrieval itself was lexical, retrieval itself used dense representations, semantic processing occurred only after retrieval, or several stages were combined. The third puzzle therefore has to wait for Part II."
+          "excerpt": "Semantic Scholar remains unresolved: the August 2026 result counts tell us what happened, not where meaning entered the pipeline."
         },
         {
           "anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
