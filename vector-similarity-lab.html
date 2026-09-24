@@ -187,7 +187,7 @@ input[type=range]:disabled{opacity:.42}
   <p class="kicker">Interactive companion</p>
   <h1>The Vector Similarity Lab</h1>
   <p class="subtitle">Vector search needs a rule for comparing the query with stored vectors. Follow the seven-step prediction tour, then move the vectors yourself in the sandbox to compare cosine, dot product and relevance.</p>
-  <p class="backlink"><a href="search-textbook.html#single-vector-dense-retrieval-compress-first-compare-later">← Back to “Single-vector dense retrieval”</a> · <a href="search-textbook.html#representations-and-units">On to “Representations and indexed units”</a></p>
+  <p class="backlink"><a href="search-textbook.html#single-vector-dense-retrieval-compress-first-compare-later">← Back to “Single-vector dense retrieval”</a> · <a href="search-textbook.html#representations-and-units">On to “Representations and indexed units”</a> · <a href="teaching-notes.html#labs">Teaching notes</a></p>
 </div></header>
 <p class="hint" style="max-width:70rem;margin:1rem auto;padding:0 1rem">The document descriptions and coordinates are assigned teaching examples; no embedding model generated them. In a real system, the comparison rule should match the one the model was trained with.</p>
 
@@ -236,12 +236,12 @@ input[type=range]:disabled{opacity:.42}
     <p id="challenge-status" aria-live="polite"></p>
     <details><summary>What kind of change did you make?</summary><p>Moving an arrow changes the toy <strong>representation</strong>. Switching cosine to dot product changes the <strong>comparison rule</strong>. Applying metadata filters changes the <strong>admission rule</strong>. Normalisation transforms the vectors before comparison.</p></details>
     <details id="cutoff-experiment"><summary>Optional: can the relevant record reach the next stage?</summary>
-      <button class="btn" type="button" id="cutoff-start">Load cutoff experiment</button>
-      <p><strong>What to try:</strong> the default cosine order is A, then B, then C. C meets both metadata criteria but sits outside the first two. Apply both filters, then switch them between before and after the cutoff.</p>
+      <button class="btn" type="button" id="cutoff-start">Load cut-off experiment</button>
+      <p><strong>What to try:</strong> the default cosine order is A, then B, then C. C meets both metadata criteria but sits outside the first two. Apply both filters, then switch them between before and after the cut-off.</p>
       <label for="top-k">Candidate limit</label> <select id="top-k"><option value="1">Top 1</option><option value="2">Top 2</option><option value="3" selected>All 3</option></select>
       <label for="filter-order">Apply active filters</label> <select id="filter-order"><option value="before">Before selecting top k</option><option value="after">After selecting top k</option></select>
       <p id="pipeline-summary" aria-live="polite"></p>
-      <p class="hint">This toy scores all three records exactly. It illustrates a candidate boundary, not approximate nearest-neighbour search. Filtering after the cutoff does not refill the list here; real products may behave differently.</p>
+      <p class="hint">This toy scores all three records exactly. It illustrates a candidate boundary, not approximate nearest-neighbour search. Filtering after the cut-off does not refill the list here; real products may behave differently.</p>
     </details>
   </section>
   <p class="change-note" id="change-note" hidden aria-live="polite"></p>
@@ -266,7 +266,7 @@ input[type=range]:disabled{opacity:.42}
       <div class="control-block">
         <label class="switch" for="filter-recent"><input type="checkbox" id="filter-recent"> Published 2024 or later</label>
         <label class="switch" for="filter-empirical"><input type="checkbox" id="filter-empirical"> Empirical studies only</label>
-        <p class="hint">The query asks for both. These are metadata constraints, not part of the similarity score. In the sandbox’s optional experiment, choose whether they act before or after the candidate cutoff. Excluded candidates stay listed so you can see what the rule removed.</p>
+        <p class="hint">The query asks for both. These are metadata constraints, not part of the similarity score. In the sandbox’s optional experiment, choose whether they act before or after the candidate cut-off. Excluded candidates stay listed so you can see what the rule removed.</p>
       </div>
 
       <div class="control-block">
@@ -465,9 +465,9 @@ function score(id){const v=values(id);return metric==='cosine'?v.cosine:v.dot;}
 function allRanked(){return ['A','B','C'].sort((a,b)=>score(b)-score(a)||a.localeCompare(b));}
 function ranked(){const all=allRanked();return filterOrder==='before'?all.filter(eligible).slice(0,topK):all.slice(0,topK).filter(eligible);}
 function omittedReason(id){
-  if(filterOrder==='after'&&!allRanked().slice(0,topK).includes(id))return 'Outside the candidate cutoff; not passed to filtering.';
+  if(filterOrder==='after'&&!allRanked().slice(0,topK).includes(id))return 'Outside the candidate cut-off; not passed to filtering.';
   if(!eligible(id))return 'Removed by metadata filter: '+excludedBy(id);
-  return 'Outside the candidate cutoff.';
+  return 'Outside the candidate cut-off.';
 }
 function excluded(){return ['A','B','C'].filter(id=>!eligible(id));}
 function f(value){return (Math.abs(value)<.0005?0:value).toFixed(3);}
@@ -592,7 +592,7 @@ function renderRanking(){
   $('live-summary').textContent = inTour&&!answered?'Scores and order hidden until your prediction.':order.length
     ? `Using ${rule}, ${order.length} of 3 candidates are returned. Candidate ${order[0]} ranks first with score ${f(score(order[0]))}` +
       (order.length>1?`, followed by ${order.slice(1).join(' and ')}.`:', and is the only one left.')
-    : 'No records are returned under the current filters and candidate cutoff.';
+    : 'No records are returned under the current filters and candidate cut-off.';
 }
 
 function render(){renderControls();renderPlot();renderRanking();renderChallenge();writeHash();}

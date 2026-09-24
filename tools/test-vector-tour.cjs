@@ -58,7 +58,7 @@ t.click('cutoff-start');
 assert.equal(t.api.ranked().join(','),'C');
 t.change('filter-order','after');
 assert.equal(t.api.ranked().join(','),'');
-assert.match(t.node('rank-list').innerHTML,/Outside the candidate cutoff/);
+assert.match(t.node('rank-list').innerHTML,/Outside the candidate cut-off/);
 t.change('top-k','3');
 assert.equal(t.api.ranked().join(','),'C');
 t.change('top-k','1');

@@ -48,7 +48,7 @@
     const tied=result.rows.some(r=>r.tied);
     $('tie-note').hidden=!tied;
     $('tie-note').textContent='Equal scores share a rank. Identifiers are sorted by JavaScript string order only to make display deterministic.'+
-      (result.splitTie?' The output cutoff splits a tied group: the displayed identifier order decides which tied records remain visible, not greater relevance.':'');
+      (result.splitTie?' The output cut-off splits a tied group: the displayed identifier order decides which tied records remain visible, not greater relevance.':'');
     $('results').hidden=!result.rows.length;
     document.querySelectorAll('#presets button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.c)===result.c)));
   }
