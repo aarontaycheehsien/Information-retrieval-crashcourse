@@ -12,6 +12,16 @@ The local annotation editor remains at
 `start-annotation-editor.cmd`, the annotation server and editor tests depend on
 that path. It is an authoring prototype rather than a published reader companion.
 
+## Animated Chapter 2 explainers
+
+[`chapter-2-videos/`](chapter-2-videos/README.md) contains the scripts and original
+vector renderer for three narrated films: Boolean admission, text analysis, and
+inverted indexes. Each exports a 1080p MP4, English captions, transcript, audio
+stems, and review frames under the Git-ignored `outputs/chapter-2-videos/`.
+The renderer reuses the repository's cached, word-timed narration helpers and
+checks complete video decoding, encoded audio levels, caption survival, and
+fast-start playback. See its README for rendering and local preview commands.
+
 ## Read-this-first digest
 
 `read-this-first.html` is generated, not a separately authored edition. Run:
