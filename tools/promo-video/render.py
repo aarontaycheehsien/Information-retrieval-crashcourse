@@ -636,22 +636,24 @@ def render_frame(fmt,t):
     return im.convert("RGB")
 
 
-def validate_story():
+def validate_story(check_fonts=True):
     scenes=STORY["scenes"]
     assert scenes[0]["start"]==0 and scenes[-1]["end"]==DURATION
     assert all(a["end"]==b["start"] for a,b in zip(scenes,scenes[1:]))
     assert all(s["end"]>s["start"] and s["id"] in SHOTS for s in scenes)
-    assert all((FONT_DIR/f).exists() for f in FONT_FILES.values()), f"Set PROMO_FONT_DIR to a directory containing {FONT_FILES}"
+    if check_fonts:
+        assert all((FONT_DIR/f).exists() for f in FONT_FILES.values()), f"Set PROMO_FONT_DIR to a directory containing {FONT_FILES}"
     book=(ROOT/"search-textbook.html").read_text(encoding="utf-8")
     assert f'<h1>{STORY["book_title"]}</h1>' in book
     assert STORY["author"] in book
     assert "reranking changes its order but cannot add an excluded record" in book
     # Essential headlines must fit the actual margins before rendering starts.
-    for fmt in FORMATS:
-        width=910 if fmt=="vertical" else 1600
-        for scene in scenes:
-            for item in scene["copy"]:
-                assert all(font(77).getlength(part)<=width for part in wrap(item,77,width))
+    if check_fonts:
+        for fmt in FORMATS:
+            width=910 if fmt=="vertical" else 1600
+            for scene in scenes:
+                for item in scene["copy"]:
+                    assert all(font(77).getlength(part)<=width for part in wrap(item,77,width))
 
 
 def ffmpeg_executable():
@@ -673,15 +675,20 @@ def soundtrack(out):
     sr=48000
     n=sr*DURATION
     mix=np.zeros((n,2),dtype=np.float64)
+    music=np.zeros_like(mix)
+    effects=np.zeros_like(mix)
     rng=np.random.default_rng(STORY["seed"])
 
-    def add(at,signal,volume=1,pan=0):
+    def add(at,signal,volume=1,pan=0,bus="music"):
         start=round(at*sr)
         sig=signal[:max(0,n-start)]*volume
         if not len(sig):
             return
         mix[start:start+len(sig),0]+=sig*math.sqrt((1-pan)/2)
         mix[start:start+len(sig),1]+=sig*math.sqrt((1+pan)/2)
+        stem=music if bus=="music" else effects
+        stem[start:start+len(sig),0]+=sig*math.sqrt((1-pan)/2)
+        stem[start:start+len(sig),1]+=sig*math.sqrt((1+pan)/2)
 
     def note(at,hz,duration=1.4,vol=.12,pan=0,soft=False):
         tt=np.arange(round(duration*sr))/sr
@@ -691,7 +698,7 @@ def soundtrack(out):
         env*=np.minimum(1,(duration-tt)/.09)
         add(at,sig*env,vol,pan)
 
-    def noise(at,duration,vol=.09,pan=0,kind="paper"):
+    def noise(at,duration,vol=.09,pan=0,kind="paper",bus="effects"):
         count=round(duration*sr)
         tt=np.arange(count)/sr
         nn=rng.normal(0,1,count)
@@ -705,13 +712,13 @@ def soundtrack(out):
         else:
             nn=np.convolve(nn,np.ones(12)/12,mode="same")
             sig=nn*np.sin(np.pi*tt/duration)**2
-        add(at,sig,vol,pan)
+        add(at,sig,vol,pan,bus)
 
     # A spare D-minor detective motif becomes a D-major resolution after 30s.
     bass=[73.416,73.416,110.0,65.406]
     for i,at in enumerate(np.arange(.2,37,1.5)):
         note(float(at),bass[i%4],1.35,.12,pan=-.15)
-        noise(float(at)+.72,.055,.018,pan=.2,kind="click")
+        noise(float(at)+.72,.055,.018,pan=.2,kind="click",bus="music")
     melody=[293.665,349.228,329.628,220.0,261.626,293.665]
     for i,at in enumerate(np.arange(1.0,29.5,3)):
         note(float(at),melody[i%len(melody)],2.25,.057,pan=.2,soft=True)
@@ -735,14 +742,17 @@ def soundtrack(out):
     noise(37.42,.4,.3,kind="stamp")
     fade=np.minimum(1,np.arange(n)/(sr*.18))*np.minimum(1,(n-1-np.arange(n))/(sr*.65))
     mix*=fade[:,None]
+    music*=fade[:,None]
+    effects*=fade[:,None]
     peak=float(np.max(np.abs(mix)))
     assert peak<1, f"Unmastered audio clips at {peak}"
     path=out/"score-original.wav"
-    with wave.open(str(path),"wb") as wav:
-        wav.setnchannels(2)
-        wav.setsampwidth(2)
-        wav.setframerate(sr)
-        wav.writeframes((mix*32767).astype("<i2").tobytes())
+    for stem_path,stem in ((path,mix),(out/"music-original.wav",music),(out/"effects-original.wav",effects)):
+        with wave.open(str(stem_path),"wb") as wav:
+            wav.setnchannels(2)
+            wav.setsampwidth(2)
+            wav.setframerate(sr)
+            wav.writeframes((stem*32767).astype("<i2").tobytes())
     master=out/"soundtrack.wav"
     # Reserve a further decibel for AAC's intersample peak overshoot.
     run_ffmpeg(["-i",str(path),"-af","loudnorm=I=-16:TP=-2:LRA=9","-ar","48000","-c:a","pcm_s16le",str(master)],out/"audio-mastering.log")
@@ -832,7 +842,7 @@ def verification(out,video,fmt):
     return {"file":video.name,"width":w,"height":h,"fps":FPS,"frames":FPS*DURATION,"duration_seconds":DURATION,"video_codec":"H.264","pixel_format":"yuv420p","audio_codec":"AAC","decode":"passed","fast_start":True,"integrated_lufs":float(measurement["input_i"]),"true_peak_dbtp":float(measurement["input_tp"]),"bytes":len(payload),"sha256":hashlib.sha256(payload).hexdigest()}
 
 
-def write_sharing_copy(out):
+def write_sharing_copy(out,narrated=True):
     value=("Every citation was real. One crucial paper was absent.\n\n"
            "The Missing Paper — a 45-second search mystery for librarians.\n\n"
            "How Search Decides What You See, Aaron Tay's free online textbook, "
@@ -847,6 +857,9 @@ def write_sharing_copy(out):
            "How Search Decides What You See / Aaron Tay / Free online textbook / Read free, link in post.\n\n"
            "All visuals and music were created procedurally for this film. Original promotional cover artwork "
            "represents the online textbook. The search example is illustrative.\n")
+    if narrated:
+        import narration
+        value+=f"Synthetic female narration: Microsoft {narration.config()['voice']}.\n"
     (out/"share-copy.txt").write_text(value,encoding="utf-8")
     viewer='''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -856,11 +869,15 @@ main{max-width:1280px;margin:0 auto;padding:36px 28px}h1{font-size:42px;font-wei
 p{color:#b4b4a8;line-height:1.6}h2{font:16px Consolas,monospace;color:#83d9cc;margin:0 0 16px}
 section{margin:32px 0}video{display:block;width:100%;background:#050a0e;border:1px solid #394248}
 .vertical{max-width:420px}a{color:#83d9cc}nav{display:flex;gap:24px;flex-wrap:wrap;margin:18px 0}
-</style></head><body><main><h1>The Missing Paper</h1><p>A 45-second retrieval mystery for librarians. Original animation and instrumental score.</p>
-<section><h2>LANDSCAPE / 1920 × 1080</h2><video controls playsinline preload="metadata" poster="poster-landscape.jpg" aria-label="The Missing Paper landscape video"><source src="missing-paper-landscape.mp4" type="video/mp4"></video></section>
-<section class="vertical"><h2>VERTICAL / 1080 × 1920</h2><video controls playsinline preload="metadata" poster="poster-vertical.jpg" aria-label="The Missing Paper vertical video"><source src="missing-paper-vertical.mp4" type="video/mp4"></video></section>
+</style></head><body><main><h1>The Missing Paper</h1><p>A 45-second retrieval mystery for librarians. Original animation and score. NARRATION_NOTICE</p>
+<section><h2>LANDSCAPE / 1920 × 1080</h2><video controls playsinline preload="metadata" poster="poster-landscape.jpg" aria-label="The Missing Paper landscape video"><source src="missing-paper-landscape.mp4" type="video/mp4">CAPTION_TRACK</video></section>
+<section class="vertical"><h2>VERTICAL / 1080 × 1920</h2><video controls playsinline preload="metadata" poster="poster-vertical.jpg" aria-label="The Missing Paper vertical video"><source src="missing-paper-vertical.mp4" type="video/mp4">CAPTION_TRACK</video></section>
 <nav><a href="missing-paper-landscape.mp4" download>Download landscape</a><a href="missing-paper-vertical.mp4" download>Download vertical</a><a href="share-copy.txt">Sharing caption and reader links</a></nav>
+NARRATION_LINKS
 <p>Promoting <em>How Search Decides What You See</em> by Aaron Tay — a free online textbook.</p></main></body></html>'''
+    viewer=viewer.replace("NARRATION_NOTICE","Warm female investigator narration (synthetic voice)." if narrated else "Music-only edition.")
+    viewer=viewer.replace("CAPTION_TRACK",'<track kind="captions" src="narration.vtt" srclang="en" label="English narration">' if narrated else "")
+    viewer=viewer.replace("NARRATION_LINKS",'<nav><a href="narration-transcript.txt">Narration transcript</a><a href="narration.srt" download>Download SRT captions</a><a href="missing-paper-landscape-music-only.mp4" download>Landscape music-only original</a><a href="missing-paper-vertical-music-only.mp4" download>Vertical music-only original</a></nav>' if narrated else "")
     (out/"preview.html").write_text(viewer,encoding="utf-8")
 
 
@@ -868,31 +885,59 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--format",choices=["both",*FORMATS],default="both")
     parser.add_argument("--output",type=Path,default=ROOT/"outputs"/"promo-video")
-    parser.add_argument("--preview",action="store_true",help="Render storyboard frames and posters without video or audio")
-    parser.add_argument("--verify-only",action="store_true",help="Decode and measure existing MP4 exports")
+    mode=parser.add_mutually_exclusive_group()
+    mode.add_argument("--preview",action="store_true",help="Render storyboard frames and posters without video or audio")
+    mode.add_argument("--verify-only",action="store_true",help="Decode and measure existing MP4 exports")
+    mode.add_argument("--audio-only",action="store_true",help="Add or rebuild narration on existing videos, preserving every picture packet")
+    parser.add_argument("--music-only",action="store_true",help="Render the original edition without narration")
     args=parser.parse_args()
     out=args.output.resolve()
     out.mkdir(parents=True,exist_ok=True)
     formats=list(FORMATS) if args.format=="both" else [args.format]
-    validate_story()
+    if args.audio_only and args.music_only:
+        parser.error("--audio-only adds narration; use --music-only with a full render")
+    validate_story(check_fonts=not (args.audio_only or args.verify_only))
     if args.verify_only:
         results=[verification(out,out/f"missing-paper-{fmt}.mp4",fmt) for fmt in formats]
-        (out/"verification.json").write_text(json.dumps(results,indent=2),encoding="utf-8")
+        manifest_path=out/"verification.json"
+        existing=json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+        if not isinstance(existing,dict):
+            existing={}
+        previous={item["file"]:item for item in existing.get("exports",[])}
+        for item in results:
+            previous[item["file"]]={**previous.get(item["file"],{}),**item}
+        existing["exports"]=list(previous.values())
+        manifest_path.write_text(json.dumps(existing,indent=2),encoding="utf-8")
         print(json.dumps(results,indent=2))
         return
-    previews(out,formats)
-    write_sharing_copy(out)
+    if args.audio_only:
+        for fmt in formats:
+            if not (out/f"missing-paper-{fmt}.mp4").is_file():
+                parser.error(f"No existing {fmt} video; run a full render first")
+    else:
+        previews(out,formats)
     if args.preview:
+        write_sharing_copy(out,narrated=not args.music_only)
         print(f"Storyboard previews and posters: {out}",flush=True)
         return
     audio,audio_info=soundtrack(out)
+    narration_info=None
+    if not args.music_only:
+        import narration
+        narrated_audio,narration_info=narration.mix(out,STORY,run_ffmpeg)
     results=[]
     for fmt in formats:
-        video=export_video(out,fmt,audio)
-        results.append(verification(out,video,fmt))
+        video=out/f"missing-paper-{fmt}.mp4" if args.audio_only else export_video(out,fmt,audio)
+        if args.music_only:
+            results.append(verification(out,video,fmt))
+        else:
+            results.append(narration.remux(out,fmt,narrated_audio,run_ffmpeg,ffmpeg_executable(),verification))
         print(f"Verified: {video}",flush=True)
     manifest={"title":STORY["title"],"seed":STORY["seed"],"audio":audio_info,"exports":results,"python":sys.version,"fonts":{k:str(FONT_DIR/v) for k,v in FONT_FILES.items()}}
+    if narration_info:
+        manifest["narration"]=narration_info
     (out/"verification.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8")
+    write_sharing_copy(out,narrated=not args.music_only)
     print(f"Complete: {out}",flush=True)
 
 
