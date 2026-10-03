@@ -1,5 +1,17 @@
 # Tooling
 
+This directory contains the **current** maintenance and verification tools.
+The root-level `audit.py`, `restructure.py` and `verify.py` from the completed
+restructuring have been archived unchanged under
+[`reviews/restructuring/`](../reviews/restructuring/README.md), together with
+their snapshots. Their historical commands and gate approvals are not current
+maintenance instructions.
+
+The local annotation editor remains at
+`lightweight-wysiwyg-html-editor-v4-footnotes.html` in the repository root:
+`start-annotation-editor.cmd`, the annotation server and editor tests depend on
+that path. It is an authoring prototype rather than a published reader companion.
+
 ## Read-this-first digest
 
 `read-this-first.html` is generated, not a separately authored edition. Run:

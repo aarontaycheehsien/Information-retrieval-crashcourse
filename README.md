@@ -19,6 +19,26 @@ New to the subject? Start with [**Read this first**](https://aarontaycheehsien.g
 
 `search-textbook.html` is the sole maintained edition and the source of truth for authored prose, including glossary definitions. Marked product-evidence blocks, glossary navigation, the lookup index, the digest and the questionnaire are generated from maintained mappings. The retired single-flow edition is in Git history, and its former URL redirects to the textbook. See [`tools/README.md`](tools/README.md) for the maintenance passes and [`CHANGELOG.md`](CHANGELOG.md) for what changed between versions.
 
+## Repository map
+
+| Location | Status and purpose |
+|---|---|
+| `search-textbook.html` | Sole maintained book; authored prose is edited here. |
+| Root companion HTML files | Published labs, evaluation kit, questionnaire, digest and teaching materials. Keep these paths stable. |
+| `index.html`, `how-search-decides-what-you-see.html` | Entry-point and retired-edition redirects. These are retained for existing URLs, not alternate editions. |
+| `assets/`, `images/`, `downloads/` | Published styles/scripts, figures and downloadable workbooks. |
+| `data/` | Maintained mappings and manifests used by generators. |
+| [`tools/`](tools/README.md) | Current builders, maintenance passes, fixtures and regression checks. |
+| [`reviews/`](reviews/README.md) | Historical editorial records; findings are not automatically current tasks. |
+| [`reviews/restructuring/`](reviews/restructuring/README.md) | Completed restructuring records, snapshot reports and archived migration scripts. Not the live build pipeline. |
+| `lightweight-wysiwyg-html-editor-v4-footnotes.html` | Local authoring prototype, not a reader companion. Retained at the root because the annotation launcher and tests use this path. |
+| `outputs/` | Local generated verification artifacts; task output directories are ignored by Git. |
+
+For contributors: use the [tooling guide](tools/README.md), put new review
+records under `reviews/`, and distinguish the current `CHANGELOG.md` from the
+archived restructuring `CHANGES.md`. Do not replay historical migration scripts
+against the live book. The archive is organizational, not private.
+
 ## For instructors
 
 Start with the [**one-hour workshop**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/teaching-notes.html#one-hour-workshop), *Why did this search miss a paper?* It includes a prepared case, timed facilitator guidance, worked answers and a [two-page participant handout](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/teaching-workshop-handout.html), with no advance reading or subscription access required for participants. The [**teaching notes**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/teaching-notes.html) also provide audience routes, three longer course shapes, an eight-point assessment rubric, discussion prompts, product-claim verification guidance and a record for improving the next delivery. Workshop timings are provisional pending teaching experience.

@@ -21,6 +21,11 @@ entry here.
   tour answers are shorter, the README leads with Read this first, and visible
   lab text uses the book's "cut-off". Book text is unchanged.
 
+- **Repository organization.** Move 26 historical editorial and restructuring
+  records into `reviews/`, preserving their contents. Distinguish current tools
+  from archived migrations, add a repository map, and retain all published HTML
+  paths, retired-edition redirects and the annotation editor's working path.
+
 - **Rank Fusion Lab.** Add an offline, editable companion to Chapter 10's
   worked RRF example. Show each route's rank and contribution, exact-score ties,
   the constant's effect, independent input depths and output depth. Include four
