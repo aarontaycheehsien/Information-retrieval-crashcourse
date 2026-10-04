@@ -1,0 +1,35 @@
+{
+  "title": "A universe of research. A clearer way to search.",
+  "book_title": "How Search Decides What You See",
+  "author": "Aaron Tay",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/",
+  "intro_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/read-this-first.html",
+  "voice": {"name": "en-GB-RyanNeural", "rate": "+3%", "pitch": "+0Hz"},
+  "lead_in": 0.6,
+  "tail": 5.0,
+  "scenes": [
+    {"id": "universe", "title": "What did your search miss?", "sources": ["search-textbook.html#intro"]},
+    {"id": "pipeline", "title": "Look inside the pipeline", "sources": ["search-textbook.html#a-map-of-the-arguments-ahead"]},
+    {"id": "book", "title": "A guide written for librarians", "sources": ["search-textbook.html#sec-preface"]},
+    {"id": "map", "title": "Connect the moving parts", "sources": ["search-textbook.html#boolean-admission", "search-textbook.html#bm25-ranking", "search-textbook.html#embeddings", "search-textbook.html#hybrid-and-fusion", "search-textbook.html#reranking-and-hybrid", "search-textbook.html#agentic-search"]},
+    {"id": "practice", "title": "Bring it into library practice", "sources": ["search-textbook.html#library-practice", "search-textbook.html#appendix-evidence-synthesis-high-recall-retrieval"]},
+    {"id": "labs", "title": "Learn by trying", "sources": ["bm25-evidence-lab.html", "evaluation-kit.html", "vendor-questionnaire.html", "teaching-notes.html"]},
+    {"id": "cta", "title": "Read free. Start here.", "sources": ["read-this-first.html"]}
+  ],
+  "lines": [
+    {"id": "u1", "scene": "universe", "gap": 0, "text": "A universe of research. One search box. And the paper your researcher needed... never appeared."},
+    {"id": "u2", "scene": "universe", "gap": 0.3, "text": "For librarians, missing evidence matters."},
+    {"id": "p1", "scene": "pipeline", "gap": 0.8, "text": "Behind every result, a pipeline decides what gets found, ranked, and shown."},
+    {"id": "p2", "scene": "pipeline", "gap": 0.3, "text": "Understanding it helps you ask better questions."},
+    {"id": "b1", "scene": "book", "gap": 0.8, "text": "Meet How Search Decides What You See. Aaron Tay's free online textbook, written for librarians."},
+    {"id": "b2", "scene": "book", "gap": 0.3, "text": "No prior information retrieval knowledge or mathematics required."},
+    {"id": "m1", "scene": "map", "gap": 0.8, "text": "Explore Boolean search, B M twenty five, embeddings, hybrid search, reranking, and agentic search."},
+    {"id": "m2", "scene": "map", "gap": 0.3, "text": "See how the pieces fit together."},
+    {"id": "r1", "scene": "practice", "gap": 0.8, "text": "Build clearer search lessons. Investigate missing papers. Ask sharper vendor questions."},
+    {"id": "r2", "scene": "practice", "gap": 0.3, "text": "For evidence synthesis, learn to look beyond a convincing answer."},
+    {"id": "l1", "scene": "labs", "gap": 0.8, "text": "Try interactive labs, an evaluation kit, and a vendor questionnaire."},
+    {"id": "l2", "scene": "labs", "gap": 0.3, "text": "Take the teaching notes into your next workshop."},
+    {"id": "c1", "scene": "cta", "gap": 0.8, "text": "Start with Read This First: a forty five minute guided route."},
+    {"id": "c2", "scene": "cta", "gap": 0.4, "text": "Read free. Understand the search behind the answer."}
+  ]
+}
