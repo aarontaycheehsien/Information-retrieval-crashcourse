@@ -1,0 +1,97 @@
+{
+  "scope": "High-level account of the visible production workflow, based on saved code, artifacts, and the conversation.",
+  "requested_setup": {
+    "model": "GPT-6.1 Sol",
+    "effort": "Extra High",
+    "basis": "User supplied; not independently recovered from the earlier runtime."
+  },
+  "official_sources": [
+    {
+      "title": "GPT-6.1 Sol model documentation",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "supports": "GPT-6.1 Sol supports xhigh reasoning effort.",
+      "checked": "2026-10-05"
+    },
+    {
+      "title": "Reasoning models guide",
+      "url": "https://developers.openai.com/api/docs/guides/reasoning",
+      "supports": "Reasoning effort guides how much reasoning a model applies to a task.",
+      "checked": "2026-10-05"
+    }
+  ],
+  "earlier_production": {
+    "commit": "a127131",
+    "film_count": 3,
+    "scene_count": 15,
+    "narration_take_count": 47,
+    "voice": {
+      "name": "en-US-AndrewMultilingualNeural",
+      "rate": "-5%",
+      "pitch": "+0Hz"
+    },
+    "verification_snapshot": [
+      {
+        "file": "01-why-these-five-papers.mp4",
+        "duration": 207.2,
+        "size_mb": 13.07,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "fps": 30,
+        "decoded_frames": 6216,
+        "full_decode": "passed",
+        "integrated_lufs": -16.02,
+        "true_peak_dbtp": -2.17,
+        "caption_cues": 83,
+        "embedded_captions": "passed",
+        "fast_start": true,
+        "sha256": "1f215e259b85b2a57f14b0f5ff621f0855ee5dccb33de4433ab5502a53f722b4",
+        "source_sha256": "25f1f851a1b2dc8bef8a4b96470aa462e2cb065fa426657adc79577baff11eb8",
+        "production_sha256": "72ef7be2a7734bdc9e3bd26f419184fb7d0110ca3036263502f6ea166f2cfdd6"
+      },
+      {
+        "file": "02-a-match-is-not-relevance.mp4",
+        "duration": 92.2,
+        "size_mb": 6.86,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "fps": 30,
+        "decoded_frames": 2766,
+        "full_decode": "passed",
+        "integrated_lufs": -16.03,
+        "true_peak_dbtp": -2.34,
+        "caption_cues": 37,
+        "embedded_captions": "passed",
+        "fast_start": true,
+        "sha256": "d89814e7bf7e734cda7657d7d40b1ca771547f3ba84d50fa1e478df414543449",
+        "source_sha256": "25f1f851a1b2dc8bef8a4b96470aa462e2cb065fa426657adc79577baff11eb8",
+        "production_sha256": "72ef7be2a7734bdc9e3bd26f419184fb7d0110ca3036263502f6ea166f2cfdd6"
+      },
+      {
+        "file": "03-three-search-puzzles.mp4",
+        "duration": 134.06666666666666,
+        "size_mb": 8.47,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "fps": 30,
+        "decoded_frames": 4022,
+        "full_decode": "passed",
+        "integrated_lufs": -16.05,
+        "true_peak_dbtp": -2.44,
+        "caption_cues": 56,
+        "embedded_captions": "passed",
+        "fast_start": true,
+        "sha256": "bfb60310e534ecd3374125d0aa29be35d485c1bb4cb83af993189c5032be4399",
+        "source_sha256": "25f1f851a1b2dc8bef8a4b96470aa462e2cb065fa426657adc79577baff11eb8",
+        "production_sha256": "72ef7be2a7734bdc9e3bd26f419184fb7d0110ca3036263502f6ea166f2cfdd6"
+      }
+    ]
+  },
+  "artwork": "Original code-drawn graphics and three reduced posters from the earlier original films.",
+  "narration_note": "The earlier films reused 47 cached takes. This new retrospective requires new synthetic narration."
+}
