@@ -1,0 +1,507 @@
+{
+  "book": "How Search Decides What You See",
+  "author": "Aaron Tay",
+  "source": "search-textbook.html#intro",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#intro",
+  "chapter": 1,
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-5%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-why-these-five-papers",
+      "chapter": 1,
+      "title": "Why these five papers?",
+      "subtitle": "The evidence pipeline behind an AI answer",
+      "accent": "mint",
+      "scenes": [
+        {
+          "id": "opening",
+          "title": "An answer appears",
+          "source_anchor": "an-answer-appears",
+          "claim": "Before checking the answer, ask: why these papers?",
+          "line_ids": [
+            "o1",
+            "o2",
+            "o3"
+          ],
+          "narration": "You ask an academic AI assistant: is there an open access citation advantage? An answer appears, with five papers and neat little citation numbers. The papers are real. The summary sounds convincing. But before checking what the answer says, ask a different question. Why these five papers?"
+        },
+        {
+          "id": "machines",
+          "title": "Two machines, one product",
+          "source_anchor": "retrieval-not-generation",
+          "claim": "Retrieval selects and orders records; generation writes from supplied evidence",
+          "line_ids": [
+            "m1",
+            "m2"
+          ],
+          "narration": "Imagine two machines. Retrieval selects and orders records. Generation turns some of those records into prose. We usually stare at the second machine. Chapter one asks us to look inside the first."
+        },
+        {
+          "id": "primo",
+          "title": "Follow the evidence",
+          "source_anchor": "anatomy-of-a-cited-answer",
+          "claim": "Documented pipeline: Boolean conversion → up to 30 candidates → 5 sources → overview",
+          "line_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "narration": "Here is the Primo Research Assistant pipeline documented in the chapter. A language model rewrites the question into Boolean variations connected by OR. That query searches the Central Discovery Index. Up to thirty results enter the candidate set. An embedding based reranking step selects five sources. Only then does a language model write an overview from their abstracts. A language model helped write the query, too. So hearing that a product uses an LLM does not tell you how it retrieves."
+        },
+        {
+          "id": "sets",
+          "title": "The shortlist bottleneck",
+          "source_anchor": "retrieval-not-generation",
+          "claim": "A fixed candidate pool cannot recover a paper that never entered it",
+          "line_ids": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5"
+          ],
+          "narration": "Let's turn that into a picture. Each dot is a record in the index. Retrieval moves a small candidate set through the first boundary. Reranking changes their order. Selection keeps five. The writer receives only this smaller working set. Now notice the gold dot. It is a relevant paper, but it never entered the candidate set. Reordering that set cannot bring it back. Within this retrieval round, supplied evidence can shrink. Fluent writing cannot establish source supported coverage of a paper that was never supplied. This is the shortlist bottleneck. Another retrieval round could add evidence. A prettier answer cannot."
+        },
+        {
+          "id": "missing",
+          "title": "Where did the paper go?",
+          "source_anchor": "retrieval-not-generation",
+          "claim": "A missing citation alone does not identify where the paper was lost",
+          "line_ids": [
+            "d1",
+            "d2",
+            "d3"
+          ],
+          "narration": "But a missing citation is not a diagnosis. The paper might be outside the index, missed by the query, or cut off at a candidate boundary. It might enter the thirty candidates and lose its place when five are selected. Or it might reach the writer and still be omitted. Inspect the working set before blaming a machine. Retrieval limits the supplied evidence. It does not guarantee that every generated claim uses that evidence."
+        },
+        {
+          "id": "map",
+          "title": "A map of the machinery",
+          "source_anchor": "anatomy-of-a-cited-answer",
+          "claim": "Six possible stages; a controller chooses and sequences actions",
+          "line_ids": [
+            "g1",
+            "g2",
+            "g3"
+          ],
+          "narration": "Zoom out. A useful map has six possible stages: query transformation, analysis and execution rules, first stage retrieval, fusion, reranking, and presentation. Fusion combines candidate lists, perhaps from different queries or retrieval methods. Not every product uses every stage. A controller chooses and sequences the actions. The shape of an answer does not reveal who chose the next search."
+        },
+        {
+          "id": "matrix",
+          "title": "Two independent axes",
+          "source_anchor": "retrieval-not-generation",
+          "claim": "Output and retrieval iteration are independent; agency is a separate question",
+          "line_ids": [
+            "x1",
+            "x2",
+            "x3"
+          ],
+          "narration": "Separate two properties. Across this axis, the output changes from ranked records to a written answer. Up this axis, retrieval changes from a single pass to repeated searches. That gives us quick search, quick answer, iterative search, and deep research. Neither axis measures agency. A fixed workflow and an agent can occupy the same box."
+        }
+      ]
+    },
+    {
+      "id": "02-a-match-is-not-relevance",
+      "chapter": 1,
+      "title": "A match is not relevance",
+      "subtitle": "The gap between typed words and what a reader needs",
+      "accent": "pink",
+      "scenes": [
+        {
+          "id": "need",
+          "title": "The query is a representation",
+          "source_anchor": "what-does-relevant-actually-mean",
+          "claim": "The query is one imperfect expression of the information need",
+          "line_ids": [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          "narration": "Now for a deeper gap. You type: AI academic libraries. But those three words are not your information need. You want empirical studies since twenty twenty four, about academic libraries implementing generative AI services for research support. The query is one imperfect expression of that purpose. The system observes a representation, not your full need."
+        },
+        {
+          "id": "match",
+          "title": "A match is evidence",
+          "source_anchor": "what-does-relevant-actually-mean",
+          "claim": "Matching the expression and satisfying the need can come apart in either direction",
+          "line_ids": [
+            "r1",
+            "r2",
+            "r3",
+            "r4"
+          ],
+          "narration": "Consider this record. It contains AI, academic, and libraries. Perfect word overlap. But it is an opinion piece from twenty nineteen. Now consider an implementation study about large language models, research consultation, and a university library. It misses every exact query word, yet it may meet the need. Watch the two sets. Matching the query and helping the reader overlap, but neither contains the other. Boolean conditions, ranking scores, and embedding similarity provide evidence about relevance. They are not the reader's judgement."
+        },
+        {
+          "id": "lenses",
+          "title": "Relevant to whom, for what?",
+          "source_anchor": "what-does-relevant-actually-mean",
+          "claim": "Relevance is a relationship: to someone, for something",
+          "line_ids": [
+            "l1",
+            "l2",
+            "l3"
+          ],
+          "narration": "Relevant can mean a computed match, topical suitability, what someone learns, or usefulness for a task. These are different perspectives, not a ladder. The same paper can help a beginner understand a topic and fail a systematic review's inclusion rules. Relevance is a relationship. Relevant to someone, for something."
+        }
+      ]
+    },
+    {
+      "id": "03-three-search-puzzles",
+      "chapter": 1,
+      "title": "Three clues hiding in a search box",
+      "subtitle": "What visible results can and cannot tell us",
+      "accent": "yellow",
+      "scenes": [
+        {
+          "id": "puzzle1",
+          "title": "Puzzle 1: the impossible word",
+          "source_anchor": "three-familiar-search-results-and-three-puzzles",
+          "claim": "Returned papers challenge a strict-AND assumption; they do not establish an architecture",
+          "line_ids": [
+            "b1",
+            "b2",
+            "b3"
+          ],
+          "narration": "Chapter one leaves us with three puzzles. First, add an invented word to a real question. If strict AND requires that word, the result set should be empty. Yet the chapter's scite example still returns useful looking papers. Does that prove semantic retrieval? No. It challenges our assumption about the admission rule. Keep the internal mechanism open. A screen shows behaviour, not a complete architecture."
+        },
+        {
+          "id": "puzzle2",
+          "title": "Puzzle 2: the invisible results",
+          "source_anchor": "three-familiar-search-results-and-three-puzzles",
+          "claim": "A reported count is not evidence that every record was scored or ranked",
+          "line_ids": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "narration": "Second, the chapter's Google Scholar search reports about nine point four million results, while only a thousand are viewable. Animate those quantities separately. The reported count is enormous. The visible window is tiny. The count alone does not tell us that every record was individually scored or ranked. How was the viewable fraction chosen?"
+        },
+        {
+          "id": "puzzle3",
+          "title": "Puzzle 3: the shrinking question",
+          "source_anchor": "three-familiar-search-results-and-three-puzzles",
+          "claim": "A product name does not establish its retrieval architecture",
+          "line_ids": [
+            "q1",
+            "q2",
+            "q3"
+          ],
+          "narration": "Third, in the chapter's August twenty twenty six Semantic Scholar observation, the full question returns thirteen results. Remove the extra question words, and the shorter keyword query returns about thirty five thousand three hundred. Same need. Very different result counts. A name containing semantic does not establish a retrieval architecture. These observations are prompts to investigate, not proof of a hidden mechanism."
+        },
+        {
+          "id": "test",
+          "title": "Inspect the working set",
+          "source_anchor": "sec-intro",
+          "claim": "First inspect whether the missing paper entered the working set",
+          "line_ids": [
+            "t1",
+            "t2",
+            "t3"
+          ],
+          "narration": "Try this. Five real, accurately summarised papers appear, but the landmark paper is missing. Which machine failed? First ask whether it entered the working set. If it did, inspect selection and generation. If it did not, trace the query, index, candidate boundary, and reranking. Finding it with a new direct search tests availability. It does not prove where the original run lost it."
+        },
+        {
+          "id": "closing",
+          "title": "Follow the evidence backwards",
+          "source_anchor": "a-map-of-the-arguments-ahead",
+          "claim": "What was supplied? What was selected? What was searched?",
+          "line_ids": [
+            "c1",
+            "c2"
+          ],
+          "narration": "So when an answer arrives, follow the evidence backwards. What was supplied? What was selected? What was searched? That is the retrieval problem. Chapter two begins with the clearest admission rule of all: words as Boolean conditions."
+        }
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "id": "o1",
+      "scene": "opening",
+      "gap": 0,
+      "text": "You ask an academic AI assistant: is there an open access citation advantage?"
+    },
+    {
+      "id": "o2",
+      "scene": "opening",
+      "gap": 0.5,
+      "text": "An answer appears, with five papers and neat little citation numbers. The papers are real. The summary sounds convincing."
+    },
+    {
+      "id": "o3",
+      "scene": "opening",
+      "gap": 0.7,
+      "text": "But before checking what the answer says, ask a different question. Why these five papers?"
+    },
+    {
+      "id": "m1",
+      "scene": "machines",
+      "gap": 1.1,
+      "text": "Imagine two machines. Retrieval selects and orders records. Generation turns some of those records into prose."
+    },
+    {
+      "id": "m2",
+      "scene": "machines",
+      "gap": 0.5,
+      "text": "We usually stare at the second machine. Chapter one asks us to look inside the first."
+    },
+    {
+      "id": "p1",
+      "scene": "primo",
+      "gap": 1.0,
+      "text": "Here is the Primo Research Assistant pipeline documented in the chapter. A language model rewrites the question into Boolean variations connected by OR."
+    },
+    {
+      "id": "p2",
+      "scene": "primo",
+      "gap": 0.4,
+      "text": "That query searches the Central Discovery Index. Up to thirty results enter the candidate set."
+    },
+    {
+      "id": "p3",
+      "scene": "primo",
+      "gap": 0.5,
+      "text": "An embedding based reranking step selects five sources. Only then does a language model write an overview from their abstracts."
+    },
+    {
+      "id": "p4",
+      "scene": "primo",
+      "gap": 0.6,
+      "text": "A language model helped write the query, too. So hearing that a product uses an LLM does not tell you how it retrieves."
+    },
+    {
+      "id": "s1",
+      "scene": "sets",
+      "gap": 1.0,
+      "text": "Let's turn that into a picture. Each dot is a record in the index. Retrieval moves a small candidate set through the first boundary."
+    },
+    {
+      "id": "s2",
+      "scene": "sets",
+      "gap": 0.6,
+      "text": "Reranking changes their order. Selection keeps five. The writer receives only this smaller working set."
+    },
+    {
+      "id": "s3",
+      "scene": "sets",
+      "gap": 0.5,
+      "text": "Now notice the gold dot. It is a relevant paper, but it never entered the candidate set. Reordering that set cannot bring it back."
+    },
+    {
+      "id": "s4",
+      "scene": "sets",
+      "gap": 0.6,
+      "text": "Within this retrieval round, supplied evidence can shrink. Fluent writing cannot establish source supported coverage of a paper that was never supplied."
+    },
+    {
+      "id": "s5",
+      "scene": "sets",
+      "gap": 0.5,
+      "text": "This is the shortlist bottleneck. Another retrieval round could add evidence. A prettier answer cannot."
+    },
+    {
+      "id": "d1",
+      "scene": "missing",
+      "gap": 1.0,
+      "text": "But a missing citation is not a diagnosis. The paper might be outside the index, missed by the query, or cut off at a candidate boundary."
+    },
+    {
+      "id": "d2",
+      "scene": "missing",
+      "gap": 0.5,
+      "text": "It might enter the thirty candidates and lose its place when five are selected. Or it might reach the writer and still be omitted."
+    },
+    {
+      "id": "d3",
+      "scene": "missing",
+      "gap": 0.6,
+      "text": "Inspect the working set before blaming a machine. Retrieval limits the supplied evidence. It does not guarantee that every generated claim uses that evidence."
+    },
+    {
+      "id": "g1",
+      "scene": "map",
+      "gap": 1.0,
+      "text": "Zoom out. A useful map has six possible stages: query transformation, analysis and execution rules, first stage retrieval, fusion, reranking, and presentation."
+    },
+    {
+      "id": "g2",
+      "scene": "map",
+      "gap": 0.5,
+      "text": "Fusion combines candidate lists, perhaps from different queries or retrieval methods. Not every product uses every stage."
+    },
+    {
+      "id": "g3",
+      "scene": "map",
+      "gap": 0.5,
+      "text": "A controller chooses and sequences the actions. The shape of an answer does not reveal who chose the next search."
+    },
+    {
+      "id": "x1",
+      "scene": "matrix",
+      "gap": 1.0,
+      "text": "Separate two properties. Across this axis, the output changes from ranked records to a written answer."
+    },
+    {
+      "id": "x2",
+      "scene": "matrix",
+      "gap": 0.4,
+      "text": "Up this axis, retrieval changes from a single pass to repeated searches. That gives us quick search, quick answer, iterative search, and deep research."
+    },
+    {
+      "id": "x3",
+      "scene": "matrix",
+      "gap": 0.5,
+      "text": "Neither axis measures agency. A fixed workflow and an agent can occupy the same box."
+    },
+    {
+      "id": "n1",
+      "scene": "need",
+      "gap": 1.0,
+      "text": "Now for a deeper gap. You type: AI academic libraries. But those three words are not your information need."
+    },
+    {
+      "id": "n2",
+      "scene": "need",
+      "gap": 0.5,
+      "text": "You want empirical studies since twenty twenty four, about academic libraries implementing generative AI services for research support."
+    },
+    {
+      "id": "n3",
+      "scene": "need",
+      "gap": 0.5,
+      "text": "The query is one imperfect expression of that purpose. The system observes a representation, not your full need."
+    },
+    {
+      "id": "r1",
+      "scene": "match",
+      "gap": 1.0,
+      "text": "Consider this record. It contains AI, academic, and libraries. Perfect word overlap. But it is an opinion piece from twenty nineteen."
+    },
+    {
+      "id": "r2",
+      "scene": "match",
+      "gap": 0.7,
+      "text": "Now consider an implementation study about large language models, research consultation, and a university library. It misses every exact query word, yet it may meet the need."
+    },
+    {
+      "id": "r3",
+      "scene": "match",
+      "gap": 0.7,
+      "text": "Watch the two sets. Matching the query and helping the reader overlap, but neither contains the other."
+    },
+    {
+      "id": "r4",
+      "scene": "match",
+      "gap": 0.5,
+      "text": "Boolean conditions, ranking scores, and embedding similarity provide evidence about relevance. They are not the reader's judgement."
+    },
+    {
+      "id": "l1",
+      "scene": "lenses",
+      "gap": 1.0,
+      "text": "Relevant can mean a computed match, topical suitability, what someone learns, or usefulness for a task."
+    },
+    {
+      "id": "l2",
+      "scene": "lenses",
+      "gap": 0.6,
+      "text": "These are different perspectives, not a ladder. The same paper can help a beginner understand a topic and fail a systematic review's inclusion rules."
+    },
+    {
+      "id": "l3",
+      "scene": "lenses",
+      "gap": 0.6,
+      "text": "Relevance is a relationship. Relevant to someone, for something."
+    },
+    {
+      "id": "b1",
+      "scene": "puzzle1",
+      "gap": 1.0,
+      "text": "Chapter one leaves us with three puzzles. First, add an invented word to a real question. If strict AND requires that word, the result set should be empty."
+    },
+    {
+      "id": "b2",
+      "scene": "puzzle1",
+      "gap": 0.6,
+      "text": "Yet the chapter's scite example still returns useful looking papers. Does that prove semantic retrieval? No. It challenges our assumption about the admission rule."
+    },
+    {
+      "id": "b3",
+      "scene": "puzzle1",
+      "gap": 0.5,
+      "text": "Keep the internal mechanism open. A screen shows behaviour, not a complete architecture."
+    },
+    {
+      "id": "h1",
+      "scene": "puzzle2",
+      "gap": 1.0,
+      "text": "Second, the chapter's Google Scholar search reports about nine point four million results, while only a thousand are viewable."
+    },
+    {
+      "id": "h2",
+      "scene": "puzzle2",
+      "gap": 0.7,
+      "text": "Animate those quantities separately. The reported count is enormous. The visible window is tiny."
+    },
+    {
+      "id": "h3",
+      "scene": "puzzle2",
+      "gap": 0.6,
+      "text": "The count alone does not tell us that every record was individually scored or ranked. How was the viewable fraction chosen?"
+    },
+    {
+      "id": "q1",
+      "scene": "puzzle3",
+      "gap": 1.0,
+      "text": "Third, in the chapter's August twenty twenty six Semantic Scholar observation, the full question returns thirteen results."
+    },
+    {
+      "id": "q2",
+      "scene": "puzzle3",
+      "gap": 0.6,
+      "text": "Remove the extra question words, and the shorter keyword query returns about thirty five thousand three hundred. Same need. Very different result counts."
+    },
+    {
+      "id": "q3",
+      "scene": "puzzle3",
+      "gap": 0.6,
+      "text": "A name containing semantic does not establish a retrieval architecture. These observations are prompts to investigate, not proof of a hidden mechanism."
+    },
+    {
+      "id": "t1",
+      "scene": "test",
+      "gap": 1.0,
+      "text": "Try this. Five real, accurately summarised papers appear, but the landmark paper is missing. Which machine failed?"
+    },
+    {
+      "id": "t2",
+      "scene": "test",
+      "gap": 2.5,
+      "text": "First ask whether it entered the working set. If it did, inspect selection and generation. If it did not, trace the query, index, candidate boundary, and reranking."
+    },
+    {
+      "id": "t3",
+      "scene": "test",
+      "gap": 0.6,
+      "text": "Finding it with a new direct search tests availability. It does not prove where the original run lost it."
+    },
+    {
+      "id": "c1",
+      "scene": "closing",
+      "gap": 1.0,
+      "text": "So when an answer arrives, follow the evidence backwards. What was supplied? What was selected? What was searched?"
+    },
+    {
+      "id": "c2",
+      "scene": "closing",
+      "gap": 0.7,
+      "text": "That is the retrieval problem. Chapter two begins with the clearest admission rule of all: words as Boolean conditions."
+    }
+  ]
+}
