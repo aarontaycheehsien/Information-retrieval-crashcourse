@@ -228,6 +228,7 @@ class Film:
     def __init__(self, episode, timeline):
         self.episode, self.timeline = episode, timeline
         self.number = int(episode["id"][:2])
+        self.chapter = episode.get("chapter", 2)
         self.accent = episode["accent"]
         rng = np.random.default_rng(22)
         self.stars = rng.uniform([30, 240, 1], [1890, 860, 3], (65, 3))
@@ -249,7 +250,7 @@ class Film:
         scene = next(s for s in self.episode["scenes"] if s["id"] == name)
         a, b = self.timeline["scenes"][name]
         u, p = t-a, clamp((t-a)/(b-a))
-        text(c, f"CHAPTER 2   /   FILM {self.number:02d}", 105, 79, 25, self.accent, True, "left")
+        text(c, f"CHAPTER {self.chapter}   /   FILM {self.number:02d}", 105, 79, 25, self.accent, True, "left")
         text(c, self.episode["subtitle"], 1815, 79, 25, "muted", False, "right")
         # Headline slides into its fixed layout; no typewriter reflow.
         text(c, scene["title"], 960, 173+(1-pop(u/.7))*35, 65, "white", True, max_width=1700)
@@ -265,7 +266,7 @@ class Film:
         # A separate claim band leaves the lower subtitle zone unobstructed.
         rect(c, 230, 849, 1460, 70, "panel", 35)
         text(c, scene["claim"], 960, 898, 34, self.accent, True, max_width=1390)
-        text(c, "Adapted from Chapter 2 · Aaron Tay", 105, 945, 20, "muted", align="left")
+        text(c, f"Adapted from Chapter {self.chapter} · Aaron Tay", 105, 945, 20, "muted", align="left")
         for i, s in enumerate(self.episode["scenes"]):
             x = 1652+i*22
             circle(c, x, 937, 5, self.accent if s["id"] == name else "panel2")

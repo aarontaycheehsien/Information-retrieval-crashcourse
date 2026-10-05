@@ -12,7 +12,7 @@ The local annotation editor remains at
 `start-annotation-editor.cmd`, the annotation server and editor tests depend on
 that path. It is an authoring prototype rather than a published reader companion.
 
-## Animated Chapter 2 explainers
+## Animated chapter explainers
 
 [`chapter-2-videos/`](chapter-2-videos/README.md) contains the scripts and original
 vector renderer for three narrated films: Boolean admission, text analysis, and
@@ -21,6 +21,12 @@ stems, and review frames under the Git-ignored `outputs/chapter-2-videos/`.
 The renderer reuses the repository's cached, word-timed narration helpers and
 checks complete video decoding, encoded audio levels, caption survival, and
 fast-start playback. See its README for rendering and local preview commands.
+
+[`chapter-3-videos/`](chapter-3-videos/README.md) continues with BM25: weighted
+term evidence, saturation and length normalisation, then admission, scoring and
+the top-k boundary. It reuses the Chapter 2 media engine and adds calculated
+BM25 examples, animated plots and a separate player. Generated files belong in
+the Git-ignored `outputs/chapter-3-videos/`.
 
 ## Read-this-first digest
 

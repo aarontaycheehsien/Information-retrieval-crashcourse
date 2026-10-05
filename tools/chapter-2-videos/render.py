@@ -138,7 +138,7 @@ def prepare(cfg, episode, out, ff):
         f"{narrate.stamp(c['start'], '.')} --> {narrate.stamp(c['end'], '.')}\n{c['text']}\n" for c in cues), encoding="utf-8")
     transcript = "\n\n".join(s["title"] + "\n" + s["narration"] for s in episode["scenes"])
     (folder / "transcript.txt").write_text(episode["title"] + "\n\n" + transcript +
-        f"\n\nAdapted from Chapter 2, {cfg['book']}, by {cfg['author']}.\nSynthetic voice: {cfg['voice']['name']}.\n", encoding="utf-8")
+        f"\n\nAdapted from Chapter {cfg['chapter']}, {cfg['book']}, by {cfg['author']}.\nSynthetic voice: {cfg['voice']['name']}.\n", encoding="utf-8")
     frames = math.ceil(tl.duration * FPS)
     duration = frames / FPS
     voice = narrate.voice_track(tl).astype(np.float32)
@@ -184,9 +184,9 @@ def draw_frame(film, surface, t, cues=True, buffer=None):
     return surface_pixels(surface)
 
 
-def reviews(episode, timeline, out):
+def reviews(episode, timeline, out, film_class=Film):
     folder = out / episode["id"]
-    film = Film(episode, timeline)
+    film = film_class(episode, timeline)
     surface = skia.Surface(W, H)
     images = []
     for i, (name, (a, b)) in enumerate(timeline["scenes"].items()):
@@ -207,9 +207,9 @@ def reviews(episode, timeline, out):
     Image.fromarray(pix[:, :, :3], "RGB").save(folder / "poster.jpg", quality=94)
 
 
-def render(episode, timeline, out, ff):
+def render(episode, timeline, out, ff, film_class=Film):
     folder = out / episode["id"]
-    film = Film(episode, timeline)
+    film = film_class(episode, timeline)
     # Native BGRA readback avoids per-frame snapshot conversion and copying.
     info = skia.ImageInfo.Make(W, H, skia.kBGRA_8888_ColorType, skia.kPremul_AlphaType)
     surface = skia.Surface.MakeRaster(info)
@@ -243,7 +243,7 @@ def mux(episode, timeline, out, ff):
     command([ff, "-y", "-v", "error", "-i", str(folder / "picture.mp4"), "-i", str(folder / "soundtrack.wav"),
              "-i", str(folder / "captions.srt"), "-map", "0:v", "-map", "1:a", "-map", "2:s", "-c:v", "copy",
              "-c:a", "aac", "-b:a", "192k", "-c:s", "mov_text", "-disposition:s:0", "0", "-metadata:s:s:0", "language=eng",
-             "-metadata", "title=" + episode["title"], "-metadata", "comment=Original animation; synthetic narration; adapted from Chapter 2 by Aaron Tay",
+             "-metadata", "title=" + episode["title"], "-metadata", f"comment=Original animation; synthetic narration; adapted from Chapter {episode.get('chapter', 2)} by Aaron Tay",
              "-t", str(n/FPS), "-movflags", "+faststart", str(target)], folder / "mux.log")
     print(f"Exported {target.name}", flush=True)
 
