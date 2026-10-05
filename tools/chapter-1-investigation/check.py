@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import json
-from types import SimpleNamespace
 
 import numpy as np
 import skia
@@ -11,8 +10,26 @@ import render
 from scenes import Film
 
 
+def check_relevance_revision(script):
+    """Protect the revised task-based example against the superseded adaptation."""
+    text = " ".join(line["text"] for line in script["lines"] if line["scene"] in {"need", "contrast", "lenses"})
+    for detail in ["empirical studies", "large language models", "university library",
+                   "research consultation", "twenty twenty four", "task briefs",
+                   "Feedback", "estimate suitability", "positive reactions",
+                   "short demonstration", "introductory workshop", "same paper",
+                   "limited evidence", "answer accuracy", "staff workload",
+                   "real research consultations", "still contributes",
+                   "match has not changed", "operational evidence",
+                   "under what conditions", "work together"]:
+        assert detail in text, f"Revised relevance explanation missing: {detail}"
+    for old_claim in ["AI academic libraries", "opinion piece from twenty nineteen",
+                      "misses every exact query word", "not your full need"]:
+        assert old_claim not in text, f"Superseded relevance example remains: {old_claim}"
+
+
 def main():
     script = render.config()
+    check_relevance_revision(script)
     timeline = render.load_timeline(render.OUTPUT, script)
     captions = json.loads((render.OUTPUT / "captions.json").read_text(encoding="utf-8"))
     assert len({line["id"] for line in script["lines"]}) == len(script["lines"])
@@ -44,9 +61,11 @@ def main():
     result = {"passed":True,"scenes":len(script["scenes"]),"sampled_frames":frames,
               "voice_takes":len(timeline["takes"]),"caption_cues":len(captions),
               "caption_text_matches_script":True,"all_word_reveals_valid":True,
+              "revised_relevance_example_verified":True,
               "production_sha256":timeline["production_sha256"]}
     (render.OUTPUT / "scene-verification.json").write_text(json.dumps(result,indent=2),encoding="utf-8")
-    print(f"PASS: {frames} rendered timeline samples, 13 moving scenes, 41 complete takes, 168 caption cues.")
+    print(f"PASS: {frames} rendered timeline samples, {len(script['scenes'])} moving scenes, "
+          f"{len(timeline['takes'])} complete takes, {len(captions)} caption cues; revised relevance example.")
 
 
 if __name__ == "__main__":

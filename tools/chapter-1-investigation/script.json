@@ -4,6 +4,15 @@
   "author": "Aaron Tay",
   "source": "search-textbook.html#intro",
   "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#intro",
+  "relevance_source_phrases": [
+    "Queries, filters and task briefs can communicate substantial detail",
+    "limits publication dates to 2024 onwards",
+    "positive participant reactions after a short demonstration",
+    "same study contributes less",
+    "not wholly irrelevant",
+    "feedback can communicate judgements",
+    "Better searching and relevance judgement work together"
+  ],
   "voice": {
     "name": "en-US-AndrewMultilingualNeural",
     "rate": "-5%",
@@ -34,12 +43,12 @@
     },
     {
       "id": "need",
-      "title": "What you typed is not what you need",
+      "title": "A query can express the purpose",
       "source_anchor": "what-does-relevant-actually-mean"
     },
     {
       "id": "contrast",
-      "title": "Which paper would you choose?",
+      "title": "Same paper. Different purpose.",
       "source_anchor": "what-does-relevant-actually-mean"
     },
     {
@@ -167,43 +176,43 @@
       "id": "n1",
       "scene": "need",
       "gap": 0.8,
-      "text": "There is an even earlier gap. You type three words: AI academic libraries. What does the machine know about what you actually want?"
+      "text": "A good search can express much more than three keywords. Our librarian wants recent empirical studies of generative AI research support in academic libraries."
     },
     {
       "id": "n2",
       "scene": "need",
       "gap": 0.5,
-      "text": "You want empirical studies since twenty twenty four, about academic libraries implementing generative AI services for research support."
+      "text": "The strategy includes generative AI or large language models, academic library or university library, research support or research consultation, and publication dates from twenty twenty four onwards."
     },
     {
       "id": "n3",
       "scene": "need",
       "gap": 0.5,
-      "text": "The query is one imperfect expression of that purpose. The system observes a representation, not your full need."
+      "text": "Queries, filters, and task briefs can communicate substantial detail about the information need. A detailed request can communicate purpose. Feedback can communicate judgements. The system uses these representations to estimate suitability; the reader assesses usefulness."
     },
     {
       "id": "c1",
       "scene": "contrast",
       "gap": 0.9,
-      "text": "Consider this record. It contains AI, academic, and libraries. Perfect word overlap. But it is an opinion piece from twenty nineteen."
+      "text": "Imagine one empirical study of a university library service. Participants report positive reactions after a short demonstration. It meets the search conditions and is topically suitable."
     },
     {
       "id": "c2",
       "scene": "contrast",
       "gap": 0.5,
-      "text": "Now consider an implementation study about large language models, research consultation, and a university library. It misses every exact query word, yet it may meet the need."
+      "text": "For an introductory workshop, this is a useful example of a service and how participants responded."
     },
     {
       "id": "c3",
       "scene": "contrast",
       "gap": 1.5,
-      "text": "Watch the two sets. Matching the query and helping the reader overlap, but neither contains the other."
+      "text": "Now use exactly the same paper to decide whether to introduce that service. Those reactions offer limited evidence about answer accuracy, staff workload, or performance in real research consultations."
     },
     {
       "id": "c4",
       "scene": "contrast",
       "gap": 0.5,
-      "text": "Boolean conditions, ranking scores, and embedding similarity provide evidence about relevance. They are not the reader's judgement."
+      "text": "The paper still contributes something. Its match has not changed. Its usefulness depends on the purpose. A high ranking score cannot turn participant reactions into evidence of answer accuracy."
     },
     {
       "id": "l1",
@@ -215,7 +224,7 @@
       "id": "l2",
       "scene": "lenses",
       "gap": 0.4,
-      "text": "These are different perspectives, not a ladder. The same paper can help a beginner understand a topic and fail a systematic review's inclusion rules."
+      "text": "Refine the search to seek accuracy evaluations or operational evidence. Then assess what each study measured, under what conditions, and how well it supports the decision. Better searching and relevance judgement work together."
     },
     {
       "id": "l3",

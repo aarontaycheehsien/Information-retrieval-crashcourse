@@ -264,45 +264,59 @@ class Film:
         lines(c,["FIRST: INSPECT THE SUPPLIED WORKING SET", "Was the paper given to the writer?", "A new direct search tests availability, not the original path."],136,712,34,PAPER,self.reveal(t,"d3","Inspect"),step=65)
 
     def need(self,c,t):
-        rect(c,100,302,720,167,PAPER)
-        text(c,"WHAT YOU TYPED",130,346,24,MUTED,bold=True)
-        text(c,"AI academic libraries",130,422,52,INK,bold=True,width=650)
-        arrow(c,850,390,1015,390,RED)
-        text(c,"WHAT YOU NEED",1070,278,27,RED,bold=True)
-        items=[("empirical","Empirical studies"),("four","Published since 2024"),("academic","Academic libraries"),("implementing","Implementing generative AI"),("support","Services for research support")]
+        text(c,"A SKILLED SEARCH STRATEGY",100,263,27,RED,bold=True)
+        rect(c,100,296,1030,359,PAPER)
+        items=[("generative","(generative AI OR large language models)"),
+               ("academic","(academic library OR university library)"),
+               ("research","(research support OR research consultation)"),
+               ("dates","Publication date: 2024 onwards")]
         for i,(word,label) in enumerate(items):
             p=self.reveal(t,"n2",word)
-            rect(c,1050,304+i*94,740,76,PAPER,p)
-            text(c,label,1080,355+i*94,34,INK,p,bold=True)
-        lines(c,["The system observes", "your representation.", "The fuller purpose is yours."],100,654,43,RED,self.reveal(t,"n3","representation"),bold=True,step=65)
+            if i: text(c,"AND" if i<3 else "FILTER",127,340+i*84,20,MUTED,p,bold=True)
+            text(c,label,220,347+i*84,32,INK,p,bold=True,width=875)
+        rect(c,1190,296,630,172,INK)
+        lines(c,["PURPOSE", "Recent empirical studies", "of generative-AI library services"],1220,339,27,PAPER,step=48,bold=True,width=570)
+        p=self.reveal(t,"n3","Feedback")
+        rect(c,1190,508,630,146,TEAL,p)
+        lines(c,["READER FEEDBACK", "Communicates judgements"],1220,556,29,PAPER,p,step=58,bold=True,width=570)
+        arrow(c,1190,400,1150,400,RED,self.reveal(t,"n3","purpose"))
+        arrow(c,1190,580,1150,580,TEAL,p)
+        p=self.reveal(t,"n3","representations")
+        labels=[("Request + filters",100),("Retrieval signals",550),("Candidate records",1000),("Reader assessment",1450)]
+        for i,(label,x) in enumerate(labels):
+            rect(c,x,749,370,105,PAPER,p)
+            text(c,label,x+185,812,29,INK,p,True,align="center",width=335)
+            if i<3:arrow(c,x+379,800,x+433,800,RED,p)
+        text(c,"The representation can express substantial detail about the need.",100,914,31,RED,self.reveal(t,"n3","detail"),True,width=1720)
 
     def contrast(self,c,t):
-        text(c,"QUERY:  AI academic libraries",100,257,31,MUTED,bold=True)
-        if t>=self.at("c3"):
-            c.drawCircle(770,567,246,paint(RED,.10))
-            c.drawCircle(770,567,246,paint(RED,1,4))
-            c.drawCircle(1160,567,246,paint(TEAL,.10))
-            c.drawCircle(1160,567,246,paint(TEAL,1,4))
-            text(c,"MATCHES QUERY",585,303,35,RED,bold=True)
-            text(c,"MEETS NEED",1070,303,35,TEAL,bold=True)
-            card(c,610,504,98,134,"A",RED)
-            card(c,1230,504,98,134,"B",TEAL)
-            text(c,"Neither set contains the other.",960,868,44,INK,bold=True,align="center")
-            text(c,"A match supplies evidence about relevance; usefulness requires judgement.",100,920,26,MUTED)
-            return
-        card(c,180,319,675,443,"A",RED,angle=-1)
-        card(c,1030,319,675,443,"B",TEAL,angle=1)
-        rect(c,195,399,635,328,PAPER)
-        rect(c,1050,399,635,328,PAPER)
-        lines(c,["AI · academic · libraries", "Opinion piece", "2019", "3 exact query-word matches"],226,453,35,INK,step=68,bold=True,width=570)
-        p=self.reveal(t,"c2")
-        lines(c,["Large language models", "Research consultation", "University library", "Implementation study · 2025"],1080,453,35,INK,p,step=68,bold=True,width=570)
-        p=self.reveal(t,"c2","need")
-        pill(c,"MATCHES WORDS; FAILS REQUIREMENTS",180,817,RED,p,23)
-        pill(c,"MAY MEET THE NEED",1030,817,TEAL,p,23)
-        text(c,"Illustrative records; B's design and context still require human assessment",100,917,22,MUTED)
+        text(c,"ONE HYPOTHETICAL STUDY",100,264,27,RED,bold=True)
+        card(c,100,320,580,440,"01",TEAL)
+        rect(c,115,394,550,334,PAPER)
+        lines(c,["University-library service", "Generative AI research support", "Short demonstration", "Positive participant reactions"],135,441,31,INK,step=68,bold=True,width=510)
+        pill(c,"MEETS THE SEARCH CONDITIONS",100,793,TEAL,self.reveal(t,"c1","conditions"),24)
+        p=self.reveal(t,"c2","workshop")
+        rect(c,850,306,970,234,TEAL,p)
+        lines(c,["TASK 1 · INTRODUCTORY WORKSHOP", "A useful example of a service", "and how participants responded"],881,358,31,PAPER,p,step=66,bold=True,width=900)
+        arrow(c,710,459,820,420,TEAL,p)
+        p=self.reveal(t,"c3","decide")
+        rect(c,850,587,970,253,INK,p)
+        lines(c,["TASK 2 · SERVICE-ADOPTION DECISION", "Limited evidence about:", "Accuracy · workload · real consultations"],881,639,31,PAPER,p,step=72,bold=True,width=900)
+        arrow(c,710,578,820,688,RED,p)
+        text(c,"Same search match. Different contribution to the task.",100,916,38,RED,self.reveal(t,"c4","match"),True,width=1720)
 
     def lenses(self,c,t):
+        if t>=self.at("l2") and t<self.at("l3"):
+            text(c,"BETTER SEARCHING + RELEVANCE JUDGEMENT",100,265,30,RED,bold=True)
+            rect(c,100,333,780,283,PAPER)
+            lines(c,["REFINE THE STRATEGY", "Seek accuracy evaluations", "or operational evidence"],133,394,35,INK,step=81,bold=True,width=710)
+            arrow(c,910,472,995,472,RED)
+            p=self.reveal(t,"l2","assess")
+            rect(c,1040,333,780,283,INK,p)
+            lines(c,["ASSESS THE EVIDENCE", "What was measured?", "Under what conditions?"],1073,394,35,PAPER,p,step=81,bold=True,width=710)
+            text(c,"How well does this support the decision?",100,781,51,RED,self.reveal(t,"l2","decision"),True,width=1720)
+            text(c,"A high score cannot turn reactions into evidence of answer accuracy.",100,909,31,INK,self.reveal(t,"l2"),True,width=1720)
+            return
         entries=[("computed","System / algorithmic","Computed match",BLUE),
                  ("topical","Topical","About the subject",TEAL),
                  ("learns","Cognitive","What someone learns",GOLD),

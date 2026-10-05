@@ -42,6 +42,17 @@ const base = process.env.INVESTIGATION_PREVIEW_URL || 'http://127.0.0.1:8816';
     assert.equal(playback.error,null);
     assert.deepEqual(playback.captions,captions.map(cue => cue.text));
     assert.equal(await page.locator('button[data-time]').count(),13);
+    const revisedChapters = [];
+    for (const scene of ['need','contrast','lenses']) {
+      const target = Number(timeline.scenes[scene][0].toFixed(3));
+      await page.locator(`button[data-time="${target.toFixed(3)}"]`).click();
+      await page.waitForFunction(time => {
+        const video = document.querySelector('video');
+        return !video.seeking && video.readyState >= 2 && Math.abs(video.currentTime-time)<2;
+      },target);
+      await page.locator('video').evaluate(video => video.pause());
+      revisedChapters.push({scene,target});
+    }
     await page.locator('button[data-time]').last().click();
     await page.waitForFunction(() => Math.abs(document.querySelector('video').currentTime-Number(document.querySelector('button[data-time]:last-child').dataset.time))<2);
     await page.locator('video').evaluate(video => video.pause());
@@ -53,7 +64,7 @@ const base = process.env.INVESTIGATION_PREVIEW_URL || 'http://127.0.0.1:8816';
     }
     await page.screenshot({path:path.join(out,'player-check.png')});
     assert.deepEqual(errors,[]);
-    fs.writeFileSync(path.join(out,'player-verification.json'),JSON.stringify({passed:true,...playback,captionCues:playback.captions.length,byteRange:true,chapterLinks:13,responsiveWidths:[390,768,1280],pageErrors:errors},null,2));
-    console.log('PASS: playback, seeking, all 168 exact captions, 13 chapter links, byte ranges and 3 responsive widths.');
+    fs.writeFileSync(path.join(out,'player-verification.json'),JSON.stringify({passed:true,...playback,captionCues:playback.captions.length,revisedChapters,byteRange:true,chapterLinks:13,responsiveWidths:[390,768,1280],pageErrors:errors},null,2));
+    console.log(`PASS: playback, seeking, all ${captions.length} exact captions, 13 chapter links, byte ranges and 3 responsive widths.`);
   } finally {await browser.close();}
 })().catch(error => {console.error(error);process.exitCode=1;});

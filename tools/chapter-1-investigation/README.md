@@ -1,13 +1,13 @@
 # The paper your AI never saw
 
-An original 6:35 narrated adaptation of Chapter 1 of Aaron Tay's *How Search
+An original 7:09 narrated adaptation of Chapter 1 of Aaron Tay's *How Search
 Decides What You See*. The Veritasium-inspired direction uses a question,
 prediction, paper-card thought experiment, reveal, three counterintuitive
 search observations, and a closing investigation. All artwork and animation
 are original. The narrator is Microsoft Andrew Multilingual.
 
 The film uses a warm tabletop, numbered paper cards, slow camera pushes,
-animated evidence selection, a relevance-set comparison, and carefully
+animated evidence selection, a study compared across two purposes, and carefully
 labelled quantitative graphics. It covers retrieval versus generation, Primo's
 documented pipeline, missing-source diagnosis, information need versus query,
 four relevance perspectives, the three opening puzzles, the six-stage map,
@@ -18,7 +18,7 @@ and output versus retrieval iteration. Agency remains a separate question.
 The completed exports are in `outputs/chapter-1-investigation/`:
 
 - `chapter-1-the-paper-your-ai-never-saw.mp4`: 1920×1080, 30 fps, H.264/AAC,
-  stereo, 395.40 seconds, with burnt-in and embedded English captions.
+  stereo, 428.63 seconds, with burnt-in and embedded English captions.
 - Matching `.srt` and `.vtt`, plus a timed transcript.
 - `preview.html`, thirteen chapter links and `chapters.vtt`.
 - Poster, 39 review stills, contact sheet and media verification report.
@@ -48,8 +48,8 @@ For a fresh environment, install `requirements.txt` into Python 3.12.
 mutually exclusive. `--output` selects a different export directory;
 `--workers` accepts one through eight. Voice preparation is cached separately
 from picture rendering. Unchanged takes can be copied from the earlier
-Chapter 1 voice cache. The delivered film contains fifteen new recordings
-and twenty-six previously recorded Chapter 1 takes with the same narrator.
+Chapter 1 voice cache. This revision reuses thirty-three unchanged takes and
+records eight revised takes with the same narrator.
 
 The voice is `en-US-AndrewMultilingualNeural` at −5% rate and natural pitch.
 Uncached speech uses edge-tts and sends the public narration to Microsoft's
@@ -66,7 +66,7 @@ imageio-ffmpeg executable. No GPU, LaTeX, Manim or video-generation API is neede
 The renderer verifies source anchors and the chapter's distinctive dates and
 quantities. Source, script and production hashes reject stale prepared
 timelines. Before accepting a final MP4, it completely decodes the video and
-audio, verifies all 11,862 frames, resolution, fps, codecs, sample rate,
+audio, verifies all 12,859 frames, resolution, fps, codecs, sample rate,
 stereo channels, integrated loudness of −16 LUFS ±1, true peak below −1 dBTP,
 and fast-start metadata. Embedded caption text must match the SRT exactly.
 
@@ -97,11 +97,23 @@ equal marks, each representing 1,000 reported matches; one mark represents
 the documented 1,000-record display cap. Reported counts are not claims that
 every match was individually ranked or scored.
 
-The relevance examples are illustrative records. The implementation study's
-2025 label illustrates the since-2024 requirement; it is not a cited paper.
+The relevance example follows the revised `#what-does-relevant-actually-mean`
+section. A skilled strategy uses alternative terminology and a 2024-onwards
+date limit. Queries, filters, purpose briefs and reader feedback can communicate
+substantial detail; the system uses those representations to estimate
+suitability, and the reader assesses usefulness. The hypothetical demonstration
+study meets the search conditions and is topically suitable. Its positive
+participant reactions make it a useful introductory-workshop example, but
+provide limited evidence about accuracy, staff workload or actual research
+consultations for a service-adoption decision. The paper still contributes;
+its match has not changed. Refining the search for operational evidence and
+judging what studies measured work together. This is not a cited real study.
 The nonsense token `xqzblorp` is also illustrative. Observations challenge
 assumptions about admission and ranking without establishing hidden mechanisms.
 
 The source is `search-textbook.html#intro`. `script.json` records a source
 anchor for every scene. Credit Aaron Tay and the book under CC BY 4.0 when
 sharing this adaptation. Publication is a separate action.
+
+The replaced export and its original transcript are preserved locally in
+`outputs/chapter-1-investigation/previous-relevance-edition/`.
