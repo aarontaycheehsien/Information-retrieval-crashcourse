@@ -80,7 +80,7 @@ def lens(c, x, y, r, t, fill='pink'):
 
 class Film:
     SCENES = {1: {'opening', 'machines', 'primo', 'sets', 'missing', 'map', 'matrix'},
-              2: {'need', 'match', 'lenses'},
+              2: {'need', 'chain', 'strategy', 'study', 'purpose', 'refine', 'lenses'},
               3: {'puzzle1', 'puzzle2', 'puzzle3', 'test', 'closing'}}
 
     def __init__(self, episode, timeline):
@@ -261,35 +261,99 @@ class Film:
     def relevance(self, c, name, t, p):
         if name == 'need':
             robot(c, 390, 516, t, 1.2)
-            chip(c, 'AI academic libraries', 1100, 339, 1050, 'blue', 40)
-            flow(c, 570, 532, 680, 532, t, 'pink')
-            rect(c, 750, 437, 880, 325, 'panel2', 46)
-            text(c, 'THE INFORMATION NEED', 1190, 492, 31, 'pink', True)
-            requirements = [('Empirical studies', 'empirical'), ('Since 2024', 'twenty'),
-                            ('Academic libraries implementing generative AI', 'implementing'),
-                            ('Services for research support', 'support')]
-            for i, (value, word) in enumerate(requirements):
-                if t > self.at(name, word, 8+i*2):
-                    circle(c, 807, 544+i*54, 8, 'mint')
-                    text(c, value, 838, 553+i*54, 29, 'white', align='left', max_width=720)
-            text(c, 'Typed expression', 1100, 405, 25, 'blue')
-            text(c, 'The fuller purpose behind it', 1190, 806, 28, 'pink')
-        elif name == 'match':
-            # Two genuinely overlapping sets; neither circle contains the other.
-            circle(c, 776, 505, 230, 'blue', .24)
-            circle(c, 1128, 505, 230, 'pink', .24)
-            circle(c, 776, 505, 230, 'blue', .8, 4)
-            circle(c, 1128, 505, 230, 'pink', .8, 4)
-            text(c, 'MATCHES THE QUERY', 670, 279, 28, 'blue', True)
-            text(c, 'HELPS WITH THE NEED', 1250, 279, 28, 'pink', True)
-            paper(c, 660, 513, 'A', ['AI', 'academic', 'libraries'], t, .51, 'blue')
-            paper(c, 1250, 513, 'B', ['LLMs', 'consultation', 'university'], t, .51, 'pink')
-            circle(c, 952, 493, 18, 'mint')
-            text(c, 'both', 952, 546, 22, 'mint')
-            wrap(c, 'Opinion piece · 2019', 610, 727, 480, 31, 'blue', True)
-            wrap(c, 'Implementation study', 1300, 727, 530, 31, 'pink', True)
-            text(c, 'Exact words can match while the need fails', 610, 779, 26, 'muted', max_width=590)
-            text(c, 'Different words can express the same need', 1300, 779, 26, 'muted', max_width=590)
+            box(c, 1180, 358, 'INFORMATION NEED', 'What the person wants to know or accomplish', 'pink', 1040, 150)
+            flow(c, 570, 518, 700, 518, t, 'pink')
+            rect(c, 690, 481, 980, 267, 'panel2', 35)
+            text(c, 'A REPRESENTATION CAN BE DETAILED', 1180, 536, 31, 'blue', True)
+            for i, (value, fill) in enumerate([('Query and alternative terms', 'blue'),
+                    ('Filters, fields and date limits', 'mint'), ('Task brief and supplied criteria', 'yellow')]):
+                circle(c, 755, 583+i*59, 8, fill)
+                text(c, value, 787, 593+i*59, 31, 'white', align='left')
+            text(c, 'A useful match still needs to be judged against the purpose', 960, 804, 30, 'muted')
+        elif name == 'chain':
+            rect(c, 458, 282, 1004, 46, 'blue', 23, .18)
+            text(c, 'THE SYSTEM WORKS DIRECTLY WITH THESE THREE', 960, 314, 25, 'blue', True)
+            nodes = [(244, 'Information', 'need', 'The fuller purpose', 'pink'),
+                     (602, 'Query or', 'representation', 'A supplied expression', 'blue'),
+                     (960, 'Retrieval', 'signals', 'Terms · fields · scores', 'blue'),
+                     (1318, 'Retrieved or', 'ranked records', 'Available candidates', 'blue'),
+                     (1676, 'Human', 'judgement', 'Does it help this task?', 'pink')]
+            for i, (x, first, second, detail, fill) in enumerate(nodes):
+                rect(c, x-145, 377, 290, 218, 'panel2', 28)
+                circle(c, x, 375, 27, fill)
+                text(c, str(i+1), x, 386, 26, 'ink', True)
+                text(c, first, x, 450, 31, fill, True)
+                text(c, second, x, 489, 31, fill, True, max_width=266)
+                wrap(c, detail, x, 549, 262, 24)
+                if i < 4:
+                    flow(c, x+153, 483, x+205, 483, t+i*.4, 'mint')
+            line(c, [(244, 608), (244, 664), (602, 664), (602, 609)], 'pink', 4)
+            arrow(c, 602, 664, 602, 609, 'pink', 4)
+            text(c, 'Detailed request communicates purpose', 535, 704, 26, 'pink')
+            line(c, [(1676, 608), (1676, 744), (960, 744)], 'yellow', 4)
+            flow(c, 960, 744, 960, 609, t, 'yellow')
+            text(c, 'Feedback communicates judgements', 1350, 790, 26, 'yellow')
+        elif name == 'strategy':
+            text(c, 'HYPOTHETICAL SEARCH · EMPIRICAL LIBRARY RESEARCH-SUPPORT STUDIES', 960, 275, 25, 'muted')
+            rows = [('generative AI', 'large language models', 'blue'),
+                    ('academic library', 'university library', 'mint'),
+                    ('research support', 'research consultation', 'pink')]
+            for i, (left, right, fill) in enumerate(rows):
+                y = 373+i*137
+                q = pop((t-self.at(name, 'terms', 4)-i*2.4)/.65)
+                c.save()
+                c.translate((1-q)*-30, 0)
+                rect(c, 160, y-42, 1080, 93, 'panel2', 28, .5+.5*q)
+                text(c, left, 405, y+10, 31, fill, True, max_width=410)
+                chip(c, 'OR', 705, y, 85, fill, 26, 49)
+                text(c, right, 1000, y+10, 31, fill, True, max_width=420)
+                c.restore()
+                if i < 2:
+                    text(c, 'AND', 705, y+88, 22, 'muted', True)
+            robot(c, 1550, 514, t, .88)
+            flow(c, 1270, 520, 1395, 520, t, 'yellow')
+            text(c, 'A detailed strategy', 1550, 714, 30, 'yellow', True)
+            if t >= self.at(name, 'Publications', 14):
+                chip(c, 'Publication date: 2024 onwards', 705, 782, 930, 'yellow', 30, 62)
+        elif name == 'study':
+            text(c, 'HYPOTHETICAL STUDY · THE SAME PAPER IN THE NEXT SCENE', 960, 275, 25, 'muted')
+            paper(c, 457, 512, 'D', ['demo', 'study'], t, .82, 'mint')
+            text(c, 'Empirical study · 2024 onwards', 457, 751, 29, 'mint', True, max_width=570)
+            box(c, 1230, 371, 'THE SERVICE', 'Generative AI research support in a university library', 'blue', 940, 135)
+            box(c, 1230, 536, 'WHAT WAS MEASURED', 'Participant reactions after a short demonstration', 'pink', 940, 135)
+            if t >= self.at(name, 'meets', 11):
+                check(c, 844, 714, size=20)
+                text(c, 'Meets the search conditions', 902, 724, 31, 'mint', True, 'left')
+                text(c, 'Topically suitable', 1230, 778, 30, 'mint')
+        elif name == 'purpose':
+            # The single study keeps its identity, match and measurements in both contexts.
+            paper(c, 960, 491, 'D', ['demo', 'study'], t, .62, 'mint')
+            text(c, 'SAME STUDY', 960, 704, 25, 'mint', True)
+            box(c, 420, 342, 'INTRODUCTORY WORKSHOP', 'Introducing possible applications', 'blue', 580, 126)
+            rect(c, 130, 443, 580, 311, 'panel2', 30)
+            for i, value in enumerate(['An example of a service', 'How participants responded', 'Useful for introducing the topic']):
+                circle(c, 175, 493+i*80, 8, 'blue')
+                wrap(c, value, 420, 502+i*80, 470, 29, 'white')
+            flow(c, 808, 505, 735, 505, t, 'blue')
+            box(c, 1500, 342, 'ADOPTION DECISION', 'Should we introduce the service?', 'yellow', 580, 126)
+            rect(c, 1210, 443, 580, 311, 'panel2', 30)
+            for i, value in enumerate(['Answer accuracy?', 'Staff workload?', 'Actual research consultations?']):
+                text(c, value, 1500, 489+i*68, 29, 'white', max_width=525)
+            text(c, 'Limited evidence for these questions', 1500, 715, 27, 'yellow', max_width=520)
+            flow(c, 1112, 505, 1185, 505, t, 'yellow')
+            text(c, 'Contributes less to this decision · does not become wholly irrelevant', 960, 809, 28, 'muted')
+        elif name == 'refine':
+            box(c, 485, 344, 'REFINE THE SEARCH', 'Bring the representation closer to the need', 'blue', 720, 133)
+            chip(c, 'Accuracy evaluations', 485, 483, 690, 'mint', 32, 78)
+            chip(c, 'Operational evidence', 485, 596, 690, 'pink', 32, 78)
+            flow(c, 865, 520, 1035, 520, t, 'mint')
+            box(c, 1405, 344, 'ASSESS THE EVIDENCE', 'The resulting studies still need judgement', 'yellow', 720, 133)
+            rect(c, 1045, 443, 720, 201, 'panel2', 30)
+            for i, value in enumerate(['What did they measure?', 'Under what conditions?', 'How well does it support the decision?']):
+                text(c, value, 1405, 489+i*60, 30, 'white', max_width=660)
+            rect(c, 190, 689, 1540, 127, 'panel2', 28)
+            text(c, 'PRIMO’S FIVE-SOURCE SELECTION: THE SCORE IS AN ESTIMATE', 960, 734, 29, 'pink', True)
+            text(c, 'A high score cannot turn participant reactions into answer-accuracy evidence', 960, 789, 28, 'muted', max_width=1480)
         elif name == 'lenses':
             paper(c, 960, 520, 'P', ['one paper'], t, .69, 'white')
             items = [(410, 390, 'COMPUTED MATCH', 'What does the system score?', 'blue'),
@@ -301,7 +365,7 @@ class Film:
                 text(c, title, x, y+80, 27, fill, True)
                 text(c, sub, x, y+119, 24, 'muted', max_width=490)
                 flow(c, 535 if x < 960 else 1385, y-15, 820 if x < 960 else 1100, 500 if y < 500 else 580, t, fill)
-            text(c, 'Related perspectives · no fixed ladder', 960, 272, 31, 'muted')
+            text(c, 'Related perspectives · models can estimate suitability · no fixed ladder', 960, 272, 28, 'muted')
 
     def puzzles(self, c, name, t, p):
         if name == 'puzzle1':

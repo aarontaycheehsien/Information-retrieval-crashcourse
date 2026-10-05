@@ -39,17 +39,16 @@ const config = JSON.parse(fs.readFileSync(path.join(__dirname, 'episodes.json'),
         const loaded = track.readyState===2 ? Promise.resolve() : wait(track, 'load');
         track.track.mode='hidden';
         await loaded;
-        const cue = track.track.cues[0];
         return {width:video.videoWidth, height:video.videoHeight, duration:video.duration,
                 seekedTo:video.currentTime, error:video.error?.message || null,
-                captions:track.track.cues.length, firstCaption:cue.text};
+                captions:track.track.cues.length, captionText:Array.from(track.track.cues, cue => cue.text)};
       });
       assert.equal(playback.width, 1920); assert.equal(playback.height, 1080);
       assert.ok(Math.abs(playback.duration-timeline.duration)<.15);
       assert.ok(playback.seekedTo>timeline.duration*.6);
       assert.equal(playback.error, null);
       assert.equal(playback.captions, timeline.cues.length);
-      assert.equal(playback.firstCaption, timeline.cues[0].text);
+      assert.deepEqual(playback.captionText, timeline.cues.map(cue => cue.text));
       const url = `${base}/${config.episodes[i].id}/${config.episodes[i].id}.mp4`;
       const range = await page.request.get(url, {headers:{Range:'bytes=0-1023'}});
       assert.equal(range.status(), 206); assert.equal((await range.body()).length,1024);

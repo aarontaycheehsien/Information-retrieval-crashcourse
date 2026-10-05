@@ -109,33 +109,60 @@
       "id": "02-a-match-is-not-relevance",
       "chapter": 1,
       "title": "A match is not relevance",
-      "subtitle": "The gap between typed words and what a reader needs",
+      "subtitle": "One study, two purposes, different contributions",
       "accent": "pink",
       "scenes": [
         {
           "id": "need",
           "title": "The query is a representation",
           "source_anchor": "what-does-relevant-actually-mean",
-          "claim": "The query is one imperfect expression of the information need",
+          "claim": "Queries, filters and task briefs can express substantial detail about the need",
           "line_ids": [
             "n1",
             "n2",
             "n3"
           ],
-          "narration": "Now for a deeper gap. You type: AI academic libraries. But those three words are not your information need. You want empirical studies since twenty twenty four, about academic libraries implementing generative AI services for research support. The query is one imperfect expression of that purpose. The system observes a representation, not your full need."
+          "narration": "A carefully built search makes its conditions explicit and inspectable. A record that passes them has passed a useful test. But does it help with the task? Behind the search is an information need: what a person wants to know or accomplish. Queries, filters, and task briefs can express substantial detail about it. The query represents the need. It is not the need itself."
         },
         {
-          "id": "match",
-          "title": "A match is evidence",
+          "id": "chain",
+          "title": "From a need to a judgement",
           "source_anchor": "what-does-relevant-actually-mean",
-          "claim": "Matching the expression and satisfying the need can come apart in either direction",
-          "line_ids": [
-            "r1",
-            "r2",
-            "r3",
-            "r4"
-          ],
-          "narration": "Consider this record. It contains AI, academic, and libraries. Perfect word overlap. But it is an opinion piece from twenty nineteen. Now consider an implementation study about large language models, research consultation, and a university library. It misses every exact query word, yet it may meet the need. Watch the two sets. Matching the query and helping the reader overlap, but neither contains the other. Boolean conditions, ranking scores, and embedding similarity provide evidence about relevance. They are not the reader's judgement."
+          "claim": "Detailed requests and feedback help the system estimate suitability",
+          "line_ids": ["ch1", "ch2"],
+          "narration": "Follow the chain: information need, query or representation, retrieval signals, retrieved or ranked records, then human judgement. The system works directly with the middle three. A detailed request can communicate the purpose. Feedback can communicate judgements. The system can use both to estimate suitability; the reader still assesses whether a record helps."
+        },
+        {
+          "id": "strategy",
+          "title": "A skilled search expresses more",
+          "source_anchor": "what-does-relevant-actually-mean",
+          "claim": "Alternative terminology and a date limit communicate a detailed need",
+          "line_ids": ["st1", "st2", "st3"],
+          "narration": "Take the chapter's hypothetical search: recent empirical studies of generative AI services for research support in academic libraries. The librarian combines alternative terms: generative AI or large language models; academic library or university library; research support or research consultation. Publications must be from twenty twenty four onwards. This strategy expresses much more of the need than a few broad keywords."
+        },
+        {
+          "id": "study",
+          "title": "The study passes the search",
+          "source_anchor": "what-does-relevant-actually-mean",
+          "claim": "The hypothetical demonstration study meets the conditions and is topically suitable",
+          "line_ids": ["r1", "r2"],
+          "narration": "The search retrieves an empirical study of a university library's generative AI research support service. Participants report positive reactions after a short demonstration. It meets the search conditions and is topically suitable. Now keep that same paper in view while we change the purpose."
+        },
+        {
+          "id": "purpose",
+          "title": "Same paper, different purpose",
+          "source_anchor": "what-does-relevant-actually-mean",
+          "claim": "The contribution changes with the task; the search match stays the same",
+          "line_ids": ["u1", "u2", "u3"],
+          "narration": "For a workshop introducing possible applications, the study offers a useful example of a service and how participants responded. For a decision about introducing the service, it contributes less. Positive reactions after a demonstration offer limited evidence about answer accuracy, staff workload, or performance in actual research consultations. The paper is not wholly irrelevant to that decision. It just does not establish what the decision maker needs to know. Its search match has not changed."
+        },
+        {
+          "id": "refine",
+          "title": "Search better, then assess the evidence",
+          "source_anchor": "what-does-relevant-actually-mean",
+          "claim": "Better searching and relevance judgement work together; a score remains an estimate",
+          "line_ids": ["f1", "f2", "f3"],
+          "narration": "Refine the search to seek accuracy evaluations or operational evidence. Then assess the resulting studies: what did they measure, under what conditions, and how well does that evidence support the decision? Better searching and relevance judgement work together. When Primo Research Assistant selects five sources, its score is an estimate based on available evidence and training. A high score for the demonstration study cannot turn participant reactions into evidence of answer accuracy."
         },
         {
           "id": "lenses",
@@ -147,7 +174,7 @@
             "l2",
             "l3"
           ],
-          "narration": "Relevant can mean a computed match, topical suitability, what someone learns, or usefulness for a task. These are different perspectives, not a ladder. The same paper can help a beginner understand a topic and fail a systematic review's inclusion rules. Relevance is a relationship. Relevant to someone, for something."
+          "narration": "Relevant can mean a computed match, topical suitability, what a person learns, or usefulness for a task. These are related perspectives, not a fixed ladder. A model can estimate topical or task specific suitability. That estimate is still different from the reader's experienced usefulness. Relevance is a relationship: relevant to someone, for something. A match is evidence, not the judgement."
         }
       ]
     },
@@ -363,61 +390,115 @@
       "id": "n1",
       "scene": "need",
       "gap": 1.0,
-      "text": "Now for a deeper gap. You type: AI academic libraries. But those three words are not your information need."
+      "text": "A carefully built search makes its conditions explicit and inspectable. A record that passes them has passed a useful test. But does it help with the task?"
     },
     {
       "id": "n2",
       "scene": "need",
       "gap": 0.5,
-      "text": "You want empirical studies since twenty twenty four, about academic libraries implementing generative AI services for research support."
+      "text": "Behind the search is an information need: what a person wants to know or accomplish."
     },
     {
       "id": "n3",
       "scene": "need",
       "gap": 0.5,
-      "text": "The query is one imperfect expression of that purpose. The system observes a representation, not your full need."
+      "text": "Queries, filters, and task briefs can express substantial detail about it. The query represents the need. It is not the need itself."
+    },
+    {
+      "id": "ch1",
+      "scene": "chain",
+      "gap": 1.0,
+      "text": "Follow the chain: information need, query or representation, retrieval signals, retrieved or ranked records, then human judgement. The system works directly with the middle three."
+    },
+    {
+      "id": "ch2",
+      "scene": "chain",
+      "gap": 0.6,
+      "text": "A detailed request can communicate the purpose. Feedback can communicate judgements. The system can use both to estimate suitability; the reader still assesses whether a record helps."
+    },
+    {
+      "id": "st1",
+      "scene": "strategy",
+      "gap": 1.0,
+      "text": "Take the chapter's hypothetical search: recent empirical studies of generative AI services for research support in academic libraries."
+    },
+    {
+      "id": "st2",
+      "scene": "strategy",
+      "gap": 0.6,
+      "text": "The librarian combines alternative terms: generative AI or large language models; academic library or university library; research support or research consultation."
+    },
+    {
+      "id": "st3",
+      "scene": "strategy",
+      "gap": 0.6,
+      "text": "Publications must be from twenty twenty four onwards. This strategy expresses much more of the need than a few broad keywords."
     },
     {
       "id": "r1",
-      "scene": "match",
+      "scene": "study",
       "gap": 1.0,
-      "text": "Consider this record. It contains AI, academic, and libraries. Perfect word overlap. But it is an opinion piece from twenty nineteen."
+      "text": "The search retrieves an empirical study of a university library's generative AI research support service. Participants report positive reactions after a short demonstration."
     },
     {
       "id": "r2",
-      "scene": "match",
+      "scene": "study",
       "gap": 0.7,
-      "text": "Now consider an implementation study about large language models, research consultation, and a university library. It misses every exact query word, yet it may meet the need."
+      "text": "It meets the search conditions and is topically suitable. Now keep that same paper in view while we change the purpose."
     },
     {
-      "id": "r3",
-      "scene": "match",
-      "gap": 0.7,
-      "text": "Watch the two sets. Matching the query and helping the reader overlap, but neither contains the other."
+      "id": "u1",
+      "scene": "purpose",
+      "gap": 1.0,
+      "text": "For a workshop introducing possible applications, the study offers a useful example of a service and how participants responded."
     },
     {
-      "id": "r4",
-      "scene": "match",
-      "gap": 0.5,
-      "text": "Boolean conditions, ranking scores, and embedding similarity provide evidence about relevance. They are not the reader's judgement."
+      "id": "u2",
+      "scene": "purpose",
+      "gap": 0.7,
+      "text": "For a decision about introducing the service, it contributes less. Positive reactions after a demonstration offer limited evidence about answer accuracy, staff workload, or performance in actual research consultations."
+    },
+    {
+      "id": "u3",
+      "scene": "purpose",
+      "gap": 0.7,
+      "text": "The paper is not wholly irrelevant to that decision. It just does not establish what the decision maker needs to know. Its search match has not changed."
+    },
+    {
+      "id": "f1",
+      "scene": "refine",
+      "gap": 1.0,
+      "text": "Refine the search to seek accuracy evaluations or operational evidence. Then assess the resulting studies: what did they measure, under what conditions, and how well does that evidence support the decision?"
+    },
+    {
+      "id": "f2",
+      "scene": "refine",
+      "gap": 0.6,
+      "text": "Better searching and relevance judgement work together."
+    },
+    {
+      "id": "f3",
+      "scene": "refine",
+      "gap": 0.6,
+      "text": "When Primo Research Assistant selects five sources, its score is an estimate based on available evidence and training. A high score for the demonstration study cannot turn participant reactions into evidence of answer accuracy."
     },
     {
       "id": "l1",
       "scene": "lenses",
       "gap": 1.0,
-      "text": "Relevant can mean a computed match, topical suitability, what someone learns, or usefulness for a task."
+      "text": "Relevant can mean a computed match, topical suitability, what a person learns, or usefulness for a task."
     },
     {
       "id": "l2",
       "scene": "lenses",
       "gap": 0.6,
-      "text": "These are different perspectives, not a ladder. The same paper can help a beginner understand a topic and fail a systematic review's inclusion rules."
+      "text": "These are related perspectives, not a fixed ladder. A model can estimate topical or task specific suitability. That estimate is still different from the reader's experienced usefulness."
     },
     {
       "id": "l3",
       "scene": "lenses",
       "gap": 0.6,
-      "text": "Relevance is a relationship. Relevant to someone, for something."
+      "text": "Relevance is a relationship: relevant to someone, for something. A match is evidence, not the judgement."
     },
     {
       "id": "b1",

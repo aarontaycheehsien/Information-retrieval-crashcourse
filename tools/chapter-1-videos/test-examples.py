@@ -18,12 +18,33 @@ class ChapterExamples(unittest.TestCase):
             self.assertIn(value, narration)
         self.assertLess(narration.index('thirty'), narration.index('five sources'))
 
-    def test_query_example_preserves_the_full_need(self):
+    def test_relevance_uses_the_revised_search_and_study(self):
         text = ' '.join(s['narration'] for s in self.cfg['episodes'][1]['scenes'])
-        for value in ['AI academic libraries', 'empirical studies since twenty twenty four',
-                      'opinion piece from twenty nineteen', 'large language models', 'university library',
-                      'different perspectives, not a ladder', 'Relevant to someone, for something']:
+        for value in ['Queries, filters, and task briefs can express substantial detail',
+                      'middle three', 'Feedback can communicate judgements', 'hypothetical search',
+                      'large language models', 'university library', 'research consultation',
+                      'twenty twenty four onwards', 'positive reactions after a short demonstration',
+                      'meets the search conditions and is topically suitable']:
             self.assertIn(value, text)
+        for obsolete in ['AI academic libraries', 'opinion piece from twenty nineteen',
+                         'misses every exact query word', 'neither contains the other']:
+            self.assertNotIn(obsolete, text)
+
+    def test_same_study_has_contextual_value_and_scores_remain_estimates(self):
+        episode = self.cfg['episodes'][1]
+        text = ' '.join(s['narration'] for s in episode['scenes'])
+        for value in ['workshop introducing possible applications', 'it contributes less',
+                      'answer accuracy, staff workload', 'actual research consultations',
+                      'not wholly irrelevant', 'Its search match has not changed',
+                      'accuracy evaluations or operational evidence', 'under what conditions',
+                      'Better searching and relevance judgement work together',
+                      'score is an estimate based on available evidence and training',
+                      'cannot turn participant reactions into evidence of answer accuracy',
+                      'related perspectives, not a fixed ladder', "reader's experienced usefulness",
+                      'relevant to someone, for something']:
+            self.assertIn(value, text)
+        self.assertEqual([s['id'] for s in episode['scenes']],
+                         ['need', 'chain', 'strategy', 'study', 'purpose', 'refine', 'lenses'])
 
     def test_puzzles_retain_quantities_dates_and_uncertainty(self):
         text = ' '.join(s['narration'] for s in self.cfg['episodes'][2]['scenes'])

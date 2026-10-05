@@ -9,12 +9,13 @@ score. Everything is drawn and animated with Skia.
 | Film | Duration | Focus |
 | --- | --- | --- |
 | Why these five papers? | 3:27 | Retrieval versus generation, documented Primo pipeline, candidate bottleneck, diagnosis, six stages and two axes |
-| A match is not relevance | 1:32 | Information need versus query, matching versus usefulness, four relevance perspectives |
+| A match is not relevance | 3:27 | Detailed search construction, the need-to-judgement chain, one study serving two purposes, refinement and four relevance perspectives |
 | Three clues hiding in a search box | 2:14 | The three opening puzzles, evidence limits, and a diagnostic exercise |
 
 The narrator is Microsoft's `en-US-AndrewMultilingualNeural`, at −5% rate and
-natural pitch. This production reuses the existing Chapter 1 adaptation's
-word-timed narration takes; its previous animation and exports remain intact.
+natural pitch. Films 1 and 3 reuse 37 word-timed narration takes from the existing
+Chapter 1 adaptation. Film 2 uses 19 new takes for the revised relevance section.
+The earlier single-film adaptation is a separate production.
 Music is synthesized locally without recorded samples. Segoe UI fonts are
 loaded locally from Windows and are not distributed.
 
@@ -45,8 +46,20 @@ stale prepared timelines and outdated exports during packaging.
 
 Existing voice caches are copied into the new output directory when present.
 Uncached or edited narration uses edge-tts and sends the public spoken script
-to Microsoft's online speech service. Preparing the delivered films reused
-all 47 cached takes and required no new speech synthesis requests.
+to Microsoft's online speech service. The initial production reused 47 cached
+takes. The 6 October 2026 relevance revision adds 19 newly synthesized public
+narration takes; subsequent builds reuse their cache.
+
+Film 2 follows the substantially revised “What does ‘relevant’ actually mean?”
+section. The earlier broad-keyword/opinion-piece example is replaced with a
+skilled synonym-and-date strategy and one hypothetical demonstration study.
+The same study contributes differently to an introductory workshop and an
+adoption decision. Seven scenes include the five-box need-to-judgement chain,
+feedback, search refinement and the limits of a computed suitability estimate.
+Films 1 and 3 retain their narration and scene definitions. All exports are
+rebuilt and verified together to keep the complete bundle's source and
+production hashes current. The previous relevance film and complete ZIP are
+preserved locally in `outputs/chapter-1-videos/previous-relevance/`.
 
 ## Watch and download
 
@@ -87,9 +100,20 @@ source freshness and media hashes, and checks archive CRCs.
   that every generated claim uses that evidence or that every supplied paper is cited.
 - Output format and retrieval iteration are separate axes. Agency is a third
   question; repeated searching alone does not identify who chooses actions.
-- The full information need retains the chapter's empirical-study, since-2024,
-  academic-library, implementation and research-support requirements. The two
-  overlapping circles illustrate different sets; neither contains the other.
+- Queries, filters and task briefs can communicate substantial detail about a
+  need. The five-box chain shows what the system works with directly and how
+  detailed requests and feedback can inform suitability estimates.
+- The hypothetical strategy retains the three terminology alternatives and
+  publication limit of 2024 onwards. It seeks empirical library research-support
+  studies; it is not a demonstrated database query or a newly observed paper.
+- The same demonstration study meets the conditions and is topically suitable.
+  Positive participant reactions help an introductory workshop, but offer limited
+  evidence about accuracy, workload or actual consultations for an adoption
+  decision. The paper does not become wholly irrelevant; its match is unchanged.
+- Refining a search for accuracy evaluations or operational evidence helps
+  express the need. The resulting studies still require assessment. A model can
+  estimate topical or task-specific suitability; a high score cannot change
+  what a study measured into evidence of something it did not measure.
 - The scite puzzle challenges a strict-AND assumption without diagnosing its
   implementation. `xqzblorp` is an invented illustrative word, not a rerun query.
 - Google Scholar's approximately 9.4-million count and 1,000-record viewing
@@ -99,7 +123,7 @@ source freshness and media hashes, and checks archive CRCs.
   observation date. Bars use labelled `log10(count + 1)` lengths. The ratio is
   stated separately as approximately 2,715-fold. The architecture remains open.
 
-Five checks cover source-grounded examples, uncertainty, scene-aware word
+Six checks cover source-grounded examples, uncertainty, scene-aware word
 timing, and every scene at five animation times. Each completed film is fully
 decoded with FFmpeg's strict error mode, then checked for frame count,
 dimensions, fps, codecs, exact embedded caption text, fast-start metadata,

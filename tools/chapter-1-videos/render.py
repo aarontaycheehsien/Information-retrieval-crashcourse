@@ -47,6 +47,13 @@ def read_config():
     for required in ('The retrieval problem', 'Chapter 1', 'up to 30', 'five abstracts',
                      '9.4 million', '35,300', '13 results', 'August 2026', 'September 2026'):
         assert required in chapter, f'Chapter changed: missing {required}'
+    relevance = chapter[chapter.index('<h3 id="what-does-relevant-actually-mean"'):
+                        chapter.index('<h3 id="three-familiar-search-results-and-three-puzzles"')]
+    for required in ('Queries, filters and task briefs', 'large language models', '2024 onwards',
+                     'positive participant reactions', 'short demonstration', 'workshop',
+                     'answer accuracy', 'staff workload', 'actual research consultations',
+                     'not wholly irrelevant', 'operational evidence', 'experienced usefulness'):
+        assert required in relevance, f'Relevance example changed: missing {required}'
     cfg['source_sha256'] = hashlib.sha256(chapter.encode()).hexdigest()
     cfg['production_sha256'] = hashlib.sha256(b''.join(p.read_bytes() for p in (
         HERE / 'episodes.json', HERE / 'render.py', HERE / 'scenes.py',
