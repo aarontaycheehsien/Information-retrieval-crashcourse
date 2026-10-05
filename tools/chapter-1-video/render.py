@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html
 import importlib.util
 import json
 import math
@@ -47,7 +48,12 @@ def check_source(script):
             assert f'id="{scene["source_anchor"]}"' in chapter, scene["source_anchor"]
     for evidence in ["up to 30", "top five", "35,300", "9.4 million", "13 results", "1,000", "September 2026", "August 2026"]:
         assert evidence in chapter, f"Recheck script against changed source: {evidence}"
+    relevance = chapter.split('<h3 id="what-does-relevant-actually-mean">', 1)[1].split('<aside class="orientation"', 1)[0]
+    relevance_text = " ".join(html.unescape(re.sub(r"<[^>]+>", "", relevance)).split()).casefold()
+    for phrase in script["relevance_source_phrases"]:
+        assert phrase.casefold() in relevance_text, f"Recheck relevance adaptation against changed source: {phrase}"
     return {"source": script["source"], "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+            "relevance_source_sha256": hashlib.sha256(relevance.encode("utf-8")).hexdigest(),
             "script_sha256": hashlib.sha256((HERE / "script.json").read_bytes()).hexdigest()}
 
 
@@ -249,7 +255,8 @@ def verify(path, timeline, out, ff):
     info = {"file": path.name, "width": W, "height": H, "fps": FPS, "duration_seconds": timeline["duration"],
             "decoded_frames": count, "integrated_lufs": lufs, "true_peak_dbfs": peak, "video": video,
             "audio": audio, "faststart": True, "sha256": digest.hexdigest(), "bytes": path.stat().st_size,
-            "source_sha256": timeline["source_sha256"], "script_sha256": timeline["script_sha256"], "passed": True}
+            "source_sha256": timeline["source_sha256"], "relevance_source_sha256": timeline["relevance_source_sha256"],
+            "script_sha256": timeline["script_sha256"], "passed": True}
     print(f"Verified {count:,} frames; {lufs:.1f} LUFS, {peak:.1f} dBTP; H.264/AAC, faststart", flush=True)
     return info
 
@@ -315,11 +322,12 @@ def main():
     if args.prepare_only:
         return
     stills(timeline, script, out)
-    preview(timeline, script, out)
     if args.stills_only:
+        preview(timeline, script, out)
         return
     render(timeline, script, out, ff, args.workers)
     dest = mux(timeline, script, out, ff)
+    preview(timeline, script, out)
     print(f"Completed: {dest}", flush=True)
 
 

@@ -385,73 +385,115 @@ class Film:
         self.note(c, "Agency is a separate question: who chooses the next action?", GOLD, self.p(t, "x3"), 31)
 
     def need(self, c, t):
-        p = self.p(t, "n1", "type")
-        box(c, 1150, 422, 610, 260, BLUE, p)
-        text(c, "SUBMITTED QUERY", 1455, 383, 25, BLUE, p, kind="mono")
-        lines(c, ["AI", "academic", "libraries"], 1455, 492, 38, BLUE, p, kind="mono", step=64)
+        explicit = self.p(t, "n1", "explicit")
+        text(c, "Explicit · inspectable · reproducible", 960, 279, 30, MUTED, explicit)
         q = self.p(t, "n2")
-        box(c, 160, 338, 740, 440, GOLD, q)
-        text(c, "INFORMATION NEED", 530, 303, 25, GOLD, q, kind="mono")
-        requirements = [("Empirical studies", "empirical"), ("Published since 2024", "since"),
-                        ("Academic libraries", "libraries"), ("Implementing generative-AI services", "implementing"),
-                        ("Research support", "support")]
+        box(c, 120, 366, 505, 414, GOLD, q)
+        text(c, "INFORMATION NEED", 373, 341, 26, GOLD, q, kind="mono")
+        requirements = [("Recent empirical studies", "empirical"), ("Generative-AI services", "generative"),
+                        ("Academic libraries", "academic"), ("Research support", "support")]
         for i, (s, word) in enumerate(requirements):
             reveal = self.p(t, "n2", word)
-            dot(c, 220, 409 + i * 70, GOLD, 5, reveal)
-            text(c, s, 257, 420 + i * 70, 30, WHITE, reveal, align="left", width=600)
-        compression = self.p(t, "n3", "expression", duration=1.5)
-        for i in range(5):
-            yy = 410 + i * 70
-            arrow(c, (930, yy), (1120, 550), GOLD, .5 * compression, compression, 1.5)
-        self.note(c, "The system observes the expression, not the whole purpose.", GOLD, self.p(t, "n3"), 34)
+            dot(c, 165, 451 + i * 77, GOLD, 5, reveal)
+            text(c, s, 192, 461 + i * 77, 28, WHITE, reveal, align="left", width=398)
+        strategy = self.p(t, "n3", "terminology")
+        box(c, 810, 366, 990, 414, BLUE, strategy)
+        text(c, "SEARCHABLE REPRESENTATION", 1305, 341, 26, BLUE, strategy, kind="mono")
+        alternatives = [("generative AI", "large language models", "generative"),
+                        ("academic library", "university library", "academic"),
+                        ("research support", "research consultation", "research")]
+        for i, (left, right, word) in enumerate(alternatives):
+            reveal = self.p(t, "n3", word)
+            y = 450 + i * 77
+            text(c, left, 1050, y, 28, BLUE, reveal, width=390)
+            text(c, "OR", 1280, y, 24, GOLD, reveal, kind="mono")
+            text(c, right, 1545, y, 28, BLUE, reveal, width=430)
+            if i < 2:
+                text(c, "AND", 1305, y + 39, 18, MUTED, self.p(t, "n3", alternatives[i + 1][2]), kind="mono")
+        date = self.p(t, "n3", "date")
+        line(c, 866, 658, 1744, 658, DIM, a=date, stroke=1)
+        text(c, "Publication date: 2024 onwards", 1305, 726, 28, BLUE, date)
+        arrow(c, (650, 565), (785, 565), GOLD, p=strategy)
+        detailed = self.p(t, "n4", "detail")
+        text(c, "Queries + filters + task briefs can express substantial detail.", 960, 852, 30, TEAL, detailed)
+        self.note(c, "The representation informs suitability estimates; usefulness still needs assessment.", GOLD,
+                  self.p(t, "n4", "suitability"), 28)
 
     def match(self, c, t):
-        a = self.p(t, "r1", "record")
-        b = self.p(t, "r2", "study")
-        sets = self.p(t, "r3", "sets", duration=1.3)
-        leftx, rightx = mix(515, 820, sets), mix(1395, 1110, sets)
-        r = mix(95, 226, sets)
-        if sets > .002:
-            c.drawCircle(leftx, 543, r, paint(BLUE, .06 * sets))
-            c.drawCircle(rightx, 543, r, paint(TEAL, .06 * sets))
-            ring(c, leftx, 543, r, BLUE, sets)
-            ring(c, rightx, 543, r, TEAL, sets)
-            text(c, "MATCHES QUERY", 690, 282, 27, BLUE, sets, kind="mono")
-            text(c, "HELPS THIS READER", 1205, 282, 27, TEAL, sets, kind="mono")
-        p1x = mix(515, 700, sets)
-        p2x = mix(1395, 1225, sets)
-        paper(c, p1x, 523, RED, a, mix(2.4, 1.15, sets), "A")
-        paper(c, p2x, 523, GOLD, b, mix(2.4, 1.15, sets), "B")
-        if sets < .98:
-            aa = a * (1 - sets)
-            bb = b * (1 - sets)
-            lines(c, ["AI · academic · libraries", "Opinion piece · 2019", "matches every query word"], 515, 687, 29, BLUE, aa, step=51)
-            lines(c, ["Large language models", "University library · implementation", "may satisfy the actual need"], 1395, 687, 29, TEAL, bb, step=51, width=780)
-        if sets > .002:
-            dot(c, 961, 490, WHITE, 9, sets)
-            dot(c, 975, 600, WHITE, 9, sets)
-            text(c, "A", p1x, 625, 24, RED, sets, kind="mono")
-            text(c, "B", p2x, 625, 24, GOLD, sets, kind="mono")
-            text(c, "match; does not help", 655, 815, 27, RED, sets)
-            text(c, "helps; no exact match", 1295, 815, 27, GOLD, sets)
-        self.note(c, "A match is evidence about relevance.", GOLD, self.p(t, "r4"), 41)
+        text(c, "Hypothetical example from Chapter 1", 960, 260, 24, MUTED)
+        study = self.p(t, "r1", "study")
+        box(c, 585, 312, 750, 247, BLUE, study)
+        paper(c, 667, 425, BLUE, study, 1.65)
+        facts = [("Empirical study of a library service", "empirical"),
+                 ("Short demonstration", "demonstration"), ("Positive participant reactions", "positive")]
+        for i, (label, word) in enumerate(facts):
+            text(c, label, 730, 370 + i * 55, 29, WHITE, self.p(t, "r1", word), align="left", width=570)
+        text(c, "MEETS THE STRATEGY · TOPICALLY SUITABLE", 960, 533, 21, BLUE,
+             self.p(t, "r1", "conditions"), kind="mono")
+        workshop = self.p(t, "r2", "workshop")
+        decision = self.p(t, "r3", "purpose")
+        arrow(c, (700, 574), (440, 652), TEAL, p=workshop)
+        arrow(c, (1220, 574), (1470, 652), GOLD, p=decision)
+        box(c, 140, 672, 630, 189, TEAL, workshop)
+        text(c, "INTRODUCTORY WORKSHOP", 455, 711, 24, TEAL, workshop, kind="mono")
+        lines(c, ["A useful example of an application", "and participants' responses"], 455, 763, 28,
+              WHITE, self.p(t, "r2", "useful"), step=42)
+        box(c, 1070, 672, 710, 189, GOLD, decision)
+        text(c, "SERVICE-ADOPTION DECISION", 1425, 711, 24, GOLD, decision, kind="mono")
+        for i, (label, word) in enumerate([("Answer accuracy?", "accuracy"), ("Staff workload?", "workload"),
+                                           ("Actual consultations?", "consultations")]):
+            text(c, label, 1425, 751 + i * 34, 25, WHITE, self.p(t, "r4", word))
+        fixed = self.p(t, "r3", "fixed")
+        lines(c, ["same study", "same match"], 920, 746, 24, BLUE, fixed, kind="mono", step=40)
+        limited = self.p(t, "r4", "limited")
+        text(c, "Useful illustration", 455, 900, 25, TEAL, workshop)
+        text(c, "Limited evidence for this decision", 1425, 900, 25, GOLD, limited)
+        text(c, "The paper contributes something; its contribution depends on the purpose.", 960, 968, 29, GOLD,
+             self.p(t, "r5", "contribution"), kind="italic", width=1660)
 
     def lenses(self, c, t):
+        refine = self.p(t, "l3", "refine", duration=1.2)
         px, py = 960, 570
-        paper(c, px, py, WHITE, 1, 2)
+        paper(c, px, mix(py, 335, refine), WHITE, 1, mix(2, 1.2, refine))
         lenses = [(450, 372, "Computed match", "system / algorithmic", BLUE, "computed"),
                   (1470, 372, "Topical suitability", "about the topic", PURPLE, "topical"),
                   (450, 731, "What someone learns", "cognitive", GOLD, "learns"),
                   (1470, 731, "Usefulness for a task", "situational", TEAL, "usefulness")]
         for x, y, title, label, rgb, word in lenses:
-            p = self.p(t, "l1", word)
+            p = self.p(t, "l1", word) * (1 - refine)
             arrow(c, (px + (75 if x > px else -75), py + (35 if y > py else -35)),
-                  (x + (-220 if x > px else 220), y), rgb, .6, p)
+                  (x + (-220 if x > px else 220), y), rgb, .6 * (1 - refine), p)
             box(c, x - 250, y - 60, 500, 132, rgb, p)
             text(c, title, x, y - 3, 31, rgb, p)
             text(c, label, x, y + 47, 24, MUTED, p)
-        self.note(c, "Relevant to someone, for something.", GOLD, self.p(t, "l3"), 43)
-        text(c, "Related perspectives, not a fixed ladder", 960, 260, 28, MUTED, self.p(t, "l2"))
+        text(c, "Related perspectives, not a fixed ladder", 960, 260, 28, MUTED,
+             self.p(t, "l2") * (1 - refine))
+        text(c, "Detailed requests + feedback can inform suitability estimates.", 960, 870, 28, TEAL,
+             self.p(t, "l2", "feedback") * (1 - refine))
+        if refine > .002:
+            text(c, "Bring the representation closer to the need", 960, 410, 32, MUTED, refine)
+            box(c, 135, 472, 505, 214, BLUE, refine)
+            text(c, "REFINE THE STRATEGY", 388, 519, 24, BLUE, refine, kind="mono")
+            text(c, "Accuracy evaluations", 388, 585, 29, WHITE, self.p(t, "l3", "accuracy"))
+            text(c, "Operational evidence", 388, 633, 29, WHITE, self.p(t, "l3", "operational"))
+            box(c, 725, 472, 470, 214, PURPLE, self.p(t, "l3", "studies"))
+            text(c, "RETRIEVED STUDIES", 960, 519, 24, PURPLE, self.p(t, "l3", "studies"), kind="mono")
+            for i in range(3):
+                paper(c, 875 + i * 85, 599, PURPLE, self.p(t, "l3", "studies"), .9)
+            box(c, 1280, 472, 505, 214, TEAL, self.p(t, "l3", "assess"))
+            text(c, "ASSESS THE EVIDENCE", 1533, 519, 24, TEAL, self.p(t, "l3", "assess"), kind="mono")
+            for i, (s, word) in enumerate([("What did they measure?", "measure"),
+                                           ("Under what conditions?", "conditions"),
+                                           ("Support for this decision?", "support")]):
+                text(c, s, 1533, 564 + i * 42, 27, WHITE, self.p(t, "l3", word), width=450)
+            arrow(c, (655, 581), (708, 581), BLUE, p=self.p(t, "l3", "studies"))
+            arrow(c, (1210, 581), (1263, 581), TEAL, p=self.p(t, "l3", "assess"))
+            feedback = self.p(t, "l4", "together", duration=1.8)
+            line(c, 1533, 701, 1533, 782, GOLD, p=clamp(feedback * 3))
+            line(c, 1533, 782, 388, 782, GOLD, p=clamp(feedback * 3 - 1))
+            arrow(c, (388, 782), (388, 701), GOLD, p=clamp(feedback * 3 - 2))
+            text(c, "Use assessment to refine the next search", 960, 837, 29, GOLD, feedback)
+        self.note(c, "Relevant to someone, for something.", GOLD, self.p(t, "l4", "Relevant"), 43)
 
     def puzzle1(self, c, t):
         p = self.p(t, "b1", "word")

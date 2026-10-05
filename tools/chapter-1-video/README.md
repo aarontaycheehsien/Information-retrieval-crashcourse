@@ -1,6 +1,6 @@
 # Chapter 1: The retrieval problem
 
-A 7-minute, 9-second narrated geometric explainer adapted from Chapter 1 of
+A narrated geometric explainer (currently 8 minutes, 17 seconds) adapted from Chapter 1 of
 Aaron Tay's *How Search Decides What You See*, version 1.2.1. Its dark canvas,
 colored geometric objects, evolving sets, and speech-led reveals are inspired
 by 3Blue1Brown's visual teaching approach. All animation is original; this is
@@ -11,6 +11,15 @@ retrieval versus generation, the shortlist bottleneck, the six-stage map,
 the output/iteration matrix, information need versus query, four relevance
 perspectives, all three opening puzzles, and a closing diagnostic exercise.
 It preserves the chapter's open questions about undocumented mechanisms.
+
+The relevance sequence follows the October 2026 revision: a librarian expresses
+the need with alternative terminology and a date filter; the same empirical
+demonstration study offers a useful workshop example but limited evidence for
+a service-adoption decision. Its match stays fixed while its contribution
+changes with the purpose. The film then shows strategy refinement and evidence
+assessment working together, including the role of detailed requests and feedback
+in suitability estimates. It replaces the earlier broad-keyword and exact-overlap
+example rather than portraying skilled search construction as inadequate.
 
 ## Reproduce
 
@@ -76,7 +85,9 @@ scale. The Semantic Scholar bars are illustrative, with the enlargement of the
 The maintained source is `search-textbook.html#intro`. These scenes map to
 the chapter's own sections; the renderer checks anchors and distinctive
 quantities before building sound and records source/script SHA-256 hashes.
-These guards detect some source drift; they do not replace editorial review.
+It also checks seven distinctive phrases in the revised relevance section and
+records that section's SHA-256 hash. These guards detect some source drift;
+they do not replace editorial review.
 
 | Scenes | Chapter source |
 | --- | --- |
@@ -115,13 +126,17 @@ and transcript. Third-party figures and logos are not reproduced.
 Everything generated stays under Git-ignored `outputs/chapter-1-video/`:
 
 - `chapter-1-the-retrieval-problem.mp4`: 1920×1080, 30 fps, H.264/AAC stereo,
-  429.43 seconds, with fast-start metadata for browser playback.
-- Matching `.srt` and `.vtt`: 176 optional English caption cues.
+  496.80 seconds, with fast-start metadata for browser playback.
+- Matching `.srt` and `.vtt`: 200 optional English caption cues.
 - `chapters.vtt` and `preview.html`: player with fifteen clickable scene links.
 - `transcript.txt`: timed narration, attribution, and synthetic-voice credit.
 - `poster.jpg`, `contact-sheet.jpg`, and `stills/`: visual QA artifacts.
 - `timeline.json`, `captions.json`, `voice-cache/`: reproducible timing/assets.
 - `narration.wav`, intermediate pictures, logs, and `verification.json`.
+
+The previous completed MP4 and its verification record are preserved locally
+in `history/before-relevance-update/`. The full-render command refreshes the
+browser player only after the new MP4 passes verification.
 
 Each export completely decodes both streams and checks exact frame count,
 resolution, frame rate, pixel format, stereo AAC sample rate, −16 LUFS ±1
