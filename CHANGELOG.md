@@ -9,6 +9,12 @@ entry here.
 
 ## Unreleased
 
+- **Chapter 1 relevance example.** Start with a carefully constructed search,
+  then show how the same hypothetical study contributes differently to an
+  introductory workshop and a service-adoption decision. Acknowledge what
+  queries, filters and task briefs can communicate, while separating matching
+  from usefulness for a task. Align Figure 1.4 and the chapter’s vocabulary.
+
 - **Companion readability.** Teaching notes open with their contents menu, give
   the labs as one table and show the product-claim groups as one-line claims
   with short status and per-group counts. Read this first drops the book's

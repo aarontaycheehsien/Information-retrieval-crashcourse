@@ -711,7 +711,7 @@
         },
         {
           "anchor": "relevance-chain-title",
-          "excerpt": "When Primo Research Assistant selects five sources, the score is an estimate based on the evidence and training available to the system. It does not establish that the sources answer this reader’s need. A study may concern open access and citations yet fail a requirement for recent empirical evidence. Keep the need, the submitted query and the computed match separate."
+          "excerpt": "When Primo Research Assistant selects five sources, the score is an estimate based on the evidence and training available to the system. It does not establish that the sources answer this reader’s need. A high score for the demonstration study would not turn participant reactions into evidence of answer accuracy. Keep the need, the submitted query and the computed match separate."
         },
         {
           "anchor": "puzzles-under-answer-layers",
