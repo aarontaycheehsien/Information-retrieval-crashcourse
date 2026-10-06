@@ -1,0 +1,26 @@
+{
+  "book": "How Search Decides What You See",
+  "author": "Aaron Tay",
+  "chapter": 1,
+  "source": "tools/chapter-1-videos/README.md",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#intro",
+  "requested_setup": {"model": "GPT-6.1 Sol", "effort": "Extra High", "basis": "User-supplied description of the earlier run"},
+  "voice": {"name": "Microsoft David Desktop", "rate": "+0%", "pitch": "+0Hz"},
+  "episode": {
+    "id": "01-how-codex-built-the-videos",
+    "chapter": 1,
+    "title": "How Codex built these videos",
+    "subtitle": "From a chapter to a checked, playable animation",
+    "accent": "mint",
+    "scenes": [
+      {"id": "setup", "title": "A chapter becomes three films", "claim": "Codex connects the source, the script, the code, and the tools", "evidence": "User request; prior Chapter 1 production files; official OpenAI model and reasoning documentation", "narration": "You asked for Chapter one in a colorful animated explainer style. I built three films using the Codex setup you named: six point one Sol at Extra High effort. Extra High governs how much reasoning the model applies. My visible role was to read, adapt, write code, run tools, and check results. Here is how those pieces became videos."},
+      {"id": "read", "title": "Read first, then find the story", "claim": "Three stories: the evidence pipeline, relevance, and the search puzzles", "evidence": "tools/chapter-1-videos/episodes.json; search-textbook.html#intro", "narration": "First, I read the chapter and inspected the video tools already in this repository. I grouped the material into three stories: the evidence behind an AI answer, what relevance means, and the three search puzzles. The product examples kept the chapter's dates, quantities, and open questions."},
+      {"id": "story", "title": "Give each scene a job", "claim": "What we say, what we show, and where it comes from", "evidence": "tools/chapter-1-videos/episodes.json; tools/chapter-1-videos/render.py", "narration": "Next, I organized the narration into scenes. Each scene had a title, a teaching point, spoken lines, and a link back to the chapter. This became an editable storyboard. The script and the pictures had to explain the same thing, with uncertainty carried into both."},
+      {"id": "art", "title": "Draw a world with code", "claim": "Shapes + a shared palette + movement over time = consistent animation", "evidence": "tools/chapter-1-videos/scenes.py; tools/chapter-2-videos/visuals.py", "narration": "I wrote Python code to draw the artwork with Skia: circles, rounded rectangles, paper characters, an index robot, and moving signals. Positions changed as time advanced. Reusing a palette and drawing helpers gave the films a consistent look. The animation was produced frame by frame from these instructions."},
+      {"id": "clock", "title": "Let the voice set the clock", "claim": "47 cached narration takes supplied the timing for the earlier films", "evidence": "tools/chapter-1-videos/README.md; tools/chapter-1-videos/render.py; tools/pick-a-card/narrate.py", "narration": "The voice supplied the timing. For those three films, I reused forty seven cached narration takes in Microsoft's Andrew neural voice. Recorded word boundaries set the captions and key visual reveals. When the narration reached selection, five papers appeared. The pictures followed the speech without shortening or speeding it up."},
+      {"id": "music", "title": "Build a quiet soundtrack", "claim": "Narration stays clear while the music supports the scene", "evidence": "tools/chapter-2-videos/render.py#music_track; tools/chapter-1-videos/render.py#prepare", "narration": "I added a musical score synthesized locally from simple tones, then made it quieter under the voice. Narration, music, and captions were assembled on one timeline. Audio measurements checked the listening level and kept peaks below the export ceiling."},
+      {"id": "review", "title": "Inspect, revise, then render", "claim": "The visual explanation has to survive inspection and playback", "evidence": "tools/chapter-1-videos/scenes.py#sets; tools/chapter-1-videos/test-examples.py; tools/chapter-1-videos/render.py", "narration": "Before finishing, I checked sample frames and watched the layout. One revision made candidate dots move across the retrieval boundary and kept the missing gold paper visible. Then separate rendering processes encoded the three films. This is where the drawings, timing, sound, and captions became playable video files."},
+      {"id": "deliver", "title": "Check the export, then deliver", "claim": "A playable film, captions, transcripts, and editable source", "evidence": "tools/chapter-1-videos/render.py; tools/chapter-1-videos/check-preview.cjs; tools/chapter-1-videos/package.py; prior commit a127131", "narration": "Finally, I decoded every film and checked frame counts, captions, sound, and browser playback, including seeking. I packaged the videos, transcripts, and captions, and committed the editable source. That was the production loop: understand the material, build a visual explanation, inspect the result, and deliver something you can watch and revise."}
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "book": "How Search Decides What You See",
+  "author": "Aaron Tay",
+  "source": "search-textbook.html#boolean-admission",
+  "source_section": "sec-boolean-admission",
+  "chapter": 2,
+  "voice": {"name": "en-GB-RyanNeural", "rate": "-3%", "pitch": "+0Hz"},
+  "episodes": [
+    {
+      "id": "01-boolean-gates",
+      "title": "The gates of search",
+      "subtitle": "Boolean admission",
+      "accent": "mint",
+      "scenes": [
+        {"id": "universe", "title": "Who gets through?", "claim": "Strict Boolean search decides eligibility", "narration": "Imagine a library floating in space. Millions of papers are waiting outside, but your search has built a gate. In strict Boolean search, each paper either passes your conditions, or stays outside. There are no almost-matches."},
+        {"id": "and", "title": "AND: both conditions", "claim": "delulu AND job", "narration": "Take the query: delulu AND job. A record must satisfy both conditions. A paper with just job fails. A paper with both passes. AND is an intersection: keep the records shared by the two sets."},
+        {"id": "or", "title": "OR: either condition", "claim": "delulu OR unrealistic", "narration": "OR opens another route. Delulu OR unrealistic admits a record satisfying either condition, including a record satisfying both. More alternatives can bring more records into the eligible set. That can help when authors use different words."},
+        {"id": "not", "title": "NOT: remove a set", "claim": "delulu NOT interview", "narration": "NOT removes records satisfying an excluded condition. Delulu NOT interview keeps delulu records without interview. But a relevant paper using the excluded term can disappear too. The rule follows your query, not your intention."},
+        {"id": "ranking", "title": "Admission comes before ordering", "claim": "Eligible does not mean relevant", "narration": "And passing the gate does not prove relevance. Boolean logic creates an eligible set. It does not award graded relevance scores or decide who comes first. A separate ranking method can order the admitted records."},
+        {"id": "expansion", "title": "A new word opens a new door", "claim": "Inspect every suggested alternative", "narration": "Now imagine an AI suggests foolish as another word for delulu. Add it with OR, and records containing foolish can enter. Ranking might push weak matches down, but the expansion has already changed who gets in."},
+        {"id": "excluded", "title": "A closed gate is final", "claim": "Ranking cannot rescue an excluded record", "narration": "The reverse mistake matters too. Make interview compulsory with AND, and a useful paper without that indexed term never becomes eligible. A ranking stage working on that set cannot rescue a record it never received."},
+        {"id": "recap", "title": "One rule to remember", "claim": "Boolean admits. Ranking orders.", "narration": "So keep the decisions separate: analyse the words, apply the admission rules, then rank if needed. Boolean tells you which records satisfy your conditions. Whether those records answer your real question still needs judgement."}
+      ]
+    },
+    {
+      "id": "02-text-to-terms",
+      "title": "What happens to your words?",
+      "subtitle": "From text to searchable terms",
+      "accent": "yellow",
+      "scenes": [
+        {"id": "raw", "title": "The words you see", "claim": "Text must be analysed before lexical matching", "narration": "You type a word and expect the same word to be found. But lexical search usually matches processed terms. Before Boolean rules can act, text passes through an analyser. Let's follow one tiny sentence: Delulu about jobs!"},
+        {"id": "tokens", "title": "1. Choose the boundaries", "claim": "A token is a processing unit", "narration": "First comes tokenisation: dividing the string into units. Our example makes four tokens: Delulu, about, jobs, and an exclamation mark. Other systems choose different boundaries. A token can be a word, punctuation, a character, or part of a word."},
+        {"id": "case", "title": "2. Normalise case", "claim": "Delulu becomes delulu", "narration": "Next, case normalisation can turn capital Delulu into lowercase delulu. Tokenisation and lowercasing are separate steps. One picks the boundaries; the other changes the form. Neither step understands what you actually need."},
+        {"id": "filter", "title": "3. Optional removal", "claim": "This example drops about and !", "narration": "Our illustrative analyser then removes about and the punctuation. These choices are optional. Another field or database might retain both. Never assume that every word you typed survives into the matching stage."},
+        {"id": "stem", "title": "4. Optional stemming", "claim": "jobs can become job", "narration": "Stemming can reduce jobs to job, letting different grammatical forms share a matching key. Some stemmers reduce studies, studying, and studied to studi. A stem does not have to be a dictionary word. Exact outputs depend on the algorithm."},
+        {"id": "lemma", "title": "A dictionary form", "claim": "Lemmatisation uses linguistic information", "narration": "Lemmatisation uses vocabulary and morphology to choose a dictionary form, such as study. Grammar still matters. Adjectival better may become good. These processes primarily normalise grammatical forms; they are not the same as synonym expansion or understanding meaning."},
+        {"id": "compatibility", "title": "Two sides must meet", "claim": "Document terms and query terms must correspond", "narration": "Now the crucial test. If document jobs becomes indexed job, and your query becomes job, the two sides meet. But if the index stores only jobs while the query looks up only job, the match is missed without another mapping."},
+        {"id": "fields", "title": "The field changes the rules", "claim": "Check the analyser and the indexed fields", "narration": "Different fields can use different analysers. A title might stem words while an identifier stays exact. Ask which text is indexed, and which transformations apply. Boolean still returns yes or no, but that decision happens after analysis has shaped the evidence."}
+      ]
+    },
+    {
+      "id": "03-inverted-index",
+      "title": "The map that makes search fast",
+      "subtitle": "Inverted indexes and posting lists",
+      "accent": "coral",
+      "scenes": [
+        {"id": "records", "title": "A tiny universe of records", "claim": "Four records from Chapter 2", "narration": "How can a search engine find matches without rereading the whole collection? Start with four tiny records. Each contains words. Reading them document by document is natural for us, but search needs a shortcut in the other direction."},
+        {"id": "invert", "title": "Reverse the direction", "claim": "Record → words becomes term → records", "narration": "An inverted index flips the map. Start with a searchable term, then follow its pointers to records containing it. Think of the index at the back of a book, except the destinations are record identifiers instead of page numbers."},
+        {"id": "postings", "title": "Follow the posting lists", "claim": "A posting identifies a record containing a term", "narration": "In our collection, delulu points to D one and D four. Interview points to D one and D two. Job points to all four. Each term has a posting list: entries identifying the records where that analysed term occurs."},
+        {"id": "intersection", "title": "AND finds shared identifiers", "claim": "delulu AND interview → D1", "narration": "Search for delulu AND interview. The engine looks up those two lists and intersects them. D one appears in both, so D one passes. No rereading of all four documents is needed. The Boolean decision happens over identifiers."},
+        {"id": "sets", "title": "The same lists, different rules", "claim": "OR joins sets. NOT subtracts.", "narration": "Change AND to OR, and the union contains D one, D two, and D four. Use delulu NOT interview, and only D four remains. The same index supports different admission rules. The operator decides how the lists are combined."},
+        {"id": "speed", "title": "Go directly. Move forwards.", "claim": "Selective access + ordered access", "narration": "Two features make this efficient. Selective access jumps directly to the lists you need; rare terms have short lists. Ordered access keeps identifiers sorted, so intersection can advance forwards through both lists instead of repeatedly searching earlier entries."},
+        {"id": "rich", "title": "Postings can carry more", "claim": "Identifier · frequency · field · position", "narration": "Real postings can also store term frequency, fields, and positions. These support scoring, phrase queries, proximity, and highlighting. And full-text search describes a capability: it does not guarantee that complete articles are indexed. The searchable fields still matter."},
+        {"id": "finish", "title": "A set is only the beginning", "claim": "The next question is ranking", "narration": "Now we have a fast route from analysed terms to an eligible set. But the index alone does not decide which eligible record deserves first place. That is the next chapter's question: how matching evidence becomes a ranking."}
+      ]
+    }
+  ]
+}

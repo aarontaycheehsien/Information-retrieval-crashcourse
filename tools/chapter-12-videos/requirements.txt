@@ -1,0 +1,1 @@
+-r ../chapter-2-videos/requirements.txt
