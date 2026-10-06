@@ -7,6 +7,98 @@ which text they were working from.
 The version shown in the page header and footer always matches the most recent
 entry here.
 
+## Unreleased
+
+- **Chapter 1 relevance example.** Start with a carefully constructed search,
+  then show how the same hypothetical study contributes differently to an
+  introductory workshop and a service-adoption decision. Acknowledge what
+  queries, filters and task briefs can communicate, while separating matching
+  from usefulness for a task. Align Figure 1.4 and the chapter’s vocabulary.
+
+- **Companion readability.** Teaching notes open with their contents menu, give
+  the labs as one table and show the product-claim groups as one-line claims
+  with short status and per-group counts. Read this first drops the book's
+  chapter-to-chapter hand-offs and panel paragraphs that referred to absent
+  context, splits Mechanisms into Representations and Pipelines, and labels its
+  source links. The vendor questionnaire adds a "Listen for" cue to every
+  question, letters multi-question prompts and hides answer spaces on screen
+  (print unchanged). The evaluation guide puts its worked example first and
+  separates each step's action from its edge cases. Lab introductions and two
+  tour answers are shorter, the README leads with Read this first, and visible
+  lab text uses the book's "cut-off". Book text is unchanged.
+
+- **Repository organization.** Move 26 historical editorial and restructuring
+  records into `reviews/`, preserving their contents. Distinguish current tools
+  from archived migrations, add a repository map, and retain all published HTML
+  paths, retired-edition redirects and the annotation editor's working path.
+
+- **Rank Fusion Lab.** Add an offline, editable companion to Chapter 10's
+  worked RRF example. Show each route's rank and contribution, exact-score ties,
+  the constant's effect, independent input depths and output depth. Include four
+  prediction experiments, full resets, input validation, a static no-JavaScript
+  example and calculation/browser regression checks. Scores are not judgements.
+
+- **Read-this-first digest.** Generate a five-stage, provisional 45-minute
+  reading-and-reflection route from all fifteen chapter summaries, the two
+  distinction panels, opening puzzles and closing recommendation. Preserve
+  excerpt wording and source/evidence links; keep route guidance separate.
+  Add reproducible generation, drift checks and browser/layout verification.
+
+- **Glossary hub.** Add stable links and reviewed explanation destinations for
+  all 84 existing entries without changing their definitions. Inline term marks
+  now link to the glossary while retaining definition tooltips. Add local lookup
+  across terms, aliases and authored headings, with explicit ambiguous matches,
+  keyboard navigation and offline/no-JavaScript fallbacks. Generate navigation
+  and the embedded index from one maintained mapping, with regression checks.
+
+- **Product evidence register.** Inventory 118 separately checkable assertions
+  across 221 book locations, with evidence type, temporal scope, sources,
+  limitations and inherited check dates. Generate the book register, nearby
+  evidence links and nine teaching verification groups from one JSON source.
+  Add an offline currency report, source-drift/date tests and prominent error
+  links. Historical evidence stays historical; missing verification dates stay
+  unknown. This migration is not a fresh product fact-check.
+
+- **Vendor questionnaire.** Add a printable companion with Chapter 15's nineteen
+  core questions and optional sections for Appendix E's four ranking-method
+  prompts and Appendix G's seven RAG prompts. Separate vendor answers, supporting
+  evidence, library verification and follow-up. Generate the questions from
+  stable textbook anchors, with explicit mappings and print-layout checks.
+
+- **Local retrieval evaluation kit.** Add a portable XLSX template, a completed
+  Figure 14.1 example and a companion guide. The workbooks compare per-query
+  precision at a fixed cutoff and known-seed recovery, with explicit capture
+  and judgement checks. Add a shared builder, fixture data and scoring checks;
+  connect the kit to Chapter 14, Exercise III, the closing recommendation and
+  teaching notes. The browser lab remains outside this release.
+
+Five review passes on the `fable-1` branch, each recorded in a review file at the
+repository root. The scope is unchanged: three parts, fifteen chapters, seven
+appendices and two labs.
+
+- **Readability passes over Parts I, II and III** (`part-i-readability-review.md`,
+  `part-ii-readability-review.md`, `part-iii-readability-review.md`). Content held
+  fixed: duplicated statements consolidated to one home, misplaced blocks moved,
+  long sentences split, and every link text that did not name its destination
+  ("Discussed later", "the advanced appendix", "Where it was left") replaced with
+  the chapter, appendix or section it points at, so `maintain.py` can verify it.
+  Chapter 6's longest section gained three subheadings. Consistency repairs found
+  on the way: Figure 7.1's caption no longer claims values the lab's defaults have
+  moved away from; Chapter 9's opening no longer promises the hybrid material that
+  moved to Chapter 10; a stale "Figure 9.5" is now Figure 9.7; Chapters 13 and 14
+  now point at the lab steps built to demonstrate their claims.
+- **Teaching notes and labs** (`teaching-and-labs-review.md`). The re-verification
+  table's stale Table 9.2 / Figure 9.5, two claims about the book that were not
+  true of it, a row for Chapter 12's Web of Science Research Assistant claim, and
+  documentation dates prefilled where the book states them; one sentence moved in
+  the Vector Similarity Lab.
+- **Whole-book consistency audit** (`whole-book-consistency-review.md`). The
+  Preface's reading totals for Parts II and III; footnote 51's tokeniser example;
+  three glossary entries the book promised and lacked, and a TF-IDF definition that
+  contradicted Chapter 3; the reuse section aligned with the README; nine reference
+  entries for sources the text cites, and nine reference entries moved into
+  alphabetical order; six vague back-references in the appendices and footnotes.
+
 ## 1.2.1 — 12 September 2026
 
 Consistency corrections across the textbook, teaching notes and labs. The

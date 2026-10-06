@@ -1,0 +1,39 @@
+{
+  "title": "Pick a Card",
+  "book_title": "How Search Decides What You See",
+  "author": "Aaron Tay",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/",
+  "display_url": "aarontaycheehsien.github.io/Information-retrieval-crashcourse",
+  "intro_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/read-this-first.html",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "+0%",
+    "pitch": "+0Hz",
+    "description": "Warm, wry close-up magician talking to one person across a table; synthetic US English voice"
+  },
+  "lead_in": 1.0,
+  "tail": 3.2,
+  "lines": [
+    {"id": "pick", "scene": "pick", "gap": 0.0, "text": "Pick a card. Any card."},
+    {"id": "gotone", "scene": "pick", "gap": 1.0, "text": "Got one?"},
+    {"id": "ontop", "scene": "pick", "gap": 0.7, "text": "It was the one on top, wasn't it? Don't worry. That's the one most people pick."},
+    {"id": "force", "scene": "force", "gap": 0.5, "text": "Magicians call that a force. You feel like you chose... but the choice was made for you."},
+    {"id": "allday", "scene": "force", "gap": 1.4, "text": "Search engines do it all day. And they've got better tricks than I do."},
+    {"id": "t1a", "scene": "trick1", "gap": 0.7, "text": "Trick one. Take a real research question, and add a word that doesn't exist. Anywhere. Shazamblix."},
+    {"id": "t1b", "scene": "trick1", "gap": 0.4, "text": "By Boolean logic, every single result should now vanish."},
+    {"id": "t1c", "scene": "trick1", "gap": 2.3, "text": "And yet... here they all are."},
+    {"id": "t2a", "scene": "trick2", "gap": 0.8, "text": "Trick two. About nine point four million results. Go on... try to see them."},
+    {"id": "t2b", "scene": "trick2", "gap": 2.4, "text": "A thousand. That's where it stops. So where are the other nine million?"},
+    {"id": "t3a", "scene": "trick3", "gap": 0.8, "text": "Trick three. Ask in a full sentence... thirteen results."},
+    {"id": "t3b", "scene": "trick3", "gap": 0.5, "text": "Now just the keywords... thirty-five thousand."},
+    {"id": "t3c", "scene": "trick3", "gap": 0.7, "text": "Same question. Very different trick."},
+    {"id": "real", "scene": "reveal", "gap": 0.8, "text": "All three are real. They're in chapter one."},
+    {"id": "secrets", "scene": "reveal", "gap": 0.45, "text": "Magicians never reveal their secrets. And search tools don't always explain theirs, either."},
+    {"id": "book", "scene": "reveal", "gap": 0.5, "text": "So this free book shows you how tricks like these work. Boolean, BM25, embeddings, reranking, hybrid search..."},
+    {"id": "table", "scene": "reveal", "gap": 0.3, "text": "and how to test a tool when nobody will show you what's under the table."},
+    {"id": "title", "scene": "end", "gap": 1.0, "rate": "-6%", "text": "How Search Decides What You See. A free textbook."},
+    {"id": "author", "scene": "end", "gap": 0.2, "rate": "-4%", "text": "Written by Aaron Tay."},
+    {"id": "oh", "scene": "end", "gap": 0.9, "text": "Oh, and this video?"},
+    {"id": "either", "scene": "end", "gap": 0.7, "text": "You didn't pick it either."}
+  ]
+}

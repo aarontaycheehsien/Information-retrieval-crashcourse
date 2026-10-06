@@ -1,3 +1,14 @@
 __pycache__/
 *.pyc
 *.annotations.json
+outputs/evaluation-kit/
+outputs/vendor-questionnaire/
+outputs/product-claims/
+outputs/glossary-hub/
+outputs/digest/
+outputs/rank-fusion/
+outputs/promo-video/
+outputs/pick-a-card/
+outputs/chapter-1-video/
+outputs/chapter-2-videos/
+outputs/chapter-3-videos/

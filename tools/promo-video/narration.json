@@ -1,0 +1,23 @@
+{
+  "voice": "en-GB-SoniaNeural",
+  "rate": "-5%",
+  "pitch": "+0Hz",
+  "description": "Warm, curious female investigator; synthetic British English voice",
+  "max_time_compression": 1.1,
+  "music_gain_db": 8,
+  "music_duck_db": -10,
+  "effects_duck_db": -5,
+  "duck_attack_seconds": 0.15,
+  "duck_release_seconds": 0.4,
+  "master_lufs": -16,
+  "master_true_peak_db": -2.5,
+  "cues": [
+    {"scene": "missing", "start": 0.1, "deadline": 3.95, "rate": "+10%", "text": "One crucial paper. Missing. Let's investigate."},
+    {"scene": "answer", "start": 4.25, "deadline": 9.75, "text": "Every citation checked out. Yet one crucial paper was missing."},
+    {"scene": "backwards", "start": 10.4, "deadline": 16.8, "text": "Let's follow the evidence. From the answer… back to the search."},
+    {"scene": "candidates", "start": 17.15, "deadline": 23.8, "text": "There it is. Still in the index. It never reached the candidate list."},
+    {"scene": "rerank", "start": 24.4, "deadline": 29.7, "text": "Reranking can't rescue a paper it never received."},
+    {"scene": "book", "start": 30.1, "deadline": 36.9, "rate": "+15%", "text": "Learn to investigate the pipeline. Boolean search, embeddings, hybrid search, reranking, and evaluation."},
+    {"scene": "end", "start": 37.65, "deadline": 44.45, "text": "How Search Decides What You See. By Aaron Tay. Read free. Case reopened."}
+  ]
+}

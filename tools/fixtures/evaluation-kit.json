@@ -1,0 +1,15 @@
+{
+  "source": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#fig-14-1",
+  "description": "Controlled illustration from Figure 14.1. Records and relevance are stipulated, not live product observations. The kit selects A, C, E, G and J as a teaching seed subset; that subset is not specified in the figure.",
+  "before": ["A", "K", "L", "M", "B", "N", "O", "P", "Q", "R", "C", "D", "E", "F", "G", "H", "I", "J", "S", "T"],
+  "after": ["A", "B", "K", "C", "D", "L", "E", "M", "F", "N", "G", "H", "I", "J", "O", "P", "Q", "R", "S", "T"],
+  "relevant": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+  "seeds": ["A", "C", "E", "G", "J"],
+  "probes": [
+    ["Q01", "Find a record for a specific identifier, gene, chemical string or product code.", "Exact identifier"],
+    ["Q02", "Find a paper using a phrase verified to occur only in its full text.", "Full-text-only evidence"],
+    ["Q03", "Find a relevant record that shares almost none of the query's words.", "Vocabulary mismatch"],
+    ["Q04", "Find evidence for one direction of a relationship; pair with Q05.", "Composition: direction 1"],
+    ["Q05", "Find evidence for the opposite direction; judge separately from Q04.", "Composition: direction 2"]
+  ]
+}

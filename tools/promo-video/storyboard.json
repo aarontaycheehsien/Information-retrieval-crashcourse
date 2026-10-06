@@ -1,0 +1,19 @@
+{
+  "title": "The Missing Paper",
+  "book_title": "How Search Decides What You See",
+  "author": "Aaron Tay",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/",
+  "intro_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/read-this-first.html",
+  "duration": 45,
+  "fps": 30,
+  "seed": 709,
+  "scenes": [
+    {"id": "missing", "start": 0, "end": 4, "eyebrow": "01 / A DISAPPEARANCE", "copy": ["MISSING:", "ONE RELEVANT", "PAPER."], "note": "Last seen: in the index."},
+    {"id": "answer", "start": 4, "end": 10, "eyebrow": "02 / THE CITATIONS CHECK OUT", "copy": ["Every citation", "was real."], "reveal": ["One crucial paper", "was absent."]},
+    {"id": "backwards", "start": 10, "end": 17, "eyebrow": "03 / FOLLOW THE EVIDENCE", "copy": ["Follow the search.", "Backwards."]},
+    {"id": "candidates", "start": 17, "end": 24, "eyebrow": "04 / THE FIRST BOTTLENECK", "copy": ["It never made", "the candidate list."]},
+    {"id": "rerank", "start": 24, "end": 30, "eyebrow": "05 / OUT OF REACH", "copy": ["Reranking can't rescue", "a paper it never", "received."]},
+    {"id": "book", "start": 30, "end": 37, "eyebrow": "06 / THE CASE MANUAL", "copy": ["Learn to investigate", "the pipeline."], "topics": ["Boolean", "BM25", "Embeddings", "Hybrid search", "Reranking", "Evaluation"]},
+    {"id": "end", "start": 37, "end": 45, "eyebrow": "CASE REOPENED", "copy": ["How Search Decides", "What You See"], "cta": "Read free / Link in post"}
+  ]
+}

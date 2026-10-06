@@ -1,0 +1,5 @@
+numpy>=2.2,<3
+Pillow>=11,<13
+skia-python>=138,<145
+edge-tts==7.2.8
+imageio-ffmpeg>=0.6,<0.7
