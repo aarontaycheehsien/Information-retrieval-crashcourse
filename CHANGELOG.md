@@ -13,7 +13,11 @@ entry here.
   then show how the same hypothetical study contributes differently to an
   introductory workshop and a service-adoption decision. Acknowledge what
   queries, filters and task briefs can communicate, while separating matching
-  from usefulness for a task. Align Figure 1.4 and the chapter’s vocabulary.
+  from usefulness for a task. Make the two purposes explicit, give relevance
+  judgement its own paragraph and explain how judgements can guide later
+  searches. Distinguish targeted follow-up searches from compulsory conditions,
+  clarify the perspectives on relevance and shorten the repeated conclusion.
+  Align Figure 1.4, the chapter’s vocabulary and its summary.
 
 - **Companion readability.** Teaching notes open with their contents menu, give
   the labs as one table and show the product-claim groups as one-line claims
