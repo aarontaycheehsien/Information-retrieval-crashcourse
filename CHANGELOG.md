@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Chapter 1 pipeline and application.** Explain the assistant’s searchable
+  scope before ranking, distinguish the book’s teaching decomposition from
+  vendor workflow labels and describe fusion as undocumented. Tighten broad
+  claims about AI search and LLM roles. Add self-checks on three exclusion
+  points and on the demonstration study’s usefulness for two purposes. Retain
+  the author’s assessment of poorer Semantic Scholar question results, based
+  on the known literature and inspection, with its evidence recorded separately
+  from the result counts. Update the evidence snapshot to 9 October 2026.
+
 - **Chapter 1 relevance example.** Start with a carefully constructed search,
   then show how the same hypothetical study contributes differently to an
   introductory workshop and a service-adoption decision. Acknowledge what

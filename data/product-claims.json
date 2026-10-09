@@ -87,7 +87,9 @@
         "placement-google-scholar-labs",
         "placement-undermind-august-snapshot",
         "placement-scispace-deep-review-and-agents",
-        "placement-consensus-deep-search"
+        "placement-consensus-deep-search",
+        "primo-ra-content-scope",
+        "semantic-scholar-question-quality"
       ],
       "exclusions": "General mechanisms, research-paper findings, definitions, recommendations, questions and fictional exercises are outside the product-claim register. Bibliography and reading-list entries are evidence pointers, not additional assertions. Companion links and disclosure are not product evaluations."
     },
@@ -164,7 +166,8 @@
         "alice-vectors",
         "alice-cosine",
         "alice-index-count",
-        "alice-api-exclusion"
+        "alice-api-exclusion",
+        "semantic-scholar-question-quality"
       ],
       "exclusions": "General mechanisms, research-paper findings, definitions, recommendations, questions and fictional exercises are outside the product-claim register. Bibliography and reading-list entries are evidence pointers, not additional assertions. Companion links and disclosure are not product evaluations."
     },
@@ -611,7 +614,7 @@
         },
         {
           "anchor": "tbl-9-3",
-          "excerpt": "The five documented stages of Primo Research Assistant, each mapped to the chapter that explains it. The two budgets—30 candidates reranked, five abstracts passed to generation—are the ones discussed above."
+          "excerpt": "A teaching decomposition of Primo Research Assistant’s documented workflow, mapped to the chapters that explain it. The two budgets—30 candidates reranked, five abstracts passed to generation—are the ones discussed above."
         },
         {
           "anchor": "tbl-9-3",
@@ -661,7 +664,7 @@
         },
         {
           "anchor": "tbl-9-3",
-          "excerpt": "The five documented stages of Primo Research Assistant, each mapped to the chapter that explains it. The two budgets—30 candidates reranked, five abstracts passed to generation—are the ones discussed above."
+          "excerpt": "A teaching decomposition of Primo Research Assistant’s documented workflow, mapped to the chapters that explain it. The two budgets—30 candidates reranked, five abstracts passed to generation—are the ones discussed above."
         },
         {
           "anchor": "when-a-system-writes-the-boolean-query",
@@ -727,7 +730,7 @@
         },
         {
           "anchor": "tbl-9-3",
-          "excerpt": "The five documented stages of Primo Research Assistant, each mapped to the chapter that explains it. The two budgets—30 candidates reranked, five abstracts passed to generation—are the ones discussed above."
+          "excerpt": "A teaching decomposition of Primo Research Assistant’s documented workflow, mapped to the chapters that explain it. The two budgets—30 candidates reranked, five abstracts passed to generation—are the ones discussed above."
         },
         {
           "anchor": "tbl-9-3",
@@ -924,7 +927,7 @@
       "locations": [
         {
           "anchor": "semantic-scholar-opening-caption",
-          "excerpt": "Puzzle 3. The name Semantic Scholar promises search by meaning—so a natural-language question ought to be exactly the query it handles best. It is not. In August 2026, Is there an open access citation advantage returned just 13 results, for a topic with hundreds of relevant papers. Strip the question down to its keywords— open access citation advantage —and the same system returned about 35,300. Same information need, same words at its core, a 2,700-fold difference in results. Why did the more natural query retrieve dramatically less?"
+          "excerpt": "Puzzle 3. The name Semantic Scholar invites the expectation that it will handle a natural-language question well. In August 2026, Is there an open access citation advantage returned just 13 results, for an established topic with dozens to hundreds of relevant studies. Strip the question down to its keywords— open access citation advantage —and the same system returned about 35,300. Inspection of the leading results also showed poorer relevance for the natural-language question. The question performed worse in this comparison; the judgement rests on the known literature and the inspected results, not on the counts alone. Why did the more natural query perform worse?"
         },
         {
           "anchor": "semantic-scholar-opening-caption",
@@ -936,7 +939,7 @@
         },
         {
           "anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
-          "excerpt": "Puzzle 3 set a name against two result counts. Semantic Scholar sounds as though it searches by meaning, perhaps through dense retrieval, yet in August 2026 the question Is there an open access citation advantage returned only 13 results—far fewer than the hundreds of relevant papers on this established topic—while the keyword query open access citation advantage returned about 35,300."
+          "excerpt": "Puzzle 3 set a name against two result counts and an inspection of search quality. Semantic Scholar sounds as though it searches by meaning, perhaps through dense retrieval, yet in August 2026 the question Is there an open access citation advantage returned only 13 results—far fewer than the dozens to hundreds of relevant studies on this established topic—while the keyword query open access citation advantage returned about 35,300. Inspection of the leading results also favoured the keyword query. Why did the more natural query perform worse?"
         },
         {
           "anchor": "closing-puzzle-map-title",
@@ -4688,7 +4691,91 @@
         "pipeline"
       ],
       "review_trigger": "Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating."
+    },
+    {
+      "id": "primo-ra-content-scope",
+      "product": "Primo",
+      "mode": "Research Assistant · content scope",
+      "claim": "Research Assistant searches CDI metadata and abstracts subject to content exclusions; its searchable scope can exclude records available through the library’s wider discovery system.",
+      "temporal_scope": "current-facing",
+      "evidence_basis": "documentation",
+      "evidence_date": "2026-10-09",
+      "evidence": [
+        {
+          "url": "https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_(English)/015_Getting_Started_with_Primo_Research_Assistant",
+          "title": "Getting Started with Primo Research Assistant",
+          "locator": "Content Scope: CDI metadata and abstracts, with exceptions including insufficient metadata/abstracts and excluded provider collections."
+        }
+      ],
+      "evidence_gap": null,
+      "reviews": [
+        {
+          "checked_on": "2026-10-09",
+          "finding": "supported",
+          "evidence_indices": [
+            0
+          ],
+          "notes": "Inspected the live Content Scope section. Support concerns documented scope and exclusions; this was not a behavioural test of an individual record."
+        }
+      ],
+      "limitations": "Content exclusions can change. Availability in a wider discovery interface does not by itself establish Research Assistant eligibility.",
+      "locations": [
+        {
+          "anchor": "primo-ra-content-scope",
+          "excerpt": "Coverage comes before ranking. Research Assistant searches CDI metadata and abstracts, subject to content exclusions such as insufficient metadata or abstracts and some provider collections. A record available through the library’s wider discovery system may therefore fall outside the assistant’s searchable scope. If it cannot enter that scope, changing the query or reranking cannot bring it into the working set. Content scope documentation checked October 2026."
+        }
+      ],
+      "teaching_groups": [],
+      "review_trigger": "Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating."
+    },
+    {
+      "id": "semantic-scholar-question-quality",
+      "product": "Semantic Scholar",
+      "mode": "Main search · author’s assessment of the opening comparison",
+      "claim": "The author judged the natural-language question’s search quality worse than the keyword query, based on the known literature and inspection of leading results.",
+      "temporal_scope": "historical",
+      "evidence_basis": "observation",
+      "evidence_date": null,
+      "evidence": [
+        {
+          "url": "reviews/chapter-1-search-observation-2026-10-09.md",
+          "title": "Author-reported search-quality observation, recorded 9 October 2026",
+          "locator": "Author’s clarification of the comparison: dozens to hundreds of relevant studies and inspection of leading results; no individual relevance judgements supplied."
+        }
+      ],
+      "evidence_gap": null,
+      "reviews": [
+        {
+          "checked_on": "2026-10-09",
+          "finding": "supported",
+          "evidence_indices": [
+            0
+          ],
+          "notes": "Recorded the author’s qualitative assessment as reported. The searches were not independently rerun or regraded. Support is limited to that assessment of this example, not measured precision/recall or the underlying mechanism."
+        }
+      ],
+      "limitations": "Inspection date and individual relevance judgements are not supplied. The result-count screenshots are separate evidence. This qualitative assessment establishes no numerical precision/recall estimate or general superiority of keywords.",
+      "locations": [
+        {
+          "anchor": "semantic-scholar-opening-caption",
+          "excerpt": "Inspection of the leading results also showed poorer relevance for the natural-language question. The question performed worse in this comparison; the judgement rests on the known literature and the inspected results, not on the counts alone."
+        },
+        {
+          "anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
+          "excerpt": "Inspection of the leading results also favoured the keyword query."
+        },
+        {
+          "anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
+          "excerpt": "The inspected results support a judgement of poorer search quality for the natural-language question in this example."
+        },
+        {
+          "anchor": "intro",
+          "excerpt": "a natural-language question that produced fewer papers and poorer leading results than a shorter keyword query"
+        }
+      ],
+      "teaching_groups": [],
+      "review_trigger": "Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating."
     }
   ],
-  "currency_as_of": "2026-09-19"
+  "currency_as_of": "2026-10-09"
 }
