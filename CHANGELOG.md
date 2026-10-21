@@ -9,6 +9,26 @@ entry here.
 
 ## Unreleased
 
+- **Chapter 14 measures recovery, consistency and who judged.** The local
+  evaluation set now plants six probes: a deliberately poor or zero-result query
+  and several phrasings of one need join the original four, with success@k
+  added to Table 14.2. This keeps Chapter 12's promise that recovery from a poor
+  query would be measured; its sentence now links to the probe. Short additions
+  note that assessors disagree while system comparisons hold (Voorhees), that
+  some reported gains are now judged by a language model, and that a local set
+  should report wins, ties and losses and be rerun unchanged before systems are
+  compared. Chapter 14's reading time moves from 22 to 26 minutes and Part III
+  to about 88.
+- **New Appendix H, “Evaluation in more depth”.** Optional sections on
+  LLM-generated relevance judgements (Thomas et al., UMBRELA, Clarke and Dietz,
+  Soboroff), reading the LitSearch benchmark, stability of repeated searches
+  (Bramer; Pozsgai et al.; Gusenbauer and Haddaway), how many queries a local
+  set needs (Sakai), a worked example in which five metrics disagree
+  (Table H.1), retrievability, and what usage logs can and cannot show. Twelve
+  references, glossary entries for retrievability and success@k, an
+  evidence-register coverage note and an evaluation-kit pointer to the two new
+  probes accompany it. The README now counts eight appendices.
+
 - **Evidence-register locations use the book's own labels.** “Book locations”
   links now show the heading text, figure or table number, footnote number or
   vendor question number instead of a de-hyphenated anchor, so “Strict boolean

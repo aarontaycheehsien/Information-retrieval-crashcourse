@@ -368,6 +368,12 @@
       "exclusions": "General mechanisms, research-paper findings, definitions, recommendations, questions and fictional exercises are outside the product-claim register. Bibliography and reading-list entries are evidence pointers, not additional assertions. Companion links and disclosure are not product evaluations."
     },
     {
+      "anchor": "appendix-evaluation-depth",
+      "title": "Evaluation in more depth",
+      "claim_ids": [],
+      "exclusions": "Research findings about LLM relevance judgements, the LitSearch benchmark, search reproducibility studies (including Google Scholar, PubMed, Scopus and Web of Science results reported by Bramer, Pozsgai and colleagues, and Gusenbauer and Haddaway), topic set size and retrievability are dated research results, not product claims maintained in this register. Worked examples and recommendations are outside the register."
+    },
+    {
       "anchor": "figures-and-tables",
       "title": "Figures and tables #",
       "claim_ids": [],

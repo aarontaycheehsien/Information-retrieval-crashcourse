@@ -13,9 +13,9 @@ class GlossaryTests(unittest.TestCase):
 
     def test_all_entries_and_targets(self):
         entries,headings=g.validate(self.mapping,self.book)
-        self.assertEqual(len(entries),84)
-        self.assertEqual(len(self.mapping['terms']),84)
-        self.assertEqual(len(re.findall(r'<dt id="term-',self.book)),84)
+        self.assertEqual(len(entries),86)
+        self.assertEqual(len(self.mapping['terms']),86)
+        self.assertEqual(len(re.findall(r'<dt id="term-',self.book)),86)
         self.assertGreater(len(headings),150)
         for term in self.mapping['terms']:
             self.assertTrue(term['targets'])
@@ -61,7 +61,7 @@ class GlossaryTests(unittest.TestCase):
         index=json.loads(raw)
         self.assertLess(len(raw.encode('utf-8')),140000)
         self.assertEqual(len(index),len({i['id'] for i in index}))
-        self.assertEqual(sum(i['kind']=='Term' for i in index),84)
+        self.assertEqual(sum(i['kind']=='Term' for i in index),86)
         self.assertFalse(any(i['id'].startswith(('claim-','claims-product-')) for i in index))
         self.assertFalse(any('claim-status' in i['text'] for i in index))
         self.assertNotIn('<',raw)

@@ -2,7 +2,7 @@
 
 A practical introduction to information retrieval architecture, written primarily for information literacy and evidence synthesis librarians, with a smaller secondary audience of systems/discovery librarians. It covers Boolean search, BM25, dense retrieval, hybrid search, reranking, query understanding, agentic search, retrieval failure and evaluation.
 
-[**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.2.1, three parts, fifteen chapters and seven appendices.
+[**Read the textbook**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/) — version 1.2.1, three parts, fifteen chapters and eight appendices.
 
 New to the subject? Start with [**Read this first**](https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/read-this-first.html): a 45-minute guided route through the chapter summaries and key distinctions, with every excerpt linked back to the book.
 
