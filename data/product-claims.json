@@ -714,7 +714,7 @@
         },
         {
           "anchor": "relevance-chain-title",
-          "excerpt": "When Primo Research Assistant selects five sources, the score is an estimate based on the evidence and training available to the system. It does not establish that the sources answer this reader’s need. A high score for the demonstration study would not turn participant reactions into evidence of answer accuracy."
+          "excerpt": "When Primo Research Assistant selects five sources, the ranking behind that choice is an estimate based on the evidence and training available to the system. It does not establish that the sources answer this reader’s need. A high score for the demonstration study would not turn participant reactions into evidence of answer accuracy."
         },
         {
           "anchor": "puzzles-under-answer-layers",
@@ -1722,7 +1722,7 @@
         },
         {
           "anchor": "ltr-offline-online-title",
-          "excerpt": "PubMed supplies the other documented scholarly example, and the one most librarians will actually be asked about. Its Best Match ranking uses BM25 to supply 500 candidates, which a LambdaMART model then reorders . The division of labour is the same as Semantic Scholar’s, at half the candidate depth: a cheap lexical pass sets the ceiling, and the learnt model spends its budget inside it. The documented feature set is worth knowing for a different reason. It combines title matches, term proximity, publication year and type and past usage — and, as noted above, does not list citation count, which is the signal most searchers assume a scholarly ranker must be using. A searcher who scrolls past the 500th candidate has left the reranked region entirely. In both systems, the model’s sophistication does not relax the shortlist ceiling. It only spends the available budget more carefully above it."
+          "excerpt": "PubMed supplies the other documented scholarly example, and the one most librarians will actually be asked about. Its Best Match ranking uses BM25 to supply 500 candidates, which a LambdaMART model then reorders . The division of labour is the same as Semantic Scholar’s, at half the candidate depth: a cheap lexical pass sets the ceiling, and the learnt model spends its budget inside it. The documented feature set is worth knowing for a different reason. It combines title matches, term proximity, publication year and type and past usage—and, as noted above, does not list citation count, which is the signal most searchers assume a scholarly ranker must be using. A searcher who scrolls past the 500th candidate has left the reranked region entirely. In both systems, the model’s sophistication does not relax the shortlist ceiling. It only spends the available budget more carefully above it."
         }
       ],
       "teaching_groups": [],
@@ -1767,7 +1767,7 @@
         },
         {
           "anchor": "ltr-offline-online-title",
-          "excerpt": "PubMed supplies the other documented scholarly example, and the one most librarians will actually be asked about. Its Best Match ranking uses BM25 to supply 500 candidates, which a LambdaMART model then reorders . The division of labour is the same as Semantic Scholar’s, at half the candidate depth: a cheap lexical pass sets the ceiling, and the learnt model spends its budget inside it. The documented feature set is worth knowing for a different reason. It combines title matches, term proximity, publication year and type and past usage — and, as noted above, does not list citation count, which is the signal most searchers assume a scholarly ranker must be using. A searcher who scrolls past the 500th candidate has left the reranked region entirely. In both systems, the model’s sophistication does not relax the shortlist ceiling. It only spends the available budget more carefully above it."
+          "excerpt": "PubMed supplies the other documented scholarly example, and the one most librarians will actually be asked about. Its Best Match ranking uses BM25 to supply 500 candidates, which a LambdaMART model then reorders . The division of labour is the same as Semantic Scholar’s, at half the candidate depth: a cheap lexical pass sets the ceiling, and the learnt model spends its budget inside it. The documented feature set is worth knowing for a different reason. It combines title matches, term proximity, publication year and type and past usage—and, as noted above, does not list citation count, which is the signal most searchers assume a scholarly ranker must be using. A searcher who scrolls past the 500th candidate has left the reranked region entirely. In both systems, the model’s sophistication does not relax the shortlist ceiling. It only spends the available budget more carefully above it."
         }
       ],
       "teaching_groups": [],
@@ -1808,7 +1808,7 @@
         },
         {
           "anchor": "ltr-offline-online-title",
-          "excerpt": "PubMed supplies the other documented scholarly example, and the one most librarians will actually be asked about. Its Best Match ranking uses BM25 to supply 500 candidates, which a LambdaMART model then reorders . The division of labour is the same as Semantic Scholar’s, at half the candidate depth: a cheap lexical pass sets the ceiling, and the learnt model spends its budget inside it. The documented feature set is worth knowing for a different reason. It combines title matches, term proximity, publication year and type and past usage — and, as noted above, does not list citation count, which is the signal most searchers assume a scholarly ranker must be using. A searcher who scrolls past the 500th candidate has left the reranked region entirely. In both systems, the model’s sophistication does not relax the shortlist ceiling. It only spends the available budget more carefully above it."
+          "excerpt": "PubMed supplies the other documented scholarly example, and the one most librarians will actually be asked about. Its Best Match ranking uses BM25 to supply 500 candidates, which a LambdaMART model then reorders . The division of labour is the same as Semantic Scholar’s, at half the candidate depth: a cheap lexical pass sets the ceiling, and the learnt model spends its budget inside it. The documented feature set is worth knowing for a different reason. It combines title matches, term proximity, publication year and type and past usage—and, as noted above, does not list citation count, which is the signal most searchers assume a scholarly ranker must be using. A searcher who scrolls past the 500th candidate has left the reranked region entirely. In both systems, the model’s sophistication does not relax the shortlist ceiling. It only spends the available budget more carefully above it."
         }
       ],
       "teaching_groups": [],
@@ -1845,7 +1845,7 @@
       "locations": [
         {
           "anchor": "ltr-offline-online-title",
-          "excerpt": "PubMed supplies the other documented scholarly example, and the one most librarians will actually be asked about. Its Best Match ranking uses BM25 to supply 500 candidates, which a LambdaMART model then reorders . The division of labour is the same as Semantic Scholar’s, at half the candidate depth: a cheap lexical pass sets the ceiling, and the learnt model spends its budget inside it. The documented feature set is worth knowing for a different reason. It combines title matches, term proximity, publication year and type and past usage — and, as noted above, does not list citation count, which is the signal most searchers assume a scholarly ranker must be using. A searcher who scrolls past the 500th candidate has left the reranked region entirely. In both systems, the model’s sophistication does not relax the shortlist ceiling. It only spends the available budget more carefully above it."
+          "excerpt": "PubMed supplies the other documented scholarly example, and the one most librarians will actually be asked about. Its Best Match ranking uses BM25 to supply 500 candidates, which a LambdaMART model then reorders . The division of labour is the same as Semantic Scholar’s, at half the candidate depth: a cheap lexical pass sets the ceiling, and the learnt model spends its budget inside it. The documented feature set is worth knowing for a different reason. It combines title matches, term proximity, publication year and type and past usage—and, as noted above, does not list citation count, which is the signal most searchers assume a scholarly ranker must be using. A searcher who scrolls past the 500th candidate has left the reranked region entirely. In both systems, the model’s sophistication does not relax the shortlist ceiling. It only spends the available budget more carefully above it."
         }
       ],
       "teaching_groups": [],
@@ -2541,7 +2541,7 @@
         },
         {
           "anchor": "web-of-science-smart-search-caption",
-          "excerpt": "Primo NDE Natural Language Search likewise documents classifying the input, generating a Boolean query and expanding it into OR -connected permutations. In both products, the generated query remains visible and editable."
+          "excerpt": "Primo VE NDE Natural Language Search likewise documents classifying the input, generating a Boolean query and expanding it into OR -connected permutations. In both products, the generated query remains visible and editable."
         },
         {
           "anchor": "tbl-11-4",
@@ -2659,7 +2659,7 @@
       "locations": [
         {
           "anchor": "web-of-science-smart-search-caption",
-          "excerpt": "Primo NDE Natural Language Search likewise documents classifying the input, generating a Boolean query and expanding it into OR -connected permutations. In both products, the generated query remains visible and editable."
+          "excerpt": "Primo VE NDE Natural Language Search likewise documents classifying the input, generating a Boolean query and expanding it into OR -connected permutations. In both products, the generated query remains visible and editable."
         },
         {
           "anchor": "tbl-11-4",
@@ -2701,7 +2701,7 @@
       "locations": [
         {
           "anchor": "web-of-science-smart-search-caption",
-          "excerpt": "Primo NDE Natural Language Search likewise documents classifying the input, generating a Boolean query and expanding it into OR -connected permutations. In both products, the generated query remains visible and editable."
+          "excerpt": "Primo VE NDE Natural Language Search likewise documents classifying the input, generating a Boolean query and expanding it into OR -connected permutations. In both products, the generated query remains visible and editable."
         },
         {
           "anchor": "tbl-11-4",
@@ -2975,7 +2975,7 @@
         },
         {
           "anchor": "vendor-q16",
-          "excerpt": "What happens when a mode is retired? Can saved searches, saved sets and stored traces be exported before a mode is withdrawn, and how much notice is given? Chapter 12 records both kinds of change: Ai2's Paper Finder became Asta Find Paper , and Table 12.3 distinguishes Undermind's original deep search from Undermind Projects. A search documented under a mode that no longer exists is not reproducible in any sense the library can act on."
+          "excerpt": "What happens when a mode is retired? Can saved searches, saved sets and stored traces be exported before a mode is withdrawn, and how much notice is given? Chapter 12 records both kinds of change: Ai2’s Paper Finder became Asta Find Paper , and Table 12.3 distinguishes Undermind’s original deep search from Undermind Projects. A search documented under a mode that no longer exists is not reproducible in any sense the library can act on."
         }
       ],
       "teaching_groups": [
@@ -3140,7 +3140,7 @@
         },
         {
           "anchor": "vendor-q16",
-          "excerpt": "What happens when a mode is retired? Can saved searches, saved sets and stored traces be exported before a mode is withdrawn, and how much notice is given? Chapter 12 records both kinds of change: Ai2's Paper Finder became Asta Find Paper , and Table 12.3 distinguishes Undermind's original deep search from Undermind Projects. A search documented under a mode that no longer exists is not reproducible in any sense the library can act on."
+          "excerpt": "What happens when a mode is retired? Can saved searches, saved sets and stored traces be exported before a mode is withdrawn, and how much notice is given? Chapter 12 records both kinds of change: Ai2’s Paper Finder became Asta Find Paper , and Table 12.3 distinguishes Undermind’s original deep search from Undermind Projects. A search documented under a mode that no longer exists is not reproducible in any sense the library can act on."
         }
       ],
       "teaching_groups": [
@@ -3372,7 +3372,7 @@
       "locations": [
         {
           "anchor": "tbl-12-3",
-          "excerpt": "One more product can be placed, and from a document rather than from testing — which makes it a different kind of evidence from the rows above. Clarivate describe Web of Science Research Assistant as “fully agentic” in an April 2026 product post, and the same post says what the agency does: “It automatically determines whether the user needs a topic map, structured review, journal recommendation, or something else entirely.” Before that release those were three separate guides, and the user picked between them. What changed is who picks, not how many there are to pick from. Read against Table 12.1 , a model selecting among routes the designers enumerated is the adaptive row, whatever adjective the announcement uses."
+          "excerpt": "One more product can be placed, and from a document rather than from testing—which makes it a different kind of evidence from the rows above. Clarivate describe Web of Science Research Assistant as “fully agentic” in an April 2026 product post, and the same post says what the agency does: “It automatically determines whether the user needs a topic map, structured review, journal recommendation, or something else entirely.” Before that release those were three separate guides, and the user picked between them. What changed is who picks, not how many there are to pick from. Read against Table 12.1 , a model selecting among routes the designers enumerated is the adaptive row, whatever adjective the announcement uses."
         }
       ],
       "teaching_groups": [
@@ -3401,7 +3401,7 @@
       "locations": [
         {
           "anchor": "tbl-12-3",
-          "excerpt": "One more product can be placed, and from a document rather than from testing — which makes it a different kind of evidence from the rows above. Clarivate describe Web of Science Research Assistant as “fully agentic” in an April 2026 product post, and the same post says what the agency does: “It automatically determines whether the user needs a topic map, structured review, journal recommendation, or something else entirely.” Before that release those were three separate guides, and the user picked between them. What changed is who picks, not how many there are to pick from. Read against Table 12.1 , a model selecting among routes the designers enumerated is the adaptive row, whatever adjective the announcement uses."
+          "excerpt": "One more product can be placed, and from a document rather than from testing—which makes it a different kind of evidence from the rows above. Clarivate describe Web of Science Research Assistant as “fully agentic” in an April 2026 product post, and the same post says what the agency does: “It automatically determines whether the user needs a topic map, structured review, journal recommendation, or something else entirely.” Before that release those were three separate guides, and the user picked between them. What changed is who picks, not how many there are to pick from. Read against Table 12.1 , a model selecting among routes the designers enumerated is the adaptive row, whatever adjective the announcement uses."
         },
         {
           "anchor": "tbl-12-3",

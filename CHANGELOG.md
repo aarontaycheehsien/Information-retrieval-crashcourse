@@ -9,6 +9,16 @@ entry here.
 
 ## Unreleased
 
+- **Whole-book consistency pass.** Chapter 7 now says it resolves two of the
+  five distinctions Part I left open (semantic search and top-*k*), matching the
+  Part II panel; Appendix D places the six-distinction list at the start of
+  Part I, as the Preface does; Chapter 1’s relevance paragraph names the ranking
+  behind Primo’s five-source choice rather than an unintroduced score. Close
+  spaced em dashes in prose (labels, headings and diagram text keep them), and
+  standardise TF-IDF, cut-off, Naive Bayes, “Transformer”, curly apostrophes and
+  the name Primo VE NDE Natural Language Search. Update 12 product-claim
+  excerpts and regenerate Read this first and the vendor questionnaire.
+
 - **Plainer prose in Chapters 2–12.** Apply the whole-text review in
   `reviews/chapters-2-12-plain-prose-recommendations.md`: remove announcements,
   slogans and repeated chapter hand-offs, replace metaphors with the mechanisms
