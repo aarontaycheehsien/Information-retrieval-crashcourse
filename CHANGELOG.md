@@ -9,11 +9,50 @@ entry here.
 
 ## Unreleased
 
+- **Plainer prose in Chapters 2–12.** Apply the whole-text review in
+  `reviews/chapters-2-12-plain-prose-recommendations.md`: remove announcements,
+  slogans and repeated chapter hand-offs, replace metaphors with the mechanisms
+  they stood for, and narrow claims the evidence does not support. These include
+  the equivalence of scite’s interface and MCP access, the “strongest evidence”
+  reading of the Chapter 12 catalogue demonstration and the two-strand account of
+  Transformer history. Keep the book’s working terms (eligible set, compete,
+  leaders, ceiling, term-match floor, operational model of relevance) and the
+  “Nearest means best available” line the Vector Similarity Lab quotes. Retitle
+  two sections (“Four questions about a representation”, “Choosing wording for
+  each receiving component”) with anchors unchanged. Update 31 product-claim
+  excerpts and the scite claim wording, the Read this first manifest and all
+  generated views. Chapters 2–12 are about 1,500 words shorter.
+
+- **Chapter 5, 8, 9 and 12 claims rechecked against sources.** Restore the
+  historical encoder–decoder split as a past pattern, learnt sparse retrieval as
+  one alternative to separate lexical and dense retrievers, and the argument
+  that library work moves rather than disappears, each with its limits stated.
+  Describe the Chapter 12 probe as its December 2025 write-up does, including
+  SciSpace and the general-purpose assistants, and name a fixed workflow as the
+  likely cause of Undermind’s result without ruling out others. State what
+  scite’s MCP documentation establishes (checked October 2026) and record it in
+  the claim register, and align the catalogue-loop paragraph with its write-up’s
+  conclusion. Record December 2025, confirmed by the author, as the run and
+  evidence date of the six probe claims.
+
+- **Chapter 1 pipeline and application.** Explain the assistant’s searchable
+  scope before ranking, distinguish the book’s teaching decomposition from
+  vendor workflow labels and describe fusion as undocumented. Tighten broad
+  claims about AI search and LLM roles. Add self-checks on three exclusion
+  points and on the demonstration study’s usefulness for two purposes. Retain
+  the author’s assessment of poorer Semantic Scholar question results, based
+  on the known literature and inspection, with its evidence recorded separately
+  from the result counts. Update the evidence snapshot to 9 October 2026.
+
 - **Chapter 1 relevance example.** Start with a carefully constructed search,
   then show how the same hypothetical study contributes differently to an
   introductory workshop and a service-adoption decision. Acknowledge what
   queries, filters and task briefs can communicate, while separating matching
-  from usefulness for a task. Align Figure 1.4 and the chapter’s vocabulary.
+  from usefulness for a task. Make the two purposes explicit, give relevance
+  judgement its own paragraph and explain how judgements can guide later
+  searches. Distinguish targeted follow-up searches from compulsory conditions,
+  clarify the perspectives on relevance and shorten the repeated conclusion.
+  Align Figure 1.4, the chapter’s vocabulary and its summary.
 
 - **Companion readability.** Teaching notes open with their contents menu, give
   the labs as one table and show the product-claim groups as one-line claims

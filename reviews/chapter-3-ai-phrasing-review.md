@@ -1,0 +1,29 @@
+# Chapter 3: AI-sounding phrasing review
+
+Review date: 2026-10-13. Saved to the repository: 2026-10-16.
+
+Scope: Chapter 3, **“BM25 and ranked lexical retrieval,”** on `fable-1`. Reviewed source: `search-textbook.html`, blob `ec83886289897c795d42d7020c5e2299d5c16beb`; source links below use commit `913617f79a9f5ccfa416c70b102e537645a5bb26`.
+
+These are the passages flagged as sounding most like “Claude speak”—a stylistic judgement, not proof of AI authorship. This record preserves the review from the conversation; it does not change the chapter or propose replacement wording.
+
+| Location | Exact wording | Why it stands out |
+|---|---|---|
+| [Opening](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1524) | “The ranking is added; the index is not replaced.” | Neatly balanced contrast presented as a punchy takeaway. |
+| [Introduction to BM25](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1536) | “It is also, quietly, one of the most consequential algorithms a librarian never sees named.” | **Strong flag.** The inserted “quietly” and grand claim about an overlooked subject feel conspicuously AI-editorial. |
+| [TF-IDF comparison](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1537) | “no shared term, no evidence.” | Slogan-like compression. Mild alone, more noticeable alongside the chapter’s other aphorisms. |
+| [Historical aside](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1537) | “A caution for the historically minded” | A mannered aside that sounds like an AI adopting a scholarly narrator’s voice. |
+| [Historical aside](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1537) | “the resemblance is convergent, not genealogical.” | **Strong flag.** An unusually polished, elevated “X, not Y” formulation. |
+| [Score explanation](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1538) | “But it is not relevance, and it is not a probability of relevance—it is lexical evidence, added up.” | **Strong flag.** Repeated negation followed by an em-dash reveal and a short closing flourish. |
+| [Parameters](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1546) | “What makes BM25 BM25 is how it answers the last two” | Formulaic “what makes X X” explanatory framing. |
+| [Parameters](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1546) | “A librarian inspecting a search engine’s ranking configuration will meet these two letters.” | A slightly forced attempt to end the explanation with a memorable, audience-specific line. |
+| [Lab invitation](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1570) | “Try it: the formula is easier to understand when you can interfere with it.” | Self-consciously playful teaching copy; sounds engineered to be engaging. |
+| [Academic search opening](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1574) | “None of this is textbook history.” | Dramatic rebuttal to an objection the reader has not raised. |
+| [Figure 3.3](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1581) | “The TF-IDF intuition is not textbook history.” | Repeats the same rhetorical move almost immediately, creating a templated feel. |
+| [Figure 3.4](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1590) | “A production ranking pipeline should not be reduced to one formula.” | Broad, polished admonition; also repeats the conclusion of the preceding PubMed paragraph. |
+| [Efficiency discussion](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1610) | “they do not turn BM25 into semantic retrieval.” | Another corrective contrast inserted into an explanation about efficiency. The accumulation makes the voice feel formulaic. |
+| [Chapter summary](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1612) | “BM25 is not a historical curiosity.” | A third version of the “not textbook history” reassurance. |
+| [Closing transition](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/913617f79a9f5ccfa416c70b102e537645a5bb26/search-textbook.html#L1612) | “Ranking changes what a result list looks like. It also changes what happens to a query term the system cannot match at all—and that is where the central misconception of this book begins.” | **Strong flag.** Carefully staged short-to-long rhythm ending in a dramatic teaser for the next chapter. |
+
+The most noticeable pattern is **repeated punchy contrasts and dramatic closing lines**, rather than individual vocabulary choices. Ordinary technical distinctions elsewhere in the chapter do not strike me as suspicious by themselves.
+
+Quoted unchanged from Aaron Tay Chee Hsien’s textbook, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
