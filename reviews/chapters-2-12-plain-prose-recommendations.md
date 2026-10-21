@@ -1,10 +1,10 @@
 # Chapters 2–12: recommendations for plainer prose
 
-Reviewed: 18 October 2026 (Singapore). Contextual second pass completed the same day.
+Reviewed: 18 October 2026 (Singapore). Contextual second pass completed the same day. Whole-text third pass: 21 October 2026.
 
 **Purpose.** Turn the eleven existing AI-style reviews into specific editorial changes that make the chapters sound less formulaic and more like a librarian explaining how retrieval works. The request is interpreted as reducing “AI/Claude speak”, consistent with the supplied reviews. These are stylistic judgements, not evidence of authorship.
 
-**Source checked.** `fable-1` at commit [`2343676f8136ecd7b6445c96ca0e0077159384d4`](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/commit/2343676f8136ecd7b6445c96ca0e0077159384d4); `search-textbook.html` blob `ec83886289897c795d42d7020c5e2299d5c16beb`. The textbook blob is unchanged from the snapshot named in the earlier reviews. Source links below are pinned to this commit.
+**Source checked.** `fable-1` at commit [`2343676f8136ecd7b6445c96ca0e0077159384d4`](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/commit/2343676f8136ecd7b6445c96ca0e0077159384d4); `search-textbook.html` blob `ec83886289897c795d42d7020c5e2299d5c16beb`. The textbook blob is unchanged from the snapshot named in the earlier reviews. Source links below are pinned to this commit. The third pass rechecked `fable-1` at commit `99bfb9c`; the textbook blob is still `ec83886`, so the pinned line numbers remain valid.
 
 **Status.** Recommendations only. The textbook, illustrations, exercises, citations and original review records have not been edited. Every flagged entry in the eleven reviews has a corresponding numbered recommendation below. Some entries concern the same paragraph and should be implemented together, not as successive independent replacements.
 
@@ -16,6 +16,50 @@ Rechecked all 174 entries against their surrounding paragraphs. Revised 55 recom
 - Replace complete sentences or paragraphs where a fragment edit would leave a repeated list, an unfinished colon or a second version of the same transition. Overlapping recommendations now identify the single replacement to apply.
 - Preserve technical scope: optional terms can be Boolean; cross-encoders score query–candidate pairs; learnt sparse retrieval can be part of a hybrid pipeline; and Chapter 11 addresses translators and controllers as well as retrievers.
 - Keep the author’s observations and practical arguments distinct from causal claims. Entries marked **Meaning-sensitive** alter the strength or scope of a claim and require editorial judgement rather than mechanical application. Product-specific assertions still require their cited evidence; no new vendor fact-check is claimed here.
+
+## Whole-text third pass
+
+The second pass read each entry against its own paragraph and neighbours. This pass read the whole textbook (Preface, Chapters 1–15, “What you can now ask”, Appendices A–G and the glossary) and the material generated from or built around it: `read-this-first.html` and its manifest, the BM25 and Vector Similarity Labs, and the chapter-film scripts under `tools/`. A phrase that looks like a local tic can be a term the book defines once and relies on later, a callback that another chapter answers, or a line a lab or film repeats. Thirty-four entries are revised or annotated as a result, and three new items are added. The remaining entries were checked against the whole text and stand as written.
+
+Five findings drive the changes:
+
+- **Some flagged phrases are book-wide terms.** “Ceiling” (Chapters 1, 9, 14, the Part III recap panel, Appendices E and F, and the closing), “term-match floor” (Chapter 7, its self-check and film), “operational model of relevance” (Chapter 6, then Chapters 12–14) and the three-controls formula “who may compete, how candidates are ordered, how many are kept” (Chapters 2, 4, 7 and 14, and the Part II recap panel) all recur. Removing them where they are introduced leaves later chapters using undefined terms. Keep the term; remove only the decoration around it.
+- **Some flagged sentences are one end of a callback.** Chapter 1’s puzzles are answered in Chapter 4, Chapter 7 and the closing puzzle map. Chapter 6 opens by restating the two questions Chapter 5 ends with. Appendix A refers back to “the bargain described in Chapter 5”. Edit both ends together.
+- **Some second-pass replacements duplicate text elsewhere.** The replacements in 4.7, 8.5, 10.4 and 12.10 repeat sentences that already appear a few paragraphs away (Chapter 4, line 1626; Chapter 8, line 2222; Chapter 10, line 2445; Chapter 11, line 2707). Deletion is the better edit there.
+- **The second-pass hand-offs created a new pattern.** Eleven replacements use “Chapter N explains/examines X”. The transitions that were never flagged (Chapters 4, 8, 9, 11 and 12) already use a plainer house form, usually a question the next chapter takes up: “The next chapter asks what a system can afford once it has a shortlist.” Entries 2.5, 3.15 and 5.17 now use that form. Where the second-pass hand-off is kept (6.13, 7.2, 7.14, 8.9, 8.13, 10.15), vary the verbs when implementing.
+- **Some prose is copied or selected by build tools.** `tools/build-digest.py` copies the chapter summaries (and the Chapter 10 transition) into `read-this-first.html`. Its manifest also omits paragraphs whose opening words entries 4.17 and 4.18 would change. Headings changed by 8.4 and 11.6 feed both tables of contents, glossary links and the local lookup index. The implementation section now lists the regeneration steps.
+
+| Entry | Third-pass change | Whole-text basis |
+|---|---|---|
+| 2.2 | Keep “compete” in the pull quote; drop only “finishes first” | The three-controls formula starts here and recurs through Chapter 14 |
+| 2.5, 2.6 | Use “eligible set”, the term Chapter 2 defines; question-led hand-off | Chapter 3 opens with “every eligible record” |
+| 3.15 | Restore the link to the first opening puzzle | Table 1.2 sends Puzzle 1’s mistake to Chapter 4 |
+| 4.3 | Echo the Part I wording instead of deleting the contrast | Chapter 2 and 3 headings; Part I blurb; Chapter 2 and 3 films |
+| 4.7 | Delete rather than replace | The replacement repeats line 1626 and the line 1755 verdict |
+| 4.11, 4.12 | Extend to “stories” (1682, 1707, 1732) and “undecidable” in the summary | Chapter 13 and the closing say “Chapter 4’s four explanations”; the summary feeds the digest |
+| 4.16 | Also change “The third temptation” at 1760 | Otherwise that sentence refers to a list that no longer exists |
+| 4.17, 4.18 | Update the digest manifest’s `omit` prefixes | The build fails if a prefix matches no paragraph |
+| 5.1 | Also change line 1789 (“the encoder built here”) | Same overstatement, two paragraphs later |
+| 5.4, 5.15 | Basis strengthened; no change to the replacement | Appendix A relies on the masked/next-token contrast and already calls the strand split “a lineage rather than a rule” |
+| 5.9 | Also change Appendix A’s “the bargain described in Chapter 5” | Orphaned callback |
+| 5.16 | Apply the same change to line 1785 and Figure 6.2’s caption | Same “training decides” wording |
+| 5.17 | Pose the two questions Chapter 6 says Chapter 5 ended with | Chapter 6 opening, line 1937 |
+| 6.7 | Use the replacement sentence rather than omitting it | Chapters 13 and 14 call back to this argument |
+| 6.11 | Keep “operational model of relevance” | Chapter 13 pull quote (2938); Chapters 12 and 14 |
+| 7.7 | Retain the original pull quote | Chapter 7 self-check, Vector Similarity Lab takeaway, Chapter 7 film |
+| 7.8 | Keep “leaders” | Used eight times across Chapters 4 and 7, and defined at 2125 |
+| 8.4, 11.6 | Update the heading `aria-label`; regenerate contents lists, glossary links and lookup index | Heading text is copied by `maintain.py` and `build-glossary-hub.py` |
+| 8.5 | “This describes the shape of a representation” | The book’s term “shape”; line 2222 makes the semantic point |
+| 9.1 | Keep “ceiling” | Book-wide term; Chapter 9 self-check says “recall ceiling” |
+| 9.15 | Name Chapter 7’s “term-match floor” instead of deleting the floor idea | Chapter 7 defines it; its self-check and film use it |
+| 10.3, 10.4 | Delete the lead-in and paired bullets | Chapter 10’s opening (2445) and line 2455 already make the point |
+| 11.13 | Keep “the question behind Puzzle 3” | Figure 11.1’s caption still says it; it is the book’s running question |
+| 12.10 | Delete rather than replace | Replacement repeats Chapter 11, line 2707 |
+| 12.11 | Extend the parity caution to line 2828 and Appendix G | The evidence register records this claim as an undated inference |
+| 12.12 | Extend to line 2830 (“for a great many searches”) | Same unqualified judgement |
+| 12.21, 12.22 | Cross-referenced to new items W.2 and W.3 | Same scope problem at line 2857 and in the summary |
+
+New items W.1–W.3, covering Chapter 9’s summary and two Chapter 12 claims, follow Chapter 12.
 
 ## Editorial approach
 
@@ -59,11 +103,13 @@ Reduce the repeated eligibility-versus-ranking explanation. Keep the inverted-in
 
 **Recommendation:** Delete the opening sentence. Begin the paragraph: “Boolean logic underlies the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid.” Keep the systematic-review explanation and its links.
 
-### 2.2 — Retain the teaching cue; replace the metaphor
+### 2.2 — Retain the pull quote and the book’s “compete” formula
 
 **Original** ([source, line 1382](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1382)): “Boolean decides who gets into the competition. Ranking decides who finishes first.”
 
-**Recommendation:** Keep one short pull quote: “Boolean conditions determine which records qualify; a ranking method orders those records.” It prepares readers for the expansion errors immediately below. This is useful instructional repetition, so the preceding technical explanation can remain. Replace the competition metaphor rather than automatically deleting the cue.
+**Recommendation:** Keep one short pull quote: “Boolean conditions decide which records may compete; ranking decides their order.” It prepares readers for the expansion errors immediately below. This is useful instructional repetition, so the preceding technical explanation can remain. Drop the race extension (“finishes first”), not the word “compete”. Leave “It never enters the competition” at line 1395 as it is.
+
+**Whole-text basis:** This pull quote introduces the book’s standard statement of three separate controls: admission decides who may compete, ranking orders the candidates, and the output boundary decides how many are kept. Chapter 4 restates it (lines 1642, 1648, 1757, the summary and a self-check), the Part II “Carried forward” panel repeats it, Chapter 7 recaps it (line 2129) and Chapter 14 relies on it (line 3046). The second-pass wording (“qualify”) would remove the formula at its source while leaving it everywhere else.
 
 ### 2.3 — Delete
 
@@ -81,13 +127,15 @@ Reduce the repeated eligibility-versus-ranking explanation. Keep the inverted-in
 
 **Original** ([source, line 1523](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1523)): “An eligible set of forty thousand records is not a result list anyone can use. The next chapter asks what has to be added to turn matching into ranking.”
 
-**Recommendation:** “A large matching set can be difficult to browse. Chapter 3 explains how a lexical ranking method orders the matching records.” Avoid claiming that nobody can use a large result set.
+**Recommendation:** “A large eligible set can be hard to browse. Chapter 3 asks how a lexical system can order it.” Avoid claiming that nobody can use a large result set.
+
+**Whole-text basis:** “Eligible set” is the term this chapter defines (lines 1362, 1522 and the summary) and the one Chapter 3 opens with (“every eligible record”); “matching set” introduces a synonym. The question-led hand-off follows the unflagged transitions in Chapters 4, 8, 9, 11 and 12. Appendix F (line 4060) confirms that a large screening set is normal in evidence synthesis, which supports removing “not a result list anyone can use”.
 
 ### 2.6 — Replace; retain the summary recap
 
 **Original** ([source, line 1522](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1522)): “The inverted index gets us quickly to the eligible set. But if several records pass, the posting lists do not inherently say which one deserves first place. What is missing is a graded ranking rule.”
 
-**Recommendation:** Replace the three-sentence paragraph with “The posting lists identify matching records. To order those records by estimated relevance, the system also needs a scoring rule.” In the following chapter summary, retain “Boolean retrieval produces an eligible set, not an ordering” and delete only its immediate restatement, “Nothing in the mechanism says which eligible record should appear first.” A short summary should remain understandable on its own.
+**Recommendation:** Replace the three-sentence paragraph with “The posting lists identify the eligible set. To order it by estimated relevance, the system also needs a scoring rule.” (“Eligible set” rather than “matching records”, for the reason given in 2.5.) In the following chapter summary, retain “Boolean retrieval produces an eligible set, not an ordering” and delete only its immediate restatement, “Nothing in the mechanism says which eligible record should appear first.” A short summary should remain understandable on its own.
 
 ### 2.7 — Replace
 
@@ -210,7 +258,9 @@ Remove the three versions of “this is not history” and let the documented pr
 
 **Original** ([source, line 1612](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1612)): “Ranking changes what a result list looks like. It also changes what happens to a query term the system cannot match at all—and that is where the central misconception of this book begins.”
 
-**Recommendation:** “Chapter 4 examines lexical searches in which some query terms are optional, including what happens when a term matches no record.” This identifies the next topic without wrongly making optionality a consequence of ranking alone.
+**Recommendation:** “Chapter 4 asks what happens to a query term that is optional or matches no record, which is the question behind the first opening puzzle.” This identifies the next topic without wrongly making optionality a consequence of ranking alone.
+
+**Whole-text basis:** Chapter 1’s Table 1.2 sends Puzzle 1 (scite) and its tempting mistake, that the system “stopped matching words at all”, to Chapter 4. The second-pass hand-off dropped that link, so the reader met the puzzle again in Chapter 4 without a cue.
 
 
 <a id="chapter-4"></a>
@@ -237,7 +287,9 @@ This chapter needs the largest reduction in rhetorical framing. Preserve the dis
 
 **Original** ([source, line 1614](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1614)): “Boolean uses words as gates, BM25 uses words as weights.”
 
-**Recommendation:** Replace the whole sentence beginning “What separates them is not the evidence” with “Boolean conditions determine whether a record qualifies. BM25 assigns a score from its matching analysed terms.” Keep the next paragraph showing that Boolean conditions and BM25 can operate together. Do not paste two new sentences after the old colon.
+**Recommendation:** Replace the whole sentence beginning “What separates them is not the evidence” with “Both draw their evidence only from words, but use it differently: Boolean treats words as admission rules, BM25 as weighted evidence.” Keep the next paragraph showing that Boolean conditions and BM25 can operate together. Do not paste new sentences after the old colon.
+
+**Whole-text basis:** The contrast is the spine of Part I, not a local flourish. The Part I blurb promises “words as admission rules, words as weighted evidence”; the Chapter 2 and Chapter 3 headings are “Strict Boolean search: words as admission rules” and “BM25: words as weighted clues”; the Chapter 2 and 3 films both use “Boolean gates”. The second-pass replacement deleted the recap at the point where the two chapters are brought together. This version keeps the recap and uses the blurb’s plain wording instead of the gates/weights metaphor.
 
 ### 4.4 — Replace paragraph ending
 
@@ -257,11 +309,13 @@ This chapter needs the largest reduction in rhetorical framing. Preserve the dis
 
 **Recommendation:** Remove this pull quote. The three-item list and Figure 4.1 already demonstrate that the same index supports different rules. If a caption needs a short introduction, use “The three examples use the same terms and index, with different matching requirements.”
 
-### 4.7 — Replace the whole sentence
+### 4.7 — Delete the whole sentence
 
 **Original** ([source, line 1653](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1653)): “The lesson is narrow but important:”
 
-**Recommendation:** Replace the complete sentence beginning “The lesson is narrow but important” with “A result that lacks a typed term does not, by itself, establish semantic matching.” Keep the historical evidence and citations before it. This connects the example to the chapter’s central misconception without treating every departure from implied AND as non-Boolean.
+**Recommendation:** Delete the complete sentence beginning “The lesson is narrow but important”. Keep the historical evidence and citations before it; the Google example stands as a counterexample without a moral attached. If the box needs a closing line, make it specific to the example: “Google’s soft AND departed from strict conjunction while still ranking lexical matches.”
+
+**Whole-text basis:** The second-pass replacement (“A result that lacks a typed term does not, by itself, establish semantic matching”) repeats line 1626 (“A record lacking a typed word therefore does not establish semantic matching”) from the same chapter. The line 1755 verdict restates the same point. The “The lesson is X” construction also recurs across the book (Chapters 8, 11 and 13; Appendices B, F and G), so removing one instance does not need a replacement.
 
 ### 4.8 — Delete bridge
 
@@ -285,13 +339,17 @@ This chapter needs the largest reduction in rhetorical framing. Preserve the dis
 
 **Original** ([source, line 1700](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1700)): “Four stories, one screen—and the screen looks identical under all of them.”
 
-**Recommendation:** “The visible result is consistent with all four explanations, and several may operate in the same search.” Retain the following example of combined analysis and optional terms, but avoid restating the same point twice.
+**Recommendation:** “The visible result is consistent with all four explanations, and several may operate in the same search.” Retain the following example of combined analysis and optional terms, but avoid restating the same point twice. For consistency, also replace “stories” with “explanations” at lines 1682 (“Four stories are consistent with what you can see”), 1707 (“as one of the four stories above”) and 1732 (“the second of the four stories of a missing word”). Figure 4.3’s title, “four different histories”, can stay.
+
+**Whole-text basis:** Every later reference uses “explanations”: the Chapter 4 self-check (“Name the four lexical explanations”), Chapter 13 (line 2873, “Chapter 4’s four explanations apply first”) and the closing puzzle map (line 3501, “Any of Chapter 4’s four explanations”). Changing only line 1700 would leave Chapter 4 using two names for the same list.
 
 ### 4.12 — Replace ending
 
 **Original** ([source, line 1700](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1700)): “the question is not hard, it is undecidable from the evidence the interface provides.”
 
-**Recommendation:** “The scite screenshot alone does not show which explanation applies.” Use this after the combined-mechanisms example. It is an evidential limit, not mathematical undecidability.
+**Recommendation:** “The scite screenshot alone does not show which explanation applies.” Use this after the combined-mechanisms example. It is an evidential limit, not mathematical undecidability. Apply the same correction to the chapter summary: replace “and shows why the mechanism behind each is undecidable from the interface” with “and shows why the interface alone cannot identify the mechanism behind either”. Entry 4.18 covers the third use at line 1758.
+
+**Whole-text basis:** “Undecidable” occurs three times in Chapter 4 and nowhere else in the book. The summary sentence is copied verbatim into `read-this-first.html`, so leaving it would keep the overstatement in the digest. The closing puzzle map already uses the plain form (“The screen cannot separate them”).
 
 ### 4.13 — Implement with 4.15
 
@@ -315,7 +373,9 @@ This chapter needs the largest reduction in rhetorical framing. Preserve the dis
 
 **Original** ([source, line 1750](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1750)): “Chapter 1 named three temptations and left them standing until you had watched a lexical system behave. Two of the three fall here, settled by ordinary lexical retrieval with no appeal to meaning at all.”
 
-**Recommendation:** “The scite and Google Scholar examples can be explained using the distinctions introduced in Part I.” Follow with the specific observations; do not imply that either product’s architecture has been established from its result screen.
+**Recommendation:** “The scite and Google Scholar examples can be explained using the distinctions introduced in Part I.” Follow with the specific observations; do not imply that either product’s architecture has been established from its result screen. The original sentence is a link to Chapter 1’s “A map of the arguments ahead” (`#a-map-of-the-arguments-ahead`); keep that link on the new wording, for example on “the distinctions introduced in Part I” or on a short lead such as “The first two puzzles from Chapter 1”. At line 1760, also replace “The third temptation is not of this kind” with “The Semantic Scholar puzzle is not of this kind”. Keep the paragraph’s `id="third-temptation"`, which line 1747 links to.
+
+**Whole-text basis:** Line 1760 refers back to the “three temptations” that this entry removes, and “temptation” is used nowhere else in the book; Chapter 1 calls them puzzles and “tempting mistakes”. The section heading at line 1741 (“Returning to the first two opening puzzles”) supplies a callback in words, and the retained link supplies the route back to Table 1.2.
 
 ### 4.17 — Replace first sentence
 
@@ -323,11 +383,15 @@ This chapter needs the largest reduction in rhetorical framing. Preserve the dis
 
 **Recommendation:** “The Google Scholar example separates the reported match count from the number of results a user can view.” Keep the explanation of admission, ranking and output limits, with the product name explicit so the reader need not recall “the second puzzle”.
 
+**Implementation dependency:** This paragraph sits inside the “What a result screen can settle” panel, which `read-this-first.html` reproduces. The manifest `data/digest-selections.json` omits it by the prefix “The second puzzle points the same way”. Change that prefix to “The Google Scholar example separates” in the same commit. The builder fails if an `omit` prefix matches no paragraph.
+
 ### 4.18 — Delete and simplify
 
 **Original** ([source, line 1758](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1758)): “That is the finding, not a shortfall.”
 
 **Recommendation:** Delete “That is the finding, not a shortfall.” Rewrite the preceding sentence as “These observations do not establish the products’ retrieval architectures.”
+
+**Whole-text basis and dependency:** The closing section uses the same formula at line 3507 (“That is the finding, not a failure to reach one”), where it summarises all three puzzles. Removing the Chapter 4 instance leaves the closing as the single use. The digest manifest omits this paragraph by the prefix “Neither observation required a claim”; change it to “These observations do not establish” in the same commit.
 
 ### 4.19 — Delete coda
 
@@ -348,7 +412,9 @@ Keep the orientation box: this chapter introduces unfamiliar concepts to Boolean
 
 **Original** ([source, line 1778](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1778)): “This chapter builds that encoder in three moves”
 
-**Recommendation:** “The chapter introduces word vectors, shows how representations can depend on context, and explains how training shapes those representations.” Avoid implying that the chapter constructs or trains an encoder.
+**Recommendation:** “The chapter introduces word vectors, shows how representations can depend on context, and explains how training shapes those representations.” Avoid implying that the chapter constructs or trains an encoder. Make the matching change at line 1789: replace “which takes the encoder built here and runs it against a whole collection” with “which shows how such an encoder is used to search a whole collection”.
+
+**Whole-text basis:** Line 1789, two paragraphs later and not flagged in the original review, repeats “the encoder built here”. It is part of a chain that runs from Chapter 5 to Chapter 7 (“builds that encoder”, “The encoder now exists”, “That is an encoder, not yet a retrieval system”, “This chapter deploys that encoder”, “That is not yet a search system”). Entries 5.17, 6.1, 6.12, 7.1 and 7.15 remove the other links; line 1789 is the only one left.
 
 ### 5.2 — Delete reassurance, retain guidance
 
@@ -367,6 +433,8 @@ Keep the orientation box: this chapter introduces unfamiliar concepts to Boolean
 **Original** ([source, line 1788](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1788)): “What you can read once and let go:”
 
 **Recommendation:** Replace the paragraph with “The Word2Vec prediction examples and the comparison of masked and next-token prediction explain how training works. The king − man + woman example illustrates relationships found in learnt vectors. Later chapters do not require you to reproduce these calculations or training details.” The analogy calculation is an illustration of the resulting geometry, not itself a training procedure. Keep the following invitation to preview Chapter 7.
+
+**Whole-text basis:** The replacement is also more accurate than the original’s “Nothing later in the book asks you to recall them”. Optional Appendix A builds on the masked/next-token contrast to explain the encoder and decoder strands. If the paragraph needs a pointer, add “Appendix A builds on the masked/next-token contrast for readers who want more.”
 
 ### 5.5 — Replace the first sentence
 
@@ -396,7 +464,9 @@ Keep the orientation box: this chapter introduces unfamiliar concepts to Boolean
 
 **Original** ([source, line 1816](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1816)): “CBOW and Skip-gram are the two arrangements of the same bargain, and the fourth stage is the part that matters here”
 
-**Recommendation:** “CBOW predicts a target word from its neighbours; Skip-gram predicts neighbouring words from a target word. After training, the learnt word vectors can be reused without the prediction machinery. The Illustrated Word2Vec explains the prediction step in more detail.” Retain the existing external and full-resolution links.
+**Recommendation:** “CBOW predicts a target word from its neighbours; Skip-gram predicts neighbouring words from a target word. After training, the learnt word vectors can be reused without the prediction machinery. The Illustrated Word2Vec explains the prediction step in more detail.” Retain the existing external and full-resolution links. In Appendix A (line 3542), replace “Both strands kept the bargain described in Chapter 5” with “Both strands kept the self-supervised arrangement described in Chapter 5”.
+
+**Whole-text basis:** Appendix A’s sentence points back to this caption’s “same bargain”. Once the caption changes, that callback has nothing to point to. “Self-supervised” is the term Chapter 5 itself introduces (line 1841) and the glossary defines.
 
 ### 5.10 — Delete sentence, keep qualification
 
@@ -434,17 +504,23 @@ Keep the orientation box: this chapter introduces unfamiliar concepts to Boolean
 
 **Recommendation:** Replace the paragraph at line 1917 with “Masked-token prediction can use context on both sides of a masked position. Next-token prediction uses preceding context; exposing the next token would reveal the target. These objectives help explain the bidirectional encoder and causal decoder arrangements discussed in Appendix A.” Retain the appendix link. **Meaning-sensitive:** this also removes the claim that one constraint alone determined the history of Transformer research and all retrieval/generation roles. Simply deleting the first sentence would leave that overstatement intact.
 
+**Whole-text basis:** The book’s own fuller account supports the qualification. Appendix A says the split “describes a lineage rather than a rule”, names models that kept both halves (T5, BART) and notes embedding models initialised from decoders. Appendix D (line 3877) makes the same point about decoder-derived embedders. As written, line 1917 contradicts both.
+
 ### 5.16 — Replace
 
 **Original** ([source, line 1923](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1923)): “Contextualisation supplies information a model could use. Task training decides what it becomes good at.”
 
-**Recommendation:** “A contextual representation incorporates the surrounding text. Further training adapts it to tasks such as comparing a query with a relevant passage.” This states the relationship without making training sound like a conscious decision.
+**Recommendation:** “A contextual representation incorporates the surrounding text. Further training adapts it to tasks such as comparing a query with a relevant passage.” This states the relationship without making training sound like a conscious decision. If this entry and 6.11 are applied, make the same change in two unflagged places: the carry-forward list (line 1785), “What a model places near what is shaped by training, not by meaning”, and Figure 6.2’s caption (line 1967), “retrieval training shapes what ends up close together”.
+
+**Whole-text basis:** “Training decides” recurs in Chapter 5 (lines 1785, 1923 and the summary) and Chapter 6 (Figure 6.2’s caption and the summary, the latter covered by 6.11). Changing only the flagged instances would leave the same construction in the list readers are told to carry forward. Entry 5.3 keeps that list, so its wording should match the chapter’s revised usage.
 
 ### 5.17 — Replace the two-sentence transition
 
 **Original** ([source, line 1925](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1925)): “The encoder now exists, but it is not yet retrieval infrastructure.”
 
-**Recommendation:** Replace both sentences at line 1925 with “Chapter 6 explains how a contextual encoder can be trained to produce query and document vectors suitable for retrieval, and how the training examples shape what counts as a useful match.” This retains the relevance question and avoids duplicating the existing Chapter 6 introduction.
+**Recommendation:** Replace both sentences at line 1925 with “Chapter 6 asks what one vector should represent and what training makes nearby vectors useful for search.” This retains the relevance question in a single hand-off.
+
+**Whole-text basis:** Chapter 6 opens (line 1937) with “Chapter 5 ended with a contextual language model and two unanswered retrieval questions: what should one vector represent, and what training makes nearby vectors useful for search?” The second-pass replacement turned Chapter 5’s ending into a statement about what Chapter 6 explains, which made that opening inaccurate. Posing the two questions keeps the two chapters aligned and follows the book’s question-led hand-offs. The echo between the end of Chapter 5 and the start of Chapter 6 is acceptable: the end matter (line 4684) says chapters are written to be assignable on their own, so Chapter 6’s opening recap should stay.
 
 
 <a id="chapter-6"></a>
@@ -491,11 +567,13 @@ Make training, pooling and relevance labels concrete. Preserve the warning that 
 
 **Recommendation:** Delete the sentence. Begin with “Training pairs are drawn from a particular literature, genre and style of question”. The following examples explain why this affects transfer.
 
-### 6.7 — Replace or omit
+### 6.7 — Replace
 
 **Original** ([source, line 1995](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L1995)): “The same architecture, trained on different material, becomes a different retriever.”
 
-**Recommendation:** If a closing sentence is needed, use “Changing the training examples can change which records the model ranks highly, even with the same architecture.” Otherwise omit it: the paragraph already demonstrates the point.
+**Recommendation:** Use “Changing the training examples can change which records the model ranks highly, even with the same architecture.” Do not take the second-pass option of omitting the sentence.
+
+**Whole-text basis:** Later chapters call back to this paragraph as an argument rather than a set of examples: Chapter 13 (line 2933, “the other side of Chapter 6’s retrieval-training story”) and Chapter 14 (line 3143, “the measurement counterpart of Chapter 6’s argument about training data”). With 6.6 also deleting the lead-in, omitting the closing sentence would leave the paragraph without a stated conclusion for those callbacks to point to.
 
 ### 6.8 — Replace lead-in
 
@@ -515,11 +593,13 @@ Make training, pooling and relevance labels concrete. Preserve the warning that 
 
 **Recommendation:** Replace the sentence with “Positive and negative labels record the task’s intended distinction; a negative example may still be useful for a different information need.” Retain footnote 28. The worked example above supplies that alternative need. Merely saying how an example was classified loses the reason for the original caution.
 
-### 6.11 — Replace the complete first sentence
+### 6.11 — Replace the complete first sentence; keep the defined term
 
 **Original** ([source, line 2000](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2000)): “Every retrieval embedding space embodies an operational model of relevance”
 
-**Recommendation:** Replace the entire first sentence at line 2000, including the clause after the colon, with “The training data and objective influence which query–document relationships a retrieval model scores highly.” Keep the next sentence about clicks, answer pairs and citations as proxies. In the summary, replace the complete sentence beginning “A pretrained encoder supplies representations” with “A pretrained encoder supplies representations; retrieval training influences which query–document relationships receive high similarity scores.” Avoid leaving two near-identical explanations in the same sentence.
+**Recommendation:** Replace the entire first sentence at line 2000, including the clause after the colon, with “The training data and objective give a retrieval model an operational model of relevance: they influence which query–document relationships it scores highly.” Keep the next sentence about clicks, answer pairs and citations as proxies. In the summary, replace the complete sentence beginning “A pretrained encoder supplies representations” with “A pretrained encoder supplies representations; retrieval training gives the model an operational model of relevance, influencing which query–document relationships receive high similarity scores.” Remove “every” and “embodies”, not the term.
+
+**Whole-text basis:** “Operational model of relevance” is introduced here and used later without redefinition: Chapter 12 (line 2844, “some operationalisation of relevance”), Chapter 13 (line 2933 and the pull quote at line 2938, “A learnt retriever may transfer its operational model of relevance badly”) and Chapter 14 (line 3028 and its summary, “an operational definition of relevance”). The second-pass wording removed the only definition. The Chapter 6 summary is also copied into `read-this-first.html`.
 
 ### 6.12 — Delete transition
 
@@ -578,17 +658,21 @@ Concentrate on what is stored, what is compared and what limits the returned set
 
 **Recommendation:** Replace the first two sentences of the compression paragraph with “A single-vector bi-encoder compresses each passage into one vector before the incoming query is known. Details important to a particular query may therefore be poorly preserved.” Keep the discussion of shorter chunks and the examples of identifiers, negation and other decisive details. This avoids implying that all topics, entities and qualifications are successfully represented.
 
-### 7.7 — Replace
+### 7.7 — Retain the pull quote
 
 **Original** ([source, line 2079](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2079)): “Nearest means best available, not necessarily relevant.”
 
-**Recommendation:** “Even the closest stored vectors may correspond to irrelevant records.” Place this beside the explanation of nearest-neighbour results; it need not be a standalone pull quote.
+**Recommendation:** Keep the original pull quote. This reverses the first- and second-pass recommendation (“Even the closest stored vectors may correspond to irrelevant records”).
+
+**Whole-text basis:** The sentence is accurate and compact, and other material is built on it. The chapter’s own self-check answers with “nearest means best available rather than relevant”. The Vector Similarity Lab’s takeaway is “Nearest means best available under the chosen representation and rule”, and the Chapter 7 film narration uses the same line. Replacing it would leave the self-check and both companions quoting a sentence the chapter no longer contains. The preceding sentence (“Even an unrelated document will be nearest if everything else is farther away”) already supplies the mechanism, so the pull quote is a recap, not an unsupported slogan.
 
 ### 7.8 — Replace
 
 **Original** ([source, line 2129](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2129)): “k says how many leaders were requested—not who could compete, how relevance was calculated or how much work was done.”
 
-**Recommendation:** “k specifies the requested result count. It does not identify the candidate-selection rule, scoring method or search cost.” Retain this distinction, but use “records” rather than “leaders” elsewhere in the paragraph.
+**Recommendation:** “k says how many leaders were requested. It does not say which records could compete, how scores were calculated or how much work was done.” This removes the dash construction and keeps the book’s vocabulary. Do not replace “leaders” elsewhere; the second-pass instruction to use “records” in this paragraph is withdrawn.
+
+**Whole-text basis:** “Leaders” is used consistently for the highest-scoring candidates eight times across Chapter 4 (line 1648 and a self-check) and Chapter 7 (lines 2073, 2083, 2125, 2127 twice and 2129), and line 2125 defines it (“k for the requested number of leaders”). Changing one paragraph would make the same idea carry two names. “Could compete” is the three-controls formula discussed in 2.2.
 
 ### 7.9 — Delete lead-in
 
@@ -677,11 +761,15 @@ Keep the four representation questions and the distinction between documents, in
 
 **Recommendation:** “Four questions about a representation”. Preserve the existing HTML anchor if the heading is later edited, so links continue to work.
 
+**Implementation dependency:** The anchor is already `four-questions-about-a-representation`, so the new heading matches it. The old heading text is copied into both tables of contents, the heading’s `aria-label`, glossary “Read the explanation” links (for Latent dimension and Sparse vector / dense vector) and the embedded `book-lookup-index`. Update the `aria-label`, which begins “Link to”, by hand; no current tool writes it. Then run `tools/maintain.py` for the contents lists and `tools/build-glossary-hub.py` for the glossary links and lookup index, rather than changing those copies by hand. The distinct “four questions” of Chapter 3 (BM25) are unaffected.
+
 ### 8.5 — Replace only the final sentence
 
 **Original** ([source, line 2220](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2220)): “This describes shape, not quality or meaning.”
 
-**Recommendation:** After the existing definitions of sparse and dense, use “This proportion does not, by itself, establish retrieval quality or semantic capability.” Do not add another definition of active dimensions immediately after the existing one.
+**Recommendation:** After the existing definitions of sparse and dense, use “This describes the shape of a representation.” Do not add another definition of active dimensions immediately after the existing one, and do not restate the semantic point here.
+
+**Whole-text basis:** The second-pass replacement duplicated the fourth question two lines below (line 2222, “not density alone”) and line 2230 (“Density still says nothing by itself about semantics”). “Shape” is the book’s term for sparse versus dense: Chapter 7 (line 2029), the Chapter 8 summary, Appendix D (line 3811) and the glossary entry “Sparse vector / dense vector”. Using it here links the definition to that vocabulary and leaves the semantic caution to the two sentences that already make it.
 
 ### 8.6 — Delete lead-in
 
@@ -756,7 +844,9 @@ State the candidate-pool limitation clearly near the beginning, then show its co
 
 **Original** ([source, line 2292](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2292)): “Because scale and care trade against each other—and because every shortlist is also a ceiling.”
 
-**Recommendation:** “A shortlist makes more expensive query–document comparisons affordable. Reranking can then reorder only the records on that shortlist.” Keep the question as part of the orientation box.
+**Recommendation:** “A shortlist makes more expensive query–document comparisons affordable. It also sets a ceiling: reranking can reorder only the records on it.” Keep the question as part of the orientation box. Remove the dash construction, not the word “ceiling”.
+
+**Whole-text basis:** “Ceiling” is one of the book’s working terms for the candidate-pool limit: Chapter 1 (line 1225, “Retrieval sets a ceiling generation cannot raise”), Chapter 9 (line 2316 and the self-check’s “recall ceiling”), the Part III “Carried forward” panel, Chapter 14 (line 3053 and Figure 14.2), Appendices E and F, and the closing (line 3490). The orientation box is where Chapter 9 first attaches the term to reranking.
 
 ### 9.2 — Replace question and answer
 
@@ -840,7 +930,9 @@ State the candidate-pool limitation clearly near the beginning, then show its co
 
 **Original** ([source, line 2428](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2428)): “The lexical floor survives the learning.”
 
-**Recommendation:** Replace the span from “The lexical floor survives the learning” through “without becoming dense” with “For the sparse term-matching route described here, a non-zero matching score requires overlap between active vocabulary dimensions. Learnt expansion can create that overlap even when the original query and document share no typed query term.” Keep the qualified Elicit example and citation 40. This concerns evidence for a matching score, not a universal rule that every implementation must suppress zero-score results. It also replaces the full repeated explanation rather than leaving the floor metaphor in adjacent sentences.
+**Recommendation:** Replace the span from “The lexical floor survives the learning” through “without becoming dense” with “For the sparse term-matching route described here, Chapter 7’s term-match floor still applies, but to the expanded vocabulary: a non-zero matching score requires overlap between active vocabulary dimensions. Learnt expansion can create that overlap even when the original query and document share no typed query term.” Keep the qualified Elicit example and citation 40. This concerns evidence for a matching score, not a universal rule that every implementation must suppress zero-score results. It replaces the repeated floor sentences with one reference to the defined term.
+
+**Whole-text basis:** “Term-match floor” is defined in Chapter 7 (line 2078, “Dense retrieval has no comparable term-match floor”) and used in its self-check and film. The second-pass replacement removed the idea from Chapter 9 entirely, so the point that learnt sparse retrieval keeps the lexical route’s floor while dense retrieval lacks one was no longer connected to Chapter 7. Naming the term once does that without the slogan.
 
 ### 9.16 — Delete setup
 
@@ -869,17 +961,19 @@ Explain why routes can complement each other, how RRF combines ranks and how rou
 
 **Recommendation:** “The two retrievers return separate candidate lists that must be combined.” Keep the following design questions about depth, deduplication and scores.
 
-### 10.3 — Replace lead-in
+### 10.3 — Delete lead-in (implement with 10.4)
 
 **Original** ([source, line 2449](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2449)): “The cleanest summary is more complicated than keywords versus semantics:”
 
-**Recommendation:** “The two methods can fail on different records:” This introduces the two concrete limitations below.
+**Recommendation:** Delete the lead-in together with the paired bullets in 10.4. The section then moves from “this is the point to ask why anyone would” to the pull quote about complementary blind spots and the paragraph listing what each method preserves.
 
-### 10.4 — Replace paired bullets
+### 10.4 — Delete paired bullets
 
 **Original** ([source, line 2451](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2451)): “A lexical system may preserve the word and miss the meaning.” / “A single-vector dense system may recover the meaning and blur the exact word.”
 
-**Recommendation:** “A lexical retriever can match an exact identifier but may miss a paraphrase with no shared analysed terms.” / “A single-vector dense retriever may find that paraphrase but fail to preserve a decisive identifier or qualifier.” This avoids treating word and meaning as mutually exclusive evidence.
+**Recommendation:** Delete both bullets. If the list is kept for layout reasons, use the second-pass wording (“A lexical retriever can match an exact identifier but may miss a paraphrase with no shared analysed terms.” / “A single-vector dense retriever may find that paraphrase but fail to preserve a decisive identifier or qualifier.”) and remove the matching clause from the chapter opening instead.
+
+**Whole-text basis:** Chapter 10 is the shortest chapter, and its opening paragraph (line 2445) already says, in the plain form the second pass proposed, that “a lexical route may preserve an identifier that a dense representation blurs; a dense route may recover a paraphrase that shares no useful indexed term”. Line 2455 then says it a third time (“BM25 can preserve analysed lexical term evidence, including rare identifiers. Dense retrieval can bridge different formulations”). Chapter 7’s compression section and Chapter 13’s identifier discussion make the same contrast at length.
 
 ### 10.5 — Replace the full final sentence
 
@@ -992,6 +1086,8 @@ Keep the eight query-object examples and the open-access citation-advantage ques
 
 **Recommendation:** Use “Choosing wording for each receiving component”. Retain the existing HTML anchor and update the visible contents-list heading when implementing it. Table 11.2 includes retrievers, LLM query translators, agentic controllers and undisclosed pipelines; “retrieval method” alone is too narrow.
 
+**Whole-text basis and dependency:** The book uses “box” in two senses. The Preface heading (“The words on the box stopped meaning anything”) and the Part II panel (“What the words on the box do not name”) mean product packaging; this heading and entry 11.8 mean the search box. Removing the second sense here and in 11.8 avoids the clash. The heading text is copied into both tables of contents, the heading’s `aria-label` and the embedded lookup index. Update the `aria-label` by hand, then regenerate the rest with `tools/maintain.py` and `tools/build-glossary-hub.py`. The anchor stays `phrase-for-the-mechanism-not-the-box`.
+
 ### 11.7 — Replace joint conclusion
 
 **Original** ([source, line 2566](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2566)): “Each says the same three things: match the expression to the component that receives it, inspect any transformation, and test the resulting route on the actual task.”
@@ -1032,7 +1128,9 @@ Keep the eight query-object examples and the open-access citation-advantage ques
 
 **Original** ([source, line 2538](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2538)): “Eight categories are a lot to hold at once, so run one need through all of them.”
 
-**Recommendation:** “The question ‘Is there an open access citation advantage?’ can be approached using each of the eight query objects below.” Replace the complete paragraph, including the “doors” sentence covered in entry 2. Keep the figure’s qualification that the categories overlap.
+**Recommendation:** “Take the question behind Puzzle 3, ‘Is there an open access citation advantage?’, and approach it through each of the eight query objects below.” Replace the complete paragraph, including the “doors” sentence covered in entry 2. Keep the figure’s qualification that the categories overlap.
+
+**Whole-text basis:** This is the book’s running question. It opens Chapter 1 (the Primo Research Assistant walkthrough), underlies all three opening puzzles and returns in Chapters 9, 12, 15 and Appendices E and G. Figure 11.1’s caption still says the eight rows are “worked against the question behind Puzzle 3”, so the paragraph above it should keep the same reference. Appendix G’s “an MCP endpoint in front of an index is a door” is a separate metaphor and is unaffected by removing the doors here.
 
 ### 11.14 — Replace
 
@@ -1109,11 +1207,13 @@ Retain the distinction between fixed, adaptive and agentic control, but explain 
 
 **Recommendation:** “Use the documented operations to assess the control arrangement, and record what the description leaves uncertain.” Keep the qualifications about vendor terminology and the ambiguous “or something else entirely” clause.
 
-### 12.10 — Replace
+### 12.10 — Delete
 
 **Original** ([source, line 2825](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2825)): “As with every other distinction in this book, the interface label settles none of it.”
 
-**Recommendation:** “The product label alone does not establish these properties.” Remove the reference to every other distinction in the book.
+**Recommendation:** Delete the sentence. The paragraph’s preceding sentence (“A product may advertise one while possessing only that one”) already makes the point about labels.
+
+**Whole-text basis:** The second-pass replacement (“The product label alone does not establish these properties”) is close to Chapter 11’s last section (line 2707, “The interface label alone does not reveal which operations occurred”), a few pages earlier. “The label does not reveal the architecture” is the book’s central claim and is stated in every chapter from the Preface onwards; a further restatement here adds nothing.
 
 ### 12.11 — Separate the process claim from unverified endpoint parity
 
@@ -1121,11 +1221,15 @@ Retain the distinction between fixed, adaptive and agentic control, but explain 
 
 **Recommendation:** Replace the final sentence at line 2827 with “The controller can change queries, choose among available sources and decide whether to search again. These actions may improve the combined results while leaving each retriever’s scoring rule unchanged.” **Meaning-sensitive:** the earlier sentence asserting identical scite retrieval through its interface and MCP needs documentation. If that evidence is unavailable, replace it with “Whether an agent’s calls reproduce the product interface’s retrieval depends on the endpoints, parameters and access provided.” Do not imply that endpoint parity has been verified by this prose review. The adjoining MCP paragraph should likewise not infer unchanged ranking or identical access merely from the use of MCP; preserve the point that authentication and subscription requirements still apply.
 
+**Whole-text basis:** The same assumption appears at line 2828 (“which is why the index and ranking do not change”) and in Appendix G (line 4299, “Nothing about that composition changes what the retrieval system on the other end of the connection does”). The book’s own evidence register records the scite claim (`scite-interface-equivalence`) as an inference with no evidence date. Apply the same caution in all three places. If the prose changes, update that register entry in `data/product-claims.json` and rerun `tools/build-product-claims.py --check`.
+
 ### 12.12 — Delete cue
 
 **Original** ([source, line 2840](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2840)): “But it is worth being honest about how often that applies.”
 
 **Recommendation:** Delete “But it is worth being honest about how often that applies.” Keep the practical question of whether the task fits an existing procedure; prefer a conditional cost comparison over claiming that most academic searches are a poor use of agents.
+
+**Whole-text basis:** The section’s opening line makes the same unqualified judgement and was not flagged: line 2830, “It is a trade, and for a great many searches it is a bad one.” Replace it with a conditional: “It is a trade, and for a known task with an established procedure it may be a poor one.” Otherwise the section asserts the claim this entry removes from its end.
 
 ### 12.13 — Replace
 
@@ -1179,19 +1283,72 @@ Retain the distinction between fixed, adaptive and agentic control, but explain 
 
 **Original** ([source, line 2862](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2862)): “Agency does not improve the retriever’s scoring function. It can improve the search process by giving a failed attempt somewhere to go.”
 
-**Recommendation:** Replace the closing line with “A loop can use retrieval feedback to revise a query and try again without changing the retriever’s scoring function. In the selected examples, that process recovered useful results.” Keep the earlier limits on the experiment and the acknowledgement that fixed or adaptive retries may also work. This preserves the process-versus-scoring distinction, which the first-pass replacement largely dropped.
+**Recommendation:** Replace the closing line with “A loop can use retrieval feedback to revise a query and try again without changing the retriever’s scoring function. In the selected examples, that process recovered useful results.” Keep the earlier limits on the experiment and the acknowledgement that fixed or adaptive retries may also work. This preserves the process-versus-scoring distinction, which the first-pass replacement largely dropped. Apply the same scope to line 2857 and the chapter summary (items W.2 and W.3 below).
 
 ### 12.22 — Replace the complete check-yourself answer
 
 **Original** ([source, line 2865](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2865)): “Nothing at all — and that is the point.”
 
-**Recommendation:** Replace the answer with “Both runs used the same underlying retriever, so the comparison concerns how it was used. The loop used the zero-result response to revise the query, whereas the single-pass rewrite did not. The selected examples support the value of feedback and reformulation, but do not isolate them as the sole cause or show that recovery requires agentic control. The smaller-model and holdings-CSV comparisons changed other aspects of the setup and should be interpreted separately.” Keep the question unchanged. A complete replacement avoids leaving the old claim that feedback alone explains the smaller-model and CSV results.
+**Recommendation:** Replace the answer with “Both runs used the same underlying retriever, so the comparison concerns how it was used. The loop used the zero-result response to revise the query, whereas the single-pass rewrite did not. The selected examples support the value of feedback and reformulation, but do not isolate them as the sole cause or show that recovery requires agentic control. The smaller-model and holdings-CSV comparisons changed other aspects of the setup and should be interpreted separately.” Keep the question unchanged. A complete replacement avoids leaving the old claim that feedback alone explains the smaller-model and CSV results. Items W.2 and W.3 apply the same scope to the two other places that generalise from the experiment.
+
+
+<a id="whole-text-items"></a>
+
+## Additional whole-text items
+
+These passages were not flagged in the eleven chapter reviews. They are listed because reading the whole text shows that they repeat a problem an existing entry fixes, or that leaving them would contradict a revised passage. They are numbered separately so that the original 174 entry numbers stay comparable.
+
+### W.1 — Chapter 9: remove the third statement of the candidate-pool limit in the summary
+
+**Original** ([source, lines 2433–2434](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2433)): “A reranker can only reorder what the first stage returned. It cannot recover a document that was never retrieved.” / “A later stage can spend more computation, but only on candidates an earlier stage admitted.”
+
+**Recommendation:** Keep the summary bullet. Delete the first sentence of the chapter transition (“A later stage can spend more computation, but only on candidates an earlier stage admitted.”) and begin the hand-off with “Chapter 10 turns to a different design decision”.
+
+**Whole-text basis:** Entries 9.1, 9.3 and 9.10 thin the repeated candidate-pool statements in the body of Chapter 9, which still makes the point several times (lines 2297, 2299, 2316–2318, 2398 and 2418). The summary then states it three times in consecutive sentences. Transitions are omitted from `read-this-first.html` unless the manifest keeps them, and Chapter 9’s is not kept, so the digest is unaffected.
+
+### W.2 — Chapter 12: scope the “strongest evidence” sentence to the demonstration
+
+**Original** ([source, line 2857](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2857)): “This is the strongest evidence in the book for a claim Chapters 3 and 4 made on other grounds: lexical retrieval is not obsolete. Wrapped in something that can fail and retry, an ordinary keyword search outperformed a cleverer single rewrite over the same index.”
+
+**Recommendation:** “These examples are consistent with a point Chapter 3 documents on other grounds: lexical retrieval remains in active use and can still be effective. In this demonstration, a keyword search inside a retry loop recovered results that a single rewrite over the same index did not.” **Meaning-sensitive.**
+
+**Whole-text basis:** The chapter itself describes the experiment as selected rather than sampled and “an exploratory demonstration of failure recovery, not a measured success rate” (line 2853). Calling it the strongest evidence in the book contradicts that caveat and the scoping that 12.19, 12.21 and 12.22 apply. The callback also changes meaning once entries 3.10, 3.11 and 3.14 remove Chapter 3’s “not history” sentences: Chapter 3 then supports the claim through its documented examples (PubMed Best Match, Lucene defaults, Scopus and CDI), not through a stated thesis. Chapter 4 argues that lexical retrieval is broader than Boolean retrieval, which is a different claim, so the reference should name Chapter 3 only.
+
+### W.3 — Chapter 12 summary: the same scope in the recap
+
+**Original** ([source, line 2865](https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/2343676f8136ecd7b6445c96ca0e0077159384d4/search-textbook.html#L2865)): “What the loop buys is recovery. A query that returns nothing stops being the end of the interaction and becomes the input to the next attempt — which is why an ordinary keyword search inside a loop can beat a cleverer one-shot rewrite over the same index.”
+
+**Recommendation:** “What the loop buys is recovery. A query that returns nothing stops being the end of the interaction and becomes the input to the next attempt. In the selected examples, a keyword search inside a loop recovered results that a one-shot rewrite over the same index did not.” **Meaning-sensitive.**
+
+**Whole-text basis:** The clause beginning “which is why an ordinary keyword search inside a loop can beat” turns the demonstration into a general explanation. The summary is copied into `read-this-first.html`, where it is read without the experiment’s caveats, so the scope needs to be in the sentence itself.
+
+## Outside the scope of Chapters 2–12
+
+Reading the whole text also shows patterns in chapters the eleven reviews did not cover. They are recorded here for a later pass, not as recommendations:
+
+- “No amount of” recurs as an emphatic closer: Chapter 1 (line 1360, “no amount of squinting at an interface will ever settle it”, the source of entry 4.2’s phrase), Chapter 12 (line 2791, covered by 12.7) and Chapter 13 (line 2870).
+- “The lesson is not X. It is Y” and close variants: Chapter 13 (line 2922), Appendix B (line 3592), Appendix F (line 4177) and Appendix G (line 4295).
+- “None of this requires reading a loss function”: Chapter 14 (line 3201) and twice in Chapter 15 (line 3483 and a self-check).
+- “Is not academic” twice in one paragraph of Chapter 1 (line 1346), and “That is not an engineering detail” in Chapter 14 (line 3004), the same construction as entries 5.15 and 9.7.
+- Appendix E (line 4052) and Appendix G (line 4324) end with the same two-sentence formula (“The method name describes a mechanism. The answers above describe the search system a reader will actually encounter”).
 
 ## Implementation and checking
 
 Apply each consolidated paragraph replacement once; mark its subordinate entries as covered rather than applying them again. Then apply independent sentence and phrase edits, checking the specified start and end points. Read the affected paragraph and its neighbours aloud after each group of edits; remove stranded pronouns, duplicated conclusions and unnecessary transitions. Do not replace every contrast with the same sentence pattern. Preserve summaries, captions and instructional cues that need to work independently of the surrounding prose. Resolve the explicitly marked meaning-sensitive changes against the author’s intended claim and available evidence.
 
 For any later implementation, preserve the existing examples, numerical results, citations, footnote identifiers, heading anchors and figure references. Heading and caption changes should be checked against the contents list and accessibility text. Product descriptions here retain the textbook’s evidential scope and dates; this editorial review does not refresh those claims against current vendor documentation.
+
+Several entries reach beyond the paragraph they quote. Apply each linked edit in the same change as its entry: Chapter 4, lines 1682, 1707, 1732 and 1760, and the summary (4.11, 4.12, 4.16); Chapter 5, lines 1785 and 1789, and Figure 6.2’s caption (5.1, 5.16); Appendix A, line 3542 (5.9); Chapter 12, lines 2828 and 2830, and Appendix G, line 4299 (12.11, 12.12); and items W.1–W.3. Keep the book-wide terms that the third pass retains (“eligible set”, “compete”, “leaders”, “ceiling”, “term-match floor”, “operational model of relevance”) rather than introducing synonyms in replacement sentences.
+
+The textbook is the source for several generated files. After editing `search-textbook.html`, follow `tools/README.md`:
+
+1. Update `data/digest-selections.json` in the same commit as entries 4.17 and 4.18: the `interface-panel` omit prefixes “The second puzzle points the same way” and “Neither observation required a claim” must match the new opening words.
+2. For the heading changes in 8.4 and 11.6, update each heading’s `aria-label` by hand, then run `python -X utf8 tools/maintain.py` to rebuild both tables of contents.
+3. Run `python tools/build-glossary-hub.py`, then `--check`, so glossary “Read the explanation” links and the lookup index carry the new headings.
+4. If entry 12.11 changes the scite sentence, update `scite-interface-equivalence` in `data/product-claims.json`, then run `python tools/build-product-claims.py --check`.
+5. Run `python -X utf8 tools/build-digest.py`, then `--check` and `tools/test-digest.py`. The digest copies the summaries changed by 2.4, 2.6, 3.14, 4.12, 6.11, 7.13, 8.14, 12.1, 12.7 and W.3, and the Chapter 10 transition changed by 10.13–10.15.
+
+Companion materials repeat some of the book’s lines and should be checked when the corresponding entries are applied. The Vector Similarity Lab takeaway and the Chapter 7 film use “Nearest means best available” (7.7, retained). The Chapter 2 and 3 films use “Boolean gates” and “Who finishes first?” (2.2, 4.3). The Chapter 4 film says the bad term “has changed jobs” (4.8). Films may paraphrase the book, so these need a decision, not automatic edits.
 
 This recommendations-only change requires checking coverage, source locators, Markdown structure and the Git diff. It does not change executable code or the published textbook.
 
