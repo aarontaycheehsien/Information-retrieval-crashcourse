@@ -9,6 +9,14 @@ entry here.
 
 ## Unreleased
 
+- **Reading times recalculated** on the established basis (visible text,
+  self-check answers excluded) at the book's current median of 200 words a
+  minute, changing only times two or more minutes out: Chapter 1 from 17 to 20,
+  Chapter 4 from 16 to 14, Chapter 12 from 23 to 25, Appendix F from 17 to 19
+  and Appendix G from 7 to 9. The Preface's three sittings and the part
+  dividers follow: about 68 minutes for the Preface and Part I and 84 for
+  Part III.
+
 - **Whole-book consistency pass.** Chapter 7 now says it resolves two of the
   five distinctions Part I left open (semantic search and top-*k*), matching the
   Part II panel; Appendix D places the six-distinction list at the start of
