@@ -3,7 +3,8 @@
 Date: 2026-10-21  
 Reviewed commit: `342cd92` (textbook unchanged since `99bfb9c`)  
 Builds on: the [initial proposal](evidence-synthesis-plan-2026-10-21.md) and the [reconsidered recommendation](evidence-synthesis-plan-reconsidered-2026-10-21.md)  
-Status: Editorial recommendation only. It does not change the textbook or its companions.
+Status: Editorial recommendation only. It does not change the textbook or its companions.  
+Decision (later on 2026-10-21): the author chose a separate, independent textbook in a new repository, `search-for-evidence-synthesis`, instead of option C below. The rest of this analysis carries over to that book's plan.
 
 ## Summary
 
