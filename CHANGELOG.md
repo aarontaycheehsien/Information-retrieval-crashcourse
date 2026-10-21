@@ -9,6 +9,14 @@ entry here.
 
 ## Unreleased
 
+- **Plainer prose in Chapter 14.** Apply `reviews/chapter-14-ai-style-review.md`:
+  remove staged setups, “not X but Y” maxims, self-references, intensifiers and
+  slogan fragments, including several introduced by the same day's Chapter 14
+  additions, and move the Appendix H pointer so “That returns the problem…”
+  keeps its antecedent. Book-wide terms and the three pull quotes stay. The
+  summary bullet on rank metrics now includes success@k; Read this first is
+  regenerated.
+
 - **Chapter 14 measures recovery, consistency and who judged.** The local
   evaluation set now plants six probes: a deliberately poor or zero-result query
   and several phrasings of one need join the original four, with success@k
