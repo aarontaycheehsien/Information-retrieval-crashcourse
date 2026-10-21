@@ -3184,7 +3184,7 @@
       "claim": "In the uncited-references probe, the tool located the target article and stopped.",
       "temporal_scope": "historical",
       "evidence_basis": "observation",
-      "evidence_date": null,
+      "evidence_date": "2025-12",
       "evidence": [
         {
           "url": "https://aarontay.substack.com/p/how-agentic-are-academic-deep-research",
@@ -3194,7 +3194,7 @@
       ],
       "evidence_gap": null,
       "reviews": [],
-      "limitations": "One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.",
+      "limitations": "One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.",
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
@@ -3213,7 +3213,7 @@
       "claim": "In the probe, papers already cited by the target were returned despite four sub-agents.",
       "temporal_scope": "historical",
       "evidence_basis": "observation",
-      "evidence_date": null,
+      "evidence_date": "2025-12",
       "evidence": [
         {
           "url": "https://aarontay.substack.com/p/how-agentic-are-academic-deep-research",
@@ -3223,7 +3223,7 @@
       ],
       "evidence_gap": null,
       "reviews": [],
-      "limitations": "One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.",
+      "limitations": "One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.",
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
@@ -3242,7 +3242,7 @@
       "claim": "Related work was found, mostly already in the reference list.",
       "temporal_scope": "historical",
       "evidence_basis": "observation",
-      "evidence_date": null,
+      "evidence_date": "2025-12",
       "evidence": [
         {
           "url": "https://aarontay.substack.com/p/how-agentic-are-academic-deep-research",
@@ -3252,7 +3252,7 @@
       ],
       "evidence_gap": null,
       "reviews": [],
-      "limitations": "One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.",
+      "limitations": "One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.",
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
@@ -3271,7 +3271,7 @@
       "claim": "The described pipeline offered no step for checking whether candidates were already cited.",
       "temporal_scope": "historical",
       "evidence_basis": "observation",
-      "evidence_date": null,
+      "evidence_date": "2025-12",
       "evidence": [
         {
           "url": "https://aarontay.substack.com/p/how-agentic-are-academic-deep-research",
@@ -3281,7 +3281,7 @@
       ],
       "evidence_gap": null,
       "reviews": [],
-      "limitations": "One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.",
+      "limitations": "One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.",
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
@@ -3300,7 +3300,7 @@
       "claim": "The tool extracted the reference list and attempted the comparison; most suggestions were not already cited, a few matches failed on incomplete metadata, and completion was unclear.",
       "temporal_scope": "historical",
       "evidence_basis": "observation",
-      "evidence_date": null,
+      "evidence_date": "2025-12",
       "evidence": [
         {
           "url": "https://aarontay.substack.com/p/how-agentic-are-academic-deep-research",
@@ -3310,7 +3310,7 @@
       ],
       "evidence_gap": null,
       "reviews": [],
-      "limitations": "One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.",
+      "limitations": "One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.",
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
@@ -3329,7 +3329,7 @@
       "claim": "The author reports success for Claude Sonnet without an academic connector and earlier success for GPT models; Gemini and GPT-5.1 struggled, attributed to blocked full-text access.",
       "temporal_scope": "historical",
       "evidence_basis": "observation",
-      "evidence_date": null,
+      "evidence_date": "2025-12",
       "evidence": [
         {
           "url": "https://aarontay.substack.com/p/how-agentic-are-academic-deep-research",
@@ -3339,7 +3339,7 @@
       ],
       "evidence_gap": null,
       "reviews": [],
-      "limitations": "One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.",
+      "limitations": "One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.",
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",

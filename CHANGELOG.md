@@ -32,7 +32,8 @@ entry here.
   likely cause of Undermind’s result without ruling out others. State what
   scite’s MCP documentation establishes (checked October 2026) and record it in
   the claim register, and align the catalogue-loop paragraph with its write-up’s
-  conclusion.
+  conclusion. Record December 2025, confirmed by the author, as the run and
+  evidence date of the six probe claims.
 
 - **Chapter 1 pipeline and application.** Explain the assistant’s searchable
   scope before ranking, distinguish the book’s teaching decomposition from

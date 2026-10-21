@@ -2769,7 +2769,7 @@ $$</p>
 <details class="claim-links"><summary>Evidence register · 6 claims</summary><p><a href="#claim-asta-probe"><strong>Ai2 · Asta Find Paper.</strong> In the uncited-references probe, the tool located the target article and stopped.</a></p><p><a href="#claim-consensus-probe"><strong>Consensus · Deep Search.</strong> In the probe, papers already cited by the target were returned despite four sub-agents.</a></p><p><a href="#claim-undermind-probe"><strong>Undermind · Deep search in the probe.</strong> Related work was found, mostly already in the reference list.</a></p><p><a href="#claim-elicit-probe"><strong>Elicit · Screening pipeline in the probe.</strong> The described pipeline offered no step for checking whether candidates were already cited.</a></p><p><a href="#claim-scispace-probe"><strong>SciSpace · Agents.</strong> The tool extracted the reference list and attempted the comparison; most suggestions were not already cited, a few matches failed on incomplete metadata, and completion was unclear.</a></p><p><a href="#claim-general-assistants-probe"><strong>General-purpose assistants · Web-search modes in the probe.</strong> The author reports success for Claude Sonnet without an academic connector and earlier success for GPT models; Gemini and GPT-5.1 struggled, attributed to blocked full-text access.</a></p></details>
 <!-- END PRODUCT CLAIMS LINKS where-current-academic-tools-actually-sit -->
 
-<p>I tested the tools with a task: <em>find papers that could have been cited by a particular article but were not.</em> The probe, written up in December 2025 as “<a href="https://aarontay.substack.com/p/how-agentic-are-academic-deep-research">Deep Research, Shallow Agency: What Academic Deep Research Can and Can’t Do</a>”, was deliberately ordinary. It needs no specialist knowledge, only four ordinary steps: identify the paper, extract its reference list, find related work on the same topic, then subtract the second from the third. The one thing it does not do is match any product’s predetermined workflow.</p>
+<p>I tested the tools with a task: <em>find papers that could have been cited by a particular article but were not.</em> The probe, run and written up in December 2025 as “<a href="https://aarontay.substack.com/p/how-agentic-are-academic-deep-research">Deep Research, Shallow Agency: What Academic Deep Research Can and Can’t Do</a>”, was deliberately ordinary. It needs no specialist knowledge, only four ordinary steps: identify the paper, extract its reference list, find related work on the same topic, then subtract the second from the third. The one thing it does not do is match any product’s predetermined workflow.</p>
 <p>Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which <em>is this one already cited?</em> could be asked. SciSpace Agents came closest: it extracted the article’s reference list and attempted the comparison, and most of its suggestions were not already cited, although incomplete metadata broke a few matches and it was unclear whether it finished. General-purpose assistants with web search mostly passed: Claude Sonnet did so with no academic connector at all, and earlier GPT models also succeeded, while Gemini and GPT-5.1 struggled when blocked from the full text.</p>
 <p>Undermind’s case shows how hard the cause of a failure is to establish. It asked clarifying questions that suggested it understood the request, and its internals are the least documented of the tools tested. In related tests, its clarifying step sometimes warned that the system could not do the task requested. That fits a fixed workflow with no step for this comparison, although the result alone cannot rule out a missing operation or poor choices of action.</p>
 <p>Sorting the tools themselves is a separate exercise, done in April 2026 and written up as “<a href="https://aarontay.substack.com/p/from-fixed-search-workflows-to-agentic">From Fixed Search Workflows to Agentic Academic Search</a>”. It describes how these products were built at that point, and it will date quickly.</p>
@@ -4857,10 +4857,10 @@ $$</div>
 <p class="claim-id">asta-probe · Asta Find Paper</p>
 <p><strong>In the uncited-references probe, the tool located the target article and stopped.</strong></p>
 <p class="claim-status">Historical example</p>
-<p>Evidence date: Unknown / not recorded · Last supporting check: Unknown / not recorded</p>
+<p>Evidence date: 2025-12 · Last supporting check: Unknown / not recorded</p>
 <details><summary>Evidence, review history and book locations</summary>
 <p>Basis: observation. Finding: No recorded verification finding. Last attempt: Unknown / not recorded.</p>
-<p>One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.</p>
+<p>One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.</p>
 <ul>
 <li><a href="https://aarontay.substack.com/p/how-agentic-are-academic-deep-research">Deep Research, Shallow Agency: What Academic Deep Research Can and Can’t Do</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
@@ -5068,10 +5068,10 @@ $$</div>
 <p class="claim-id">consensus-probe · Deep Search</p>
 <p><strong>In the probe, papers already cited by the target were returned despite four sub-agents.</strong></p>
 <p class="claim-status">Historical example</p>
-<p>Evidence date: Unknown / not recorded · Last supporting check: Unknown / not recorded</p>
+<p>Evidence date: 2025-12 · Last supporting check: Unknown / not recorded</p>
 <details><summary>Evidence, review history and book locations</summary>
 <p>Basis: observation. Finding: No recorded verification finding. Last attempt: Unknown / not recorded.</p>
-<p>One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.</p>
+<p>One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.</p>
 <ul>
 <li><a href="https://aarontay.substack.com/p/how-agentic-are-academic-deep-research">Deep Research, Shallow Agency: What Academic Deep Research Can and Can’t Do</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
@@ -5251,10 +5251,10 @@ $$</div>
 <p class="claim-id">elicit-probe · Screening pipeline in the probe</p>
 <p><strong>The described pipeline offered no step for checking whether candidates were already cited.</strong></p>
 <p class="claim-status">Historical example</p>
-<p>Evidence date: Unknown / not recorded · Last supporting check: Unknown / not recorded</p>
+<p>Evidence date: 2025-12 · Last supporting check: Unknown / not recorded</p>
 <details><summary>Evidence, review history and book locations</summary>
 <p>Basis: observation. Finding: No recorded verification finding. Last attempt: Unknown / not recorded.</p>
-<p>One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.</p>
+<p>One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.</p>
 <ul>
 <li><a href="https://aarontay.substack.com/p/how-agentic-are-academic-deep-research">Deep Research, Shallow Agency: What Academic Deep Research Can and Can’t Do</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
@@ -5326,10 +5326,10 @@ $$</div>
 <p class="claim-id">general-assistants-probe · Web-search modes in the probe</p>
 <p><strong>The author reports success for Claude Sonnet without an academic connector and earlier success for GPT models; Gemini and GPT-5.1 struggled, attributed to blocked full-text access.</strong></p>
 <p class="claim-status">Historical example</p>
-<p>Evidence date: Unknown / not recorded · Last supporting check: Unknown / not recorded</p>
+<p>Evidence date: 2025-12 · Last supporting check: Unknown / not recorded</p>
 <details><summary>Evidence, review history and book locations</summary>
 <p>Basis: observation. Finding: No recorded verification finding. Last attempt: Unknown / not recorded.</p>
-<p>One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.</p>
+<p>One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.</p>
 <ul>
 <li><a href="https://aarontay.substack.com/p/how-agentic-are-academic-deep-research">Deep Research, Shallow Agency: What Academic Deep Research Can and Can’t Do</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
@@ -5945,10 +5945,10 @@ $$</div>
 <p class="claim-id">scispace-probe · Agents</p>
 <p><strong>The tool extracted the reference list and attempted the comparison; most suggestions were not already cited, a few matches failed on incomplete metadata, and completion was unclear.</strong></p>
 <p class="claim-status">Historical example</p>
-<p>Evidence date: Unknown / not recorded · Last supporting check: Unknown / not recorded</p>
+<p>Evidence date: 2025-12 · Last supporting check: Unknown / not recorded</p>
 <details><summary>Evidence, review history and book locations</summary>
 <p>Basis: observation. Finding: No recorded verification finding. Last attempt: Unknown / not recorded.</p>
-<p>One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.</p>
+<p>One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.</p>
 <ul>
 <li><a href="https://aarontay.substack.com/p/how-agentic-are-academic-deep-research">Deep Research, Shallow Agency: What Academic Deep Research Can and Can’t Do</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
@@ -6411,10 +6411,10 @@ $$</div>
 <p class="claim-id">undermind-probe · Deep search in the probe</p>
 <p><strong>Related work was found, mostly already in the reference list.</strong></p>
 <p class="claim-status">Historical example</p>
-<p>Evidence date: Unknown / not recorded · Last supporting check: Unknown / not recorded</p>
+<p>Evidence date: 2025-12 · Last supporting check: Unknown / not recorded</p>
 <details><summary>Evidence, review history and book locations</summary>
 <p>Basis: observation. Finding: No recorded verification finding. Last attempt: Unknown / not recorded.</p>
-<p>One selected task type; run date and full conditions must be recovered from the linked account. Not a general success or failure rate.</p>
+<p>One selected task type, run in December 2025 (date confirmed by the author); full conditions are in the linked account. Not a general success or failure rate.</p>
 <ul>
 <li><a href="https://aarontay.substack.com/p/how-agentic-are-academic-deep-research">Deep Research, Shallow Agency: What Academic Deep Research Can and Can’t Do</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
