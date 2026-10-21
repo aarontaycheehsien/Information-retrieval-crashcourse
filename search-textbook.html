@@ -2697,7 +2697,7 @@ $$</p>
 <p>This is especially important for evidence searches. A rewrite, compulsory clause, filter or route can <a href="#why-search-systems-use-multiple-stages">exclude a relevant document before ranking</a>; feedback can also reinforce an unrepresentative first ranking. Evaluation and reporting should therefore distinguish the original input, every transformed input, the selected routes and any intermediate results used to construct a later query.</p>
 <p>All of these operations can appear in a non-agentic workflow. A designer can prescribe five reformulations, two retrievers, one fusion rule and one reranker in advance—even the two-pass feedback workflow above. <a href="#fixed-adaptive-and-agentic-are-not-the-same-thing">Chapter 12</a> asks the separate question: who chooses what happens next?</p>
 
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>The useful question comes before phrasing: what object stands for the information need, and what mechanism will receive it?</li><li>Free-text strings, controlled expressions, citation edges, seed documents, relevance judgements, browse targets, API predicates and task briefs address different mechanisms.</li><li>Query understanding interprets a request and may or may not change what retrieval receives.</li><li>Transformation creates changed or additional retrieval inputs; routing and coordination control which retrieval paths use them.</li><li>Pseudo-relevance feedback constructs a later query from an initial ranking. It is retrieval-dependent, but a prescribed two-pass workflow need not be agentic.</li><li>Query2doc and HyDE use generated text differently, which makes that text part of the search strategy and part of what must be recorded.</li><li>Natural-language filter extraction is useful and reliably partial.</li></ol><p class="chapter-transition">Interpretation, transformation, routing and feedback can all be arranged in advance. Part III asks who chooses the next action while a search is running.</p></aside><section class="self-check" aria-label="Questions on this chapter"><p class="self-check-label">Check yourself</p><details class="self-check-q"><summary>A researcher types a polished question, follows a citation from one relevant paper, and asks an agent to search until three named databases have been covered. Which three different kinds of input are involved?</summary><p>The question is a text query, the citation is a graph edge used for traversal, and the coverage instruction is part of a task brief to the controller. Treating all three as phrasing styles would hide the different mechanisms they address.</p></details><details class="self-check-q"><summary>Why can pseudo-relevance feedback not be described as an entirely upstream stage? Does using feedback make the workflow agentic?</summary><p>PRF needs an initial ranking before it can select terms and construct a second query, so it includes a retrieval-to-transformation feedback loop. No: a system can be programmed to run those same two passes every time. The second query adapts to the first results, while the control sequence remains fixed.</p></details><details class="self-check-q"><summary>Is SPLADE’s expansion the same kind of operation as an LLM generating three reformulations of a query?</summary><p>No—though not because one is inspectable and the other is not. The LLM produces alternative retrieval inputs as text. SPLADE produces a weighted vocabulary representation, whose activated terms can also be listed. Either can be handed to another component, so what separates them is the form of the retrieval input, not where a component boundary falls.</p></details><details class="self-check-q"><summary>Query2doc and HyDE both generate text. How do they differ, and what risk do they share?</summary><p>Query2doc uses the generated language to expand a query for a lexical or dense retriever; HyDE embeds the generated document and retrieves real documents near that vector. Both can import invented details that steer retrieval, so the generated text—not only the user’s question—belongs in the search record.</p></details></section><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#hybrid-and-fusion"><span>Previous</span>Hybrid retrieval and rank fusion</a><a class="cnav next" href="#exercise2"><span>Next</span>Application exercise II</a></nav></section><section class="exercise" id="exercise2"><p class="exercise-label">End of Part II</p><h2>Application exercise II — Map a product onto the pipeline</h2><p>Across Chapters 5 to 11, Part II assembled a pipeline: query interpretation and transformation, first-stage retrieval, fusion, reranking and presentation. This exercise asks how much of it a vendor will tell you.</p><ol><li>Choose an institutional or publicly accessible product that advertises semantic, natural-language or AI search.</li><li>First use technical documentation, release notes and help pages to fill in the six-stage map, noting any routing or feedback decision. Then add the behavioural probe below as a separate evidence source. Marketing claims alone do not establish an architecture.</li><li>Mark every stage as <strong>documented</strong> (the vendor states it), <strong>inferred</strong> (you deduced it from observed behaviour), or <strong>unknown</strong>. Use <strong>documented: not used</strong> when documentation explicitly states a stage is absent.</li><li>For the indexed unit, develop and test a hypothesis about whether the product retrieves titles, abstracts, passages or full text. Search for a claim known to appear only in a paper’s full text, then record what the result supports, what alternative explanations remain and what only vendor documentation could establish.</li></ol><p class="exercise-deliverable"><strong>Deliverable.</strong> A completed six-stage map with each stage labelled by evidence type, plus the single question you would put to the vendor about the stage you could least determine. Bring the map to your next renewal conversation.</p><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#query-transformation"><span>Previous</span>Understanding, transforming and routing queries</a><a class="cnav next" href="#agentic-search"><span>Next</span>Agentic search</a></nav></section><section class="part-divider" id="part3"><p class="part-tag">Part III</p><h2 class="part-title">Control, failure and professional judgement</h2><p class="part-blurb">Who chooses the next retrieval action, where retrieval goes wrong, and what libraries must record, inspect and require.</p><p class="part-time">Reading time: about 84 min</p><aside class="part-recap" aria-labelledby="part3-recap-title"><p class="part-recap-label">Carried forward</p><h4 id="part3-recap-title">Five things from Part II that Part III leans on</h4><dl><dt>Embedding</dt><dd>A learnt mapping into a vector space, and by shorthand the vector it produces. Part III asks what happens when the training behind one does not fit your collection.</dd><dt>Indexed unit</dt><dd>The text the system actually searches—an abstract, a section, a passage—which need not be a whole document. It is <a href="#diagnosing-failure">Chapter 13’s</a> first diagnostic question.</dd><dt>The candidate boundary</dt><dd>Where the fixed pool’s recall ceiling is set. No reranker, fusion stage or generated answer recovers a record that no earlier route let in; <a href="#precision-and-recall">Chapter 14</a> gives that its exact meaning.</dd><dt>Reranker</dt><dd>A later, more expensive stage reordering a shortlist an earlier retriever produced. It reorders; it never retrieves.</dd><dt>Hybrid and multi-stage</dt><dd>Hybrid combines candidate-generation routes; multi-stage means later operations process what an earlier one supplied. <a href="#agentic-search">Chapter 12</a> adds a third, independent property: who chose the order.</dd></dl><p>Part II’s chapter summaries restate each of these, and the <a href="#glossary">glossary</a> holds the short definitions.</p></aside></section><section class="chapter" id="sec-agentic-search"><span id="ch7" class="legacy-anchor"></span><header class="chapter-head"><p class="chapter-eyebrow">Chapter 12</p><p class="chapter-meta">About 25 min</p><h2 id="agentic-search">Agentic search</h2><p class="chapter-question"><span>Central question</span>Who chooses the next retrieval action?</p><div class="stage-map" role="group" aria-label="Pipeline map: the stage this chapter covers is highlighted"><div class="stage-controller on">Controller — chooses and sequences the stages below</div><div class="stage-row"><a class="stage off" href="#query-transformation" title="Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them.">Query<br>transformation</a><a class="stage off" href="#boolean-admission" title="Chapter 2 — text becomes index terms, and the rules decide which records are eligible at all.">Analysis &amp;<br>execution rules</a><a class="stage off" href="#bm25-ranking" title="Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set.">First-stage<br>retrieval</a><a class="stage off" href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one.">Fusion</a><a class="stage off" href="#reranking-and-hybrid" title="Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed.">Reranking</a><a class="stage off" href="#library-practice" title="Chapter 15 — what the reader is finally shown, and what can be recorded about it.">Presentation</a></div></div><div class="chapter-orient"><p>Everything to this point has been a pipeline: an arrangement of stages, possibly with branches, all decided before the search ran. Chapters 9 to 11 showed a system generating several queries, routing them to different retrievers, fusing the results and reranking the candidates—none of it necessarily agentic. Agentic search removes that guarantee. A model inspects what came back and decides what to do next.</p><p>That is a change in control, not in retrieval. The retrievers, rerankers and fusion rules are the ones already described. This chapter separates fixed, adaptive and agentic arrangements and shows where current academic tools sit. It is candid about what agency costs, including two retrieval problems that iteration makes worse rather than better. It ends with what agency is genuinely for. That turns out to be narrower than the marketing suggests—and more useful to a library.</p></div></header><span id="agentic-search-who-chooses-the-next-retrieval-action" class="legacy-anchor"></span>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>The useful question comes before phrasing: what object stands for the information need, and what mechanism will receive it?</li><li>Free-text strings, controlled expressions, citation edges, seed documents, relevance judgements, browse targets, API predicates and task briefs address different mechanisms.</li><li>Query understanding interprets a request and may or may not change what retrieval receives.</li><li>Transformation creates changed or additional retrieval inputs; routing and coordination control which retrieval paths use them.</li><li>Pseudo-relevance feedback constructs a later query from an initial ranking. It is retrieval-dependent, but a prescribed two-pass workflow need not be agentic.</li><li>Query2doc and HyDE use generated text differently, which makes that text part of the search strategy and part of what must be recorded.</li><li>Natural-language filter extraction is useful and reliably partial.</li></ol><p class="chapter-transition">Interpretation, transformation, routing and feedback can all be arranged in advance. Part III asks who chooses the next action while a search is running.</p></aside><section class="self-check" aria-label="Questions on this chapter"><p class="self-check-label">Check yourself</p><details class="self-check-q"><summary>A researcher types a polished question, follows a citation from one relevant paper, and asks an agent to search until three named databases have been covered. Which three different kinds of input are involved?</summary><p>The question is a text query, the citation is a graph edge used for traversal, and the coverage instruction is part of a task brief to the controller. Treating all three as phrasing styles would hide the different mechanisms they address.</p></details><details class="self-check-q"><summary>Why can pseudo-relevance feedback not be described as an entirely upstream stage? Does using feedback make the workflow agentic?</summary><p>PRF needs an initial ranking before it can select terms and construct a second query, so it includes a retrieval-to-transformation feedback loop. No: a system can be programmed to run those same two passes every time. The second query adapts to the first results, while the control sequence remains fixed.</p></details><details class="self-check-q"><summary>Is SPLADE’s expansion the same kind of operation as an LLM generating three reformulations of a query?</summary><p>No—though not because one is inspectable and the other is not. The LLM produces alternative retrieval inputs as text. SPLADE produces a weighted vocabulary representation, whose activated terms can also be listed. Either can be handed to another component, so what separates them is the form of the retrieval input, not where a component boundary falls.</p></details><details class="self-check-q"><summary>Query2doc and HyDE both generate text. How do they differ, and what risk do they share?</summary><p>Query2doc uses the generated language to expand a query for a lexical or dense retriever; HyDE embeds the generated document and retrieves real documents near that vector. Both can import invented details that steer retrieval, so the generated text—not only the user’s question—belongs in the search record.</p></details></section><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#hybrid-and-fusion"><span>Previous</span>Hybrid retrieval and rank fusion</a><a class="cnav next" href="#exercise2"><span>Next</span>Application exercise II</a></nav></section><section class="exercise" id="exercise2"><p class="exercise-label">End of Part II</p><h2>Application exercise II — Map a product onto the pipeline</h2><p>Across Chapters 5 to 11, Part II filled in the six-stage pipeline introduced in Chapter 1: query transformation, analysis and execution rules (from Part I), first-stage retrieval, fusion, reranking and presentation. This exercise asks how much of it a vendor will tell you.</p><ol><li>Choose an institutional or publicly accessible product that advertises semantic, natural-language or AI search.</li><li>First use technical documentation, release notes and help pages to fill in the six-stage map, noting any routing or feedback decision. Then add the behavioural probe below as a separate evidence source. Marketing claims alone do not establish an architecture.</li><li>Mark every stage as <strong>documented</strong> (the vendor states it), <strong>inferred</strong> (you deduced it from observed behaviour), or <strong>unknown</strong>. Use <strong>documented: not used</strong> when documentation explicitly states a stage is absent.</li><li>For the indexed unit, develop and test a hypothesis about whether the product retrieves titles, abstracts, passages or full text. Search for a claim known to appear only in a paper’s full text, then record what the result supports, what alternative explanations remain and what only vendor documentation could establish.</li></ol><p class="exercise-deliverable"><strong>Deliverable.</strong> A completed six-stage map with each stage labelled by evidence type, plus the single question you would put to the vendor about the stage you could least determine. Bring the map to your next renewal conversation.</p><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#query-transformation"><span>Previous</span>Understanding, transforming and routing queries</a><a class="cnav next" href="#agentic-search"><span>Next</span>Agentic search</a></nav></section><section class="part-divider" id="part3"><p class="part-tag">Part III</p><h2 class="part-title">Control, failure and professional judgement</h2><p class="part-blurb">Who chooses the next retrieval action, where retrieval goes wrong, and what libraries must record, inspect and require.</p><p class="part-time">Reading time: about 84 min</p><aside class="part-recap" aria-labelledby="part3-recap-title"><p class="part-recap-label">Carried forward</p><h4 id="part3-recap-title">Five things from Part II that Part III leans on</h4><dl><dt>Embedding</dt><dd>A learnt mapping into a vector space, and by shorthand the vector it produces. Part III asks what happens when the training behind one does not fit your collection.</dd><dt>Indexed unit</dt><dd>The text the system actually searches—an abstract, a section, a passage—which need not be a whole document. It is <a href="#diagnosing-failure">Chapter 13’s</a> first diagnostic question.</dd><dt>The candidate boundary</dt><dd>Where the fixed pool’s recall ceiling is set. No reranker, fusion stage or generated answer recovers a record that no earlier route let in; <a href="#precision-and-recall">Chapter 14</a> gives that its exact meaning.</dd><dt>Reranker</dt><dd>A later, more expensive stage reordering a shortlist an earlier retriever produced. It reorders; it never retrieves.</dd><dt>Hybrid and multi-stage</dt><dd>Hybrid combines candidate-generation routes; multi-stage means later operations process what an earlier one supplied. <a href="#agentic-search">Chapter 12</a> adds a third, independent property: who chose the order.</dd></dl><p>Part II’s chapter summaries restate each of these, and the <a href="#glossary">glossary</a> holds the short definitions.</p></aside></section><section class="chapter" id="sec-agentic-search"><span id="ch7" class="legacy-anchor"></span><header class="chapter-head"><p class="chapter-eyebrow">Chapter 12</p><p class="chapter-meta">About 25 min</p><h2 id="agentic-search">Agentic search</h2><p class="chapter-question"><span>Central question</span>Who chooses the next retrieval action?</p><div class="stage-map" role="group" aria-label="Pipeline map: the stage this chapter covers is highlighted"><div class="stage-controller on">Controller — chooses and sequences the stages below</div><div class="stage-row"><a class="stage off" href="#query-transformation" title="Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them.">Query<br>transformation</a><a class="stage off" href="#boolean-admission" title="Chapter 2 — text becomes index terms, and the rules decide which records are eligible at all.">Analysis &amp;<br>execution rules</a><a class="stage off" href="#bm25-ranking" title="Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set.">First-stage<br>retrieval</a><a class="stage off" href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one.">Fusion</a><a class="stage off" href="#reranking-and-hybrid" title="Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed.">Reranking</a><a class="stage off" href="#library-practice" title="Chapter 15 — what the reader is finally shown, and what can be recorded about it.">Presentation</a></div></div><div class="chapter-orient"><p>Everything to this point has been a pipeline: an arrangement of stages, possibly with branches, all decided before the search ran. Chapters 9 to 11 showed a system generating several queries, routing them to different retrievers, fusing the results and reranking the candidates—none of it necessarily agentic. Agentic search removes that guarantee. A model inspects what came back and decides what to do next.</p><p>That is a change in control, not in retrieval. The retrievers, rerankers and fusion rules are the ones already described. This chapter separates fixed, adaptive and agentic arrangements and shows where current academic tools sit. It is candid about what agency costs, including two retrieval problems that iteration makes worse rather than better. It ends with what agency is genuinely for. That turns out to be narrower than the marketing suggests—and more useful to a library.</p></div></header><span id="agentic-search-who-chooses-the-next-retrieval-action" class="legacy-anchor"></span>
 <p>Chapter 11 also separated a task brief from the queries it produces. The brief is the controller’s input: it defines scope, criteria, sources, coverage, stopping conditions and the required record. The controller turns that specification into retrieval inputs and tool calls. Calling the brief a query hides the layer that interprets it.</p>
 <p>Pseudo-relevance feedback, met in Chapter 11, marks where the lines fall. Its <em>content</em> adapts to the first ranking, but if the system always runs the same two passes, its <em>control sequence</em> is fixed. A rule that decides whether to search again makes the control flow adaptive. A model free to choose the next query, route, tool or stopping point from what it observes may make it agentic.</p>
 <h3 id="fixed-adaptive-and-agentic-are-not-the-same-thing">Fixed, adaptive and agentic are not the same thing<a aria-label="Link to Fixed, adaptive and agentic are not the same thing" class="heading-anchor" href="#fixed-adaptive-and-agentic-are-not-the-same-thing">#</a></h3>
@@ -4850,7 +4850,7 @@ $$</div>
 <ul>
 </ul>
 <p>Review trigger: Any documented deployment, or a scoped review of current public architecture evidence.</p>
-<p>Book locations: <a href="#neural-ir-broader-than-dense-retrieval">Neural ir broader than dense retrieval</a></p>
+<p>Book locations: <a href="#neural-ir-broader-than-dense-retrieval">Neural information retrieval is broader than dense retrieval</a></p>
 </details></article>
 <h4 id="claims-product-ai2">Ai2</h4>
 <article class="claim-entry" id="claim-asta-probe">
@@ -4894,7 +4894,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-asta-renaming">
 <p class="claim-id">asta-renaming · Paper Finder / Asta Find Paper</p>
@@ -4909,7 +4909,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/from-fixed-search-workflows-to-agentic">From Fixed Search Workflows to Agentic Academic Search</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#tbl-12-1">Table 12.1</a> · <a href="#vendor-q16">Vendor q16</a></p>
+<p>Book locations: <a href="#tbl-12-1">Table 12.1</a> · <a href="#vendor-q16">Vendor question 16</a></p>
 </details></article>
 <h4 id="claims-product-apache-lucene">Apache Lucene</h4>
 <article class="claim-entry" id="claim-lucene-idf">
@@ -4924,7 +4924,7 @@ $$</div>
 <li><a href="https://lucene.apache.org/core/10_1_0/core/org/apache/lucene/search/similarities/BM25Similarity.html">BM25Similarity</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#fn:bm25-idf">Footnote: bm25 idf</a></p>
+<p>Book locations: <a href="#fn:bm25-idf">Footnote 6</a></p>
 </details></article>
 <article class="claim-entry" id="claim-apache-lucene-bm25">
 <p class="claim-id">apache-lucene-bm25 · Default text similarity</p>
@@ -4938,7 +4938,7 @@ $$</div>
 <li><a href="https://lucene.apache.org/core/10_1_0/core/org/apache/lucene/search/similarities/BM25Similarity.html">BM25Similarity</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#an-introduction-to-bm25">An introduction to bm25</a> · <a href="#fn:lucene-family">Footnote: lucene family</a></p>
+<p>Book locations: <a href="#an-introduction-to-bm25">An introduction to BM25</a> · <a href="#fn:lucene-family">Footnote 4</a></p>
 </details></article>
 <h4 id="claims-product-apache-solr">Apache Solr</h4>
 <article class="claim-entry" id="claim-apache-solr-bm25">
@@ -4955,7 +4955,7 @@ $$</div>
 <li><a href="https://docs.opensearch.org/latest/field-types/mapping-parameters/similarity/">OpenSearch</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#an-introduction-to-bm25">An introduction to bm25</a> · <a href="#fn:lucene-family">Footnote: lucene family</a></p>
+<p>Book locations: <a href="#an-introduction-to-bm25">An introduction to BM25</a> · <a href="#fn:lucene-family">Footnote 4</a></p>
 </details></article>
 <h4 id="claims-product-asreview">ASReview</h4>
 <article class="claim-entry" id="claim-asreview-features">
@@ -4971,7 +4971,7 @@ $$</div>
 <li><a href="https://asreview.nl/blog/asreview-model-selection-guide/">Current ASReview workflows</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#tar-is-a-workflow-not-a-representation">Tar is a workflow not a representation</a> · <a href="#how-asreview-active-learning-works">How asreview active learning works</a></p>
+<p>Book locations: <a href="#tar-is-a-workflow-not-a-representation">TAR describes a workflow, not a representation</a> · <a href="#how-asreview-active-learning-works">How ASReview active learning works</a></p>
 </details></article>
 <article class="claim-entry" id="claim-asreview-modules">
 <p class="claim-id">asreview-modules · Active-learning workflow</p>
@@ -4986,7 +4986,7 @@ $$</div>
 <li><a href="https://asreview.nl/blog/asreview-model-selection-guide/">Current ASReview workflows</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#tar-is-a-workflow-not-a-representation">Tar is a workflow not a representation</a> · <a href="#how-asreview-active-learning-works">How asreview active learning works</a></p>
+<p>Book locations: <a href="#tar-is-a-workflow-not-a-representation">TAR describes a workflow, not a representation</a> · <a href="#how-asreview-active-learning-works">How ASReview active learning works</a></p>
 </details></article>
 <article class="claim-entry" id="claim-asreview-pool">
 <p class="claim-id">asreview-pool · Active-learning workflow</p>
@@ -5001,7 +5001,7 @@ $$</div>
 <li><a href="https://asreview.nl/blog/asreview-model-selection-guide/">Current ASReview workflows</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#how-asreview-active-learning-works">How asreview active learning works</a></p>
+<p>Book locations: <a href="#how-asreview-active-learning-works">How ASReview active learning works</a></p>
 </details></article>
 <article class="claim-entry" id="claim-asreview-stop-prompt">
 <p class="claim-id">asreview-stop-prompt · LAB 3.0.8 documentation</p>
@@ -5016,7 +5016,7 @@ $$</div>
 </ul>
 <p>Review 2026-08: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#asreview-stopping-interface">Asreview stopping interface</a></p>
+<p>Book locations: <a href="#asreview-stopping-interface">ASReview’s stopping interface</a></p>
 </details></article>
 <article class="claim-entry" id="claim-asreview-simulation">
 <p class="claim-id">asreview-simulation · Simulation interface</p>
@@ -5030,7 +5030,7 @@ $$</div>
 <li><a href="https://asreview.readthedocs.io/en/stable/lab/simulation_overview.html">ASReview’s simulation interface</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#controlled-tar-comparison">Controlled tar comparison</a></p>
+<p>Book locations: <a href="#controlled-tar-comparison">A controlled TAR comparison</a></p>
 </details></article>
 <h4 id="claims-product-blacklight">Blacklight</h4>
 <article class="claim-entry" id="claim-blacklight-solr">
@@ -5047,7 +5047,7 @@ $$</div>
 <li><a href="https://workshop.projectblacklight.org/v7.11.1/solr/">Blacklight discovery interface uses Apache Solr as its index and search backend</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#fn:lucene-family-examples">Footnote: lucene family examples</a></p>
+<p>Book locations: <a href="#fn:lucene-family-examples">Footnote 10</a></p>
 </details></article>
 <h4 id="claims-product-consensus">Consensus</h4>
 <article class="claim-entry" id="claim-consensus-control">
@@ -5091,7 +5091,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-placement-consensus-pro-mode">
 <p class="claim-id">placement-consensus-pro-mode · Pro Mode</p>
@@ -5106,7 +5106,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <h4 id="claims-product-ebscohost">EBSCOhost</h4>
 <article class="claim-entry" id="claim-ebsco-advanced">
@@ -5121,7 +5121,7 @@ $$</div>
 <ul>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict boolean search words as admission rules</a></p>
+<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict Boolean search: words as admission rules</a></p>
 </details></article>
 <article class="claim-entry" id="claim-placement-ebscohost-natural-language-search">
 <p class="claim-id">placement-ebscohost-natural-language-search · Natural Language Search</p>
@@ -5136,7 +5136,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <h4 id="claims-product-ebscohost-and-eds">EBSCOhost and EDS</h4>
 <article class="claim-entry" id="claim-ebsco-ai-parsing">
@@ -5184,7 +5184,7 @@ $$</div>
 <li><a href="https://docs.opensearch.org/latest/field-types/mapping-parameters/similarity/">OpenSearch</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#an-introduction-to-bm25">An introduction to bm25</a> · <a href="#fn:lucene-family">Footnote: lucene family</a></p>
+<p>Book locations: <a href="#an-introduction-to-bm25">An introduction to BM25</a> · <a href="#fn:lucene-family">Footnote 4</a></p>
 </details></article>
 <h4 id="claims-product-elicit">Elicit</h4>
 <article class="claim-entry" id="claim-elicit-splade-development">
@@ -5201,7 +5201,7 @@ $$</div>
 </ul>
 <p>Review 2026-09-12: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#neural-ir-broader-than-dense-retrieval">Neural ir broader than dense retrieval</a> · <a href="#tbl-11-3">Table 11.3</a> · <a href="#fn:elicit-pricing-inference">Footnote: elicit pricing inference</a></p>
+<p>Book locations: <a href="#neural-ir-broader-than-dense-retrieval">Neural information retrieval is broader than dense retrieval</a> · <a href="#tbl-11-3">Table 11.3</a> · <a href="#fn:elicit-pricing-inference">Footnote 40</a></p>
 </details></article>
 <article class="claim-entry" id="claim-elicit-cost-inference">
 <p class="claim-id">elicit-cost-inference · Interpretation of the 2024 chronology</p>
@@ -5216,7 +5216,7 @@ $$</div>
 <li><a href="https://support.elicit.com/en/articles/14823097-changelog">changelog entry for 25 July 2024</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#fn:elicit-pricing-inference">Footnote: elicit pricing inference</a></p>
+<p>Book locations: <a href="#fn:elicit-pricing-inference">Footnote 40</a></p>
 </details></article>
 <article class="claim-entry" id="claim-elicit-credit-removal">
 <p class="claim-id">elicit-credit-removal · July 2024 pricing announcement</p>
@@ -5231,7 +5231,7 @@ $$</div>
 </ul>
 <p>Review 2026-09-12: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#fn:elicit-pricing-inference">Footnote: elicit pricing inference</a></p>
+<p>Book locations: <a href="#fn:elicit-pricing-inference">Footnote 40</a></p>
 </details></article>
 <article class="claim-entry" id="claim-elicit-agents">
 <p class="claim-id">elicit-agents · Research Agents</p>
@@ -5274,7 +5274,7 @@ $$</div>
 <ul>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#how-boolean-search-uses-an-inverted-index">How boolean search uses an inverted index</a></p>
+<p>Book locations: <a href="#how-boolean-search-uses-an-inverted-index">How Boolean search uses an inverted index</a></p>
 </details></article>
 <article class="claim-entry" id="claim-cdi-broad-query-limits">
 <p class="claim-id">cdi-broad-query-limits · Broad one-word searches</p>
@@ -5288,7 +5288,7 @@ $$</div>
 <li><a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_%28English%29/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI#Boolean_Operators">CDI, for example, limits certain one-word searches by narrowing where it searches and reducing the long tail of results while retaining the highest-ranked records</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#fn:relatively-cheap-does-not-mean-costless-the-work">Footnote: relatively cheap does not mean costless the work</a></p>
+<p>Book locations: <a href="#fn:relatively-cheap-does-not-mean-costless-the-work">Footnote 31</a></p>
 </details></article>
 <article class="claim-entry" id="claim-cdi-ranking-signals">
 <p class="claim-id">cdi-ranking-signals · Relevance ranking</p>
@@ -5303,7 +5303,7 @@ $$</div>
 <li><a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI">Primo’s Central Discovery Index</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#bm25-academic-search-title">Bm25 academic search title</a> · <a href="#primo-cdi-ranking-signals-title">Primo cdi ranking signals title</a> · <a href="#tbl-9-3">Table 9.3</a></p>
+<p>Book locations: <a href="#bm25-academic-search-title">Figure 3.3</a> · <a href="#primo-cdi-ranking-signals-title">Figure 3.4</a> · <a href="#tbl-9-3">Table 9.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-cdi-solr">
 <p class="claim-id">cdi-solr · Search infrastructure</p>
@@ -5319,7 +5319,7 @@ $$</div>
 <li><a href="https://workshop.projectblacklight.org/v7.11.1/solr/">Blacklight discovery interface uses Apache Solr as its index and search backend</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#fn:lucene-family-examples">Footnote: lucene family examples</a></p>
+<p>Book locations: <a href="#fn:lucene-family-examples">Footnote 10</a></p>
 </details></article>
 <h4 id="claims-product-general-purpose-assistants">General-purpose assistants</h4>
 <article class="claim-entry" id="claim-general-assistants-probe">
@@ -5350,7 +5350,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-placement-google-scholar-search">
 <p class="claim-id">placement-google-scholar-search · Search</p>
@@ -5365,7 +5365,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scholar-reported-total">
 <p class="claim-id">scholar-reported-total · Search interface in the opening puzzle</p>
@@ -5379,7 +5379,7 @@ $$</div>
 <li><a href="images/googlescholar1000.png">Local screenshot or figure</a> — Image as supplied in the book; see linked caption for scope.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#scholar-opening-caption">Scholar opening caption</a> · <a href="#returning-to-the-opening-puzzles">Returning to the opening puzzles</a> · <a href="#closing-puzzle-map-title">Closing puzzle map title</a></p>
+<p>Book locations: <a href="#scholar-opening-caption">Figure 1.6</a> · <a href="#returning-to-the-opening-puzzles">Returning to the first two opening puzzles</a> · <a href="#closing-puzzle-map-title">The three puzzles, and what each one settled</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scholar-display-limit">
 <p class="claim-id">scholar-display-limit · Search results</p>
@@ -5393,7 +5393,7 @@ $$</div>
 <li><a href="https://scholar.google.com/intl/us/scholar/help.html">Google Scholar documents a 1,000-result display limit</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#scholar-opening-caption">Scholar opening caption</a> · <a href="#returning-to-the-opening-puzzles">Returning to the opening puzzles</a> · <a href="#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Top k is a result boundary not a dense retrieval method</a> · <a href="#closing-puzzle-map-title">Closing puzzle map title</a></p>
+<p>Book locations: <a href="#scholar-opening-caption">Figure 1.6</a> · <a href="#returning-to-the-opening-puzzles">Returning to the first two opening puzzles</a> · <a href="#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Top-k: complete rankings are possible—but often unnecessary</a> · <a href="#closing-puzzle-map-title">The three puzzles, and what each one settled</a></p>
 </details></article>
 <h4 id="claims-product-openalex">OpenAlex</h4>
 <article class="claim-entry" id="claim-openalex-filters">
@@ -5422,7 +5422,7 @@ $$</div>
 <ul>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#how-boolean-search-uses-an-inverted-index">How boolean search uses an inverted index</a></p>
+<p>Book locations: <a href="#how-boolean-search-uses-an-inverted-index">How Boolean search uses an inverted index</a></p>
 </details></article>
 <article class="claim-entry" id="claim-alice-api-exclusion">
 <p class="claim-id">alice-api-exclusion · Alice semantic search</p>
@@ -5436,7 +5436,7 @@ $$</div>
 <li><a href="https://help.openalex.org/api/semantic-search/">OpenAlex Alice semantic search</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a></p>
+<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a></p>
 </details></article>
 <article class="claim-entry" id="claim-alice-cosine">
 <p class="claim-id">alice-cosine · Alice semantic search</p>
@@ -5450,7 +5450,7 @@ $$</div>
 <li><a href="https://help.openalex.org/api/semantic-search/">OpenAlex Alice semantic search</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a> · <a href="#tbl-7-2">Table 7.2</a></p>
+<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a> · <a href="#tbl-7-2">Table 7.2</a></p>
 </details></article>
 <article class="claim-entry" id="claim-alice-index-count">
 <p class="claim-id">alice-index-count · Alice semantic search</p>
@@ -5465,7 +5465,7 @@ $$</div>
 <li><a href="https://blog.openalex.org/q2-2026-town-hall-what-we-shipped-and-whats-next/">25 April 2026 Alice account</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a></p>
+<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a></p>
 </details></article>
 <article class="claim-entry" id="claim-alice-release">
 <p class="claim-id">alice-release · Alice semantic search</p>
@@ -5480,7 +5480,7 @@ $$</div>
 <li><a href="https://blog.openalex.org/q2-2026-town-hall-what-we-shipped-and-whats-next/">25 April 2026 Alice account</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a></p>
+<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a></p>
 </details></article>
 <article class="claim-entry" id="claim-alice-vectors">
 <p class="claim-id">alice-vectors · Alice semantic search</p>
@@ -5496,7 +5496,7 @@ $$</div>
 <li><a href="https://blog.openalex.org/q2-2026-town-hall-what-we-shipped-and-whats-next/">25 April 2026 Alice account</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a> · <a href="#tbl-7-2">Table 7.2</a></p>
+<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a> · <a href="#tbl-7-2">Table 7.2</a></p>
 </details></article>
 <h4 id="claims-product-opensearch">OpenSearch</h4>
 <article class="claim-entry" id="claim-opensearch-bm25">
@@ -5513,7 +5513,7 @@ $$</div>
 <li><a href="https://docs.opensearch.org/latest/field-types/mapping-parameters/similarity/">OpenSearch</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#an-introduction-to-bm25">An introduction to bm25</a> · <a href="#fn:lucene-family">Footnote: lucene family</a></p>
+<p>Book locations: <a href="#an-introduction-to-bm25">An introduction to BM25</a> · <a href="#fn:lucene-family">Footnote 4</a></p>
 </details></article>
 <h4 id="claims-product-ovid">Ovid</h4>
 <article class="claim-entry" id="claim-ovid-advanced">
@@ -5528,7 +5528,7 @@ $$</div>
 <ul>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict boolean search words as admission rules</a></p>
+<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict Boolean search: words as admission rules</a></p>
 </details></article>
 <h4 id="claims-product-primo">Primo</h4>
 <article class="claim-entry" id="claim-placement-primo-nde-natural-language-search">
@@ -5544,7 +5544,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-placement-primo-research-assistant">
 <p class="claim-id">placement-primo-research-assistant · Research Assistant</p>
@@ -5559,7 +5559,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-primo-answer-surface">
 <p class="claim-id">primo-answer-surface · Research Assistant</p>
@@ -5574,7 +5574,7 @@ $$</div>
 </ul>
 <p>Review 2026-09: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#primo-ra-opening-caption">Primo ra opening caption</a></p>
+<p>Book locations: <a href="#primo-ra-opening-caption">Figure 1.1</a></p>
 </details></article>
 <article class="claim-entry" id="claim-primo-candidate-budget">
 <p class="claim-id">primo-candidate-budget · Research Assistant</p>
@@ -5589,7 +5589,7 @@ $$</div>
 </ul>
 <p>Review 2026-09: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#puzzles-under-answer-layers">Puzzles under answer layers</a> · <a href="#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Top k is a result boundary not a dense retrieval method</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#tbl-9-3">Table 9.3</a></p>
+<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#puzzles-under-answer-layers">The puzzles carry extra weight because systems…</a> · <a href="#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Top-k: complete rankings are possible—but often unnecessary</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#tbl-9-3">Table 9.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-primo-embedding-rerank">
 <p class="claim-id">primo-embedding-rerank · Research Assistant</p>
@@ -5604,7 +5604,7 @@ $$</div>
 </ul>
 <p>Review 2026-09: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#tbl-9-3">Table 9.3</a> · <a href="#when-a-system-writes-the-boolean-query">When a system writes the boolean query</a></p>
+<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#tbl-9-3">Table 9.3</a> · <a href="#when-a-system-writes-the-boolean-query">When a system writes the Boolean query</a></p>
 </details></article>
 <article class="claim-entry" id="claim-primo-five-source-budget">
 <p class="claim-id">primo-five-source-budget · Research Assistant</p>
@@ -5619,7 +5619,7 @@ $$</div>
 </ul>
 <p>Review 2026-09: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#relevance-chain-title">Relevance chain title</a> · <a href="#puzzles-under-answer-layers">Puzzles under answer layers</a> · <a href="#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Top k is a result boundary not a dense retrieval method</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#tbl-9-3">Table 9.3</a></p>
+<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#relevance-chain-title">Figure 1.4</a> · <a href="#puzzles-under-answer-layers">The puzzles carry extra weight because systems…</a> · <a href="#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Top-k: complete rankings are possible—but often unnecessary</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#tbl-9-3">Table 9.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-primo-generation-model">
 <p class="claim-id">primo-generation-model · Research Assistant</p>
@@ -5649,7 +5649,7 @@ $$</div>
 </ul>
 <p>Review 2026-09: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#puzzles-under-answer-layers">Puzzles under answer layers</a> · <a href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">Words sent to retrieval may not be the words you typed</a> · <a href="#when-a-system-writes-the-boolean-query">When a system writes the boolean query</a> · <a href="#tbl-9-3">Table 9.3</a></p>
+<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#puzzles-under-answer-layers">The puzzles carry extra weight because systems…</a> · <a href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">The words sent to retrieval may not be the words you typed</a> · <a href="#when-a-system-writes-the-boolean-query">When a system writes the Boolean query</a> · <a href="#tbl-9-3">Table 9.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-primo-ra-manual-refinement">
 <p class="claim-id">primo-ra-manual-refinement · Research Assistant</p>
@@ -5709,7 +5709,7 @@ $$</div>
 </ul>
 <p>Review 2026-10-09: Supported within stated scope. Inspected the live Content Scope section. Support concerns documented scope and exclusions; this was not a behavioural test of an individual record.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#primo-ra-content-scope">Primo ra content scope</a></p>
+<p>Book locations: <a href="#primo-ra-content-scope">Coverage comes before ranking</a></p>
 </details></article>
 <h4 id="claims-product-primo-local-library-demonstration">Primo / local library demonstration</h4>
 <article class="claim-entry" id="claim-nde-autism-probe">
@@ -5798,7 +5798,7 @@ $$</div>
 </ul>
 <p>Review 2026-08: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#web-of-science-smart-search-caption">Web of science smart search caption</a> · <a href="#tbl-11-4">Table 11.4</a></p>
+<p>Book locations: <a href="#web-of-science-smart-search-caption">Figure 11.3</a> · <a href="#tbl-11-4">Table 11.4</a></p>
 </details></article>
 <article class="claim-entry" id="claim-nde-visible-query">
 <p class="claim-id">nde-visible-query · NDE Natural Language Search</p>
@@ -5813,7 +5813,7 @@ $$</div>
 </ul>
 <p>Review 2026-08: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#web-of-science-smart-search-caption">Web of science smart search caption</a> · <a href="#tbl-11-4">Table 11.4</a></p>
+<p>Book locations: <a href="#web-of-science-smart-search-caption">Figure 11.3</a> · <a href="#tbl-11-4">Table 11.4</a></p>
 </details></article>
 <h4 id="claims-product-pubmed">PubMed</h4>
 <article class="claim-entry" id="claim-pubmed-advanced">
@@ -5829,7 +5829,7 @@ $$</div>
 <li><a href="https://webofscience.zendesk.com/hc/en-us/articles/28470463061265-Advanced-Search">Web of Science Advanced Search</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict boolean search words as admission rules</a></p>
+<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict Boolean search: words as admission rules</a></p>
 </details></article>
 <article class="claim-entry" id="claim-pubmed-bm25">
 <p class="claim-id">pubmed-bm25 · Best Match</p>
@@ -5845,7 +5845,7 @@ $$</div>
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/help/">PubMed User Guide</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#bm25-academic-search-title">Bm25 academic search title</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#ltr-offline-online-title">Ltr offline online title</a></p>
+<p>Book locations: <a href="#bm25-academic-search-title">Figure 3.3</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#ltr-offline-online-title">Figure E.1</a></p>
 </details></article>
 <article class="claim-entry" id="claim-pubmed-default-best-match">
 <p class="claim-id">pubmed-default-best-match · Best Match</p>
@@ -5862,7 +5862,7 @@ $$</div>
 <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6112631/">documented architecture combines an initial BM25 ranking with a learning-to-rank stage</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#bm25-words-as-weighted-clues">Bm25 words as weighted clues</a></p>
+<p>Book locations: <a href="#bm25-words-as-weighted-clues">BM25: words as weighted clues</a></p>
 </details></article>
 <article class="claim-entry" id="claim-pubmed-ranker-features">
 <p class="claim-id">pubmed-ranker-features · Best Match</p>
@@ -5878,7 +5878,7 @@ $$</div>
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/help/">PubMed User Guide</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ltr-offline-online-title">Ltr offline online title</a></p>
+<p>Book locations: <a href="#ltr-offline-online-title">Figure E.1</a></p>
 </details></article>
 <article class="claim-entry" id="claim-pubmed-rerank-budget">
 <p class="claim-id">pubmed-rerank-budget · Best Match</p>
@@ -5894,7 +5894,7 @@ $$</div>
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/help/">PubMed User Guide</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#bm25-academic-search-title">Bm25 academic search title</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#ltr-offline-online-title">Ltr offline online title</a></p>
+<p>Book locations: <a href="#bm25-academic-search-title">Figure 3.3</a> · <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#ltr-offline-online-title">Figure E.1</a></p>
 </details></article>
 <article class="claim-entry" id="claim-pubmed-tail-order">
 <p class="claim-id">pubmed-tail-order · Best Match</p>
@@ -5910,7 +5910,7 @@ $$</div>
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/help/">PubMed User Guide</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#ltr-offline-online-title">Ltr offline online title</a></p>
+<p>Book locations: <a href="#reranking-in-two-documented-academic-pipelines">Reranking in two documented academic pipelines</a> · <a href="#ltr-offline-online-title">Figure E.1</a></p>
 </details></article>
 <article class="claim-entry" id="claim-pubmed-similar">
 <p class="claim-id">pubmed-similar · Similar Articles</p>
@@ -5924,7 +5924,7 @@ $$</div>
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/help/">PubMed User Guide</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#one-need-eight-objects-title">One need eight objects title</a></p>
+<p>Book locations: <a href="#one-need-eight-objects-title">Figure 11.1</a></p>
 </details></article>
 <h4 id="claims-product-scispace">SciSpace</h4>
 <article class="claim-entry" id="claim-scispace-agents">
@@ -5968,7 +5968,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <h4 id="claims-product-scite">scite</h4>
 <article class="claim-entry" id="claim-scite-mcp">
@@ -5984,7 +5984,7 @@ $$</div>
 <li><a href="https://docs.scholargateway.ai/">Wiley AI Gateway: Getting Connected and Troubleshooting</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#agency-changes-the-sequence-not-the-retrieval">Agency changes the sequence not the retrieval</a></p>
+<p>Book locations: <a href="#agency-changes-the-sequence-not-the-retrieval">Agency changes the sequence, not the retrieval</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scite-interface-equivalence">
 <p class="claim-id">scite-interface-equivalence · Own interface versus MCP</p>
@@ -6002,7 +6002,7 @@ $$</div>
 </ul>
 <p>Review 2026-10-21: Supported within stated scope. Read scite’s MCP documentation and a third-party developer comparison. Together they support shared tools across scite’s MCP integrations, the same search filters as the Search API and the absence of the Assistant from MCP. Neither documents whether MCP results are ranked as in the web interface, so the book does not assert ranking parity. The Assistant finding rests partly on the third-party source.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#agency-changes-the-sequence-not-the-retrieval">Agency changes the sequence not the retrieval</a></p>
+<p>Book locations: <a href="#agency-changes-the-sequence-not-the-retrieval">Agency changes the sequence, not the retrieval</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scite-elasticsearch">
 <p class="claim-id">scite-elasticsearch · Search infrastructure</p>
@@ -6018,7 +6018,7 @@ $$</div>
 <li><a href="https://workshop.projectblacklight.org/v7.11.1/solr/">Blacklight discovery interface uses Apache Solr as its index and search backend</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#fn:lucene-family-examples">Footnote: lucene family examples</a></p>
+<p>Book locations: <a href="#fn:lucene-family-examples">Footnote 10</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scite-nonsense-query">
 <p class="claim-id">scite-nonsense-query · Search interface in the opening puzzle</p>
@@ -6032,7 +6032,7 @@ $$</div>
 <li><a href="images/scite.png">Local screenshot or figure</a> — Image as supplied in the book; see linked caption for scope.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#three-familiar-search-results-and-three-puzzles">Three familiar search results and three puzzles</a> · <a href="#scite-opening-caption">Scite opening caption</a> · <a href="#returning-to-the-opening-puzzles">Returning to the opening puzzles</a> · <a href="#closing-puzzle-map-title">Closing puzzle map title</a></p>
+<p>Book locations: <a href="#three-familiar-search-results-and-three-puzzles">Three familiar search results—and three puzzles</a> · <a href="#scite-opening-caption">Figure 1.5</a> · <a href="#returning-to-the-opening-puzzles">Returning to the first two opening puzzles</a> · <a href="#closing-puzzle-map-title">The three puzzles, and what each one settled</a></p>
 </details></article>
 <h4 id="claims-product-scopus">Scopus</h4>
 <article class="claim-entry" id="claim-scopus-advanced">
@@ -6047,7 +6047,7 @@ $$</div>
 <ul>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict boolean search words as admission rules</a></p>
+<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict Boolean search: words as admission rules</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scopus-relevance-sort">
 <p class="claim-id">scopus-relevance-sort · Document search</p>
@@ -6065,7 +6065,7 @@ $$</div>
 <li><a href="https://service.elsevier.com/app/answers/detail/a_id/14182/supporthub/scopus/">How does relevance sorting work in Scopus?</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#bm25-words-as-weighted-clues">Bm25 words as weighted clues</a></p>
+<p>Book locations: <a href="#bm25-words-as-weighted-clues">BM25: words as weighted clues</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scopus-ranking-signals">
 <p class="claim-id">scopus-ranking-signals · Relevance sort</p>
@@ -6080,7 +6080,7 @@ $$</div>
 <li><a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI">Primo’s Central Discovery Index</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#bm25-academic-search-title">Bm25 academic search title</a> · <a href="#primo-cdi-ranking-signals-title">Primo cdi ranking signals title</a></p>
+<p>Book locations: <a href="#bm25-academic-search-title">Figure 3.3</a> · <a href="#primo-cdi-ranking-signals-title">Figure 3.4</a></p>
 </details></article>
 <article class="claim-entry" id="claim-placement-scopus-search">
 <p class="claim-id">placement-scopus-search · Search</p>
@@ -6095,7 +6095,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <h4 id="claims-product-scopus-ai">Scopus AI</h4>
 <article class="claim-entry" id="claim-scopus-rag-generation">
@@ -6112,7 +6112,7 @@ $$</div>
 <li><a href="https://scholarlykitchen.sspnet.org/2024/07/25/interview-with-maxim-khan-about-scopus-ai/">Elsevier’s own account</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#rrf-record-journey-title">Rrf record journey title</a> · <a href="#appendix-rag-scopus">Appendix rag scopus</a> · <a href="#rag-fusion-title">Rag fusion title</a></p>
+<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#rrf-record-journey-title">Figure 10.2</a> · <a href="#appendix-rag-scopus">Worked example: Scopus AI and RAG Fusion</a> · <a href="#rag-fusion-title">Figure G.1</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scopus-rag-rrf">
 <p class="claim-id">scopus-rag-rrf · 2024 RAG Fusion account</p>
@@ -6128,7 +6128,7 @@ $$</div>
 <li><a href="https://scholarlykitchen.sspnet.org/2024/07/25/interview-with-maxim-khan-about-scopus-ai/">Elsevier’s own account</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#rrf-record-journey-title">Rrf record journey title</a> · <a href="#appendix-rag-scopus">Appendix rag scopus</a> · <a href="#rag-fusion-title">Rag fusion title</a></p>
+<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#rrf-record-journey-title">Figure 10.2</a> · <a href="#appendix-rag-scopus">Worked example: Scopus AI and RAG Fusion</a> · <a href="#rag-fusion-title">Figure G.1</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scopus-rag-variants">
 <p class="claim-id">scopus-rag-variants · 2024 RAG Fusion account</p>
@@ -6144,7 +6144,7 @@ $$</div>
 <li><a href="https://scholarlykitchen.sspnet.org/2024/07/25/interview-with-maxim-khan-about-scopus-ai/">Elsevier’s own account</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#rrf-record-journey-title">Rrf record journey title</a> · <a href="#appendix-rag-scopus">Appendix rag scopus</a> · <a href="#rag-fusion-title">Rag fusion title</a></p>
+<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#rrf-record-journey-title">Figure 10.2</a> · <a href="#appendix-rag-scopus">Worked example: Scopus AI and RAG Fusion</a> · <a href="#rag-fusion-title">Figure G.1</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scopus-rag-vector">
 <p class="claim-id">scopus-rag-vector · 2024 RAG Fusion account</p>
@@ -6160,7 +6160,7 @@ $$</div>
 <li><a href="https://scholarlykitchen.sspnet.org/2024/07/25/interview-with-maxim-khan-about-scopus-ai/">Elsevier’s own account</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#rrf-record-journey-title">Rrf record journey title</a> · <a href="#appendix-rag-scopus">Appendix rag scopus</a> · <a href="#rag-fusion-title">Rag fusion title</a></p>
+<p>Book locations: <a href="#anatomy-of-a-cited-answer">Anatomy of a cited answer</a> · <a href="#rrf-record-journey-title">Figure 10.2</a> · <a href="#appendix-rag-scopus">Worked example: Scopus AI and RAG Fusion</a> · <a href="#rag-fusion-title">Figure G.1</a></p>
 </details></article>
 <article class="claim-entry" id="claim-placement-scopus-ai-answer-mode">
 <p class="claim-id">placement-scopus-ai-answer-mode · Answer mode</p>
@@ -6175,7 +6175,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scopus-deep-research-surface">
 <p class="claim-id">scopus-deep-research-surface · Deep research</p>
@@ -6190,7 +6190,7 @@ $$</div>
 </ul>
 <p>Review 2026-09: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#scopus-ai-opening-caption">Scopus ai opening caption</a></p>
+<p>Book locations: <a href="#scopus-ai-opening-caption">Figure 1.2</a></p>
 </details></article>
 <article class="claim-entry" id="claim-scopus-route">
 <p class="claim-id">scopus-route · Query-dependent retrieval routes</p>
@@ -6204,7 +6204,7 @@ $$</div>
 <ul>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#two-hybrids-that-combine-differently">Two hybrids that combine differently</a> · <a href="#agency-changes-the-sequence-not-the-retrieval">Agency changes the sequence not the retrieval</a> · <a href="#rag-fusion-title">Rag fusion title</a></p>
+<p>Book locations: <a href="#two-hybrids-that-combine-differently">Blending results and selecting retrieval routes</a> · <a href="#agency-changes-the-sequence-not-the-retrieval">Agency changes the sequence, not the retrieval</a> · <a href="#rag-fusion-title">Figure G.1</a></p>
 </details></article>
 <h4 id="claims-product-semantic-scholar">Semantic Scholar</h4>
 <article class="claim-entry" id="claim-s2-2020-candidates">
@@ -6233,7 +6233,7 @@ $$</div>
 <li><a href="https://medium.com/ai2-blog/building-a-better-search-engine-for-semantic-scholar-ea23a0b661e7">Semantic Scholar’s 2020 engineering account</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#appendix-ltr-clicks">Appendix ltr clicks</a> · <a href="#tbl-e-5">Table E.5</a></p>
+<p>Book locations: <a href="#appendix-ltr-clicks">What click logs teach—and what they cannot</a> · <a href="#tbl-e-5">Table E.5</a></p>
 </details></article>
 <article class="claim-entry" id="claim-s2-2020-evaluation">
 <p class="claim-id">s2-2020-evaluation · 2020 engineering deployment</p>
@@ -6289,7 +6289,7 @@ $$</div>
 <ul>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#how-boolean-search-uses-an-inverted-index">How boolean search uses an inverted index</a></p>
+<p>Book locations: <a href="#how-boolean-search-uses-an-inverted-index">How Boolean search uses an inverted index</a></p>
 </details></article>
 <article class="claim-entry" id="claim-s2-candidate-budget">
 <p class="claim-id">s2-candidate-budget · Main relevance endpoint / 2025 account</p>
@@ -6303,7 +6303,7 @@ $$</div>
 <li><a href="https://arxiv.org/abs/2301.10140">The Semantic Scholar Open Data Platform</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a> · <a href="#tbl-9-1">Table 9.1</a> · <a href="#fn:semantic-scholar-goal-architecture">Footnote: semantic scholar goal architecture</a> · <a href="#closing-puzzle-map-title">Closing puzzle map title</a></p>
+<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a> · <a href="#tbl-9-1">Table 9.1</a> · <a href="#fn:semantic-scholar-goal-architecture">Footnote 33</a> · <a href="#closing-puzzle-map-title">The three puzzles, and what each one settled</a></p>
 </details></article>
 <article class="claim-entry" id="claim-s2-lexical-candidates">
 <p class="claim-id">s2-lexical-candidates · Main relevance endpoint / 2025 account</p>
@@ -6317,7 +6317,7 @@ $$</div>
 <li><a href="https://arxiv.org/abs/2301.10140">The Semantic Scholar Open Data Platform</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a> · <a href="#tbl-9-1">Table 9.1</a> · <a href="#fn:semantic-scholar-goal-architecture">Footnote: semantic scholar goal architecture</a> · <a href="#tbl-7-2">Table 7.2</a> · <a href="#closing-puzzle-map-title">Closing puzzle map title</a></p>
+<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a> · <a href="#tbl-9-1">Table 9.1</a> · <a href="#fn:semantic-scholar-goal-architecture">Footnote 33</a> · <a href="#tbl-7-2">Table 7.2</a> · <a href="#closing-puzzle-map-title">The three puzzles, and what each one settled</a></p>
 </details></article>
 <article class="claim-entry" id="claim-s2-lightgbm">
 <p class="claim-id">s2-lightgbm · Main relevance endpoint / 2025 account</p>
@@ -6331,7 +6331,7 @@ $$</div>
 <li><a href="https://arxiv.org/abs/2301.10140">The Semantic Scholar Open Data Platform</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a> · <a href="#tbl-9-1">Table 9.1</a> · <a href="#fn:semantic-scholar-goal-architecture">Footnote: semantic scholar goal architecture</a> · <a href="#tbl-7-2">Table 7.2</a> · <a href="#closing-puzzle-map-title">Closing puzzle map title</a></p>
+<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a> · <a href="#tbl-9-1">Table 9.1</a> · <a href="#fn:semantic-scholar-goal-architecture">Footnote 33</a> · <a href="#tbl-7-2">Table 7.2</a> · <a href="#closing-puzzle-map-title">The three puzzles, and what each one settled</a></p>
 </details></article>
 <article class="claim-entry" id="claim-s2-other-embeddings">
 <p class="claim-id">s2-other-embeddings · Main relevance endpoint / 2025 account</p>
@@ -6345,7 +6345,7 @@ $$</div>
 <li><a href="https://arxiv.org/abs/2301.10140">The Semantic Scholar Open Data Platform</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a> · <a href="#fn:semantic-scholar-goal-architecture">Footnote: semantic scholar goal architecture</a></p>
+<p>Book locations: <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a> · <a href="#fn:semantic-scholar-goal-architecture">Footnote 33</a></p>
 </details></article>
 <article class="claim-entry" id="claim-s2-ranker-signals">
 <p class="claim-id">s2-ranker-signals · Main relevance endpoint / 2025 account</p>
@@ -6374,7 +6374,7 @@ $$</div>
 </ul>
 <p>Review 2026-10-09: Supported within stated scope. Recorded the author’s qualitative assessment as reported. The searches were not independently rerun or regraded. Support is limited to that assessment of this example, not measured precision/recall or the underlying mechanism.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#semantic-scholar-opening-caption">Semantic scholar opening caption</a> · <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a> · <a href="#intro">Intro</a></p>
+<p>Book locations: <a href="#semantic-scholar-opening-caption">Figure 1.7</a> · <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a> · <a href="#intro">The retrieval problem</a></p>
 </details></article>
 <article class="claim-entry" id="claim-semantic-scholar-question-counts">
 <p class="claim-id">semantic-scholar-question-counts · Main search, observed August 2026</p>
@@ -6389,7 +6389,7 @@ $$</div>
 <li><a href="images/semantic-scholar-keyword-query.png">Local screenshot or figure</a> — Image as supplied in the book; see linked caption for scope.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#semantic-scholar-opening-caption">Semantic scholar opening caption</a> · <a href="#returning-to-the-opening-puzzles">Returning to the opening puzzles</a> · <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to puzzle three why did the keyword query retrieve more</a> · <a href="#closing-puzzle-map-title">Closing puzzle map title</a></p>
+<p>Book locations: <a href="#semantic-scholar-opening-caption">Figure 1.7</a> · <a href="#returning-to-the-opening-puzzles">Returning to the first two opening puzzles</a> · <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Returning to Puzzle 3: why did the keyword query retrieve more?</a> · <a href="#closing-puzzle-map-title">The three puzzles, and what each one settled</a></p>
 </details></article>
 <h4 id="claims-product-undermind">Undermind</h4>
 <article class="claim-entry" id="claim-placement-undermind-august-snapshot">
@@ -6405,7 +6405,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-undermind-probe">
 <p class="claim-id">undermind-probe · Deep search in the probe</p>
@@ -6447,7 +6447,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/from-fixed-search-workflows-to-agentic">From Fixed Search Workflows to Agentic Academic Search</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#tbl-12-3">Table 12.3</a> · <a href="#vendor-q16">Vendor q16</a></p>
+<p>Book locations: <a href="#tbl-12-3">Table 12.3</a> · <a href="#vendor-q16">Vendor question 16</a></p>
 </details></article>
 <h4 id="claims-product-web-of-science">Web of Science</h4>
 <article class="claim-entry" id="claim-wos-advanced">
@@ -6463,7 +6463,7 @@ $$</div>
 <li><a href="https://webofscience.zendesk.com/hc/en-us/articles/28470463061265-Advanced-Search">Web of Science Advanced Search</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict boolean search words as admission rules</a></p>
+<p>Book locations: <a href="#strict-boolean-search-words-as-admission-rules">Strict Boolean search: words as admission rules</a></p>
 </details></article>
 <article class="claim-entry" id="claim-wos-relevance-sort">
 <p class="claim-id">wos-relevance-sort · Document search</p>
@@ -6480,7 +6480,7 @@ $$</div>
 <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6112631/">documented architecture combines an initial BM25 ranking with a learning-to-rank stage</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#bm25-words-as-weighted-clues">Bm25 words as weighted clues</a></p>
+<p>Book locations: <a href="#bm25-words-as-weighted-clues">BM25: words as weighted clues</a></p>
 </details></article>
 <article class="claim-entry" id="claim-placement-web-of-science-research-assistant">
 <p class="claim-id">placement-web-of-science-research-assistant · Research Assistant</p>
@@ -6495,7 +6495,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-wos-ra-boolean-limit">
 <p class="claim-id">wos-ra-boolean-limit · Research Assistant</p>
@@ -6596,7 +6596,7 @@ $$</div>
 <li><a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#ai-search-2x2-caption">Ai search 2x2 caption</a></p>
+<p>Book locations: <a href="#ai-search-2x2-caption">Figure 1.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-wos-smart-blend">
 <p class="claim-id">wos-smart-blend · Smart Search</p>
@@ -6611,7 +6611,7 @@ $$</div>
 </ul>
 <p>Review 2026-08: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#two-hybrids-that-combine-differently">Two hybrids that combine differently</a> · <a href="#tbl-11-4">Table 11.4</a></p>
+<p>Book locations: <a href="#two-hybrids-that-combine-differently">Blending results and selecting retrieval routes</a> · <a href="#tbl-11-4">Table 11.4</a></p>
 </details></article>
 <article class="claim-entry" id="claim-wos-smart-parser">
 <p class="claim-id">wos-smart-parser · Smart Search</p>
@@ -6626,7 +6626,7 @@ $$</div>
 </ul>
 <p>Review 2026-08: Supported within stated scope. Check date explicitly recorded in the existing book. Imported, not newly performed. Support is limited to the stated evidence and temporal scope.</p>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#when-a-system-writes-the-boolean-query">When a system writes the boolean query</a> · <a href="#web-of-science-smart-search-caption">Web of science smart search caption</a> · <a href="#tbl-11-4">Table 11.4</a></p>
+<p>Book locations: <a href="#when-a-system-writes-the-boolean-query">When a system writes the Boolean query</a> · <a href="#web-of-science-smart-search-caption">Figure 11.3</a> · <a href="#tbl-11-4">Table 11.4</a></p>
 </details></article>
 <h4 id="claims-product-wiley-ai-gateway">Wiley AI Gateway</h4>
 <article class="claim-entry" id="claim-wiley-mcp">
@@ -6642,7 +6642,7 @@ $$</div>
 <li><a href="https://docs.scholargateway.ai/">Wiley AI Gateway: Getting Connected and Troubleshooting</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#agency-changes-the-sequence-not-the-retrieval">Agency changes the sequence not the retrieval</a></p>
+<p>Book locations: <a href="#agency-changes-the-sequence-not-the-retrieval">Agency changes the sequence, not the retrieval</a></p>
 </details></article>
 <details class="claim-coverage"><summary>Inventory coverage and exclusions</summary>
 <p>This is an editorial inventory, not an automatic proof of semantic completeness. Source edits must include a claim and coverage review.</p>

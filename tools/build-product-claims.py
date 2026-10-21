@@ -7,7 +7,7 @@ def main():
     parser.add_argument('--check', action='store_true')
     args=parser.parse_args()
     data,book,notes=load()
-    outputs={BOOK:backlinks(replace_block(book,'REGISTER',book_html(data)),data),
+    outputs={BOOK:backlinks(replace_block(book,'REGISTER',book_html(data,book)),data),
              NOTES:replace_block(notes,'TEACHING',notes_html(data))}
     drift=[]
     for path,content in outputs.items():

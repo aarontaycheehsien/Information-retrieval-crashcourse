@@ -4,6 +4,7 @@ No network access and no assertion that a working URL verifies a claim.
 """
 from collections import defaultdict, Counter
 from datetime import date, timedelta
+from functools import lru_cache
 from html import escape, unescape
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -167,11 +168,53 @@ def date_label(value):
     return escape(value) if value else 'Unknown / not recorded'
 
 
-def location_label(anchor):
+def location_label(anchor, book=None):
+    """Label a book location from its visible source text; fall back to the anchor."""
     match = re.fullmatch(r'(tbl|fig)-([a-z0-9]+)-(\d+)', anchor)
     if match:
         return ('Table' if match[1] == 'tbl' else 'Figure')+' '+match[2].upper()+'.'+match[3]
+    match = re.fullmatch(r'vendor-q(\d+)', anchor)
+    if match:
+        return f'Vendor question {int(match[1])}'
+    if book is not None:
+        label = _source_label(anchor, _stripped(book))
+        if label:
+            return label
     return anchor.replace('fn:', 'Footnote: ').replace('-', ' ').capitalize()
+
+
+@lru_cache(maxsize=2)
+def _stripped(book):
+    return strip_generated(book)
+
+
+def _label_text(s):
+    s = re.sub(r'<sup\b.*?</sup>', '', s, flags=re.S)
+    return re.sub(r'\s+', ' ', unescape(re.sub('<[^>]+>', '', s))).strip()
+
+
+def _source_label(anchor, source):
+    if anchor.startswith('fn:'):
+        ref = re.search(r'<a class="footnote-ref" href="#'+re.escape(anchor)+r'"[^>]*>(\d+)</a>', source)
+        return f'Footnote {ref[1]}' if ref else None
+    tag = re.search(r'<(h[2-5]|figcaption|p)\b([^>]*)\bid="'+re.escape(anchor)+r'"[^>]*>(.*?)</\1>', source, re.S)
+    if not tag:
+        return None
+    name, attrs, inner = tag[1], tag[2], tag[3]
+    if name.startswith('h'):
+        inner = re.sub(r'<a[^>]*class="heading-anchor".*?</a>', '', inner, flags=re.S)
+        return _label_text(inner) or None
+    if name == 'figcaption' or 'figure-title' in attrs:
+        # A figure title sits inside its figure, before the numbered caption.
+        figure_end = source.find('</figure>', tag.start())
+        number = re.compile(r'class="asset-label-inline"[^>]*>(Figure [0-9A-G]+\.\d+)<')
+        found = number.search(source, tag.start(), figure_end if figure_end != -1 else len(source))
+        return found[1] if found else None
+    lead = re.match(r'\s*<strong>(.*?)</strong>', inner, re.S)
+    if lead:
+        return _label_text(lead[1]).rstrip('.:') or None
+    words = _label_text(inner).split()
+    return ' '.join(words[:7]) + ('…' if len(words) > 7 else '') if words else None
 
 
 def status_text(state):
@@ -181,7 +224,7 @@ def status_text(state):
     return '; '.join(labels[f] for f in state['flags']) + (' · approximate age' if state['approximate'] else '')
 
 
-def book_html(data):
+def book_html(data, book=None):
     as_of = date.fromisoformat(data['currency_as_of'])
     counts = Counter(f for c in data['claims'] for f in currency(c, as_of)['flags'])
     out = ['<section class="chapter backsection product-claims-register" aria-labelledby="product-evidence-currency">',
@@ -203,7 +246,7 @@ def book_html(data):
         for c in sorted(claims, key=lambda c:(c['mode'], c['id'])):
             st = currency(c, as_of)
             locations = list(dict.fromkeys(l['anchor'] for l in c['locations']))
-            links = ' · '.join(f'<a href="#{escape(a)}">{escape(location_label(a))}</a>' for a in locations)
+            links = ' · '.join(f'<a href="#{escape(a)}">{escape(location_label(a, book))}</a>' for a in locations)
             out.extend([f'<article class="claim-entry" id="claim-{c["id"]}">',
               f'<p class="claim-id">{c["id"]} · {escape(c["mode"])}</p>',
               f'<p><strong>{escape(c["claim"])}</strong></p>',

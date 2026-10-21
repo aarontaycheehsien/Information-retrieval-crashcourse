@@ -9,6 +9,17 @@ entry here.
 
 ## Unreleased
 
+- **Evidence-register locations use the book's own labels.** “Book locations”
+  links now show the heading text, figure or table number, footnote number or
+  vendor question number instead of a de-hyphenated anchor, so “Strict boolean
+  search words as admission rules” reads “Strict Boolean search: words as
+  admission rules” and “Web of science smart search caption” reads “Figure
+  11.3”. Labels are derived from the book at build time and follow renamed
+  headings and renumbered footnotes.
+- **Application exercise II names the six stages it asks for:** query
+  transformation, analysis and execution rules, first-stage retrieval, fusion,
+  reranking and presentation. It previously listed five and omitted analysis.
+
 - **Reading times recalculated** on the established basis (visible text,
   self-check answers excluded) at the book's current median of 200 words a
   minute, changing only times two or more minutes out: Chapter 1 from 17 to 20,

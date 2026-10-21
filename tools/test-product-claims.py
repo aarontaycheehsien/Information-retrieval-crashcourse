@@ -82,7 +82,7 @@ class ClaimsTests(unittest.TestCase):
                 with self.assertRaises(ValueError): p.validate(bad,self.book)
 
     def test_views_and_preservation(self):
-        rendered=p.backlinks(p.replace_block(self.book,'REGISTER',p.book_html(self.data)),self.data)
+        rendered=p.backlinks(p.replace_block(self.book,'REGISTER',p.book_html(self.data,self.book)),self.data)
         self.assertEqual(rendered,self.book)
         self.assertEqual(p.strip_generated(rendered),p.strip_generated(self.book))
         self.assertEqual(p.backlinks(rendered,self.data),rendered)
