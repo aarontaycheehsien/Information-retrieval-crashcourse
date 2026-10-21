@@ -3198,7 +3198,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest: it extracted the article’s reference list and attempted the comparison, and most of its suggestions were not already cited, although incomplete metadata broke a few matches and it was unclear whether it finished. General-purpose assistants with web search mostly passed: Claude Sonnet did so with no academic connector at all, and earlier GPT models also succeeded, while Gemini and GPT-5.1 struggled when blocked from the full text."
         }
       ],
       "teaching_groups": [
@@ -3227,7 +3227,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest: it extracted the article’s reference list and attempted the comparison, and most of its suggestions were not already cited, although incomplete metadata broke a few matches and it was unclear whether it finished. General-purpose assistants with web search mostly passed: Claude Sonnet did so with no academic connector at all, and earlier GPT models also succeeded, while Gemini and GPT-5.1 struggled when blocked from the full text."
         }
       ],
       "teaching_groups": [
@@ -3256,7 +3256,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest: it extracted the article’s reference list and attempted the comparison, and most of its suggestions were not already cited, although incomplete metadata broke a few matches and it was unclear whether it finished. General-purpose assistants with web search mostly passed: Claude Sonnet did so with no academic connector at all, and earlier GPT models also succeeded, while Gemini and GPT-5.1 struggled when blocked from the full text."
         }
       ],
       "teaching_groups": [
@@ -3285,7 +3285,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest: it extracted the article’s reference list and attempted the comparison, and most of its suggestions were not already cited, although incomplete metadata broke a few matches and it was unclear whether it finished. General-purpose assistants with web search mostly passed: Claude Sonnet did so with no academic connector at all, and earlier GPT models also succeeded, while Gemini and GPT-5.1 struggled when blocked from the full text."
         }
       ],
       "teaching_groups": [
@@ -3297,7 +3297,7 @@
       "id": "scispace-probe",
       "product": "SciSpace",
       "mode": "Agents",
-      "claim": "The tool attempted the comparison but ran into metadata matching problems.",
+      "claim": "The tool extracted the reference list and attempted the comparison; most suggestions were not already cited, a few matches failed on incomplete metadata, and completion was unclear.",
       "temporal_scope": "historical",
       "evidence_basis": "observation",
       "evidence_date": null,
@@ -3314,7 +3314,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest: it extracted the article’s reference list and attempted the comparison, and most of its suggestions were not already cited, although incomplete metadata broke a few matches and it was unclear whether it finished. General-purpose assistants with web search mostly passed: Claude Sonnet did so with no academic connector at all, and earlier GPT models also succeeded, while Gemini and GPT-5.1 struggled when blocked from the full text."
         }
       ],
       "teaching_groups": [
@@ -3326,7 +3326,7 @@
       "id": "general-assistants-probe",
       "product": "General-purpose assistants",
       "mode": "Web-search modes in the probe",
-      "claim": "The author reports success on the selected task without an academic connector.",
+      "claim": "The author reports success for Claude Sonnet without an academic connector and earlier success for GPT models; Gemini and GPT-5.1 struggled, attributed to blocked full-text access.",
       "temporal_scope": "historical",
       "evidence_basis": "observation",
       "evidence_date": null,
@@ -3343,7 +3343,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest: it extracted the article’s reference list and attempted the comparison, and most of its suggestions were not already cited, although incomplete metadata broke a few matches and it was unclear whether it finished. General-purpose assistants with web search mostly passed: Claude Sonnet did so with no academic connector at all, and earlier GPT models also succeeded, while Gemini and GPT-5.1 struggled when blocked from the full text."
         }
       ],
       "teaching_groups": [
@@ -3539,10 +3539,10 @@
       "id": "scite-interface-equivalence",
       "product": "scite",
       "mode": "Own interface versus MCP",
-      "claim": "Whether agent calls through MCP reproduce retrieval in scite’s own interface depends on the endpoints, parameters and access provided; the book does not assert parity.",
+      "claim": "Scite documents its MCP server as another route to the same tools behind its ChatGPT and Claude integrations, with the same search filters as its Search API. Ranking parity with the web interface is not documented, and the Assistant is not offered through MCP.",
       "temporal_scope": "current-facing",
-      "evidence_basis": "inference",
-      "evidence_date": null,
+      "evidence_basis": "documentation",
+      "evidence_date": "2026-10",
       "evidence": [
         {
           "url": "https://scite.ai/",
@@ -3553,15 +3553,35 @@
           "url": "https://docs.scholargateway.ai/",
           "title": "Wiley AI Gateway: Getting Connected and Troubleshooting",
           "locator": "Reference linked in the book; exact source passage not transcribed during migration."
+        },
+        {
+          "url": "https://docs.scite.ai/mcp/overview",
+          "title": "Scite MCP (Scite API documentation)",
+          "locator": "“The plugin, connector, and MCP API are not separate data products. They are three ways to reach the same Scite tools.” search_literature “supports Boolean operators, phrase search, and the same 25+ filters as the Search API.” Undated page, read 2026-10-21."
+        },
+        {
+          "url": "https://www.scalekit.com/blog/scite-mcp-vs-api",
+          "title": "Scite MCP vs Scite API for AI Agents: How to Choose (Scalekit, 2026-10-11)",
+          "locator": "TL;DR: “Reference Check, the Assistant, bulk tallies, full citation graph traversal, and journal-level metrics are REST-only.” Third-party developer comparison."
         }
       ],
       "evidence_gap": null,
-      "reviews": [],
-      "limitations": "Endpoint parity is not established by a generic MCP description. Verify endpoints, filters, entitlements, defaults and ranking before relying on this equivalence.",
+      "reviews": [
+        {
+          "checked_on": "2026-10-21",
+          "finding": "supported",
+          "evidence_indices": [
+            2,
+            3
+          ],
+          "notes": "Read scite’s MCP documentation and a third-party developer comparison. Together they support shared tools across scite’s MCP integrations, the same search filters as the Search API and the absence of the Assistant from MCP. Neither documents whether MCP results are ranked as in the web interface, so the book does not assert ranking parity. The Assistant finding rests partly on the third-party source."
+        }
+      ],
+      "limitations": "Documentation is not a behavioural test. Ranking parity with the web interface is undocumented, and the Assistant finding rests partly on a third-party source. Recheck when scite changes its MCP tools.",
       "locations": [
         {
           "anchor": "agency-changes-the-sequence-not-the-retrieval",
-          "excerpt": "Notice what does and does not change in that arrangement. Whether an agent’s calls reproduce the product interface’s retrieval depends on the endpoints, parameters and access provided. The controller decides when to call the service, what to ask it and whether to search again. These actions may improve the combined results while leaving each retriever’s scoring rule unchanged."
+          "excerpt": "Notice what does and does not change in that arrangement. Scite documents its MCP server as another route to the same tools behind its ChatGPT and Claude integrations, with the same search filters as its Search API. It does not document whether results are ranked as in its web interface, and some interface features, such as its Assistant, are not offered through MCP. The controller decides when to call the service, what to ask it and whether to search again. These actions may improve the combined results while leaving each retriever’s scoring rule unchanged. Scite MCP documentation checked October 2026."
         }
       ],
       "teaching_groups": [],
@@ -3596,7 +3616,7 @@
         },
         {
           "anchor": "what-the-loop-is-for",
-          "excerpt": "These examples are consistent with a point Chapter 3 documents on other grounds: lexical retrieval remains in active use and can still be effective. In this demonstration, a keyword search inside a retry loop recovered results that a single rewrite over the same index did not."
+          "excerpt": "In this demonstration, a keyword-oriented search endpoint became much more useful inside a loop that reformulated, broadened and recovered from zero results. That supports a point Chapter 3 documents on other grounds: lexical retrieval remains useful. It does not show that better retrieval is unnecessary."
         }
       ],
       "teaching_groups": [],

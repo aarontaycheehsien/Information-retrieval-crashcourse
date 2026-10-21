@@ -1354,7 +1354,7 @@ This recommendations-only change requires checking coverage, source locators, Ma
 
 ## Implementation record
 
-Applied to `search-textbook.html` on 21 October 2026 on branch `more-readable`, together with the linked edits, W.1–W.3 and the regeneration steps above. All 174 entries were applied except where an entry itself says to retain the original (2.8, 7.7, 9.11). The meaning-sensitive entries (5.15, 8.9, 9.14, 12.7, 12.11, 12.20, W.2, W.3) use the recommended wording. For 12.11, the evidence register records the scite claim as an undated inference, so the “evidence unavailable” wording was used and the claim record was corrected. For 12.7, the author should confirm that no independent evidence of Undermind’s missing operation exists; if it does, restore that diagnosis with its source.
+Applied to `search-textbook.html` on 21 October 2026 on branch `more-readable`, together with the linked edits, W.1–W.3 and the regeneration steps above. All 174 entries were applied except where an entry itself says to retain the original (2.8, 7.7, 9.11). The meaning-sensitive entries (5.15, 8.9, 9.14, 12.7, 12.11, 12.20, W.2, W.3) first used the recommended wording, then were revised after checking their sources (see “Follow-up decisions” below).
 
 Departures from the recommended wording:
 
@@ -1368,5 +1368,16 @@ Departures from the recommended wording:
 - Line 2789 (not in the review): “no capability these tools lack” became “only four ordinary steps”, because it contradicted the 12.7 replacement.
 
 Read-through fixes after applying the entries: “Yet” before the corrected misconception in Chapter 4’s opening; removed a second “can be inspected and rerun” in the paragraph after 2.7; “whereas” in Figure 6.1’s caption (6.2); “that compression” for an orphaned “that pressure” (7.6); removed a repeated “job-seeking” clause (9.4); and removed a doubled “procedure” (12.12). Companion films and the patterns listed under “Outside the scope” were not changed.
+
+### Follow-up decisions, 21 October 2026
+
+The meaning-sensitive entries were rechecked against their sources: the author’s probe write-up (“Deep Research, Shallow Agency”, 8 December 2025), the catalogue write-up (“What Changes When an LLM Agent Searches Your Library Catalogue?”, 24 June 2026), scite’s MCP documentation, a third-party scite MCP comparison (Scalekit, 11 October 2026) and the research literature. Where the review had removed the author’s point along with the overstatement, a scoped version was restored.
+
+- 12.7: the probe write-up says least is known about Undermind’s internals, and it diagnoses fixed workflows, not missing operations. The paragraph now reports the clarifying questions, the sparse documentation and the warnings in related tests, and names a fixed workflow as the fitting explanation without ruling out the others. The same probe paragraph now dates the write-up, describes SciSpace as the write-up does (mostly uncited suggestions, a few metadata failures, completion unclear) and separates Claude Sonnet’s success from Gemini and GPT-5.1’s access problems. The register claims `scispace-probe` and `general-assistants-probe` were reworded to match. A reader comment reporting that Asta completes the task as a follow-up prompt was not added, because it is unverified.
+- 12.11: scite documents its MCP server as another route to the same tools as its ChatGPT and Claude integrations, with the same search filters as its Search API; the Assistant is not offered through MCP (third-party source); ranking parity with the web interface is undocumented. The paragraph now says so with a dated check, and `scite-interface-equivalence` has documentation evidence, a 2026-10 evidence date and a supported review.
+- W.2: line 2857 now follows the catalogue write-up’s own conclusion that a keyword-oriented endpoint becomes much more useful inside a loop, without implying that better retrieval is unnecessary. W.3 is unchanged.
+- 12.20: the author’s argument that the work moves rather than disappears is restored as a conditional. The review’s reading that “what the loop cannot know” meant “unknowable” was mistaken; the phrase described what the library supplies.
+- 5.15: the historical split between encoder and decoder strands is restored for “several years”, with the note that it has since blurred. Encoder–decoder models such as T5 and BART, and decoder-based retrievers, embedders and rerankers, show why it is no longer a rule.
+- 8.9 and 9.14: learnt sparse retrieval is described again as one alternative to separate lexical and dense retrievers, because one inverted index can carry exact and expanded terms, and also as a possible route within a hybrid.
 
 *Original passages by Aaron Tay Chee Hsien, from the textbook and associated reviews, under [CC BY 4.0](../LICENSE).*

@@ -23,6 +23,17 @@ entry here.
   excerpts and the scite claim wording, the Read this first manifest and all
   generated views. Chapters 2–12 are about 1,500 words shorter.
 
+- **Chapter 5, 8, 9 and 12 claims rechecked against sources.** Restore the
+  historical encoder–decoder split as a past pattern, learnt sparse retrieval as
+  one alternative to separate lexical and dense retrievers, and the argument
+  that library work moves rather than disappears, each with its limits stated.
+  Describe the Chapter 12 probe as its December 2025 write-up does, including
+  SciSpace and the general-purpose assistants, and name a fixed workflow as the
+  likely cause of Undermind’s result without ruling out others. State what
+  scite’s MCP documentation establishes (checked October 2026) and record it in
+  the claim register, and align the catalogue-loop paragraph with its write-up’s
+  conclusion.
+
 - **Chapter 1 pipeline and application.** Explain the assistant’s searchable
   scope before ranking, distinguish the book’s teaching decomposition from
   vendor workflow labels and describe fusion as undocumented. Tighten broad
