@@ -9,7 +9,7 @@
       {"id":"chapter-2","kind":"summary","source":"sec-boolean-admission"},
       {"id":"chapter-3","kind":"summary","source":"sec-bm25-ranking"},
       {"id":"chapter-4","kind":"summary","source":"sec-beyond-boolean"},
-      {"id":"interface-panel","kind":"panel","source":"distinction-map-interface","lead":"One confusion can be settled from a result screen alone, without any vendor documentation:","omit":["This is the one collapse of this kind","The second puzzle points the same way","Neither observation required a claim"]}
+      {"id":"interface-panel","kind":"panel","source":"distinction-map-interface","lead":"One confusion can be settled from a result screen alone, without any vendor documentation:","omit":["This is the one collapse of this kind","The Google Scholar example separates","These observations do not establish"]}
     ]},
     {"id":"representations","title":"Representations","minutes":9,"prompt":"Pick a product that calls itself semantic. What would you need to know to tell whether it uses dense vectors, learnt sparse vectors or lexical matching with query expansion?","items":[
       {"id":"vocabulary-panel","kind":"panel","source":"distinction-map-vocabulary","lead":"Five more confusions cannot be settled by watching a system behave; each needs a mechanism first, which Chapters 5–9 supply.","omit":["Five confusions are left."]},

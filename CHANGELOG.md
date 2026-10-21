@@ -9,6 +9,20 @@ entry here.
 
 ## Unreleased
 
+- **Plainer prose in Chapters 2–12.** Apply the whole-text review in
+  `reviews/chapters-2-12-plain-prose-recommendations.md`: remove announcements,
+  slogans and repeated chapter hand-offs, replace metaphors with the mechanisms
+  they stood for, and narrow claims the evidence does not support. These include
+  the equivalence of scite’s interface and MCP access, the “strongest evidence”
+  reading of the Chapter 12 catalogue demonstration and the two-strand account of
+  Transformer history. Keep the book’s working terms (eligible set, compete,
+  leaders, ceiling, term-match floor, operational model of relevance) and the
+  “Nearest means best available” line the Vector Similarity Lab quotes. Retitle
+  two sections (“Four questions about a representation”, “Choosing wording for
+  each receiving component”) with anchors unchanged. Update 31 product-claim
+  excerpts and the scite claim wording, the Read this first manifest and all
+  generated views. Chapters 2–12 are about 1,500 words shorter.
+
 - **Chapter 1 pipeline and application.** Explain the assistant’s searchable
   scope before ranking, distinguish the book’s teaching decomposition from
   vendor workflow labels and describe fusion as undocumented. Tighten broad

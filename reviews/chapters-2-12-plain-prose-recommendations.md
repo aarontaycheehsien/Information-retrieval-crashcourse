@@ -1352,4 +1352,21 @@ Companion materials repeat some of the book’s lines and should be checked when
 
 This recommendations-only change requires checking coverage, source locators, Markdown structure and the Git diff. It does not change executable code or the published textbook.
 
+## Implementation record
+
+Applied to `search-textbook.html` on 21 October 2026 on branch `more-readable`, together with the linked edits, W.1–W.3 and the regeneration steps above. All 174 entries were applied except where an entry itself says to retain the original (2.8, 7.7, 9.11). The meaning-sensitive entries (5.15, 8.9, 9.14, 12.7, 12.11, 12.20, W.2, W.3) use the recommended wording. For 12.11, the evidence register records the scite claim as an undated inference, so the “evidence unavailable” wording was used and the claim record was corrected. For 12.7, the author should confirm that no independent evidence of Undermind’s missing operation exists; if it does, restore that diagnosis with its source.
+
+Departures from the recommended wording:
+
+- 3.4/3.5: the historical aside is no longer in parentheses. 3.9 keeps the “Try it:” label, which Appendix C also uses.
+- 5.4 adds the optional Appendix A pointer. 5.14 adds “In Word2Vec,” so that CBOW and Skip-gram are introduced. 2.10 uses double quotation marks, as elsewhere in the book.
+- 7.3: the caption’s first sentence is deleted without a substitute. The suggested replacement would have repeated the caption’s next sentence.
+- 8.9 says “offers a way” rather than “another way”, which had no clear comparison.
+- 9.6 and 9.15 keep a plain bold lead sentence (“Token vectors need more storage.”; “Chapter 7’s term-match floor still applies.”), because the neighbouring paragraphs use bold leads.
+- 6.12/6.13, 7.14 and 10.15 vary the hand-off verbs (“puts such an encoder to work”, “asks”), as the third pass advised. 11.7 links Table 11.2.
+- 12.11 merges the recommended final sentences with the preceding “What changes is who decides” sentence, which said the same thing.
+- Line 2789 (not in the review): “no capability these tools lack” became “only four ordinary steps”, because it contradicted the 12.7 replacement.
+
+Read-through fixes after applying the entries: “Yet” before the corrected misconception in Chapter 4’s opening; removed a second “can be inspected and rerun” in the paragraph after 2.7; “whereas” in Figure 6.1’s caption (6.2); “that compression” for an orphaned “that pressure” (7.6); removed a repeated “job-seeking” clause (9.4); and removed a doubled “procedure” (12.12). Companion films and the patterns listed under “Outside the scope” were not changed.
+
 *Original passages by Aaron Tay Chee Hsien, from the textbook and associated reviews, under [CC BY 4.0](../LICENSE).*

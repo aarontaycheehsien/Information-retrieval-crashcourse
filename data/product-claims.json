@@ -552,7 +552,7 @@
         },
         {
           "anchor": "words-sent-to-retrieval-may-not-be-the-words-you-typed",
-          "excerpt": "The book has met it twice already: as one of the four stories above, and as the first step of Primo Research Assistant’s pipeline in Chapter 1 ."
+          "excerpt": "The book has met it twice already: as one of the four explanations above, and as the first step of Primo Research Assistant’s pipeline in Chapter 1 ."
         },
         {
           "anchor": "when-a-system-writes-the-boolean-query",
@@ -726,7 +726,7 @@
         },
         {
           "anchor": "reranking-in-two-documented-academic-pipelines",
-          "excerpt": "The two numbers are budgets, not statements about relevance. Each limits which records receive the second score; what happens to the rest depends on the product. PubMed continues the list below 500 in Best Match order, whereas Primo Research Assistant’s answer is bounded again by a five-source limit, so its tail is not merely unreranked. Everything outside the first stage’s results is unreachable either way. When a vendor says its search “uses AI reranking”, the useful follow-up is not which model but how many candidates reached it ."
+          "excerpt": "The two numbers are budgets, not statements about relevance. Each limits which records receive the second score; what happens to the rest depends on the product. PubMed continues the list below 500 in Best Match order, whereas Primo Research Assistant’s answer is bounded again by a five-source limit, so its tail is not merely unreranked. Everything outside the first stage’s results is unreachable either way. When a vendor says its search “uses AI reranking”, ask which model is used and how many candidates it receives ."
         },
         {
           "anchor": "tbl-9-3",
@@ -939,7 +939,7 @@
         },
         {
           "anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
-          "excerpt": "Puzzle 3 set a name against two result counts and an inspection of search quality. Semantic Scholar sounds as though it searches by meaning, perhaps through dense retrieval, yet in August 2026 the question Is there an open access citation advantage returned only 13 results—far fewer than the dozens to hundreds of relevant studies on this established topic—while the keyword query open access citation advantage returned about 35,300. Inspection of the leading results also favoured the keyword query. Why did the more natural query perform worse?"
+          "excerpt": "Semantic Scholar sounds as though it searches by meaning, perhaps through dense retrieval, yet in August 2026 the question Is there an open access citation advantage returned only 13 results—far fewer than the dozens to hundreds of relevant studies on this established topic—while the keyword query open access citation advantage returned about 35,300. Inspection of the leading results also favoured the keyword query. Why did the more natural query perform worse?"
         },
         {
           "anchor": "closing-puzzle-map-title",
@@ -977,7 +977,7 @@
       "locations": [
         {
           "anchor": "strict-boolean-search-words-as-admission-rules",
-          "excerpt": "This is not a historical curiosity. It is the model behind the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules can be inspected and rerun, but they are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
+          "excerpt": "Boolean logic underlies the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
         }
       ],
       "teaching_groups": [],
@@ -1009,7 +1009,7 @@
       "locations": [
         {
           "anchor": "strict-boolean-search-words-as-admission-rules",
-          "excerpt": "This is not a historical curiosity. It is the model behind the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules can be inspected and rerun, but they are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
+          "excerpt": "Boolean logic underlies the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
         }
       ],
       "teaching_groups": [],
@@ -1030,7 +1030,7 @@
       "locations": [
         {
           "anchor": "strict-boolean-search-words-as-admission-rules",
-          "excerpt": "This is not a historical curiosity. It is the model behind the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules can be inspected and rerun, but they are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
+          "excerpt": "Boolean logic underlies the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
         }
       ],
       "teaching_groups": [],
@@ -1051,7 +1051,7 @@
       "locations": [
         {
           "anchor": "strict-boolean-search-words-as-admission-rules",
-          "excerpt": "This is not a historical curiosity. It is the model behind the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules can be inspected and rerun, but they are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
+          "excerpt": "Boolean logic underlies the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
         }
       ],
       "teaching_groups": [],
@@ -1072,7 +1072,7 @@
       "locations": [
         {
           "anchor": "strict-boolean-search-words-as-admission-rules",
-          "excerpt": "This is not a historical curiosity. It is the model behind the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules can be inspected and rerun, but they are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
+          "excerpt": "Boolean logic underlies the advanced-search interfaces librarians use most: PubMed’s Advanced Search with its search-history builder and MeSH terms, Web of Science Advanced Search with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules are only one part of systematic study identification; Appendix F treats the wider process as a high-recall retrieval problem ."
         }
       ],
       "teaching_groups": [],
@@ -1293,7 +1293,7 @@
       "locations": [
         {
           "anchor": "an-introduction-to-bm25",
-          "excerpt": "It is also, quietly, one of the most consequential algorithms a librarian never sees named. BM25 is the default text-scoring model in Apache Lucene, and therefore in Elasticsearch, Solr and OpenSearch—the engines beneath a large share of the search tools libraries license. It remains the standard baseline that newer retrieval methods are still measured against."
+          "excerpt": "BM25 is the default text-scoring model in Apache Lucene, and therefore in Elasticsearch, Solr and OpenSearch—the engines beneath a large share of the search tools libraries license. It remains the standard baseline that newer retrieval methods are still measured against."
         },
         {
           "anchor": "fn:lucene-family",
@@ -1336,7 +1336,7 @@
       "locations": [
         {
           "anchor": "an-introduction-to-bm25",
-          "excerpt": "It is also, quietly, one of the most consequential algorithms a librarian never sees named. BM25 is the default text-scoring model in Apache Lucene, and therefore in Elasticsearch, Solr and OpenSearch—the engines beneath a large share of the search tools libraries license. It remains the standard baseline that newer retrieval methods are still measured against."
+          "excerpt": "BM25 is the default text-scoring model in Apache Lucene, and therefore in Elasticsearch, Solr and OpenSearch—the engines beneath a large share of the search tools libraries license. It remains the standard baseline that newer retrieval methods are still measured against."
         },
         {
           "anchor": "fn:lucene-family",
@@ -1379,7 +1379,7 @@
       "locations": [
         {
           "anchor": "an-introduction-to-bm25",
-          "excerpt": "It is also, quietly, one of the most consequential algorithms a librarian never sees named. BM25 is the default text-scoring model in Apache Lucene, and therefore in Elasticsearch, Solr and OpenSearch—the engines beneath a large share of the search tools libraries license. It remains the standard baseline that newer retrieval methods are still measured against."
+          "excerpt": "BM25 is the default text-scoring model in Apache Lucene, and therefore in Elasticsearch, Solr and OpenSearch—the engines beneath a large share of the search tools libraries license. It remains the standard baseline that newer retrieval methods are still measured against."
         },
         {
           "anchor": "fn:lucene-family",
@@ -1422,7 +1422,7 @@
       "locations": [
         {
           "anchor": "an-introduction-to-bm25",
-          "excerpt": "It is also, quietly, one of the most consequential algorithms a librarian never sees named. BM25 is the default text-scoring model in Apache Lucene, and therefore in Elasticsearch, Solr and OpenSearch—the engines beneath a large share of the search tools libraries license. It remains the standard baseline that newer retrieval methods are still measured against."
+          "excerpt": "BM25 is the default text-scoring model in Apache Lucene, and therefore in Elasticsearch, Solr and OpenSearch—the engines beneath a large share of the search tools libraries license. It remains the standard baseline that newer retrieval methods are still measured against."
         },
         {
           "anchor": "fn:lucene-family",
@@ -1804,7 +1804,7 @@
       "locations": [
         {
           "anchor": "reranking-in-two-documented-academic-pipelines",
-          "excerpt": "The two numbers are budgets, not statements about relevance. Each limits which records receive the second score; what happens to the rest depends on the product. PubMed continues the list below 500 in Best Match order, whereas Primo Research Assistant’s answer is bounded again by a five-source limit, so its tail is not merely unreranked. Everything outside the first stage’s results is unreachable either way. When a vendor says its search “uses AI reranking”, the useful follow-up is not which model but how many candidates reached it ."
+          "excerpt": "The two numbers are budgets, not statements about relevance. Each limits which records receive the second score; what happens to the rest depends on the product. PubMed continues the list below 500 in Best Match order, whereas Primo Research Assistant’s answer is bounded again by a five-source limit, so its tail is not merely unreranked. Everything outside the first stage’s results is unreachable either way. When a vendor says its search “uses AI reranking”, ask which model is used and how many candidates it receives ."
         },
         {
           "anchor": "ltr-offline-online-title",
@@ -2040,7 +2040,7 @@
       "locations": [
         {
           "anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
-          "excerpt": "The point is not that Semantic Scholar lacks semantic capabilities. The platform also uses SPECTER embeddings for author disambiguation and recommendations. Their presence elsewhere still does not tell us which mechanism forms the candidates for main relevance search or where semantic capability enters that pipeline. Chapter 9 returns to the LightGBM stage once reranking is in view."
+          "excerpt": "The platform also uses SPECTER embeddings for author disambiguation and recommendations. Their presence elsewhere still does not tell us which mechanism forms the candidates for main relevance search or where semantic capability enters that pipeline. Chapter 9 returns to the LightGBM stage once reranking is in view."
         },
         {
           "anchor": "fn:semantic-scholar-goal-architecture",
@@ -2078,7 +2078,7 @@
       "locations": [
         {
           "anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
-          "excerpt": "OpenAlex Alice semantic search supplies a deliberately stark contrast in which the documentation does identify dense first-stage retrieval. OpenAlex says Alice shipped in February 2026; its current documentation describes this route:"
+          "excerpt": "OpenAlex’s documentation describes dense first-stage retrieval for Alice semantic search . OpenAlex says Alice shipped in February 2026; its current documentation describes this route:"
         }
       ],
       "teaching_groups": [
@@ -2323,11 +2323,11 @@
       "locations": [
         {
           "anchor": "neural-ir-broader-than-dense-retrieval",
-          "excerpt": "The lexical floor survives the learning. A purely lexical scoring model must match at least one term, and that has not changed. What changes is that the floor now applies to the expanded term set rather than the words as typed. That is how a sparse system running on an inverted index can retrieve a document sharing no typed word with the query—without becoming dense. As a concrete literature-review example, Elicit described work on SPLADE in June 2024: model-suggested related terms enrich the query before they are sent to regular full-text search . That account describes work under way when it was written rather than a settled production architecture."
+          "excerpt": "Chapter 7’s term-match floor still applies. For the sparse term-matching route described here, a non-zero matching score requires overlap between active vocabulary dimensions. Learnt expansion can create that overlap even when the original query and document share no typed query term. As a concrete literature-review example, Elicit described work on SPLADE in June 2024: model-suggested related terms enrich the query before they are sent to regular full-text search . That account describes work under way when it was written rather than a settled production architecture."
         },
         {
           "anchor": "neural-ir-broader-than-dense-retrieval",
-          "excerpt": "The two variants are not equally visible in this sector, and the asymmetry itself tells you something. Learnt sparse retrieval has a named academic development example in Elicit; the cited account does not confirm production deployment. Late interaction does not appear to have a comparable publicly documented deployment in a major academic search product —it is well represented in the research literature and in general-purpose retrieval infrastructure, less so on a vendor’s architecture page. The storage cost described above is the usual explanation offered. Absence of documentation is not evidence of absence, and this is exactly the kind of claim that dates, so treat it as a description of what is currently inspectable rather than of what exists."
+          "excerpt": "Learnt sparse retrieval has a named academic development example in Elicit; the cited account does not confirm production deployment. Late interaction does not appear to have a comparable publicly documented deployment in a major academic search product —it is well represented in the research literature and in general-purpose retrieval infrastructure, less so on a vendor’s architecture page. The storage cost described above is the usual explanation offered. Absence of documentation is not evidence of absence, and this is exactly the kind of claim that dates, so treat it as a description of what is currently inspectable rather than of what exists."
         },
         {
           "anchor": "tbl-11-3",
@@ -2424,7 +2424,7 @@
       "locations": [
         {
           "anchor": "neural-ir-broader-than-dense-retrieval",
-          "excerpt": "The two variants are not equally visible in this sector, and the asymmetry itself tells you something. Learnt sparse retrieval has a named academic development example in Elicit; the cited account does not confirm production deployment. Late interaction does not appear to have a comparable publicly documented deployment in a major academic search product —it is well represented in the research literature and in general-purpose retrieval infrastructure, less so on a vendor’s architecture page. The storage cost described above is the usual explanation offered. Absence of documentation is not evidence of absence, and this is exactly the kind of claim that dates, so treat it as a description of what is currently inspectable rather than of what exists."
+          "excerpt": "Learnt sparse retrieval has a named academic development example in Elicit; the cited account does not confirm production deployment. Late interaction does not appear to have a comparable publicly documented deployment in a major academic search product —it is well represented in the research literature and in general-purpose retrieval infrastructure, less so on a vendor’s architecture page. The storage cost described above is the usual explanation offered. Absence of documentation is not evidence of absence, and this is exactly the kind of claim that dates, so treat it as a description of what is currently inspectable rather than of what exists."
         }
       ],
       "teaching_groups": [],
@@ -2460,7 +2460,7 @@
       "locations": [
         {
           "anchor": "two-hybrids-that-combine-differently",
-          "excerpt": "Web of Science Smart Search blends. An NLP parser first builds a structured Boolean query ; document search can then run a Boolean keyword path and a semantic-vector path and combine their results. One interface, one question, two kinds of evidence contributing to a single ranking. This is the parallel arrangement described above. Its query-parsing stage is not the hybrid part: parsing changed the query; the blend is what makes it hybrid."
+          "excerpt": "Web of Science Smart Search blends. An NLP parser first builds a structured Boolean query ; document search can then run a Boolean keyword path and a semantic-vector path and combine their results. This is the parallel arrangement described above. Its query-parsing stage is not the hybrid part: parsing changed the query; the blend is what makes it hybrid."
         },
         {
           "anchor": "tbl-11-4",
@@ -2487,7 +2487,7 @@
       "locations": [
         {
           "anchor": "two-hybrids-that-combine-differently",
-          "excerpt": "Scopus AI routes. Rather than always running both paths, it can decide per question whether to search lexically, to search over vector embeddings, or to do both. Selecting a route and combining results are separate decisions: a run that takes one path combines nothing and is not hybrid under this book’s definition. A run that takes both still needs a fusion rule to merge what they return. The answer to “is this a lexical search or a vector search?” may therefore differ from one query to the next, and neither answer is wrong."
+          "excerpt": "Scopus AI routes. Rather than always running both paths, it can decide per question whether to search lexically, to search over vector embeddings, or to do both. Selecting a route and combining results are separate decisions: a run that takes one path combines nothing and is not hybrid under this book’s definition. A run that takes both still needs a fusion rule to merge what they return. The answer to “is this a lexical search or a vector search?” may therefore differ from one query to the next."
         },
         {
           "anchor": "agency-changes-the-sequence-not-the-retrieval",
@@ -3012,7 +3012,7 @@
         },
         {
           "anchor": "tbl-12-3",
-          "excerpt": "Second, Ai2 Asta Find Paper sits in the upper-left quadrant of Figure 1.3 —iterative search, returning records rather than a report—while running a predefined structure. Repeated retrieval is not evidence of agency: a model may be making calls inside that structure without ever selecting a move its designers had not already provided. The cell exists, and it is occupied."
+          "excerpt": "Second, Ai2 Asta Find Paper sits in the upper-left quadrant of Figure 1.3 —iterative search, returning records rather than a report—while running a predefined structure. Repeated retrieval is not evidence of agency: a model may be making calls inside that structure without ever selecting a move its designers had not already provided."
         }
       ],
       "teaching_groups": [
@@ -3198,7 +3198,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools failed it, and the shape of each failure is more informative than the verdict. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
         }
       ],
       "teaching_groups": [
@@ -3227,7 +3227,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools failed it, and the shape of each failure is more informative than the verdict. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
         }
       ],
       "teaching_groups": [
@@ -3256,7 +3256,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools failed it, and the shape of each failure is more informative than the verdict. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
         }
       ],
       "teaching_groups": [
@@ -3285,7 +3285,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools failed it, and the shape of each failure is more informative than the verdict. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
         }
       ],
       "teaching_groups": [
@@ -3314,7 +3314,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools failed it, and the shape of each failure is more informative than the verdict. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
         }
       ],
       "teaching_groups": [
@@ -3343,7 +3343,7 @@
       "locations": [
         {
           "anchor": "where-current-academic-tools-actually-sit",
-          "excerpt": "Most of the specialised academic tools failed it, and the shape of each failure is more informative than the verdict. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
+          "excerpt": "Most of the specialised academic tools did not complete the task. Ai2 Asta Find Paper treated the request as a lookup and stopped once it had found the target article. Consensus Deep Search returned papers the article already cited, despite running four sub-agents. Undermind found related work, most of it already in the reference list. Elicit’s screening pipeline—search, set criteria, screen, extract—has no step at which is this one already cited? could be asked. SciSpace Agents came closest, reasoning about the comparison and attempting it, then foundering on matching the metadata. General-purpose assistants with web search passed, and did so with no academic connector at all."
         }
       ],
       "teaching_groups": [
@@ -3405,7 +3405,7 @@
         },
         {
           "anchor": "tbl-12-3",
-          "excerpt": "Two qualifications keep that from being a verdict. The clause “or something else entirely” is exactly where a blog post stops being able to settle anything: it may name a fourth enumerated route, or it may mean the model composes something, and the post does not say. And a vendor writes for its own market, not to this book’s schema, so a label and a mechanism can diverge in either direction. Consensus calls its mode Deep Search while Table 12.2 would file its report-shaped output under deep research. The point of reading the description rather than the adjective is not to catch anyone out. It is that the description is the part you can check."
+          "excerpt": "Two qualifications keep that from being a verdict. The clause “or something else entirely” is exactly where a blog post stops being able to settle anything: it may name a fourth enumerated route, or it may mean the model composes something, and the post does not say. And a vendor writes for its own market, not to this book’s schema, so a label and a mechanism can diverge in either direction. Consensus calls its mode Deep Search while Table 12.2 would file its report-shaped output under deep research. Use the documented operations to assess the control arrangement, and record what the description leaves uncertain."
         }
       ],
       "teaching_groups": [
@@ -3539,7 +3539,7 @@
       "id": "scite-interface-equivalence",
       "product": "scite",
       "mode": "Own interface versus MCP",
-      "claim": "The book asserts the index, analysis, ranking and citation evidence are unchanged between the two access paths.",
+      "claim": "Whether agent calls through MCP reproduce retrieval in scite’s own interface depends on the endpoints, parameters and access provided; the book does not assert parity.",
       "temporal_scope": "current-facing",
       "evidence_basis": "inference",
       "evidence_date": null,
@@ -3561,7 +3561,7 @@
       "locations": [
         {
           "anchor": "agency-changes-the-sequence-not-the-retrieval",
-          "excerpt": "Notice what does and does not change in that arrangement. Scite’s index, its analysis pipeline, its ranking and its citation-statement evidence are the same whether you use its own interface or call it from your own agent. What changes is who decides when to call it, what to ask it, and whether to ask again. That is the whole of what agency contributes—and it is why an agentic system built on a weak retriever is still a weak search."
+          "excerpt": "Notice what does and does not change in that arrangement. Whether an agent’s calls reproduce the product interface’s retrieval depends on the endpoints, parameters and access provided. The controller decides when to call the service, what to ask it and whether to search again. These actions may improve the combined results while leaving each retriever’s scoring rule unchanged."
         }
       ],
       "teaching_groups": [],
@@ -3596,7 +3596,7 @@
         },
         {
           "anchor": "what-the-loop-is-for",
-          "excerpt": "This is the strongest evidence in the book for a claim Chapters 3 and 4 made on other grounds: lexical retrieval is not obsolete. Wrapped in something that can fail and retry, an ordinary keyword search outperformed a cleverer single rewrite over the same index."
+          "excerpt": "These examples are consistent with a point Chapter 3 documents on other grounds: lexical retrieval remains in active use and can still be effective. In this demonstration, a keyword search inside a retry loop recovered results that a single rewrite over the same index did not."
         }
       ],
       "teaching_groups": [],
@@ -3623,7 +3623,7 @@
       "locations": [
         {
           "anchor": "what-the-loop-is-for",
-          "excerpt": "The comparison that matters is not against a human. It is against Primo’s own Natural Language Search , which converts a question into a Boolean string in a single pass. On simple misspellings it does well. On autism it produced a creditable expansion— (autism) OR (autistic disorder) OR (ASD) OR (autism spectrum) OR (neurodevelopmental disorder) OR (pervasive developmental disorder) —six synonyms, and still zero results, because the problem was never the synonyms. Both runs searched the same index. One-shot transformation cannot learn from a failure it does not see. The loop can, because it reads the empty result and treats it as information."
+          "excerpt": "The comparison that matters is not against a human. It is against Primo’s own Natural Language Search , which converts a question into a Boolean string in a single pass. On simple misspellings it does well. On autism it produced a creditable expansion— (autism) OR (autistic disorder) OR (ASD) OR (autism spectrum) OR (neurodevelopmental disorder) OR (pervasive developmental disorder) —six synonyms, and still zero results, because the problem was never the synonyms. Both runs searched the same index. The single-pass rewrite did not use the zero-result response to revise its query. The loop did, broadening the search to related subject areas."
         }
       ],
       "teaching_groups": [],
