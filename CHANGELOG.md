@@ -9,6 +9,13 @@ entry here.
 
 ## Unreleased
 
+- **Plainer prose in Chapter 15.** Apply `reviews/chapter-15-ai-style-review.md`:
+  remove “does not mean X; it means Y” corrections, “worth” cues, aphoristic
+  kickers and grand framing of what the book was for. Cut the second and third
+  “no loss function needed” statements, and remove an empty blockquote left by an
+  earlier edit. Key questions, the pull quote, vendor question 16 and the closing
+  callback stay; Read this first is regenerated.
+
 - **Plainer prose in Chapter 13.** Apply `reviews/chapter-13-ai-style-review.md`:
   eleven edits remove “not X. It is Y” corrections, narrator transitions, two
   metaphors and a “worth stating directly” cue, and make the hand-off
