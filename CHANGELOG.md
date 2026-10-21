@@ -9,6 +9,11 @@ entry here.
 
 ## Unreleased
 
+- **Plainer prose in Chapter 13.** Apply `reviews/chapter-13-ai-style-review.md`:
+  eleven edits remove “not X. It is Y” corrections, narrator transitions, two
+  metaphors and a “worth stating directly” cue, and make the hand-off
+  question-led. Pull quotes and the line the Chapter 13 film quotes stay.
+
 - **Plainer prose in Chapter 14.** Apply `reviews/chapter-14-ai-style-review.md`:
   remove staged setups, “not X but Y” maxims, self-references, intensifiers and
   slogan fragments, including several introduced by the same day's Chapter 14
