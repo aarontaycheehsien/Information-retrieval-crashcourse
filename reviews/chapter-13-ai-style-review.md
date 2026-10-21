@@ -3,7 +3,7 @@
 Reviewed and applied: 21 October 2026, on `opus5.5-readabilty` after commit `cfb8ca7`. These are stylistic flags, not evidence of AI authorship. Chapter 13 has fewer than Chapter 14. The recurring patterns are “not X. It is Y” corrections, narrator transitions, a few metaphors, and one “worth stating directly” cue.
 
 Kept deliberately:
-- All five pull quotes. “A learnt retriever may transfer its operational model of relevance badly…” carries a book-wide term.
+- Three of the five pull quotes (see the stricter pass below): “Tokenising a term is not the same as understanding it”, “A result screen supplies symptoms, not causes”, and “A learnt retriever may transfer its operational model of relevance badly…”, which carries a book-wide term.
 - “Diagnosis supplies hypotheses, not proof”, which `tools/chapter-13-videos/episodes.json` quotes.
 - “Librarians have never needed an embedding to recognise this.”
 - The closing line about a fluent summary built on the wrong records, which is a teaching contrast.
@@ -21,5 +21,20 @@ Kept deliberately:
 | 9 | Diagnose first | “Reach for it only after… The order matters more than the list: the same remedy applied to the wrong diagnosis is what makes a search look unfixable.” | Maxim and colon reveal | “Try it only after the question above it has an answer: a remedy suited to one diagnosis, applied to a different failure, can make a search look unfixable.” |
 | 10 | First-stage approaches | “Every diagnosis above ends at the same place… That is worth stating directly, because it is what separates the four lenses from a list of complaints about products.” | “Worth stating directly”; self-assessment | “Each diagnosis above comes down to evidence the retrieval method did not preserve. Table 13.3 compares what three common first-stage approaches keep and lose.” |
 | 11 | Hand-off | “The next chapter shows how to turn those hypotheses into comparisons—and how to decide…” | Dash reveal; not the house question-led hand-off | “The next chapter asks how to test those hypotheses by comparison, and what ‘better retrieval’ should mean for the task at hand.” |
+
+## Stricter pass
+
+Applied the same day, after commit `1575eac`, using the same rules as the Chapter 14 review.
+
+| # | Location | Passage | Why it stands out | Applied change |
+|---|---|---|---|---|
+| 12 | Vocabulary mismatch | Pull quote “Dense retrieval is a newer response to an old retrieval problem.” | Repeats the paragraph above it (“long predates neural retrieval”) | Removed |
+| 13 | Composition | Pull quote “All the terms can be present while the relationship that determines relevance is lost.” | Repeats the section opening and the chapter summary | Removed |
+| 14 | OOV | “The reverse case is equally important.” | Stock emphasis | “Now take the reverse case.” |
+| 15 | Four diagnostic lenses | “…which is why they cannot simply be tried in turn.” | “Which is why” plus filler “simply” | “…so they are not a checklist to work through in turn.” |
+| 16 | OOD | “That is why the practical response is… —not simply adding another synonym.” | “That is why” opener; dash correction | “The practical response is therefore… rather than another synonym.” |
+| 17 | First-stage approaches | “That is why asking whether a product ‘uses vectors’…” | Repeated “That is why” opener | “Asking whether a product ‘uses vectors’ therefore…” |
+| 18 | Diagnose first | “Does the relevant record simply use different terminology?” | Filler “simply” | “simply” removed |
+| 19 | Diagnose first | “the remedy worth testing first” | “Worth” cue | “the first remedy to test” |
 
 *Source text by Aaron Tay Chee Hsien, used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*

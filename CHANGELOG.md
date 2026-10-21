@@ -12,7 +12,9 @@ entry here.
 - **Plainer prose in Chapter 13.** Apply `reviews/chapter-13-ai-style-review.md`:
   eleven edits remove “not X. It is Y” corrections, narrator transitions, two
   metaphors and a “worth stating directly” cue, and make the hand-off
-  question-led. Pull quotes and the line the Chapter 13 film quotes stay.
+  question-led. A stricter second pass removes two pull quotes that repeated
+  nearby text, leaving three, and trims repeated “That is why” openers, filler
+  “simply” and a “worth” cue. The line the Chapter 13 film quotes stays.
 
 - **Plainer prose in Chapter 14.** Apply `reviews/chapter-14-ai-style-review.md`:
   remove staged setups, “not X but Y” maxims, self-references, intensifiers and
