@@ -1,0 +1,40 @@
+Why is this paper here?
+
+[00:00:00.700]: A paper appears at rank three. Its explanation says: This paper closely addresses your question about open access and citations. Has that established why this result appeared, or why it occupies rank three? Pause and identify the missing evidence.
+
+[00:00:20.038]: The chapter’s mock result P has a hypothetical recorded path: lexical retrieval supplied it at rank eighteen among a hundred candidates; reranking moved it to three; the display showed ten. Internal reranker details remain undisclosed. All record details and ranks here are illustrative, not a search run for this film.
+
+[00:00:42.418]: Transparency exposes information about a system. Interpretability lets a librarian trace why a record was included, excluded, scored or reranked. Understandability provides an accurate, usable mental model without demanding that every equation or weight be inspected.
+
+[00:01:01.603]: A broad ranking description can be transparent while explaining little about one record. A detailed score display can still be hard to understand. A documentable, rerunnable search can leave individual results opaque. These qualities overlap, but one does not establish the others.
+
+[00:01:21.808]: In the source’s mock trace, the original input asks whether open access increases citations. The transformed query joins the phrase open access with a truncated citation term using AND. The recorded route is lexical retrieval over indexed abstracts.
+
+[00:01:40.469]: The mock paper’s abstract contains open access and citations. That links the candidate to recorded input and indexed evidence. It does not establish that the transformation preserved every part of the searcher’s intended need, or that omitted alternatives would leave the results unchanged. The exact expression is shown on screen.
+
+[00:02:02.180]: The supplied candidate rank is eighteen of one hundred. Reranking moves P to rank three, above the display cutoff of ten. This explains which recorded stages connected the candidate to the visible page. It does not identify the reranker’s undisclosed internal scoring factors.
+
+[00:02:22.434]: A generated description of topical fit cannot fill that gap as though it were an execution fact. In a real product, call this a trace only when the details come from the executed search. The mock example demonstrates the distinction without claiming that any vendor supplied these disclosures.
+
+[00:02:42.044]: Start at the record someone wants explained. Inspect fusion and display rules, then scoring and reranking, then matched evidence. Continue to the candidate source, transformed query and original input. Each step answers a different question about how the record arrived.
+
+[00:03:00.934]: This is inspection order, not the system’s execution order. A snippet, label, deduplication rule or diversification step may alter what is seen. A product that exposes a matched word but hides the transformed query has supplied only one part of the trail. Keep going until the evidence stops, and mark that boundary.
+
+[00:03:22.971]: Boolean conditions can show eligibility without proving relevance. Lexical evidence can show analysed terms and scoring contributions without making the score a probability of relevance. A later production reranker may also have changed the final order.
+
+[00:03:40.539]: Dense inspection can expose the indexed unit, encoder, similarity, candidate rank and approximate search settings. It does not automatically supply a simple human readable causal story about a latent feature. A highlighted word, citation count or attractive snippet is not proof that it caused the final position.
+
+[00:04:02.110]: Sparse expansion terms and weights, or late interaction token alignments, expose useful layers. They do not establish that those visible pieces describe the whole model decision. Inspect candidate lists, fusion rules, reranking, cutoffs and presentation as well.
+
+[00:04:22.024]: For agentic control, inspect each chosen tool, query, source, observation, next action and stopping point. The model’s account of its reasoning does not establish what caused those choices. A helpful narrative should be labelled as interpretation when it is not derived from recorded execution evidence.
+
+[00:04:44.188]: The goal is an actionable audit trail and an accurate mental model, not disclosure of every engineering detail. Distinguish what you observed, what the vendor documents and what remains unknown. Do not replace missing evidence with an explanation that merely sounds plausible.
+
+[00:05:03.000]: A reproducible search can remain poorly understood, and a clear explanation can remain impossible to rerun without saved inputs, versions and outputs. Documentation and inspection need separate questions. The final film turns those distinctions into requirements a library can ask for before licensing a tool.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 15.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#library-practice
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

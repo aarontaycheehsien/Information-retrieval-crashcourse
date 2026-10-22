@@ -1,0 +1,102 @@
+{
+  "series": "BM25 and ranked lexical retrieval",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#bm25-ranking",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#bm25-ranking",
+  "voice": {"name": "en-US-AndrewMultilingualNeural", "rate": "-3%", "pitch": "+0Hz"},
+  "episodes": [
+    {
+      "id": "01-which-word-deserves-more-weight", "title": "Which word deserves more weight?", "subtitle": "Matching words are clues of unequal strength.", "accent": "blue",
+      "scenes": [
+        {"id": "prediction", "title": "Everyone passed. Who comes first?", "source_anchor": "bm25-words-as-weighted-clues", "visual": "prediction", "narration": [
+          "Several papers satisfy the same Boolean conditions. They are all eligible. Does that make them equally good matches? And if not, what evidence should put one paper above another? Make a prediction.",
+          "Ranked retrieval assigns graded scores and orders the candidates. That describes an operation, not a formula. Scores might use lexical evidence, vectors or several signals. Chapter Three examines one lexical method: BM twenty-five."
+        ], "pause_before_second": 2.5},
+        {"id": "match", "title": "Start with shared analysed terms", "source_anchor": "an-introduction-to-bm25", "visual": "match", "narration": [
+          "BM twenty-five adds weighted evidence from analysed terms shared by the query and document. For delulu plus job, the text unrealistic job expectations has a job match. It has no delulu match, so that term contributes nothing.",
+          "Matching another query term can add another contribution. But matches are not equally informative. The next question is how much a term discriminates among records in the collection. No query expansion is assumed in this example."
+        ]},
+        {"id": "rarity", "title": "Two records or nine?", "source_anchor": "idf-rewards-rare-terms-title", "visual": "rarity", "narration": [
+          "Use the chapter's illustrative collection of ten records. Delulu occurs in two. Job occurs in nine. All else equal, which matching term narrows the possibilities more?",
+          "The rarer term usually receives more weight through inverse document frequency, or IDF. Informative here means discriminating among documents. It does not guarantee that a paper is useful for the reader's actual task."
+        ], "pause_before_second": 1.8},
+        {"id": "frequency", "title": "Count documents, not repetitions", "source_anchor": "bm25-four-questions-title", "visual": "frequency", "narration": [
+          "Document frequency counts how many documents contain the term. Repeating a word twenty times in one paper still adds just one document to that count. Term frequency counts occurrences inside the individual document.",
+          "Those are different signals. Collection rarity supplies a weight. Within-document repetition supplies evidence whose contribution will saturate. Confusing the two counts makes the score harder to interpret."
+        ]},
+        {"id": "addition", "title": "Add weighted contributions", "source_anchor": "an-introduction-to-bm25", "visual": "addition", "narration": [
+          "For a labeled positive-IDF variant, the two-of-ten term gets a weight of about one point four eight. The nine-of-ten term gets about zero point one five. Production variants can differ; these are calculated teaching values.",
+          "At average document length, with one occurrence of each term, the frequency factor is one. Add the two contributions: about one point six three. Different repetition and length change those contributions. The total is a score, not a probability of relevance."
+        ]},
+        {"id": "limits", "title": "A lexical score cannot supply every missing expression", "source_anchor": "bm25-four-questions-title", "visual": "limits", "narration": [
+          "Now consider the text unrealistic expectations. It shares neither analysed query term, delulu nor job. In our plain, unexpanded lexical example, neither term contributes evidence. Query expansion could change what matches; the scoring formula alone does not bridge every vocabulary gap.",
+          "A high score is also not a verdict about usefulness. A well-matching paper can concern the wrong population or fail to answer the task. Ask about match, rarity, repetition and length. The next film tests why twenty repetitions do not earn twenty times the credit."
+        ]}
+      ]
+    },
+    {
+      "id": "02-twenty-mentions-twice-the-credit", "title": "Twenty mentions. Twice the credit?", "subtitle": "Repetition adds evidence with diminishing returns.", "accent": "teal",
+      "scenes": [
+        {"id": "prediction", "title": "Once or twenty times?", "source_anchor": "bm25-four-questions-title", "visual": "prediction", "narration": [
+          "Two documents have the same length and match the same query term. One mentions it once. The other mentions it twenty times. Should the second get twenty times as much credit? Hold rarity and length fixed while you decide.",
+          "BM twenty-five applies diminishing returns. Repetition contributes evidence, but each additional occurrence adds less. This term-frequency saturation prevents the contribution from growing linearly forever."
+        ], "pause_before_second": 2.5},
+        {"id": "curve", "title": "The curve levels off", "source_anchor": "bm25-curve-title", "visual": "curve", "narration": [
+          "At average document length, with k one set to one point two, one occurrence gives a term-frequency factor of one. Two give one point three seven five. Twenty give about two point zero eight.",
+          "The curve approaches two point two. Both axes are linear. We are plotting a frequency factor, not a final score or a probability. Multiply this factor by the term's IDF to obtain its contribution."
+        ]},
+        {"id": "kone", "title": "k₁ changes the contribution from repetition", "source_anchor": "an-introduction-to-bm25", "visual": "kone", "narration": [
+          "The parameter k one changes the saturation curve. These curves use the same linear scales and average document length. Different settings change how repeated occurrences add evidence and the limiting value they approach.",
+          "With k one at zero, every positive occurrence count has factor one. Presence matters; further repetition does not. A missing term still contributes zero. These settings are mathematical comparisons, not recommendations for every collection."
+        ]},
+        {"id": "length", "title": "The same frequency in forty or four hundred terms", "source_anchor": "bm25-four-questions-title", "visual": "length", "narration": [
+          "Now fix the query term, its collection rarity and one occurrence. Compare a document of forty analysed terms with one of four hundred. The collection average is one hundred. With length normalisation enabled, the shorter example has the larger contribution.",
+          "Length provides context for the frequency. This does not say that short papers are always better. Other matching terms contribute too, and usefulness still depends on the reader's information need."
+        ]},
+        {"id": "bee", "title": "b controls the length effect", "source_anchor": "an-introduction-to-bm25", "visual": "bee", "narration": [
+          "The parameter b controls the strength of length normalisation. In this calculation, k one is one point two and b is zero point seven five. The two documents receive different frequency factors.",
+          "Set b to zero and, with frequency held fixed, the two factors are equal. We have turned off the length effect, not the whole score. The figures are computed from an explicitly labeled single-field BM twenty-five variant."
+        ]},
+        {"id": "recap", "title": "Two controls—not a quality certificate", "source_anchor": "an-introduction-to-bm25", "visual": "recap", "narration": [
+          "Keep the roles separate. IDF weights collection rarity. k one shapes repetition's contribution. b controls length normalisation. One point two and zero point seven five are typical defaults used in the book's worked example; products and configurations can differ.",
+          "BM twenty-five combines measured lexical evidence. Its score does not tell you that the source answers your question. The final film follows those calculations through the same inverted index we built in Chapter Two."
+        ]}
+      ]
+    },
+    {
+      "id": "03-same-index-three-controls", "title": "Same index. Three different controls.", "subtitle": "Eligibility, scoring and top-k answer different questions.", "accent": "red",
+      "scenes": [
+        {"id": "prediction", "title": "Keep the index. Add a scoring rule.", "source_anchor": "how-bm25-uses-the-same-inverted-index", "visual": "prediction", "narration": [
+          "Do we need a completely different index to rank the records that passed our Boolean search? We already have terms and posting lists. What extra evidence would a scoring rule need?",
+          "BM twenty-five can use the same inverted index. Postings supply within-document term frequencies, the dictionary supplies document frequencies, and document metadata supplies lengths. Eligibility and scoring use the same underlying map."
+        ], "pause_before_second": 2.0},
+        {"id": "evidence", "title": "Reuse D1–D4 with an explicit analyser", "source_anchor": "boolean-then-bm25-title", "visual": "evidence", "narration": [
+          "Reuse Chapter Two's four records. Our illustrative analyser lowercases the words and retains them all. Their lengths are four, four, three and five terms; the average is four. Delulu occurs in two records. Job occurs in all four.",
+          "With delulu AND job, only D one and D four are eligible. Both use each query term once. The data here are a tiny worked example, not measurements of a production search service."
+        ]},
+        {"id": "scores", "title": "Same term counts. Different lengths.", "source_anchor": "how-bm25-uses-the-same-inverted-index", "visual": "scores", "narration": [
+          "Using our positive-IDF version, k one at one point two and b at zero point seven five, D one scores about zero point eight zero. D four scores about zero point seven two. Totals are calculated before rounding.",
+          "Their matching term counts are the same. In this example, the length adjustment makes the difference. These numbers order the two candidates; they do not establish which is useful for a particular reader."
+        ]},
+        {"id": "boundaries", "title": "Who gets in, what scores them, how many survive?", "source_anchor": "how-bm25-uses-the-same-inverted-index", "visual": "boundaries", "narration": [
+          "A top-one request retains D one. Top two retains both eligible records, with the same scores. Top k specifies an output boundary, not a scoring method.",
+          "A strict AND gate is not compulsory for BM twenty-five. Direct retrieval can score the union of records matching any query term. Our job-only records then compete too, giving the order D one, D four, D three, D two. Eligibility, scoring and output size remain separate controls."
+        ]},
+        {"id": "products", "title": "A relevance label does not reveal a formula", "source_anchor": "bm25-and-lexical-ranking-in-academic-search", "visual": "products", "narration": [
+          "PubMed's published Best Match architecture starts with BM twenty-five, then uses LambdaMART to rerank the top five hundred candidates. The chapter also describes Scopus and Primo CDI documentation of lexical evidence with additional ranking signals.",
+          "Only the PubMed example identifies BM twenty-five directly. The other accounts do not prove plain BM twenty-five ranking. A relevance label can conceal field weighting, phrases, proximity, static signals and later reranking. These are the chapter's cited accounts, not fresh service tests."
+        ]},
+        {"id": "pruning", "title": "Skip work only when a valid bound permits it", "source_anchor": "why-the-same-index-remains-fast-for-ranked-retrieval", "visual": "pruning", "narration": [
+          "Selective and ordered access still help. Compression and blocks reduce storage and memory traffic. Valid score upper bounds can avoid scoring candidates that cannot enter the leading results.",
+          "In this separate illustration, a full top-k has cutoff five. A block with a valid upper bound of three cannot compete. A bound of seven requires inspection; it does not guarantee a winner. Safe pruning preserves the result under the scoring rule. No speedup is measured here."
+        ]},
+        {"id": "closing", "title": "Three controls to keep asking about", "source_anchor": "why-the-same-index-remains-fast-for-ranked-retrieval", "visual": "closing", "narration": [
+          "Ask what admits candidates, what scores them and where the output stops. BM twenty-five is a lexical baseline, not the name of every relevance sort. Hardware, index design and query mix also affect performance; there is no universal speed guarantee.",
+          "Next, Chapter Four changes the admission question: what happens when a query term is optional or matches nothing? The same index can support behavior that strict AND alone would never predict."
+        ]}
+      ]
+    }
+  ]
+}

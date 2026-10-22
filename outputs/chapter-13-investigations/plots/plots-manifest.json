@@ -1,0 +1,83 @@
+{
+  "recipe_sha256": "3581e3733b88dcbec26010d75bba36fe1e7b67e53cf303db017390ce837d6f88",
+  "kind": "source diagnostic categories and declared text/identity contrasts",
+  "new_model_or_product_tests": false,
+  "checks": {
+    "source_diagnostic_notices": [
+      "A known relevant record uses different terminology",
+      "A coined term, identifier or specialised string disappears or behaves strangely",
+      "A model works plausibly in general but poorly for this discipline, query style, corpus or retrieval purpose",
+      "All the words occur, but their direction, negation or relationship is wrong"
+    ],
+    "source_vocabulary_questions": [
+      "Is there a corresponding term in the index vocabulary?",
+      "Can the model tokeniser encode the string?",
+      "Has the model learnt a useful representation?"
+    ],
+    "source_first_stage_methods": [
+      "Strict Boolean",
+      "BM25",
+      "Single-vector dense retrieval"
+    ],
+    "shift_sites": [
+      "Query shift",
+      "Corpus or domain shift",
+      "Task or relevance shift"
+    ],
+    "declared_keyword_field_example": {
+      "input": "DELULU-427",
+      "stored_values": [
+        [
+          "D1",
+          "DELULU-427"
+        ],
+        [
+          "D2",
+          "DELULU-427"
+        ],
+        [
+          "D3",
+          "DELULU-427"
+        ],
+        [
+          "D4",
+          "DELULU-428"
+        ]
+      ],
+      "exact_hits": [
+        "D1",
+        "D2",
+        "D3"
+      ],
+      "actual_index_or_bm25_run": false
+    },
+    "relation_contrast_same_term_counts": true,
+    "measured_relation_scores": false,
+    "bert_pieces_reported_by_source": [
+      "ri",
+      "##zz",
+      "##lord"
+    ],
+    "new_tokenizer_run": false,
+    "diagnoses_are_nonexclusive_hypotheses": true,
+    "new_model_or_product_tests": false,
+    "passed": true
+  },
+  "files": {
+    "diagnostic-contrasts.csv": "04593cd6375e59bf6b3b735c21d01dc2d29c0be1f22335e2e17e51c8894ce5a9",
+    "diagnostic-lenses.png": "55d96681f9ea43d6a0c0c92aeb8589d58afce32447545e7ea3ca74f063485122",
+    "diagnostic-lenses.svg": "62c4474773ff7a4d35ad28cdfb3fc03313be7f214c1697d8b1356824767079bb",
+    "distribution-shifts.png": "28e4dce32851ccd292de2bbbb64cfdf09cbd931d636f37eb4f33b6c362f76de2",
+    "distribution-shifts.svg": "3b84b9784800de6709c1ab83ec0978366031a18643e58a16667a3e172688b6f4",
+    "first-stage-preservation.png": "e8d460c3e4c5f0533c28271d123b0437d87330dcb7ed83f2b1d429feff48b47c",
+    "first-stage-preservation.svg": "00b86db1debcd9f307659133851dc7f56e5343f21b6c7cd2ff3c0dd447606e1d",
+    "keyword-field-example.csv": "1f54603d8604d62b7e8d4e519c15743052ae59ffc99c12d737d9958ed3bdb33f",
+    "missing-record-boundaries.png": "d30de53f1075cb12e08d2d8dac2f9e4d05e0f73e4b59ee254fdd47fdea9c96ed",
+    "missing-record-boundaries.svg": "b9892ba50ac77c4243a1c268e9207b3a9f3b4ea4c8861628fb3baf8ec34ac503",
+    "remedy-tests.png": "3e64f4ada2b2bfe6ba7b7289637dff55ccc8cda063356de0dbfd24ef475cedf9",
+    "remedy-tests.svg": "1f2798bb5450b8a8675f4c41533d97a3c67309cb216b68a392118af6e12930f1",
+    "vocabulary-layers.png": "1b0896c471c1f28b0e9b177e94175ce4193efd64cfff49a550c8014c7b0f71c8",
+    "vocabulary-layers.svg": "0fd442f8dbbe4a72820021df1a46ba8d7619bf98bd9fcd14c1d3c28c5c70ffa0"
+  },
+  "passed": true
+}

@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:39.883
+Same candidates. Better precision and better recall?
+
+00:00:39.883 --> 00:01:18.331
+Relevant to whom, for what purpose?
+
+00:01:18.331 --> 00:01:57.745
+Every metric inherits the assessors’ criteria
+
+00:01:57.745 --> 00:02:38.479
+Precision and recall divide by different things
+
+00:02:38.479 --> 00:03:16.602
+Reordering changes the display, not candidate membership
+
+00:03:16.602 --> 00:03:57.002
+A fresh route can cross the candidate boundary
+
+00:03:57.002 --> 00:04:34.477
+Where did the recall denominator come from?
+
+00:04:34.477 --> 00:05:21.600
+Choose the sensitivity and workload the task requires

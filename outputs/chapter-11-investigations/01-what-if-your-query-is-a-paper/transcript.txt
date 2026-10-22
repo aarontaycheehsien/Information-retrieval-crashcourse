@@ -1,0 +1,40 @@
+What if your query is a paper?
+
+[00:00:00.700]: You want to investigate the open access citation advantage. You could type a question, choose a known paper, follow a citation, or give a controller a research brief. Are these four ways of phrasing the same query? Pause and predict.
+
+[00:00:18.146]: They address different mechanisms. A query represents the need in a form a system can act on. Changing from words to a seed paper or citation changes more than the wording.
+
+[00:00:30.872]: A free text string might go to lexical, dense or hybrid retrieval. The visible box does not reveal whether words will be analysed, encoded, rewritten or routed. A controlled term or structured expression addresses annotations, fields, filters or Boolean conditions.
+
+[00:00:50.298]: A MeSH heading, field tag or tested search hedge is not simply a formal keyword. It depends on the target database’s structure and supported syntax.
+
+[00:01:01.342]: A seed document makes a known paper stand for the need. The system might compare its text, follow citation relationships, or combine both. PubMed Similar Articles, for example, uses a word weighted approach over title, abstract and MeSH words; a seed does not automatically imply embeddings.
+
+[00:01:21.347]: Citation methods differ too. Direct traversal follows explicit citation edges. Bibliographic coupling finds papers sharing references. Co citation finds papers cited together. Their reach depends on the graph’s coverage and timing, rather than only on the searcher’s vocabulary.
+
+[00:01:41.409]: A relevance judgement can help construct a later retrieval input from accepted or rejected records. Pseudo relevance feedback instead assumes highly ranked records are useful without asking the searcher.
+
+[00:01:55.284]: A browse or monitoring target addresses a journal, author, subject, collection or continuing alert. It can surface a paper you recognise as useful even when you could not have named it in advance. These are different ways into the literature.
+
+[00:02:13.199]: A programmatic predicate can specify identifiers, ranges, filtering, sorting and pagination. OpenAlex documents composable attribute filters. A task brief instead gives a controller scope, inclusion criteria, sources, stopping conditions and output requirements. Those instructions are not all terms that an underlying retriever can obey.
+
+[00:02:38.609]: Even a filter needs the right meaning. Filtering results to papers that are themselves open access could exclude a paywalled study about the open access citation advantage. The chapter’s example therefore filters by publication year instead.
+
+[00:02:55.368]: These objects cooperate. Text and controlled vocabulary can find seeds; citation traversal can expose missing terminology; accepted records can guide feedback; an API can make a procedure repeatable. Bates called developing a search through such discoveries berrypicking.
+
+[00:03:15.180]: In one audit of a single complex evidence review, researchers traced four hundred ninety five included sources. Thirty percent came from protocol defined database and hand searches, and fifty one percent from snowballing. That is a scoped example, not a universal estimate for reviews.
+
+[00:03:35.744]: When the query really is text, useful wording depends on its receiver. A lexical engine needs observable concepts and supported operators. A dense retriever needs a description suited to what its model was trained to match. Longer prose is not automatically better.
+
+[00:03:54.261]: A query translator needs enough context to produce inspectable retrieval inputs. Detailed relevance instructions do not automatically become instructions followed by every retrieval model; that capability depends on training.
+
+[00:04:10.770]: If the architecture is undisclosed, vary inputs systematically against known relevant records: short terms, a question, fielded syntax and a known item title. Inspect generated expressions for valid fields, controlled terms and logical relationships in the target database.
+
+[00:04:31.123]: Generated Boolean strategies can contain invalid MeSH terms. A polished paragraph is no quality guarantee. Start with the query object and receiving mechanism, then test what the system actually does.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 11.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#query-transformation
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

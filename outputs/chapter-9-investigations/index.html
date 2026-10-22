@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reranking and multi-stage retrieval · Three films</title><style>
+*{box-sizing:border-box}body{margin:0;background:#eee9e0;color:#252728;font:17px/1.65 system-ui,sans-serif}
+main{max-width:1140px;margin:auto;padding:60px 28px}header{max-width:850px;margin-bottom:65px}
+.eyebrow,.number{font-weight:750;font-size:12px;letter-spacing:.16em;color:#a34230}
+h1{font-size:clamp(44px,7vw,82px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 28px}
+h2{font-size:clamp(27px,4vw,42px);line-height:1.14;letter-spacing:-.035em;margin:10px 0}
+p{max-width:880px}a{color:#88402e;text-underline-offset:4px}article{margin:0 0 74px}
+video{display:block;width:100%;aspect-ratio:16/9;background:#252728;border-radius:8px;margin-top:24px}
+.downloads{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:14px}summary{cursor:pointer;margin:14px 0}
+nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+button{font:inherit;font-size:14px;text-align:left;padding:12px;background:#faf8f3;border:1px solid #ccc3b5;border-radius:4px;cursor:pointer}
+button span{color:#a34230;display:inline-block;width:46px}button:hover,button:focus-visible{outline:2px solid #a34230}
+footer{border-top:1px solid #ccc3b5;padding-top:24px;font-size:13px;color:#615f59}
+@media(max-width:600px){main{padding:32px 15px}header{margin-bottom:44px}.downloads{gap:8px 18px}}
+</style><main><header><div class="eyebrow">HOW SEARCH DECIDES WHAT YOU SEE · CHAPTER 9</div>
+<h1>Who gets<br>a second look?</h1><p>Three narrated investigations into shortlist boundaries, token-level comparison, and the usefulness of a result list.
+Adapted from Chapter 9 of Aaron Tay's <em>How Search Decides What You See</em>.</p>
+<p><a href="chapter-9-videos.zip" download>Download the complete series</a> · <a href="SOURCE.md">Source and production notes</a></p>
+<p class="downloads"><a href="plots/maxsim.svg">Token comparison</a><a href="plots/aspect-coverage.svg">Aspect coverage</a><a href="plots/token-similarities.csv" download>Figure data</a></p></header><article id="episode-1">
+          <div class="number">FILM 01 · 4:49</div>
+          <h2>The paper the reranker never saw</h2><p>A richer comparison still depends on who enters the shortlist.</p>
+          <video id="film-1" controls playsinline preload="metadata" poster="01-the-paper-the-reranker-never-saw/poster.jpg" src="01-the-paper-the-reranker-never-saw/01-the-paper-the-reranker-never-saw.mp4">
+            <track kind="captions" src="01-the-paper-the-reranker-never-saw/01-the-paper-the-reranker-never-saw.vtt" srclang="en" label="English">
+            <track kind="chapters" src="01-the-paper-the-reranker-never-saw/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-1" data-time="0.000"><span>0:00</span>Can a better judge rescue a missing paper?</button><button data-film="film-1" data-time="32.372"><span>0:32</span>Spend detailed comparison on fewer records</button><button data-film="film-1" data-time="69.018"><span>1:09</span>When does the query meet the passage?</button><button data-film="film-1" data-time="108.069"><span>1:48</span>Same topic, different information needs</button><button data-film="film-1" data-time="143.174"><span>2:23</span>A joint representation depends on this query</button><button data-film="film-1" data-time="175.814"><span>2:55</span>Three ways to ask an LLM for an order</button><button data-film="film-1" data-time="211.989"><span>3:31</span>A plausible explanation does not validate a ranking</button><button data-film="film-1" data-time="247.399"><span>4:07</span>A learnt ranker can still follow keyword retrieval</button></nav></details>
+          <p class="downloads"><a href="01-the-paper-the-reranker-never-saw/01-the-paper-the-reranker-never-saw.mp4" download>Download MP4</a>
+            <a href="01-the-paper-the-reranker-never-saw/01-the-paper-the-reranker-never-saw.srt" download>SRT captions</a>
+            <a href="01-the-paper-the-reranker-never-saw/transcript.txt">Transcript</a>
+            <a href="01-the-paper-the-reranker-never-saw/contact-sheet.jpg">Storyboard</a></p></article><article id="episode-2">
+          <div class="number">FILM 02 · 4:47</div>
+          <h2>One vector, or many clues?</h2><p>Follow token similarities into a score you can inspect.</p>
+          <video id="film-2" controls playsinline preload="metadata" poster="02-one-vector-or-many-clues/poster.jpg" src="02-one-vector-or-many-clues/02-one-vector-or-many-clues.mp4">
+            <track kind="captions" src="02-one-vector-or-many-clues/02-one-vector-or-many-clues.vtt" srclang="en" label="English">
+            <track kind="chapters" src="02-one-vector-or-many-clues/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-2" data-time="0.000"><span>0:00</span>What if we keep the token vectors?</button><button data-film="film-2" data-time="31.767"><span>0:31</span>Independent encoding, followed by token comparisons</button><button data-film="film-2" data-time="68.076"><span>1:08</span>Keep each row’s maximum, then add</button><button data-film="film-2" data-time="108.282"><span>1:48</span>The alignments explain the score’s composition</button><button data-film="film-2" data-time="142.070"><span>2:22</span>More retained vectors mean a larger index</button><button data-film="film-2" data-time="171.059"><span>2:51</span>The encoder’s arrangement changes the comparison</button><button data-film="film-2" data-time="208.082"><span>3:28</span>Neural retrieval can also remain sparse</button><button data-film="film-2" data-time="248.791"><span>4:08</span>Look for the evidence exposed by each score</button></nav></details>
+          <p class="downloads"><a href="02-one-vector-or-many-clues/02-one-vector-or-many-clues.mp4" download>Download MP4</a>
+            <a href="02-one-vector-or-many-clues/02-one-vector-or-many-clues.srt" download>SRT captions</a>
+            <a href="02-one-vector-or-many-clues/transcript.txt">Transcript</a>
+            <a href="02-one-vector-or-many-clues/contact-sheet.jpg">Storyboard</a></p></article><article id="episode-3">
+          <div class="number">FILM 03 · 4:52</div>
+          <h2>The best next result may rank lower</h2><p>A useful list depends on coverage, candidate budgets, and surviving evidence.</p>
+          <video id="film-3" controls playsinline preload="metadata" poster="03-the-best-next-result-may-rank-lower/poster.jpg" src="03-the-best-next-result-may-rank-lower/03-the-best-next-result-may-rank-lower.mp4">
+            <track kind="captions" src="03-the-best-next-result-may-rank-lower/03-the-best-next-result-may-rank-lower.vtt" srclang="en" label="English">
+            <track kind="chapters" src="03-the-best-next-result-may-rank-lower/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-3" data-time="0.000"><span>0:00</span>Can three strong results make a weak list?</button><button data-film="film-3" data-time="33.696"><span>0:33</span>A strong match can leave room for other aspects</button><button data-film="film-3" data-time="75.623"><span>1:15</span>Diversity, reranking and deduplication ask different questions</button><button data-film="film-3" data-time="114.028"><span>1:54</span>A diverse display does not replace high recall</button><button data-film="film-3" data-time="151.529"><span>2:31</span>The second pass has a documented budget</button><button data-film="film-3" data-time="184.897"><span>3:04</span>Follow Primo’s candidates from question to shortlist</button><button data-film="film-3" data-time="222.843"><span>3:42</span>Five abstracts are the evidence passed onward</button><button data-film="film-3" data-time="251.538"><span>4:11</span>What survives each stage?</button></nav></details>
+          <p class="downloads"><a href="03-the-best-next-result-may-rank-lower/03-the-best-next-result-may-rank-lower.mp4" download>Download MP4</a>
+            <a href="03-the-best-next-result-may-rank-lower/03-the-best-next-result-may-rank-lower.srt" download>SRT captions</a>
+            <a href="03-the-best-next-result-may-rank-lower/transcript.txt">Transcript</a>
+            <a href="03-the-best-next-result-may-rank-lower/contact-sheet.jpg">Storyboard</a></p></article><footer><p>Adapted from <a href="https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#reranking-and-hybrid">Aaron Tay, <em>How Search Decides What You See</em>, Chapter 9</a>.
+CC BY 4.0. Source branch: more-readable, commit 37b16f7ffa64.</p>
+<p>Original animated teaching illustrations and script adaptation. Synthetic narration: Microsoft Andrew Multilingual.
+Independently produced; no affiliation with Veritasium. Curiosity-driven questions, prediction pauses and evidence-led reveals.
+The MaxSim table and aspect-selection example preserve the chapter’s teaching cases. Similarities are invented, not measured model outputs; selections illustrate an objective, not a calculated diversification algorithm. Product accounts are pinned documentation snapshots.</p></footer></main>
+<script>document.querySelectorAll('button[data-film]').forEach(b=>b.onclick=()=>{const v=document.getElementById(b.dataset.film);v.currentTime=Number(b.dataset.time);v.play().catch(()=>{})});</script></html>

@@ -1,0 +1,179 @@
+{
+  "series": "BM25 and ranked lexical retrieval",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#bm25-ranking",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#bm25-ranking",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-same-index-three-controls",
+  "title": "Same index. Three different controls.",
+  "subtitle": "Eligibility, scoring and top-k answer different questions.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "prediction",
+      "title": "Keep the index. Add a scoring rule.",
+      "source_anchor": "how-bm25-uses-the-same-inverted-index",
+      "visual": "prediction",
+      "narration": [
+        "Do we need a completely different index to rank the records that passed our Boolean search? We already have terms and posting lists. What extra evidence would a scoring rule need?",
+        "BM twenty-five can use the same inverted index. Postings supply within-document term frequencies, the dictionary supplies document frequencies, and document metadata supplies lengths. Eligibility and scoring use the same underlying map."
+      ],
+      "pause_before_second": 2.0
+    },
+    {
+      "id": "evidence",
+      "title": "Reuse D1\u2013D4 with an explicit analyser",
+      "source_anchor": "boolean-then-bm25-title",
+      "visual": "evidence",
+      "narration": [
+        "Reuse Chapter Two's four records. Our illustrative analyser lowercases the words and retains them all. Their lengths are four, four, three and five terms; the average is four. Delulu occurs in two records. Job occurs in all four.",
+        "With delulu AND job, only D one and D four are eligible. Both use each query term once. The data here are a tiny worked example, not measurements of a production search service."
+      ]
+    },
+    {
+      "id": "scores",
+      "title": "Same term counts. Different lengths.",
+      "source_anchor": "how-bm25-uses-the-same-inverted-index",
+      "visual": "scores",
+      "narration": [
+        "Using our positive-IDF version, k one at one point two and b at zero point seven five, D one scores about zero point eight zero. D four scores about zero point seven two. Totals are calculated before rounding.",
+        "Their matching term counts are the same. In this example, the length adjustment makes the difference. These numbers order the two candidates; they do not establish which is useful for a particular reader."
+      ]
+    },
+    {
+      "id": "boundaries",
+      "title": "Who gets in, what scores them, how many survive?",
+      "source_anchor": "how-bm25-uses-the-same-inverted-index",
+      "visual": "boundaries",
+      "narration": [
+        "A top-one request retains D one. Top two retains both eligible records, with the same scores. Top k specifies an output boundary, not a scoring method.",
+        "A strict AND gate is not compulsory for BM twenty-five. Direct retrieval can score the union of records matching any query term. Our job-only records then compete too, giving the order D one, D four, D three, D two. Eligibility, scoring and output size remain separate controls."
+      ]
+    },
+    {
+      "id": "products",
+      "title": "A relevance label does not reveal a formula",
+      "source_anchor": "bm25-and-lexical-ranking-in-academic-search",
+      "visual": "products",
+      "narration": [
+        "PubMed's published Best Match architecture starts with BM twenty-five, then uses LambdaMART to rerank the top five hundred candidates. The chapter also describes Scopus and Primo CDI documentation of lexical evidence with additional ranking signals.",
+        "Only the PubMed example identifies BM twenty-five directly. The other accounts do not prove plain BM twenty-five ranking. A relevance label can conceal field weighting, phrases, proximity, static signals and later reranking. These are the chapter's cited accounts, not fresh service tests."
+      ]
+    },
+    {
+      "id": "pruning",
+      "title": "Skip work only when a valid bound permits it",
+      "source_anchor": "why-the-same-index-remains-fast-for-ranked-retrieval",
+      "visual": "pruning",
+      "narration": [
+        "Selective and ordered access still help. Compression and blocks reduce storage and memory traffic. Valid score upper bounds can avoid scoring candidates that cannot enter the leading results.",
+        "In this separate illustration, a full top-k has cutoff five. A block with a valid upper bound of three cannot compete. A bound of seven requires inspection; it does not guarantee a winner. Safe pruning preserves the result under the scoring rule. No speedup is measured here."
+      ]
+    },
+    {
+      "id": "closing",
+      "title": "Three controls to keep asking about",
+      "source_anchor": "why-the-same-index-remains-fast-for-ranked-retrieval",
+      "visual": "closing",
+      "narration": [
+        "Ask what admits candidates, what scores them and where the output stops. BM twenty-five is a lexical baseline, not the name of every relevance sort. Hardware, index design and query mix also affect performance; there is no universal speed guarantee.",
+        "Next, Chapter Four changes the admission question: what happens when a query term is optional or matches nothing? The same index can support behavior that strict AND alone would never predict."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "prediction_0",
+      "scene": "prediction",
+      "text": "Do we need a completely different index to rank the records that passed our Boolean search? We already have terms and posting lists. What extra evidence would a scoring rule need?",
+      "gap": 1.0
+    },
+    {
+      "id": "prediction_1",
+      "scene": "prediction",
+      "text": "BM twenty-five can use the same inverted index. Postings supply within-document term frequencies, the dictionary supplies document frequencies, and document metadata supplies lengths. Eligibility and scoring use the same underlying map.",
+      "gap": 2.0
+    },
+    {
+      "id": "evidence_0",
+      "scene": "evidence",
+      "text": "Reuse Chapter Two's four records. Our illustrative analyser lowercases the words and retains them all. Their lengths are four, four, three and five terms; the average is four. Delulu occurs in two records. Job occurs in all four.",
+      "gap": 1.0
+    },
+    {
+      "id": "evidence_1",
+      "scene": "evidence",
+      "text": "With delulu AND job, only D one and D four are eligible. Both use each query term once. The data here are a tiny worked example, not measurements of a production search service.",
+      "gap": 0.65
+    },
+    {
+      "id": "scores_0",
+      "scene": "scores",
+      "text": "Using our positive-IDF version, k one at one point two and b at zero point seven five, D one scores about zero point eight zero. D four scores about zero point seven two. Totals are calculated before rounding.",
+      "gap": 1.0
+    },
+    {
+      "id": "scores_1",
+      "scene": "scores",
+      "text": "Their matching term counts are the same. In this example, the length adjustment makes the difference. These numbers order the two candidates; they do not establish which is useful for a particular reader.",
+      "gap": 0.65
+    },
+    {
+      "id": "boundaries_0",
+      "scene": "boundaries",
+      "text": "A top-one request retains D one. Top two retains both eligible records, with the same scores. Top k specifies an output boundary, not a scoring method.",
+      "gap": 1.0
+    },
+    {
+      "id": "boundaries_1",
+      "scene": "boundaries",
+      "text": "A strict AND gate is not compulsory for BM twenty-five. Direct retrieval can score the union of records matching any query term. Our job-only records then compete too, giving the order D one, D four, D three, D two. Eligibility, scoring and output size remain separate controls.",
+      "gap": 0.65
+    },
+    {
+      "id": "products_0",
+      "scene": "products",
+      "text": "PubMed's published Best Match architecture starts with BM twenty-five, then uses LambdaMART to rerank the top five hundred candidates. The chapter also describes Scopus and Primo CDI documentation of lexical evidence with additional ranking signals.",
+      "gap": 1.0
+    },
+    {
+      "id": "products_1",
+      "scene": "products",
+      "text": "Only the PubMed example identifies BM twenty-five directly. The other accounts do not prove plain BM twenty-five ranking. A relevance label can conceal field weighting, phrases, proximity, static signals and later reranking. These are the chapter's cited accounts, not fresh service tests.",
+      "gap": 0.65
+    },
+    {
+      "id": "pruning_0",
+      "scene": "pruning",
+      "text": "Selective and ordered access still help. Compression and blocks reduce storage and memory traffic. Valid score upper bounds can avoid scoring candidates that cannot enter the leading results.",
+      "gap": 1.0
+    },
+    {
+      "id": "pruning_1",
+      "scene": "pruning",
+      "text": "In this separate illustration, a full top-k has cutoff five. A block with a valid upper bound of three cannot compete. A bound of seven requires inspection; it does not guarantee a winner. Safe pruning preserves the result under the scoring rule. No speedup is measured here.",
+      "gap": 0.65
+    },
+    {
+      "id": "closing_0",
+      "scene": "closing",
+      "text": "Ask what admits candidates, what scores them and where the output stops. BM twenty-five is a lexical baseline, not the name of every relevance sort. Hardware, index design and query mix also affect performance; there is no universal speed guarantee.",
+      "gap": 1.0
+    },
+    {
+      "id": "closing_1",
+      "scene": "closing",
+      "text": "Next, Chapter Four changes the admission question: what happens when a query term is optional or matches nothing? The same index can support behavior that strict AND alone would never predict.",
+      "gap": 0.65
+    }
+  ]
+}

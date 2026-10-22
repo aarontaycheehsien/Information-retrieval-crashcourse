@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8832/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8832/01-same-question-same-search/01-same-question-same-search.mp4",
+      "duration": 349.933333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 137,
+      "seek_seconds": 174.966666,
+      "byte_range": "bytes 0-1023/38359345",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8832/02-why-is-this-paper-here/02-why-is-this-paper-here.mp4",
+      "duration": 327.766667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 126,
+      "seek_seconds": 163.883333,
+      "byte_range": "bytes 0-1023/38980776",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8832/03-what-are-you-actually-licensing/03-what-are-you-actually-licensing.mp4",
+      "duration": 358.6,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 135,
+      "seek_seconds": 179.3,
+      "byte_range": "bytes 0-1023/40138315",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

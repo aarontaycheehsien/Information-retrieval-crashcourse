@@ -1,0 +1,79 @@
+{
+  "file": "01-two-models-do-not-make-a-hybrid.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 253.8,
+  "decoded_frames": 7614,
+  "integrated_lufs": -16.1,
+  "true_peak_dbfs": -2.5,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 592 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 177 kb/s (default)",
+  "faststart": true,
+  "sha256": "3709c4cf9c28e2d844e704a0bb9f2bcf3aee6fa294c93675a5e62a936c2237d0",
+  "bytes": 24684326,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "b0a65af60c806ae173011a21299f20884c2651823ff1d96760ce1af2e7b26c4d",
+  "passed": true,
+  "chapter_sha256": "3d98323e1c89450a004389723467410caa1bed34df62abab4d7683cd193b313e",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "f243f704339e70637a405e4599006b8b855211d689de35795b40c8b46e3260cc",
+  "embedded_captions_verified": true,
+  "caption_cues": 100,
+  "reviewed_animation_times": 90,
+  "worked_examples": {
+    "source_lists": [
+      [
+        "A",
+        "B",
+        "C"
+      ],
+      [
+        "C",
+        "A",
+        "D"
+      ]
+    ],
+    "constant": 60,
+    "exact_fraction_scores": {
+      "A": "123/3782",
+      "C": "124/3843",
+      "B": "1/62",
+      "D": "1/63"
+    },
+    "rounded_source_scores": {
+      "A": "0.03252",
+      "C": "0.03227",
+      "B": "0.01613",
+      "D": "0.01587"
+    },
+    "baseline_order": [
+      "A",
+      "C",
+      "B",
+      "D"
+    ],
+    "input_occurrences": 6,
+    "distinct_candidates": 4,
+    "shallower_order": [
+      "A",
+      "C",
+      "B"
+    ],
+    "shallower_candidates": [
+      "A",
+      "B",
+      "C"
+    ],
+    "dense_double_weight_order": [
+      "C",
+      "A",
+      "D",
+      "B"
+    ],
+    "score_gap_examples_are_invented": true,
+    "measured_retrieval_results": false,
+    "fused_scores_are_relevance_probabilities": false,
+    "passed": true
+  }
+}

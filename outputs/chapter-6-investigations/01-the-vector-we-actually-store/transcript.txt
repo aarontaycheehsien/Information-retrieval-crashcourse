@@ -1,0 +1,36 @@
+The vector we actually store
+
+[00:00:00.700]: A question enters an encoder. Out come tokens, vocabulary identifiers, initial vectors, contextual representations, and eventually one vector for the complete text. Which of these does a conventional single-vector dense retriever store and compare? Take a moment before following the assembly line.
+
+[00:00:22.803]: Only the final pooled representation plays that role here. The earlier units are working material inside the encoder. Calling several of them tokens or embeddings can hide the boundaries that matter for search.
+
+[00:00:37.096]: A lexical index term comes from text analysis and can lead directly to a posting list. A model token is an input unit processed with surrounding units inside an encoder. It does not acquire a posting list simply because we call it a token.
+
+[00:00:53.408]: The collection determines which analysed terms have postings. A pretrained model instead has a fixed input-token vocabulary or byte inventory. These processes serve different jobs; their units are not interchangeable.
+
+[00:01:08.810]: Classic word two vec uses a fixed word vocabulary, so an unseen complete word may become an unknown token. Modern encoders usually split unfamiliar strings into reusable subwords, characters or bytes. This improves input coverage.
+
+[00:01:27.118]: For our declared toy tokenizer, delulu becomes six characters: d, e, l, u, l, u. That is not a named model's tokenizer. Being able to split the slang does not establish that an encoder has learnt its use or the searcher's need.
+
+[00:01:45.413]: In our toy vocabulary, d has identifier three, e eight, l eleven, and u twenty-one. The sequence becomes three, eight, eleven, twenty-one, eleven, twenty-one. These identifiers are lookup keys, not similarity scores or the final embedding dimensions.
+
+[00:02:05.514]: A lookup supplies an initial vector for each identifier. Both occurrences of l start from the same toy lookup vector. Their representations can later differ because they occupy different places in the sequence. All of these numbers are teaching values, not measured encoder outputs.
+
+[00:02:25.137]: The contextual encoder combines information across the sequence. It still produces per-token representations. Pooling then combines that working material into one representation for the complete query or passage. Averaging is one option; a sequence-opening representation is another.
+
+[00:02:45.691]: Our six supplied three-number vectors sum to six, six, twelve. Divide each total by six and the mean is one, one, two. This arithmetic illustrates pooling, not an actual language-model computation. Pooling alone does not guarantee useful retrieval.
+
+[00:03:05.233]: In a bi-encoder arrangement, a query and a passage are encoded independently, then their output vectors are compared. Their encoding paths can share parameters or use different parameters. Matching the arrangement and training to the task matters.
+
+[00:03:21.347]: Independent passage encoding means its vector can be prepared before a new query arrives. The passage need not be encoded again with every question. Chapter Seven takes this arrangement to a whole collection; here we are identifying what produces the comparable representations.
+
+[00:03:40.108]: Return to the assembly line: text, model tokens, identifiers, initial vectors, contextual representations, pooling, one embedding. Model tokens are inputs; they are not the dimensions of the final vector and are not automatically searchable lexical terms.
+
+[00:03:58.457]: This chapter follows a conventional single-vector arrangement. Late-interaction methods retain multiple token vectors for comparison instead. Producing a stored representation is one decision. Teaching its comparisons to reward useful passages is the next one.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 6.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#retrieval-encoder
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

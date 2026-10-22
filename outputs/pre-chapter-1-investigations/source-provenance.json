@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "preface_sha256": "5c9763f9c43e9aa4fdee671fefdeda85cea48ea5f2f0e6a660c7c2455a827fdb",
+  "license": "CC BY 4.0",
+  "scope": "Complete preface including reading orientation; Chapter 1 excluded"
+}

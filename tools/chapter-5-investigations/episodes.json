@@ -1,0 +1,272 @@
+{
+  "series": "Embeddings: what the learnt geometry encodes",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#embeddings",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#embeddings",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-the-map-nobody-drew",
+      "title": "The map nobody drew",
+      "subtitle": "How a prediction task can leave useful geometry behind.",
+      "accent": "blue",
+      "scenes": [
+        {
+          "id": "map_hook",
+          "title": "Who decided where the words should go?",
+          "source_anchor": "from-word2vec-to-retrieval-embeddings",
+          "visual": "map_hook",
+          "narration": [
+            "Imagine a map where words occupy locations, and related words often sit near one another. Who drew the map? Did someone label an axis meaning, another axis emotion, and tell the computer where every word belongs? Make a prediction.",
+            "The chapter gives a more surprising route. Train a model to predict patterns in text. Adjust its parameters when predictions miss their targets. Useful relationships can emerge in the resulting vectors without anyone drawing those relationships explicitly."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "representations",
+          "title": "A representation, a vector, an embedding",
+          "source_anchor": "representation-vector-embedding-title",
+          "visual": "representations",
+          "narration": [
+            "A representation is any form used to stand for an item. A vector is one form: an ordered list of numbers. Two numbers can specify a location on paper. Real language-model vectors often have hundreds or thousands of dimensions.",
+            "An embedding is a mapping into a vector space, usually learnt during training in modern language processing. We also call the output vector an embedding. A vector need not come from a learnt mapping; these words do different jobs."
+          ]
+        },
+        {
+          "id": "two_routes",
+          "title": "Both routes calculate numbers",
+          "source_anchor": "calculated-weights-and-learnt-parameters-title",
+          "visual": "two_routes",
+          "narration": [
+            "BM twenty-five also calculates numbers. Its weights come from term counts, document lengths and collection statistics through a specified formula. A neural encoder calculates an output from text, tokenisation and learnt parameters.",
+            "The distinction is how the mapping was obtained. Training fits the encoder's parameters; inference uses the fitted mapping on new input. A learnt calculation is still a calculation. Being able to reproduce its output does not make every dimension easy to interpret."
+          ]
+        },
+        {
+          "id": "self_targets",
+          "title": "The text already contains an answer",
+          "source_anchor": "text-that-supplies-its-own-targets",
+          "visual": "self_targets",
+          "narration": [
+            "Training needs a target. Where can one come from without a person labelling the meaning of every word? Hide part of a sentence. Ask the model to recover it. The original text supplies the answer.",
+            "The distributional hypothesis suggests that words used in similar contexts tend to be used in similar ways. Predicting those contexts turns an observation about language into a training task. It does not supply a universal definition of meaning."
+          ]
+        },
+        {
+          "id": "word2vec_games",
+          "title": "Two prediction games; keep the vectors",
+          "source_anchor": "word2vec-predicting-context-title",
+          "visual": "word2vec_games",
+          "narration": [
+            "Word two vec has two familiar arrangements. Continuous bag of words, or C B O W, predicts a target word from its neighbours. Skip-gram reverses that direction: use a target word to predict neighbouring words.",
+            "Across many examples, predictions are compared with targets and parameters are adjusted. After training, the word vectors can be reused without running the original prediction task. Their dimensions are usually anonymous, and useful patterns are distributed across them."
+          ]
+        },
+        {
+          "id": "analogy",
+          "title": "A relationship can become a reusable direction",
+          "source_anchor": "word2vec-analogy-offsets-title",
+          "visual": "analogy",
+          "narration": [
+            "The famous demonstration takes king, subtracts man, and adds woman. In some trained spaces, queen is the nearest candidate after excluding the three input words. The step from man to woman resembles the step from king to queen.",
+            "Our coordinates are deliberately invented to show that arithmetic exactly. They are not measurements from a trained model. Real analogies can fail. A successful example demonstrates a geometric regularity, not a universal equation about meaning."
+          ]
+        },
+        {
+          "id": "projection",
+          "title": "A two-dimensional picture can hide a difference",
+          "source_anchor": "word2vec-country-capital-pca-title",
+          "visual": "projection",
+          "narration": [
+            "The chapter also shows selected country-to-capital directions in a two-dimensional projection of thousand-dimensional vectors. That picture is a shadow of a larger space. Projection can discard differences that matter.",
+            "Our separate toy example makes the loss visible. Two three-dimensional points differ by ten units in their third coordinate. Drop that coordinate and both appear at the same location. This is a simple coordinate projection, not the chapter's P C A experiment."
+          ]
+        },
+        {
+          "id": "geometry_limits",
+          "title": "Near according to what training?",
+          "source_anchor": "what-the-learnt-geometry-appears-to-encode",
+          "visual": "geometry_limits",
+          "narration": [
+            "The geometry reflects patterns rewarded by training. Predicting word contexts can produce useful relationships, but the task never directly asked which passage answers which question. Nearby does not automatically mean relevant to a particular search.",
+            "Classic word vectors are a stepping stone. Modern encoders can read a whole sequence, produce context-dependent representations, and be trained for a retrieval task. To judge the resulting map, ask what it learnt to preserve, then test it on the queries and relevance judgments that matter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-one-word-two-locations",
+      "title": "One word, two locations",
+      "subtitle": "Contextual tokens and a complete-text embedding are different stages.",
+      "accent": "teal",
+      "scenes": [
+        {
+          "id": "bank_hook",
+          "title": "The same bank in two different sentences",
+          "source_anchor": "context-changes-the-representation",
+          "visual": "bank_hook",
+          "narration": [
+            "Read these two phrases: the river bank; the bank refused the loan. The letters in bank are identical. Should its vector be identical too? If the vector is just a stored address for a word, how could the surrounding sentence change it?",
+            "That is the difference between a classic static word vector and a contextual token representation. One reuses a stored vector for the string. The other computes a representation for this occurrence from its sequence."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "static_context",
+          "title": "From a stored word vector to a contextual one",
+          "source_anchor": "context-changes-the-representation",
+          "visual": "static_context",
+          "narration": [
+            "Classic word two vec gives bank essentially the same stored vector in both sentences. A contextual encoder starts with token embeddings and transforms them using the surrounding sequence. River supplies different evidence from refused and loan.",
+            "Our two moving markers illustrate that distinction; their coordinates are invented. They do not measure a model's ability to disambiguate bank, and different vectors alone would not establish that a model interpreted the two sentences correctly."
+          ]
+        },
+        {
+          "id": "attention",
+          "title": "Other tokens can change this representation",
+          "source_anchor": "context-changes-the-representation",
+          "visual": "attention",
+          "narration": [
+            "A Transformer's self-attention lets a token's representation draw on information from other tokens in the sequence. It is a mechanism for combining information. What the model learns to do with that mechanism depends on its training.",
+            "Contextual representations did not begin with Transformers. ELMo used bidirectional recurrent networks. Transformer encoders later became dominant as self-attention helped make large-scale sequence processing more parallelisable. Architecture and training objective remain separate choices."
+          ]
+        },
+        {
+          "id": "model_tokens",
+          "title": "Model tokens are not index terms",
+          "source_anchor": "chapter-5-orientation-title",
+          "visual": "model_tokens",
+          "narration": [
+            "There is another trap: the units a model receives are not necessarily the terms an inverted index stores. For this illustration only, define a toy tokenizer that makes one character per token. Jobs becomes four units: j, o, b, s.",
+            "A separate illustrative lexical analyser lowercases jobs and stems it to job. Those are different representations made for different jobs. Real neural tokenizers may use subwords, characters or bytes. Our character split does not claim how any named model tokenizes this word."
+          ]
+        },
+        {
+          "id": "pooling",
+          "title": "Many token vectors. One complete-text vector.",
+          "source_anchor": "context-changes-the-representation",
+          "visual": "pooling",
+          "narration": [
+            "Contextual token representations are still several vectors, one for each token occurrence. A model producing a single embedding for a complete query or passage needs another step. Pooling can combine token representations, or the model can use a selected representation.",
+            "Our declared toy averages three two-number vectors: one, three; three, one; and two, two. The result is two, two. This demonstrates mean pooling only. It is not a claim about BERT's default retrieval behavior or the best pooling method."
+          ]
+        },
+        {
+          "id": "reproducible",
+          "title": "Reproducible does not mean easy to interpret",
+          "source_anchor": "from-word2vec-to-retrieval-embeddings",
+          "visual": "reproducible",
+          "narration": [
+            "An encoder computes an output using a fitted mapping. With the same model, preprocessing and inference settings, its output can be reproduced. Training is the stage that changes the mapping; applying it need not train the model again.",
+            "Reproducibility is different from interpretability. Individual dimensions usually do not arrive with labels such as occupation or emotion. Our two-number diagrams make operations visible; real representations distribute patterns across many dimensions and cannot be inspected as a simple map."
+          ]
+        },
+        {
+          "id": "context_limits",
+          "title": "Context is a capability, not a relevance verdict",
+          "source_anchor": "what-bert-is-and-what-it-still-needs",
+          "visual": "context_limits",
+          "narration": [
+            "Now return to the two uses of bank. Context can change the representation. Pooling can make one vector for the complete text. Neither step, by itself, establishes that independently encoded questions will rank close to the passages a searcher needs.",
+            "That relationship depends on architecture and training, and its usefulness needs evaluation. Before accepting a claim about contextual embeddings, ask what text unit the vector represents, how that vector was obtained, and what task taught the model which relationships to reward."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-the-wrong-prediction-game",
+      "title": "The wrong prediction game",
+      "subtitle": "Why language knowledge alone does not specify a search ranking.",
+      "accent": "red",
+      "scenes": [
+        {
+          "id": "training_hook",
+          "title": "Excellent at filling blanks. Good at search?",
+          "source_anchor": "what-bert-is-and-what-it-still-needs",
+          "visual": "training_hook",
+          "narration": [
+            "Suppose a model is excellent at recovering hidden words in medical papers. Would you expect it to be an excellent search engine for medical questions? It sounds plausible: it has learnt the vocabulary and can use the surrounding context.",
+            "But a prediction task rewards a particular relationship. Filling a gap in a sentence is not the same task as placing a separately encoded question near a useful answering passage. Start by examining what the model was trained to predict."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "cbow",
+          "title": "CBOW: predict the word from its neighbours",
+          "source_anchor": "shapes-of-the-blank-title",
+          "visual": "cbow",
+          "narration": [
+            "Use the chapter's sentence: The patient received heart treatment after the attack. In our C B O W illustration, hide heart. A local window gives the model patient, received, treatment and after. The target, taken from the original sentence, is heart.",
+            "The neighbouring words supply evidence on both sides. This row illustrates continuous bag of words. Skip-gram uses the opposite direction, predicting neighbouring words from the target word. Neither arrangement requires a person to label the sentence's meaning."
+          ]
+        },
+        {
+          "id": "masked",
+          "title": "Masked prediction: context on both sides",
+          "source_anchor": "shapes-of-the-blank-title",
+          "visual": "masked",
+          "narration": [
+            "Now hide treatment. A masked-language objective can use the words before and after that position to recover the missing token. BERT's pretraining chiefly uses this kind of bidirectional prediction to learn broad language patterns.",
+            "Our word boxes simplify a task that operates on model tokens. The answer comes from the text itself, which makes this self-supervised learning. The available context and the target define the prediction problem; self-attention is the mechanism that combines information."
+          ]
+        },
+        {
+          "id": "next_token",
+          "title": "Next-token prediction: the future is hidden",
+          "source_anchor": "shapes-of-the-blank-title",
+          "visual": "next_token",
+          "narration": [
+            "For next-token prediction, show only The patient received heart treatment. The next target is after. Everything to the right is unavailable to the model at that prediction step. Revealing the next token in the input would give away the answer.",
+            "GPT-style training uses preceding context this way. Historically, bidirectional encoders often started retrieval models and decoders often powered generation. That division has blurred. An architecture family alone does not establish a present-day model's task or role."
+          ]
+        },
+        {
+          "id": "three_training_jobs",
+          "title": "Language, domain, and retrieval are separate jobs",
+          "source_anchor": "what-bert-is-and-what-it-still-needs",
+          "visual": "three_training_jobs",
+          "narration": [
+            "Pretraining learns broad language patterns. Domain pretraining changes the material behind those patterns. Retrieval-oriented training rewards relationships useful for the search task, such as a question and a relevant passage.",
+            "That retrieval signal need not be a human relevance label. It can come from human judgments, behavior, weak labels, synthetic labels or self-supervised pairs. Ask what those examples and targets teach the model to preserve, and how well that transfers to the searches you care about."
+          ]
+        },
+        {
+          "id": "domain_models",
+          "title": "Knowing the domain does not specify the ranking",
+          "source_anchor": "what-bert-is-and-what-it-still-needs",
+          "visual": "domain_models",
+          "narration": [
+            "The chapter distinguishes three domain examples. BioBERT continues pretraining on biomedical literature. BiomedBERT starts with biomedical text and vocabulary. SciBERT learns from scientific literature. These choices change the language experience behind the representations.",
+            "They do not by themselves specify which query should rank near which passage. Generic BERT has no direct requirement from masked-word prediction to make those independent embeddings useful for retrieval. Sentence-BERT changes architecture and training to make complete-text representations useful for comparison."
+          ]
+        },
+        {
+          "id": "pipeline_roles",
+          "title": "The same model family can do different jobs",
+          "source_anchor": "what-bert-is-and-what-it-still-needs",
+          "visual": "pipeline_roles",
+          "narration": [
+            "A product can use a BERT-family model to interpret a query, to produce vectors for first-stage retrieval, or to compare records in an existing shortlist as a reranker. These positions expose the model to different inputs and give it different responsibilities.",
+            "A family name therefore leaves the pipeline open. Knowing that BERT appears somewhere does not tell you how the whole collection was searched, what candidates reached a later stage, or whether the model was trained for that particular retrieval task."
+          ]
+        },
+        {
+          "id": "two_questions",
+          "title": "Ask what it learnt—and where it is used",
+          "source_anchor": "what-bert-is-and-what-it-still-needs",
+          "visual": "two_questions",
+          "narration": [
+            "Carry two questions out of Chapter Five. Was this model trained for retrieval, and what relationship did its targets reward? Where does it sit in the search pipeline? Contextualisation, domain knowledge and useful retrieval are related, but distinct.",
+            "The vectors are calculated. Their geometry is shaped by training. Whether that geometry helps a searcher must be tested. Chapter Six asks what one vector should represent and how training can make comparisons between queries and documents useful."
+          ]
+        }
+      ]
+    }
+  ]
+}

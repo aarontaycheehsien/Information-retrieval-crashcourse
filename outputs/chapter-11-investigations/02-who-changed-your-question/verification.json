@@ -1,0 +1,73 @@
+{
+  "file": "02-who-changed-your-question.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 278.6666666666667,
+  "decoded_frames": 8360,
+  "integrated_lufs": -16.1,
+  "true_peak_dbfs": -2.5,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 681 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 178 kb/s (default)",
+  "faststart": true,
+  "sha256": "0d5a5846e6251557c2c39f2f442279b757a27f2c54bf9a41e258f4d4768d3580",
+  "bytes": 30226148,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "0efa6f851da3e476476910a121820febe192b51d29b35978e138217cde7c4987",
+  "passed": true,
+  "chapter_sha256": "e361b1c2c77ba99e7e15ec59ff0377e2e45002cbaa40ee5ba358516f984b3ac8",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "53ed7d59454d3a33c1814c58d2a2f9bfabae83310596d276694c7848604598ec",
+  "embedded_captions_verified": true,
+  "caption_cues": 113,
+  "reviewed_animation_times": 90,
+  "worked_examples": {
+    "source_query_objects": [
+      "Free-text string",
+      "Controlled term or structured expression",
+      "Citation edge",
+      "Seed document",
+      "Relevance judgement",
+      "Browse or monitoring target",
+      "Programmatic predicate",
+      "Task brief"
+    ],
+    "receivers": [
+      "Lexical or Boolean retriever",
+      "Dense retriever",
+      "LLM query translator",
+      "Agentic controller",
+      "Undisclosed pipeline"
+    ],
+    "source_structured_expression": "PY=(2020-2024) AND OG_SMART=(university of california) AND TS=(apple) AND TS=(oranges) AND TS=(bananas)",
+    "all_five_conditions_joined_with_AND": true,
+    "scoped_review_audit": {
+      "included_sources": 495,
+      "reported_percentages": {
+        "Protocol-defined database and hand searches": 30,
+        "Snowballing": 51
+      },
+      "universal_estimate": false,
+      "converted_to_exact_source_counts": false
+    },
+    "prf_sequence": [
+      "initial query",
+      "initial ranking",
+      "assume top records relevant",
+      "construct later query",
+      "later retrieval"
+    ],
+    "screening_sequence": [
+      "existing candidate pool",
+      "inclusion or exclusion judgements",
+      "reprioritise existing records"
+    ],
+    "generated_paths": {
+      "Query2doc": "original query + generated language \u2192 lexical or dense retrieval",
+      "HyDE": "generated document \u2192 dense encoder \u2192 vector retrieval of real sources"
+    },
+    "generated_text_is_evidence": false,
+    "new_product_or_model_tests": false,
+    "passed": true
+  }
+}

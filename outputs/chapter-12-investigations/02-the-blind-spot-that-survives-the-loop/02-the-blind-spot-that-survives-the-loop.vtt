@@ -1,0 +1,322 @@
+WEBVTT
+
+00:00:00.714 --> 00:00:02.472
+Find related papers that an article could
+
+00:00:02.492 --> 00:00:04.611
+have cited but did not.
+
+00:00:04.786 --> 00:00:06.982
+The chapter’s probe requires identifying
+
+00:00:07.002 --> 00:00:09.804
+the article, extracting its references,
+
+00:00:09.825 --> 00:00:12.253
+finding related work, and comparing
+
+00:00:12.273 --> 00:00:14.392
+identities. Would running more searches
+
+00:00:14.412 --> 00:00:16.466
+alone complete that task?
+
+00:00:16.642 --> 00:00:19.714
+Pause and identify the missing operation.
+
+00:00:22.149 --> 00:00:24.556
+The comparison must actually happen.
+
+00:00:24.732 --> 00:00:27.959
+Our invented set diagram removes already
+
+00:00:27.979 --> 00:00:30.240
+cited identities from a related candidate
+
+00:00:30.260 --> 00:00:32.830
+pool. The remaining records are candidates
+
+00:00:32.850 --> 00:00:35.420
+for checking, not verified citation
+
+00:00:35.440 --> 00:00:39.234
+omissions; timing, relevance and metadata
+
+00:00:39.294 --> 00:00:40.575
+still need assessment.
+
+00:00:41.481 --> 00:00:43.556
+The author’s December twenty twenty five
+
+00:00:43.576 --> 00:00:46.121
+probe reports Asta stopping at the target
+
+00:00:46.141 --> 00:00:48.698
+lookup, and Consensus returning already
+
+00:00:48.718 --> 00:00:51.674
+cited papers despite four sub agents.
+
+00:00:51.850 --> 00:00:54.355
+SciSpace attempted reference extraction
+
+00:00:54.375 --> 00:00:56.572
+and comparison; most suggestions were
+
+00:00:56.592 --> 00:00:59.922
+uncited, but metadata caused some matching
+
+00:00:59.942 --> 00:01:02.783
+failures and completion was unclear.
+
+00:01:03.324 --> 00:01:06.161
+General assistants also depended on access
+
+00:01:06.181 --> 00:01:07.539
+to the full text.
+
+00:01:07.715 --> 00:01:10.259
+This was one task type, not a general
+
+00:01:10.279 --> 00:01:11.612
+capability ranking.
+
+00:01:11.787 --> 00:01:14.421
+Passing or failing it does not establish
+
+00:01:14.441 --> 00:01:17.746
+robust agency across tasks or identify a
+
+00:01:17.766 --> 00:01:19.356
+failure’s sole cause.
+
+00:01:20.262 --> 00:01:22.142
+A trace records what the system did.
+
+00:01:22.305 --> 00:01:24.437
+It does not reveal every action it could
+
+00:01:24.457 --> 00:01:26.988
+have taken. Missing reference extraction
+
+00:01:27.008 --> 00:01:29.874
+or source access can block the task.
+
+00:01:30.430 --> 00:01:32.624
+MCP can expose search operations to a
+
+00:01:32.644 --> 00:01:35.846
+controller: their inputs, outputs and
+
+00:01:35.866 --> 00:01:39.338
+purpose. Scite and Wiley AI Gateway
+
+00:01:39.358 --> 00:01:41.335
+provide examples in the chapter.
+
+00:01:41.510 --> 00:01:44.286
+The underlying retrieval algorithm stays
+
+00:01:44.306 --> 00:01:45.072
+separate.
+
+00:01:45.969 --> 00:01:48.554
+Wiley’s documented server returns relevant
+
+00:01:48.574 --> 00:01:51.196
+full text chunks with paper metadata.
+
+00:01:51.358 --> 00:01:53.915
+Scite documents tools and Search API
+
+00:01:53.935 --> 00:01:56.299
+filters, but does not document ranking
+
+00:01:56.319 --> 00:01:58.632
+parity with its web interface; its
+
+00:01:58.652 --> 00:02:01.492
+Assistant is not offered through MCP.
+
+00:02:02.051 --> 00:02:03.967
+The controller chooses when to call those
+
+00:02:03.987 --> 00:02:06.905
+operations, what to ask and whether to
+
+00:02:06.925 --> 00:02:09.843
+search again. The exposed operations,
+
+00:02:09.863 --> 00:02:12.240
+authentication and library entitlements
+
+00:02:12.260 --> 00:02:15.191
+still apply. An endpoint does not provide
+
+00:02:15.211 --> 00:02:17.910
+every interface feature or a route around
+
+00:02:17.930 --> 00:02:18.863
+a subscription.
+
+00:02:19.780 --> 00:02:21.944
+The chapter illustrates a hypothetical
+
+00:02:21.964 --> 00:02:25.461
+search about open access and citations.
+
+00:02:25.624 --> 00:02:27.846
+Round one returns papers about overall
+
+00:02:27.866 --> 00:02:30.513
+citation differences, while selection bias
+
+00:02:30.533 --> 00:02:31.995
+methods are missing.
+
+00:02:32.170 --> 00:02:34.031
+Later searches follow the returned
+
+00:02:34.051 --> 00:02:37.343
+terminology and references, reinforcing
+
+00:02:37.363 --> 00:02:38.631
+the same aspect.
+
+00:02:39.181 --> 00:02:41.823
+After three rounds the budget ends, with
+
+00:02:41.843 --> 00:02:45.019
+selection bias methods still unexplored.
+
+00:02:45.194 --> 00:02:47.687
+These are hypothetical recorded actions
+
+00:02:47.707 --> 00:02:50.316
+and observations, not private model
+
+00:02:50.336 --> 00:02:52.274
+reasoning. The example shows how a
+
+00:02:52.294 --> 00:02:54.736
+shortlist bottleneck can recur and
+
+00:02:54.756 --> 00:02:56.449
+influence the next search.
+
+00:02:57.365 --> 00:02:59.764
+An alternative second action explicitly
+
+00:02:59.784 --> 00:03:02.419
+searches for open access, citation
+
+00:03:02.439 --> 00:03:05.047
+advantage and selection bias methods.
+
+00:03:05.222 --> 00:03:07.109
+Suppose that action retrieves
+
+00:03:07.129 --> 00:03:09.197
+methodological papers absent from the
+
+00:03:09.217 --> 00:03:12.367
+first round. The cumulative candidate pool
+
+00:03:12.387 --> 00:03:15.524
+can then expand, informing later choices.
+
+00:03:16.066 --> 00:03:18.485
+The task brief, a librarian or the
+
+00:03:18.505 --> 00:03:20.353
+controller could prompt that action.
+
+00:03:20.528 --> 00:03:23.342
+It is not guaranteed to occur or succeed.
+
+00:03:23.517 --> 00:03:25.972
+Citation searching does not always stay
+
+00:03:25.992 --> 00:03:28.897
+inside one aspect; the illustration
+
+00:03:28.917 --> 00:03:31.706
+contrasts possible trajectories, not
+
+00:03:31.726 --> 00:03:33.226
+universal outcomes.
+
+00:03:34.114 --> 00:03:36.262
+A workflow may stop because its steps
+
+00:03:36.282 --> 00:03:39.109
+ended. A harness may impose a round limit
+
+00:03:39.129 --> 00:03:41.673
+or budget, or the user may interrupt.
+
+00:03:41.823 --> 00:03:44.303
+A model may instead decide that the
+
+00:03:44.323 --> 00:03:46.970
+evidence it has seen is sufficient.
+
+00:03:47.519 --> 00:03:49.817
+That last decision applies a relevance
+
+00:03:49.837 --> 00:03:52.962
+criterion to results the user may not have
+
+00:03:52.982 --> 00:03:54.804
+inspected. Record it.
+
+00:03:54.966 --> 00:03:57.485
+A budget reached, declining yield or a
+
+00:03:57.505 --> 00:03:59.753
+model saying enough does not prove
+
+00:03:59.773 --> 00:04:02.201
+completeness, and two runs may stop
+
+00:04:02.221 --> 00:04:03.026
+differently.
+
+00:04:03.951 --> 00:04:06.335
+Evaluating the loop requires the available
+
+00:04:06.355 --> 00:04:10.420
+action menu as well as the executed trace,
+
+00:04:10.440 --> 00:04:12.456
+intermediate results and stopping
+
+00:04:12.476 --> 00:04:15.485
+conditions. Otherwise an access limit can
+
+00:04:15.505 --> 00:04:17.804
+look like reasoning failure, and an early
+
+00:04:17.824 --> 00:04:20.060
+omission can disappear behind a fluent
+
+00:04:20.080 --> 00:04:21.167
+final answer.
+
+00:04:21.709 --> 00:04:24.441
+More rounds add latency and tokens.
+
+00:04:24.578 --> 00:04:27.560
+A known procedure may be cheaper and more
+
+00:04:27.580 --> 00:04:30.292
+reproducible when prescribed in advance.
+
+00:04:30.454 --> 00:04:33.037
+Choose the arrangement for the task, and
+
+00:04:33.057 --> 00:04:34.996
+evaluate what it recovered and what it
+
+00:04:35.016 --> 00:04:36.632
+failed to explore.

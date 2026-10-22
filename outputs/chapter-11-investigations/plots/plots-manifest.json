@@ -1,0 +1,71 @@
+{
+  "recipe_sha256": "ddd9abcce488f23a5e7446185686d46db8b7e972c469c1d92119e1c08e39de46",
+  "kind": "source taxonomy, transformation paths and scoped reported audit shares",
+  "new_product_or_model_tests": false,
+  "checks": {
+    "source_query_objects": [
+      "Free-text string",
+      "Controlled term or structured expression",
+      "Citation edge",
+      "Seed document",
+      "Relevance judgement",
+      "Browse or monitoring target",
+      "Programmatic predicate",
+      "Task brief"
+    ],
+    "receivers": [
+      "Lexical or Boolean retriever",
+      "Dense retriever",
+      "LLM query translator",
+      "Agentic controller",
+      "Undisclosed pipeline"
+    ],
+    "source_structured_expression": "PY=(2020-2024) AND OG_SMART=(university of california) AND TS=(apple) AND TS=(oranges) AND TS=(bananas)",
+    "all_five_conditions_joined_with_AND": true,
+    "scoped_review_audit": {
+      "included_sources": 495,
+      "reported_percentages": {
+        "Protocol-defined database and hand searches": 30,
+        "Snowballing": 51
+      },
+      "universal_estimate": false,
+      "converted_to_exact_source_counts": false
+    },
+    "prf_sequence": [
+      "initial query",
+      "initial ranking",
+      "assume top records relevant",
+      "construct later query",
+      "later retrieval"
+    ],
+    "screening_sequence": [
+      "existing candidate pool",
+      "inclusion or exclusion judgements",
+      "reprioritise existing records"
+    ],
+    "generated_paths": {
+      "Query2doc": "original query + generated language \u2192 lexical or dense retrieval",
+      "HyDE": "generated document \u2192 dense encoder \u2192 vector retrieval of real sources"
+    },
+    "generated_text_is_evidence": false,
+    "new_product_or_model_tests": false,
+    "passed": true
+  },
+  "files": {
+    "feedback-boundaries.png": "9184da2d622c68c01f0a99705c4fd37384bde423b624f5ba7b55d4b4ea4c56b6",
+    "feedback-boundaries.svg": "62b61c071c3073b0bfda94a1b541ce890c530ae7bffdfcadbf9402024ea31afe",
+    "generated-paths.png": "2786e7856113be32e11f9ba2eaa93890713a24b97897ac6dcbb1a095bf8d50ed",
+    "generated-paths.svg": "0d075561409a81f24036a9199a61122f2c83e6936920aa4ac4f36d84ec231279",
+    "query-objects.csv": "206bd7a906c9f260423211adba9219dcc4d94ce6f2409b40b6fd9ed42411c35f",
+    "query-objects.png": "20ec41fae445e31aa9858caaca34bc5c16f43ec84c64baa97cc59db418ea5cc0",
+    "query-objects.svg": "f8868af7530818bf5acc2356c8a885e0847aa2fb1fe649b6bf6767e102271a59",
+    "receiving-components.png": "5f2004d3ef45fff84b76a1627959fab887c5cf192b5635071d7596581136a356",
+    "receiving-components.svg": "25b14b857a3835bee282ba843f2d31221848bb8a9da5d2574b7c9cffad6a10e6",
+    "review-audit.csv": "da9ca15d7b7eee6fabc70b72560012325bb61c04df0f35daf3fb2d8b2e452c28",
+    "review-audit.png": "7cb996011bdd2e2e55f1d529d718a19662cefff36f20a2f9ab8652b1957ac121",
+    "review-audit.svg": "944cd4088829175579d9fcfcff5770f28ac9dd32b6e66c603684c16b974f855b",
+    "visible-boolean.png": "3b8fbe5da71875fde3b738efe742da4763cdbe1f6241673ae808bc3768df2446",
+    "visible-boolean.svg": "5fe08dfd454ed2b39e9a5efddb1c11cfba343d084415e537168de1cc661655d9"
+  },
+  "passed": true
+}

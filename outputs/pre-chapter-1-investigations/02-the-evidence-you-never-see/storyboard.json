@@ -1,0 +1,179 @@
+{
+  "series": "Before the search begins",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#preface",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#preface",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-the-evidence-you-never-see",
+  "title": "The evidence you never see",
+  "subtitle": "Real citations can still leave a blind spot.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "prediction",
+      "title": "All the citations are real. Are we done?",
+      "source_anchor": "the-half-nobody-is-watching",
+      "visual": "answer",
+      "narration": [
+        "Imagine an AI search answer with three citations. You check every reference. All three papers exist. Can you now trust the answer? Hold that thought. What exactly did your check establish?",
+        "It established that the references are real. That is useful. But it did not establish that the answer represents them faithfully, or that the system found the evidence needed to answer your question."
+      ],
+      "pause_before_second": 3.0
+    },
+    {
+      "id": "existence",
+      "title": "Check one: does the source exist?",
+      "source_anchor": "the-half-nobody-is-watching",
+      "visual": "existence",
+      "narration": [
+        "A fabricated citation is one kind of failure. A reference that does not exist can be exposed by checking it. But passing that check answers only the existence question.",
+        "Our imaginary answer passes. The three references are real within the illustration. We still have two more questions to investigate."
+      ]
+    },
+    {
+      "id": "faithfulness",
+      "title": "Check two: does the writing fit the source?",
+      "source_anchor": "the-half-nobody-is-watching",
+      "visual": "faithfulness",
+      "narration": [
+        "A real source can still be misrepresented. In this invented example, a paper reports an uncertain result, while the answer describes it as a settled conclusion. The reference exists; the description is wrong.",
+        "Checking the writing against the source tackles that problem. Now suppose we correct the wording and every sentence fairly represents the papers it cites. Is our investigation finished?"
+      ]
+    },
+    {
+      "id": "missing",
+      "title": "Check three: what evidence was available?",
+      "source_anchor": "the-half-nobody-is-watching",
+      "visual": "missing",
+      "narration": [
+        "Here is the harder failure to see. Another relevant paper never reaches the answer-writing step. The answer cannot show you evidence it never received. It can be fluent, carefully worded and neatly cited, yet still rest on an inadequate selection.",
+        "The preface asks us to examine this retrieval half of the system. Faithful writing and adequate retrieval are separate questions. A citation list alone settles neither."
+      ]
+    },
+    {
+      "id": "experiment",
+      "title": "A simple envelope experiment",
+      "source_anchor": "the-half-nobody-is-watching",
+      "visual": "envelopes",
+      "narration": [
+        "Try a thought experiment. Give two writers different envelopes of papers about the same question. Both writers describe every supplied paper perfectly. One envelope omits an important piece of evidence.",
+        "Excellent writing cannot put that missing paper back into the envelope. The illustration does not prove how any real product behaves. It shows why inspecting the final prose and inspecting evidence selection do different jobs."
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "An omission starts an investigation",
+      "source_anchor": "preface",
+      "visual": "diagnosis",
+      "narration": [
+        "If a paper is missing from an answer, start asking questions. Was it in the searchable collection? Did it enter a candidate set? How was it ranked? What evidence was passed onward? What did the writer use?",
+        "Those are diagnostic possibilities, not a verdict about where a real failure occurred. The goal is to locate the decision, using what the system documents and what you can actually inspect."
+      ]
+    },
+    {
+      "id": "responsibility",
+      "title": "Why this belongs in library work",
+      "source_anchor": "the-half-nobody-is-watching",
+      "visual": "responsibility",
+      "narration": [
+        "Libraries license, configure, evaluate and pay for the retrieval side of these tools. Tay argues that someone in the library needs enough understanding to compare systems and ask which layer a problem belongs to.",
+        "You do not need to become a retrieval engineer. You need to keep three questions separate: is the source real, is it represented faithfully, and was the evidence selection adequate? The papers you never see deserve a question too."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "prediction_0",
+      "scene": "prediction",
+      "text": "Imagine an AI search answer with three citations. You check every reference. All three papers exist. Can you now trust the answer? Hold that thought. What exactly did your check establish?",
+      "gap": 1.0
+    },
+    {
+      "id": "prediction_1",
+      "scene": "prediction",
+      "text": "It established that the references are real. That is useful. But it did not establish that the answer represents them faithfully, or that the system found the evidence needed to answer your question.",
+      "gap": 3.0
+    },
+    {
+      "id": "existence_0",
+      "scene": "existence",
+      "text": "A fabricated citation is one kind of failure. A reference that does not exist can be exposed by checking it. But passing that check answers only the existence question.",
+      "gap": 1.0
+    },
+    {
+      "id": "existence_1",
+      "scene": "existence",
+      "text": "Our imaginary answer passes. The three references are real within the illustration. We still have two more questions to investigate.",
+      "gap": 0.65
+    },
+    {
+      "id": "faithfulness_0",
+      "scene": "faithfulness",
+      "text": "A real source can still be misrepresented. In this invented example, a paper reports an uncertain result, while the answer describes it as a settled conclusion. The reference exists; the description is wrong.",
+      "gap": 1.0
+    },
+    {
+      "id": "faithfulness_1",
+      "scene": "faithfulness",
+      "text": "Checking the writing against the source tackles that problem. Now suppose we correct the wording and every sentence fairly represents the papers it cites. Is our investigation finished?",
+      "gap": 0.65
+    },
+    {
+      "id": "missing_0",
+      "scene": "missing",
+      "text": "Here is the harder failure to see. Another relevant paper never reaches the answer-writing step. The answer cannot show you evidence it never received. It can be fluent, carefully worded and neatly cited, yet still rest on an inadequate selection.",
+      "gap": 1.0
+    },
+    {
+      "id": "missing_1",
+      "scene": "missing",
+      "text": "The preface asks us to examine this retrieval half of the system. Faithful writing and adequate retrieval are separate questions. A citation list alone settles neither.",
+      "gap": 0.65
+    },
+    {
+      "id": "experiment_0",
+      "scene": "experiment",
+      "text": "Try a thought experiment. Give two writers different envelopes of papers about the same question. Both writers describe every supplied paper perfectly. One envelope omits an important piece of evidence.",
+      "gap": 1.0
+    },
+    {
+      "id": "experiment_1",
+      "scene": "experiment",
+      "text": "Excellent writing cannot put that missing paper back into the envelope. The illustration does not prove how any real product behaves. It shows why inspecting the final prose and inspecting evidence selection do different jobs.",
+      "gap": 0.65
+    },
+    {
+      "id": "diagnosis_0",
+      "scene": "diagnosis",
+      "text": "If a paper is missing from an answer, start asking questions. Was it in the searchable collection? Did it enter a candidate set? How was it ranked? What evidence was passed onward? What did the writer use?",
+      "gap": 1.0
+    },
+    {
+      "id": "diagnosis_1",
+      "scene": "diagnosis",
+      "text": "Those are diagnostic possibilities, not a verdict about where a real failure occurred. The goal is to locate the decision, using what the system documents and what you can actually inspect.",
+      "gap": 0.65
+    },
+    {
+      "id": "responsibility_0",
+      "scene": "responsibility",
+      "text": "Libraries license, configure, evaluate and pay for the retrieval side of these tools. Tay argues that someone in the library needs enough understanding to compare systems and ask which layer a problem belongs to.",
+      "gap": 1.0
+    },
+    {
+      "id": "responsibility_1",
+      "scene": "responsibility",
+      "text": "You do not need to become a retrieval engineer. You need to keep three questions separate: is the source real, is it represented faithfully, and was the evidence selection adequate? The papers you never see deserve a question too.",
+      "gap": 0.65
+    }
+  ]
+}

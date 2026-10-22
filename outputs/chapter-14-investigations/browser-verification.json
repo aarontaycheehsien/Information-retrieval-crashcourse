@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8831/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8831/01-can-both-scores-improve/01-can-both-scores-improve.mp4",
+      "duration": 321.6,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 127,
+      "seek_seconds": 160.8,
+      "byte_range": "bytes 0-1023/35749568",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8831/02-the-number-that-ignores-the-rest/02-the-number-that-ignores-the-rest.mp4",
+      "duration": 313.566667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 124,
+      "seek_seconds": 156.783333,
+      "byte_range": "bytes 0-1023/35254643",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8831/03-the-average-went-up-the-search-got-worse/03-the-average-went-up-the-search-got-worse.mp4",
+      "duration": 316.433333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 125,
+      "seek_seconds": 158.216666,
+      "byte_range": "bytes 0-1023/35460005",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

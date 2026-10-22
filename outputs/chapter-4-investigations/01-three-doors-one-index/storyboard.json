@@ -1,0 +1,179 @@
+{
+  "series": "Lexical search beyond strict Boolean",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#beyond-boolean",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#beyond-boolean",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-three-doors-one-index",
+  "title": "Three doors, one index",
+  "subtitle": "The same words can support very different admission rules.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "doors_prediction",
+      "title": "The result is missing banana",
+      "source_anchor": "lexical-search-does-not-have-to-mean-boolean-search",
+      "visual": "doors_prediction",
+      "narration": [
+        "You search for apple, orange, banana. A result appears that contains apple and orange, but no banana. Has the engine stopped searching for words? Has it understood some deeper meaning? Make a prediction before looking behind the search box.",
+        "A perfectly ordinary lexical system can do this. The crucial question is which analysed terms were compulsory. Matching words and requiring every word are different decisions."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "fruit_records",
+      "title": "Four records. Keep the evidence fixed.",
+      "source_anchor": "admission-worked-title",
+      "visual": "fruit_records",
+      "narration": [
+        "Keep the chapter's tiny collection fixed. A contains apple, orange and banana. B contains apple and orange. C contains apple. D contains pear and grape. These cards show term presence, not repetition counts or complete document lengths.",
+        "Nothing about the vocabulary or the index has changed. Now turn just one control: how many of the three query terms must a record match to become eligible?"
+      ]
+    },
+    {
+      "id": "three_rules",
+      "title": "Change only the admission rule",
+      "source_anchor": "admission-worked-title",
+      "visual": "three_rules",
+      "narration": [
+        "Require all three terms, and only A gets in. Require at least two, and A and B get in. Let any one term suffice, and A, B and C get in. D has no query terms and stays out.",
+        "Every arrangement still uses lexical evidence. The any-match eligible set is the union of the posting lists, expressible as Boolean OR. A separate scoring rule can supply graded rankings."
+      ]
+    },
+    {
+      "id": "stipulated_order",
+      "title": "Eligibility does not determine order",
+      "source_anchor": "admission-worked-title",
+      "visual": "stipulated_order",
+      "narration": [
+        "Keep any-match admission. A, B and C may compete. Suppose a scoring rule orders them B, A, C. This order is stipulated, exactly as in the chapter. These cards do not contain enough information to calculate BM twenty-five scores.",
+        "Matching more distinct terms does not guarantee a higher BM twenty-five score. Term rarity, frequency and document length also matter. Three matches do not automatically beat two."
+      ]
+    },
+    {
+      "id": "output_boundary",
+      "title": "C qualified. C still disappears.",
+      "source_anchor": "admission-worked-title",
+      "visual": "output_boundary",
+      "narration": [
+        "Now retain only the first two records. B and A are returned. C qualified, but fell below the output boundary. D never qualified. Both are absent from the final pair, for completely different reasons.",
+        "Admission asks who may compete. Ranking asks how the candidates are ordered. A top k boundary asks how many leaders are retained. Changing one control need not change the other two."
+      ]
+    },
+    {
+      "id": "reported_count",
+      "title": "A count is not a window into the engine",
+      "source_anchor": "returning-to-google-scholar",
+      "visual": "reported_count",
+      "narration": [
+        "The chapter's Google Scholar example separates another three things: the reported match count, relevance ordering, and the set a person can actually view. Its supplied example reports about nine point four million matches, while help documents a one thousand result display limit.",
+        "That limit is an observable presentation boundary. It does not reveal every scoring signal, whether every match received a final score, or whether the displayed set is a global top k. We are reading the chapter's evidence, not testing today's service."
+      ]
+    },
+    {
+      "id": "three_controls",
+      "title": "What did the missing word establish?",
+      "source_anchor": "one-category-error-resolved-and-one-still-ahead",
+      "visual": "three_controls",
+      "narration": [
+        "Return to the missing banana. A result lacking a typed word can be consistent with lexical retrieval. It does not identify the complete architecture behind the interface. Even the apparent absence of a match may need closer inspection.",
+        "Before naming the engine, separate the controls. What terms reached retrieval? Which conditions were required? How were candidates scored? And what output could you see? The next investigation changes a query term while keeping those questions separate."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "doors_prediction_0",
+      "scene": "doors_prediction",
+      "text": "You search for apple, orange, banana. A result appears that contains apple and orange, but no banana. Has the engine stopped searching for words? Has it understood some deeper meaning? Make a prediction before looking behind the search box.",
+      "gap": 1.0
+    },
+    {
+      "id": "doors_prediction_1",
+      "scene": "doors_prediction",
+      "text": "A perfectly ordinary lexical system can do this. The crucial question is which analysed terms were compulsory. Matching words and requiring every word are different decisions.",
+      "gap": 2.5
+    },
+    {
+      "id": "fruit_records_0",
+      "scene": "fruit_records",
+      "text": "Keep the chapter's tiny collection fixed. A contains apple, orange and banana. B contains apple and orange. C contains apple. D contains pear and grape. These cards show term presence, not repetition counts or complete document lengths.",
+      "gap": 1.0
+    },
+    {
+      "id": "fruit_records_1",
+      "scene": "fruit_records",
+      "text": "Nothing about the vocabulary or the index has changed. Now turn just one control: how many of the three query terms must a record match to become eligible?",
+      "gap": 0.65
+    },
+    {
+      "id": "three_rules_0",
+      "scene": "three_rules",
+      "text": "Require all three terms, and only A gets in. Require at least two, and A and B get in. Let any one term suffice, and A, B and C get in. D has no query terms and stays out.",
+      "gap": 1.0
+    },
+    {
+      "id": "three_rules_1",
+      "scene": "three_rules",
+      "text": "Every arrangement still uses lexical evidence. The any-match eligible set is the union of the posting lists, expressible as Boolean OR. A separate scoring rule can supply graded rankings.",
+      "gap": 0.65
+    },
+    {
+      "id": "stipulated_order_0",
+      "scene": "stipulated_order",
+      "text": "Keep any-match admission. A, B and C may compete. Suppose a scoring rule orders them B, A, C. This order is stipulated, exactly as in the chapter. These cards do not contain enough information to calculate BM twenty-five scores.",
+      "gap": 1.0
+    },
+    {
+      "id": "stipulated_order_1",
+      "scene": "stipulated_order",
+      "text": "Matching more distinct terms does not guarantee a higher BM twenty-five score. Term rarity, frequency and document length also matter. Three matches do not automatically beat two.",
+      "gap": 0.65
+    },
+    {
+      "id": "output_boundary_0",
+      "scene": "output_boundary",
+      "text": "Now retain only the first two records. B and A are returned. C qualified, but fell below the output boundary. D never qualified. Both are absent from the final pair, for completely different reasons.",
+      "gap": 1.0
+    },
+    {
+      "id": "output_boundary_1",
+      "scene": "output_boundary",
+      "text": "Admission asks who may compete. Ranking asks how the candidates are ordered. A top k boundary asks how many leaders are retained. Changing one control need not change the other two.",
+      "gap": 0.65
+    },
+    {
+      "id": "reported_count_0",
+      "scene": "reported_count",
+      "text": "The chapter's Google Scholar example separates another three things: the reported match count, relevance ordering, and the set a person can actually view. Its supplied example reports about nine point four million matches, while help documents a one thousand result display limit.",
+      "gap": 1.0
+    },
+    {
+      "id": "reported_count_1",
+      "scene": "reported_count",
+      "text": "That limit is an observable presentation boundary. It does not reveal every scoring signal, whether every match received a final score, or whether the displayed set is a global top k. We are reading the chapter's evidence, not testing today's service.",
+      "gap": 0.65
+    },
+    {
+      "id": "three_controls_0",
+      "scene": "three_controls",
+      "text": "Return to the missing banana. A result lacking a typed word can be consistent with lexical retrieval. It does not identify the complete architecture behind the interface. Even the apparent absence of a match may need closer inspection.",
+      "gap": 1.0
+    },
+    {
+      "id": "three_controls_1",
+      "scene": "three_controls",
+      "text": "Before naming the engine, separate the controls. What terms reached retrieval? Which conditions were required? How were candidates scored? And what output could you see? The next investigation changes a query term while keeping those questions separate.",
+      "gap": 0.65
+    }
+  ]
+}

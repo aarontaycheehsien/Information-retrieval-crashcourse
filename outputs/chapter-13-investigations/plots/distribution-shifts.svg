@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="403.2pt" viewBox="0 0 1008 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Original retrieval-diagnosis teaching illustration; not a model measurement</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 1008 403.2 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #eee9e0"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 25.2 143.86176 
+L 312.48 143.86176 
+L 312.48 96.12288 
+L 25.2 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="168.84" y="124.40732" transform="rotate(-0 168.84 124.40732)">Site of possible shift</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 312.48 143.86176 
+L 982.8 143.86176 
+L 982.8 96.12288 
+L 312.48 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="647.64" y="124.34482" transform="rotate(-0 647.64 124.34482)">What may differ from training</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 25.2 191.60064 
+L 312.48 191.60064 
+L 312.48 143.86176 
+L 25.2 143.86176 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="168.84" y="172.1462" transform="rotate(-0 168.84 172.1462)">Query shift</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 312.48 191.60064 
+L 982.8 191.60064 
+L 982.8 143.86176 
+L 312.48 143.86176 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="647.64" y="172.1462" transform="rotate(-0 647.64 172.1462)">Style, register, length, intent or query type</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 25.2 239.33952 
+L 312.48 239.33952 
+L 312.48 191.60064 
+L 25.2 191.60064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="168.84" y="219.88508" transform="rotate(-0 168.84 219.88508)">Corpus / domain shift</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 312.48 239.33952 
+L 982.8 239.33952 
+L 982.8 191.60064 
+L 312.48 191.60064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="647.64" y="219.88508" transform="rotate(-0 647.64 219.88508)">Discipline, genre, language, document type or period</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 25.2 287.0784 
+L 312.48 287.0784 
+L 312.48 239.33952 
+L 25.2 239.33952 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="168.84" y="267.62396" transform="rotate(-0 168.84 267.62396)">Task / relevance shift</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 312.48 287.0784 
+L 982.8 287.0784 
+L 982.8 239.33952 
+L 312.48 239.33952 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="647.64" y="267.62396" transform="rotate(-0 647.64 267.62396)">Answer-bearing passage vs evidence set, known item or citation</text>
+    </g>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="504" y="36.384" transform="rotate(-0 504 36.384)">Familiar words do not establish successful transfer</text>
+   </g>
+  </g>
+  <g id="text_10">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 379.89125)">These sites overlap and are not a fixed formal partition. A single poor result cannot prove OOD; compare performance locally</text>
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 394.448406)">and record training uncertainty.</text>
+  </g>
+ </g>
+</svg>

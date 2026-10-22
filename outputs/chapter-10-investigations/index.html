@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hybrid retrieval and rank fusion · Three films</title><style>
+*{box-sizing:border-box}body{margin:0;background:#eee9e0;color:#252728;font:17px/1.65 system-ui,sans-serif}
+main{max-width:1140px;margin:auto;padding:60px 28px}header{max-width:850px;margin-bottom:65px}
+.eyebrow,.number{font-weight:750;font-size:12px;letter-spacing:.16em;color:#a34230}
+h1{font-size:clamp(44px,7vw,82px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 28px}
+h2{font-size:clamp(27px,4vw,42px);line-height:1.14;letter-spacing:-.035em;margin:10px 0}
+p{max-width:880px}a{color:#88402e;text-underline-offset:4px}article{margin:0 0 74px}
+video{display:block;width:100%;aspect-ratio:16/9;background:#252728;border-radius:8px;margin-top:24px}
+.downloads{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:14px}summary{cursor:pointer;margin:14px 0}
+nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+button{font:inherit;font-size:14px;text-align:left;padding:12px;background:#faf8f3;border:1px solid #ccc3b5;border-radius:4px;cursor:pointer}
+button span{color:#a34230;display:inline-block;width:46px}button:hover,button:focus-visible{outline:2px solid #a34230}
+footer{border-top:1px solid #ccc3b5;padding-top:24px;font-size:13px;color:#615f59}
+@media(max-width:600px){main{padding:32px 15px}header{margin-bottom:44px}.downloads{gap:8px 18px}}
+</style><main><header><div class="eyebrow">HOW SEARCH DECIDES WHAT YOU SEE · CHAPTER 10</div>
+<h1>Two routes.<br>One result list.</h1><p>Three narrated investigations into hybrid retrieval, reciprocal rank fusion, and the evidence hidden by a merged ranking.
+Adapted from Chapter 10 of Aaron Tay's <em>How Search Decides What You See</em>.</p>
+<p><a href="chapter-10-videos.zip" download>Download the complete series</a> · <a href="SOURCE.md">Source and production notes</a></p>
+<p class="downloads"><a href="plots/rrf-contributions.svg">Fusion arithmetic</a><a href="plots/constant-effect.svg">Constant and rank</a><a href="plots/rrf-values.csv" download>Figure data</a></p></header><article id="episode-1">
+          <div class="number">FILM 01 · 4:13</div>
+          <h2>Two models do not make a hybrid</h2><p>Count the candidate routes, then follow what happens to their evidence.</p>
+          <video id="film-1" controls playsinline preload="metadata" poster="01-two-models-do-not-make-a-hybrid/poster.jpg" src="01-two-models-do-not-make-a-hybrid/01-two-models-do-not-make-a-hybrid.mp4">
+            <track kind="captions" src="01-two-models-do-not-make-a-hybrid/01-two-models-do-not-make-a-hybrid.vtt" srclang="en" label="English">
+            <track kind="chapters" src="01-two-models-do-not-make-a-hybrid/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-1" data-time="0.000"><span>0:00</span>Two models. But how many retrieval routes?</button><button data-film="film-1" data-time="30.036"><span>0:30</span>Different representations can preserve different clues</button><button data-film="film-1" data-time="67.619"><span>1:07</span>Two lists supply overlapping candidate sets</button><button data-film="film-1" data-time="97.362"><span>1:37</span>One route can support several later stages</button><button data-film="film-1" data-time="123.000"><span>2:03</span>Multiple routes can feed one scoring stage</button><button data-film="film-1" data-time="157.544"><span>2:37</span>Parallel retrieval can feed a later reranker</button><button data-film="film-1" data-time="192.022"><span>3:12</span>Choosing routes is a separate decision</button><button data-film="film-1" data-time="219.203"><span>3:39</span>Ask what the hybrid label leaves unanswered</button></nav></details>
+          <p class="downloads"><a href="01-two-models-do-not-make-a-hybrid/01-two-models-do-not-make-a-hybrid.mp4" download>Download MP4</a>
+            <a href="01-two-models-do-not-make-a-hybrid/01-two-models-do-not-make-a-hybrid.srt" download>SRT captions</a>
+            <a href="01-two-models-do-not-make-a-hybrid/transcript.txt">Transcript</a>
+            <a href="01-two-models-do-not-make-a-hybrid/contact-sheet.jpg">Storyboard</a></p></article><article id="episode-2">
+          <div class="number">FILM 02 · 4:08</div>
+          <h2>How two lists become one</h2><p>Follow A, B, C and D through reciprocal rank fusion.</p>
+          <video id="film-2" controls playsinline preload="metadata" poster="02-how-two-lists-become-one/poster.jpg" src="02-how-two-lists-become-one/02-how-two-lists-become-one.mp4">
+            <track kind="captions" src="02-how-two-lists-become-one/02-how-two-lists-become-one.vtt" srclang="en" label="English">
+            <track kind="chapters" src="02-how-two-lists-become-one/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-2" data-time="0.000"><span>0:00</span>How do we combine scores with unlike meanings?</button><button data-film="film-2" data-time="30.966"><span>0:30</span>Keep record identity while recording position</button><button data-film="film-2" data-time="63.380"><span>1:03</span>One over the constant plus the rank</button><button data-film="film-2" data-time="96.951"><span>1:36</span>A is near the top of both lists</button><button data-film="film-2" data-time="124.625"><span>2:04</span>C combines third place with first place</button><button data-film="film-2" data-time="152.970"><span>2:32</span>B and D receive one contribution each</button><button data-film="film-2" data-time="185.966"><span>3:05</span>The four identities now have one order</button><button data-film="film-2" data-time="212.800"><span>3:32</span>The constant is not a result count</button></nav></details>
+          <p class="downloads"><a href="02-how-two-lists-become-one/02-how-two-lists-become-one.mp4" download>Download MP4</a>
+            <a href="02-how-two-lists-become-one/02-how-two-lists-become-one.srt" download>SRT captions</a>
+            <a href="02-how-two-lists-become-one/transcript.txt">Transcript</a>
+            <a href="02-how-two-lists-become-one/contact-sheet.jpg">Storyboard</a></p></article><article id="episode-3">
+          <div class="number">FILM 03 · 4:31</div>
+          <h2>What the fused ranking cannot tell you</h2><p>Rank fusion trades score detail for a simple shared rule.</p>
+          <video id="film-3" controls playsinline preload="metadata" poster="03-what-the-fused-ranking-cannot-tell-you/poster.jpg" src="03-what-the-fused-ranking-cannot-tell-you/03-what-the-fused-ranking-cannot-tell-you.mp4">
+            <track kind="captions" src="03-what-the-fused-ranking-cannot-tell-you/03-what-the-fused-ranking-cannot-tell-you.vtt" srclang="en" label="English">
+            <track kind="chapters" src="03-what-the-fused-ranking-cannot-tell-you/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-3" data-time="0.000"><span>0:00</span>Same ranks. Very different score gaps.</button><button data-film="film-3" data-time="34.983"><span>0:34</span>The constant softens the advantage of first place</button><button data-film="film-3" data-time="65.676"><span>1:05</span>A shallower input changes the evidence available</button><button data-film="film-3" data-time="98.314"><span>1:38</span>Equal list contributions are a choice</button><button data-film="film-3" data-time="129.479"><span>2:09</span>Web of Science blends; Scopus AI can route</button><button data-film="film-3" data-time="163.223"><span>2:43</span>Expose the path chosen for this question</button><button data-film="film-3" data-time="195.224"><span>3:15</span>RRF can combine several versions of one question</button><button data-film="film-3" data-time="228.027"><span>3:48</span>Compare the full design with its individual routes</button></nav></details>
+          <p class="downloads"><a href="03-what-the-fused-ranking-cannot-tell-you/03-what-the-fused-ranking-cannot-tell-you.mp4" download>Download MP4</a>
+            <a href="03-what-the-fused-ranking-cannot-tell-you/03-what-the-fused-ranking-cannot-tell-you.srt" download>SRT captions</a>
+            <a href="03-what-the-fused-ranking-cannot-tell-you/transcript.txt">Transcript</a>
+            <a href="03-what-the-fused-ranking-cannot-tell-you/contact-sheet.jpg">Storyboard</a></p></article><footer><p>Adapted from <a href="https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#hybrid-and-fusion">Aaron Tay, <em>How Search Decides What You See</em>, Chapter 10</a>.
+CC BY 4.0. Source branch: more-readable, commit 37b16f7ffa64.</p>
+<p>Original animated teaching illustrations and script adaptation. Synthetic narration: Microsoft Andrew Multilingual.
+Independently produced; no affiliation with Veritasium. Curiosity-driven questions, prediction pauses and evidence-led reveals.
+The four-record fusion example preserves the chapter’s lists and constant. Additional score-gap and weighting examples are declared mathematical teaching cases, not measured retrieval results. Product accounts are pinned documentation snapshots; hybrid retrieval is not a quality guarantee.</p></footer></main>
+<script>document.querySelectorAll('button[data-film]').forEach(b=>b.onclick=()=>{const v=document.getElementById(b.dataset.film);v.currentTime=Number(b.dataset.time);v.play().catch(()=>{})});</script></html>

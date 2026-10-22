@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "dense-at-scale",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "9baa4dc1e0a363402b82352a6c4abc488a29573631f317908f4a1514fa68f10c",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 7: Dense retrieval at collection scale; source-exact ANN coordinates and declared cosine/dot-product toy vectors"
+}

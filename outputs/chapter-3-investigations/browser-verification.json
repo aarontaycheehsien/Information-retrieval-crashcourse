@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8820/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8820/01-which-word-deserves-more-weight/01-which-word-deserves-more-weight.mp4",
+      "duration": 204.366667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 80,
+      "seek_seconds": 102.183333,
+      "byte_range": "bytes 0-1023/17677308",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8820/02-twenty-mentions-twice-the-credit/02-twenty-mentions-twice-the-credit.mp4",
+      "duration": 193.633333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 77,
+      "seek_seconds": 96.816666,
+      "byte_range": "bytes 0-1023/18415720",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8820/03-same-index-three-controls/03-same-index-three-controls.mp4",
+      "duration": 233.066667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 91,
+      "seek_seconds": 116.533333,
+      "byte_range": "bytes 0-1023/22290794",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

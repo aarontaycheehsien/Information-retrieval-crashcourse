@@ -1,0 +1,201 @@
+{
+  "series": "Implications for library practice and tool evaluation",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#library-practice",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#library-practice",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-same-question-same-search",
+  "title": "Same question. Same search?",
+  "subtitle": "A saved question is only part of a documentable search.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "same_question_hook",
+      "title": "Saving the question does not save the whole search",
+      "source_anchor": "reproducibility-implication-title",
+      "visual": "same_question_hook",
+      "narration": [
+        "You save a natural language question and rerun it next year. The words are identical. Have you repeated the same search? Pause and name what could change between your question and the results: generated inputs, coverage, indexing, models, ranking or control.",
+        "No retrieval method guarantees the same records forever. The useful question is which parts were fixed, documented, exportable and versioned. An exact future recreation may be impossible, while a saved transformation, trace and result export still let you compare the later run with the original."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "four_record_areas",
+      "title": "Record four areas of the pipeline",
+      "source_anchor": "tbl-15-1",
+      "visual": "four_record_areas",
+      "narration": [
+        "The chapter names four areas. Query interpretation records what was typed and what was actually sent onward. Candidate retrieval records the database, fields, indexed unit, retrieval method, parameters and cutoffs. Ranking and fusion records the ordering stages, component lists and final depth.",
+        "Retrieval control records whether the sequence was fixed, adaptive or agentic, and the path actually taken. Saving only the question leaves all four partly unspecified. Some details are visible today; internal versions and budgets may require vendor disclosure. Mark them unknown when unavailable."
+      ]
+    },
+    {
+      "id": "lexical_repeatability",
+      "title": "Repeatability still depends on the indexed system",
+      "source_anchor": "tbl-15-2",
+      "visual": "lexical_repeatability",
+      "narration": [
+        "Strict Boolean makes inclusion and exclusion explicit. Eligibility should repeat given the same records, indexing, analyser and query interpretation. Record the exact query, database and platform, fields, limits, vocabulary version, date and count. An unchanged query can still meet a changed database.",
+        "Ranked lexical retrieval also needs analysis, stemming, field weights, rewriting, ranking configuration, sort order and depth. BM twenty five can move when new records change term rarity and document length statistics. A stable scoring formula is not a frozen collection or a permanent ranking."
+      ]
+    },
+    {
+      "id": "dense_repeatability",
+      "title": "Dense retrieval is not inherently random",
+      "source_anchor": "tbl-15-2",
+      "visual": "dense_repeatability",
+      "narration": [
+        "A fixed encoder, indexed units, stored vectors, similarity function and exact search procedure can produce repeatable scores. Dense retrieval is not inherently random. Record the model and tokeniser versions, embedded text and metadata, chunking, index version, filters and retrieval depth or threshold.",
+        "Ask whether the search was exact or approximate. Approximate index construction and search parameters can affect candidates near a boundary. That is a different question from whether a language model generated the query differently. Keep the component and the suspected source of variation separate."
+      ]
+    },
+    {
+      "id": "token_level_records",
+      "title": "Visible terms and alignments still need their versions",
+      "source_anchor": "tbl-15-2",
+      "visual": "token_level_records",
+      "narration": [
+        "Learnt sparse retrieval can expose generated vocabulary terms and weights. Those expansions may include terms the searcher never typed, so the original input alone is insufficient. Record the model, tokeniser, index, scoring configuration and depth, with expansions and weights where available.",
+        "Late interaction can expose query and document token alignments. It also needs indexed unit boundaries, compression and index versions, similarity and MaxSim settings, pruning or approximate search settings and depth. Inspectable alignments do not make contextual vectors portable between model versions."
+      ]
+    },
+    {
+      "id": "rewriting_variation",
+      "title": "Reusing an input differs from generating a new one",
+      "source_anchor": "tbl-15-2",
+      "visual": "rewriting_variation",
+      "narration": [
+        "An LLM rewrite may generate Boolean logic, expansion terms, subqueries or hypothetical text. Save the exact generated form, inferred filters, route, prompt or template, parser and model versions, and sampling settings or seed if exposed. Ask whether rerunning reuses that form or regenerates it.",
+        "Sampling can introduce deliberate variation. Model, prompt and hosted inference changes can affect outputs even at temperature zero or with greedy decoding. This does not mean every call must vary. Identical output needs a guarantee the complete system actually provides and tests, rather than an assumption."
+      ]
+    },
+    {
+      "id": "control_trace",
+      "title": "Record actions and observations, not narrated reasoning",
+      "source_anchor": "tbl-15-2",
+      "visual": "control_trace",
+      "narration": [
+        "Fixed and adaptive workflows can document rules in advance, but an adaptive branch and result dependent query still need a record of what happened. An agentic sequence can differ between runs because it chooses later actions from observations.",
+        "Record controller instructions, permitted tools and sources, executed queries and routes, intermediate results, order, budgets, stopping and final identifiers. What is needed is an action and observation trace: what the system did and what came back. A model\u2019s narrated reasoning is not a substitute for that record."
+      ]
+    },
+    {
+      "id": "record_today",
+      "title": "Start with the evidence you can preserve today",
+      "source_anchor": "reproducibility-implication-title",
+      "visual": "record_today",
+      "narration": [
+        "Keep input, product and mode, search date, visible transformations, filters, result identifiers, counts and observed limitations. Save a raw export where possible. Separate direct observation from vendor documentation and unknown internal details. Ask the institution to obtain traces, versions and change notices that individuals cannot access.",
+        "The chapter aligns this practice with PRISMA S reporting of strategies, databases, platforms, limits, dates and counts, while recognising replication limits. Documentation makes a later comparison possible; it does not by itself explain why a particular paper appeared. That is the next film\u2019s question."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "same_question_hook_0",
+      "scene": "same_question_hook",
+      "text": "You save a natural language question and rerun it next year. The words are identical. Have you repeated the same search? Pause and name what could change between your question and the results: generated inputs, coverage, indexing, models, ranking or control.",
+      "gap": 1.0
+    },
+    {
+      "id": "same_question_hook_1",
+      "scene": "same_question_hook",
+      "text": "No retrieval method guarantees the same records forever. The useful question is which parts were fixed, documented, exportable and versioned. An exact future recreation may be impossible, while a saved transformation, trace and result export still let you compare the later run with the original.",
+      "gap": 2.5
+    },
+    {
+      "id": "four_record_areas_0",
+      "scene": "four_record_areas",
+      "text": "The chapter names four areas. Query interpretation records what was typed and what was actually sent onward. Candidate retrieval records the database, fields, indexed unit, retrieval method, parameters and cutoffs. Ranking and fusion records the ordering stages, component lists and final depth.",
+      "gap": 1.0
+    },
+    {
+      "id": "four_record_areas_1",
+      "scene": "four_record_areas",
+      "text": "Retrieval control records whether the sequence was fixed, adaptive or agentic, and the path actually taken. Saving only the question leaves all four partly unspecified. Some details are visible today; internal versions and budgets may require vendor disclosure. Mark them unknown when unavailable.",
+      "gap": 0.65
+    },
+    {
+      "id": "lexical_repeatability_0",
+      "scene": "lexical_repeatability",
+      "text": "Strict Boolean makes inclusion and exclusion explicit. Eligibility should repeat given the same records, indexing, analyser and query interpretation. Record the exact query, database and platform, fields, limits, vocabulary version, date and count. An unchanged query can still meet a changed database.",
+      "gap": 1.0
+    },
+    {
+      "id": "lexical_repeatability_1",
+      "scene": "lexical_repeatability",
+      "text": "Ranked lexical retrieval also needs analysis, stemming, field weights, rewriting, ranking configuration, sort order and depth. BM twenty five can move when new records change term rarity and document length statistics. A stable scoring formula is not a frozen collection or a permanent ranking.",
+      "gap": 0.65
+    },
+    {
+      "id": "dense_repeatability_0",
+      "scene": "dense_repeatability",
+      "text": "A fixed encoder, indexed units, stored vectors, similarity function and exact search procedure can produce repeatable scores. Dense retrieval is not inherently random. Record the model and tokeniser versions, embedded text and metadata, chunking, index version, filters and retrieval depth or threshold.",
+      "gap": 1.0
+    },
+    {
+      "id": "dense_repeatability_1",
+      "scene": "dense_repeatability",
+      "text": "Ask whether the search was exact or approximate. Approximate index construction and search parameters can affect candidates near a boundary. That is a different question from whether a language model generated the query differently. Keep the component and the suspected source of variation separate.",
+      "gap": 0.65
+    },
+    {
+      "id": "token_level_records_0",
+      "scene": "token_level_records",
+      "text": "Learnt sparse retrieval can expose generated vocabulary terms and weights. Those expansions may include terms the searcher never typed, so the original input alone is insufficient. Record the model, tokeniser, index, scoring configuration and depth, with expansions and weights where available.",
+      "gap": 1.0
+    },
+    {
+      "id": "token_level_records_1",
+      "scene": "token_level_records",
+      "text": "Late interaction can expose query and document token alignments. It also needs indexed unit boundaries, compression and index versions, similarity and MaxSim settings, pruning or approximate search settings and depth. Inspectable alignments do not make contextual vectors portable between model versions.",
+      "gap": 0.65
+    },
+    {
+      "id": "rewriting_variation_0",
+      "scene": "rewriting_variation",
+      "text": "An LLM rewrite may generate Boolean logic, expansion terms, subqueries or hypothetical text. Save the exact generated form, inferred filters, route, prompt or template, parser and model versions, and sampling settings or seed if exposed. Ask whether rerunning reuses that form or regenerates it.",
+      "gap": 1.0
+    },
+    {
+      "id": "rewriting_variation_1",
+      "scene": "rewriting_variation",
+      "text": "Sampling can introduce deliberate variation. Model, prompt and hosted inference changes can affect outputs even at temperature zero or with greedy decoding. This does not mean every call must vary. Identical output needs a guarantee the complete system actually provides and tests, rather than an assumption.",
+      "gap": 0.65
+    },
+    {
+      "id": "control_trace_0",
+      "scene": "control_trace",
+      "text": "Fixed and adaptive workflows can document rules in advance, but an adaptive branch and result dependent query still need a record of what happened. An agentic sequence can differ between runs because it chooses later actions from observations.",
+      "gap": 1.0
+    },
+    {
+      "id": "control_trace_1",
+      "scene": "control_trace",
+      "text": "Record controller instructions, permitted tools and sources, executed queries and routes, intermediate results, order, budgets, stopping and final identifiers. What is needed is an action and observation trace: what the system did and what came back. A model\u2019s narrated reasoning is not a substitute for that record.",
+      "gap": 0.65
+    },
+    {
+      "id": "record_today_0",
+      "scene": "record_today",
+      "text": "Keep input, product and mode, search date, visible transformations, filters, result identifiers, counts and observed limitations. Save a raw export where possible. Separate direct observation from vendor documentation and unknown internal details. Ask the institution to obtain traces, versions and change notices that individuals cannot access.",
+      "gap": 1.0
+    },
+    {
+      "id": "record_today_1",
+      "scene": "record_today",
+      "text": "The chapter aligns this practice with PRISMA S reporting of strategies, databases, platforms, limits, dates and counts, while recognising replication limits. Documentation makes a later comparison possible; it does not by itself explain why a particular paper appeared. That is the next film\u2019s question.",
+      "gap": 0.65
+    }
+  ]
+}

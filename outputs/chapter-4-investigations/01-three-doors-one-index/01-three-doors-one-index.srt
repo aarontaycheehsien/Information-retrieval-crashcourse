@@ -1,0 +1,355 @@
+1
+00:00:00,700 --> 00:00:03,327
+You search for apple, orange, banana.
+
+2
+00:00:03,490 --> 00:00:05,686
+A result appears that contains apple and
+
+3
+00:00:05,706 --> 00:00:07,696
+orange, but no banana.
+
+4
+00:00:07,858 --> 00:00:09,243
+Has the engine stopped searching for
+
+5
+00:00:09,263 --> 00:00:11,833
+words? Has it understood some deeper
+
+6
+00:00:11,853 --> 00:00:14,281
+meaning? Make a prediction before looking
+
+7
+00:00:14,301 --> 00:00:15,776
+behind the search box.
+
+8
+00:00:18,182 --> 00:00:20,928
+A perfectly ordinary lexical system can do
+
+9
+00:00:20,948 --> 00:00:23,492
+this. The crucial question is which
+
+10
+00:00:23,512 --> 00:00:25,605
+analysed terms were compulsory.
+
+11
+00:00:25,767 --> 00:00:28,583
+Matching words and requiring every word
+
+12
+00:00:28,603 --> 00:00:30,077
+are different decisions.
+
+13
+00:00:30,969 --> 00:00:33,590
+Keep the chapter's tiny collection fixed.
+
+14
+00:00:33,740 --> 00:00:36,954
+A contains apple, orange and banana.
+
+15
+00:00:37,116 --> 00:00:39,209
+B contains apple and orange.
+
+16
+00:00:39,371 --> 00:00:40,768
+C contains apple.
+
+17
+00:00:40,956 --> 00:00:43,010
+D contains pear and grape.
+
+18
+00:00:43,173 --> 00:00:45,936
+These cards show term presence, not
+
+19
+00:00:45,956 --> 00:00:48,282
+repetition counts or complete document
+
+20
+00:00:48,302 --> 00:00:49,067
+lengths.
+
+21
+00:00:49,624 --> 00:00:51,916
+Nothing about the vocabulary or the index
+
+22
+00:00:51,936 --> 00:00:55,124
+has changed. Now turn just one control:
+
+23
+00:00:55,415 --> 00:00:57,302
+how many of the three query terms must a
+
+24
+00:00:57,322 --> 00:00:59,724
+record match to become eligible?
+
+25
+00:01:00,617 --> 00:01:03,722
+Require all three terms, and only A gets
+
+26
+00:01:03,742 --> 00:01:07,150
+in. Require at least two, and A and B get
+
+27
+00:01:07,170 --> 00:01:11,415
+in. Let any one term suffice, and A, B and
+
+28
+00:01:11,435 --> 00:01:14,611
+C get in. D has no query terms and stays
+
+29
+00:01:14,631 --> 00:01:15,203
+out.
+
+30
+00:01:15,778 --> 00:01:18,391
+Every arrangement still uses lexical
+
+31
+00:01:18,411 --> 00:01:21,522
+evidence. The any-match eligible set is
+
+32
+00:01:21,542 --> 00:01:23,712
+the union of the posting lists,
+
+33
+00:01:23,900 --> 00:01:26,612
+expressible as Boolean OR.
+
+34
+00:01:26,774 --> 00:01:29,344
+A separate scoring rule can supply graded
+
+35
+00:01:29,364 --> 00:01:30,297
+rankings.
+
+36
+00:01:31,191 --> 00:01:32,730
+Keep any-match admission.
+
+37
+00:01:32,892 --> 00:01:35,062
+A, B and C may compete.
+
+38
+00:01:35,225 --> 00:01:38,671
+Suppose a scoring rule orders them B, A,
+
+39
+00:01:38,691 --> 00:01:42,602
+C. This order is stipulated, exactly as in
+
+40
+00:01:42,622 --> 00:01:45,166
+the chapter. These cards do not contain
+
+41
+00:01:45,186 --> 00:01:47,679
+enough information to calculate BM
+
+42
+00:01:47,699 --> 00:01:49,057
+twenty-five scores.
+
+43
+00:01:49,612 --> 00:01:51,519
+Matching more distinct terms does not
+
+44
+00:01:51,539 --> 00:01:55,204
+guarantee a higher BM twenty-five score.
+
+45
+00:01:55,380 --> 00:01:58,646
+Term rarity, frequency and document length
+
+46
+00:01:58,666 --> 00:02:01,339
+also matter. Three matches do not
+
+47
+00:02:01,359 --> 00:02:03,027
+automatically beat two.
+
+48
+00:02:03,938 --> 00:02:06,751
+Now retain only the first two records.
+
+49
+00:02:06,926 --> 00:02:08,632
+B and A are returned.
+
+50
+00:02:08,795 --> 00:02:11,519
+C qualified, but fell below the output
+
+51
+00:02:11,539 --> 00:02:13,903
+boundary. D never qualified.
+
+52
+00:02:14,065 --> 00:02:16,378
+Both are absent from the final pair, for
+
+53
+00:02:16,398 --> 00:02:18,065
+completely different reasons.
+
+54
+00:02:18,598 --> 00:02:20,523
+Admission asks who may compete.
+
+55
+00:02:20,685 --> 00:02:22,508
+Ranking asks how the candidates are
+
+56
+00:02:22,528 --> 00:02:25,588
+ordered. A top k boundary asks how many
+
+57
+00:02:25,608 --> 00:02:26,901
+leaders are retained.
+
+58
+00:02:27,064 --> 00:02:29,557
+Changing one control need not change the
+
+59
+00:02:29,577 --> 00:02:30,419
+other two.
+
+60
+00:02:31,346 --> 00:02:33,096
+The chapter's Google Scholar example
+
+61
+00:02:33,116 --> 00:02:35,892
+separates another three things: the
+
+62
+00:02:35,912 --> 00:02:38,637
+reported match count, relevance ordering,
+
+63
+00:02:38,812 --> 00:02:40,853
+and the set a person can actually view.
+
+64
+00:02:41,028 --> 00:02:43,483
+Its supplied example reports about nine
+
+65
+00:02:43,503 --> 00:02:45,854
+point four million matches, while help
+
+66
+00:02:45,874 --> 00:02:48,418
+documents a one thousand result display
+
+67
+00:02:48,438 --> 00:02:49,101
+limit.
+
+68
+00:02:49,664 --> 00:02:52,001
+That limit is an observable presentation
+
+69
+00:02:52,021 --> 00:02:55,068
+boundary. It does not reveal every scoring
+
+70
+00:02:55,088 --> 00:02:57,594
+signal, whether every match received a
+
+71
+00:02:57,614 --> 00:03:00,558
+final score, or whether the displayed set
+
+72
+00:03:00,578 --> 00:03:02,013
+is a global top k.
+
+73
+00:03:02,189 --> 00:03:04,720
+We are reading the chapter's evidence, not
+
+74
+00:03:04,740 --> 00:03:06,395
+testing today's service.
+
+75
+00:03:07,296 --> 00:03:08,899
+Return to the missing banana.
+
+76
+00:03:09,074 --> 00:03:11,631
+A result lacking a typed word can be
+
+77
+00:03:11,651 --> 00:03:13,899
+consistent with lexical retrieval.
+
+78
+00:03:14,061 --> 00:03:15,948
+It does not identify the complete
+
+79
+00:03:15,968 --> 00:03:18,112
+architecture behind the interface.
+
+80
+00:03:18,275 --> 00:03:20,484
+Even the apparent absence of a match may
+
+81
+00:03:20,504 --> 00:03:22,275
+need closer inspection.
+
+82
+00:03:22,854 --> 00:03:24,832
+Before naming the engine, separate the
+
+83
+00:03:24,852 --> 00:03:27,834
+controls. What terms reached retrieval?
+
+84
+00:03:28,009 --> 00:03:29,703
+Which conditions were required?
+
+85
+00:03:29,878 --> 00:03:31,223
+How were candidates scored?
+
+86
+00:03:31,373 --> 00:03:32,860
+And what output could you see?
+
+87
+00:03:33,035 --> 00:03:35,335
+The next investigation changes a query
+
+88
+00:03:35,355 --> 00:03:37,074
+term while keeping those questions
+
+89
+00:03:37,094 --> 00:03:37,860
+separate.

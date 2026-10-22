@@ -1,0 +1,201 @@
+{
+  "series": "Boolean admission and the inverted index",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#boolean-admission",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#boolean-admission",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-search-without-rereading",
+  "title": "Search without rereading the papers",
+  "subtitle": "Reverse the map: start with a term, follow its records.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "prediction",
+      "title": "Must the engine read every record again?",
+      "source_anchor": "how-boolean-search-uses-an-inverted-index",
+      "visual": "prediction",
+      "narration": [
+        "A collection may contain hundreds of millions of records. Must a Boolean search reread all of them whenever you type a query? Imagine doing that for every new search.",
+        "An inverted index provides a different route. Start from an analysed term and follow its pointers to records containing it. Our four-record illustration shows the mechanism; it is not a speed benchmark."
+      ],
+      "pause_before_second": 2.0
+    },
+    {
+      "id": "records",
+      "title": "One collection, two directions",
+      "source_anchor": "from-analysed-tokens-to-a-term-first-map",
+      "visual": "records",
+      "narration": [
+        "The chapter starts with D one: Delulu job interview expectations. D two: Job interview preparation guide. D three: Unrealistic job expectations. D four: Delulu about my dream job.",
+        "Document first means opening a record and reading its words. Term first reverses the direction: begin with a dictionary term, then look up its posting list. A posting identifies a document containing that analysed term."
+      ]
+    },
+    {
+      "id": "postings",
+      "title": "The identifiers do the work",
+      "source_anchor": "records-to-postings-title",
+      "visual": "postings",
+      "narration": [
+        "In the selected dictionary, delulu points to D one and D four. Interview points to D one and D two. Job points to all four. These are selected lists, not every term in the collection.",
+        "For delulu AND interview, intersect the two lists. D one is the shared identifier, so D one passes. The engine does not need to reread all four texts to make this Boolean decision."
+      ]
+    },
+    {
+      "id": "sets",
+      "title": "Change the operator, keep the index",
+      "source_anchor": "boolean-treats-postings-as-sets",
+      "visual": "sets",
+      "narration": [
+        "Use OR instead, and combine the identifiers: D one, D two and D four. Use delulu NOT interview, and remove the overlap: only D four remains.",
+        "The same posting lists support different admission rules. The dictionary tells you which lists to consult. The Boolean operator tells you how to combine them. Neither step, by itself, decides the best order for the resulting records."
+      ]
+    },
+    {
+      "id": "speed",
+      "title": "Go directly. Move forwards.",
+      "source_anchor": "why-inverted-indexes-can-be-so-fast",
+      "visual": "speed",
+      "narration": [
+        "Two properties make this efficient. Selective access goes directly to the query terms' lists instead of scanning every document. Rare terms tend to have shorter lists. Ordered access keeps identifiers sorted, so intersection can move forwards through the lists.",
+        "Our moving pointers compare identifiers, advance the smaller one, and retain an equal identifier. Appendix C develops the fuller mechanism. This is an algorithm illustration, not a universal response-time promise."
+      ]
+    },
+    {
+      "id": "rich",
+      "title": "A posting can carry more than an identifier",
+      "source_anchor": "from-analysed-tokens-to-a-term-first-map",
+      "visual": "rich",
+      "narration": [
+        "Real postings may also record term frequency, the field containing a term and its positions. These additions support scoring, field weighting, phrase searching, proximity and highlighting. A list of identifiers is the simplest teaching view.",
+        "The analysis that created the dictionary also affects these entries and the collection statistics used by later lexical ranking methods. Text analysis has shaped the evidence before a ranking formula ever runs."
+      ]
+    },
+    {
+      "id": "fts",
+      "title": "Full-text search does not promise full-article coverage",
+      "source_anchor": "what-full-text-search-means-in-ir",
+      "visual": "fts",
+      "narration": [
+        "In search engineering, full-text search names a capability for searching natural-language text fields. Those fields might contain titles and abstracts, selected passages or OCR text. They need not contain a complete publication.",
+        "Conversely, possessing a complete article does not guarantee every part is indexed. The label also specifies no single admission rule or ranking method. Ask which text and units are searchable, how analysis treats them, and how matches are admitted and ranked."
+      ]
+    },
+    {
+      "id": "closing",
+      "title": "We have a set. Who should come first?",
+      "source_anchor": "why-inverted-indexes-can-be-so-fast",
+      "visual": "closing",
+      "narration": [
+        "We can now follow the whole chain: text, tokens, analysed terms, a dictionary with posting lists, and Boolean set operations. Compatible analysis matters on both document and query sides.",
+        "The result is an eligible set. To order it by estimated relevance, the system still needs a scoring rule. That is Chapter Three's question: how does a lexical system rank the records that got through?"
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "prediction_0",
+      "scene": "prediction",
+      "text": "A collection may contain hundreds of millions of records. Must a Boolean search reread all of them whenever you type a query? Imagine doing that for every new search.",
+      "gap": 1.0
+    },
+    {
+      "id": "prediction_1",
+      "scene": "prediction",
+      "text": "An inverted index provides a different route. Start from an analysed term and follow its pointers to records containing it. Our four-record illustration shows the mechanism; it is not a speed benchmark.",
+      "gap": 2.0
+    },
+    {
+      "id": "records_0",
+      "scene": "records",
+      "text": "The chapter starts with D one: Delulu job interview expectations. D two: Job interview preparation guide. D three: Unrealistic job expectations. D four: Delulu about my dream job.",
+      "gap": 1.0
+    },
+    {
+      "id": "records_1",
+      "scene": "records",
+      "text": "Document first means opening a record and reading its words. Term first reverses the direction: begin with a dictionary term, then look up its posting list. A posting identifies a document containing that analysed term.",
+      "gap": 0.65
+    },
+    {
+      "id": "postings_0",
+      "scene": "postings",
+      "text": "In the selected dictionary, delulu points to D one and D four. Interview points to D one and D two. Job points to all four. These are selected lists, not every term in the collection.",
+      "gap": 1.0
+    },
+    {
+      "id": "postings_1",
+      "scene": "postings",
+      "text": "For delulu AND interview, intersect the two lists. D one is the shared identifier, so D one passes. The engine does not need to reread all four texts to make this Boolean decision.",
+      "gap": 0.65
+    },
+    {
+      "id": "sets_0",
+      "scene": "sets",
+      "text": "Use OR instead, and combine the identifiers: D one, D two and D four. Use delulu NOT interview, and remove the overlap: only D four remains.",
+      "gap": 1.0
+    },
+    {
+      "id": "sets_1",
+      "scene": "sets",
+      "text": "The same posting lists support different admission rules. The dictionary tells you which lists to consult. The Boolean operator tells you how to combine them. Neither step, by itself, decides the best order for the resulting records.",
+      "gap": 0.65
+    },
+    {
+      "id": "speed_0",
+      "scene": "speed",
+      "text": "Two properties make this efficient. Selective access goes directly to the query terms' lists instead of scanning every document. Rare terms tend to have shorter lists. Ordered access keeps identifiers sorted, so intersection can move forwards through the lists.",
+      "gap": 1.0
+    },
+    {
+      "id": "speed_1",
+      "scene": "speed",
+      "text": "Our moving pointers compare identifiers, advance the smaller one, and retain an equal identifier. Appendix C develops the fuller mechanism. This is an algorithm illustration, not a universal response-time promise.",
+      "gap": 0.65
+    },
+    {
+      "id": "rich_0",
+      "scene": "rich",
+      "text": "Real postings may also record term frequency, the field containing a term and its positions. These additions support scoring, field weighting, phrase searching, proximity and highlighting. A list of identifiers is the simplest teaching view.",
+      "gap": 1.0
+    },
+    {
+      "id": "rich_1",
+      "scene": "rich",
+      "text": "The analysis that created the dictionary also affects these entries and the collection statistics used by later lexical ranking methods. Text analysis has shaped the evidence before a ranking formula ever runs.",
+      "gap": 0.65
+    },
+    {
+      "id": "fts_0",
+      "scene": "fts",
+      "text": "In search engineering, full-text search names a capability for searching natural-language text fields. Those fields might contain titles and abstracts, selected passages or OCR text. They need not contain a complete publication.",
+      "gap": 1.0
+    },
+    {
+      "id": "fts_1",
+      "scene": "fts",
+      "text": "Conversely, possessing a complete article does not guarantee every part is indexed. The label also specifies no single admission rule or ranking method. Ask which text and units are searchable, how analysis treats them, and how matches are admitted and ranked.",
+      "gap": 0.65
+    },
+    {
+      "id": "closing_0",
+      "scene": "closing",
+      "text": "We can now follow the whole chain: text, tokens, analysed terms, a dictionary with posting lists, and Boolean set operations. Compatible analysis matters on both document and query sides.",
+      "gap": 1.0
+    },
+    {
+      "id": "closing_1",
+      "scene": "closing",
+      "text": "The result is an eligible set. To order it by estimated relevance, the system still needs a scoring rule. That is Chapter Three's question: how does a lexical system rank the records that got through?",
+      "gap": 0.65
+    }
+  ]
+}

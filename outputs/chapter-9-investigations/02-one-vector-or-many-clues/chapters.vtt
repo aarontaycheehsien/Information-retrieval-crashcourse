@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:31.767
+What if we keep the token vectors?
+
+00:00:31.767 --> 00:01:08.076
+Independent encoding, followed by token comparisons
+
+00:01:08.076 --> 00:01:48.282
+Keep each row’s maximum, then add
+
+00:01:48.282 --> 00:02:22.070
+The alignments explain the score’s composition
+
+00:02:22.070 --> 00:02:51.059
+More retained vectors mean a larger index
+
+00:02:51.059 --> 00:03:28.082
+The encoder’s arrangement changes the comparison
+
+00:03:28.082 --> 00:04:08.791
+Neural retrieval can also remain sparse
+
+00:04:08.791 --> 00:04:47.567
+Look for the evidence exposed by each score

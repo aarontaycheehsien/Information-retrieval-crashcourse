@@ -1,0 +1,201 @@
+{
+  "series": "Lexical search beyond strict Boolean",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#beyond-boolean",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#beyond-boolean",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-four-lives-of-a-missing-word",
+  "title": "Four lives of a missing word",
+  "subtitle": "One visible absence, several possible histories.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "missing_prediction",
+      "title": "The title has no delulu. What happened?",
+      "source_anchor": "what-might-have-happened-to-a-missing-query-word",
+      "visual": "missing_prediction",
+      "narration": [
+        "You type delulu, job, interview. A result title says only Job interview expectations. Where did delulu go? It is tempting to tell a story about a clever semantic engine. But the same screen can fit several very different histories.",
+        "Follow four possible routes. Each is a mechanism the chapter asks us to check, not a diagnosis of a named product. Several routes could operate in the same search."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "analysis_history",
+      "title": "History 1: removed during analysis",
+      "source_anchor": "missing-word-paths-title",
+      "visual": "analysis_history",
+      "narration": [
+        "First, a word can disappear during routine analysis. In the chapter's illustration, you type the job interview. An optional stop-word rule removes the. Retrieval receives job interview. The discarded word was never a condition at lookup.",
+        "This example depends on the analyser. It does not say every system removes the same words. Tokenisation, normalisation, stemming and stop-word handling prepare strings for matching; none by itself establishes understanding of meaning."
+      ]
+    },
+    {
+      "id": "rewrite_history",
+      "title": "History 2: changed during rewriting",
+      "source_anchor": "missing-word-paths-title",
+      "visual": "rewrite_history",
+      "narration": [
+        "Second, an upstream rewrite can change what retrieval receives. You type delulu job expectations. A transformation replaces delulu with unrealistic. Retrieval then looks for unrealistic job expectations. The original word need not appear in a matching record.",
+        "Unlike routine analysis, this is an explicit reformulation. The illustration is not evidence that a particular product made this rewrite. To establish that, inspect the processed query or obtain documentation about that stage."
+      ]
+    },
+    {
+      "id": "optional_history",
+      "title": "History 3: it survived, but was optional",
+      "source_anchor": "missing-word-paths-title",
+      "visual": "optional_history",
+      "narration": [
+        "Third, delulu can remain in the retrieval input without being required. An any-match rule admits a record containing job and interview. A delulu match could add scoring evidence, but its absence need not exclude the record.",
+        "An optional term might even have no posting list anywhere in the index. Other terms can still admit records. Make that unmatched term compulsory under strict AND, and the eligible set is empty. The difference is the execution rule."
+      ]
+    },
+    {
+      "id": "hidden_history",
+      "title": "History 4: the match is out of view",
+      "source_anchor": "missing-word-paths-title",
+      "visual": "hidden_history",
+      "narration": [
+        "Fourth, the term may have matched evidence you cannot see in the excerpt. The visible title says Job interview expectations. The indexed abstract says, We examine delulu expectations. A lexical match occurred, but the title did not display it.",
+        "Other indexed fields, expanded terms, older indexed versions or off-page evidence may also matter. Inspect the searchable fields and the indexed representation before concluding that no lexical match happened. A snippet is only a small window."
+      ]
+    },
+    {
+      "id": "four_jobs",
+      "title": "Four jobs between keyboard and index",
+      "source_anchor": "words-sent-to-retrieval-may-not-be-the-words-you-typed",
+      "visual": "four_jobs",
+      "narration": [
+        "Keep four jobs distinct. Analysis prepares strings. Execution rules decide which clauses are required, optional or subject to a minimum match. Query understanding interprets things such as entities, dates, phrases or intent. Transformation changes what retrieval receives.",
+        "Understanding can inform a decision while leaving every word unchanged. It becomes relevant to a missing word when its interpretation causes a change. Understanding alone is not a fifth history that magically removes a term."
+      ]
+    },
+    {
+      "id": "natural_language",
+      "title": "A natural-language door can lead to lexical search",
+      "source_anchor": "words-sent-to-retrieval-may-not-be-the-words-you-typed",
+      "visual": "natural_language",
+      "narration": [
+        "A question in natural language can pass through a parser or language model that constructs a Boolean expression. The lexical engine can then apply Boolean admission and BM twenty-five ranking over an inverted index.",
+        "The form of the input does not identify the retrieval method. To bridge a vocabulary gap, one route changes the query and keeps lexical matching. Another changes the representation so related texts can be retrieved without shared analysed terms."
+      ]
+    },
+    {
+      "id": "evidence_questions",
+      "title": "The screen leaves the mechanism open",
+      "source_anchor": "returning-to-the-opening-puzzles",
+      "visual": "evidence_questions",
+      "narration": [
+        "Return to the title without delulu. Was the word removed in analysis, changed in a rewrite, retained as optional, or matched outside the excerpt? The title alone cannot choose among them. A product name and a result count cannot settle it either.",
+        "Ask for the processed query, the admission rules, the indexed fields and evidence about the retrieval pipeline. Part One separates lexical search from strict all-term Boolean search. The next chapters investigate representations, while keeping the rest of the pipeline in view."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "missing_prediction_0",
+      "scene": "missing_prediction",
+      "text": "You type delulu, job, interview. A result title says only Job interview expectations. Where did delulu go? It is tempting to tell a story about a clever semantic engine. But the same screen can fit several very different histories.",
+      "gap": 1.0
+    },
+    {
+      "id": "missing_prediction_1",
+      "scene": "missing_prediction",
+      "text": "Follow four possible routes. Each is a mechanism the chapter asks us to check, not a diagnosis of a named product. Several routes could operate in the same search.",
+      "gap": 2.5
+    },
+    {
+      "id": "analysis_history_0",
+      "scene": "analysis_history",
+      "text": "First, a word can disappear during routine analysis. In the chapter's illustration, you type the job interview. An optional stop-word rule removes the. Retrieval receives job interview. The discarded word was never a condition at lookup.",
+      "gap": 1.0
+    },
+    {
+      "id": "analysis_history_1",
+      "scene": "analysis_history",
+      "text": "This example depends on the analyser. It does not say every system removes the same words. Tokenisation, normalisation, stemming and stop-word handling prepare strings for matching; none by itself establishes understanding of meaning.",
+      "gap": 0.65
+    },
+    {
+      "id": "rewrite_history_0",
+      "scene": "rewrite_history",
+      "text": "Second, an upstream rewrite can change what retrieval receives. You type delulu job expectations. A transformation replaces delulu with unrealistic. Retrieval then looks for unrealistic job expectations. The original word need not appear in a matching record.",
+      "gap": 1.0
+    },
+    {
+      "id": "rewrite_history_1",
+      "scene": "rewrite_history",
+      "text": "Unlike routine analysis, this is an explicit reformulation. The illustration is not evidence that a particular product made this rewrite. To establish that, inspect the processed query or obtain documentation about that stage.",
+      "gap": 0.65
+    },
+    {
+      "id": "optional_history_0",
+      "scene": "optional_history",
+      "text": "Third, delulu can remain in the retrieval input without being required. An any-match rule admits a record containing job and interview. A delulu match could add scoring evidence, but its absence need not exclude the record.",
+      "gap": 1.0
+    },
+    {
+      "id": "optional_history_1",
+      "scene": "optional_history",
+      "text": "An optional term might even have no posting list anywhere in the index. Other terms can still admit records. Make that unmatched term compulsory under strict AND, and the eligible set is empty. The difference is the execution rule.",
+      "gap": 0.65
+    },
+    {
+      "id": "hidden_history_0",
+      "scene": "hidden_history",
+      "text": "Fourth, the term may have matched evidence you cannot see in the excerpt. The visible title says Job interview expectations. The indexed abstract says, We examine delulu expectations. A lexical match occurred, but the title did not display it.",
+      "gap": 1.0
+    },
+    {
+      "id": "hidden_history_1",
+      "scene": "hidden_history",
+      "text": "Other indexed fields, expanded terms, older indexed versions or off-page evidence may also matter. Inspect the searchable fields and the indexed representation before concluding that no lexical match happened. A snippet is only a small window.",
+      "gap": 0.65
+    },
+    {
+      "id": "four_jobs_0",
+      "scene": "four_jobs",
+      "text": "Keep four jobs distinct. Analysis prepares strings. Execution rules decide which clauses are required, optional or subject to a minimum match. Query understanding interprets things such as entities, dates, phrases or intent. Transformation changes what retrieval receives.",
+      "gap": 1.0
+    },
+    {
+      "id": "four_jobs_1",
+      "scene": "four_jobs",
+      "text": "Understanding can inform a decision while leaving every word unchanged. It becomes relevant to a missing word when its interpretation causes a change. Understanding alone is not a fifth history that magically removes a term.",
+      "gap": 0.65
+    },
+    {
+      "id": "natural_language_0",
+      "scene": "natural_language",
+      "text": "A question in natural language can pass through a parser or language model that constructs a Boolean expression. The lexical engine can then apply Boolean admission and BM twenty-five ranking over an inverted index.",
+      "gap": 1.0
+    },
+    {
+      "id": "natural_language_1",
+      "scene": "natural_language",
+      "text": "The form of the input does not identify the retrieval method. To bridge a vocabulary gap, one route changes the query and keeps lexical matching. Another changes the representation so related texts can be retrieved without shared analysed terms.",
+      "gap": 0.65
+    },
+    {
+      "id": "evidence_questions_0",
+      "scene": "evidence_questions",
+      "text": "Return to the title without delulu. Was the word removed in analysis, changed in a rewrite, retained as optional, or matched outside the excerpt? The title alone cannot choose among them. A product name and a result count cannot settle it either.",
+      "gap": 1.0
+    },
+    {
+      "id": "evidence_questions_1",
+      "scene": "evidence_questions",
+      "text": "Ask for the processed query, the admission rules, the indexed fields and evidence about the retrieval pipeline. Part One separates lexical search from strict all-term Boolean search. The next chapters investigate representations, while keeping the rest of the pipeline in view.",
+      "gap": 0.65
+    }
+  ]
+}

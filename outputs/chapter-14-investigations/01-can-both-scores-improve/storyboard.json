@@ -1,0 +1,201 @@
+{
+  "series": "Measuring whether retrieval worked",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#evaluation",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#evaluation",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-can-both-scores-improve",
+  "title": "Can both scores improve?",
+  "subtitle": "A fixed candidate pool can produce a much better first page.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "both_hook",
+      "title": "Same candidates. Better precision and better recall?",
+      "source_anchor": "reranking-recall-worked-title",
+      "visual": "both_hook",
+      "narration": [
+        "Twenty candidate papers contain all ten papers judged relevant. On the first page, only two of ten are relevant. Reranking adds no paper. Can precision and recall both improve? Pause and decide which set, and which denominator, each number describes.",
+        "In the chapter\u2019s controlled example, six relevant papers reach the first ten after reranking. Precision at ten and recall at ten both rise from point two to point six. Recall over the entire candidate pool stays at one. The boundary makes the difference."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "relevance_perspectives",
+      "title": "Relevant to whom, for what purpose?",
+      "source_anchor": "relevance-is-a-judgement",
+      "visual": "relevance_perspectives",
+      "narration": [
+        "Before counting, decide what relevant means. The same paper may help a researcher trace a method, fail to inform an undergraduate seeking an overview, and fail a reviewer\u2019s inclusion criteria. Those verdicts concern different needs and tasks, without the paper itself changing.",
+        "The chapter separates algorithmic estimates, topical aboutness, usefulness given the reader\u2019s knowledge, and usefulness for a task in context. This is a teaching simplification, not a complete taxonomy. A high model score is evidence the system uses, not the human judgement itself."
+      ]
+    },
+    {
+      "id": "judgement_protocol",
+      "title": "Every metric inherits the assessors\u2019 criteria",
+      "source_anchor": "relevance-is-a-judgement",
+      "visual": "judgement_protocol",
+      "narration": [
+        "A reference interview establishes what would count as a useful answer. Evaluation writes those criteria and judgements down so systems can be compared against the same ones. Some test collections use mainly topical criteria; others encode detailed task or inclusion rules.",
+        "The formula cannot tell which conception was used. A topically relevant paper can have the wrong population, date or method, or be superseded. Report who judged, for which purpose, and whether relevance was binary or graded. The number measures agreement with those operational judgements."
+      ]
+    },
+    {
+      "id": "two_denominators",
+      "title": "Precision and recall divide by different things",
+      "source_anchor": "precision-and-recall",
+      "visual": "two_denominators",
+      "narration": [
+        "Precision divides retrieved relevant papers by retrieved papers. Recall divides retrieved relevant papers by all relevant papers under the evaluation protocol. In this example the first page holds ten records, and the complete relevance set also has ten. The denominators happen to agree numerically.",
+        "They still count different things. Before reranking, both fractions are two over ten. Afterward, both are six over ten. The complete relevant set is stipulated here. Finding ten known seeds in a live database would not establish that those are every relevant paper."
+      ]
+    },
+    {
+      "id": "fixed_pool",
+      "title": "Reordering changes the display, not candidate membership",
+      "source_anchor": "where-recall-is-decided",
+      "visual": "fixed_pool",
+      "narration": [
+        "All twenty records remain candidates before and after. Reranking moves relevant ones across the display cutoff without increasing the pool\u2019s recall. For any later stage that only processes this fixed output, excluded records remain unavailable.",
+        "This is compatible with a better first page. Extending a fixed ranking cannot lower recall, but precision can rise or fall as the added record changes the fraction. A better ranking or representation can improve both measures at a chosen depth. The trade is not an unavoidable law between systems."
+      ]
+    },
+    {
+      "id": "fresh_retrieval",
+      "title": "A fresh route can cross the candidate boundary",
+      "source_anchor": "recall-boundary-title",
+      "visual": "fresh_retrieval",
+      "narration": [
+        "Hybrid routes and another retrieval round can expand the cumulative pool. Their recall gain comes from newly contributed relevant records, before that new candidate boundary. Merely rearranging one existing list cannot add evidence that it never contained.",
+        "Duplicates and irrelevant additions do not raise recall. They can enlarge the pool or push useful records below a displayed cutoff. Ask where candidate generation ends, and distinguish its ceiling from recall at the depth the reader actually sees. A generated answer cannot recover an excluded source by summarising harder."
+      ]
+    },
+    {
+      "id": "unknown_denominator",
+      "title": "Where did the recall denominator come from?",
+      "source_anchor": "precision-and-recall",
+      "visual": "unknown_denominator",
+      "narration": [
+        "Precision requires judging what came back. Absolute recall also requires knowing how many relevant records the collection holds. In a live database, that total is usually unknown. A large result count does not answer the question.",
+        "Practitioners compare the relevant union found by several strategies, or test recovery of known relevant seeds. These are useful relative comparisons and regression checks, not the true denominator of an entire collection. Report the scope rather than turning known seed recovery into an absolute recall claim."
+      ]
+    },
+    {
+      "id": "task_and_practice",
+      "title": "Choose the sensitivity and workload the task requires",
+      "source_anchor": "evidence-synthesis-current-practice",
+      "visual": "task_and_practice",
+      "narration": [
+        "Ready reference often values precision; evidence reviews lean heavily on recall. The chapter\u2019s August twenty twenty six methodological note keeps structured database searching as the formal review core, supplemented by other routes. That describes practice, not an inherent Boolean recall advantage.",
+        "Boolean strategies can miss synonyms or depend on incomplete coverage. Ranked boundaries can constrain BM twenty five as well as dense retrieval. Test the complete workflow for the task, with inspectable conditions and stated judgements. Next, we examine the different definitions of better hidden inside ranking metrics."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "both_hook_0",
+      "scene": "both_hook",
+      "text": "Twenty candidate papers contain all ten papers judged relevant. On the first page, only two of ten are relevant. Reranking adds no paper. Can precision and recall both improve? Pause and decide which set, and which denominator, each number describes.",
+      "gap": 1.0
+    },
+    {
+      "id": "both_hook_1",
+      "scene": "both_hook",
+      "text": "In the chapter\u2019s controlled example, six relevant papers reach the first ten after reranking. Precision at ten and recall at ten both rise from point two to point six. Recall over the entire candidate pool stays at one. The boundary makes the difference.",
+      "gap": 2.5
+    },
+    {
+      "id": "relevance_perspectives_0",
+      "scene": "relevance_perspectives",
+      "text": "Before counting, decide what relevant means. The same paper may help a researcher trace a method, fail to inform an undergraduate seeking an overview, and fail a reviewer\u2019s inclusion criteria. Those verdicts concern different needs and tasks, without the paper itself changing.",
+      "gap": 1.0
+    },
+    {
+      "id": "relevance_perspectives_1",
+      "scene": "relevance_perspectives",
+      "text": "The chapter separates algorithmic estimates, topical aboutness, usefulness given the reader\u2019s knowledge, and usefulness for a task in context. This is a teaching simplification, not a complete taxonomy. A high model score is evidence the system uses, not the human judgement itself.",
+      "gap": 0.65
+    },
+    {
+      "id": "judgement_protocol_0",
+      "scene": "judgement_protocol",
+      "text": "A reference interview establishes what would count as a useful answer. Evaluation writes those criteria and judgements down so systems can be compared against the same ones. Some test collections use mainly topical criteria; others encode detailed task or inclusion rules.",
+      "gap": 1.0
+    },
+    {
+      "id": "judgement_protocol_1",
+      "scene": "judgement_protocol",
+      "text": "The formula cannot tell which conception was used. A topically relevant paper can have the wrong population, date or method, or be superseded. Report who judged, for which purpose, and whether relevance was binary or graded. The number measures agreement with those operational judgements.",
+      "gap": 0.65
+    },
+    {
+      "id": "two_denominators_0",
+      "scene": "two_denominators",
+      "text": "Precision divides retrieved relevant papers by retrieved papers. Recall divides retrieved relevant papers by all relevant papers under the evaluation protocol. In this example the first page holds ten records, and the complete relevance set also has ten. The denominators happen to agree numerically.",
+      "gap": 1.0
+    },
+    {
+      "id": "two_denominators_1",
+      "scene": "two_denominators",
+      "text": "They still count different things. Before reranking, both fractions are two over ten. Afterward, both are six over ten. The complete relevant set is stipulated here. Finding ten known seeds in a live database would not establish that those are every relevant paper.",
+      "gap": 0.65
+    },
+    {
+      "id": "fixed_pool_0",
+      "scene": "fixed_pool",
+      "text": "All twenty records remain candidates before and after. Reranking moves relevant ones across the display cutoff without increasing the pool\u2019s recall. For any later stage that only processes this fixed output, excluded records remain unavailable.",
+      "gap": 1.0
+    },
+    {
+      "id": "fixed_pool_1",
+      "scene": "fixed_pool",
+      "text": "This is compatible with a better first page. Extending a fixed ranking cannot lower recall, but precision can rise or fall as the added record changes the fraction. A better ranking or representation can improve both measures at a chosen depth. The trade is not an unavoidable law between systems.",
+      "gap": 0.65
+    },
+    {
+      "id": "fresh_retrieval_0",
+      "scene": "fresh_retrieval",
+      "text": "Hybrid routes and another retrieval round can expand the cumulative pool. Their recall gain comes from newly contributed relevant records, before that new candidate boundary. Merely rearranging one existing list cannot add evidence that it never contained.",
+      "gap": 1.0
+    },
+    {
+      "id": "fresh_retrieval_1",
+      "scene": "fresh_retrieval",
+      "text": "Duplicates and irrelevant additions do not raise recall. They can enlarge the pool or push useful records below a displayed cutoff. Ask where candidate generation ends, and distinguish its ceiling from recall at the depth the reader actually sees. A generated answer cannot recover an excluded source by summarising harder.",
+      "gap": 0.65
+    },
+    {
+      "id": "unknown_denominator_0",
+      "scene": "unknown_denominator",
+      "text": "Precision requires judging what came back. Absolute recall also requires knowing how many relevant records the collection holds. In a live database, that total is usually unknown. A large result count does not answer the question.",
+      "gap": 1.0
+    },
+    {
+      "id": "unknown_denominator_1",
+      "scene": "unknown_denominator",
+      "text": "Practitioners compare the relevant union found by several strategies, or test recovery of known relevant seeds. These are useful relative comparisons and regression checks, not the true denominator of an entire collection. Report the scope rather than turning known seed recovery into an absolute recall claim.",
+      "gap": 0.65
+    },
+    {
+      "id": "task_and_practice_0",
+      "scene": "task_and_practice",
+      "text": "Ready reference often values precision; evidence reviews lean heavily on recall. The chapter\u2019s August twenty twenty six methodological note keeps structured database searching as the formal review core, supplemented by other routes. That describes practice, not an inherent Boolean recall advantage.",
+      "gap": 1.0
+    },
+    {
+      "id": "task_and_practice_1",
+      "scene": "task_and_practice",
+      "text": "Boolean strategies can miss synonyms or depend on incomplete coverage. Ranked boundaries can constrain BM twenty five as well as dense retrieval. Test the complete workflow for the task, with inspectable conditions and stated judgements. Next, we examine the different definitions of better hidden inside ranking metrics.",
+      "gap": 0.65
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:30.837
+The same bank in two different sentences
+
+00:00:30.837 --> 00:01:03.772
+From a stored word vector to a contextual one
+
+00:01:03.772 --> 00:01:40.157
+Other tokens can change this representation
+
+00:01:40.157 --> 00:02:19.283
+Model tokens are not index terms
+
+00:02:19.283 --> 00:02:57.394
+Many token vectors. One complete-text vector.
+
+00:02:57.394 --> 00:03:34.866
+Reproducible does not mean easy to interpret
+
+00:03:34.866 --> 00:04:11.833
+Context is a capability, not a relevance verdict

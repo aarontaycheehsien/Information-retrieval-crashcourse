@@ -1,0 +1,119 @@
+{
+  "file": "02-the-number-that-ignores-the-rest.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 313.56666666666666,
+  "decoded_frames": 9407,
+  "integrated_lufs": -16.1,
+  "true_peak_dbfs": -2.4,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 712 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 179 kb/s (default)",
+  "faststart": true,
+  "sha256": "3762f08556f364529ed6a7fc6523a485a0732ca3aa08a15465d74b8bcf7b3f47",
+  "bytes": 35254643,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "ed583641bdb22deeb231dd23f2851492a6bbed41e6d0f1e5f94e0d90739efc3b",
+  "passed": true,
+  "chapter_sha256": "4ff57a1b4ba4c467ccc5118ce605b63f3a4308952311009ffa23bfd4e967a868",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "0948d22d707e55a881fcf22b1e96e87cca480cd1fa952bf086ef51bacdb9f37b",
+  "embedded_captions_verified": true,
+  "caption_cues": 124,
+  "reviewed_animation_times": 90,
+  "worked_examples": {
+    "source_measures": [
+      "Precision",
+      "Recall"
+    ],
+    "source_ranked_metrics": [
+      "Precision@k",
+      "MRR",
+      "MAP",
+      "nDCG"
+    ],
+    "source_relevance_perspectives": [
+      "System or algorithmic relevance",
+      "Topical relevance",
+      "Cognitive relevance or pertinence",
+      "Situational relevance or usefulness"
+    ],
+    "controlled_source_reranking": {
+      "relevant": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "before": [
+        "A",
+        "K",
+        "L",
+        "M",
+        "B",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "S",
+        "T"
+      ],
+      "after": [
+        "A",
+        "B",
+        "K",
+        "C",
+        "D",
+        "L",
+        "E",
+        "M",
+        "F",
+        "N",
+        "G",
+        "H",
+        "I",
+        "J",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T"
+      ],
+      "before_p10_r10": 0.2,
+      "after_p10_r10": 0.6,
+      "pool_recall_both": 1,
+      "complete_relevance_set_stipulated": true
+    },
+    "single_query_arithmetic": {
+      "reciprocal_rank_both": 1,
+      "average_precision_before": 0.4870881406175524,
+      "average_precision_after": 0.7640576090576091,
+      "not_a_multiquery_mrr_or_map_comparison": true
+    },
+    "illustrative_local_rows": {
+      "before_equal_row_mean": 0.3,
+      "after_equal_row_mean": 0.3333333333333333,
+      "third_row_averages_two_separately_judged_queries": true,
+      "identifier_relative_precision_loss": 0.6666666666666666
+    },
+    "known_seeds_not_absolute_recall": true,
+    "new_model_or_product_benchmarks": false,
+    "passed": true
+  }
+}

@@ -1,0 +1,5 @@
+schematic_term,invented_weight,in_input,measured_model_output
+heart,1.2,True,False
+attack,1.0,True,False
+myocardial,0.8,False,False
+infarction,0.7,False,False

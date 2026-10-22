@@ -1,0 +1,77 @@
+{
+  "file": "03-the-best-next-result-may-rank-lower.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 292.3333333333333,
+  "decoded_frames": 8770,
+  "integrated_lufs": -16.0,
+  "true_peak_dbfs": -2.5,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 643 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 179 kb/s (default)",
+  "faststart": true,
+  "sha256": "c73adffb3b4780deff6e4899c64efe04cf875b7ac12a8bb34229cfe82fc313cc",
+  "bytes": 30325694,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "2637fb420e531ff6fd9233518be59c2f86c46864f7c49d099169ef8be7c6a2b9",
+  "passed": true,
+  "chapter_sha256": "af608a3d003bd1ad21fec375775f67af5c55ba4b97c1f6c78c2a9ae76ebd2d55",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "6d6272eee70da69ef6c75e4043798e243a7f93b98c3326b7a2eb2f14edbb0875",
+  "embedded_captions_verified": true,
+  "caption_cues": 114,
+  "reviewed_animation_times": 90,
+  "worked_examples": {
+    "invented_source_similarities": [
+      [
+        0.1,
+        0.2,
+        0.9,
+        0.4
+      ],
+      [
+        0.2,
+        0.3,
+        0.5,
+        0.8
+      ]
+    ],
+    "row_maxima": [
+      0.9,
+      0.8
+    ],
+    "maxsim": 1.7000000000000002,
+    "winning_document_tokens": [
+      "citation",
+      "advantage"
+    ],
+    "maxsim_allows_reused_document_tokens": true,
+    "measured_model_output": false,
+    "reranking_preserves_candidate_set": true,
+    "excluded_record": "X",
+    "stipulated_selections": {
+      "individual": [
+        "A",
+        "B",
+        "C"
+      ],
+      "diversified": [
+        "A",
+        "D",
+        "E"
+      ]
+    },
+    "aspect_counts": {
+      "individual": 1,
+      "diversified": 3
+    },
+    "calculated_diversification_algorithm": false,
+    "documented_budgets_not_relevance_counts": {
+      "Semantic Scholar (2025)": 1000,
+      "PubMed Best Match": 500,
+      "Primo reranking": 30,
+      "Primo abstract context": 5
+    },
+    "passed": true
+  }
+}

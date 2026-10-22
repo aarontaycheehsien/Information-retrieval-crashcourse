@@ -1,0 +1,201 @@
+{
+  "series": "Representations and indexed units",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#representations-and-units",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#representations-and-units",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-the-vector-hiding-in-keyword-search",
+  "title": "The vector hiding in keyword search",
+  "subtitle": "Seven coordinates reveal what a lexical vector can\u2014and cannot\u2014tell us.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "vector_hook",
+      "title": "Your keyword engine already has vectors",
+      "source_anchor": "a-vector-does-not-have-to-be-dense-or-semantic",
+      "visual": "vector_hook",
+      "narration": [
+        "A search product says it uses vectors. What does that tell you? Before answering, look at three ordinary keyword records. Heart attack treatment. Job interview tips. Cancer treatment. We can turn every one into a vector without training a neural network. Make a prediction: what will the coordinates mean?",
+        "They will mean vocabulary terms. Vector names a numerical object: an ordered list of numbers. Chapter Eight makes those hidden choices visible."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "coordinates",
+      "title": "First, agree what every position means",
+      "source_anchor": "step-1-fix-the-coordinate-system",
+      "visual": "coordinates",
+      "narration": [
+        "Fix this vocabulary order: attack, cancer, heart, interview, job, tips, treatment. Every document now lives in the same seven dimensional space. Coordinate three always means heart.",
+        "Put one where a term occurs and zero where it does not. The first document activates attack, heart and treatment. The second activates interview, job and tips. The third activates cancer and treatment. These are sparse, vocabulary aligned vectors."
+      ]
+    },
+    {
+      "id": "overlap_logic",
+      "title": "The numbers do not choose AND or OR",
+      "source_anchor": "step-2-binary-presence",
+      "visual": "overlap_logic",
+      "narration": [
+        "Now search for heart treatment. Its two active coordinates overlap the first document twice, the third once, and the second not at all. Counting shared ones gives a graded score.",
+        "Heart AND treatment admits only the first document. Heart OR treatment admits the first and third. The binary vector did not contain either operator. The retrieval rule decides whether term evidence becomes a hard requirement or a contribution to a ranking."
+      ]
+    },
+    {
+      "id": "term_counts",
+      "title": "One mention and three mentions look different",
+      "source_anchor": "step-3-term-frequency",
+      "visual": "term_counts",
+      "narration": [
+        "Change the first document to heart attack treatment treatment treatment. Binary presence barely notices: the same three coordinates are active. Raw term frequency instead puts three in the treatment coordinate. The vocabulary has stayed fixed; the values have changed.",
+        "Repetition can be useful evidence of topic. But raw counts keep growing, and long documents get more chances to accumulate them. We need a rule for how much another occurrence contributes."
+      ]
+    },
+    {
+      "id": "rarity_weights",
+      "title": "Rarer terms carry more distinguishing weight",
+      "source_anchor": "step-4-tf-idf",
+      "visual": "rarity_weights",
+      "narration": [
+        "Term frequency looks inside a document. Inverse document frequency looks across the collection. Treatment occurs in two of our three documents. Heart occurs in only one. Heart therefore distinguishes a smaller group and receives more rarity weight under the illustrated rule.",
+        "The figure uses raw counts times the natural logarithm of collection size divided by document frequency. The coordinates still mean words. Adding collection statistics has not turned them into latent semantic dimensions."
+      ]
+    },
+    {
+      "id": "bm25_weights",
+      "title": "Let extra mentions add less",
+      "source_anchor": "step-5-bm25",
+      "visual": "bm25_weights",
+      "narration": [
+        "BM twenty five adds diminishing returns from repetition and adjusts term frequency evidence for document length, while retaining inverse document frequency. Our figure declares one standard parameter setting and computes the resulting term contributions.",
+        "This is a comparison of representations, not a historical claim that one method was derived from another. Binary presence, raw counts, TF IDF and BM twenty five can all use vocabulary coordinates."
+      ]
+    },
+    {
+      "id": "inverted_storage",
+      "title": "A huge coordinate space can be cheap to store",
+      "source_anchor": "step-5-bm25",
+      "visual": "inverted_storage",
+      "narration": [
+        "A real vocabulary might contain millions of terms, but a short document activates only a few hundred. The implementation can store term and weight pairs for active coordinates.",
+        "An inverted index lets a query jump to the posting lists for its active terms and accumulate contributions. A dot product style mathematical description of BM twenty five does not imply that the engine scans dense vectors or runs nearest neighbour search."
+      ]
+    },
+    {
+      "id": "vector_verdict",
+      "title": "Ask what the coordinates preserve",
+      "source_anchor": "four-questions-about-a-representation",
+      "visual": "vector_verdict",
+      "narration": [
+        "Return to the product claim: we use vectors. Ask what each coordinate represents, which values are active, how the weighting rule was obtained, and how matching evidence becomes an eligible set or a score.",
+        "The same numerical object can hold term presence, calculated lexical weights, recorded facts or learnt latent features. Calling it a vector settles none of those choices. In the next film, a dense vector fails a semantic test while a sparse one bridges a wording gap."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "vector_hook_0",
+      "scene": "vector_hook",
+      "text": "A search product says it uses vectors. What does that tell you? Before answering, look at three ordinary keyword records. Heart attack treatment. Job interview tips. Cancer treatment. We can turn every one into a vector without training a neural network. Make a prediction: what will the coordinates mean?",
+      "gap": 1.0
+    },
+    {
+      "id": "vector_hook_1",
+      "scene": "vector_hook",
+      "text": "They will mean vocabulary terms. Vector names a numerical object: an ordered list of numbers. Chapter Eight makes those hidden choices visible.",
+      "gap": 2.5
+    },
+    {
+      "id": "coordinates_0",
+      "scene": "coordinates",
+      "text": "Fix this vocabulary order: attack, cancer, heart, interview, job, tips, treatment. Every document now lives in the same seven dimensional space. Coordinate three always means heart.",
+      "gap": 1.0
+    },
+    {
+      "id": "coordinates_1",
+      "scene": "coordinates",
+      "text": "Put one where a term occurs and zero where it does not. The first document activates attack, heart and treatment. The second activates interview, job and tips. The third activates cancer and treatment. These are sparse, vocabulary aligned vectors.",
+      "gap": 0.65
+    },
+    {
+      "id": "overlap_logic_0",
+      "scene": "overlap_logic",
+      "text": "Now search for heart treatment. Its two active coordinates overlap the first document twice, the third once, and the second not at all. Counting shared ones gives a graded score.",
+      "gap": 1.0
+    },
+    {
+      "id": "overlap_logic_1",
+      "scene": "overlap_logic",
+      "text": "Heart AND treatment admits only the first document. Heart OR treatment admits the first and third. The binary vector did not contain either operator. The retrieval rule decides whether term evidence becomes a hard requirement or a contribution to a ranking.",
+      "gap": 0.65
+    },
+    {
+      "id": "term_counts_0",
+      "scene": "term_counts",
+      "text": "Change the first document to heart attack treatment treatment treatment. Binary presence barely notices: the same three coordinates are active. Raw term frequency instead puts three in the treatment coordinate. The vocabulary has stayed fixed; the values have changed.",
+      "gap": 1.0
+    },
+    {
+      "id": "term_counts_1",
+      "scene": "term_counts",
+      "text": "Repetition can be useful evidence of topic. But raw counts keep growing, and long documents get more chances to accumulate them. We need a rule for how much another occurrence contributes.",
+      "gap": 0.65
+    },
+    {
+      "id": "rarity_weights_0",
+      "scene": "rarity_weights",
+      "text": "Term frequency looks inside a document. Inverse document frequency looks across the collection. Treatment occurs in two of our three documents. Heart occurs in only one. Heart therefore distinguishes a smaller group and receives more rarity weight under the illustrated rule.",
+      "gap": 1.0
+    },
+    {
+      "id": "rarity_weights_1",
+      "scene": "rarity_weights",
+      "text": "The figure uses raw counts times the natural logarithm of collection size divided by document frequency. The coordinates still mean words. Adding collection statistics has not turned them into latent semantic dimensions.",
+      "gap": 0.65
+    },
+    {
+      "id": "bm25_weights_0",
+      "scene": "bm25_weights",
+      "text": "BM twenty five adds diminishing returns from repetition and adjusts term frequency evidence for document length, while retaining inverse document frequency. Our figure declares one standard parameter setting and computes the resulting term contributions.",
+      "gap": 1.0
+    },
+    {
+      "id": "bm25_weights_1",
+      "scene": "bm25_weights",
+      "text": "This is a comparison of representations, not a historical claim that one method was derived from another. Binary presence, raw counts, TF IDF and BM twenty five can all use vocabulary coordinates.",
+      "gap": 0.65
+    },
+    {
+      "id": "inverted_storage_0",
+      "scene": "inverted_storage",
+      "text": "A real vocabulary might contain millions of terms, but a short document activates only a few hundred. The implementation can store term and weight pairs for active coordinates.",
+      "gap": 1.0
+    },
+    {
+      "id": "inverted_storage_1",
+      "scene": "inverted_storage",
+      "text": "An inverted index lets a query jump to the posting lists for its active terms and accumulate contributions. A dot product style mathematical description of BM twenty five does not imply that the engine scans dense vectors or runs nearest neighbour search.",
+      "gap": 0.65
+    },
+    {
+      "id": "vector_verdict_0",
+      "scene": "vector_verdict",
+      "text": "Return to the product claim: we use vectors. Ask what each coordinate represents, which values are active, how the weighting rule was obtained, and how matching evidence becomes an eligible set or a score.",
+      "gap": 1.0
+    },
+    {
+      "id": "vector_verdict_1",
+      "scene": "vector_verdict",
+      "text": "The same numerical object can hold term presence, calculated lexical weights, recorded facts or learnt latent features. Calling it a vector settles none of those choices. In the next film, a dense vector fails a semantic test while a sparse one bridges a wording gap.",
+      "gap": 0.65
+    }
+  ]
+}

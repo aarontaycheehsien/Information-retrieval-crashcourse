@@ -1,0 +1,280 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:04.086
+A query and three candidate passages
+
+00:00:04.106 --> 00:00:05.606
+already have vectors.
+
+00:00:05.781 --> 00:00:08.299
+We compare them, and A comes first.
+
+00:00:08.474 --> 00:00:11.057
+Compare the very same vectors another way,
+
+00:00:11.206 --> 00:00:12.719
+and B comes first.
+
+00:00:12.881 --> 00:00:14.523
+No passage changed.
+
+00:00:14.685 --> 00:00:17.010
+No new relevance judgment arrived.
+
+00:00:17.160 --> 00:00:19.343
+What changed? Make a prediction.
+
+00:00:21.776 --> 00:00:24.095
+The numerical comparison rule changed.
+
+00:00:24.257 --> 00:00:27.111
+A dense encoder supplies representations,
+
+00:00:27.131 --> 00:00:29.353
+but the search system still needs a rule
+
+00:00:29.373 --> 00:00:30.525
+for comparing them.
+
+00:00:30.675 --> 00:00:33.631
+Cosine similarity and unnormalised dot
+
+00:00:33.651 --> 00:00:35.744
+product can give different leaders.
+
+00:00:36.651 --> 00:00:39.258
+A conventional bi-encoder represents each
+
+00:00:39.278 --> 00:00:41.990
+passage independently of the incoming
+
+00:00:42.010 --> 00:00:44.284
+query. Its passage vector can be
+
+00:00:44.304 --> 00:00:46.925
+calculated in advance and stored.
+
+00:00:47.100 --> 00:00:49.889
+When a query arrives, the system encodes
+
+00:00:49.909 --> 00:00:52.338
+that query and compares its vector with
+
+00:00:52.358 --> 00:00:53.497
+the stored ones.
+
+00:00:54.034 --> 00:00:56.318
+Query and passage encoders can share
+
+00:00:56.338 --> 00:00:58.972
+weights or use distinct parameters,
+
+00:00:59.160 --> 00:01:01.666
+normally trained together for retrieval.
+
+00:01:01.841 --> 00:01:04.488
+Our drawable space has just two anonymous
+
+00:01:04.508 --> 00:01:06.718
+coordinates. Real embeddings can have
+
+00:01:06.738 --> 00:01:09.746
+hundreds or thousands; these numbers are a
+
+00:01:09.766 --> 00:01:12.761
+declared toy, not model measurements.
+
+00:01:13.658 --> 00:01:16.188
+Think of each vector as an arrow from the
+
+00:01:16.208 --> 00:01:18.972
+same origin. Cosine compares the angle
+
+00:01:18.992 --> 00:01:21.111
+between arrows and divides out both
+
+00:01:21.131 --> 00:01:23.701
+lengths. A smaller angle means better
+
+00:01:23.721 --> 00:01:26.034
+alignment. Stretching an arrow in the same
+
+00:01:26.054 --> 00:01:29.319
+direction leaves its cosine unchanged.
+
+00:01:29.874 --> 00:01:31.515
+Same direction gives one.
+
+00:01:31.665 --> 00:01:33.487
+A right angle gives zero.
+
+00:01:33.649 --> 00:01:36.374
+Beyond ninety degrees the value becomes
+
+00:01:36.394 --> 00:01:39.415
+negative, reaching minus one for opposite
+
+00:01:39.435 --> 00:01:41.645
+directions. These are mathematical
+
+00:01:41.665 --> 00:01:44.892
+landmarks, not percentages of relevance or
+
+00:01:44.912 --> 00:01:45.794
+truth.
+
+00:01:46.690 --> 00:01:48.856
+Dot product multiplies matching
+
+00:01:48.876 --> 00:01:51.600
+coordinates and adds the products.
+
+00:01:51.775 --> 00:01:54.049
+Our query is one, zero.
+
+00:01:54.198 --> 00:01:57.232
+A is zero point nine, zero point three.
+
+00:01:57.381 --> 00:02:00.428
+B is one, one. A is better aligned, but B
+
+00:02:00.448 --> 00:02:01.433
+is longer.
+
+00:02:01.992 --> 00:02:04.260
+Their cosine scores are approximately zero
+
+00:02:04.280 --> 00:02:07.018
+point nine four nine and zero point seven
+
+00:02:07.038 --> 00:02:09.260
+zero seven, so A leads.
+
+00:02:09.422 --> 00:02:11.528
+Their unnormalised dot products are zero
+
+00:02:11.548 --> 00:02:14.453
+point nine and one, so B leads.
+
+00:02:14.628 --> 00:02:16.940
+C has a negative score under both rules.
+
+00:02:17.844 --> 00:02:20.034
+Now normalise the query and every
+
+00:02:20.054 --> 00:02:21.747
+candidate to length one.
+
+00:02:21.922 --> 00:02:24.660
+Dot product and cosine become numerically
+
+00:02:24.680 --> 00:02:27.752
+identical, and A leads under both rules.
+
+00:02:27.915 --> 00:02:30.575
+Removing magnitude removed the source of
+
+00:02:30.595 --> 00:02:31.567
+disagreement.
+
+00:02:32.127 --> 00:02:34.572
+This is a mathematical comparison, not a
+
+00:02:34.592 --> 00:02:36.428
+recommendation to change a production
+
+00:02:36.448 --> 00:02:38.257
+model's settings casually.
+
+00:02:38.420 --> 00:02:40.436
+An encoder may have learnt to use
+
+00:02:40.456 --> 00:02:43.232
+magnitude. The comparison rule and
+
+00:02:43.252 --> 00:02:45.900
+normalisation should match its training
+
+00:02:45.920 --> 00:02:46.634
+setup.
+
+00:02:47.536 --> 00:02:50.118
+Add a third coordinate: x, y, z.
+
+00:02:50.294 --> 00:02:51.433
+Add hundreds more.
+
+00:02:51.595 --> 00:02:53.972
+Dot product still multiplies matching
+
+00:02:53.992 --> 00:02:56.111
+coordinate pairs and adds them.
+
+00:02:56.286 --> 00:02:58.431
+Cosine still divides by both vector
+
+00:02:58.451 --> 00:03:01.266
+lengths. Higher dimensionality does not
+
+00:03:01.286 --> 00:03:03.559
+require a new comparison idea.
+
+00:03:04.135 --> 00:03:06.859
+Our axes are anonymous toy coordinates,
+
+00:03:06.995 --> 00:03:08.547
+not named concepts.
+
+00:03:08.722 --> 00:03:10.893
+A flat diagram cannot show a
+
+00:03:10.913 --> 00:03:13.199
+high-dimensional representation directly.
+
+00:03:13.348 --> 00:03:15.944
+A vector score also depends on the model
+
+00:03:15.964 --> 00:03:17.902
+and the comparison rule that produced it.
+
+00:03:18.794 --> 00:03:20.971
+The two orderings tell us which candidates
+
+00:03:20.991 --> 00:03:23.251
+scored highest under each rule.
+
+00:03:23.414 --> 00:03:25.430
+Neither establishes whether a passage
+
+00:03:25.450 --> 00:03:27.917
+serves a reader's task, context or
+
+00:03:27.937 --> 00:03:29.424
+inclusion criteria.
+
+00:03:29.586 --> 00:03:31.976
+Scores from different models or searches
+
+00:03:31.996 --> 00:03:33.496
+need not be comparable.
+
+00:03:34.054 --> 00:03:36.731
+Ask which model, preprocessing,
+
+00:03:36.751 --> 00:03:39.386
+normalisation and similarity rule are used
+
+00:03:39.406 --> 00:03:41.925
+together. Then evaluate the results
+
+00:03:41.945 --> 00:03:43.483
+against your information need.
+
+00:03:43.646 --> 00:03:46.435
+The next film keeps a rule fixed and asks
+
+00:03:46.455 --> 00:03:48.780
+a different question: which stored vectors
+
+00:03:48.800 --> 00:03:50.841
+did the search actually examine?

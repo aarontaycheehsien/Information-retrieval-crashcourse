@@ -1,0 +1,77 @@
+<section class="chapter" id="sec-preface"><header class="chapter-head"><p class="chapter-eyebrow">Preface</p>
+<p class="chapter-meta">About 8 min</p>
+<h2 id="preface">Why this book exists</h2></header>
+<p>When a search system hands you a ranked list — or an answer with citations — two questions are hiding inside it, and they are almost always blurred together: <em>why did this record get into the candidate set at all</em>, and <em>why did it rank where it did?</em> This book exists to teach you to keep those two questions apart. By the end, you should be able to look at any search tool your library licenses — Boolean, “semantic,” “AI-powered,” or all three at once — and ask which decision happened at which layer, what the vendor has actually documented, and what nobody outside the company can know.</p>
+<p>It took me three years to acquire that skill the slow way. Here is why.</p>
+<p>Years ago, in library school, information retrieval got perhaps five minutes of a course called <em>Information Searching &amp; Sources</em>. TF-IDF got those five minutes and a formula; vector search got one slide near the end. When someone in class asked the lecturer to explain it:</p>
+<blockquote class="pull-quote"><p>Don’t worry about it. You won’t be examined on it.</p></blockquote>
+<p>That was the right call at the time. Academic databases behaved alike underneath — words as admission rules, and a ranking assembled from how often a term appears and how rare it is. When every engine works the same way, knowing the engine buys you nothing and knowing the syntax buys you everything, and the syntax is what we all learned, thoroughly and well. I went on to spend years as an academic librarian, teaching classes and studying discovery systems, and nothing in the job required me to understand the retrieval mechanics under the hood. I argued this at more length in “<a href="https://aarontay.substack.com/p/were-good-at-search-just-not-the">‘We’re Good at Search’… Just Not the Kind That the AI Era Demands</a>,” which ended by calling for real information-retrieval competence in the profession. This book is my attempt to answer my own provocation.</p>
+<p>Around 2022, knowing the engine stopped being unimportant. I have spent the years since learning this material the slow way: introductory retrieval courses, engineering blogs from the companies that build search infrastructure, conference talks, vendor documentation, and peer-reviewed papers on Transformer-based retrieval. The climb is steep — not because the ideas are especially difficult, but because the material is scattered across communities that rarely cite one another, pitched at readers with a mathematics or computer-science background, and almost never written with a librarian’s questions in mind. The questions I actually had were more fundamental. <em>How is this different from Boolean search? How should I enter my queries now? And how does this change which papers my researchers find?</em> Answering any of them usually meant reading three things that were mostly about something else.</p>
+<p>This book is that climb, compressed. It is what I wanted in 2022 and could not find.</p>
+<h3 id="the-words-on-the-box">The words on the box stopped meaning anything<a aria-label="Link to The words on the box stopped meaning anything" class="heading-anchor" href="#the-words-on-the-box">#</a>
+</h3>
+<p>Since pretrained Transformer models entered text ranking around 2019, the field has moved unusually quickly, and it still feels a little like the Wild West. No single neural architecture has simply replaced lexical retrieval.<sup id="fnref:post-transformer-plurality"><a class="footnote-ref" href="#fn:post-transformer-plurality">1</a></sup> Instead we have an expanding pile of overlapping labels — <em>neural search</em>, <em>vector search</em>, <em>embedding search</em>, <em>semantic search</em>, <em>agentic search</em>, and the least helpful of all, <em>AI-powered search</em> — used interchangeably while describing entirely different things: a representation, a matching method, a stage in a pipeline, or simply a capability someone wants to market. The words on the outside of the box no longer tell you much about what is inside it.</p>
+<p>Six of these confusions recur often enough to be worth naming — treating <em>semantic search</em> as another name for dense retrieval is one — and the book names each one at the point where you can check it against a real mechanism. <a href="#core-distinction-checklist">The start of Part I</a> lists all six. They survive for the same reason: each lets a vendor say something true and have it heard as something stronger. (<a href="#appendix-search-terminology">Appendix D, A librarian’s map of search terminology</a> maps the terminology in one place.)</p>
+<h3 id="the-half-nobody-is-watching">The half nobody is watching<a aria-label="Link to The half nobody is watching" class="heading-anchor" href="#the-half-nobody-is-watching">#</a>
+</h3>
+<p>Ask an AI search tool a question and two quite separate things happen: something selects a handful of papers, and something else writes about them. Almost every conversation about these tools — in the profession, in the press, in the fast-growing literature on hallucination — is about the writing.</p>
+<p>But the two steps do not fail in the same way. Checking whether a reference exists can expose a fabricated citation, but a real source can still be misrepresented. Missing evidence is often harder to notice: the answer does not show you the papers it never received. The answer is just as fluent, just as neatly cited, and quietly built on the wrong papers — or on a set missing the one everybody in the field would name. Both failures require investigation. A citation list alone establishes neither faithful writing nor adequate retrieval.</p>
+<p>The generation half already has a crowd around it: computer scientists measuring fabrication rates, journalists stress-testing chatbots, an ethics literature several years deep. The retrieval half has almost nobody — and it is the half libraries license, configure, evaluate and pay for. If we do not ask which papers a system was able to reach, it is not obvious who will. That does not mean librarians need to become retrieval engineers. It means somebody in the library needs to understand enough of the stack to ask sensible questions, compare systems, and work out which layer a problem actually belongs to — the case I made in “<a href="https://aarontay.substack.com/p/eleven-ways-of-looking-at-academic">AI Search Is Rebundling Everything Libraries Know About Discovery</a>.” <a href="#library-practice">Chapter 15</a> sets out what that takes in practice.</p>
+<h3 id="who-this-is-for">Who this is for<a aria-label="Link to Who this is for" class="heading-anchor" href="#who-this-is-for">#</a>
+</h3>
+<p>Librarians are genuinely expert searchers, though that expertise takes different forms, and this book is written for three of them:</p>
+<ul>
+<li>
+<strong>Information literacy librarians</strong>, who teach people to turn questions into workable searches and to understand what different interfaces invite them to do;</li>
+<li>
+<strong>Evidence synthesis librarians</strong>, who build high-recall strategies across databases, controlled vocabularies and platform syntax, then document them so somebody else can rerun them;</li>
+<li>
+<strong>Systems and discovery librarians</strong>, who see search from the other side—configuration, indexes, integrations, and the questions vendors do or do not answer.</li>
+</ul>
+<p><a href="https://aarontay.substack.com/p/i-built-an-elaborate-librarian-recommender">There are many ways to be expert in search</a>. This book assumes that professional knowledge and begins where those forms of expertise meet the retrieval machinery under the interface. The first two audiences are primary; the third will find the procurement and evaluation chapters written with them in mind.</p>
+
+<h3 id="what-this-book-is">What this book is, and what it is not<a aria-label="Link to What this book is, and what it is not" class="heading-anchor" href="#what-this-book-is">#</a>
+</h3>
+<p>Because it is written for the readers described above, this is not a typical Information Retrieval 101 text. It follows three deliberate principles.</p>
+<ul>
+<li>
+<strong>Understanding before detailed mechanism.</strong> The inverted index is explained in enough detail to show why it is fast and what it structurally can and cannot do — not enough for you to build one. You will get a sense of the latency and other trade-offs behind different indexing and retrieval choices; where the fuller machinery matters, it lives in <a href="#backmatter">the appendices</a> rather than interrupting the main argument.</li>
+<li>
+<strong>Examples familiar to librarians.</strong> Wherever possible, I tie a concept to what a named library or academic search system is documented to do, together with the date I checked it. When the documentation runs out, I say so rather than infer what is happening. This is the part of the book that will age fastest, and it is dated so you can see it ageing; the mechanisms underneath move far more slowly than the products built on them.</li>
+<li>
+<strong>Formulas only where they carry an argument.</strong> A formula is a kind of compression: useful if you already read formulas fluently, an obstacle if you do not. A librarian assessing a search system needs to understand what BM25 responds to and what it is blind to, not how to calculate it by hand.</li>
+</ul>
+<p>Equally, there are things this book is not:</p>
+<ul>
+<li>
+<strong>Not an implementation guide.</strong> You will not come out able to build a retriever.</li>
+<li>
+<strong>Not a product review.</strong> Named systems appear as dated illustrations of mechanisms, not as recommendations.</li>
+<li>
+<strong>Not a substitute for a graduate course in information retrieval.</strong> Specialists will find simplifications throughout.</li>
+<li>
+<strong>Not a book about answer generation.</strong> Chapter 1 opens with answer-generating RAG assistants, but the step in which a model writes the final prose stays outside the book’s scope. The book concentrates on how evidence becomes available before an answer is written.</li>
+</ul>
+<p>It is meant to give you a floor to stand on: enough to follow a technical conversation, interrogate a vendor claim, and recognise when one of your own search problems is really a retrieval problem. <a href="#where-to-go-deeper">Where to go deeper</a> lists what to read next.</p>
+<aside class="orientation" aria-labelledby="orientation-title">
+<p class="orientation-label">Before you start</p>
+<h4 id="orientation-title">How to read this</h4>
+<p><strong>No prior knowledge of information retrieval is assumed.</strong> You should be able to start here knowing little more than Boolean searching. <strong>No mathematics is required</strong> either: formulas and worked examples are accompanied by explanations in words, and no calculation is required to follow the main argument. Most mathematical detail is in the footnotes and appendices; Chapter 10 includes an optional RRF calculation. Appendix F is core reading for the evidence-synthesis route. Sections marked “for awareness” go a level deeper again, and sit inside the appendices.</p>
+<p>The book divides naturally into three sittings — about 67 minutes for the Preface and Part I, about 107 for Part II, and about 82 for Part III — and you lose nothing by stopping between them. Each chapter carries an estimated reading time beside its number, so you can also just pick one that fits the time you actually have. Each part ends with an application exercise asking you to run real searches in a system available to you and write down what you find; the teaching notes include a public-access route. These are probably the slowest part of the book and the part most likely to teach you something about your own tools, but you can skip them without losing the main argument.</p>
+<p><strong>Reading straight through is the default route.</strong> If you are here with a narrower purpose, there are five shorter routes:</p>
+<ul>
+<li>
+<strong>Short orientation</strong>—take the <a href="read-this-first.html">45-minute reading-and-reflection route</a>: the chapter summaries, key distinctions and closing puzzle map, with links back to the full explanations.</li>
+<li>
+<strong>Instruction</strong>—teaching information literacy? Protect <a href="#part1">Part I</a>, then <a href="#query-transformation">Chapter 11</a> on query transformation and <a href="#diagnosing-failure">Chapters 13</a> to <a href="#library-practice">15</a> on failure, evaluation and professional practice.</li>
+<li>
+<strong>Evidence synthesis</strong>—focus on <a href="#boolean-admission">Chapter 2</a>, <a href="#query-transformation">Chapter 11</a> and <a href="#diagnosing-failure">Chapters 13</a> to <a href="#library-practice">15</a>, then read <a href="#appendix-evidence-synthesis-high-recall-retrieval">Appendix F</a> as the application that connects candidate retrieval, high recall, screening and stopping. On this route, Appendix F is core rather than optional.</li>
+<li>
+<strong>Procurement</strong>—focus on <a href="#one-category-error-resolved-and-one-still-ahead">the category errors and distinctions</a>, <a href="#diagnosing-where-retrieval-goes-wrong">diagnosing where retrieval goes wrong</a> and <a href="#implications-for-library-practice">the implications for library practice</a>. Those carry the vocabulary and the questions; the mechanics can wait until a vendor’s answer puzzles you. Keep <a href="#appendix-search-terminology">Appendix D</a> open alongside them, and use <a href="#hybrid-and-fusion">Chapter 10</a> and <a href="#appendix-rank-fusion-and-learning-to-rank">Appendix E</a> when a system combines or reranks candidate lists.</li>
+<li>
+<strong>Curiosity</strong>—already comfortable with Boolean retrieval and BM25? Start at <a href="#from-word2vec-to-retrieval-embeddings">learnt representations</a>. Everything before that is largely devoted to establishing that lexical retrieval is broader than Boolean retrieval, which you may already accept.</li>
+</ul>
+<p>Most examples come from scholarly and library search, though I occasionally use newer internet slang such as <code dir="ltr">delulu</code> and <code dir="ltr">rizz</code> — deliberately, because unfamiliar words make useful stress tests for search systems.</p>
+</aside>
+<p><em>Now, to the machine itself.</em></p>
+<nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav next" href="#intro"><span>Next</span>The retrieval problem</a></nav></section>

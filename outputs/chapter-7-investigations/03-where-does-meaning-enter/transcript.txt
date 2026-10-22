@@ -1,0 +1,40 @@
+Where does meaning enter?
+
+[00:00:00.700]: A product promises semantic search and accepts a question in ordinary language. Has it told you that the first retrieval stage compares dense vectors? It has told you a goal and an input format. The candidate-building machinery is still an open question.
+
+[00:00:19.716]: Semantic describes an intended capability: matching by meaning. Dense, vector and embedding describe different technical properties. A product can pursue the goal through expansion, learnt representations, reranking, or combinations. Ask where meaning enters its pipeline.
+
+[00:00:39.702]: Search for heart attack treatment. A document says myocardial infarction therapy. Expansion can add those expressions so a lexical retriever has matching terms. A suitably trained dense retriever may bridge the original phrasings through vector comparison.
+
+[00:00:58.446]: A third route first uses expansion and lexical retrieval to admit the document, then applies a semantic reranker to that shortlist. The expansion supplied the bridge. A reranker cannot rescue a document that never arrived. These are possible routes, not guaranteed matches.
+
+[00:01:19.040]: A suitably trained encoder may connect the chapter's delulu question with a passage about unrealistic expectations. That vocabulary bridge is valuable. But a single-vector passage encoder compresses the passage before it knows what the next query will ask.
+
+[00:01:36.892]: Broad similarity can dominate an exact code, a rare name or a negation. Shorter chunks reduce the compression, while each chunk still has one pooled vector. Similar meaning alone does not establish suitability for a task or inclusion criteria.
+
+[00:01:55.822]: A range search can return vectors above a similarity threshold. The difficulty is calibration. Scores vary across queries, models and collections. One fixed threshold may return nothing for one search and thousands for another.
+
+[00:02:13.001]: A fixed k gives a more predictable output size, not a guarantee that every returned item is useful. A similarity score needs the context of its model and comparison rule. It is not a calibrated probability of relevance.
+
+[00:02:28.459]: Our invented pipeline retrieves forty candidates, passes eight to an answer writer, and displays three citations. These numbers are teaching budgets, not measurements of a named product. Each handoff can narrow the available evidence.
+
+[00:02:45.024]: The visible three do not tell you how many records competed or were examined. Google Scholar's documented display cap likewise does not establish an exhaustively scored global top k. Candidate selection, ranking, execution and presentation need separate evidence.
+
+[00:03:03.955]: The chapter's August twenty twenty-six Semantic Scholar observation returned thirteen results for a natural-language question and about thirty-five thousand three hundred for its shorter keyword query. The author also judged the inspected leading keyword results better for the topic.
+
+[00:03:21.176]: Those observations describe this example. They do not establish that keyword queries always work better, or show exactly how the interface processed either request. A product name and visible counts cannot answer that architectural question.
+
+[00:03:37.385]: The chapter's twenty twenty-five Semantic Scholar account starts with Elasticsearch keyword candidates, capped at one thousand, followed by Light G B M reranking. That account does not establish the precise processing of the later interface comparison.
+
+[00:03:54.088]: OpenAlex Alice's twenty twenty-six documentation instead describes G T E Large E N embeddings compared by cosine. Its April account reports four hundred thirteen million embeddings. The documented semantic request is an alternative to its lexical modes, not automatically a hybrid query.
+
+[00:04:15.104]: The same semantic goal can lead through different mechanisms. Ask what text unit is indexed, which representation and comparison rule it uses, whether search is exact or approximate, and where filters, rerankers and output boundaries act.
+
+[00:04:31.656]: Then evaluate usefulness for the real task. A natural-language box, a dense vector, a high score and a top-k list each leave different questions unanswered. Chapter Eight opens the stored representation and asks whether an indexed item is a document, record or passage.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 7.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#dense-at-scale
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

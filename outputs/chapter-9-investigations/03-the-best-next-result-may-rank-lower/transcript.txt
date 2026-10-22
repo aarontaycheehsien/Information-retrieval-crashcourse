@@ -1,0 +1,40 @@
+The best next result may rank lower
+
+[00:00:00.700]: Your first three papers all fit the query well, but cover the same aspect using similar evidence. A lower ranked paper covers another useful aspect. Which one would you want next when exploring the topic? Pause and predict.
+
+[00:00:17.516]: Result diversification asks what a candidate adds to the items already selected. It changes the objective from sorting independent scores to constructing a useful set. The answer depends on the search task and what the system counts as different.
+
+[00:00:34.246]: The chapter’s schematic pool concerns open access citation advantage. A, B and C cover overall advantage. D covers disciplinary differences. E covers selection bias methods. F is weakly related.
+
+[00:00:50.384]: One selection is A, B, C: three strong individual matches with repeated aspect coverage. Another is A, D, E: retain a strong match and expose two other useful aspects. F stays out because being different is insufficient. These stipulated selections illustrate an objective, not a calculated algorithm output.
+
+[00:01:16.173]: Diversification names an objective. Reranking names a pipeline position. Deduplication removes records considered equivalent under a separate rule. B and C remain distinct studies even though they share an aspect with A; shared subject matter does not make them duplicates.
+
+[00:01:35.781]: Difference might mean topic, method, geography, viewpoint or merely wording. Broader topical coverage does not automatically create viewpoint diversity, fairness or balanced evidence. The system’s representation of difference needs to match what the reader actually wants to explore.
+
+[00:01:54.578]: Exploratory search may benefit from less repetition. A systematic review may need every relevant study, including very similar ones. Diversity aware selection can push a highly relevant near neighbour below the displayed cut off. Similar papers can still contain separate evidence.
+
+[00:02:15.687]: Diversification does not retrieve records missing from the pool. Evaluate retrieval, diversity and display limits separately. A broader looking list can be useful without being an exhaustive account of the evidence.
+
+[00:02:32.079]: The chapter’s published PubMed Best Match account starts with BM twenty five and applies LambdaMART to the top five hundred candidates. Its list continues below that reranked region in Best Match order.
+
+[00:02:45.910]: Primo Research Assistant has another boundary: up to thirty candidates are reranked using embeddings, and five selected abstracts reach generation. These are documentation accounts, not new service tests. Neither count measures relevance, and the two products handle their tails differently.
+
+[00:03:05.447]: The documented Primo workflow starts when an LLM converts a question into Boolean variations connected with OR. Some filters can be refined automatically. CDI then retrieves through a largely lexical inverted index route.
+
+[00:03:22.137]: Its ranking combines lexical and field evidence, phrase and proximity signals, and static signals such as recency and citations. The embedding reranking stage receives up to thirty leading candidates. An AI component later in the chain does not make the first retrieval stage dense.
+
+[00:03:43.393]: The documented working set for generation is five abstracts. A paper omitted before the thirty candidate reranking boundary cannot be reordered there. A candidate outside the five source boundary is also unavailable to that answer writer’s documented working set.
+
+[00:04:01.955]: And an abstract is not the complete paper. A detail stated only in full text was not supplied in this documented abstract based context.
+
+[00:04:12.088]: Learning to rank, including LambdaMART, learns to combine available features from training examples. Those features can be lexical matches, dates, publication types or usage; they need not be embeddings. Its limits include the evidence and labels it receives.
+
+[00:04:30.787]: Ask which route supplied candidates, how many received each comparison, what text survived, and whether the selected set serves the task. Chapter Ten adds another decision: combining or routing multiple retrieval routes whose ranked lists and score scales may differ.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 9.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#reranking-and-hybrid
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

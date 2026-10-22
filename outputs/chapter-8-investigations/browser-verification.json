@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8825/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8825/01-the-vector-hiding-in-keyword-search/01-the-vector-hiding-in-keyword-search.mp4",
+      "duration": 266.033333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 108,
+      "seek_seconds": 133.016665,
+      "byte_range": "bytes 0-1023/24081862",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8825/02-dense-does-not-mean-semantic/02-dense-does-not-mean-semantic.mp4",
+      "duration": 276.4,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 112,
+      "seek_seconds": 138.2,
+      "byte_range": "bytes 0-1023/26670305",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8825/03-one-paper-fifty-searchable-objects/03-one-paper-fifty-searchable-objects.mp4",
+      "duration": 271.1,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 106,
+      "seek_seconds": 135.55,
+      "byte_range": "bytes 0-1023/24094538",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

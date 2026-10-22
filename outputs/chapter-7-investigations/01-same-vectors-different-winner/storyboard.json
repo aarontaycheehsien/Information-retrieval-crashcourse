@@ -1,0 +1,179 @@
+{
+  "series": "Dense retrieval at collection scale",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#dense-at-scale",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#dense-at-scale",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-same-vectors-different-winner",
+  "title": "Same vectors, different winner",
+  "subtitle": "One rule favors direction; another also responds to length.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "winner_hook",
+      "title": "The candidates stay still. The winner changes.",
+      "source_anchor": "single-vector-dense-retrieval-compress-first-compare-later",
+      "visual": "winner_hook",
+      "narration": [
+        "A query and three candidate passages already have vectors. We compare them, and A comes first. Compare the very same vectors another way, and B comes first. No passage changed. No new relevance judgment arrived. What changed? Make a prediction.",
+        "The numerical comparison rule changed. A dense encoder supplies representations, but the search system still needs a rule for comparing them. Cosine similarity and unnormalised dot product can give different leaders."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "precompute",
+      "title": "Store the passages before the query arrives",
+      "source_anchor": "bi-encoder-pipeline-title",
+      "visual": "precompute",
+      "narration": [
+        "A conventional bi-encoder represents each passage independently of the incoming query. Its passage vector can be calculated in advance and stored. When a query arrives, the system encodes that query and compares its vector with the stored ones.",
+        "Query and passage encoders can share weights or use distinct parameters, normally trained together for retrieval. Our drawable space has just two anonymous coordinates. Real embeddings can have hundreds or thousands; these numbers are a declared toy, not model measurements."
+      ]
+    },
+    {
+      "id": "cosine_direction",
+      "title": "Cosine compares directional alignment",
+      "source_anchor": "vector-similarity-explained",
+      "visual": "cosine_direction",
+      "narration": [
+        "Think of each vector as an arrow from the same origin. Cosine compares the angle between arrows and divides out both lengths. A smaller angle means better alignment. Stretching an arrow in the same direction leaves its cosine unchanged.",
+        "Same direction gives one. A right angle gives zero. Beyond ninety degrees the value becomes negative, reaching minus one for opposite directions. These are mathematical landmarks, not percentages of relevance or truth."
+      ]
+    },
+    {
+      "id": "dot_product",
+      "title": "Dot product also responds to length",
+      "source_anchor": "vector-similarity-two-rules-title",
+      "visual": "dot_product",
+      "narration": [
+        "Dot product multiplies matching coordinates and adds the products. Our query is one, zero. A is zero point nine, zero point three. B is one, one. A is better aligned, but B is longer.",
+        "Their cosine scores are approximately zero point nine four nine and zero point seven zero seven, so A leads. Their unnormalised dot products are zero point nine and one, so B leads. C has a negative score under both rules."
+      ]
+    },
+    {
+      "id": "normalisation",
+      "title": "Unit length makes the rules agree",
+      "source_anchor": "vector-similarity-two-rules-title",
+      "visual": "normalisation",
+      "narration": [
+        "Now normalise the query and every candidate to length one. Dot product and cosine become numerically identical, and A leads under both rules. Removing magnitude removed the source of disagreement.",
+        "This is a mathematical comparison, not a recommendation to change a production model's settings casually. An encoder may have learnt to use magnitude. The comparison rule and normalisation should match its training setup."
+      ]
+    },
+    {
+      "id": "dimensions",
+      "title": "More coordinates, the same operation",
+      "source_anchor": "vector-dimensions-title",
+      "visual": "dimensions",
+      "narration": [
+        "Add a third coordinate: x, y, z. Add hundreds more. Dot product still multiplies matching coordinate pairs and adds them. Cosine still divides by both vector lengths. Higher dimensionality does not require a new comparison idea.",
+        "Our axes are anonymous toy coordinates, not named concepts. A flat diagram cannot show a high-dimensional representation directly. A vector score also depends on the model and the comparison rule that produced it."
+      ]
+    },
+    {
+      "id": "score_limits",
+      "title": "A high score is not a relevance probability",
+      "source_anchor": "single-vector-dense-retrieval-compress-first-compare-later",
+      "visual": "score_limits",
+      "narration": [
+        "The two orderings tell us which candidates scored highest under each rule. Neither establishes whether a passage serves a reader's task, context or inclusion criteria. Scores from different models or searches need not be comparable.",
+        "Ask which model, preprocessing, normalisation and similarity rule are used together. Then evaluate the results against your information need. The next film keeps a rule fixed and asks a different question: which stored vectors did the search actually examine?"
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "winner_hook_0",
+      "scene": "winner_hook",
+      "text": "A query and three candidate passages already have vectors. We compare them, and A comes first. Compare the very same vectors another way, and B comes first. No passage changed. No new relevance judgment arrived. What changed? Make a prediction.",
+      "gap": 1.0
+    },
+    {
+      "id": "winner_hook_1",
+      "scene": "winner_hook",
+      "text": "The numerical comparison rule changed. A dense encoder supplies representations, but the search system still needs a rule for comparing them. Cosine similarity and unnormalised dot product can give different leaders.",
+      "gap": 2.5
+    },
+    {
+      "id": "precompute_0",
+      "scene": "precompute",
+      "text": "A conventional bi-encoder represents each passage independently of the incoming query. Its passage vector can be calculated in advance and stored. When a query arrives, the system encodes that query and compares its vector with the stored ones.",
+      "gap": 1.0
+    },
+    {
+      "id": "precompute_1",
+      "scene": "precompute",
+      "text": "Query and passage encoders can share weights or use distinct parameters, normally trained together for retrieval. Our drawable space has just two anonymous coordinates. Real embeddings can have hundreds or thousands; these numbers are a declared toy, not model measurements.",
+      "gap": 0.65
+    },
+    {
+      "id": "cosine_direction_0",
+      "scene": "cosine_direction",
+      "text": "Think of each vector as an arrow from the same origin. Cosine compares the angle between arrows and divides out both lengths. A smaller angle means better alignment. Stretching an arrow in the same direction leaves its cosine unchanged.",
+      "gap": 1.0
+    },
+    {
+      "id": "cosine_direction_1",
+      "scene": "cosine_direction",
+      "text": "Same direction gives one. A right angle gives zero. Beyond ninety degrees the value becomes negative, reaching minus one for opposite directions. These are mathematical landmarks, not percentages of relevance or truth.",
+      "gap": 0.65
+    },
+    {
+      "id": "dot_product_0",
+      "scene": "dot_product",
+      "text": "Dot product multiplies matching coordinates and adds the products. Our query is one, zero. A is zero point nine, zero point three. B is one, one. A is better aligned, but B is longer.",
+      "gap": 1.0
+    },
+    {
+      "id": "dot_product_1",
+      "scene": "dot_product",
+      "text": "Their cosine scores are approximately zero point nine four nine and zero point seven zero seven, so A leads. Their unnormalised dot products are zero point nine and one, so B leads. C has a negative score under both rules.",
+      "gap": 0.65
+    },
+    {
+      "id": "normalisation_0",
+      "scene": "normalisation",
+      "text": "Now normalise the query and every candidate to length one. Dot product and cosine become numerically identical, and A leads under both rules. Removing magnitude removed the source of disagreement.",
+      "gap": 1.0
+    },
+    {
+      "id": "normalisation_1",
+      "scene": "normalisation",
+      "text": "This is a mathematical comparison, not a recommendation to change a production model's settings casually. An encoder may have learnt to use magnitude. The comparison rule and normalisation should match its training setup.",
+      "gap": 0.65
+    },
+    {
+      "id": "dimensions_0",
+      "scene": "dimensions",
+      "text": "Add a third coordinate: x, y, z. Add hundreds more. Dot product still multiplies matching coordinate pairs and adds them. Cosine still divides by both vector lengths. Higher dimensionality does not require a new comparison idea.",
+      "gap": 1.0
+    },
+    {
+      "id": "dimensions_1",
+      "scene": "dimensions",
+      "text": "Our axes are anonymous toy coordinates, not named concepts. A flat diagram cannot show a high-dimensional representation directly. A vector score also depends on the model and the comparison rule that produced it.",
+      "gap": 0.65
+    },
+    {
+      "id": "score_limits_0",
+      "scene": "score_limits",
+      "text": "The two orderings tell us which candidates scored highest under each rule. Neither establishes whether a passage serves a reader's task, context or inclusion criteria. Scores from different models or searches need not be comparable.",
+      "gap": 1.0
+    },
+    {
+      "id": "score_limits_1",
+      "scene": "score_limits",
+      "text": "Ask which model, preprocessing, normalisation and similarity rule are used together. Then evaluate the results against your information need. The next film keeps a rule fixed and asks a different question: which stored vectors did the search actually examine?",
+      "gap": 0.65
+    }
+  ]
+}

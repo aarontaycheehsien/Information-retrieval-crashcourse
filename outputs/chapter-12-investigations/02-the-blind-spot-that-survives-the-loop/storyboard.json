@@ -1,0 +1,201 @@
+{
+  "series": "Agentic search",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#agentic-search",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#agentic-search",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-the-blind-spot-that-survives-the-loop",
+  "title": "The blind spot that survives the loop",
+  "subtitle": "More rounds do not automatically establish better coverage.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "uncited_hook",
+      "title": "A simple request can require an unfamiliar sequence",
+      "source_anchor": "where-current-academic-tools-actually-sit",
+      "visual": "uncited_hook",
+      "narration": [
+        "Find related papers that an article could have cited but did not. The chapter\u2019s probe requires identifying the article, extracting its references, finding related work, and comparing identities. Would running more searches alone complete that task? Pause and identify the missing operation.",
+        "The comparison must actually happen. Our invented set diagram removes already cited identities from a related candidate pool. The remaining records are candidates for checking, not verified citation omissions; timing, relevance and metadata still need assessment."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "dated_probe",
+      "title": "A task probe is different from a product league table",
+      "source_anchor": "where-current-academic-tools-actually-sit",
+      "visual": "dated_probe",
+      "narration": [
+        "The author\u2019s December twenty twenty five probe reports Asta stopping at the target lookup, and Consensus returning already cited papers despite four sub agents. SciSpace attempted reference extraction and comparison; most suggestions were uncited, but metadata caused some matching failures and completion was unclear.",
+        "General assistants also depended on access to the full text. This was one task type, not a general capability ranking. Passing or failing it does not establish robust agency across tasks or identify a failure\u2019s sole cause."
+      ]
+    },
+    {
+      "id": "available_menu",
+      "title": "The path taken does not reveal the available menu",
+      "source_anchor": "what-agency-costs-and-what-it-buys",
+      "visual": "available_menu",
+      "narration": [
+        "A trace records what the system did. It does not reveal every action it could have taken. Missing reference extraction or source access can block the task.",
+        "MCP can expose search operations to a controller: their inputs, outputs and purpose. Scite and Wiley AI Gateway provide examples in the chapter. The underlying retrieval algorithm stays separate."
+      ]
+    },
+    {
+      "id": "endpoint_boundaries",
+      "title": "An exposed service still has a defined boundary",
+      "source_anchor": "agency-changes-the-sequence-not-the-retrieval",
+      "visual": "endpoint_boundaries",
+      "narration": [
+        "Wiley\u2019s documented server returns relevant full text chunks with paper metadata. Scite documents tools and Search API filters, but does not document ranking parity with its web interface; its Assistant is not offered through MCP.",
+        "The controller chooses when to call those operations, what to ask and whether to search again. The exposed operations, authentication and library entitlements still apply. An endpoint does not provide every interface feature or a route around a subscription."
+      ]
+    },
+    {
+      "id": "reinforced_omission",
+      "title": "Earlier results can steer every later round",
+      "source_anchor": "agentic-search-trajectory-title",
+      "visual": "reinforced_omission",
+      "narration": [
+        "The chapter illustrates a hypothetical search about open access and citations. Round one returns papers about overall citation differences, while selection bias methods are missing. Later searches follow the returned terminology and references, reinforcing the same aspect.",
+        "After three rounds the budget ends, with selection bias methods still unexplored. These are hypothetical recorded actions and observations, not private model reasoning. The example shows how a shortlist bottleneck can recur and influence the next search."
+      ]
+    },
+    {
+      "id": "repairing_the_gap",
+      "title": "An alternative action can admit new candidates",
+      "source_anchor": "agentic-search-trajectory-title",
+      "visual": "repairing_the_gap",
+      "narration": [
+        "An alternative second action explicitly searches for open access, citation advantage and selection bias methods. Suppose that action retrieves methodological papers absent from the first round. The cumulative candidate pool can then expand, informing later choices.",
+        "The task brief, a librarian or the controller could prompt that action. It is not guaranteed to occur or succeed. Citation searching does not always stay inside one aspect; the illustration contrasts possible trajectories, not universal outcomes."
+      ]
+    },
+    {
+      "id": "stopping_boundary",
+      "title": "Stopping is a decision about unseen evidence",
+      "source_anchor": "what-agency-costs-and-what-it-buys",
+      "visual": "stopping_boundary",
+      "narration": [
+        "A workflow may stop because its steps ended. A harness may impose a round limit or budget, or the user may interrupt. A model may instead decide that the evidence it has seen is sufficient.",
+        "That last decision applies a relevance criterion to results the user may not have inspected. Record it. A budget reached, declining yield or a model saying enough does not prove completeness, and two runs may stop differently."
+      ]
+    },
+    {
+      "id": "trace_and_cost",
+      "title": "Record actions, observations, options and stopping",
+      "source_anchor": "what-agency-costs-and-what-it-buys",
+      "visual": "trace_and_cost",
+      "narration": [
+        "Evaluating the loop requires the available action menu as well as the executed trace, intermediate results and stopping conditions. Otherwise an access limit can look like reasoning failure, and an early omission can disappear behind a fluent final answer.",
+        "More rounds add latency and tokens. A known procedure may be cheaper and more reproducible when prescribed in advance. Choose the arrangement for the task, and evaluate what it recovered and what it failed to explore."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "uncited_hook_0",
+      "scene": "uncited_hook",
+      "text": "Find related papers that an article could have cited but did not. The chapter\u2019s probe requires identifying the article, extracting its references, finding related work, and comparing identities. Would running more searches alone complete that task? Pause and identify the missing operation.",
+      "gap": 1.0
+    },
+    {
+      "id": "uncited_hook_1",
+      "scene": "uncited_hook",
+      "text": "The comparison must actually happen. Our invented set diagram removes already cited identities from a related candidate pool. The remaining records are candidates for checking, not verified citation omissions; timing, relevance and metadata still need assessment.",
+      "gap": 2.5
+    },
+    {
+      "id": "dated_probe_0",
+      "scene": "dated_probe",
+      "text": "The author\u2019s December twenty twenty five probe reports Asta stopping at the target lookup, and Consensus returning already cited papers despite four sub agents. SciSpace attempted reference extraction and comparison; most suggestions were uncited, but metadata caused some matching failures and completion was unclear.",
+      "gap": 1.0
+    },
+    {
+      "id": "dated_probe_1",
+      "scene": "dated_probe",
+      "text": "General assistants also depended on access to the full text. This was one task type, not a general capability ranking. Passing or failing it does not establish robust agency across tasks or identify a failure\u2019s sole cause.",
+      "gap": 0.65
+    },
+    {
+      "id": "available_menu_0",
+      "scene": "available_menu",
+      "text": "A trace records what the system did. It does not reveal every action it could have taken. Missing reference extraction or source access can block the task.",
+      "gap": 1.0
+    },
+    {
+      "id": "available_menu_1",
+      "scene": "available_menu",
+      "text": "MCP can expose search operations to a controller: their inputs, outputs and purpose. Scite and Wiley AI Gateway provide examples in the chapter. The underlying retrieval algorithm stays separate.",
+      "gap": 0.65
+    },
+    {
+      "id": "endpoint_boundaries_0",
+      "scene": "endpoint_boundaries",
+      "text": "Wiley\u2019s documented server returns relevant full text chunks with paper metadata. Scite documents tools and Search API filters, but does not document ranking parity with its web interface; its Assistant is not offered through MCP.",
+      "gap": 1.0
+    },
+    {
+      "id": "endpoint_boundaries_1",
+      "scene": "endpoint_boundaries",
+      "text": "The controller chooses when to call those operations, what to ask and whether to search again. The exposed operations, authentication and library entitlements still apply. An endpoint does not provide every interface feature or a route around a subscription.",
+      "gap": 0.65
+    },
+    {
+      "id": "reinforced_omission_0",
+      "scene": "reinforced_omission",
+      "text": "The chapter illustrates a hypothetical search about open access and citations. Round one returns papers about overall citation differences, while selection bias methods are missing. Later searches follow the returned terminology and references, reinforcing the same aspect.",
+      "gap": 1.0
+    },
+    {
+      "id": "reinforced_omission_1",
+      "scene": "reinforced_omission",
+      "text": "After three rounds the budget ends, with selection bias methods still unexplored. These are hypothetical recorded actions and observations, not private model reasoning. The example shows how a shortlist bottleneck can recur and influence the next search.",
+      "gap": 0.65
+    },
+    {
+      "id": "repairing_the_gap_0",
+      "scene": "repairing_the_gap",
+      "text": "An alternative second action explicitly searches for open access, citation advantage and selection bias methods. Suppose that action retrieves methodological papers absent from the first round. The cumulative candidate pool can then expand, informing later choices.",
+      "gap": 1.0
+    },
+    {
+      "id": "repairing_the_gap_1",
+      "scene": "repairing_the_gap",
+      "text": "The task brief, a librarian or the controller could prompt that action. It is not guaranteed to occur or succeed. Citation searching does not always stay inside one aspect; the illustration contrasts possible trajectories, not universal outcomes.",
+      "gap": 0.65
+    },
+    {
+      "id": "stopping_boundary_0",
+      "scene": "stopping_boundary",
+      "text": "A workflow may stop because its steps ended. A harness may impose a round limit or budget, or the user may interrupt. A model may instead decide that the evidence it has seen is sufficient.",
+      "gap": 1.0
+    },
+    {
+      "id": "stopping_boundary_1",
+      "scene": "stopping_boundary",
+      "text": "That last decision applies a relevance criterion to results the user may not have inspected. Record it. A budget reached, declining yield or a model saying enough does not prove completeness, and two runs may stop differently.",
+      "gap": 0.65
+    },
+    {
+      "id": "trace_and_cost_0",
+      "scene": "trace_and_cost",
+      "text": "Evaluating the loop requires the available action menu as well as the executed trace, intermediate results and stopping conditions. Otherwise an access limit can look like reasoning failure, and an early omission can disappear behind a fluent final answer.",
+      "gap": 1.0
+    },
+    {
+      "id": "trace_and_cost_1",
+      "scene": "trace_and_cost",
+      "text": "More rounds add latency and tokens. A known procedure may be cheaper and more reproducible when prescribed in advance. Choose the arrangement for the task, and evaluate what it recovered and what it failed to explore.",
+      "gap": 0.65
+    }
+  ]
+}

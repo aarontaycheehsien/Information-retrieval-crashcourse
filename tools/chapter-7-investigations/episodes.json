@@ -1,0 +1,262 @@
+{
+  "series": "Dense retrieval at collection scale",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#dense-at-scale",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#dense-at-scale",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-same-vectors-different-winner",
+      "title": "Same vectors, different winner",
+      "subtitle": "One rule favors direction; another also responds to length.",
+      "accent": "blue",
+      "scenes": [
+        {
+          "id": "winner_hook",
+          "title": "The candidates stay still. The winner changes.",
+          "source_anchor": "single-vector-dense-retrieval-compress-first-compare-later",
+          "visual": "winner_hook",
+          "narration": [
+            "A query and three candidate passages already have vectors. We compare them, and A comes first. Compare the very same vectors another way, and B comes first. No passage changed. No new relevance judgment arrived. What changed? Make a prediction.",
+            "The numerical comparison rule changed. A dense encoder supplies representations, but the search system still needs a rule for comparing them. Cosine similarity and unnormalised dot product can give different leaders."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "precompute",
+          "title": "Store the passages before the query arrives",
+          "source_anchor": "bi-encoder-pipeline-title",
+          "visual": "precompute",
+          "narration": [
+            "A conventional bi-encoder represents each passage independently of the incoming query. Its passage vector can be calculated in advance and stored. When a query arrives, the system encodes that query and compares its vector with the stored ones.",
+            "Query and passage encoders can share weights or use distinct parameters, normally trained together for retrieval. Our drawable space has just two anonymous coordinates. Real embeddings can have hundreds or thousands; these numbers are a declared toy, not model measurements."
+          ]
+        },
+        {
+          "id": "cosine_direction",
+          "title": "Cosine compares directional alignment",
+          "source_anchor": "vector-similarity-explained",
+          "visual": "cosine_direction",
+          "narration": [
+            "Think of each vector as an arrow from the same origin. Cosine compares the angle between arrows and divides out both lengths. A smaller angle means better alignment. Stretching an arrow in the same direction leaves its cosine unchanged.",
+            "Same direction gives one. A right angle gives zero. Beyond ninety degrees the value becomes negative, reaching minus one for opposite directions. These are mathematical landmarks, not percentages of relevance or truth."
+          ]
+        },
+        {
+          "id": "dot_product",
+          "title": "Dot product also responds to length",
+          "source_anchor": "vector-similarity-two-rules-title",
+          "visual": "dot_product",
+          "narration": [
+            "Dot product multiplies matching coordinates and adds the products. Our query is one, zero. A is zero point nine, zero point three. B is one, one. A is better aligned, but B is longer.",
+            "Their cosine scores are approximately zero point nine four nine and zero point seven zero seven, so A leads. Their unnormalised dot products are zero point nine and one, so B leads. C has a negative score under both rules."
+          ]
+        },
+        {
+          "id": "normalisation",
+          "title": "Unit length makes the rules agree",
+          "source_anchor": "vector-similarity-two-rules-title",
+          "visual": "normalisation",
+          "narration": [
+            "Now normalise the query and every candidate to length one. Dot product and cosine become numerically identical, and A leads under both rules. Removing magnitude removed the source of disagreement.",
+            "This is a mathematical comparison, not a recommendation to change a production model's settings casually. An encoder may have learnt to use magnitude. The comparison rule and normalisation should match its training setup."
+          ]
+        },
+        {
+          "id": "dimensions",
+          "title": "More coordinates, the same operation",
+          "source_anchor": "vector-dimensions-title",
+          "visual": "dimensions",
+          "narration": [
+            "Add a third coordinate: x, y, z. Add hundreds more. Dot product still multiplies matching coordinate pairs and adds them. Cosine still divides by both vector lengths. Higher dimensionality does not require a new comparison idea.",
+            "Our axes are anonymous toy coordinates, not named concepts. A flat diagram cannot show a high-dimensional representation directly. A vector score also depends on the model and the comparison rule that produced it."
+          ]
+        },
+        {
+          "id": "score_limits",
+          "title": "A high score is not a relevance probability",
+          "source_anchor": "single-vector-dense-retrieval-compress-first-compare-later",
+          "visual": "score_limits",
+          "narration": [
+            "The two orderings tell us which candidates scored highest under each rule. Neither establishes whether a passage serves a reader's task, context or inclusion criteria. Scores from different models or searches need not be comparable.",
+            "Ask which model, preprocessing, normalisation and similarity rule are used together. Then evaluate the results against your information need. The next film keeps a rule fixed and asks a different question: which stored vectors did the search actually examine?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-the-neighbour-you-never-visited",
+      "title": "The neighbour you never visited",
+      "subtitle": "Search effort, exactness, and the requested result count are separate controls.",
+      "accent": "red",
+      "scenes": [
+        {
+          "id": "visited_hook",
+          "title": "Both searches return three. Did both search the same way?",
+          "source_anchor": "how-nearest-neighbour-indexing-makes-dense-retrieval-practical",
+          "visual": "visited_hook",
+          "narration": [
+            "Two searches each return three results. One examined every stored vector. The other took a shortcut and missed a closer candidate. Could you tell which search ran just by counting the results on screen? Make a prediction.",
+            "The output count does not reveal the work or the guarantee behind it. We need to separate the comparison rule, the search procedure, and the number of leaders requested."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "two_indexes",
+          "title": "A term pointer and a vector search are different routes",
+          "source_anchor": "how-nearest-neighbour-indexing-makes-dense-retrieval-practical",
+          "visual": "two_indexes",
+          "narration": [
+            "An inverted index can jump from an analysed term to documents containing it. A dense vector has no equivalent posting list for all passages expressing a meaning. Its dimensions do not directly correspond to recognisable words, and a useful passage need not share query terms.",
+            "The exact baseline is flat vector search: compare the query with every stored vector. Its work grows with collection size and dimensionality. It can construct a complete ranking or retain only the leaders."
+          ]
+        },
+        {
+          "id": "exact_search",
+          "title": "Examine all six; keep the nearest three",
+          "source_anchor": "ann-worked-title",
+          "visual": "exact_search",
+          "narration": [
+            "Use the chapter's six points and put the query at zero, zero. This example uses Euclidean distance, not the cosine rule from the first film. Smaller distance wins. Exhaustive search examines A through F and returns A, B and C.",
+            "A is one unit away, B two, and C about two point eight three. D is about three point one six away. Exact here means exact under the chosen comparison rule. It does not guarantee that those nearest points represent relevant passages."
+          ]
+        },
+        {
+          "id": "approx_search",
+          "title": "C was closer, but this run never saw it",
+          "source_anchor": "ann-worked-title",
+          "visual": "approx_search",
+          "narration": [
+            "Now stipulate a run that examines only A, B, D and F. It returns A, B and D. C was closer than D, but was never examined. Both runs still requested the same top three.",
+            "Approximate nearest-neighbour structures reduce search work by exploring selected regions or neighbours. They may miss a true nearest neighbour. This small example illustrates one possible miss, not a measured system, an H N S W simulation, or a claim that approximate search always misses."
+          ]
+        },
+        {
+          "id": "graph_navigation",
+          "title": "Navigate promising neighbours",
+          "source_anchor": "how-nearest-neighbour-indexing-makes-dense-retrieval-practical",
+          "visual": "graph_navigation",
+          "narration": [
+            "H N S W is one widely used approximate approach. It organises vectors as a navigable graph with multiple layers. Connections help a search explore promising neighbours instead of comparing every vector.",
+            "Our graph is schematic. It does not show the algorithm's real links or a measured path. Other index designs partition the space, compress vectors, or combine strategies. Indexing changes how the search runs; the requested k still describes its output size."
+          ]
+        },
+        {
+          "id": "four_controls",
+          "title": "Four decisions behind the same top-k output",
+          "source_anchor": "top-k-is-a-result-boundary-not-a-dense-retrieval-method",
+          "visual": "four_controls",
+          "narration": [
+            "Keep four controls apart: who may compete, what rule scores them, how the engine searches, and how many leaders it retains. Our exact and approximate runs requested k equals three while examining six and four points respectively.",
+            "Top k does not mean only k candidates were examined. Exact lexical pruning can safely skip candidates that cannot enter the leaders; approximate vector search offers a different guarantee. Lexical, dense and hybrid systems can all return top-k results."
+          ]
+        },
+        {
+          "id": "best_available",
+          "title": "Nearest means best available under the rule",
+          "source_anchor": "candidate-boundaries-in-lexical-and-dense-retrieval",
+          "visual": "best_available",
+          "narration": [
+            "Dense retrieval has no comparable term-match floor. Unless filters narrow the collection, every stored vector can receive a similarity score. An unrelated passage can still be nearest when every alternative is farther away.",
+            "Metadata filters, lexical evidence and vectors can coexist in one product. The candidate boundary and output size remain separate questions. To assess a search, inspect its filters, scoring rule, exact or approximate execution, and result boundary—then judge whether the returned material is useful."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-where-does-meaning-enter",
+      "title": "Where does meaning enter?",
+      "subtitle": "A semantic goal can be pursued at several different stages.",
+      "accent": "teal",
+      "scenes": [
+        {
+          "id": "semantic_hook",
+          "title": "What did the word semantic actually tell you?",
+          "source_anchor": "semantic-search-is-a-goal-not-an-architecture",
+          "visual": "semantic_hook",
+          "narration": [
+            "A product promises semantic search and accepts a question in ordinary language. Has it told you that the first retrieval stage compares dense vectors? It has told you a goal and an input format. The candidate-building machinery is still an open question.",
+            "Semantic describes an intended capability: matching by meaning. Dense, vector and embedding describe different technical properties. A product can pursue the goal through expansion, learnt representations, reranking, or combinations. Ask where meaning enters its pipeline."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "three_routes",
+          "title": "One wording gap, three possible routes",
+          "source_anchor": "semantic-three-routes-title",
+          "visual": "three_routes",
+          "narration": [
+            "Search for heart attack treatment. A document says myocardial infarction therapy. Expansion can add those expressions so a lexical retriever has matching terms. A suitably trained dense retriever may bridge the original phrasings through vector comparison.",
+            "A third route first uses expansion and lexical retrieval to admit the document, then applies a semantic reranker to that shortlist. The expansion supplied the bridge. A reranker cannot rescue a document that never arrived. These are possible routes, not guaranteed matches."
+          ]
+        },
+        {
+          "id": "bridge_bottleneck",
+          "title": "Precomputation brings a bridge—and a bottleneck",
+          "source_anchor": "what-dense-retrieval-gains-and-compresses",
+          "visual": "bridge_bottleneck",
+          "narration": [
+            "A suitably trained encoder may connect the chapter's delulu question with a passage about unrealistic expectations. That vocabulary bridge is valuable. But a single-vector passage encoder compresses the passage before it knows what the next query will ask.",
+            "Broad similarity can dominate an exact code, a rare name or a negation. Shorter chunks reduce the compression, while each chunk still has one pooled vector. Similar meaning alone does not establish suitability for a task or inclusion criteria."
+          ]
+        },
+        {
+          "id": "range_threshold",
+          "title": "Why not return everything above one score?",
+          "source_anchor": "dense-range-search-question-title",
+          "visual": "range_threshold",
+          "narration": [
+            "A range search can return vectors above a similarity threshold. The difficulty is calibration. Scores vary across queries, models and collections. One fixed threshold may return nothing for one search and thousands for another.",
+            "A fixed k gives a more predictable output size, not a guarantee that every returned item is useful. A similarity score needs the context of its model and comparison rule. It is not a calibrated probability of relevance."
+          ]
+        },
+        {
+          "id": "stage_budgets",
+          "title": "Several handoffs can have different budgets",
+          "source_anchor": "top-k-is-a-result-boundary-not-a-dense-retrieval-method",
+          "visual": "stage_budgets",
+          "narration": [
+            "Our invented pipeline retrieves forty candidates, passes eight to an answer writer, and displays three citations. These numbers are teaching budgets, not measurements of a named product. Each handoff can narrow the available evidence.",
+            "The visible three do not tell you how many records competed or were examined. Google Scholar's documented display cap likewise does not establish an exhaustively scored global top k. Candidate selection, ranking, execution and presentation need separate evidence."
+          ]
+        },
+        {
+          "id": "opening_puzzle",
+          "title": "A shorter query produced many more reported matches",
+          "source_anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
+          "visual": "opening_puzzle",
+          "narration": [
+            "The chapter's August twenty twenty-six Semantic Scholar observation returned thirteen results for a natural-language question and about thirty-five thousand three hundred for its shorter keyword query. The author also judged the inspected leading keyword results better for the topic.",
+            "Those observations describe this example. They do not establish that keyword queries always work better, or show exactly how the interface processed either request. A product name and visible counts cannot answer that architectural question."
+          ]
+        },
+        {
+          "id": "documented_routes",
+          "title": "Read the documented candidate-building route",
+          "source_anchor": "tbl-7-2",
+          "visual": "documented_routes",
+          "narration": [
+            "The chapter's twenty twenty-five Semantic Scholar account starts with Elasticsearch keyword candidates, capped at one thousand, followed by Light G B M reranking. That account does not establish the precise processing of the later interface comparison.",
+            "OpenAlex Alice's twenty twenty-six documentation instead describes G T E Large E N embeddings compared by cosine. Its April account reports four hundred thirteen million embeddings. The documented semantic request is an alternative to its lexical modes, not automatically a hybrid query."
+          ]
+        },
+        {
+          "id": "pipeline_questions",
+          "title": "Ask which stage forms the candidate boundary",
+          "source_anchor": "semantic-search-is-a-goal-not-an-architecture",
+          "visual": "pipeline_questions",
+          "narration": [
+            "The same semantic goal can lead through different mechanisms. Ask what text unit is indexed, which representation and comparison rule it uses, whether search is exact or approximate, and where filters, rerankers and output boundaries act.",
+            "Then evaluate usefulness for the real task. A natural-language box, a dense vector, a high score and a top-k list each leave different questions unanswered. Chapter Eight opens the stored representation and asks whether an indexed item is a document, record or passage."
+          ]
+        }
+      ]
+    }
+  ]
+}

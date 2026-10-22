@@ -1,0 +1,252 @@
+{
+  "series": "From language model to retrieval encoder",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#retrieval-encoder",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#retrieval-encoder",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-the-vector-we-actually-store",
+      "title": "The vector we actually store",
+      "subtitle": "Follow text through the encoder, then separate its inputs from its output.",
+      "accent": "blue",
+      "scenes": [
+        {
+          "id": "vector_hook",
+          "title": "Which of these numbers goes into the search index?",
+          "source_anchor": "encoder-assembly-line-title",
+          "visual": "vector_hook",
+          "narration": [
+            "A question enters an encoder. Out come tokens, vocabulary identifiers, initial vectors, contextual representations, and eventually one vector for the complete text. Which of these does a conventional single-vector dense retriever store and compare? Take a moment before following the assembly line.",
+            "Only the final pooled representation plays that role here. The earlier units are working material inside the encoder. Calling several of them tokens or embeddings can hide the boundaries that matter for search."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "two_units",
+          "title": "One name, two different jobs",
+          "source_anchor": "tbl-6-1",
+          "visual": "two_units",
+          "narration": [
+            "A lexical index term comes from text analysis and can lead directly to a posting list. A model token is an input unit processed with surrounding units inside an encoder. It does not acquire a posting list simply because we call it a token.",
+            "The collection determines which analysed terms have postings. A pretrained model instead has a fixed input-token vocabulary or byte inventory. These processes serve different jobs; their units are not interchangeable."
+          ]
+        },
+        {
+          "id": "coverage",
+          "title": "A string can be split without being understood",
+          "source_anchor": "model-tokens-are-not-indexed-terms",
+          "visual": "coverage",
+          "narration": [
+            "Classic word two vec uses a fixed word vocabulary, so an unseen complete word may become an unknown token. Modern encoders usually split unfamiliar strings into reusable subwords, characters or bytes. This improves input coverage.",
+            "For our declared toy tokenizer, delulu becomes six characters: d, e, l, u, l, u. That is not a named model's tokenizer. Being able to split the slang does not establish that an encoder has learnt its use or the searcher's need."
+          ]
+        },
+        {
+          "id": "ids",
+          "title": "Token IDs are lookup keys, not search coordinates",
+          "source_anchor": "encoder-assembly-line-title",
+          "visual": "ids",
+          "narration": [
+            "In our toy vocabulary, d has identifier three, e eight, l eleven, and u twenty-one. The sequence becomes three, eight, eleven, twenty-one, eleven, twenty-one. These identifiers are lookup keys, not similarity scores or the final embedding dimensions.",
+            "A lookup supplies an initial vector for each identifier. Both occurrences of l start from the same toy lookup vector. Their representations can later differ because they occupy different places in the sequence. All of these numbers are teaching values, not measured encoder outputs."
+          ]
+        },
+        {
+          "id": "context_pool",
+          "title": "Six working vectors become one representation",
+          "source_anchor": "encoder-assembly-line-title",
+          "visual": "context_pool",
+          "narration": [
+            "The contextual encoder combines information across the sequence. It still produces per-token representations. Pooling then combines that working material into one representation for the complete query or passage. Averaging is one option; a sequence-opening representation is another.",
+            "Our six supplied three-number vectors sum to six, six, twelve. Divide each total by six and the mean is one, one, two. This arithmetic illustrates pooling, not an actual language-model computation. Pooling alone does not guarantee useful retrieval."
+          ]
+        },
+        {
+          "id": "independent",
+          "title": "A question and passage can be encoded separately",
+          "source_anchor": "how-a-contextual-encoder-becomes-a-retrieval-encoder",
+          "visual": "independent",
+          "narration": [
+            "In a bi-encoder arrangement, a query and a passage are encoded independently, then their output vectors are compared. Their encoding paths can share parameters or use different parameters. Matching the arrangement and training to the task matters.",
+            "Independent passage encoding means its vector can be prepared before a new query arrives. The passage need not be encoded again with every question. Chapter Seven takes this arrangement to a whole collection; here we are identifying what produces the comparable representations."
+          ]
+        },
+        {
+          "id": "stored_boundary",
+          "title": "One stored vector is a design choice",
+          "source_anchor": "encoder-assembly-line-title",
+          "visual": "stored_boundary",
+          "narration": [
+            "Return to the assembly line: text, model tokens, identifiers, initial vectors, contextual representations, pooling, one embedding. Model tokens are inputs; they are not the dimensions of the final vector and are not automatically searchable lexical terms.",
+            "This chapter follows a conventional single-vector arrangement. Late-interaction methods retain multiple token vectors for comparison instead. Producing a stored representation is one decision. Teaching its comparisons to reward useful passages is the next one."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-the-result-that-almost-answers",
+      "title": "The result that almost answers",
+      "subtitle": "A hard negative shares the topic while answering a different question.",
+      "accent": "red",
+      "scenes": [
+        {
+          "id": "nearby_hook",
+          "title": "A close match can miss the question",
+          "source_anchor": "how-a-contextual-encoder-becomes-a-retrieval-encoder",
+          "visual": "nearby_hook",
+          "narration": [
+            "A passage talks about your job interview. It repeats important words, sounds related, and sits near your question in a vector space. Is that enough to make it the result you need? Predicting language and retrieving a useful passage reward different relationships.",
+            "Pooling a pretrained model gives a complete-text vector. It does not automatically arrange independently encoded questions near relevant passages. Retrieval-oriented training supplies examples of the comparisons the system should learn to prefer."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "stated_need",
+          "title": "First state the information need",
+          "source_anchor": "a-worked-training-example",
+          "visual": "stated_need",
+          "narration": [
+            "The chapter asks: Am I being delulu about getting this job? For this teaching case, interpret the need as help me judge whether my expectations are unrealistic. That choice determines the labels we are about to assign.",
+            "The labelled positive is How to recognise unrealistic expectations during a job search. It addresses that stated need without repeating the slang. The example makes a desired ranking explicit; it does not demonstrate that a pretrained model already understands delulu."
+          ]
+        },
+        {
+          "id": "easy_negative",
+          "title": "An easy negative supplies a broad contrast",
+          "source_anchor": "a-worked-training-example",
+          "visual": "easy_negative",
+          "narration": [
+            "One competing passage is A history of agricultural employment. It concerns work, but offers little help with the stipulated question about unrealistic expectations. The training example labels it an easy negative.",
+            "An easy contrast can help define the task, but it need not teach the finer distinctions among closely related results. Choosing the negative examples changes the lesson. A system can separate unrelated topics while still confusing different needs inside the same topic."
+          ]
+        },
+        {
+          "id": "hard_negative",
+          "title": "The hard negative almost sounds right",
+          "source_anchor": "a-worked-training-example",
+          "visual": "hard_negative",
+          "narration": [
+            "The hard negative is Ten signs that you performed well in your job interview. It shares the broad topic and important vocabulary. Under our stated need, it does not address whether the searcher's expectations are unrealistic.",
+            "Change the need to estimating your chances from how the interview went, and this passage might be useful. Positive and negative labels record a task's intended distinction. They do not reveal an eternal relevance label attached to the passage."
+          ]
+        },
+        {
+          "id": "score_comparison",
+          "title": "Train for the desired comparison",
+          "source_anchor": "positives-and-negatives-title",
+          "visual": "score_comparison",
+          "narration": [
+            "Training updates model parameters to favour the labelled positive over its competitors. Triplet loss and contrastive objectives implement this idea in different ways. The chapter does not claim a particular score for these passages.",
+            "Our invented two-dimensional example uses unit-length vectors and cosine similarity. Initially, the hard negative scores above the positive. In the desired arrangement, the positive scores highest. The two pictures illustrate an ordering, not a measured training run, a universal trajectory, or probabilities of relevance."
+          ]
+        },
+        {
+          "id": "sbert_dpr",
+          "title": "Train independently encoded representations",
+          "source_anchor": "how-a-contextual-encoder-becomes-a-retrieval-encoder",
+          "visual": "sbert_dpr",
+          "narration": [
+            "Sentence BERT adapted BERT so that independently encoded sentences could be compared efficiently. Dense Passage Retrieval applied the bi-encoder approach to questions and passages, training relevant passages to score above competitors.",
+            "Both illustrate the transition from a general language model to useful comparisons for an intended task. The family name alone does not make the transition. Pooling, the training examples, the negatives, and the objective all help determine the resulting representation."
+          ]
+        },
+        {
+          "id": "labels_limit",
+          "title": "What did the model learn to preserve?",
+          "source_anchor": "what-the-space-ends-up-preserving",
+          "visual": "labels_limit",
+          "narration": [
+            "The space reflects its starting model, training pairs, negative examples, loss function and optimisation. Those ingredients influence which query and document relationships receive high scores. Better performance on one task does not establish usefulness for every search.",
+            "Ask why a passage received its label and whether the negatives test distinctions that matter to you. Then evaluate the retriever against the intended task. The next film follows the labels back to their sources: clicks, answers, citations and other proxies for a useful result."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-whose-idea-of-relevance",
+      "title": "Whose idea of relevance?",
+      "subtitle": "Training signals teach different relationships—and their limits travel with them.",
+      "accent": "teal",
+      "scenes": [
+        {
+          "id": "signals_hook",
+          "title": "Who taught the model what belongs together?",
+          "source_anchor": "where-the-training-signal-comes-from",
+          "visual": "signals_hook",
+          "narration": [
+            "Two retrievers have the same architecture and search the same collection. One learnt from question and answer pairs. The other learnt from citation-linked papers. Should they produce the same ranking? Make a prediction.",
+            "They can learn different relationships because their training examples reward different things. The targets and negative examples give a retriever an operational model of relevance. To understand its high scores, ask where that lesson came from."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "clicks_answers",
+          "title": "Clicks and answers teach different lessons",
+          "source_anchor": "where-the-training-signal-comes-from",
+          "visual": "clicks_answers",
+          "narration": [
+            "A clicked result records an action. Clicks can reward popularity and ranking position as well as usefulness. A question paired with an answer passage instead rewards an answer-bearing relationship. Neither source directly observes everything a searcher means by relevance.",
+            "Titles paired with abstracts may mainly reward topical similarity. Human judgements, generated queries and neighbouring passages can supply other training signals. Each has advantages and limitations. Knowing the signal helps you ask which relationship a model was encouraged to preserve."
+          ]
+        },
+        {
+          "id": "citations",
+          "title": "A citation supplies a scholarly relationship",
+          "source_anchor": "where-the-training-signal-comes-from",
+          "visual": "citations",
+          "narration": [
+            "The chapter gives SPECTER as a deliberate scholarly example. It trains document-level paper embeddings using the citation graph. Citation-linked relationships shape a space intended to reflect scholarly relatedness.",
+            "That is a different target from finding a direct answer to a question. Relatedness can be useful, but it does not prove that a paper answers this search, supports another paper's conclusion, or meets a review's eligibility criteria. The training relationship needs to fit the use."
+          ]
+        },
+        {
+          "id": "transfer",
+          "title": "The same architecture can receive a different education",
+          "source_anchor": "where-the-training-signal-comes-from",
+          "visual": "transfer",
+          "narration": [
+            "A retriever trained on general web question and answer pairs learns from that literature, genre and style of question. A systematic reviewer, a chemistry researcher, or someone searching another language may need distinctions barely represented in those examples.",
+            "Changing the examples can change what ranks highly even with the same architecture. A strong benchmark result may transfer poorly to another collection or query population. Treat transfer as something to evaluate locally, not as a guarantee supplied by a model name."
+          ]
+        },
+        {
+          "id": "fine_distinctions",
+          "title": "A small difference can carry the whole need",
+          "source_anchor": "what-the-space-ends-up-preserving",
+          "visual": "fine_distinctions",
+          "narration": [
+            "If exact identifiers rarely matter during training, an embedding may blur them. If negatives rarely contain contradictions or specialised senses, the space may fail to preserve those distinctions. Our invented labels C M P one zero four and C M P one four zero illustrate an identifier distinction.",
+            "These are teaching identifiers, not chemical facts or a model test. A useful evaluation should include the exact identifiers, relations, contradictions and specialised senses that matter to your real task. Broad topical similarity alone cannot settle those cases."
+          ]
+        },
+        {
+          "id": "diagnosis",
+          "title": "Poor results do not identify the cause",
+          "source_anchor": "sec-retrieval-encoder",
+          "visual": "diagnosis",
+          "narration": [
+            "Suppose the web-trained retriever performs poorly over a chemistry collection. Training mismatch is a plausible hypothesis. Before attributing the failure to training, inspect collection coverage, searchable fields, query processing and candidate cut-offs.",
+            "Then compare performance across a local set of judged queries. The scenario says how retrieval training was supplied; it does not tell you whether domain pretraining occurred. Different stages can produce the same missing-paper symptom, and neither training lever alone guarantees a fit."
+          ]
+        },
+        {
+          "id": "three_questions",
+          "title": "Ask what is stored, what taught it, and what works",
+          "source_anchor": "what-the-space-ends-up-preserving",
+          "visual": "three_questions",
+          "narration": [
+            "Take three questions back to the library. What text unit does each stored vector represent? Which positives, negatives and training signals taught its comparisons? Does it retrieve useful material for our own task, collection and query population?",
+            "Model tokenisation supplies inputs. Contextual encoding and pooling produce a representation. Retrieval training shapes which comparisons score highly. Local evidence tests whether those comparisons serve your need. Chapter Seven puts the encoder to work across a whole collection."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "series": "Diagnosing retrieval failure",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#diagnosing-failure",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#diagnosing-failure",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-it-can-spell-it-can-it-find-it",
+  "title": "It can spell it. Can it find it?",
+  "subtitle": "Encoding a string does not establish useful retrieval evidence.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "encodable_hook",
+      "title": "The identifier is visible. Why is the result missing?",
+      "source_anchor": "out-of-vocabulary",
+      "visual": "encodable_hook",
+      "narration": [
+        "A chemical identifier is plainly printed in a record, and a model can encode every piece of it. Searching still fails. Has that ruled out a representation problem? Pause and name the separate components between the string you see and the evidence a retriever can use.",
+        "Out of vocabulary only means something relative to a named vocabulary. The index may lack a corresponding analysed term. A tokeniser may lack a complete word entry. Or every token may exist while the retriever\u2019s representation remains poor. Those are different conditions."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "three_questions",
+      "title": "Out of whose vocabulary?",
+      "source_anchor": "tbl-13-2",
+      "visual": "three_questions",
+      "narration": [
+        "Ask three questions separately. Is there a corresponding term and posting list in the lexical index? Can the model tokeniser encode the string? Has the retrieval model learnt a useful representation of those pieces in context?",
+        "The first two concern literal vocabularies. The third concerns representation or training exposure. A tokeniser passing its question does not answer the other two. Inspect the field, lexical analysis, model tokenisation and retrieval behaviour as separate layers."
+      ]
+    },
+    {
+      "id": "word_and_subword",
+      "title": "A reader\u2019s decomposition need not be the model\u2019s",
+      "source_anchor": "out-of-vocabulary",
+      "visual": "word_and_subword",
+      "narration": [
+        "An older word level model may have no complete entry for a new word. A subword model can instead encode known pieces. That often avoids literal whole word absence, while making no promise about how informative the resulting representation will be.",
+        "The chapter\u2019s appendix reports Bert splitting rizzlord into the three pieces shown here, rather than a neat rizz plus lord. That is a reported tokenisation example, not a tokeniser run for this film. Another model may split exactly the same string differently."
+      ]
+    },
+    {
+      "id": "bytes_are_not_meaning",
+      "title": "Encoding coverage and useful meaning are separate properties",
+      "source_anchor": "out-of-vocabulary",
+      "visual": "bytes_are_not_meaning",
+      "narration": [
+        "A pure byte level model can encode valid UTF eight input. A character level model depends on its supported character inventory or fallback. Either can represent an expression\u2019s form without having learnt how people use it for this retrieval task.",
+        "So tokenisable does not mean understood, and understood in some language task does not establish good retrieval. The source\u2019s new expressions illustrate why naming the representation matters. Avoid calling every weak response out of vocabulary when no literal vocabulary entry is missing."
+      ]
+    },
+    {
+      "id": "exact_identity",
+      "title": "Exact identity can be preserved without semantic training",
+      "source_anchor": "out-of-vocabulary",
+      "visual": "exact_identity",
+      "narration": [
+        "Now reverse the problem. The source supposes an identifier, delulu four twenty seven, occurs in three indexed documents. Our invented keyword field example stores that exact string in three records and a neighbouring identifier in a fourth. Literal equality selects the three intended identities.",
+        "That calculation demonstrates exact field identity only. An ordinary text analyser might split the string into word and numeric components. Query and document analysis must agree. BM twenty five can weight rare matching components without previously encountering the identifier during model training."
+      ]
+    },
+    {
+      "id": "pooled_identity",
+      "title": "A pooled representation can blur a decisive distinction",
+      "source_anchor": "out-of-vocabulary",
+      "visual": "pooled_identity",
+      "narration": [
+        "A standard single vector dense retriever usually can encode the identifier as model tokens. Contextualisation and pooling may still blur it with related strings or concepts. A small local difference can determine relevance even when the overall meanings look similar.",
+        "The chapter cites research showing that better training can mitigate this weakness. It does not claim dense retrieval always fails on identifiers. Our neighbouring strings are a teaching contrast, not measured vectors, model scores or a reported ranking."
+      ]
+    },
+    {
+      "id": "preserve_a_route",
+      "title": "When exact identity determines relevance, keep a lexical route",
+      "source_anchor": "out-of-vocabulary",
+      "visual": "preserve_a_route",
+      "narration": [
+        "Gene names, chemical strings, dataset titles, model names, article identifiers, personal names and new terminology can all make exact identity important. Preserve a suitable lexical route and inspect fields and analysis. Do not assume an embedding alone preserves the distinction.",
+        "A synonym or controlled term may work around some lexical absence, while a keyword field may preserve an exact identifier. Neither remedy by itself fixes an unfamiliar deployment task or a failure to preserve negation. Choose the remedy for the component that lost the evidence."
+      ]
+    },
+    {
+      "id": "layered_evidence",
+      "title": "Test the layers before choosing the repair",
+      "source_anchor": "diagnose-before-choosing-a-remedy",
+      "visual": "layered_evidence",
+      "narration": [
+        "Use a known relevant record and a controlled contrast. Record the literal input, field selected, available analysis information and model tokenisation if documented. Establish eligibility first, then compare what each layer preserves. Mark internal details unknown when the system does not expose them.",
+        "A good diagnosis can combine lexical absence, weak representation and unfamiliar deployment conditions. Tokenisation gives evidence about encoding, not a complete cause of retrieval failure. The next film considers failures where every word is familiar and the missing information is a relationship."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "encodable_hook_0",
+      "scene": "encodable_hook",
+      "text": "A chemical identifier is plainly printed in a record, and a model can encode every piece of it. Searching still fails. Has that ruled out a representation problem? Pause and name the separate components between the string you see and the evidence a retriever can use.",
+      "gap": 1.0
+    },
+    {
+      "id": "encodable_hook_1",
+      "scene": "encodable_hook",
+      "text": "Out of vocabulary only means something relative to a named vocabulary. The index may lack a corresponding analysed term. A tokeniser may lack a complete word entry. Or every token may exist while the retriever\u2019s representation remains poor. Those are different conditions.",
+      "gap": 2.5
+    },
+    {
+      "id": "three_questions_0",
+      "scene": "three_questions",
+      "text": "Ask three questions separately. Is there a corresponding term and posting list in the lexical index? Can the model tokeniser encode the string? Has the retrieval model learnt a useful representation of those pieces in context?",
+      "gap": 1.0
+    },
+    {
+      "id": "three_questions_1",
+      "scene": "three_questions",
+      "text": "The first two concern literal vocabularies. The third concerns representation or training exposure. A tokeniser passing its question does not answer the other two. Inspect the field, lexical analysis, model tokenisation and retrieval behaviour as separate layers.",
+      "gap": 0.65
+    },
+    {
+      "id": "word_and_subword_0",
+      "scene": "word_and_subword",
+      "text": "An older word level model may have no complete entry for a new word. A subword model can instead encode known pieces. That often avoids literal whole word absence, while making no promise about how informative the resulting representation will be.",
+      "gap": 1.0
+    },
+    {
+      "id": "word_and_subword_1",
+      "scene": "word_and_subword",
+      "text": "The chapter\u2019s appendix reports Bert splitting rizzlord into the three pieces shown here, rather than a neat rizz plus lord. That is a reported tokenisation example, not a tokeniser run for this film. Another model may split exactly the same string differently.",
+      "gap": 0.65
+    },
+    {
+      "id": "bytes_are_not_meaning_0",
+      "scene": "bytes_are_not_meaning",
+      "text": "A pure byte level model can encode valid UTF eight input. A character level model depends on its supported character inventory or fallback. Either can represent an expression\u2019s form without having learnt how people use it for this retrieval task.",
+      "gap": 1.0
+    },
+    {
+      "id": "bytes_are_not_meaning_1",
+      "scene": "bytes_are_not_meaning",
+      "text": "So tokenisable does not mean understood, and understood in some language task does not establish good retrieval. The source\u2019s new expressions illustrate why naming the representation matters. Avoid calling every weak response out of vocabulary when no literal vocabulary entry is missing.",
+      "gap": 0.65
+    },
+    {
+      "id": "exact_identity_0",
+      "scene": "exact_identity",
+      "text": "Now reverse the problem. The source supposes an identifier, delulu four twenty seven, occurs in three indexed documents. Our invented keyword field example stores that exact string in three records and a neighbouring identifier in a fourth. Literal equality selects the three intended identities.",
+      "gap": 1.0
+    },
+    {
+      "id": "exact_identity_1",
+      "scene": "exact_identity",
+      "text": "That calculation demonstrates exact field identity only. An ordinary text analyser might split the string into word and numeric components. Query and document analysis must agree. BM twenty five can weight rare matching components without previously encountering the identifier during model training.",
+      "gap": 0.65
+    },
+    {
+      "id": "pooled_identity_0",
+      "scene": "pooled_identity",
+      "text": "A standard single vector dense retriever usually can encode the identifier as model tokens. Contextualisation and pooling may still blur it with related strings or concepts. A small local difference can determine relevance even when the overall meanings look similar.",
+      "gap": 1.0
+    },
+    {
+      "id": "pooled_identity_1",
+      "scene": "pooled_identity",
+      "text": "The chapter cites research showing that better training can mitigate this weakness. It does not claim dense retrieval always fails on identifiers. Our neighbouring strings are a teaching contrast, not measured vectors, model scores or a reported ranking.",
+      "gap": 0.65
+    },
+    {
+      "id": "preserve_a_route_0",
+      "scene": "preserve_a_route",
+      "text": "Gene names, chemical strings, dataset titles, model names, article identifiers, personal names and new terminology can all make exact identity important. Preserve a suitable lexical route and inspect fields and analysis. Do not assume an embedding alone preserves the distinction.",
+      "gap": 1.0
+    },
+    {
+      "id": "preserve_a_route_1",
+      "scene": "preserve_a_route",
+      "text": "A synonym or controlled term may work around some lexical absence, while a keyword field may preserve an exact identifier. Neither remedy by itself fixes an unfamiliar deployment task or a failure to preserve negation. Choose the remedy for the component that lost the evidence.",
+      "gap": 0.65
+    },
+    {
+      "id": "layered_evidence_0",
+      "scene": "layered_evidence",
+      "text": "Use a known relevant record and a controlled contrast. Record the literal input, field selected, available analysis information and model tokenisation if documented. Establish eligibility first, then compare what each layer preserves. Mark internal details unknown when the system does not expose them.",
+      "gap": 1.0
+    },
+    {
+      "id": "layered_evidence_1",
+      "scene": "layered_evidence",
+      "text": "A good diagnosis can combine lexical absence, weak representation and unfamiliar deployment conditions. Tokenisation gives evidence about encoding, not a complete cause of retrieval failure. The next film considers failures where every word is familiar and the missing information is a relationship.",
+      "gap": 0.65
+    }
+  ]
+}

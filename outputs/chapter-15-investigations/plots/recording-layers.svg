@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="403.2pt" viewBox="0 0 1008 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Original library-practice teaching illustration; not a model measurement</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 1008 403.2 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #eee9e0"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 25.2 134.313984 
+L 302.904 134.313984 
+L 302.904 96.12288 
+L 25.2 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="119.633432" transform="rotate(-0 164.052 119.633432)">Pipeline area</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 302.904 134.313984 
+L 982.8 134.313984 
+L 982.8 96.12288 
+L 302.904 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="642.852" y="119.633432" transform="rotate(-0 642.852 119.633432)">What to preserve</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 25.2 172.505088 
+L 302.904 172.505088 
+L 302.904 134.313984 
+L 25.2 134.313984 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="157.824536" transform="rotate(-0 164.052 157.824536)">Query interpretation</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 302.904 172.505088 
+L 982.8 172.505088 
+L 982.8 134.313984 
+L 302.904 134.313984 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="642.852" y="157.824536" transform="rotate(-0 642.852 157.824536)">Original and transformed inputs, inferred filters, parser/model</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 25.2 210.696192 
+L 302.904 210.696192 
+L 302.904 172.505088 
+L 25.2 172.505088 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="196.01564" transform="rotate(-0 164.052 196.01564)">Candidate retrieval</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 302.904 210.696192 
+L 982.8 210.696192 
+L 982.8 172.505088 
+L 302.904 172.505088 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="642.852" y="196.01564" transform="rotate(-0 642.852 196.01564)">Database, version, fields, indexed unit, method and cutoffs</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 25.2 248.887296 
+L 302.904 248.887296 
+L 302.904 210.696192 
+L 25.2 210.696192 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="234.206744" transform="rotate(-0 164.052 234.206744)">Ranking and fusion</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 302.904 248.887296 
+L 982.8 248.887296 
+L 982.8 210.696192 
+L 302.904 210.696192 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="642.852" y="234.206744" transform="rotate(-0 642.852 234.206744)">Sort, component lists, fusion rule, reranking and final depth</text>
+    </g>
+    <g id="patch_10">
+     <path d="M 25.2 287.0784 
+L 302.904 287.0784 
+L 302.904 248.887296 
+L 25.2 248.887296 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="272.397848" transform="rotate(-0 164.052 272.397848)">Retrieval control</text>
+    </g>
+    <g id="patch_11">
+     <path d="M 302.904 287.0784 
+L 982.8 287.0784 
+L 982.8 248.887296 
+L 302.904 248.887296 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="642.852" y="272.397848" transform="rotate(-0 642.852 272.397848)">Arrangement, actual branch/actions, observations and stop</text>
+    </g>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="504" y="36.384" transform="rotate(-0 504 36.384)">A saved question does not document the whole search</text>
+   </g>
+  </g>
+  <g id="text_12">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 379.89125)">Table 15.1 reference summary. Save date, count, identifiers and raw exports where possible. Unknown internal details remain</text>
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 394.448406)">unknown; exact future recreation is conditional.</text>
+  </g>
+ </g>
+</svg>

@@ -1,0 +1,260 @@
+{
+  "films": [
+    {
+      "file": "01-where-did-the-paper-go.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration_seconds": 307.56666666666666,
+      "decoded_frames": 9227,
+      "integrated_lufs": -16.1,
+      "true_peak_dbfs": -2.5,
+      "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 702 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+      "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 179 kb/s (default)",
+      "faststart": true,
+      "sha256": "14374616a226b783f62f658fe1909aecb6f3d68a4a0f6a77ab0a8ca634693f14",
+      "bytes": 34169156,
+      "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+      "script_sha256": "5d634849f25678e5852990474a82bc65b2c7dd6a38aec94e60536510e0dc343a",
+      "passed": true,
+      "chapter_sha256": "4e3d32758bf097779fa8ec76d93f527d34cfd43ab85b81dc8e91fa05e8472b23",
+      "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+      "production_sha256": "36d87e7bfc88cae87085a1d8752c7d195687c17747bcfe4e33dc4b691c64e767",
+      "embedded_captions_verified": true,
+      "caption_cues": 123,
+      "reviewed_animation_times": 90,
+      "worked_examples": {
+        "source_diagnostic_notices": [
+          "A known relevant record uses different terminology",
+          "A coined term, identifier or specialised string disappears or behaves strangely",
+          "A model works plausibly in general but poorly for this discipline, query style, corpus or retrieval purpose",
+          "All the words occur, but their direction, negation or relationship is wrong"
+        ],
+        "source_vocabulary_questions": [
+          "Is there a corresponding term in the index vocabulary?",
+          "Can the model tokeniser encode the string?",
+          "Has the model learnt a useful representation?"
+        ],
+        "source_first_stage_methods": [
+          "Strict Boolean",
+          "BM25",
+          "Single-vector dense retrieval"
+        ],
+        "shift_sites": [
+          "Query shift",
+          "Corpus or domain shift",
+          "Task or relevance shift"
+        ],
+        "declared_keyword_field_example": {
+          "input": "DELULU-427",
+          "stored_values": [
+            [
+              "D1",
+              "DELULU-427"
+            ],
+            [
+              "D2",
+              "DELULU-427"
+            ],
+            [
+              "D3",
+              "DELULU-427"
+            ],
+            [
+              "D4",
+              "DELULU-428"
+            ]
+          ],
+          "exact_hits": [
+            "D1",
+            "D2",
+            "D3"
+          ],
+          "actual_index_or_bm25_run": false
+        },
+        "relation_contrast_same_term_counts": true,
+        "measured_relation_scores": false,
+        "bert_pieces_reported_by_source": [
+          "ri",
+          "##zz",
+          "##lord"
+        ],
+        "new_tokenizer_run": false,
+        "diagnoses_are_nonexclusive_hypotheses": true,
+        "new_model_or_product_tests": false,
+        "passed": true
+      }
+    },
+    {
+      "file": "02-it-can-spell-it-can-it-find-it.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration_seconds": 315.1666666666667,
+      "decoded_frames": 9455,
+      "integrated_lufs": -16.1,
+      "true_peak_dbfs": -2.4,
+      "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 639 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+      "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 179 kb/s (default)",
+      "faststart": true,
+      "sha256": "a8ee9fbf34bbca6a0f4b64bd69bff71c2b84800ed3f4d3fac5bc9974e6da0fd9",
+      "bytes": 32547648,
+      "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+      "script_sha256": "5d634849f25678e5852990474a82bc65b2c7dd6a38aec94e60536510e0dc343a",
+      "passed": true,
+      "chapter_sha256": "4e3d32758bf097779fa8ec76d93f527d34cfd43ab85b81dc8e91fa05e8472b23",
+      "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+      "production_sha256": "36d87e7bfc88cae87085a1d8752c7d195687c17747bcfe4e33dc4b691c64e767",
+      "embedded_captions_verified": true,
+      "caption_cues": 122,
+      "reviewed_animation_times": 90,
+      "worked_examples": {
+        "source_diagnostic_notices": [
+          "A known relevant record uses different terminology",
+          "A coined term, identifier or specialised string disappears or behaves strangely",
+          "A model works plausibly in general but poorly for this discipline, query style, corpus or retrieval purpose",
+          "All the words occur, but their direction, negation or relationship is wrong"
+        ],
+        "source_vocabulary_questions": [
+          "Is there a corresponding term in the index vocabulary?",
+          "Can the model tokeniser encode the string?",
+          "Has the model learnt a useful representation?"
+        ],
+        "source_first_stage_methods": [
+          "Strict Boolean",
+          "BM25",
+          "Single-vector dense retrieval"
+        ],
+        "shift_sites": [
+          "Query shift",
+          "Corpus or domain shift",
+          "Task or relevance shift"
+        ],
+        "declared_keyword_field_example": {
+          "input": "DELULU-427",
+          "stored_values": [
+            [
+              "D1",
+              "DELULU-427"
+            ],
+            [
+              "D2",
+              "DELULU-427"
+            ],
+            [
+              "D3",
+              "DELULU-427"
+            ],
+            [
+              "D4",
+              "DELULU-428"
+            ]
+          ],
+          "exact_hits": [
+            "D1",
+            "D2",
+            "D3"
+          ],
+          "actual_index_or_bm25_run": false
+        },
+        "relation_contrast_same_term_counts": true,
+        "measured_relation_scores": false,
+        "bert_pieces_reported_by_source": [
+          "ri",
+          "##zz",
+          "##lord"
+        ],
+        "new_tokenizer_run": false,
+        "diagnoses_are_nonexclusive_hypotheses": true,
+        "new_model_or_product_tests": false,
+        "passed": true
+      }
+    },
+    {
+      "file": "03-every-word-was-there.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration_seconds": 333.6,
+      "decoded_frames": 10008,
+      "integrated_lufs": -16.1,
+      "true_peak_dbfs": -2.5,
+      "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 692 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+      "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 180 kb/s (default)",
+      "faststart": true,
+      "sha256": "463423370ee11a63b1f417b5a2e49b46eb15e7a25eb2fb100d6201aea37f847b",
+      "bytes": 36693097,
+      "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+      "script_sha256": "5d634849f25678e5852990474a82bc65b2c7dd6a38aec94e60536510e0dc343a",
+      "passed": true,
+      "chapter_sha256": "4e3d32758bf097779fa8ec76d93f527d34cfd43ab85b81dc8e91fa05e8472b23",
+      "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+      "production_sha256": "36d87e7bfc88cae87085a1d8752c7d195687c17747bcfe4e33dc4b691c64e767",
+      "embedded_captions_verified": true,
+      "caption_cues": 128,
+      "reviewed_animation_times": 90,
+      "worked_examples": {
+        "source_diagnostic_notices": [
+          "A known relevant record uses different terminology",
+          "A coined term, identifier or specialised string disappears or behaves strangely",
+          "A model works plausibly in general but poorly for this discipline, query style, corpus or retrieval purpose",
+          "All the words occur, but their direction, negation or relationship is wrong"
+        ],
+        "source_vocabulary_questions": [
+          "Is there a corresponding term in the index vocabulary?",
+          "Can the model tokeniser encode the string?",
+          "Has the model learnt a useful representation?"
+        ],
+        "source_first_stage_methods": [
+          "Strict Boolean",
+          "BM25",
+          "Single-vector dense retrieval"
+        ],
+        "shift_sites": [
+          "Query shift",
+          "Corpus or domain shift",
+          "Task or relevance shift"
+        ],
+        "declared_keyword_field_example": {
+          "input": "DELULU-427",
+          "stored_values": [
+            [
+              "D1",
+              "DELULU-427"
+            ],
+            [
+              "D2",
+              "DELULU-427"
+            ],
+            [
+              "D3",
+              "DELULU-427"
+            ],
+            [
+              "D4",
+              "DELULU-428"
+            ]
+          ],
+          "exact_hits": [
+            "D1",
+            "D2",
+            "D3"
+          ],
+          "actual_index_or_bm25_run": false
+        },
+        "relation_contrast_same_term_counts": true,
+        "measured_relation_scores": false,
+        "bert_pieces_reported_by_source": [
+          "ri",
+          "##zz",
+          "##lord"
+        ],
+        "new_tokenizer_run": false,
+        "diagnoses_are_nonexclusive_hypotheses": true,
+        "new_model_or_product_tests": false,
+        "passed": true
+      }
+    }
+  ],
+  "passed": true
+}

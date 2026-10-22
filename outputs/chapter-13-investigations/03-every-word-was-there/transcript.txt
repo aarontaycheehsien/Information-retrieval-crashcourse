@@ -1,0 +1,40 @@
+Every word was there
+
+[00:00:00.700]: A query asks whether A causes B. Two candidate passages contain exactly the same words: A causes B, and B causes A. Would counting matching terms distinguish them? Pause and identify what information determines relevance.
+
+[00:00:19.048]: The word inventory is identical; direction differs. A missing relationship is not automatically a missing vocabulary entry. Negation, causal direction and the binding of two concepts can fail even when lexical overlap is complete and the query is familiar.
+
+[00:00:37.430]: Another failure appears across settings. A retriever works plausibly on ordinary web questions but poorly on biomedical papers or high recall evidence searches. Investigate out of distribution transfer: deployment may differ from the retrieval conditions represented during training.
+
+[00:00:56.137]: The chapter identifies three useful sites: query shift in style or intent; corpus or domain shift in discipline, genre, language or time; and task or relevance shift in the relationship that should rank. Every word can be familiar while the rewarded retrieval behaviour is wrong for the task.
+
+[00:01:17.696]: Training pairs, negatives and relevance judgements teach what should rank together. Finding one answer bearing web passage rewards something different from recovering all studies meeting review criteria, finding a known item or discovering citations. More synonyms do not repair that difference by themselves.
+
+[00:01:38.592]: Conversely, one new discipline can combine distribution shift, specialised vocabulary and mismatched terminology. These hypotheses can overlap. Out of distribution is a training to deployment relationship, not a synonym for a strange word or an unexplained bad result.
+
+[00:01:57.700]: The hypothesis becomes stronger when plausible performance on familiar queries degrades systematically for a discipline, collection, query style or purpose. Compare locally using known relevance evidence before adapting, retraining or replacing a model. Undisclosed training data limits what can be concluded.
+
+[00:02:18.764]: The chapter cites BEIR’s heterogeneous zero shot evaluation: BM twenty five was a robust baseline, while some more expensive neural and reranking approaches performed better on average. That benchmark finding is not a universal law about lexical or dense transfer, nor a new comparison run here.
+
+[00:02:39.624]: Now return to the relation problem. Boolean logic preserves the explicit inclusion and exclusion you state over analysed terms. Ordinary conjunction still does not encode who caused what. Simply excluding a word is different from correctly interpreting the scope of a negated proposition.
+
+[00:02:59.599]: Phrase operators, positional indexes and proximity can preserve adjacency and local order. They are useful controls to test, but adjacency alone does not solve causality, negation or relation binding. Our opposite statements are controlled text contrasts, not predictions of any particular system’s scores.
+
+[00:03:21.981]: A cross encoder reads query and candidate together, offering the strongest architectural opportunity to model these relationships. Late interaction preserves more token evidence than a pooled vector, but still encodes the query and document separately. Neither architecture guarantees correct logic.
+
+[00:03:43.131]: The cited NevIR evaluation found cross encoders strongest and late interaction next, yet most evaluated systems still ranked at or below a random baseline. Keep that qualification. And no reranker can rescue a paper absent from its first stage shortlist.
+
+[00:04:02.908]: The chapter contrasts three reference patterns. Strict Boolean preserves explicit logic over analysed terms. BM twenty five preserves lexical evidence, especially rare matching terms. Single vector dense retrieval preserves overall learnt similarity. Each has characteristic strengths and blind spots.
+
+[00:04:25.796]: This is not an exhaustive list: learnt sparse and late interaction methods can also retrieve first stage candidates. Transformation changes inputs, control selects operations, and rerankers compare shortlists. A product saying it uses vectors does not tell you which evidence its full pipeline preserves.
+
+[00:04:47.354]: Begin with a known relevant record or controlled contrast and establish that it could have been returned. Then inspect terminology, component vocabularies, training transfer and relationships. Save the available evidence and mark unknowns. Several failures can coexist.
+
+[00:05:06.534]: Test a remedy against the suspected cause: expansion, an exact lexical route, local adaptation, explicit logic, reranking or a combined system. No representation preserves everything equally well. Diagnosis supplies hypotheses. Chapter fourteen asks how to compare them and decide what better retrieval means for the task.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 13.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#diagnosing-failure
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

@@ -1,0 +1,201 @@
+{
+  "series": "Hybrid retrieval and rank fusion",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#hybrid-and-fusion",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#hybrid-and-fusion",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-how-two-lists-become-one",
+  "title": "How two lists become one",
+  "subtitle": "Follow A, B, C and D through reciprocal rank fusion.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "fusion_hook",
+      "title": "How do we combine scores with unlike meanings?",
+      "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+      "visual": "fusion_hook",
+      "narration": [
+        "Two retrievers return different score scales. A large lexical score and a small vector similarity are not automatically comparable measurements. Could we combine the lists using a different piece of information? Make a prediction.",
+        "Reciprocal rank fusion uses each record\u2019s position in each supplied list. It ignores the raw scores. It avoids a shared score scale, while discarding information examined in the next film."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "input_lists",
+      "title": "Keep record identity while recording position",
+      "source_anchor": "rrf-record-journey-title",
+      "visual": "input_lists",
+      "narration": [
+        "Keep the chapter\u2019s exact lists in view. The lexical order is A, B, C. The dense order is C, A, D. Positions begin at one. Matching letters identify the same record across both routes.",
+        "Each occurrence contributes according to its position. A record absent from a supplied list contributes zero from that list. This is absence from the supplied input, not a judgement that the record is irrelevant or absent from the collection."
+      ]
+    },
+    {
+      "id": "fusion_formula",
+      "title": "One over the constant plus the rank",
+      "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+      "visual": "fusion_formula",
+      "narration": [
+        "For every supplied ranking, take one divided by the constant plus the record\u2019s rank. Then add those contributions. The chapter uses the constant sixty, following the original paper\u2019s baseline choice. This unsupervised rule does not learn a relevance model.",
+        "Here the three possible contributions are one over sixty one, one over sixty two, and one over sixty three. The constant softens the advantage of the first positions. It can be tuned; sixty is not a universal optimum."
+      ]
+    },
+    {
+      "id": "record_a",
+      "title": "A is near the top of both lists",
+      "source_anchor": "tbl-10-1",
+      "visual": "record_a",
+      "narration": [
+        "A appears first in the lexical list and second in the dense list. Its two contributions are one over sixty one and one over sixty two. Add them to obtain approximately zero point zero three two five two.",
+        "Both occurrences refer to one A record. They are evidence about the same identity. A receives credit from both supplied lists, without adding their original retrieval scores."
+      ]
+    },
+    {
+      "id": "record_c",
+      "title": "C combines third place with first place",
+      "source_anchor": "tbl-10-1",
+      "visual": "record_c",
+      "narration": [
+        "C appears third lexically and first in the dense list. One over sixty three plus one over sixty one is approximately zero point zero three two two seven. C therefore follows A in this particular example.",
+        "Both records received two contributions. A\u2019s advantage comes from its second place versus C\u2019s third place in the other list. Fused scores are not probabilities of usefulness."
+      ]
+    },
+    {
+      "id": "single_route_records",
+      "title": "B and D receive one contribution each",
+      "source_anchor": "tbl-10-1",
+      "visual": "single_route_records",
+      "narration": [
+        "B appears second in the lexical list and outside the supplied dense list. Its score is one over sixty two, approximately zero point zero one six one three. D appears third only in the dense list.",
+        "D receives one over sixty three, approximately zero point zero one five eight seven. B and D remain candidates. Receiving one contribution does not mean a record is unimportant; it describes which lists supplied it."
+      ]
+    },
+    {
+      "id": "fused_order",
+      "title": "The four identities now have one order",
+      "source_anchor": "rrf-record-journey-title",
+      "visual": "fused_order",
+      "narration": [
+        "Sort the fused scores from largest to smallest. The result is A, C, B, D. A and C benefit from agreement near the top. The two routes have supplied six occurrences representing four distinct records.",
+        "RRF is a fusion rule. It does not jointly read query and passage text, supply a new trained relevance estimate, or search the rest of the collection."
+      ]
+    },
+    {
+      "id": "three_depths",
+      "title": "The constant is not a result count",
+      "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+      "visual": "three_depths",
+      "narration": [
+        "Three numbers describe different choices here: input depth three per route, fusion constant sixty, and four distinct supplied identities. A final display could show just the top two, but that would be another boundary after fusion.",
+        "Records below an input cutoff contribute nothing from that list. Reducing output depth instead hides already fused records below the display boundary. Keep those decisions separate when documenting or evaluating a hybrid search."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "fusion_hook_0",
+      "scene": "fusion_hook",
+      "text": "Two retrievers return different score scales. A large lexical score and a small vector similarity are not automatically comparable measurements. Could we combine the lists using a different piece of information? Make a prediction.",
+      "gap": 1.0
+    },
+    {
+      "id": "fusion_hook_1",
+      "scene": "fusion_hook",
+      "text": "Reciprocal rank fusion uses each record\u2019s position in each supplied list. It ignores the raw scores. It avoids a shared score scale, while discarding information examined in the next film.",
+      "gap": 2.5
+    },
+    {
+      "id": "input_lists_0",
+      "scene": "input_lists",
+      "text": "Keep the chapter\u2019s exact lists in view. The lexical order is A, B, C. The dense order is C, A, D. Positions begin at one. Matching letters identify the same record across both routes.",
+      "gap": 1.0
+    },
+    {
+      "id": "input_lists_1",
+      "scene": "input_lists",
+      "text": "Each occurrence contributes according to its position. A record absent from a supplied list contributes zero from that list. This is absence from the supplied input, not a judgement that the record is irrelevant or absent from the collection.",
+      "gap": 0.65
+    },
+    {
+      "id": "fusion_formula_0",
+      "scene": "fusion_formula",
+      "text": "For every supplied ranking, take one divided by the constant plus the record\u2019s rank. Then add those contributions. The chapter uses the constant sixty, following the original paper\u2019s baseline choice. This unsupervised rule does not learn a relevance model.",
+      "gap": 1.0
+    },
+    {
+      "id": "fusion_formula_1",
+      "scene": "fusion_formula",
+      "text": "Here the three possible contributions are one over sixty one, one over sixty two, and one over sixty three. The constant softens the advantage of the first positions. It can be tuned; sixty is not a universal optimum.",
+      "gap": 0.65
+    },
+    {
+      "id": "record_a_0",
+      "scene": "record_a",
+      "text": "A appears first in the lexical list and second in the dense list. Its two contributions are one over sixty one and one over sixty two. Add them to obtain approximately zero point zero three two five two.",
+      "gap": 1.0
+    },
+    {
+      "id": "record_a_1",
+      "scene": "record_a",
+      "text": "Both occurrences refer to one A record. They are evidence about the same identity. A receives credit from both supplied lists, without adding their original retrieval scores.",
+      "gap": 0.65
+    },
+    {
+      "id": "record_c_0",
+      "scene": "record_c",
+      "text": "C appears third lexically and first in the dense list. One over sixty three plus one over sixty one is approximately zero point zero three two two seven. C therefore follows A in this particular example.",
+      "gap": 1.0
+    },
+    {
+      "id": "record_c_1",
+      "scene": "record_c",
+      "text": "Both records received two contributions. A\u2019s advantage comes from its second place versus C\u2019s third place in the other list. Fused scores are not probabilities of usefulness.",
+      "gap": 0.65
+    },
+    {
+      "id": "single_route_records_0",
+      "scene": "single_route_records",
+      "text": "B appears second in the lexical list and outside the supplied dense list. Its score is one over sixty two, approximately zero point zero one six one three. D appears third only in the dense list.",
+      "gap": 1.0
+    },
+    {
+      "id": "single_route_records_1",
+      "scene": "single_route_records",
+      "text": "D receives one over sixty three, approximately zero point zero one five eight seven. B and D remain candidates. Receiving one contribution does not mean a record is unimportant; it describes which lists supplied it.",
+      "gap": 0.65
+    },
+    {
+      "id": "fused_order_0",
+      "scene": "fused_order",
+      "text": "Sort the fused scores from largest to smallest. The result is A, C, B, D. A and C benefit from agreement near the top. The two routes have supplied six occurrences representing four distinct records.",
+      "gap": 1.0
+    },
+    {
+      "id": "fused_order_1",
+      "scene": "fused_order",
+      "text": "RRF is a fusion rule. It does not jointly read query and passage text, supply a new trained relevance estimate, or search the rest of the collection.",
+      "gap": 0.65
+    },
+    {
+      "id": "three_depths_0",
+      "scene": "three_depths",
+      "text": "Three numbers describe different choices here: input depth three per route, fusion constant sixty, and four distinct supplied identities. A final display could show just the top two, but that would be another boundary after fusion.",
+      "gap": 1.0
+    },
+    {
+      "id": "three_depths_1",
+      "scene": "three_depths",
+      "text": "Records below an input cutoff contribute nothing from that list. Reducing output depth instead hides already fused records below the display boundary. Keep those decisions separate when documenting or evaluating a hybrid search.",
+      "gap": 0.65
+    }
+  ]
+}

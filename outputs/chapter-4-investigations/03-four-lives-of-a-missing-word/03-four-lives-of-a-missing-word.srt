@@ -1,0 +1,435 @@
+1
+00:00:00,700 --> 00:00:03,447
+You type delulu, job, interview.
+
+2
+00:00:03,597 --> 00:00:06,425
+A result title says only Job interview
+
+3
+00:00:06,445 --> 00:00:09,311
+expectations. Where did delulu go?
+
+4
+00:00:09,460 --> 00:00:11,167
+It is tempting to tell a story about a
+
+5
+00:00:11,187 --> 00:00:12,713
+clever semantic engine.
+
+6
+00:00:12,888 --> 00:00:15,613
+But the same screen can fit several very
+
+7
+00:00:15,633 --> 00:00:16,888
+different histories.
+
+8
+00:00:19,342 --> 00:00:21,100
+Follow four possible routes.
+
+9
+00:00:21,275 --> 00:00:23,639
+Each is a mechanism the chapter asks us to
+
+10
+00:00:23,659 --> 00:00:26,809
+check, not a diagnosis of a named product.
+
+11
+00:00:26,958 --> 00:00:29,039
+Several routes could operate in the same
+
+12
+00:00:29,059 --> 00:00:29,889
+search.
+
+13
+00:00:30,861 --> 00:00:33,844
+First, a word can disappear during routine
+
+14
+00:00:33,864 --> 00:00:36,549
+analysis. In the chapter's illustration,
+
+15
+00:00:36,737 --> 00:00:38,315
+you type the job interview.
+
+16
+00:00:38,464 --> 00:00:41,343
+An optional stop-word rule removes the.
+
+17
+00:00:41,493 --> 00:00:43,727
+Retrieval receives job interview.
+
+18
+00:00:43,902 --> 00:00:46,279
+The discarded word was never a condition
+
+19
+00:00:46,299 --> 00:00:47,181
+at lookup.
+
+20
+00:00:47,767 --> 00:00:49,982
+This example depends on the analyser.
+
+21
+00:00:50,145 --> 00:00:52,367
+It does not say every system removes the
+
+22
+00:00:52,387 --> 00:00:56,348
+same words. Tokenisation, normalisation,
+
+23
+00:00:56,369 --> 00:00:58,604
+stemming and stop-word handling prepare
+
+24
+00:00:58,624 --> 00:01:00,962
+strings for matching; none by itself
+
+25
+00:01:00,982 --> 00:01:03,230
+establishes understanding of meaning.
+
+26
+00:01:04,125 --> 00:01:06,915
+Second, an upstream rewrite can change
+
+27
+00:01:06,935 --> 00:01:08,538
+what retrieval receives.
+
+28
+00:01:08,700 --> 00:01:11,257
+You type delulu job expectations.
+
+29
+00:01:11,394 --> 00:01:13,732
+A transformation replaces delulu with
+
+30
+00:01:13,752 --> 00:01:16,271
+unrealistic. Retrieval then looks for
+
+31
+00:01:16,291 --> 00:01:19,492
+unrealistic job expectations.
+
+32
+00:01:19,667 --> 00:01:22,057
+The original word need not appear in a
+
+33
+00:01:22,077 --> 00:01:23,177
+matching record.
+
+34
+00:01:23,746 --> 00:01:26,235
+Unlike routine analysis, this is an
+
+35
+00:01:26,255 --> 00:01:28,206
+explicit reformulation.
+
+36
+00:01:28,382 --> 00:01:30,836
+The illustration is not evidence that a
+
+37
+00:01:30,856 --> 00:01:33,451
+particular product made this rewrite.
+
+38
+00:01:33,613 --> 00:01:36,609
+To establish that, inspect the processed
+
+39
+00:01:36,629 --> 00:01:39,070
+query or obtain documentation about that
+
+40
+00:01:39,090 --> 00:01:39,933
+stage.
+
+41
+00:01:40,849 --> 00:01:43,367
+Third, delulu can remain in the retrieval
+
+42
+00:01:43,387 --> 00:01:45,712
+input without being required.
+
+43
+00:01:45,874 --> 00:01:48,007
+An any-match rule admits a record
+
+44
+00:01:48,027 --> 00:01:50,145
+containing job and interview.
+
+45
+00:01:50,307 --> 00:01:53,328
+A delulu match could add scoring evidence,
+
+46
+00:01:53,452 --> 00:01:55,687
+but its absence need not exclude the
+
+47
+00:01:55,707 --> 00:01:56,395
+record.
+
+48
+00:01:56,954 --> 00:01:59,011
+An optional term might even have no
+
+49
+00:01:59,031 --> 00:02:01,626
+posting list anywhere in the index.
+
+50
+00:02:01,763 --> 00:02:03,843
+Other terms can still admit records.
+
+51
+00:02:03,992 --> 00:02:06,421
+Make that unmatched term compulsory under
+
+52
+00:02:06,441 --> 00:02:10,518
+strict AND, and the eligible set is empty.
+
+53
+00:02:10,680 --> 00:02:13,224
+The difference is the execution rule.
+
+54
+00:02:14,139 --> 00:02:16,606
+Fourth, the term may have matched evidence
+
+55
+00:02:16,626 --> 00:02:18,861
+you cannot see in the excerpt.
+
+56
+00:02:19,036 --> 00:02:21,838
+The visible title says Job interview
+
+57
+00:02:21,858 --> 00:02:25,485
+expectations. The indexed abstract says,
+
+58
+00:02:25,505 --> 00:02:28,088
+We examine delulu expectations.
+
+59
+00:02:28,250 --> 00:02:30,511
+A lexical match occurred, but the title
+
+60
+00:02:30,531 --> 00:02:31,941
+did not display it.
+
+61
+00:02:32,494 --> 00:02:35,334
+Other indexed fields, expanded terms,
+
+62
+00:02:35,535 --> 00:02:37,976
+older indexed versions or off-page
+
+63
+00:02:37,996 --> 00:02:39,870
+evidence may also matter.
+
+64
+00:02:40,006 --> 00:02:42,370
+Inspect the searchable fields and the
+
+65
+00:02:42,390 --> 00:02:45,064
+indexed representation before concluding
+
+66
+00:02:45,084 --> 00:02:47,164
+that no lexical match happened.
+
+67
+00:02:47,339 --> 00:02:49,780
+A snippet is only a small window.
+
+68
+00:02:50,687 --> 00:02:52,314
+Keep four jobs distinct.
+
+69
+00:02:52,490 --> 00:02:54,789
+Analysis prepares strings.
+
+70
+00:02:54,964 --> 00:02:57,495
+Execution rules decide which clauses are
+
+71
+00:02:57,515 --> 00:03:00,704
+required, optional or subject to a minimum
+
+72
+00:03:00,724 --> 00:03:03,307
+match. Query understanding interprets
+
+73
+00:03:03,327 --> 00:03:06,774
+things such as entities, dates, phrases or
+
+74
+00:03:06,794 --> 00:03:09,299
+intent. Transformation changes what
+
+75
+00:03:09,319 --> 00:03:10,845
+retrieval receives.
+
+76
+00:03:11,410 --> 00:03:13,712
+Understanding can inform a decision while
+
+77
+00:03:13,732 --> 00:03:16,314
+leaving every word unchanged.
+
+78
+00:03:16,477 --> 00:03:19,137
+It becomes relevant to a missing word when
+
+79
+00:03:19,157 --> 00:03:21,559
+its interpretation causes a change.
+
+80
+00:03:21,708 --> 00:03:24,562
+Understanding alone is not a fifth history
+
+81
+00:03:24,582 --> 00:03:26,598
+that magically removes a term.
+
+82
+00:03:27,519 --> 00:03:30,071
+A question in natural language can pass
+
+83
+00:03:30,091 --> 00:03:32,326
+through a parser or language model that
+
+84
+00:03:32,346 --> 00:03:34,593
+constructs a Boolean expression.
+
+85
+00:03:34,769 --> 00:03:37,017
+The lexical engine can then apply Boolean
+
+86
+00:03:37,037 --> 00:03:39,980
+admission and BM twenty-five ranking over
+
+87
+00:03:40,000 --> 00:03:41,294
+an inverted index.
+
+88
+00:03:41,837 --> 00:03:44,258
+The form of the input does not identify
+
+89
+00:03:44,278 --> 00:03:45,546
+the retrieval method.
+
+90
+00:03:45,708 --> 00:03:48,601
+To bridge a vocabulary gap, one route
+
+91
+00:03:48,621 --> 00:03:50,779
+changes the query and keeps lexical
+
+92
+00:03:50,799 --> 00:03:52,467
+matching. Another changes the
+
+93
+00:03:52,487 --> 00:03:54,993
+representation so related texts can be
+
+94
+00:03:55,013 --> 00:03:58,549
+retrieved without shared analysed terms.
+
+95
+00:03:59,444 --> 00:04:01,888
+Return to the title without delulu.
+
+96
+00:04:02,050 --> 00:04:04,775
+Was the word removed in analysis, changed
+
+97
+00:04:04,795 --> 00:04:07,907
+in a rewrite, retained as optional, or
+
+98
+00:04:07,927 --> 00:04:09,929
+matched outside the excerpt?
+
+99
+00:04:10,117 --> 00:04:12,764
+The title alone cannot choose among them.
+
+100
+00:04:12,939 --> 00:04:15,239
+A product name and a result count cannot
+
+101
+00:04:15,259 --> 00:04:16,347
+settle it either.
+
+102
+00:04:16,890 --> 00:04:19,113
+Ask for the processed query, the admission
+
+103
+00:04:19,133 --> 00:04:22,026
+rules, the indexed fields and evidence
+
+104
+00:04:22,046 --> 00:04:23,726
+about the retrieval pipeline.
+
+105
+00:04:23,889 --> 00:04:25,995
+Part One separates lexical search from
+
+106
+00:04:26,015 --> 00:04:28,404
+strict all-term Boolean search.
+
+107
+00:04:28,579 --> 00:04:30,144
+The next chapters investigate
+
+108
+00:04:30,164 --> 00:04:32,670
+representations, while keeping the rest of
+
+109
+00:04:32,690 --> 00:04:34,229
+the pipeline in view.

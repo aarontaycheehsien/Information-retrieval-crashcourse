@@ -1,0 +1,179 @@
+{
+  "series": "The retrieval problem",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#intro",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#intro",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-a-match-is-not-a-verdict",
+  "title": "A match is not a verdict",
+  "subtitle": "The same paper can serve two purposes differently.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "prediction",
+      "title": "Every search condition matches. Enough?",
+      "source_anchor": "what-does-relevant-actually-mean",
+      "visual": "match",
+      "narration": [
+        "An empirical study passes every condition in a carefully built search. It concerns the right service, the right setting and the right dates. Have we established that it answers the reader's question? Take a moment.",
+        "We have established a useful match. Whether it helps depends on what the reader is trying to accomplish. Relevance is a relationship: relevant to someone, for something."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "need",
+      "title": "The query represents the information need",
+      "source_anchor": "what-does-relevant-actually-mean",
+      "visual": "need",
+      "narration": [
+        "The information need is the fuller purpose behind a search. Queries, filters and task briefs can communicate substantial detail about it. A query represents that need; it is not the need itself.",
+        "Follow the chain: information need, representation, retrieval signals, retrieved records, human judgement. The system works directly with the middle three. Detailed requests and feedback can help it estimate suitability. The reader still assesses usefulness."
+      ]
+    },
+    {
+      "id": "strategy",
+      "title": "A skilled strategy expresses more",
+      "source_anchor": "what-does-relevant-actually-mean",
+      "visual": "strategy",
+      "narration": [
+        "The chapter's hypothetical librarian wants recent empirical studies of generative AI services for research support in academic libraries. The strategy combines alternatives: generative AI or large language models; academic library or university library; research support or research consultation.",
+        "Publication dates are limited to twenty twenty-four onwards. These explicit conditions communicate much more than a handful of broad keywords. Now keep the resulting study fixed while we change the purpose."
+      ]
+    },
+    {
+      "id": "purposes",
+      "title": "Same study. Different contribution.",
+      "source_anchor": "what-does-relevant-actually-mean",
+      "visual": "purposes",
+      "narration": [
+        "The invented study reports positive participant reactions after a short demonstration of a university library's generative AI research-support service. It matches the search and is topically suitable. For an introductory workshop, it provides a useful example of a service and participants' responses.",
+        "For a service-adoption decision, those reactions are insufficient. They do not establish answer accuracy, staff workload or performance in real consultations. The study still contributes evidence about reactions. Its contribution changes with the purpose; its search match has not changed."
+      ]
+    },
+    {
+      "id": "followup",
+      "title": "Search and judgement improve each other",
+      "source_anchor": "what-does-relevant-actually-mean",
+      "visual": "followup",
+      "narration": [
+        "Targeted follow-up searches can seek accuracy evaluations, workload evidence and real-world use. Then inspect what each study measured, under what conditions, and whether the findings support the decision.",
+        "Making every issue a compulsory search condition can also miss useful studies. They may use unexpected terminology or report the issue only in full text. Better searching and relevance judgement work together."
+      ]
+    },
+    {
+      "id": "screening",
+      "title": "Some criteria belong in screening",
+      "source_anchor": "evidence-synthesis-search-resistant",
+      "visual": "screening",
+      "narration": [
+        "Evidence-synthesis searchers call some of these search-resistant concepts. A review criterion may be poorly indexed, inconsistently described or difficult to express as dependable search terms.",
+        "A strategy may retrieve a broader set of potentially relevant records and leave some criteria to screening. This is a deliberate division of work between retrieval and assessment. It does not make searching or eligibility criteria unimportant."
+      ]
+    },
+    {
+      "id": "lenses",
+      "title": "Four perspectives, without a fixed ladder",
+      "source_anchor": "what-does-relevant-actually-mean",
+      "visual": "lenses",
+      "narration": [
+        "Relevance can concern a system's estimated match, topical suitability, a contribution to the reader's understanding, or usefulness for a task. These are related perspectives, with no single hierarchy among them.",
+        "Boolean matching, BM twenty-five, embeddings and neural rerankers help estimate relevance. A high score cannot turn participant reactions into evidence of answer accuracy. Ask what the record contributes to this reader's purpose."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "prediction_0",
+      "scene": "prediction",
+      "text": "An empirical study passes every condition in a carefully built search. It concerns the right service, the right setting and the right dates. Have we established that it answers the reader's question? Take a moment.",
+      "gap": 1.0
+    },
+    {
+      "id": "prediction_1",
+      "scene": "prediction",
+      "text": "We have established a useful match. Whether it helps depends on what the reader is trying to accomplish. Relevance is a relationship: relevant to someone, for something.",
+      "gap": 2.5
+    },
+    {
+      "id": "need_0",
+      "scene": "need",
+      "text": "The information need is the fuller purpose behind a search. Queries, filters and task briefs can communicate substantial detail about it. A query represents that need; it is not the need itself.",
+      "gap": 1.0
+    },
+    {
+      "id": "need_1",
+      "scene": "need",
+      "text": "Follow the chain: information need, representation, retrieval signals, retrieved records, human judgement. The system works directly with the middle three. Detailed requests and feedback can help it estimate suitability. The reader still assesses usefulness.",
+      "gap": 0.65
+    },
+    {
+      "id": "strategy_0",
+      "scene": "strategy",
+      "text": "The chapter's hypothetical librarian wants recent empirical studies of generative AI services for research support in academic libraries. The strategy combines alternatives: generative AI or large language models; academic library or university library; research support or research consultation.",
+      "gap": 1.0
+    },
+    {
+      "id": "strategy_1",
+      "scene": "strategy",
+      "text": "Publication dates are limited to twenty twenty-four onwards. These explicit conditions communicate much more than a handful of broad keywords. Now keep the resulting study fixed while we change the purpose.",
+      "gap": 0.65
+    },
+    {
+      "id": "purposes_0",
+      "scene": "purposes",
+      "text": "The invented study reports positive participant reactions after a short demonstration of a university library's generative AI research-support service. It matches the search and is topically suitable. For an introductory workshop, it provides a useful example of a service and participants' responses.",
+      "gap": 1.0
+    },
+    {
+      "id": "purposes_1",
+      "scene": "purposes",
+      "text": "For a service-adoption decision, those reactions are insufficient. They do not establish answer accuracy, staff workload or performance in real consultations. The study still contributes evidence about reactions. Its contribution changes with the purpose; its search match has not changed.",
+      "gap": 0.65
+    },
+    {
+      "id": "followup_0",
+      "scene": "followup",
+      "text": "Targeted follow-up searches can seek accuracy evaluations, workload evidence and real-world use. Then inspect what each study measured, under what conditions, and whether the findings support the decision.",
+      "gap": 1.0
+    },
+    {
+      "id": "followup_1",
+      "scene": "followup",
+      "text": "Making every issue a compulsory search condition can also miss useful studies. They may use unexpected terminology or report the issue only in full text. Better searching and relevance judgement work together.",
+      "gap": 0.65
+    },
+    {
+      "id": "screening_0",
+      "scene": "screening",
+      "text": "Evidence-synthesis searchers call some of these search-resistant concepts. A review criterion may be poorly indexed, inconsistently described or difficult to express as dependable search terms.",
+      "gap": 1.0
+    },
+    {
+      "id": "screening_1",
+      "scene": "screening",
+      "text": "A strategy may retrieve a broader set of potentially relevant records and leave some criteria to screening. This is a deliberate division of work between retrieval and assessment. It does not make searching or eligibility criteria unimportant.",
+      "gap": 0.65
+    },
+    {
+      "id": "lenses_0",
+      "scene": "lenses",
+      "text": "Relevance can concern a system's estimated match, topical suitability, a contribution to the reader's understanding, or usefulness for a task. These are related perspectives, with no single hierarchy among them.",
+      "gap": 1.0
+    },
+    {
+      "id": "lenses_1",
+      "scene": "lenses",
+      "text": "Boolean matching, BM twenty-five, embeddings and neural rerankers help estimate relevance. A high score cannot turn participant reactions into evidence of answer accuracy. Ask what the record contributes to this reader's purpose.",
+      "gap": 0.65
+    }
+  ]
+}

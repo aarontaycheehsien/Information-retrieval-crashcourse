@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8819/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8819/01-the-word-that-opened-the-gate/01-the-word-that-opened-the-gate.mp4",
+      "duration": 207.233333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 81,
+      "seek_seconds": 103.616666,
+      "byte_range": "bytes 0-1023/18382275",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8819/02-the-word-you-never-searched/02-the-word-you-never-searched.mp4",
+      "duration": 227.566667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 92,
+      "seek_seconds": 113.783333,
+      "byte_range": "bytes 0-1023/18898044",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8819/03-search-without-rereading/03-search-without-rereading.mp4",
+      "duration": 244.166667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 95,
+      "seek_seconds": 122.083333,
+      "byte_range": "bytes 0-1023/21204232",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

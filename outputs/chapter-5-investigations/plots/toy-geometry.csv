@@ -1,0 +1,8 @@
+example,item,coordinate_1,coordinate_2,coordinate_3,measured_model_output
+analogy,man,1.0,1.0,,False
+analogy,woman,4.0,2.0,,False
+analogy,king,2.0,4.0,,False
+analogy,queen,5.0,5.0,,False
+analogy,tree,6.0,1.0,,False
+projection,P,2.0,2.0,0.0,False
+projection,Q,2.0,2.0,10.0,False

@@ -1,0 +1,40 @@
+When zero results become a clue
+
+[00:00:00.700]: A student wants a database for autism research. A catalogue search returns nothing. Should the system conclude that the library has nothing useful, or treat the failure as information for another attempt? Pause and consider what a database record is likely to say.
+
+[00:00:19.833]: The chapter’s loop broadens to related subject areas and recovers useful database names. The request was for a database about a subject, not necessarily a database named after that subject. Recovery changes how the search is used.
+
+[00:00:36.227]: The author’s June twenty twenty six demonstration replayed selected database queries from twenty twenty three zero result logs against the library’s Primo index, through a model and an MCP server. The request asked for a database for each topic.
+
+[00:00:53.511]: The examples were selected rather than sampled, and newer models answered older queries. Read the account as exploratory failure recovery, not a success rate, a controlled benchmark, or a comparison proving superiority over human searchers.
+
+[00:01:10.680]: The comparison used Primo’s single pass Natural Language Search over the same index. For autism it produced a plausible OR expression including autistic disorder, ASD, autism spectrum, neurodevelopmental disorder and pervasive developmental disorder. It still returned zero results.
+
+[00:01:31.565]: The source’s six terms stayed at the autism concept. The single pass rewrite did not use the zero result response to revise the query. More synonyms were not the same operation as choosing a broader subject area.
+
+[00:01:46.076]: The loop broadened autism into psychology, medicine, education and disability. In the selected example it returned PsycINFO, Education Research Complete and SocINDEX. Those names are reported outcomes from the chapter, not searches conducted for this video.
+
+[00:02:05.303]: The keyword oriented endpoint did not need a new scoring formula for that sequence to become useful. The controller reformulated the request and tried again.
+
+[00:02:16.451]: Other selected examples turned cost of living into inflation, household expenditure and consumer prices. Rolex watches became a question about luxury goods, producing Statista and Passport. The typo statis resolved to Statista.
+
+[00:02:33.533]: The refinituv example reached LSEG, but that illustrates the dating problem: the recovered rebrand postdated the original query. A newer model knows things an older model might not. Do not attribute every improvement to the loop alone.
+
+[00:02:51.031]: The chapter reports that a holdings CSV also worked for the selected examples, and a smaller model made little difference there. That does not establish that model capability is generally irrelevant, or that MCP itself caused recovery.
+
+[00:03:07.219]: The examples support feedback, broadening and another attempt, while changing other parts of the setup too. They do not isolate the loop as the sole cause. Fixed or adaptive workflows could also implement useful retries; better retrieval still matters.
+
+[00:03:25.885]: The model can draw on public knowledge about familiar databases and subject areas. A little known or newly licensed database may receive less help. Current coverage, field quirks, embargo dates and this institution’s actual entitlements are local facts it cannot safely infer.
+
+[00:03:45.553]: Those facts need authoritative library information. Recovery does not remove that work; it changes where it belongs. A specialised request about particular variables, companies and years can still exceed the available knowledge or tools.
+
+[00:04:01.700]: A zero result can become an observation that informs the next action, while the retriever’s scoring function stays unchanged. In these selected examples, that helped recover useful results. It does not show that every retry succeeds or requires agentic control.
+
+[00:04:19.851]: Record the failed query, the new action, what came back and why the search stopped. Choose control for the actual task and supply current local knowledge. The completed pipeline now lets us ask a diagnostic question: where did a particular search go wrong?
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 12.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#agentic-search
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

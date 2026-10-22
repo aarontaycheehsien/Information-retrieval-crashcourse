@@ -1,0 +1,40 @@
+The number that ignores the rest
+
+[00:00:00.700]: Our source example improves from two to six relevant papers in the first ten. Yet its first relevant paper stays at rank one. Could a conventional ranking measure report no improvement at all? Pause and ask what that measure would have to ignore.
+
+[00:00:18.155]: Reciprocal rank is one divided by the first relevant rank. Here it stays one before and after. It ignores every relevant paper following that first hit. Across queries, mean reciprocal rank averages those reciprocals. A useful number can be perfectly blind to the improvement your task values.
+
+[00:00:39.174]: Precision at k counts relevant records inside an evaluation depth. A relevant record at rank one and the same record at rank ten contribute equally to precision at ten. Rank eleven contributes nothing to that first page score.
+
+[00:00:55.701]: Here k names the depth being evaluated. It need not equal the first stage candidate limit or the reranker’s budget. State all those boundaries separately. Comparing one system’s first ten with another system’s first twenty changes the question along with the system.
+
+[00:01:14.118]: Mean reciprocal rank is a natural fit when the task essentially has one right answer: finding a known paper, resolving a citation, or making a factual lookup. Moving the first relevant hit upward increases its reciprocal rank.
+
+[00:01:30.925]: It does not establish broad evidence coverage. Two systems can share the same first hit while one finds many additional relevant records and the other finds none. Our displayed value is a single query’s reciprocal rank; calling it a multi query comparison would imply evidence this illustration does not contain.
+
+[00:01:52.066]: Average precision collects precision at the ranks where relevant papers appear, then averages using the judged relevant total for that query. For this complete twenty record illustration, the arithmetic rewards the improved placement of many relevant papers, even though the first hit stays unchanged.
+
+[00:02:12.110]: Mean average precision then averages query level average precision values. It is closer to the goal of assembling a useful set, but treats relevance as binary. A marginal paper and a decisive paper count alike if both are labelled relevant. State the evaluation protocol and depth.
+
+[00:02:32.698]: Normalised discounted cumulative gain accepts relevance grades and discounts contributions at lower ranks, relative to an ideal ordering at the evaluation depth. A highly relevant paper near the top can count more than a partly relevant one farther down.
+
+[00:02:50.864]: That requires graded judgements and an explicit scoring convention. We are explaining the metric’s goal, not inventing grades for the source’s binary example. Its limitation remains: several highly graded records can repeat one aspect while another aspect is missing. High ranking quality does not automatically establish diverse coverage.
+
+[00:03:13.941]: Precision at k values relevant items inside the cutoff. Mean reciprocal rank values an early first hit. Mean average precision values many binary relevant hits placed high. Normalised discounted gain values graded relevance discounted by position.
+
+[00:03:31.270]: All four need judgements. These conventional relevance only measures treat record judgements independently; they do not directly reward coverage across known aspects. A metric choice is a task choice. Ask which benefit the number rewards, and which failure it cannot reveal.
+
+[00:03:50.063]: The Cranfield arrangement fixes a document collection, queries or topics, and relevance judgements. Compare systems against those same inputs. Offline test collections answer that controlled question; user studies and task based evaluations ask complementary questions.
+
+[00:04:07.995]: BEIR’s cited cross collection finding is conditional on its topics and assessors: BM twenty five held up as a robust baseline, while several more expensive neural systems did better on average. That does not settle performance on your chemistry theses, languages, or local researchers’ questions.
+
+[00:04:28.459]: Large evaluations often judge the union of top results from several systems. Under the chapter’s described scoring approach, unjudged records are treated as non relevant. A genuinely useful new result outside that pool can therefore receive no credit.
+
+[00:04:46.976]: This judgement pooling is different from compressing token representations into a vector. It can bias evaluation against unfamiliar retrieval approaches. Read a leaderboard as evidence about its benchmark, then ask whether the topics, criteria and judged pool resemble your task. The next film builds an evaluation whose criteria a library controls.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 14.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#evaluation
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

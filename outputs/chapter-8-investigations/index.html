@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Representations and indexed units · Three films</title><style>
+*{box-sizing:border-box}body{margin:0;background:#eee9e0;color:#252728;font:17px/1.65 system-ui,sans-serif}
+main{max-width:1140px;margin:auto;padding:60px 28px}header{max-width:850px;margin-bottom:65px}
+.eyebrow,.number{font-weight:750;font-size:12px;letter-spacing:.16em;color:#a34230}
+h1{font-size:clamp(44px,7vw,82px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 28px}
+h2{font-size:clamp(27px,4vw,42px);line-height:1.14;letter-spacing:-.035em;margin:10px 0}
+p{max-width:880px}a{color:#88402e;text-underline-offset:4px}article{margin:0 0 74px}
+video{display:block;width:100%;aspect-ratio:16/9;background:#252728;border-radius:8px;margin-top:24px}
+.downloads{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:14px}summary{cursor:pointer;margin:14px 0}
+nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+button{font:inherit;font-size:14px;text-align:left;padding:12px;background:#faf8f3;border:1px solid #ccc3b5;border-radius:4px;cursor:pointer}
+button span{color:#a34230;display:inline-block;width:46px}button:hover,button:focus-visible{outline:2px solid #a34230}
+footer{border-top:1px solid #ccc3b5;padding-top:24px;font-size:13px;color:#615f59}
+@media(max-width:600px){main{padding:32px 15px}header{margin-bottom:44px}.downloads{gap:8px 18px}}
+</style><main><header><div class="eyebrow">HOW SEARCH DECIDES WHAT YOU SEE · CHAPTER 8</div>
+<h1>What did<br>search store?</h1><p>Three narrated investigations into lexical vectors, learnt sparse representations, and the units hidden behind a result list.
+Adapted from Chapter 8 of Aaron Tay's <em>How Search Decides What You See</em>.</p>
+<p><a href="chapter-8-videos.zip" download>Download the complete series</a> · <a href="SOURCE.md">Source and production notes</a></p>
+<p class="downloads"><a href="plots/binary-vectors.svg">Lexical vectors</a><a href="plots/sparse-expansion.svg">Learnt expansion</a><a href="plots/lexical-weights.csv" download>Figure data</a></p></header><article id="episode-1">
+          <div class="number">FILM 01 · 4:26</div>
+          <h2>The vector hiding in keyword search</h2><p>Seven coordinates reveal what a lexical vector can—and cannot—tell us.</p>
+          <video id="film-1" controls playsinline preload="metadata" poster="01-the-vector-hiding-in-keyword-search/poster.jpg" src="01-the-vector-hiding-in-keyword-search/01-the-vector-hiding-in-keyword-search.mp4">
+            <track kind="captions" src="01-the-vector-hiding-in-keyword-search/01-the-vector-hiding-in-keyword-search.vtt" srclang="en" label="English">
+            <track kind="chapters" src="01-the-vector-hiding-in-keyword-search/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-1" data-time="0.000"><span>0:00</span>Your keyword engine already has vectors</button><button data-film="film-1" data-time="33.565"><span>0:33</span>First, agree what every position means</button><button data-film="film-1" data-time="67.019"><span>1:07</span>The numbers do not choose AND or OR</button><button data-film="film-1" data-time="97.867"><span>1:37</span>One mention and three mentions look different</button><button data-film="film-1" data-time="130.019"><span>2:10</span>Rarer terms carry more distinguishing weight</button><button data-film="film-1" data-time="165.878"><span>2:45</span>Let extra mentions add less</button><button data-film="film-1" data-time="199.076"><span>3:19</span>A huge coordinate space can be cheap to store</button><button data-film="film-1" data-time="230.687"><span>3:50</span>Ask what the coordinates preserve</button></nav></details>
+          <p class="downloads"><a href="01-the-vector-hiding-in-keyword-search/01-the-vector-hiding-in-keyword-search.mp4" download>Download MP4</a>
+            <a href="01-the-vector-hiding-in-keyword-search/01-the-vector-hiding-in-keyword-search.srt" download>SRT captions</a>
+            <a href="01-the-vector-hiding-in-keyword-search/transcript.txt">Transcript</a>
+            <a href="01-the-vector-hiding-in-keyword-search/contact-sheet.jpg">Storyboard</a></p></article><article id="episode-2">
+          <div class="number">FILM 02 · 4:36</div>
+          <h2>Dense does not mean semantic</h2><p>A sparse representation can learn expansions; a dense one can hold simple facts.</p>
+          <video id="film-2" controls playsinline preload="metadata" poster="02-dense-does-not-mean-semantic/poster.jpg" src="02-dense-does-not-mean-semantic/02-dense-does-not-mean-semantic.mp4">
+            <track kind="captions" src="02-dense-does-not-mean-semantic/02-dense-does-not-mean-semantic.vtt" srclang="en" label="English">
+            <track kind="chapters" src="02-dense-does-not-mean-semantic/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-2" data-time="0.000"><span>0:00</span>All four coordinates are active. Is it semantic?</button><button data-film="film-2" data-time="31.768"><span>0:31</span>Four questions, four different kinds of answer</button><button data-film="film-2" data-time="69.260"><span>1:09</span>An active coordinate need not have a word label</button><button data-film="film-2" data-time="100.967"><span>1:40</span>Predict weights instead of counting occurrences</button><button data-film="film-2" data-time="131.649"><span>2:11</span>A word that was absent can receive weight</button><button data-film="film-2" data-time="168.447"><span>2:48</span>Keep the expansion small enough to search</button><button data-film="film-2" data-time="202.542"><span>3:22</span>The comparison operation settles a different choice</button><button data-film="film-2" data-time="233.888"><span>3:53</span>Read the representation before judging the promise</button></nav></details>
+          <p class="downloads"><a href="02-dense-does-not-mean-semantic/02-dense-does-not-mean-semantic.mp4" download>Download MP4</a>
+            <a href="02-dense-does-not-mean-semantic/02-dense-does-not-mean-semantic.srt" download>SRT captions</a>
+            <a href="02-dense-does-not-mean-semantic/transcript.txt">Transcript</a>
+            <a href="02-dense-does-not-mean-semantic/contact-sheet.jpg">Storyboard</a></p></article><article id="episode-3">
+          <div class="number">FILM 03 · 4:31</div>
+          <h2>One paper, fifty searchable objects</h2><p>Follow evidence from a source article to indexed passages and answer context.</p>
+          <video id="film-3" controls playsinline preload="metadata" poster="03-one-paper-fifty-searchable-objects/poster.jpg" src="03-one-paper-fifty-searchable-objects/03-one-paper-fifty-searchable-objects.mp4">
+            <track kind="captions" src="03-one-paper-fifty-searchable-objects/03-one-paper-fifty-searchable-objects.vtt" srclang="en" label="English">
+            <track kind="chapters" src="03-one-paper-fifty-searchable-objects/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-3" data-time="0.000"><span>0:00</span>Four matches. How many papers?</button><button data-film="film-3" data-time="40.362"><span>0:40</span>One source can produce very different indexes</button><button data-film="film-3" data-time="73.304"><span>1:13</span>Fifty vectors stay fifty separate representations</button><button data-film="film-3" data-time="108.470"><span>1:48</span>Related evidence can land in different chunks</button><button data-film="film-3" data-time="142.663"><span>2:22</span>A stage can match only the evidence it indexes</button><button data-film="film-3" data-time="170.262"><span>2:50</span>Retrieved text and supplied context can differ</button><button data-film="film-3" data-time="202.255"><span>3:22</span>Grouping by source does not combine the argument</button><button data-film="film-3" data-time="237.936"><span>3:57</span>Follow the evidence through four choices</button></nav></details>
+          <p class="downloads"><a href="03-one-paper-fifty-searchable-objects/03-one-paper-fifty-searchable-objects.mp4" download>Download MP4</a>
+            <a href="03-one-paper-fifty-searchable-objects/03-one-paper-fifty-searchable-objects.srt" download>SRT captions</a>
+            <a href="03-one-paper-fifty-searchable-objects/transcript.txt">Transcript</a>
+            <a href="03-one-paper-fifty-searchable-objects/contact-sheet.jpg">Storyboard</a></p></article><footer><p>Adapted from <a href="https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#representations-and-units">Aaron Tay, <em>How Search Decides What You See</em>, Chapter 8</a>.
+CC BY 4.0. Source branch: more-readable, commit 37b16f7ffa64.</p>
+<p>Original animated teaching illustrations and script adaptation. Synthetic narration: Microsoft Andrew Multilingual.
+Independently produced; no affiliation with Veritasium. Curiosity-driven questions, prediction pauses and evidence-led reveals.
+The chapter’s vocabulary and binary vectors are preserved. Numeric weights and expansion values are declared teaching cases, not model measurements. Passage counts illustrate indexing choices; grouping does not combine evidence into an answer.</p></footer></main>
+<script>document.querySelectorAll('button[data-film]').forEach(b=>b.onclick=()=>{const v=document.getElementById(b.dataset.film);v.currentTime=Number(b.dataset.time);v.play().catch(()=>{})});</script></html>

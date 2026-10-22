@@ -1,0 +1,61 @@
+{
+  "recipe_sha256": "26a5444bcd75181891e0120c38c268f449cfbafb240352bb619ddc7c9a99e5e5",
+  "kind": "toy similarity rules and source-exact neighbour example",
+  "measured_model_outputs": false,
+  "simulates_hnsw": false,
+  "checks": {
+    "declared_similarity_vectors": true,
+    "measured_model_outputs": false,
+    "cosine_scores": {
+      "A": 0.9486832980505139,
+      "B": 0.7071067811865475,
+      "C": -0.4472135954999579
+    },
+    "dot_scores": {
+      "A": 0.9,
+      "B": 1.0,
+      "C": -0.4
+    },
+    "unit_dot_scores": {
+      "A": 0.9486832980505139,
+      "B": 0.7071067811865475,
+      "C": -0.4472135954999579
+    },
+    "ann_distances": {
+      "A": 1.0,
+      "B": 2.0,
+      "C": 2.8284271247461903,
+      "D": 3.1622776601683795,
+      "E": 5.0,
+      "F": 5.0990195135927845
+    },
+    "exact_top_three": [
+      "A",
+      "B",
+      "C"
+    ],
+    "approximate_top_three": [
+      "A",
+      "B",
+      "D"
+    ],
+    "exact_comparisons": 6,
+    "approximate_comparisons": 4,
+    "simulates_hnsw": false,
+    "scores_are_relevance_probabilities": false,
+    "passed": true
+  },
+  "files": {
+    "comparison-rules.png": "935fb7032912ca584ba8d7fff3cc191f0bbf86ba72b89194869934a252dea2f2",
+    "comparison-rules.svg": "74cd388bc5a52b8137b486c989c6f6b16528297e77093bbd1aa1f65f9140ae90",
+    "neighbour-search.csv": "8842ab4135c72a867586bd849e944cea84217e49a53241d2909a2091004eb6f4",
+    "neighbours-approximate.png": "b8d2902f94b34cd1346be2bd8ab9fc724defbd0031b6268c501840e2e96d5731",
+    "neighbours-approximate.svg": "62348709fb2c91f4da89dd02f0df0c093ea6b9658174fa74dbe5c7200982079a",
+    "neighbours-exact.png": "806519c48423246da249e07d111e0ffa03458424c2f29bc080333060f8997c72",
+    "neighbours-exact.svg": "9292ae53ea8d879793651fa167c5b1747576949b883deb92fe47aa925710b65e",
+    "similarity-scores.csv": "71a3e7e77d20335ff3ec8612085aeea69380faac9e0b5c18b1b7875c94893e53",
+    "unit-rules.png": "a2110d8dbd1196e13790669be5cc34e878c187ba3aad0b1d695598b4bb9c74b5",
+    "unit-rules.svg": "be6e3832f128b3fb8c6c8cef368527a72bb5f1aca926aee556e111a92da49dbd"
+  },
+  "passed": true
+}

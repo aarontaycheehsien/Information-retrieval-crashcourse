@@ -1,0 +1,36 @@
+The result that almost answers
+
+[00:00:00.700]: A passage talks about your job interview. It repeats important words, sounds related, and sits near your question in a vector space. Is that enough to make it the result you need? Predicting language and retrieving a useful passage reward different relationships.
+
+[00:00:19.481]: Pooling a pretrained model gives a complete-text vector. It does not automatically arrange independently encoded questions near relevant passages. Retrieval-oriented training supplies examples of the comparisons the system should learn to prefer.
+
+[00:00:36.190]: The chapter asks: Am I being delulu about getting this job? For this teaching case, interpret the need as help me judge whether my expectations are unrealistic. That choice determines the labels we are about to assign.
+
+[00:00:50.833]: The labelled positive is How to recognise unrealistic expectations during a job search. It addresses that stated need without repeating the slang. The example makes a desired ranking explicit; it does not demonstrate that a pretrained model already understands delulu.
+
+[00:01:09.168]: One competing passage is A history of agricultural employment. It concerns work, but offers little help with the stipulated question about unrealistic expectations. The training example labels it an easy negative.
+
+[00:01:24.164]: An easy contrast can help define the task, but it need not teach the finer distinctions among closely related results. Choosing the negative examples changes the lesson. A system can separate unrelated topics while still confusing different needs inside the same topic.
+
+[00:01:43.261]: The hard negative is Ten signs that you performed well in your job interview. It shares the broad topic and important vocabulary. Under our stated need, it does not address whether the searcher's expectations are unrealistic.
+
+[00:01:57.830]: Change the need to estimating your chances from how the interview went, and this passage might be useful. Positive and negative labels record a task's intended distinction. They do not reveal an eternal relevance label attached to the passage.
+
+[00:02:14.746]: Training updates model parameters to favour the labelled positive over its competitors. Triplet loss and contrastive objectives implement this idea in different ways. The chapter does not claim a particular score for these passages.
+
+[00:02:30.492]: Our invented two-dimensional example uses unit-length vectors and cosine similarity. Initially, the hard negative scores above the positive. In the desired arrangement, the positive scores highest. The two pictures illustrate an ordering, not a measured training run, a universal trajectory, or probabilities of relevance.
+
+[00:02:53.511]: Sentence BERT adapted BERT so that independently encoded sentences could be compared efficiently. Dense Passage Retrieval applied the bi-encoder approach to questions and passages, training relevant passages to score above competitors.
+
+[00:03:10.334]: Both illustrate the transition from a general language model to useful comparisons for an intended task. The family name alone does not make the transition. Pooling, the training examples, the negatives, and the objective all help determine the resulting representation.
+
+[00:03:28.901]: The space reflects its starting model, training pairs, negative examples, loss function and optimisation. Those ingredients influence which query and document relationships receive high scores. Better performance on one task does not establish usefulness for every search.
+
+[00:03:48.990]: Ask why a passage received its label and whether the negatives test distinctions that matter to you. Then evaluate the retriever against the intended task. The next film follows the labels back to their sources: clicks, answers, citations and other proxies for a useful result.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 6.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#retrieval-encoder
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

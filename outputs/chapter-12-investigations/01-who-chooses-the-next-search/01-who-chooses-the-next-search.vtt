@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.874
+A system searches, reads its top results,
+
+00:00:03.894 --> 00:00:06.078
+builds a different query, and searches
+
+00:00:06.098 --> 00:00:09.299
+again. A model may help choose the words.
+
+00:00:09.461 --> 00:00:11.052
+Is this agentic search?
+
+00:00:11.214 --> 00:00:14.429
+Pause and ask a more precise question: who
+
+00:00:14.449 --> 00:00:16.425
+decided that another search would happen?
+
+00:00:18.839 --> 00:00:21.101
+Two pass pseudo relevance feedback can
+
+00:00:21.121 --> 00:00:23.614
+follow exactly that prescribed sequence
+
+00:00:23.634 --> 00:00:26.539
+every time. Its query contents adapt to
+
+00:00:26.559 --> 00:00:28.769
+the first ranking while its next action
+
+00:00:28.789 --> 00:00:31.655
+stays fixed. Result dependent content does
+
+00:00:31.675 --> 00:00:35.985
+not, by itself, establish agentic control.
+
+00:00:36.890 --> 00:00:38.928
+A fixed workflow follows a prescribed
+
+00:00:38.948 --> 00:00:41.712
+sequence. An adaptive workflow selects
+
+00:00:41.732 --> 00:00:44.714
+among branches explicitly enumerated by
+
+00:00:44.734 --> 00:00:48.438
+its designer. A rule, classifier or model
+
+00:00:48.458 --> 00:00:49.933
+may choose that branch.
+
+00:00:50.095 --> 00:00:52.176
+Using a model for the choice does not
+
+00:00:52.196 --> 00:00:53.515
+settle the category.
+
+00:00:54.090 --> 00:00:56.968
+Agentic search lets a model plan at least
+
+00:00:56.988 --> 00:00:59.288
+part of a multi action retrieval
+
+00:00:59.308 --> 00:01:01.401
+trajectory from the task and its
+
+00:01:01.421 --> 00:01:03.824
+observations. Its tools are predefined
+
+00:01:03.844 --> 00:01:06.053
+too. The distinction is whether it
+
+00:01:06.073 --> 00:01:08.759
+assembles a sequence, rather than only
+
+00:01:08.779 --> 00:01:11.130
+selecting enumerated branches.
+
+00:01:12.021 --> 00:01:15.169
+The task brief supplies scope, criteria,
+
+00:01:15.318 --> 00:01:18.378
+sources, coverage, stopping conditions and
+
+00:01:18.398 --> 00:01:19.537
+the required record.
+
+00:01:19.726 --> 00:01:22.347
+The harness defines available operations,
+
+00:01:22.380 --> 00:01:25.530
+reachable sources, budgets and limits.
+
+00:01:25.705 --> 00:01:28.404
+A tool means a callable operation, such as
+
+00:01:28.424 --> 00:01:31.200
+searching or fetching references, rather
+
+00:01:31.220 --> 00:01:33.055
+than an entire licensed product.
+
+00:01:33.613 --> 00:01:36.126
+The model works within those permissions.
+
+00:01:36.327 --> 00:01:38.845
+Further reasoning cannot supply an
+
+00:01:38.865 --> 00:01:41.345
+unavailable operation or inaccessible
+
+00:01:41.365 --> 00:01:42.208
+source.
+
+00:01:43.110 --> 00:01:45.436
+Output format is a separate property.
+
+00:01:45.598 --> 00:01:48.413
+A scripted deep search can return records
+
+00:01:48.433 --> 00:01:49.972
+after repeated retrieval.
+
+00:01:50.134 --> 00:01:53.310
+An agentic search can also return records.
+
+00:01:53.472 --> 00:01:56.210
+Either fixed or model planned retrieval
+
+00:01:56.230 --> 00:01:59.727
+can precede a generated report or answer.
+
+00:02:00.262 --> 00:02:03.079
+Length, fluency and citations show
+
+00:02:03.099 --> 00:02:05.991
+generation, not who controlled the search.
+
+00:02:06.140 --> 00:02:09.354
+Basic RAG retrieves then generates.
+
+00:02:09.517 --> 00:02:12.216
+Agentic RAG lets a model choose retrieval
+
+00:02:12.236 --> 00:02:14.483
+actions towards a generated response;
+
+00:02:14.749 --> 00:02:17.345
+agentic search is broader and need not
+
+00:02:17.365 --> 00:02:18.671
+generate prose.
+
+00:02:19.555 --> 00:02:21.847
+Hybrid describes contributing retrieval
+
+00:02:21.867 --> 00:02:24.360
+routes. Multi stage describes how
+
+00:02:24.380 --> 00:02:26.898
+operations follow earlier outputs.
+
+00:02:27.060 --> 00:02:30.209
+Agentic describes who chose the sequence.
+
+00:02:30.372 --> 00:02:33.135
+These properties can combine, but none
+
+00:02:33.155 --> 00:02:35.609
+automatically establishes the others.
+
+00:02:36.171 --> 00:02:38.994
+Model planned repeated BM twenty five
+
+00:02:39.014 --> 00:02:41.675
+searches can be agentic without being
+
+00:02:41.695 --> 00:02:45.282
+hybrid. Fixed lexical and dense retrieval
+
+00:02:45.367 --> 00:02:48.221
+followed by fusion can be hybrid and multi
+
+00:02:48.241 --> 00:02:50.579
+stage without being agentic.
+
+00:02:50.767 --> 00:02:52.770
+The controller changes which operations
+
+00:02:52.790 --> 00:02:55.863
+run; it does not change BM twenty five’s
+
+00:02:55.883 --> 00:02:57.151
+scoring formula.
+
+00:02:58.055 --> 00:02:59.856
+The chapter’s April twenty twenty six
+
+00:02:59.876 --> 00:03:03.194
+account places Asta Find Paper in a semi
+
+00:03:03.214 --> 00:03:06.235
+rigid, predefined flow shaped by model
+
+00:03:06.255 --> 00:03:08.735
+decisions. It contrasts Undermind’s
+
+00:03:08.755 --> 00:03:11.686
+original deep search with Projects, which
+
+00:03:11.706 --> 00:03:14.366
+the account describes as dynamically
+
+00:03:14.386 --> 00:03:16.685
+selecting and chaining tools.
+
+00:03:17.218 --> 00:03:19.268
+These are dated reference points along a
+
+00:03:19.288 --> 00:03:22.103
+continuum, not new product tests.
+
+00:03:22.278 --> 00:03:24.655
+One vendor can offer different control
+
+00:03:24.675 --> 00:03:26.561
+arrangements in different modes.
+
+00:03:26.711 --> 00:03:29.822
+Iteration or a model inside a pipeline is
+
+00:03:29.842 --> 00:03:32.129
+insufficient evidence of an independently
+
+00:03:32.149 --> 00:03:33.456
+planned trajectory.
+
+00:03:34.378 --> 00:03:36.467
+An April twenty twenty six Web of Science
+
+00:03:36.487 --> 00:03:39.727
+Research Assistant post used fully agentic
+
+00:03:39.748 --> 00:03:42.021
+while describing automatic choice among
+
+00:03:42.041 --> 00:03:44.405
+task routes. That description is
+
+00:03:44.425 --> 00:03:47.034
+compatible with adaptive control; the post
+
+00:03:47.054 --> 00:03:49.161
+does not settle whether novel sequences
+
+00:03:49.181 --> 00:03:50.436
+can be composed.
+
+00:03:50.983 --> 00:03:53.789
+It also documents user review and approval
+
+00:03:53.809 --> 00:03:56.404
+of a proposed strategy before retrieval,
+
+00:03:56.618 --> 00:03:58.943
+followed by an Advanced Search expression.
+
+00:03:59.092 --> 00:04:01.314
+That approval gate is a concrete control
+
+00:04:01.334 --> 00:04:03.968
+property. It is different from deciding
+
+00:04:04.015 --> 00:04:06.327
+when an ongoing search has enough evidence
+
+00:04:06.347 --> 00:04:07.254
+to stop.
+
+00:04:08.155 --> 00:04:10.261
+For a known task with a sound established
+
+00:04:10.281 --> 00:04:13.534
+procedure, fixed or adaptive control may
+
+00:04:13.554 --> 00:04:14.693
+be the better bargain.
+
+00:04:14.843 --> 00:04:16.949
+Agentic control can attempt an
+
+00:04:16.969 --> 00:04:19.501
+unanticipated sequence using available
+
+00:04:19.521 --> 00:04:22.658
+actions, with added cost, latency and
+
+00:04:22.678 --> 00:04:24.616
+variation between runs.
+
+00:04:25.159 --> 00:04:27.826
+Inspect the required sequence, available
+
+00:04:27.846 --> 00:04:31.280
+actions and evidence of who chose the next
+
+00:04:31.300 --> 00:04:33.896
+move. The next film examines why more
+
+00:04:33.916 --> 00:04:36.370
+iterations can preserve a blind spot just
+
+00:04:36.390 --> 00:04:38.509
+as easily as repair one.

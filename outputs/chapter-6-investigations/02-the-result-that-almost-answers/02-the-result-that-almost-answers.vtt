@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.848
+A passage talks about your job interview.
+
+00:00:03.024 --> 00:00:05.529
+It repeats important words, sounds
+
+00:00:05.549 --> 00:00:07.978
+related, and sits near your question in a
+
+00:00:07.998 --> 00:00:10.310
+vector space. Is that enough to make it
+
+00:00:10.330 --> 00:00:11.457
+the result you need?
+
+00:00:11.645 --> 00:00:13.686
+Predicting language and retrieving a
+
+00:00:13.706 --> 00:00:15.929
+useful passage reward different
+
+00:00:15.949 --> 00:00:17.075
+relationships.
+
+00:00:19.481 --> 00:00:21.467
+Pooling a pretrained model gives a
+
+00:00:21.487 --> 00:00:23.116
+complete-text vector.
+
+00:00:23.291 --> 00:00:25.423
+It does not automatically arrange
+
+00:00:25.443 --> 00:00:27.859
+independently encoded questions near
+
+00:00:27.879 --> 00:00:29.289
+relevant passages.
+
+00:00:29.438 --> 00:00:31.274
+Retrieval-oriented training supplies
+
+00:00:31.294 --> 00:00:33.787
+examples of the comparisons the system
+
+00:00:33.807 --> 00:00:35.307
+should learn to prefer.
+
+00:00:36.190 --> 00:00:39.177
+The chapter asks: Am I being delulu about
+
+00:00:39.197 --> 00:00:40.259
+getting this job?
+
+00:00:40.460 --> 00:00:43.210
+For this teaching case, interpret the need
+
+00:00:43.231 --> 00:00:45.621
+as help me judge whether my expectations
+
+00:00:45.641 --> 00:00:46.999
+are unrealistic.
+
+00:00:47.187 --> 00:00:49.048
+That choice determines the labels we are
+
+00:00:49.068 --> 00:00:50.259
+about to assign.
+
+00:00:50.833 --> 00:00:53.197
+The labelled positive is How to recognise
+
+00:00:53.217 --> 00:00:55.633
+unrealistic expectations during a job
+
+00:00:55.653 --> 00:00:58.455
+search. It addresses that stated need
+
+00:00:58.475 --> 00:01:00.272
+without repeating the slang.
+
+00:01:00.434 --> 00:01:02.411
+The example makes a desired ranking
+
+00:01:02.431 --> 00:01:04.937
+explicit; it does not demonstrate that a
+
+00:01:04.957 --> 00:01:07.282
+pretrained model already understands
+
+00:01:07.302 --> 00:01:08.248
+delulu.
+
+00:01:09.168 --> 00:01:11.626
+One competing passage is A history of
+
+00:01:11.646 --> 00:01:13.134
+agricultural employment.
+
+00:01:13.296 --> 00:01:15.853
+It concerns work, but offers little help
+
+00:01:15.873 --> 00:01:17.825
+with the stipulated question about
+
+00:01:17.845 --> 00:01:19.989
+unrealistic expectations.
+
+00:01:20.165 --> 00:01:22.619
+The training example labels it an easy
+
+00:01:22.639 --> 00:01:23.598
+negative.
+
+00:01:24.164 --> 00:01:27.108
+An easy contrast can help define the task,
+
+00:01:27.141 --> 00:01:28.822
+but it need not teach the finer
+
+00:01:28.842 --> 00:01:30.665
+distinctions among closely related
+
+00:01:30.685 --> 00:01:33.423
+results. Choosing the negative examples
+
+00:01:33.443 --> 00:01:34.814
+changes the lesson.
+
+00:01:34.951 --> 00:01:37.675
+A system can separate unrelated topics
+
+00:01:37.695 --> 00:01:40.382
+while still confusing different needs
+
+00:01:40.402 --> 00:01:42.340
+inside the same topic.
+
+00:01:43.261 --> 00:01:45.344
+The hard negative is Ten signs that you
+
+00:01:45.364 --> 00:01:47.586
+performed well in your job interview.
+
+00:01:47.735 --> 00:01:49.958
+It shares the broad topic and important
+
+00:01:49.978 --> 00:01:53.128
+vocabulary. Under our stated need, it does
+
+00:01:53.148 --> 00:01:54.919
+not address whether the searcher's
+
+00:01:54.939 --> 00:01:57.289
+expectations are unrealistic.
+
+00:01:57.830 --> 00:02:00.202
+Change the need to estimating your chances
+
+00:02:00.222 --> 00:02:02.664
+from how the interview went, and this
+
+00:02:02.684 --> 00:02:04.467
+passage might be useful.
+
+00:02:04.630 --> 00:02:06.697
+Positive and negative labels record a
+
+00:02:06.717 --> 00:02:08.939
+task's intended distinction.
+
+00:02:09.101 --> 00:02:11.375
+They do not reveal an eternal relevance
+
+00:02:11.395 --> 00:02:13.836
+label attached to the passage.
+
+00:02:14.746 --> 00:02:16.775
+Training updates model parameters to
+
+00:02:16.795 --> 00:02:18.927
+favour the labelled positive over its
+
+00:02:18.947 --> 00:02:21.904
+competitors. Triplet loss and contrastive
+
+00:02:21.924 --> 00:02:24.507
+objectives implement this idea in
+
+00:02:24.527 --> 00:02:25.667
+different ways.
+
+00:02:25.816 --> 00:02:27.935
+The chapter does not claim a particular
+
+00:02:27.955 --> 00:02:29.932
+score for these passages.
+
+00:02:30.492 --> 00:02:33.242
+Our invented two-dimensional example uses
+
+00:02:33.262 --> 00:02:36.412
+unit-length vectors and cosine similarity.
+
+00:02:36.574 --> 00:02:39.338
+Initially, the hard negative scores above
+
+00:02:39.358 --> 00:02:41.825
+the positive. In the desired arrangement,
+
+00:02:41.845 --> 00:02:43.989
+the positive scores highest.
+
+00:02:44.152 --> 00:02:46.824
+The two pictures illustrate an ordering,
+
+00:02:47.038 --> 00:02:49.583
+not a measured training run, a universal
+
+00:02:49.603 --> 00:02:52.610
+trajectory, or probabilities of relevance.
+
+00:02:53.511 --> 00:02:56.075
+Sentence BERT adapted BERT so that
+
+00:02:56.095 --> 00:02:58.536
+independently encoded sentences could be
+
+00:02:58.556 --> 00:02:59.979
+compared efficiently.
+
+00:03:00.154 --> 00:03:02.415
+Dense Passage Retrieval applied the
+
+00:03:02.435 --> 00:03:05.160
+bi-encoder approach to questions and
+
+00:03:05.180 --> 00:03:08.123
+passages, training relevant passages to
+
+00:03:08.143 --> 00:03:09.785
+score above competitors.
+
+00:03:10.334 --> 00:03:12.490
+Both illustrate the transition from a
+
+00:03:12.510 --> 00:03:14.423
+general language model to useful
+
+00:03:14.443 --> 00:03:16.897
+comparisons for an intended task.
+
+00:03:17.072 --> 00:03:19.243
+The family name alone does not make the
+
+00:03:19.263 --> 00:03:21.781
+transition. Pooling, the training
+
+00:03:21.801 --> 00:03:24.861
+examples, the negatives, and the objective
+
+00:03:24.881 --> 00:03:26.871
+all help determine the resulting
+
+00:03:26.891 --> 00:03:27.992
+representation.
+
+00:03:28.901 --> 00:03:31.106
+The space reflects its starting model,
+
+00:03:31.243 --> 00:03:34.444
+training pairs, negative examples, loss
+
+00:03:34.464 --> 00:03:36.583
+function and optimisation.
+
+00:03:36.758 --> 00:03:39.522
+Those ingredients influence which query
+
+00:03:39.542 --> 00:03:41.815
+and document relationships receive high
+
+00:03:41.835 --> 00:03:44.986
+scores. Better performance on one task
+
+00:03:45.006 --> 00:03:47.589
+does not establish usefulness for every
+
+00:03:47.609 --> 00:03:48.426
+search.
+
+00:03:48.990 --> 00:03:51.682
+Ask why a passage received its label and
+
+00:03:51.702 --> 00:03:53.615
+whether the negatives test distinctions
+
+00:03:53.635 --> 00:03:54.916
+that matter to you.
+
+00:03:55.078 --> 00:03:57.236
+Then evaluate the retriever against the
+
+00:03:57.256 --> 00:03:59.994
+intended task. The next film follows the
+
+00:04:00.014 --> 00:04:02.880
+labels back to their sources: clicks,
+
+00:04:02.900 --> 00:04:05.780
+answers, citations and other proxies for a
+
+00:04:05.800 --> 00:04:06.836
+useful result.

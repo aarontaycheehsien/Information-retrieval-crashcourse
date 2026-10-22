@@ -1,0 +1,423 @@
+1
+00:00:00,700 --> 00:00:02,998
+Two retrievers have the same architecture
+
+2
+00:00:03,160 --> 00:00:05,163
+and search the same collection.
+
+3
+00:00:05,338 --> 00:00:07,959
+One learnt from question and answer pairs.
+
+4
+00:00:08,122 --> 00:00:10,318
+The other learnt from citation-linked
+
+5
+00:00:10,338 --> 00:00:12,818
+papers. Should they produce the same
+
+6
+00:00:12,838 --> 00:00:14,686
+ranking? Make a prediction.
+
+7
+00:00:17,107 --> 00:00:18,904
+They can learn different relationships
+
+8
+00:00:18,924 --> 00:00:21,275
+because their training examples reward
+
+9
+00:00:21,295 --> 00:00:22,434
+different things.
+
+10
+00:00:22,622 --> 00:00:25,038
+The targets and negative examples give a
+
+11
+00:00:25,058 --> 00:00:27,409
+retriever an operational model of
+
+12
+00:00:27,429 --> 00:00:30,333
+relevance. To understand its high scores,
+
+13
+00:00:30,496 --> 00:00:32,215
+ask where that lesson came from.
+
+14
+00:00:33,141 --> 00:00:35,186
+A clicked result records an action.
+
+15
+00:00:35,348 --> 00:00:37,764
+Clicks can reward popularity and ranking
+
+16
+00:00:37,784 --> 00:00:40,096
+position as well as usefulness.
+
+17
+00:00:40,258 --> 00:00:42,468
+A question paired with an answer passage
+
+18
+00:00:42,488 --> 00:00:44,749
+instead rewards an answer-bearing
+
+19
+00:00:44,769 --> 00:00:47,197
+relationship. Neither source directly
+
+20
+00:00:47,217 --> 00:00:49,542
+observes everything a searcher means by
+
+21
+00:00:49,562 --> 00:00:50,547
+relevance.
+
+22
+00:00:51,113 --> 00:00:53,631
+Titles paired with abstracts may mainly
+
+23
+00:00:53,651 --> 00:00:55,679
+reward topical similarity.
+
+24
+00:00:55,893 --> 00:00:58,772
+Human judgements, generated queries and
+
+25
+00:00:58,792 --> 00:01:01,066
+neighbouring passages can supply other
+
+26
+00:01:01,086 --> 00:01:02,354
+training signals.
+
+27
+00:01:02,504 --> 00:01:05,035
+Each has advantages and limitations.
+
+28
+00:01:05,210 --> 00:01:07,484
+Knowing the signal helps you ask which
+
+29
+00:01:07,504 --> 00:01:09,752
+relationship a model was encouraged to
+
+30
+00:01:09,772 --> 00:01:10,627
+preserve.
+
+31
+00:01:11,549 --> 00:01:13,813
+The chapter gives SPECTER as a deliberate
+
+32
+00:01:13,833 --> 00:01:15,281
+scholarly example.
+
+33
+00:01:15,431 --> 00:01:18,169
+It trains document-level paper embeddings
+
+34
+00:01:18,189 --> 00:01:19,946
+using the citation graph.
+
+35
+00:01:20,109 --> 00:01:22,563
+Citation-linked relationships shape a
+
+36
+00:01:22,583 --> 00:01:25,218
+space intended to reflect scholarly
+
+37
+00:01:25,238 --> 00:01:26,261
+relatedness.
+
+38
+00:01:26,819 --> 00:01:28,873
+That is a different target from finding a
+
+39
+00:01:28,893 --> 00:01:30,690
+direct answer to a question.
+
+40
+00:01:30,852 --> 00:01:33,280
+Relatedness can be useful, but it does not
+
+41
+00:01:33,300 --> 00:01:35,883
+prove that a paper answers this search,
+
+42
+00:01:35,994 --> 00:01:38,409
+supports another paper's conclusion, or
+
+43
+00:01:38,429 --> 00:01:41,050
+meets a review's eligibility criteria.
+
+44
+00:01:41,213 --> 00:01:43,332
+The training relationship needs to fit the
+
+45
+00:01:43,352 --> 00:01:44,246
+use.
+
+46
+00:01:45,149 --> 00:01:47,042
+A retriever trained on general web
+
+47
+00:01:47,062 --> 00:01:49,374
+question and answer pairs learns from that
+
+48
+00:01:49,394 --> 00:01:52,363
+literature, genre and style of question.
+
+49
+00:01:52,526 --> 00:01:54,787
+A systematic reviewer, a chemistry
+
+50
+00:01:54,807 --> 00:01:57,622
+researcher, or someone searching another
+
+51
+00:01:57,642 --> 00:01:59,941
+language may need distinctions barely
+
+52
+00:01:59,961 --> 00:02:01,848
+represented in those examples.
+
+53
+00:02:02,385 --> 00:02:04,454
+Changing the examples can change what
+
+54
+00:02:04,474 --> 00:02:06,425
+ranks highly even with the same
+
+55
+00:02:06,445 --> 00:02:09,312
+architecture. A strong benchmark result
+
+56
+00:02:09,332 --> 00:02:12,083
+may transfer poorly to another collection
+
+57
+00:02:12,103 --> 00:02:13,680
+or query population.
+
+58
+00:02:13,817 --> 00:02:16,232
+Treat transfer as something to evaluate
+
+59
+00:02:16,252 --> 00:02:18,758
+locally, not as a guarantee supplied by a
+
+60
+00:02:18,778 --> 00:02:19,698
+model name.
+
+61
+00:02:20,622 --> 00:02:23,098
+If exact identifiers rarely matter during
+
+62
+00:02:23,118 --> 00:02:25,842
+training, an embedding may blur them.
+
+63
+00:02:25,992 --> 00:02:28,807
+If negatives rarely contain contradictions
+
+64
+00:02:28,827 --> 00:02:32,299
+or specialised senses, the space may fail
+
+65
+00:02:32,319 --> 00:02:34,373
+to preserve those distinctions.
+
+66
+00:02:34,548 --> 00:02:38,188
+Our invented labels C M P one zero four
+
+67
+00:02:38,208 --> 00:02:41,474
+and C M P one four zero illustrate an
+
+68
+00:02:41,494 --> 00:02:42,904
+identifier distinction.
+
+69
+00:02:43,475 --> 00:02:45,639
+These are teaching identifiers, not
+
+70
+00:02:45,659 --> 00:02:47,971
+chemical facts or a model test.
+
+71
+00:02:48,095 --> 00:02:50,368
+A useful evaluation should include the
+
+72
+00:02:50,388 --> 00:02:53,178
+exact identifiers, relations,
+
+73
+00:02:53,198 --> 00:02:55,858
+contradictions and specialised senses that
+
+74
+00:02:55,878 --> 00:02:57,662
+matter to your real task.
+
+75
+00:02:57,824 --> 00:03:00,819
+Broad topical similarity alone cannot
+
+76
+00:03:00,839 --> 00:03:02,327
+settle those cases.
+
+77
+00:03:03,238 --> 00:03:05,914
+Suppose the web-trained retriever performs
+
+78
+00:03:05,934 --> 00:03:08,374
+poorly over a chemistry collection.
+
+79
+00:03:08,550 --> 00:03:10,385
+Training mismatch is a plausible
+
+80
+00:03:10,405 --> 00:03:13,555
+hypothesis. Before attributing the failure
+
+81
+00:03:13,575 --> 00:03:16,377
+to training, inspect collection coverage,
+
+82
+00:03:16,397 --> 00:03:19,161
+searchable fields, query processing and
+
+83
+00:03:19,181 --> 00:03:20,629
+candidate cut-offs.
+
+84
+00:03:21,176 --> 00:03:23,455
+Then compare performance across a local
+
+85
+00:03:23,475 --> 00:03:25,516
+set of judged queries.
+
+86
+00:03:25,678 --> 00:03:27,875
+The scenario says how retrieval training
+
+87
+00:03:27,895 --> 00:03:30,620
+was supplied; it does not tell you whether
+
+88
+00:03:30,640 --> 00:03:32,526
+domain pretraining occurred.
+
+89
+00:03:32,689 --> 00:03:35,336
+Different stages can produce the same
+
+90
+00:03:35,408 --> 00:03:37,450
+missing-paper symptom, and neither
+
+91
+00:03:37,470 --> 00:03:40,013
+training lever alone guarantees a fit.
+
+92
+00:03:40,926 --> 00:03:43,468
+Take three questions back to the library.
+
+93
+00:03:43,644 --> 00:03:45,827
+What text unit does each stored vector
+
+94
+00:03:45,847 --> 00:03:48,804
+represent? Which positives, negatives and
+
+95
+00:03:48,824 --> 00:03:51,497
+training signals taught its comparisons?
+
+96
+00:03:51,646 --> 00:03:53,688
+Does it retrieve useful material for our
+
+97
+00:03:53,708 --> 00:03:57,089
+own task, collection and query population?
+
+98
+00:03:57,653 --> 00:04:00,392
+Model tokenisation supplies inputs.
+
+99
+00:04:00,554 --> 00:04:03,446
+Contextual encoding and pooling produce a
+
+100
+00:04:03,466 --> 00:04:04,619
+representation.
+
+101
+00:04:04,768 --> 00:04:06,423
+Retrieval training shapes which
+
+102
+00:04:06,443 --> 00:04:08,536
+comparisons score highly.
+
+103
+00:04:08,686 --> 00:04:10,483
+Local evidence tests whether those
+
+104
+00:04:10,503 --> 00:04:12,338
+comparisons serve your need.
+
+105
+00:04:12,513 --> 00:04:15,135
+Chapter Seven puts the encoder to work
+
+106
+00:04:15,155 --> 00:04:17,286
+across a whole collection.

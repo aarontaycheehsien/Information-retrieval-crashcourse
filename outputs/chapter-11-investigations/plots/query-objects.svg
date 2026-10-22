@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="403.2pt" viewBox="0 0 1008 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Original query-mechanism teaching illustration; not a model measurement</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 1008 403.2 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #eee9e0"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 25.2 117.34016 
+L 446.544 117.34016 
+L 446.544 96.12288 
+L 25.2 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="235.872" y="110.870583" transform="rotate(-0 235.872 110.870583)">What stands for the need</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 446.544 117.34016 
+L 982.8 117.34016 
+L 982.8 96.12288 
+L 446.544 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="714.672" y="110.870583" transform="rotate(-0 714.672 110.870583)">Mechanism addressed</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 25.2 138.55744 
+L 446.544 138.55744 
+L 446.544 117.34016 
+L 25.2 117.34016 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="235.872" y="132.087862" transform="rotate(-0 235.872 132.087862)">Free-text string</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 446.544 138.55744 
+L 982.8 138.55744 
+L 982.8 117.34016 
+L 446.544 117.34016 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="714.672" y="132.087862" transform="rotate(-0 714.672 132.087862)">Lexical, dense or hybrid retrieval</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 25.2 159.77472 
+L 446.544 159.77472 
+L 446.544 138.55744 
+L 25.2 138.55744 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="235.872" y="153.305142" transform="rotate(-0 235.872 153.305142)">Controlled term or structured expression</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 446.544 159.77472 
+L 982.8 159.77472 
+L 982.8 138.55744 
+L 446.544 138.55744 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="714.672" y="153.305142" transform="rotate(-0 714.672 153.305142)">Annotations, fields, filters, Boolean logic</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 25.2 180.992 
+L 446.544 180.992 
+L 446.544 159.77472 
+L 25.2 159.77472 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="235.872" y="174.522422" transform="rotate(-0 235.872 174.522422)">Citation edge</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 446.544 180.992 
+L 982.8 180.992 
+L 982.8 159.77472 
+L 446.544 159.77472 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="714.672" y="174.522422" transform="rotate(-0 714.672 174.522422)">Direct links, coupling or co-citation</text>
+    </g>
+    <g id="patch_10">
+     <path d="M 25.2 202.20928 
+L 446.544 202.20928 
+L 446.544 180.992 
+L 25.2 180.992 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="235.872" y="195.739702" transform="rotate(-0 235.872 195.739702)">Seed document</text>
+    </g>
+    <g id="patch_11">
+     <path d="M 446.544 202.20928 
+L 982.8 202.20928 
+L 982.8 180.992 
+L 446.544 180.992 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="714.672" y="195.739702" transform="rotate(-0 714.672 195.739702)">Text similarity, citation relations, or both</text>
+    </g>
+    <g id="patch_12">
+     <path d="M 25.2 223.42656 
+L 446.544 223.42656 
+L 446.544 202.20928 
+L 25.2 202.20928 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_11">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="235.872" y="216.956982" transform="rotate(-0 235.872 216.956982)">Relevance judgement</text>
+    </g>
+    <g id="patch_13">
+     <path d="M 446.544 223.42656 
+L 982.8 223.42656 
+L 982.8 202.20928 
+L 446.544 202.20928 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_12">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="714.672" y="216.956982" transform="rotate(-0 714.672 216.956982)">Construct a later retrieval input</text>
+    </g>
+    <g id="patch_14">
+     <path d="M 25.2 244.64384 
+L 446.544 244.64384 
+L 446.544 223.42656 
+L 25.2 223.42656 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="235.872" y="238.174262" transform="rotate(-0 235.872 238.174262)">Browse or monitoring target</text>
+    </g>
+    <g id="patch_15">
+     <path d="M 446.544 244.64384 
+L 982.8 244.64384 
+L 982.8 223.42656 
+L 446.544 223.42656 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="714.672" y="238.174262" transform="rotate(-0 714.672 238.174262)">Collection browsing or continuing alerts</text>
+    </g>
+    <g id="patch_16">
+     <path d="M 25.2 265.86112 
+L 446.544 265.86112 
+L 446.544 244.64384 
+L 25.2 244.64384 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_15">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="235.872" y="259.391543" transform="rotate(-0 235.872 259.391543)">Programmatic predicate</text>
+    </g>
+    <g id="patch_17">
+     <path d="M 446.544 265.86112 
+L 982.8 265.86112 
+L 982.8 244.64384 
+L 446.544 244.64384 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_16">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="714.672" y="259.391543" transform="rotate(-0 714.672 259.391543)">API filters, identifiers, sorting, pagination</text>
+    </g>
+    <g id="patch_18">
+     <path d="M 25.2 287.0784 
+L 446.544 287.0784 
+L 446.544 265.86112 
+L 25.2 265.86112 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_17">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="235.872" y="280.608822" transform="rotate(-0 235.872 280.608822)">Task brief</text>
+    </g>
+    <g id="patch_19">
+     <path d="M 446.544 287.0784 
+L 982.8 287.0784 
+L 982.8 265.86112 
+L 446.544 265.86112 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_18">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="714.672" y="280.608822" transform="rotate(-0 714.672 280.608822)">Controller scope, criteria and stopping</text>
+    </g>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="504" y="36.384" transform="rotate(-0 504 36.384)">One information need · Eight overlapping ways into retrieval</text>
+   </g>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 379.89125)">Source categories overlap: an API can carry text, and a seed can start citation traversal. These are mechanisms, not eight</text>
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 394.448406)">phrasing styles.</text>
+  </g>
+ </g>
+</svg>

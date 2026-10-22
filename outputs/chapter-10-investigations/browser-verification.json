@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8827/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8827/01-two-models-do-not-make-a-hybrid/01-two-models-do-not-make-a-hybrid.mp4",
+      "duration": 253.8,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 100,
+      "seek_seconds": 126.9,
+      "byte_range": "bytes 0-1023/24684326",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8827/02-how-two-lists-become-one/02-how-two-lists-become-one.mp4",
+      "duration": 248.7,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 97,
+      "seek_seconds": 124.35,
+      "byte_range": "bytes 0-1023/23228764",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8827/03-what-the-fused-ranking-cannot-tell-you/03-what-the-fused-ranking-cannot-tell-you.mp4",
+      "duration": 271,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 105,
+      "seek_seconds": 135.5,
+      "byte_range": "bytes 0-1023/30223431",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

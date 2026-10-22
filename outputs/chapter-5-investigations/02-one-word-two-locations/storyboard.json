@@ -1,0 +1,179 @@
+{
+  "series": "Embeddings: what the learnt geometry encodes",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#embeddings",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#embeddings",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-one-word-two-locations",
+  "title": "One word, two locations",
+  "subtitle": "Contextual tokens and a complete-text embedding are different stages.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "bank_hook",
+      "title": "The same bank in two different sentences",
+      "source_anchor": "context-changes-the-representation",
+      "visual": "bank_hook",
+      "narration": [
+        "Read these two phrases: the river bank; the bank refused the loan. The letters in bank are identical. Should its vector be identical too? If the vector is just a stored address for a word, how could the surrounding sentence change it?",
+        "That is the difference between a classic static word vector and a contextual token representation. One reuses a stored vector for the string. The other computes a representation for this occurrence from its sequence."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "static_context",
+      "title": "From a stored word vector to a contextual one",
+      "source_anchor": "context-changes-the-representation",
+      "visual": "static_context",
+      "narration": [
+        "Classic word two vec gives bank essentially the same stored vector in both sentences. A contextual encoder starts with token embeddings and transforms them using the surrounding sequence. River supplies different evidence from refused and loan.",
+        "Our two moving markers illustrate that distinction; their coordinates are invented. They do not measure a model's ability to disambiguate bank, and different vectors alone would not establish that a model interpreted the two sentences correctly."
+      ]
+    },
+    {
+      "id": "attention",
+      "title": "Other tokens can change this representation",
+      "source_anchor": "context-changes-the-representation",
+      "visual": "attention",
+      "narration": [
+        "A Transformer's self-attention lets a token's representation draw on information from other tokens in the sequence. It is a mechanism for combining information. What the model learns to do with that mechanism depends on its training.",
+        "Contextual representations did not begin with Transformers. ELMo used bidirectional recurrent networks. Transformer encoders later became dominant as self-attention helped make large-scale sequence processing more parallelisable. Architecture and training objective remain separate choices."
+      ]
+    },
+    {
+      "id": "model_tokens",
+      "title": "Model tokens are not index terms",
+      "source_anchor": "chapter-5-orientation-title",
+      "visual": "model_tokens",
+      "narration": [
+        "There is another trap: the units a model receives are not necessarily the terms an inverted index stores. For this illustration only, define a toy tokenizer that makes one character per token. Jobs becomes four units: j, o, b, s.",
+        "A separate illustrative lexical analyser lowercases jobs and stems it to job. Those are different representations made for different jobs. Real neural tokenizers may use subwords, characters or bytes. Our character split does not claim how any named model tokenizes this word."
+      ]
+    },
+    {
+      "id": "pooling",
+      "title": "Many token vectors. One complete-text vector.",
+      "source_anchor": "context-changes-the-representation",
+      "visual": "pooling",
+      "narration": [
+        "Contextual token representations are still several vectors, one for each token occurrence. A model producing a single embedding for a complete query or passage needs another step. Pooling can combine token representations, or the model can use a selected representation.",
+        "Our declared toy averages three two-number vectors: one, three; three, one; and two, two. The result is two, two. This demonstrates mean pooling only. It is not a claim about BERT's default retrieval behavior or the best pooling method."
+      ]
+    },
+    {
+      "id": "reproducible",
+      "title": "Reproducible does not mean easy to interpret",
+      "source_anchor": "from-word2vec-to-retrieval-embeddings",
+      "visual": "reproducible",
+      "narration": [
+        "An encoder computes an output using a fitted mapping. With the same model, preprocessing and inference settings, its output can be reproduced. Training is the stage that changes the mapping; applying it need not train the model again.",
+        "Reproducibility is different from interpretability. Individual dimensions usually do not arrive with labels such as occupation or emotion. Our two-number diagrams make operations visible; real representations distribute patterns across many dimensions and cannot be inspected as a simple map."
+      ]
+    },
+    {
+      "id": "context_limits",
+      "title": "Context is a capability, not a relevance verdict",
+      "source_anchor": "what-bert-is-and-what-it-still-needs",
+      "visual": "context_limits",
+      "narration": [
+        "Now return to the two uses of bank. Context can change the representation. Pooling can make one vector for the complete text. Neither step, by itself, establishes that independently encoded questions will rank close to the passages a searcher needs.",
+        "That relationship depends on architecture and training, and its usefulness needs evaluation. Before accepting a claim about contextual embeddings, ask what text unit the vector represents, how that vector was obtained, and what task taught the model which relationships to reward."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "bank_hook_0",
+      "scene": "bank_hook",
+      "text": "Read these two phrases: the river bank; the bank refused the loan. The letters in bank are identical. Should its vector be identical too? If the vector is just a stored address for a word, how could the surrounding sentence change it?",
+      "gap": 1.0
+    },
+    {
+      "id": "bank_hook_1",
+      "scene": "bank_hook",
+      "text": "That is the difference between a classic static word vector and a contextual token representation. One reuses a stored vector for the string. The other computes a representation for this occurrence from its sequence.",
+      "gap": 2.5
+    },
+    {
+      "id": "static_context_0",
+      "scene": "static_context",
+      "text": "Classic word two vec gives bank essentially the same stored vector in both sentences. A contextual encoder starts with token embeddings and transforms them using the surrounding sequence. River supplies different evidence from refused and loan.",
+      "gap": 1.0
+    },
+    {
+      "id": "static_context_1",
+      "scene": "static_context",
+      "text": "Our two moving markers illustrate that distinction; their coordinates are invented. They do not measure a model's ability to disambiguate bank, and different vectors alone would not establish that a model interpreted the two sentences correctly.",
+      "gap": 0.65
+    },
+    {
+      "id": "attention_0",
+      "scene": "attention",
+      "text": "A Transformer's self-attention lets a token's representation draw on information from other tokens in the sequence. It is a mechanism for combining information. What the model learns to do with that mechanism depends on its training.",
+      "gap": 1.0
+    },
+    {
+      "id": "attention_1",
+      "scene": "attention",
+      "text": "Contextual representations did not begin with Transformers. ELMo used bidirectional recurrent networks. Transformer encoders later became dominant as self-attention helped make large-scale sequence processing more parallelisable. Architecture and training objective remain separate choices.",
+      "gap": 0.65
+    },
+    {
+      "id": "model_tokens_0",
+      "scene": "model_tokens",
+      "text": "There is another trap: the units a model receives are not necessarily the terms an inverted index stores. For this illustration only, define a toy tokenizer that makes one character per token. Jobs becomes four units: j, o, b, s.",
+      "gap": 1.0
+    },
+    {
+      "id": "model_tokens_1",
+      "scene": "model_tokens",
+      "text": "A separate illustrative lexical analyser lowercases jobs and stems it to job. Those are different representations made for different jobs. Real neural tokenizers may use subwords, characters or bytes. Our character split does not claim how any named model tokenizes this word.",
+      "gap": 0.65
+    },
+    {
+      "id": "pooling_0",
+      "scene": "pooling",
+      "text": "Contextual token representations are still several vectors, one for each token occurrence. A model producing a single embedding for a complete query or passage needs another step. Pooling can combine token representations, or the model can use a selected representation.",
+      "gap": 1.0
+    },
+    {
+      "id": "pooling_1",
+      "scene": "pooling",
+      "text": "Our declared toy averages three two-number vectors: one, three; three, one; and two, two. The result is two, two. This demonstrates mean pooling only. It is not a claim about BERT's default retrieval behavior or the best pooling method.",
+      "gap": 0.65
+    },
+    {
+      "id": "reproducible_0",
+      "scene": "reproducible",
+      "text": "An encoder computes an output using a fitted mapping. With the same model, preprocessing and inference settings, its output can be reproduced. Training is the stage that changes the mapping; applying it need not train the model again.",
+      "gap": 1.0
+    },
+    {
+      "id": "reproducible_1",
+      "scene": "reproducible",
+      "text": "Reproducibility is different from interpretability. Individual dimensions usually do not arrive with labels such as occupation or emotion. Our two-number diagrams make operations visible; real representations distribute patterns across many dimensions and cannot be inspected as a simple map.",
+      "gap": 0.65
+    },
+    {
+      "id": "context_limits_0",
+      "scene": "context_limits",
+      "text": "Now return to the two uses of bank. Context can change the representation. Pooling can make one vector for the complete text. Neither step, by itself, establishes that independently encoded questions will rank close to the passages a searcher needs.",
+      "gap": 1.0
+    },
+    {
+      "id": "context_limits_1",
+      "scene": "context_limits",
+      "text": "That relationship depends on architecture and training, and its usefulness needs evaluation. Before accepting a claim about contextual embeddings, ask what text unit the vector represents, how that vector was obtained, and what task taught the model which relationships to reward.",
+      "gap": 0.65
+    }
+  ]
+}

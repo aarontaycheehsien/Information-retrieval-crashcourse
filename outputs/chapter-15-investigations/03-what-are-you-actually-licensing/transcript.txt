@@ -1,0 +1,40 @@
+What are you actually licensing?
+
+[00:00:00.700]: Two products advertise semantic AI search. Their query boxes look alike. Are you licensing the same retrieval design? Pause and ask what each accepts: only text, or fields, a seed paper, citation links, saved judgements and API predicates?
+
+[00:00:21.607]: For an agentic mode, ask whether both the task brief and its generated queries can be exported. A convenient text box can narrow the starting method before ranking begins. The chapter turns documentation and inspection into nineteen vendor questions, grouped into six areas. They are questions to verify, not answers supplied by this film.
+
+[00:00:44.890]: First, what does the system infer, change and decide? Separate recognising fields or intent, transforming inputs, selecting routes and constructing another query from earlier results. Ask to inspect and export each transformation, route and feedback record.
+
+[00:01:03.824]: Second, who controls the trajectory? Is the sequence prescribed, selected among designer enumerated branches, or planned from observations? A rule, classifier or model may choose an adaptive branch. For model planned actions, ask which tools, sources and iteration limits bound the sequence and whether every action and stop is visible.
+
+[00:01:29.126]: Ask which retrieval and ranking components run, whether in parallel or sequence, and how many candidates survive. Ask what job the neural model performs: query interpretation, first stage representation, sparse expansion, joint reranking or final answer generation. A model name alone does not describe the architecture.
+
+[00:01:51.525]: Ask the indexed unit and whether later full text fetching is separate. An abstract index cannot match full text only evidence at that stage. Ask how multiple passage matches from one paper are assembled. Finally, ask where hybrid component lists are fused, which cutoffs and rerankers follow, and whether component contributions can be inspected or controlled.
+
+[00:02:17.685]: Ask whether an exact lexical route survives for identifiers and quoted phrases. Ask how case, punctuation, hyphens and identifiers are analysed, and whether query and document analysis agree. For dense inputs, ask which token representation is used and how unfamiliar strings are tested.
+
+[00:02:39.948]: Ask for exactness, negation, exclusions, contradictory claims and near duplicate name tests. Then ask what trained the relevance model and how it was adapted to local disciplines and document types. Web questions, citation links and scholarly judgements reward different relationships. A paraphrase demonstration does not answer these questions.
+
+[00:03:04.404]: Ask whether users can trace a result backwards through actual inputs, constraints, candidate routes, evidence, ranking and display. Require a distinction between execution evidence and a post hoc explanation. Ask whether the exact generated inputs, routes, mode, versions, index date, cutoffs and identifiers can be exported.
+
+[00:03:28.127]: On rerun, does the product reuse a saved transformation or generate it again? Ask whether model, index and ranking changes are disclosed, including which version produced a saved run. These are requirements for later comparison, not a promise of identical results forever.
+
+[00:03:47.223]: Ask what a search costs: seats, queries or tokens, with which rate and iteration limits. What happens at a limit: refusal, truncation or a silently shallower search? Does agentic mode cost differently, and can the library inspect per query consumption?
+
+[00:04:07.571]: Ask what happens when a mode is retired. Can saved searches, result sets and traces be exported, and how much notice is given? The chapter cites renamed and distinct product modes as reasons to ask. It does not claim a new retirement event. Continuity depends on exportable records and explicit change arrangements.
+
+[00:04:29.431]: Ask how performance is evaluated, and on whose queries. Include the institution’s disciplines, vocabulary, languages, document types and known relevant records. Ask whether known failure cases belong in evaluation, rather than relying only on the product’s strongest demonstrations.
+
+[00:04:50.045]: Finally, can the library rerun local test queries across a model, index or ranking update? Save the baseline and inspect per query differences, so a regression omitted from release notes can become visible. These questions connect procurement to the local comparisons of Chapter fourteen; no vendor benchmark is being performed here.
+
+[00:05:13.765]: Documentation and inspection cannot be relied on to arrive on a library’s timetable after licensing. Ask for evidence, record the vendor’s response, verify what the library can test and keep follow up for unknowns. The accompanying question sheet leaves those answers blank.
+
+[00:05:33.549]: Libraries need enough visibility to establish what was searched, enough documentation to rerun or compare it later, and enough control to test it against their collections and users. That requires the distinctions developed through this course, rather than every model weight. A clear marketing label is the beginning of the investigation, not its conclusion.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 15.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#library-practice
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

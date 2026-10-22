@@ -1,0 +1,36 @@
+The word you never searched
+
+[00:00:00.700]: You type job. The record on screen contains jobs. Can an ordinary lexical search match them? If it can, does that mean the system used semantic search? Take a moment.
+
+[00:00:13.804]: It can match when text analysis brings the forms to a compatible indexed term. That does not require dense retrieval. The important comparison is between the processed terms, not just the visible spellings.
+
+[00:00:27.790]: Follow the chapter's sample: Delulu about jobs, followed by an exclamation mark. Its illustrative tokenizer makes four units: Delulu, about, jobs, and the punctuation. Each unit is a token.
+
+[00:00:41.813]: Tokens are not always whole words. They can be punctuation, parts of words, characters or other units. Names, hyphens, identifiers and languages with different boundary conventions require choices. Tokenisation divides the string; it is only one step in text analysis.
+
+[00:01:01.533]: In this example, case normalisation lowercases Delulu. Optional removal drops about and the exclamation mark. Optional stemming changes jobs to job. The final indexed terms are delulu and job.
+
+[00:01:15.883]: These are separate operations, not a universal recipe. Another analyser might retain about, preserve jobs or keep an entire value in a keyword field. Never assume every displayed word becomes a searchable term.
+
+[00:01:31.437]: Stemming uses rules or heuristics to reduce forms. Studies, studying and studied might become studi. That matching key need not be a dictionary word. Lemmatisation uses vocabulary and morphology to choose a dictionary form, such as study.
+
+[00:01:49.004]: Grammar still matters: adjectival better may become good. These outputs are illustrative, not guaranteed. Different algorithms, languages, dictionaries and fields can behave differently, or apply neither process.
+
+[00:02:04.791]: When related grammatical forms meet at one term, useful matches can become possible. Over-stemming can also collapse unrelated words and lose precision. Under-stemming leaves related forms separate and can miss a useful match.
+
+[00:02:20.417]: An incorrect grammatical interpretation can also harm lemmatisation. Neither method is synonym expansion, controlled-vocabulary mapping or a guarantee of meaning. Test the analysis on the collection and fields you actually search.
+
+[00:02:36.405]: On the document side, jobs may be stored as indexed job. On the query side, job may remain job. Both sides consult the same dictionary entry, so the document can match despite the different surface form.
+
+[00:02:51.056]: Now let the index store only jobs while the query looks up only job. Without another mapping, that document is missed. No error message is required. Query and document analysis need to be compatible, even when their operations are not identical.
+
+[00:03:09.083]: User-entered truncation, such as librar star, is separate from stemming and lemmatisation. Its expansion depends on platform syntax and indexed forms. If related words unexpectedly fail to match, inspect that analysis and expansion before blaming AND or OR.
+
+[00:03:28.856]: Fields can differ too. A title-and-abstract field might reduce grammatical forms, while a code, exact name or identifier deliberately preserves the original value. Ask what was indexed, how it was analysed, and what the query actually looked up.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 2.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#boolean-admission
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

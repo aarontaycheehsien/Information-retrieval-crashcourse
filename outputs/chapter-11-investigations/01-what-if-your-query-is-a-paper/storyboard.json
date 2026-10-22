@@ -1,0 +1,201 @@
+{
+  "series": "Understanding, transforming and routing queries",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#query-transformation",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#query-transformation",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-what-if-your-query-is-a-paper",
+  "title": "What if your query is a paper?",
+  "subtitle": "One information need can address several different mechanisms.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "object_hook",
+      "title": "Before wording, identify what stands for the need",
+      "source_anchor": "before-phrasing-identify-the-query-object",
+      "visual": "object_hook",
+      "narration": [
+        "You want to investigate the open access citation advantage. You could type a question, choose a known paper, follow a citation, or give a controller a research brief. Are these four ways of phrasing the same query? Pause and predict.",
+        "They address different mechanisms. A query represents the need in a form a system can act on. Changing from words to a seed paper or citation changes more than the wording."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "text_and_structure",
+      "title": "Words and structured conditions address different evidence",
+      "source_anchor": "tbl-11-1",
+      "visual": "text_and_structure",
+      "narration": [
+        "A free text string might go to lexical, dense or hybrid retrieval. The visible box does not reveal whether words will be analysed, encoded, rewritten or routed. A controlled term or structured expression addresses annotations, fields, filters or Boolean conditions.",
+        "A MeSH heading, field tag or tested search hedge is not simply a formal keyword. It depends on the target database\u2019s structure and supported syntax."
+      ]
+    },
+    {
+      "id": "records_and_links",
+      "title": "A seed and a relationship offer different paths",
+      "source_anchor": "one-need-eight-objects-title",
+      "visual": "records_and_links",
+      "narration": [
+        "A seed document makes a known paper stand for the need. The system might compare its text, follow citation relationships, or combine both. PubMed Similar Articles, for example, uses a word weighted approach over title, abstract and MeSH words; a seed does not automatically imply embeddings.",
+        "Citation methods differ too. Direct traversal follows explicit citation edges. Bibliographic coupling finds papers sharing references. Co citation finds papers cited together. Their reach depends on the graph\u2019s coverage and timing, rather than only on the searcher\u2019s vocabulary."
+      ]
+    },
+    {
+      "id": "feedback_and_monitoring",
+      "title": "Judgements and monitoring can guide the next search",
+      "source_anchor": "tbl-11-1",
+      "visual": "feedback_and_monitoring",
+      "narration": [
+        "A relevance judgement can help construct a later retrieval input from accepted or rejected records. Pseudo relevance feedback instead assumes highly ranked records are useful without asking the searcher.",
+        "A browse or monitoring target addresses a journal, author, subject, collection or continuing alert. It can surface a paper you recognise as useful even when you could not have named it in advance. These are different ways into the literature."
+      ]
+    },
+    {
+      "id": "predicates_and_briefs",
+      "title": "An API predicate is different from a task brief",
+      "source_anchor": "tbl-11-1",
+      "visual": "predicates_and_briefs",
+      "narration": [
+        "A programmatic predicate can specify identifiers, ranges, filtering, sorting and pagination. OpenAlex documents composable attribute filters. A task brief instead gives a controller scope, inclusion criteria, sources, stopping conditions and output requirements. Those instructions are not all terms that an underlying retriever can obey.",
+        "Even a filter needs the right meaning. Filtering results to papers that are themselves open access could exclude a paywalled study about the open access citation advantage. The chapter\u2019s example therefore filters by publication year instead."
+      ]
+    },
+    {
+      "id": "objects_cooperate",
+      "title": "A good text query can still cover only one route",
+      "source_anchor": "using-several-query-objects-together",
+      "visual": "objects_cooperate",
+      "narration": [
+        "These objects cooperate. Text and controlled vocabulary can find seeds; citation traversal can expose missing terminology; accepted records can guide feedback; an API can make a procedure repeatable. Bates called developing a search through such discoveries berrypicking.",
+        "In one audit of a single complex evidence review, researchers traced four hundred ninety five included sources. Thirty percent came from protocol defined database and hand searches, and fifty one percent from snowballing. That is a scoped example, not a universal estimate for reviews."
+      ]
+    },
+    {
+      "id": "phrase_for_receiver",
+      "title": "Choose wording for the component that receives it",
+      "source_anchor": "phrase-for-the-mechanism-not-the-box",
+      "visual": "phrase_for_receiver",
+      "narration": [
+        "When the query really is text, useful wording depends on its receiver. A lexical engine needs observable concepts and supported operators. A dense retriever needs a description suited to what its model was trained to match. Longer prose is not automatically better.",
+        "A query translator needs enough context to produce inspectable retrieval inputs. Detailed relevance instructions do not automatically become instructions followed by every retrieval model; that capability depends on training."
+      ]
+    },
+    {
+      "id": "known_record_tests",
+      "title": "Test the receiver against known relevant records",
+      "source_anchor": "tbl-11-2",
+      "visual": "known_record_tests",
+      "narration": [
+        "If the architecture is undisclosed, vary inputs systematically against known relevant records: short terms, a question, fielded syntax and a known item title. Inspect generated expressions for valid fields, controlled terms and logical relationships in the target database.",
+        "Generated Boolean strategies can contain invalid MeSH terms. A polished paragraph is no quality guarantee. Start with the query object and receiving mechanism, then test what the system actually does."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "object_hook_0",
+      "scene": "object_hook",
+      "text": "You want to investigate the open access citation advantage. You could type a question, choose a known paper, follow a citation, or give a controller a research brief. Are these four ways of phrasing the same query? Pause and predict.",
+      "gap": 1.0
+    },
+    {
+      "id": "object_hook_1",
+      "scene": "object_hook",
+      "text": "They address different mechanisms. A query represents the need in a form a system can act on. Changing from words to a seed paper or citation changes more than the wording.",
+      "gap": 2.5
+    },
+    {
+      "id": "text_and_structure_0",
+      "scene": "text_and_structure",
+      "text": "A free text string might go to lexical, dense or hybrid retrieval. The visible box does not reveal whether words will be analysed, encoded, rewritten or routed. A controlled term or structured expression addresses annotations, fields, filters or Boolean conditions.",
+      "gap": 1.0
+    },
+    {
+      "id": "text_and_structure_1",
+      "scene": "text_and_structure",
+      "text": "A MeSH heading, field tag or tested search hedge is not simply a formal keyword. It depends on the target database\u2019s structure and supported syntax.",
+      "gap": 0.65
+    },
+    {
+      "id": "records_and_links_0",
+      "scene": "records_and_links",
+      "text": "A seed document makes a known paper stand for the need. The system might compare its text, follow citation relationships, or combine both. PubMed Similar Articles, for example, uses a word weighted approach over title, abstract and MeSH words; a seed does not automatically imply embeddings.",
+      "gap": 1.0
+    },
+    {
+      "id": "records_and_links_1",
+      "scene": "records_and_links",
+      "text": "Citation methods differ too. Direct traversal follows explicit citation edges. Bibliographic coupling finds papers sharing references. Co citation finds papers cited together. Their reach depends on the graph\u2019s coverage and timing, rather than only on the searcher\u2019s vocabulary.",
+      "gap": 0.65
+    },
+    {
+      "id": "feedback_and_monitoring_0",
+      "scene": "feedback_and_monitoring",
+      "text": "A relevance judgement can help construct a later retrieval input from accepted or rejected records. Pseudo relevance feedback instead assumes highly ranked records are useful without asking the searcher.",
+      "gap": 1.0
+    },
+    {
+      "id": "feedback_and_monitoring_1",
+      "scene": "feedback_and_monitoring",
+      "text": "A browse or monitoring target addresses a journal, author, subject, collection or continuing alert. It can surface a paper you recognise as useful even when you could not have named it in advance. These are different ways into the literature.",
+      "gap": 0.65
+    },
+    {
+      "id": "predicates_and_briefs_0",
+      "scene": "predicates_and_briefs",
+      "text": "A programmatic predicate can specify identifiers, ranges, filtering, sorting and pagination. OpenAlex documents composable attribute filters. A task brief instead gives a controller scope, inclusion criteria, sources, stopping conditions and output requirements. Those instructions are not all terms that an underlying retriever can obey.",
+      "gap": 1.0
+    },
+    {
+      "id": "predicates_and_briefs_1",
+      "scene": "predicates_and_briefs",
+      "text": "Even a filter needs the right meaning. Filtering results to papers that are themselves open access could exclude a paywalled study about the open access citation advantage. The chapter\u2019s example therefore filters by publication year instead.",
+      "gap": 0.65
+    },
+    {
+      "id": "objects_cooperate_0",
+      "scene": "objects_cooperate",
+      "text": "These objects cooperate. Text and controlled vocabulary can find seeds; citation traversal can expose missing terminology; accepted records can guide feedback; an API can make a procedure repeatable. Bates called developing a search through such discoveries berrypicking.",
+      "gap": 1.0
+    },
+    {
+      "id": "objects_cooperate_1",
+      "scene": "objects_cooperate",
+      "text": "In one audit of a single complex evidence review, researchers traced four hundred ninety five included sources. Thirty percent came from protocol defined database and hand searches, and fifty one percent from snowballing. That is a scoped example, not a universal estimate for reviews.",
+      "gap": 0.65
+    },
+    {
+      "id": "phrase_for_receiver_0",
+      "scene": "phrase_for_receiver",
+      "text": "When the query really is text, useful wording depends on its receiver. A lexical engine needs observable concepts and supported operators. A dense retriever needs a description suited to what its model was trained to match. Longer prose is not automatically better.",
+      "gap": 1.0
+    },
+    {
+      "id": "phrase_for_receiver_1",
+      "scene": "phrase_for_receiver",
+      "text": "A query translator needs enough context to produce inspectable retrieval inputs. Detailed relevance instructions do not automatically become instructions followed by every retrieval model; that capability depends on training.",
+      "gap": 0.65
+    },
+    {
+      "id": "known_record_tests_0",
+      "scene": "known_record_tests",
+      "text": "If the architecture is undisclosed, vary inputs systematically against known relevant records: short terms, a question, fielded syntax and a known item title. Inspect generated expressions for valid fields, controlled terms and logical relationships in the target database.",
+      "gap": 1.0
+    },
+    {
+      "id": "known_record_tests_1",
+      "scene": "known_record_tests",
+      "text": "Generated Boolean strategies can contain invalid MeSH terms. A polished paragraph is no quality guarantee. Start with the query object and receiving mechanism, then test what the system actually does.",
+      "gap": 0.65
+    }
+  ]
+}

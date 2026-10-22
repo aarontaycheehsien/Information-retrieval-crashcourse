@@ -1,0 +1,201 @@
+{
+  "series": "Reranking and multi-stage retrieval",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#reranking-and-hybrid",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#reranking-and-hybrid",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-the-paper-the-reranker-never-saw",
+  "title": "The paper the reranker never saw",
+  "subtitle": "A richer comparison still depends on who enters the shortlist.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "shortlist_hook",
+      "title": "Can a better judge rescue a missing paper?",
+      "source_anchor": "rerankers-compare-more-carefully-after-retrieval",
+      "visual": "shortlist_hook",
+      "narration": [
+        "Imagine a paper that would be useful for your particular question. The first retrieval stage misses it. Now a much stronger model reranks the shortlist. Can that model put the missing paper first? Pause and predict what information it actually receives.",
+        "It receives the shortlisted candidates. Reranking can change their order, but the absent paper is unavailable. Our invented cards illustrate a boundary inherited by later stages."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "broad_then_deep",
+      "title": "Spend detailed comparison on fewer records",
+      "source_anchor": "why-search-systems-use-multiple-stages",
+      "visual": "broad_then_deep",
+      "narration": [
+        "Imagine millions of records. Applying an expensive query and document comparison to every record for every search would usually cost too much. Fast first stages retrieve a manageable set; later stages spend more computation on each survivor.",
+        "The first stage balances speed and retaining potentially relevant records. Reranking aims to improve the ordering within its pool. A later answer generator inherits that candidate boundary too, unless another operation explicitly brings in additional evidence."
+      ]
+    },
+    {
+      "id": "joint_encoding",
+      "title": "When does the query meet the passage?",
+      "source_anchor": "cross-encoder-reranking",
+      "visual": "joint_encoding",
+      "narration": [
+        "A conventional bi encoder represents the query and passage independently. Passage vectors can be stored before any query arrives. Their interaction happens after each text has been compressed. A cross encoder instead processes the query and one candidate together.",
+        "Attention can run across their tokens before producing a ranking score. That creates an opportunity to examine a qualifier, negation, entity or intent more closely. Cross encoder names an arrangement; the score still reflects training and the chosen relevance task."
+      ]
+    },
+    {
+      "id": "delulu_example",
+      "title": "Same topic, different information needs",
+      "source_anchor": "cross-encoder-reranking",
+      "visual": "delulu_example",
+      "narration": [
+        "The chapter\u2019s query asks: am I being delulu about getting this job? One candidate explains how to recognise unrealistic expectations during a job search. Another lists ten signs that you performed well in your job interview.",
+        "Both concern job seeking and advice. For the stated need about unrealistic expectations, the first is the intended match; interview performance is the hard negative. Joint query and candidate processing exposes details that a pooled representation may blur."
+      ]
+    },
+    {
+      "id": "pair_cost",
+      "title": "A joint representation depends on this query",
+      "source_anchor": "bi-encoder-vs-cross-encoder-title",
+      "visual": "pair_cost",
+      "narration": [
+        "The cross encoder\u2019s candidate representation depends on the incoming query, so it cannot be precomputed and reused in the same way. Reranking a hundred candidates requires roughly a hundred query and candidate evaluations, even when implementation batches the work.",
+        "That count is not a measured latency estimate. Truncation can also hide decisive text. A richer scoring arrangement makes more evidence accessible; it does not establish objective or infallible relevance."
+      ]
+    },
+    {
+      "id": "llm_modes",
+      "title": "Three ways to ask an LLM for an order",
+      "source_anchor": "llms-as-rerankers",
+      "visual": "llm_modes",
+      "narration": [
+        "An LLM can receive the query, candidate text and explicit criteria such as population, study design or whether a passage answers the question. Pointwise prompting judges each candidate separately. Pairwise prompting asks which of two candidates is more relevant.",
+        "Listwise prompting presents several candidates together and requests an ordering. Larger lists may require windows or repeated partial rankings. Here these names describe prompting, rather than classical learning to rank training objectives."
+      ]
+    },
+    {
+      "id": "judgement_limits",
+      "title": "A plausible explanation does not validate a ranking",
+      "source_anchor": "llm-reranking-strategies-title",
+      "visual": "judgement_limits",
+      "narration": [
+        "Each arrangement has failure modes. Separate scores may need calibration. Pairwise preferences can be inconsistent. Listwise outputs may depend on input order. Prompt wording, context limits, model updates and sampling settings can all affect an LLM reranker.",
+        "A fluent explanation can help someone inspect a decision, but it is not evidence that the decision was correct. Evaluate the complete pipeline against the actual information need, including candidates that an earlier stage failed to supply."
+      ]
+    },
+    {
+      "id": "documented_boundary",
+      "title": "A learnt ranker can still follow keyword retrieval",
+      "source_anchor": "why-search-systems-use-multiple-stages",
+      "visual": "documented_boundary",
+      "narration": [
+        "The chapter\u2019s documented Semantic Scholar account from twenty twenty five uses Elasticsearch keyword retrieval over titles, abstracts and author names. Up to a thousand candidates then reach a LightGBM reranker using signals including title matches, citations and recency.",
+        "That is machine learnt ranking after lexical retrieval. It establishes neither dense first stage retrieval nor an LLM reranker, and does not explain the precise later interface behaviour. Ask what produced the pool, what text the ranker saw, and how many candidates reached it."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "shortlist_hook_0",
+      "scene": "shortlist_hook",
+      "text": "Imagine a paper that would be useful for your particular question. The first retrieval stage misses it. Now a much stronger model reranks the shortlist. Can that model put the missing paper first? Pause and predict what information it actually receives.",
+      "gap": 1.0
+    },
+    {
+      "id": "shortlist_hook_1",
+      "scene": "shortlist_hook",
+      "text": "It receives the shortlisted candidates. Reranking can change their order, but the absent paper is unavailable. Our invented cards illustrate a boundary inherited by later stages.",
+      "gap": 2.5
+    },
+    {
+      "id": "broad_then_deep_0",
+      "scene": "broad_then_deep",
+      "text": "Imagine millions of records. Applying an expensive query and document comparison to every record for every search would usually cost too much. Fast first stages retrieve a manageable set; later stages spend more computation on each survivor.",
+      "gap": 1.0
+    },
+    {
+      "id": "broad_then_deep_1",
+      "scene": "broad_then_deep",
+      "text": "The first stage balances speed and retaining potentially relevant records. Reranking aims to improve the ordering within its pool. A later answer generator inherits that candidate boundary too, unless another operation explicitly brings in additional evidence.",
+      "gap": 0.65
+    },
+    {
+      "id": "joint_encoding_0",
+      "scene": "joint_encoding",
+      "text": "A conventional bi encoder represents the query and passage independently. Passage vectors can be stored before any query arrives. Their interaction happens after each text has been compressed. A cross encoder instead processes the query and one candidate together.",
+      "gap": 1.0
+    },
+    {
+      "id": "joint_encoding_1",
+      "scene": "joint_encoding",
+      "text": "Attention can run across their tokens before producing a ranking score. That creates an opportunity to examine a qualifier, negation, entity or intent more closely. Cross encoder names an arrangement; the score still reflects training and the chosen relevance task.",
+      "gap": 0.65
+    },
+    {
+      "id": "delulu_example_0",
+      "scene": "delulu_example",
+      "text": "The chapter\u2019s query asks: am I being delulu about getting this job? One candidate explains how to recognise unrealistic expectations during a job search. Another lists ten signs that you performed well in your job interview.",
+      "gap": 1.0
+    },
+    {
+      "id": "delulu_example_1",
+      "scene": "delulu_example",
+      "text": "Both concern job seeking and advice. For the stated need about unrealistic expectations, the first is the intended match; interview performance is the hard negative. Joint query and candidate processing exposes details that a pooled representation may blur.",
+      "gap": 0.65
+    },
+    {
+      "id": "pair_cost_0",
+      "scene": "pair_cost",
+      "text": "The cross encoder\u2019s candidate representation depends on the incoming query, so it cannot be precomputed and reused in the same way. Reranking a hundred candidates requires roughly a hundred query and candidate evaluations, even when implementation batches the work.",
+      "gap": 1.0
+    },
+    {
+      "id": "pair_cost_1",
+      "scene": "pair_cost",
+      "text": "That count is not a measured latency estimate. Truncation can also hide decisive text. A richer scoring arrangement makes more evidence accessible; it does not establish objective or infallible relevance.",
+      "gap": 0.65
+    },
+    {
+      "id": "llm_modes_0",
+      "scene": "llm_modes",
+      "text": "An LLM can receive the query, candidate text and explicit criteria such as population, study design or whether a passage answers the question. Pointwise prompting judges each candidate separately. Pairwise prompting asks which of two candidates is more relevant.",
+      "gap": 1.0
+    },
+    {
+      "id": "llm_modes_1",
+      "scene": "llm_modes",
+      "text": "Listwise prompting presents several candidates together and requests an ordering. Larger lists may require windows or repeated partial rankings. Here these names describe prompting, rather than classical learning to rank training objectives.",
+      "gap": 0.65
+    },
+    {
+      "id": "judgement_limits_0",
+      "scene": "judgement_limits",
+      "text": "Each arrangement has failure modes. Separate scores may need calibration. Pairwise preferences can be inconsistent. Listwise outputs may depend on input order. Prompt wording, context limits, model updates and sampling settings can all affect an LLM reranker.",
+      "gap": 1.0
+    },
+    {
+      "id": "judgement_limits_1",
+      "scene": "judgement_limits",
+      "text": "A fluent explanation can help someone inspect a decision, but it is not evidence that the decision was correct. Evaluate the complete pipeline against the actual information need, including candidates that an earlier stage failed to supply.",
+      "gap": 0.65
+    },
+    {
+      "id": "documented_boundary_0",
+      "scene": "documented_boundary",
+      "text": "The chapter\u2019s documented Semantic Scholar account from twenty twenty five uses Elasticsearch keyword retrieval over titles, abstracts and author names. Up to a thousand candidates then reach a LightGBM reranker using signals including title matches, citations and recency.",
+      "gap": 1.0
+    },
+    {
+      "id": "documented_boundary_1",
+      "scene": "documented_boundary",
+      "text": "That is machine learnt ranking after lexical retrieval. It establishes neither dense first stage retrieval nor an LLM reranker, and does not explain the precise later interface behaviour. Ask what produced the pool, what text the ranker saw, and how many candidates reached it.",
+      "gap": 0.65
+    }
+  ]
+}

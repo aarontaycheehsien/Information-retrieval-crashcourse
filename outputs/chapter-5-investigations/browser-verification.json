@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8822/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8822/01-the-map-nobody-drew/01-the-map-nobody-drew.mp4",
+      "duration": 272.133333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 112,
+      "seek_seconds": 136.066666,
+      "byte_range": "bytes 0-1023/24865071",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8822/02-one-word-two-locations/02-one-word-two-locations.mp4",
+      "duration": 251.833333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 102,
+      "seek_seconds": 125.916666,
+      "byte_range": "bytes 0-1023/20983034",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8822/03-the-wrong-prediction-game/03-the-wrong-prediction-game.mp4",
+      "duration": 289.133333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 118,
+      "seek_seconds": 144.566666,
+      "byte_range": "bytes 0-1023/26429289",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

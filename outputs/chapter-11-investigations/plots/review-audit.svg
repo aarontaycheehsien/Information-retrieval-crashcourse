@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="403.2pt" viewBox="0 0 1008 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Original query-mechanism teaching illustration; not a model measurement</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 1008 403.2 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #eee9e0"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 282.24 306.432 
+L 937.44 306.432 
+L 937.44 60.48 
+L 282.24 60.48 
+z
+" style="fill: #faf8f3"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 282.24 71.659636 
+L 478.8 71.659636 
+L 478.8 144.176197 
+L 282.24 144.176197 
+z
+" clip-path="url(#pd051b8a90f)" style="fill: #2f577b"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 282.24 222.735803 
+L 616.392 222.735803 
+L 616.392 295.252364 
+L 282.24 295.252364 
+z
+" clip-path="url(#pd051b8a90f)" style="fill: #256c63"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m87df23259d" d="M 0 0 
+L 0 3.5 
+" style="stroke: #6e6b63; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m87df23259d" x="282.24" y="306.432" style="fill: #6e6b63; stroke: #6e6b63; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #6e6b63" x="282.24" y="326.349344" transform="rotate(-0 282.24 326.349344)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m87df23259d" x="446.04" y="306.432" style="fill: #6e6b63; stroke: #6e6b63; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #6e6b63" x="446.04" y="326.349344" transform="rotate(-0 446.04 326.349344)">25</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m87df23259d" x="609.84" y="306.432" style="fill: #6e6b63; stroke: #6e6b63; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #6e6b63" x="609.84" y="326.349344" transform="rotate(-0 609.84 326.349344)">50</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m87df23259d" x="773.64" y="306.432" style="fill: #6e6b63; stroke: #6e6b63; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #6e6b63" x="773.64" y="326.349344" transform="rotate(-0 773.64 326.349344)">75</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m87df23259d" x="937.44" y="306.432" style="fill: #6e6b63; stroke: #6e6b63; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #6e6b63" x="937.44" y="326.349344" transform="rotate(-0 937.44 326.349344)">100</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="609.84" y="347.562" transform="rotate(-0 609.84 347.562)">Reported share of included sources (%)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_6">
+      <defs>
+       <path id="me045ea7b0f" d="M 0 0 
+L -3.5 0 
+" style="stroke: #6e6b63; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#me045ea7b0f" x="282.24" y="107.917916" style="fill: #6e6b63; stroke: #6e6b63; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 17px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(52.399219 106.150182)">Protocol-defined database</text>
+      <text style="font-size: 17px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(131.65375 125.186463)">+ hand searches</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#me045ea7b0f" x="282.24" y="258.994084" style="fill: #6e6b63; stroke: #6e6b63; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #6e6b63" x="275.24" y="265.452755" transform="rotate(-0 275.24 265.452755)">Snowballing</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_5">
+    <path d="M 282.24 306.432 
+L 282.24 60.48 
+" style="fill: none; stroke: #6e6b63; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 282.24 306.432 
+L 937.44 306.432 
+" style="fill: none; stroke: #6e6b63; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #252728" x="490.5936" y="113.988541" transform="rotate(-0 490.5936 113.988541)">30%</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #252728" x="628.1856" y="265.064709" transform="rotate(-0 628.1856 265.064709)">51%</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="609.84" y="42.48" transform="rotate(-0 609.84 42.48)">One review audit · 495 included sources</text>
+   </g>
+  </g>
+  <g id="text_12">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 379.89125)">Greenhalgh and Peacock audit reported in the chapter. Only two reported routes shown; percentages are not universal estimates</text>
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 394.448406)">or exact source counts.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pd051b8a90f">
+   <rect x="282.24" y="60.48" width="655.2" height="245.952"/>
+  </clipPath>
+ </defs>
+</svg>

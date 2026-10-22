@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:31.768
+All four coordinates are active. Is it semantic?
+
+00:00:31.768 --> 00:01:09.260
+Four questions, four different kinds of answer
+
+00:01:09.260 --> 00:01:40.967
+An active coordinate need not have a word label
+
+00:01:40.967 --> 00:02:11.649
+Predict weights instead of counting occurrences
+
+00:02:11.649 --> 00:02:48.447
+A word that was absent can receive weight
+
+00:02:48.447 --> 00:03:22.542
+Keep the expansion small enough to search
+
+00:03:22.542 --> 00:03:53.888
+The comparison operation settles a different choice
+
+00:03:53.888 --> 00:04:36.400
+Read the representation before judging the promise

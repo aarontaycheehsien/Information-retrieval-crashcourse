@@ -1,0 +1,117 @@
+{
+  "recipe_sha256": "8c889d43f21f6afc935b7ced2be190045851a7149cbb20933bbfc616cdd33279",
+  "kind": "source controlled rankings, metric arithmetic and hypothetical local regression",
+  "new_model_or_product_benchmarks": false,
+  "checks": {
+    "source_measures": [
+      "Precision",
+      "Recall"
+    ],
+    "source_ranked_metrics": [
+      "Precision@k",
+      "MRR",
+      "MAP",
+      "nDCG"
+    ],
+    "source_relevance_perspectives": [
+      "System or algorithmic relevance",
+      "Topical relevance",
+      "Cognitive relevance or pertinence",
+      "Situational relevance or usefulness"
+    ],
+    "controlled_source_reranking": {
+      "relevant": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "before": [
+        "A",
+        "K",
+        "L",
+        "M",
+        "B",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "S",
+        "T"
+      ],
+      "after": [
+        "A",
+        "B",
+        "K",
+        "C",
+        "D",
+        "L",
+        "E",
+        "M",
+        "F",
+        "N",
+        "G",
+        "H",
+        "I",
+        "J",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T"
+      ],
+      "before_p10_r10": 0.2,
+      "after_p10_r10": 0.6,
+      "pool_recall_both": 1,
+      "complete_relevance_set_stipulated": true
+    },
+    "single_query_arithmetic": {
+      "reciprocal_rank_both": 1,
+      "average_precision_before": 0.4870881406175524,
+      "average_precision_after": 0.7640576090576091,
+      "not_a_multiquery_mrr_or_map_comparison": true
+    },
+    "illustrative_local_rows": {
+      "before_equal_row_mean": 0.3,
+      "after_equal_row_mean": 0.3333333333333333,
+      "third_row_averages_two_separately_judged_queries": true,
+      "identifier_relative_precision_loss": 0.6666666666666666
+    },
+    "known_seeds_not_absolute_recall": true,
+    "new_model_or_product_benchmarks": false,
+    "passed": true
+  },
+  "files": {
+    "benchmark-controls.png": "d31c19feab781f0af0a93720ac52560adea1a093e3734ef66046ffa9f1cfacd3",
+    "benchmark-controls.svg": "61ceac6452b2519b83f4c2d00b43ad275292d6092f0aca7730a1fdb83788574d",
+    "denominators.png": "560dfd745cb1b4e6229d877ce22da949fce50f041053e3141e257dd6138e8cba",
+    "denominators.svg": "26f18c3937a0edf2665f57983e685b738e383872d4bdcc1a87f9c62d4f9737a9",
+    "local-regression.csv": "10edff559c8674873a3b8b60852f7420559134cea22a114b5659bcf927227175",
+    "local-regression.png": "cf7f6a4e35704f1232c70eef486d833b9179a8011fbaaca190bd033dbb8f4ccd",
+    "local-regression.svg": "36a9683e59fd5ba7790ba98b1975e52c65ea9bc8ef50e4d6fce681b1d64e7eba",
+    "ranking-goals.png": "37cf7c4e8eb726acc3b8e3711f178f1410c3cd9521abf1008070c7a15df7d2c8",
+    "ranking-goals.svg": "fd3e07281aa7d801ad6ad4eb6a2536c817f622f89978e0d83ed3912264a447ca",
+    "reranking-metrics.png": "e49b9d06d5ffa2594bfd755da487ce4559e6b99d1dd5775928712c6893d56148",
+    "reranking-metrics.svg": "8e59a2198db2f7774c853c3f380203c03b11239d35002095c9bd39b7b6d442b2",
+    "single-query-scores.png": "f6cac1f9f623ca1cb95b431fbe43d7ea5398f9caa6fb55fa7c4c133addf9bba9",
+    "single-query-scores.svg": "93883ca5216c992fd2972cffb01fd4589d584c3d0bc0cedafda15bce127fec6a",
+    "source-rankings.csv": "fd21d737fb0fec852af5f53b6c5df403a9524b20b88a1c9a23d733b3d339ec4d"
+  },
+  "passed": true
+}

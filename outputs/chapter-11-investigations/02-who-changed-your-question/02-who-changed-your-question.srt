@@ -1,0 +1,451 @@
+1
+00:00:00,700 --> 00:00:02,740
+A system recognises a date in your
+
+2
+00:00:02,760 --> 00:00:05,085
+request. Has it changed what retrieval
+
+3
+00:00:05,105 --> 00:00:07,366
+receives? Has it selected a different
+
+4
+00:00:07,386 --> 00:00:09,286
+search route? Those are three different
+
+5
+00:00:09,306 --> 00:00:11,709
+questions. Pause and decide what
+
+6
+00:00:11,729 --> 00:00:14,453
+recognising the date alone establishes.
+
+7
+00:00:16,855 --> 00:00:19,240
+Understanding interprets the request and
+
+8
+00:00:19,260 --> 00:00:22,164
+may leave retrieval input unchanged.
+
+9
+00:00:22,327 --> 00:00:24,600
+Transformation creates changed or
+
+10
+00:00:24,620 --> 00:00:26,636
+additional retrieval inputs.
+
+11
+00:00:26,785 --> 00:00:29,613
+Retrieval control chooses where they go,
+
+12
+00:00:29,646 --> 00:00:31,778
+which paths run, and whether another
+
+13
+00:00:31,798 --> 00:00:32,924
+search happens.
+
+14
+00:00:33,822 --> 00:00:36,275
+The chapter’s Web of Science Smart Search
+
+15
+00:00:36,295 --> 00:00:39,058
+example asks for apple, oranges and
+
+16
+00:00:39,078 --> 00:00:41,095
+bananas, from twenty twenty to twenty
+
+17
+00:00:41,115 --> 00:00:43,169
+twenty four, with affiliation from the
+
+18
+00:00:43,189 --> 00:00:44,741
+University of California.
+
+19
+00:00:44,916 --> 00:00:47,370
+The displayed interpretation separates a
+
+20
+00:00:47,390 --> 00:00:50,412
+year range, an organisation and topic
+
+21
+00:00:50,432 --> 00:00:51,429
+conditions.
+
+22
+00:00:51,971 --> 00:00:53,942
+The structured query joins those
+
+23
+00:00:53,962 --> 00:00:57,035
+conditions with AND, including a separate
+
+24
+00:00:57,055 --> 00:00:59,457
+topic condition for each fruit.
+
+25
+00:00:59,619 --> 00:01:01,829
+Inspect the visible, editable
+
+26
+00:01:01,849 --> 00:01:03,065
+interpretation.
+
+27
+00:01:03,202 --> 00:01:05,347
+An omitted concept or a misread
+
+28
+00:01:05,367 --> 00:01:07,563
+relationship changes the eligible
+
+29
+00:01:07,583 --> 00:01:09,921
+candidate set before ranking.
+
+30
+00:01:10,837 --> 00:01:13,390
+Primo VE NDE Natural Language Search
+
+31
+00:01:13,410 --> 00:01:16,766
+documents GPT four point one Mini
+
+32
+00:01:16,786 --> 00:01:19,730
+identifying fields, generating a basic
+
+33
+00:01:19,750 --> 00:01:22,449
+Boolean query, and adding six related OR
+
+34
+00:01:22,469 --> 00:01:24,136
+connected permutations.
+
+35
+00:01:24,299 --> 00:01:26,907
+Advanced Search receives an inspectable,
+
+36
+00:01:26,953 --> 00:01:28,827
+editable structured expression.
+
+37
+00:01:29,387 --> 00:01:31,261
+That is distinct from Primo Research
+
+38
+00:01:31,281 --> 00:01:33,658
+Assistant’s documented question to Boolean
+
+39
+00:01:33,678 --> 00:01:37,253
+variations, CDI retrieval and embedding
+
+40
+00:01:37,273 --> 00:01:38,722
+reranking pipeline.
+
+41
+00:01:38,897 --> 00:01:41,223
+Do not transfer one feature’s architecture
+
+42
+00:01:41,243 --> 00:01:43,710
+to the other. Natural language input can
+
+43
+00:01:43,730 --> 00:01:46,364
+still lead to Boolean conditions and
+
+44
+00:01:46,384 --> 00:01:47,730
+lexical retrieval.
+
+45
+00:01:48,623 --> 00:01:50,955
+Explicit retrieval feedback uses the
+
+46
+00:01:50,975 --> 00:01:53,236
+searcher’s judgements about accepted or
+
+47
+00:01:53,256 --> 00:01:55,916
+rejected records to help construct another
+
+48
+00:01:55,936 --> 00:01:57,114
+retrieval input.
+
+49
+00:01:57,289 --> 00:01:59,370
+Pseudo relevance feedback asks the
+
+50
+00:01:59,390 --> 00:02:01,908
+searcher for nothing: it assumes highly
+
+51
+00:02:01,928 --> 00:02:04,215
+ranked records from an initial search are
+
+52
+00:02:04,235 --> 00:02:04,988
+relevant.
+
+53
+00:02:05,537 --> 00:02:07,802
+It selects useful looking terms from those
+
+54
+00:02:07,822 --> 00:02:10,945
+results and constructs a second query.
+
+55
+00:02:11,120 --> 00:02:13,291
+If the first ranking is off topic, the
+
+56
+00:02:13,311 --> 00:02:15,932
+added terms can reinforce that mistake.
+
+57
+00:02:16,108 --> 00:02:18,755
+The second pass may add candidates, but
+
+58
+00:02:18,775 --> 00:02:21,577
+the relevance assumption was unverified.
+
+59
+00:02:22,489 --> 00:02:24,442
+Active learning screening in systematic
+
+60
+00:02:24,462 --> 00:02:27,883
+reviews also uses inclusion and exclusion
+
+61
+00:02:27,903 --> 00:02:29,906
+judgements. But it repeatedly
+
+62
+00:02:29,926 --> 00:02:33,051
+reprioritises the records already in an
+
+63
+00:02:33,071 --> 00:02:34,957
+existing candidate pool.
+
+64
+00:02:35,120 --> 00:02:37,071
+Those judgements do not inherently
+
+65
+00:02:37,091 --> 00:02:39,868
+construct another retrieval pass or add
+
+66
+00:02:39,888 --> 00:02:40,718
+records.
+
+67
+00:02:41,269 --> 00:02:43,673
+Ask whether feedback changed the search
+
+68
+00:02:43,693 --> 00:02:46,095
+sent to a collection, or changed the order
+
+69
+00:02:46,115 --> 00:02:47,899
+of records awaiting screening.
+
+70
+00:02:48,074 --> 00:02:49,858
+They address different candidate
+
+71
+00:02:49,878 --> 00:02:50,901
+boundaries.
+
+72
+00:02:51,804 --> 00:02:54,250
+Pseudo relevance feedback needs an initial
+
+73
+00:02:54,270 --> 00:02:56,839
+ranking before it can build a later query.
+
+74
+00:02:57,002 --> 00:02:58,696
+It is therefore a retrieval to
+
+75
+00:02:58,716 --> 00:03:01,002
+transformation loop, not a step that
+
+76
+00:03:01,022 --> 00:03:03,502
+happens entirely before searching.
+
+77
+00:03:03,677 --> 00:03:06,234
+Yet a designer can prescribe exactly those
+
+78
+00:03:06,254 --> 00:03:08,321
+two passes every time.
+
+79
+00:03:08,890 --> 00:03:11,209
+The second query’s contents adapt to the
+
+80
+00:03:11,229 --> 00:03:13,606
+results, while the control sequence
+
+81
+00:03:13,626 --> 00:03:16,544
+remains fixed. That dependence alone does
+
+82
+00:03:16,564 --> 00:03:18,876
+not make the workflow agentic.
+
+83
+00:03:19,025 --> 00:03:22,021
+Chapter Twelve asks the separate question
+
+84
+00:03:22,041 --> 00:03:24,237
+of who chooses the next action while a
+
+85
+00:03:24,257 --> 00:03:25,370
+search runs.
+
+86
+00:03:26,273 --> 00:03:29,062
+An LLM rewrite produces alternative
+
+87
+00:03:29,082 --> 00:03:31,755
+retrieval text or a structured expression.
+
+88
+00:03:31,930 --> 00:03:33,856
+SPLADE can instead assign weights to
+
+89
+00:03:33,876 --> 00:03:36,704
+vocabulary dimensions, including terms
+
+90
+00:03:36,724 --> 00:03:38,675
+absent from the original input.
+
+91
+00:03:38,838 --> 00:03:40,467
+That weighted representation is a
+
+92
+00:03:40,487 --> 00:03:42,979
+different form of retrieval input.
+
+93
+00:03:43,529 --> 00:03:45,801
+Both can be inspected, and either can be
+
+94
+00:03:45,821 --> 00:03:47,527
+passed between components.
+
+95
+00:03:47,690 --> 00:03:50,002
+Handoff between components is not what
+
+96
+00:03:50,022 --> 00:03:51,290
+distinguishes them.
+
+97
+00:03:51,453 --> 00:03:53,262
+Record whether you received rewritten
+
+98
+00:03:53,282 --> 00:03:55,930
+language, a Boolean expression or active
+
+99
+00:03:55,950 --> 00:03:58,572
+vocabulary weights, rather than calling
+
+100
+00:03:58,592 --> 00:04:00,594
+all three the same expansion.
+
+101
+00:04:01,515 --> 00:04:04,112
+Keep the original request, the interpreted
+
+102
+00:04:04,132 --> 00:04:06,869
+constraints, every transformed retrieval
+
+103
+00:04:06,889 --> 00:04:09,085
+input, and the routes selected.
+
+104
+00:04:09,248 --> 00:04:11,277
+If earlier results helped construct a
+
+105
+00:04:11,297 --> 00:04:13,712
+later query, retain that intermediate
+
+106
+00:04:13,732 --> 00:04:16,276
+ranking and the feedback decision too.
+
+107
+00:04:16,843 --> 00:04:19,693
+Correction, mapping, expansion,
+
+108
+00:04:19,713 --> 00:04:22,696
+decomposition, routing and coordination
+
+109
+00:04:22,716 --> 00:04:25,453
+can coexist in one prescribed workflow.
+
+110
+00:04:25,615 --> 00:04:27,180
+The interface label natural language
+
+111
+00:04:27,200 --> 00:04:30,079
+search reveals none of those choices.
+
+112
+00:04:30,216 --> 00:04:33,521
+Inspect the generated inputs and test the
+
+113
+00:04:33,541 --> 00:04:35,724
+candidate boundaries they create.

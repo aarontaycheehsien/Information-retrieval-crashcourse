@@ -1,0 +1,201 @@
+{
+  "series": "Dense retrieval at collection scale",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#dense-at-scale",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#dense-at-scale",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-where-does-meaning-enter",
+  "title": "Where does meaning enter?",
+  "subtitle": "A semantic goal can be pursued at several different stages.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "semantic_hook",
+      "title": "What did the word semantic actually tell you?",
+      "source_anchor": "semantic-search-is-a-goal-not-an-architecture",
+      "visual": "semantic_hook",
+      "narration": [
+        "A product promises semantic search and accepts a question in ordinary language. Has it told you that the first retrieval stage compares dense vectors? It has told you a goal and an input format. The candidate-building machinery is still an open question.",
+        "Semantic describes an intended capability: matching by meaning. Dense, vector and embedding describe different technical properties. A product can pursue the goal through expansion, learnt representations, reranking, or combinations. Ask where meaning enters its pipeline."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "three_routes",
+      "title": "One wording gap, three possible routes",
+      "source_anchor": "semantic-three-routes-title",
+      "visual": "three_routes",
+      "narration": [
+        "Search for heart attack treatment. A document says myocardial infarction therapy. Expansion can add those expressions so a lexical retriever has matching terms. A suitably trained dense retriever may bridge the original phrasings through vector comparison.",
+        "A third route first uses expansion and lexical retrieval to admit the document, then applies a semantic reranker to that shortlist. The expansion supplied the bridge. A reranker cannot rescue a document that never arrived. These are possible routes, not guaranteed matches."
+      ]
+    },
+    {
+      "id": "bridge_bottleneck",
+      "title": "Precomputation brings a bridge\u2014and a bottleneck",
+      "source_anchor": "what-dense-retrieval-gains-and-compresses",
+      "visual": "bridge_bottleneck",
+      "narration": [
+        "A suitably trained encoder may connect the chapter's delulu question with a passage about unrealistic expectations. That vocabulary bridge is valuable. But a single-vector passage encoder compresses the passage before it knows what the next query will ask.",
+        "Broad similarity can dominate an exact code, a rare name or a negation. Shorter chunks reduce the compression, while each chunk still has one pooled vector. Similar meaning alone does not establish suitability for a task or inclusion criteria."
+      ]
+    },
+    {
+      "id": "range_threshold",
+      "title": "Why not return everything above one score?",
+      "source_anchor": "dense-range-search-question-title",
+      "visual": "range_threshold",
+      "narration": [
+        "A range search can return vectors above a similarity threshold. The difficulty is calibration. Scores vary across queries, models and collections. One fixed threshold may return nothing for one search and thousands for another.",
+        "A fixed k gives a more predictable output size, not a guarantee that every returned item is useful. A similarity score needs the context of its model and comparison rule. It is not a calibrated probability of relevance."
+      ]
+    },
+    {
+      "id": "stage_budgets",
+      "title": "Several handoffs can have different budgets",
+      "source_anchor": "top-k-is-a-result-boundary-not-a-dense-retrieval-method",
+      "visual": "stage_budgets",
+      "narration": [
+        "Our invented pipeline retrieves forty candidates, passes eight to an answer writer, and displays three citations. These numbers are teaching budgets, not measurements of a named product. Each handoff can narrow the available evidence.",
+        "The visible three do not tell you how many records competed or were examined. Google Scholar's documented display cap likewise does not establish an exhaustively scored global top k. Candidate selection, ranking, execution and presentation need separate evidence."
+      ]
+    },
+    {
+      "id": "opening_puzzle",
+      "title": "A shorter query produced many more reported matches",
+      "source_anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
+      "visual": "opening_puzzle",
+      "narration": [
+        "The chapter's August twenty twenty-six Semantic Scholar observation returned thirteen results for a natural-language question and about thirty-five thousand three hundred for its shorter keyword query. The author also judged the inspected leading keyword results better for the topic.",
+        "Those observations describe this example. They do not establish that keyword queries always work better, or show exactly how the interface processed either request. A product name and visible counts cannot answer that architectural question."
+      ]
+    },
+    {
+      "id": "documented_routes",
+      "title": "Read the documented candidate-building route",
+      "source_anchor": "tbl-7-2",
+      "visual": "documented_routes",
+      "narration": [
+        "The chapter's twenty twenty-five Semantic Scholar account starts with Elasticsearch keyword candidates, capped at one thousand, followed by Light G B M reranking. That account does not establish the precise processing of the later interface comparison.",
+        "OpenAlex Alice's twenty twenty-six documentation instead describes G T E Large E N embeddings compared by cosine. Its April account reports four hundred thirteen million embeddings. The documented semantic request is an alternative to its lexical modes, not automatically a hybrid query."
+      ]
+    },
+    {
+      "id": "pipeline_questions",
+      "title": "Ask which stage forms the candidate boundary",
+      "source_anchor": "semantic-search-is-a-goal-not-an-architecture",
+      "visual": "pipeline_questions",
+      "narration": [
+        "The same semantic goal can lead through different mechanisms. Ask what text unit is indexed, which representation and comparison rule it uses, whether search is exact or approximate, and where filters, rerankers and output boundaries act.",
+        "Then evaluate usefulness for the real task. A natural-language box, a dense vector, a high score and a top-k list each leave different questions unanswered. Chapter Eight opens the stored representation and asks whether an indexed item is a document, record or passage."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "semantic_hook_0",
+      "scene": "semantic_hook",
+      "text": "A product promises semantic search and accepts a question in ordinary language. Has it told you that the first retrieval stage compares dense vectors? It has told you a goal and an input format. The candidate-building machinery is still an open question.",
+      "gap": 1.0
+    },
+    {
+      "id": "semantic_hook_1",
+      "scene": "semantic_hook",
+      "text": "Semantic describes an intended capability: matching by meaning. Dense, vector and embedding describe different technical properties. A product can pursue the goal through expansion, learnt representations, reranking, or combinations. Ask where meaning enters its pipeline.",
+      "gap": 2.5
+    },
+    {
+      "id": "three_routes_0",
+      "scene": "three_routes",
+      "text": "Search for heart attack treatment. A document says myocardial infarction therapy. Expansion can add those expressions so a lexical retriever has matching terms. A suitably trained dense retriever may bridge the original phrasings through vector comparison.",
+      "gap": 1.0
+    },
+    {
+      "id": "three_routes_1",
+      "scene": "three_routes",
+      "text": "A third route first uses expansion and lexical retrieval to admit the document, then applies a semantic reranker to that shortlist. The expansion supplied the bridge. A reranker cannot rescue a document that never arrived. These are possible routes, not guaranteed matches.",
+      "gap": 0.65
+    },
+    {
+      "id": "bridge_bottleneck_0",
+      "scene": "bridge_bottleneck",
+      "text": "A suitably trained encoder may connect the chapter's delulu question with a passage about unrealistic expectations. That vocabulary bridge is valuable. But a single-vector passage encoder compresses the passage before it knows what the next query will ask.",
+      "gap": 1.0
+    },
+    {
+      "id": "bridge_bottleneck_1",
+      "scene": "bridge_bottleneck",
+      "text": "Broad similarity can dominate an exact code, a rare name or a negation. Shorter chunks reduce the compression, while each chunk still has one pooled vector. Similar meaning alone does not establish suitability for a task or inclusion criteria.",
+      "gap": 0.65
+    },
+    {
+      "id": "range_threshold_0",
+      "scene": "range_threshold",
+      "text": "A range search can return vectors above a similarity threshold. The difficulty is calibration. Scores vary across queries, models and collections. One fixed threshold may return nothing for one search and thousands for another.",
+      "gap": 1.0
+    },
+    {
+      "id": "range_threshold_1",
+      "scene": "range_threshold",
+      "text": "A fixed k gives a more predictable output size, not a guarantee that every returned item is useful. A similarity score needs the context of its model and comparison rule. It is not a calibrated probability of relevance.",
+      "gap": 0.65
+    },
+    {
+      "id": "stage_budgets_0",
+      "scene": "stage_budgets",
+      "text": "Our invented pipeline retrieves forty candidates, passes eight to an answer writer, and displays three citations. These numbers are teaching budgets, not measurements of a named product. Each handoff can narrow the available evidence.",
+      "gap": 1.0
+    },
+    {
+      "id": "stage_budgets_1",
+      "scene": "stage_budgets",
+      "text": "The visible three do not tell you how many records competed or were examined. Google Scholar's documented display cap likewise does not establish an exhaustively scored global top k. Candidate selection, ranking, execution and presentation need separate evidence.",
+      "gap": 0.65
+    },
+    {
+      "id": "opening_puzzle_0",
+      "scene": "opening_puzzle",
+      "text": "The chapter's August twenty twenty-six Semantic Scholar observation returned thirteen results for a natural-language question and about thirty-five thousand three hundred for its shorter keyword query. The author also judged the inspected leading keyword results better for the topic.",
+      "gap": 1.0
+    },
+    {
+      "id": "opening_puzzle_1",
+      "scene": "opening_puzzle",
+      "text": "Those observations describe this example. They do not establish that keyword queries always work better, or show exactly how the interface processed either request. A product name and visible counts cannot answer that architectural question.",
+      "gap": 0.65
+    },
+    {
+      "id": "documented_routes_0",
+      "scene": "documented_routes",
+      "text": "The chapter's twenty twenty-five Semantic Scholar account starts with Elasticsearch keyword candidates, capped at one thousand, followed by Light G B M reranking. That account does not establish the precise processing of the later interface comparison.",
+      "gap": 1.0
+    },
+    {
+      "id": "documented_routes_1",
+      "scene": "documented_routes",
+      "text": "OpenAlex Alice's twenty twenty-six documentation instead describes G T E Large E N embeddings compared by cosine. Its April account reports four hundred thirteen million embeddings. The documented semantic request is an alternative to its lexical modes, not automatically a hybrid query.",
+      "gap": 0.65
+    },
+    {
+      "id": "pipeline_questions_0",
+      "scene": "pipeline_questions",
+      "text": "The same semantic goal can lead through different mechanisms. Ask what text unit is indexed, which representation and comparison rule it uses, whether search is exact or approximate, and where filters, rerankers and output boundaries act.",
+      "gap": 1.0
+    },
+    {
+      "id": "pipeline_questions_1",
+      "scene": "pipeline_questions",
+      "text": "Then evaluate usefulness for the real task. A natural-language box, a dense vector, a high score and a top-k list each leave different questions unanswered. Chapter Eight opens the stored representation and asks whether an indexed item is a document, record or passage.",
+      "gap": 0.65
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "series": "Representations and indexed units",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#representations-and-units",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#representations-and-units",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-dense-does-not-mean-semantic",
+  "title": "Dense does not mean semantic",
+  "subtitle": "A sparse representation can learn expansions; a dense one can hold simple facts.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "dense_hook",
+      "title": "All four coordinates are active. Is it semantic?",
+      "source_anchor": "four-questions-about-a-representation",
+      "visual": "dense_hook",
+      "narration": [
+        "Here is an article vector: twenty twenty six, fourteen, thirty two, eighty seven. Every coordinate is active, so it is dense. Would you trust it to match heart attack with myocardial infarction?",
+        "They are publication year, pages, references and citations. The vector records bibliographic facts. Being dense tells us how many coordinates are active; it does not establish semantic matching."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "separate_questions",
+      "title": "Four questions, four different kinds of answer",
+      "source_anchor": "four-questions-about-a-representation",
+      "visual": "separate_questions",
+      "narration": [
+        "First, is it a vector: an ordered list of numbers? Second, is it sparse or dense: relatively few active coordinates, or mostly active coordinates? Third, was the rule specified explicitly or learnt through training? Fourth, what evidence do the dimensions preserve?",
+        "These questions describe different properties. BM twenty five is sparse with a specified weighting formula. A conventional dense bi encoder uses a learnt mapping into latent features. A learnt sparse model provides a third combination."
+      ]
+    },
+    {
+      "id": "latent_coordinates",
+      "title": "An active coordinate need not have a word label",
+      "source_anchor": "lexical-and-dense-vector-dimensions-title",
+      "visual": "latent_coordinates",
+      "narration": [
+        "In a lexical representation, we can name a coordinate: heart, treatment, or a term from the index vocabulary. In a dense text embedding, coordinates are latent. Their contribution to meaning is distributed across the representation and shaped by training.",
+        "A value of zero point eight one in latent coordinate three does not label that coordinate citation. Even a trained dense text embedding still needs evaluation on the intended retrieval task."
+      ]
+    },
+    {
+      "id": "learned_weights",
+      "title": "Predict weights instead of counting occurrences",
+      "source_anchor": "learnt-sparse-representations",
+      "visual": "learned_weights",
+      "narration": [
+        "SPLADE offers another route. It predicts weights over the output vocabulary of a transformer language model. In the standard implementation those coordinates are WordPiece subword units.",
+        "Having read the text, the model can assign weight to terms absent from the input. A training penalty encourages almost all the remaining weights to be zero. The result is learnt and sparse, while its active coordinates still carry vocabulary labels."
+      ]
+    },
+    {
+      "id": "expansion_bridge",
+      "title": "A word that was absent can receive weight",
+      "source_anchor": "splade-sparse-expansion-title",
+      "visual": "expansion_bridge",
+      "narration": [
+        "Use the chapter\u2019s schematic heart attack example. Imagine a learnt sparse representation activates heart and attack, but also myocardial and infarction. The extra words need not occur in the original text. Our displayed weights are invented teaching values, not measured outputs from SPLADE.",
+        "A query activating myocardial and infarction can now share coordinates with that representation. The mechanism can bridge vocabulary, conditional on training. Whole words make the drawing readable; a real model activates its own subword entries."
+      ]
+    },
+    {
+      "id": "sparse_execution",
+      "title": "Keep the expansion small enough to search",
+      "source_anchor": "learnt-sparse-representations",
+      "visual": "sparse_execution",
+      "narration": [
+        "If nearly every vocabulary term received weight, posting lists would grow and more work could be needed at search time. Sparsity constraints limit the active representation. The exact cost depends on which terms activate, their posting lists and the implementation.",
+        "A single inverted index can carry exact term evidence and learnt expansions. Learnt sparse retrieval can therefore be an alternative to separate lexical and dense retrievers. It can also supply one route within a hybrid system."
+      ]
+    },
+    {
+      "id": "comparison_choice",
+      "title": "The comparison operation settles a different choice",
+      "source_anchor": "density-and-learning-axes-title",
+      "visual": "comparison_choice",
+      "narration": [
+        "Dot product can combine sparse vocabulary weights or dense latent features. Cosine can also compare different numerical representations. Choosing either arithmetic operation does not make the underlying representation dense, learnt or semantic. Representation and comparison remain separate decisions.",
+        "And neither operation tells us which scored items are returned. Admission rules, filters, result limits and later stages still matter."
+      ]
+    },
+    {
+      "id": "representation_passport",
+      "title": "Read the representation before judging the promise",
+      "source_anchor": "tbl-8-2",
+      "visual": "representation_passport",
+      "narration": [
+        "Our bibliographic vector was dense and described explicit facts. BM twenty five was sparse and used a specified formula. SPLADE was sparse and used a learnt mapping that could expand vocabulary. The dense bi encoder used a learnt mapping with distributed latent coordinates.",
+        "For each, ask what evidence survives, and test whether that evidence serves the user\u2019s need. Density is a shape, training describes where the rule came from, and semantic matching is a capability to investigate. Next we ask what piece of a paper those representations actually describe."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "dense_hook_0",
+      "scene": "dense_hook",
+      "text": "Here is an article vector: twenty twenty six, fourteen, thirty two, eighty seven. Every coordinate is active, so it is dense. Would you trust it to match heart attack with myocardial infarction?",
+      "gap": 1.0
+    },
+    {
+      "id": "dense_hook_1",
+      "scene": "dense_hook",
+      "text": "They are publication year, pages, references and citations. The vector records bibliographic facts. Being dense tells us how many coordinates are active; it does not establish semantic matching.",
+      "gap": 2.5
+    },
+    {
+      "id": "separate_questions_0",
+      "scene": "separate_questions",
+      "text": "First, is it a vector: an ordered list of numbers? Second, is it sparse or dense: relatively few active coordinates, or mostly active coordinates? Third, was the rule specified explicitly or learnt through training? Fourth, what evidence do the dimensions preserve?",
+      "gap": 1.0
+    },
+    {
+      "id": "separate_questions_1",
+      "scene": "separate_questions",
+      "text": "These questions describe different properties. BM twenty five is sparse with a specified weighting formula. A conventional dense bi encoder uses a learnt mapping into latent features. A learnt sparse model provides a third combination.",
+      "gap": 0.65
+    },
+    {
+      "id": "latent_coordinates_0",
+      "scene": "latent_coordinates",
+      "text": "In a lexical representation, we can name a coordinate: heart, treatment, or a term from the index vocabulary. In a dense text embedding, coordinates are latent. Their contribution to meaning is distributed across the representation and shaped by training.",
+      "gap": 1.0
+    },
+    {
+      "id": "latent_coordinates_1",
+      "scene": "latent_coordinates",
+      "text": "A value of zero point eight one in latent coordinate three does not label that coordinate citation. Even a trained dense text embedding still needs evaluation on the intended retrieval task.",
+      "gap": 0.65
+    },
+    {
+      "id": "learned_weights_0",
+      "scene": "learned_weights",
+      "text": "SPLADE offers another route. It predicts weights over the output vocabulary of a transformer language model. In the standard implementation those coordinates are WordPiece subword units.",
+      "gap": 1.0
+    },
+    {
+      "id": "learned_weights_1",
+      "scene": "learned_weights",
+      "text": "Having read the text, the model can assign weight to terms absent from the input. A training penalty encourages almost all the remaining weights to be zero. The result is learnt and sparse, while its active coordinates still carry vocabulary labels.",
+      "gap": 0.65
+    },
+    {
+      "id": "expansion_bridge_0",
+      "scene": "expansion_bridge",
+      "text": "Use the chapter\u2019s schematic heart attack example. Imagine a learnt sparse representation activates heart and attack, but also myocardial and infarction. The extra words need not occur in the original text. Our displayed weights are invented teaching values, not measured outputs from SPLADE.",
+      "gap": 1.0
+    },
+    {
+      "id": "expansion_bridge_1",
+      "scene": "expansion_bridge",
+      "text": "A query activating myocardial and infarction can now share coordinates with that representation. The mechanism can bridge vocabulary, conditional on training. Whole words make the drawing readable; a real model activates its own subword entries.",
+      "gap": 0.65
+    },
+    {
+      "id": "sparse_execution_0",
+      "scene": "sparse_execution",
+      "text": "If nearly every vocabulary term received weight, posting lists would grow and more work could be needed at search time. Sparsity constraints limit the active representation. The exact cost depends on which terms activate, their posting lists and the implementation.",
+      "gap": 1.0
+    },
+    {
+      "id": "sparse_execution_1",
+      "scene": "sparse_execution",
+      "text": "A single inverted index can carry exact term evidence and learnt expansions. Learnt sparse retrieval can therefore be an alternative to separate lexical and dense retrievers. It can also supply one route within a hybrid system.",
+      "gap": 0.65
+    },
+    {
+      "id": "comparison_choice_0",
+      "scene": "comparison_choice",
+      "text": "Dot product can combine sparse vocabulary weights or dense latent features. Cosine can also compare different numerical representations. Choosing either arithmetic operation does not make the underlying representation dense, learnt or semantic. Representation and comparison remain separate decisions.",
+      "gap": 1.0
+    },
+    {
+      "id": "comparison_choice_1",
+      "scene": "comparison_choice",
+      "text": "And neither operation tells us which scored items are returned. Admission rules, filters, result limits and later stages still matter.",
+      "gap": 0.65
+    },
+    {
+      "id": "representation_passport_0",
+      "scene": "representation_passport",
+      "text": "Our bibliographic vector was dense and described explicit facts. BM twenty five was sparse and used a specified formula. SPLADE was sparse and used a learnt mapping that could expand vocabulary. The dense bi encoder used a learnt mapping with distributed latent coordinates.",
+      "gap": 1.0
+    },
+    {
+      "id": "representation_passport_1",
+      "scene": "representation_passport",
+      "text": "For each, ask what evidence survives, and test whether that evidence serves the user\u2019s need. Density is a shape, training describes where the rule came from, and semantic matching is a capability to investigate. Next we ask what piece of a paper those representations actually describe.",
+      "gap": 0.65
+    }
+  ]
+}

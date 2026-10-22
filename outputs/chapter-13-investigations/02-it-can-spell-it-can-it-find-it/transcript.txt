@@ -1,0 +1,40 @@
+It can spell it. Can it find it?
+
+[00:00:00.700]: A chemical identifier is plainly printed in a record, and a model can encode every piece of it. Searching still fails. Has that ruled out a representation problem? Pause and name the separate components between the string you see and the evidence a retriever can use.
+
+[00:00:20.831]: Out of vocabulary only means something relative to a named vocabulary. The index may lack a corresponding analysed term. A tokeniser may lack a complete word entry. Or every token may exist while the retriever’s representation remains poor. Those are different conditions.
+
+[00:00:40.908]: Ask three questions separately. Is there a corresponding term and posting list in the lexical index? Can the model tokeniser encode the string? Has the retrieval model learnt a useful representation of those pieces in context?
+
+[00:00:57.906]: The first two concern literal vocabularies. The third concerns representation or training exposure. A tokeniser passing its question does not answer the other two. Inspect the field, lexical analysis, model tokenisation and retrieval behaviour as separate layers.
+
+[00:01:16.867]: An older word level model may have no complete entry for a new word. A subword model can instead encode known pieces. That often avoids literal whole word absence, while making no promise about how informative the resulting representation will be.
+
+[00:01:34.119]: The chapter’s appendix reports Bert splitting rizzlord into the three pieces shown here, rather than a neat rizz plus lord. That is a reported tokenisation example, not a tokeniser run for this film. Another model may split exactly the same string differently.
+
+[00:01:51.931]: A pure byte level model can encode valid UTF eight input. A character level model depends on its supported character inventory or fallback. Either can represent an expression’s form without having learnt how people use it for this retrieval task.
+
+[00:02:08.747]: So tokenisable does not mean understood, and understood in some language task does not establish good retrieval. The source’s new expressions illustrate why naming the representation matters. Avoid calling every weak response out of vocabulary when no literal vocabulary entry is missing.
+
+[00:02:30.225]: Now reverse the problem. The source supposes an identifier, delulu four twenty seven, occurs in three indexed documents. Our invented keyword field example stores that exact string in three records and a neighbouring identifier in a fourth. Literal equality selects the three intended identities.
+
+[00:02:51.988]: That calculation demonstrates exact field identity only. An ordinary text analyser might split the string into word and numeric components. Query and document analysis must agree. BM twenty five can weight rare matching components without previously encountering the identifier during model training.
+
+[00:03:14.273]: A standard single vector dense retriever usually can encode the identifier as model tokens. Contextualisation and pooling may still blur it with related strings or concepts. A small local difference can determine relevance even when the overall meanings look similar.
+
+[00:03:33.642]: The chapter cites research showing that better training can mitigate this weakness. It does not claim dense retrieval always fails on identifiers. Our neighbouring strings are a teaching contrast, not measured vectors, model scores or a reported ranking.
+
+[00:03:51.073]: Gene names, chemical strings, dataset titles, model names, article identifiers, personal names and new terminology can all make exact identity important. Preserve a suitable lexical route and inspect fields and analysis. Do not assume an embedding alone preserves the distinction.
+
+[00:04:10.988]: A synonym or controlled term may work around some lexical absence, while a keyword field may preserve an exact identifier. Neither remedy by itself fixes an unfamiliar deployment task or a failure to preserve negation. Choose the remedy for the component that lost the evidence.
+
+[00:04:31.477]: Use a known relevant record and a controlled contrast. Record the literal input, field selected, available analysis information and model tokenisation if documented. Establish eligibility first, then compare what each layer preserves. Mark internal details unknown when the system does not expose them.
+
+[00:04:52.661]: A good diagnosis can combine lexical absence, weak representation and unfamiliar deployment conditions. Tokenisation gives evidence about encoding, not a complete cause of retrieval failure. The next film considers failures where every word is familiar and the missing information is a relationship.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 13.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#diagnosing-failure
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

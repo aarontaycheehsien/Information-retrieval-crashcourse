@@ -1,0 +1,282 @@
+{
+  "series": "Representations and indexed units",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#representations-and-units",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#representations-and-units",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-the-vector-hiding-in-keyword-search",
+      "title": "The vector hiding in keyword search",
+      "subtitle": "Seven coordinates reveal what a lexical vector can—and cannot—tell us.",
+      "accent": "blue",
+      "scenes": [
+        {
+          "id": "vector_hook",
+          "title": "Your keyword engine already has vectors",
+          "source_anchor": "a-vector-does-not-have-to-be-dense-or-semantic",
+          "visual": "vector_hook",
+          "narration": [
+            "A search product says it uses vectors. What does that tell you? Before answering, look at three ordinary keyword records. Heart attack treatment. Job interview tips. Cancer treatment. We can turn every one into a vector without training a neural network. Make a prediction: what will the coordinates mean?",
+            "They will mean vocabulary terms. Vector names a numerical object: an ordered list of numbers. Chapter Eight makes those hidden choices visible."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "coordinates",
+          "title": "First, agree what every position means",
+          "source_anchor": "step-1-fix-the-coordinate-system",
+          "visual": "coordinates",
+          "narration": [
+            "Fix this vocabulary order: attack, cancer, heart, interview, job, tips, treatment. Every document now lives in the same seven dimensional space. Coordinate three always means heart.",
+            "Put one where a term occurs and zero where it does not. The first document activates attack, heart and treatment. The second activates interview, job and tips. The third activates cancer and treatment. These are sparse, vocabulary aligned vectors."
+          ]
+        },
+        {
+          "id": "overlap_logic",
+          "title": "The numbers do not choose AND or OR",
+          "source_anchor": "step-2-binary-presence",
+          "visual": "overlap_logic",
+          "narration": [
+            "Now search for heart treatment. Its two active coordinates overlap the first document twice, the third once, and the second not at all. Counting shared ones gives a graded score.",
+            "Heart AND treatment admits only the first document. Heart OR treatment admits the first and third. The binary vector did not contain either operator. The retrieval rule decides whether term evidence becomes a hard requirement or a contribution to a ranking."
+          ]
+        },
+        {
+          "id": "term_counts",
+          "title": "One mention and three mentions look different",
+          "source_anchor": "step-3-term-frequency",
+          "visual": "term_counts",
+          "narration": [
+            "Change the first document to heart attack treatment treatment treatment. Binary presence barely notices: the same three coordinates are active. Raw term frequency instead puts three in the treatment coordinate. The vocabulary has stayed fixed; the values have changed.",
+            "Repetition can be useful evidence of topic. But raw counts keep growing, and long documents get more chances to accumulate them. We need a rule for how much another occurrence contributes."
+          ]
+        },
+        {
+          "id": "rarity_weights",
+          "title": "Rarer terms carry more distinguishing weight",
+          "source_anchor": "step-4-tf-idf",
+          "visual": "rarity_weights",
+          "narration": [
+            "Term frequency looks inside a document. Inverse document frequency looks across the collection. Treatment occurs in two of our three documents. Heart occurs in only one. Heart therefore distinguishes a smaller group and receives more rarity weight under the illustrated rule.",
+            "The figure uses raw counts times the natural logarithm of collection size divided by document frequency. The coordinates still mean words. Adding collection statistics has not turned them into latent semantic dimensions."
+          ]
+        },
+        {
+          "id": "bm25_weights",
+          "title": "Let extra mentions add less",
+          "source_anchor": "step-5-bm25",
+          "visual": "bm25_weights",
+          "narration": [
+            "BM twenty five adds diminishing returns from repetition and adjusts term frequency evidence for document length, while retaining inverse document frequency. Our figure declares one standard parameter setting and computes the resulting term contributions.",
+            "This is a comparison of representations, not a historical claim that one method was derived from another. Binary presence, raw counts, TF IDF and BM twenty five can all use vocabulary coordinates."
+          ]
+        },
+        {
+          "id": "inverted_storage",
+          "title": "A huge coordinate space can be cheap to store",
+          "source_anchor": "step-5-bm25",
+          "visual": "inverted_storage",
+          "narration": [
+            "A real vocabulary might contain millions of terms, but a short document activates only a few hundred. The implementation can store term and weight pairs for active coordinates.",
+            "An inverted index lets a query jump to the posting lists for its active terms and accumulate contributions. A dot product style mathematical description of BM twenty five does not imply that the engine scans dense vectors or runs nearest neighbour search."
+          ]
+        },
+        {
+          "id": "vector_verdict",
+          "title": "Ask what the coordinates preserve",
+          "source_anchor": "four-questions-about-a-representation",
+          "visual": "vector_verdict",
+          "narration": [
+            "Return to the product claim: we use vectors. Ask what each coordinate represents, which values are active, how the weighting rule was obtained, and how matching evidence becomes an eligible set or a score.",
+            "The same numerical object can hold term presence, calculated lexical weights, recorded facts or learnt latent features. Calling it a vector settles none of those choices. In the next film, a dense vector fails a semantic test while a sparse one bridges a wording gap."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-dense-does-not-mean-semantic",
+      "title": "Dense does not mean semantic",
+      "subtitle": "A sparse representation can learn expansions; a dense one can hold simple facts.",
+      "accent": "teal",
+      "scenes": [
+        {
+          "id": "dense_hook",
+          "title": "All four coordinates are active. Is it semantic?",
+          "source_anchor": "four-questions-about-a-representation",
+          "visual": "dense_hook",
+          "narration": [
+            "Here is an article vector: twenty twenty six, fourteen, thirty two, eighty seven. Every coordinate is active, so it is dense. Would you trust it to match heart attack with myocardial infarction?",
+            "They are publication year, pages, references and citations. The vector records bibliographic facts. Being dense tells us how many coordinates are active; it does not establish semantic matching."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "separate_questions",
+          "title": "Four questions, four different kinds of answer",
+          "source_anchor": "four-questions-about-a-representation",
+          "visual": "separate_questions",
+          "narration": [
+            "First, is it a vector: an ordered list of numbers? Second, is it sparse or dense: relatively few active coordinates, or mostly active coordinates? Third, was the rule specified explicitly or learnt through training? Fourth, what evidence do the dimensions preserve?",
+            "These questions describe different properties. BM twenty five is sparse with a specified weighting formula. A conventional dense bi encoder uses a learnt mapping into latent features. A learnt sparse model provides a third combination."
+          ]
+        },
+        {
+          "id": "latent_coordinates",
+          "title": "An active coordinate need not have a word label",
+          "source_anchor": "lexical-and-dense-vector-dimensions-title",
+          "visual": "latent_coordinates",
+          "narration": [
+            "In a lexical representation, we can name a coordinate: heart, treatment, or a term from the index vocabulary. In a dense text embedding, coordinates are latent. Their contribution to meaning is distributed across the representation and shaped by training.",
+            "A value of zero point eight one in latent coordinate three does not label that coordinate citation. Even a trained dense text embedding still needs evaluation on the intended retrieval task."
+          ]
+        },
+        {
+          "id": "learned_weights",
+          "title": "Predict weights instead of counting occurrences",
+          "source_anchor": "learnt-sparse-representations",
+          "visual": "learned_weights",
+          "narration": [
+            "SPLADE offers another route. It predicts weights over the output vocabulary of a transformer language model. In the standard implementation those coordinates are WordPiece subword units.",
+            "Having read the text, the model can assign weight to terms absent from the input. A training penalty encourages almost all the remaining weights to be zero. The result is learnt and sparse, while its active coordinates still carry vocabulary labels."
+          ]
+        },
+        {
+          "id": "expansion_bridge",
+          "title": "A word that was absent can receive weight",
+          "source_anchor": "splade-sparse-expansion-title",
+          "visual": "expansion_bridge",
+          "narration": [
+            "Use the chapter’s schematic heart attack example. Imagine a learnt sparse representation activates heart and attack, but also myocardial and infarction. The extra words need not occur in the original text. Our displayed weights are invented teaching values, not measured outputs from SPLADE.",
+            "A query activating myocardial and infarction can now share coordinates with that representation. The mechanism can bridge vocabulary, conditional on training. Whole words make the drawing readable; a real model activates its own subword entries."
+          ]
+        },
+        {
+          "id": "sparse_execution",
+          "title": "Keep the expansion small enough to search",
+          "source_anchor": "learnt-sparse-representations",
+          "visual": "sparse_execution",
+          "narration": [
+            "If nearly every vocabulary term received weight, posting lists would grow and more work could be needed at search time. Sparsity constraints limit the active representation. The exact cost depends on which terms activate, their posting lists and the implementation.",
+            "A single inverted index can carry exact term evidence and learnt expansions. Learnt sparse retrieval can therefore be an alternative to separate lexical and dense retrievers. It can also supply one route within a hybrid system."
+          ]
+        },
+        {
+          "id": "comparison_choice",
+          "title": "The comparison operation settles a different choice",
+          "source_anchor": "density-and-learning-axes-title",
+          "visual": "comparison_choice",
+          "narration": [
+            "Dot product can combine sparse vocabulary weights or dense latent features. Cosine can also compare different numerical representations. Choosing either arithmetic operation does not make the underlying representation dense, learnt or semantic. Representation and comparison remain separate decisions.",
+            "And neither operation tells us which scored items are returned. Admission rules, filters, result limits and later stages still matter."
+          ]
+        },
+        {
+          "id": "representation_passport",
+          "title": "Read the representation before judging the promise",
+          "source_anchor": "tbl-8-2",
+          "visual": "representation_passport",
+          "narration": [
+            "Our bibliographic vector was dense and described explicit facts. BM twenty five was sparse and used a specified formula. SPLADE was sparse and used a learnt mapping that could expand vocabulary. The dense bi encoder used a learnt mapping with distributed latent coordinates.",
+            "For each, ask what evidence survives, and test whether that evidence serves the user’s need. Density is a shape, training describes where the rule came from, and semantic matching is a capability to investigate. Next we ask what piece of a paper those representations actually describe."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-one-paper-fifty-searchable-objects",
+      "title": "One paper, fifty searchable objects",
+      "subtitle": "Follow evidence from a source article to indexed passages and answer context.",
+      "accent": "red",
+      "scenes": [
+        {
+          "id": "units_hook",
+          "title": "Four matches. How many papers?",
+          "source_anchor": "chunking-strategies-title",
+          "visual": "units_hook",
+          "narration": [
+            "A search retrieves four matches: passage two from paper A, passage seven from paper A, passage three from paper B, and passage nine from paper A. How many papers did it find? Four matches, two papers. Would the interface show four results, or two? Make a prediction.",
+            "Either display is possible. Matching passages may appear separately or be grouped by source identity. The visible result list hides earlier decisions about what was indexed and represented. Those decisions determine which evidence can reach the list in the first place."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "unit_strategies",
+          "title": "One source can produce very different indexes",
+          "source_anchor": "one-document-one-chunk-and-one-vector-are-not-the-same-thing",
+          "visual": "unit_strategies",
+          "narration": [
+            "Take the chapter’s illustrative twenty page article. A system might index one abstract, ten sections, or fifty overlapping passages. These are alternative choices, not measurements of a named service. They produce different searchable objects from the same source document.",
+            "An abstract is a compact account. A section can preserve more local context. A short overlapping window may expose a narrow passage. The right unit depends on the question and pipeline."
+          ]
+        },
+        {
+          "id": "independent_units",
+          "title": "Fifty vectors stay fifty separate representations",
+          "source_anchor": "paper-as-many-vectors-title",
+          "visual": "independent_units",
+          "narration": [
+            "In a conventional dense bi encoder, each indexed passage receives one pooled vector. Fifty passages therefore become fifty independently searchable vectors. No single one automatically represents the complete paper.",
+            "Nothing automatically combines evidence spread across those fifty chunks. A passage might describe the study population while another reports the outcome. Finding one passage does not prove that both facts were compared jointly when the retrieval score was calculated."
+          ]
+        },
+        {
+          "id": "split_evidence",
+          "title": "Related evidence can land in different chunks",
+          "source_anchor": "paper-as-many-vectors-title",
+          "visual": "split_evidence",
+          "narration": [
+            "Here is a declared illustration. One chunk says the participants were adults. Another contains a numerical outcome, while a neighbouring paragraph explains a limitation. A question that needs all three facts can outgrow any one retrieved unit.",
+            "Overlapping windows may retain some shared context, but an overlap is no guarantee that every decisive relationship fits. A later stage might gather neighbours, fetch the parent section, or combine evidence."
+          ]
+        },
+        {
+          "id": "indexed_limit",
+          "title": "A stage can match only the evidence it indexes",
+          "source_anchor": "one-document-one-chunk-and-one-vector-are-not-the-same-thing",
+          "visual": "indexed_limit",
+          "narration": [
+            "Now hide a claim in the results section and leave it out of the abstract. An abstract only index cannot directly match that claim as indexed text. It might retrieve the paper for other evidence, but the missing section was not available to that retrieval stage.",
+            "The chapter contrasts Wiley AI Gateway’s documented full text chunks with discovery records described by metadata and abstracts."
+          ]
+        },
+        {
+          "id": "later_context",
+          "title": "Retrieved text and supplied context can differ",
+          "source_anchor": "one-document-one-chunk-and-one-vector-are-not-the-same-thing",
+          "visual": "later_context",
+          "narration": [
+            "Retrieval is not always the final evidence boundary. After selecting an abstract or passage, a system might fetch full text, expand to a parent section, or add neighbouring passages.",
+            "Ask three separate questions: what text was indexed, what unit was retrieved, and what evidence was supplied as context? A later fetch can supply previously absent text. Whether that evidence reaches an answer correctly remains another question to check."
+          ]
+        },
+        {
+          "id": "group_matches",
+          "title": "Grouping by source does not combine the argument",
+          "source_anchor": "chunking-strategies-title",
+          "visual": "group_matches",
+          "narration": [
+            "Return to passages A two, A seven, B three and A nine. Grouping by source produces paper A with three matching passages, and paper B with one. It does not, by itself, specify how passage scores become a paper score.",
+            "It also does not merge their claims into a supported answer. A system needs explicit choices for aggregation and any later reasoning. Four returned chunks are not necessarily four distinct papers, and two displayed papers do not reveal how many chunks competed."
+          ]
+        },
+        {
+          "id": "unit_questions",
+          "title": "Follow the evidence through four choices",
+          "source_anchor": "chunking-strategies-title",
+          "visual": "unit_questions",
+          "narration": [
+            "Write down four choices: the source document, the indexed unit, the representation of each unit, and the way matches become displayed results. Then record any later context expansion.",
+            "Ask what text was embedded, how large the units were, and how matching passages were combined at article level. The next chapter asks what a system can afford after a fast first stage has produced a shortlist: more careful comparison, with a new candidate boundary."
+          ]
+        }
+      ]
+    }
+  ]
+}

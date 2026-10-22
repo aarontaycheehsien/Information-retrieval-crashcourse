@@ -1,0 +1,379 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.616
+A paper appears at rank three.
+
+00:00:02.779 --> 00:00:05.735
+Its explanation says: This paper closely
+
+00:00:05.755 --> 00:00:08.261
+addresses your question about open access
+
+00:00:08.281 --> 00:00:11.045
+and citations. Has that established why
+
+00:00:11.065 --> 00:00:13.635
+this result appeared, or why it occupies
+
+00:00:13.655 --> 00:00:16.728
+rank three? Pause and identify the missing
+
+00:00:16.748 --> 00:00:17.629
+evidence.
+
+00:00:20.038 --> 00:00:21.789
+The chapter’s mock result P has a
+
+00:00:21.809 --> 00:00:24.598
+hypothetical recorded path: lexical
+
+00:00:24.618 --> 00:00:26.892
+retrieval supplied it at rank eighteen
+
+00:00:26.912 --> 00:00:29.418
+among a hundred candidates; reranking
+
+00:00:29.438 --> 00:00:32.510
+moved it to three; the display showed ten.
+
+00:00:32.672 --> 00:00:35.036
+Internal reranker details remain
+
+00:00:35.056 --> 00:00:37.781
+undisclosed. All record details and ranks
+
+00:00:37.801 --> 00:00:40.552
+here are illustrative, not a search run
+
+00:00:40.572 --> 00:00:41.505
+for this film.
+
+00:00:42.418 --> 00:00:45.034
+Transparency exposes information about a
+
+00:00:45.054 --> 00:00:47.805
+system. Interpretability lets a librarian
+
+00:00:47.825 --> 00:00:51.283
+trace why a record was included, excluded,
+
+00:00:51.343 --> 00:00:52.997
+scored or reranked.
+
+00:00:53.160 --> 00:00:55.523
+Understandability provides an accurate,
+
+00:00:55.557 --> 00:00:58.217
+usable mental model without demanding that
+
+00:00:58.237 --> 00:01:01.051
+every equation or weight be inspected.
+
+00:01:01.603 --> 00:01:03.686
+A broad ranking description can be
+
+00:01:03.706 --> 00:01:06.263
+transparent while explaining little about
+
+00:01:06.283 --> 00:01:09.021
+one record. A detailed score display can
+
+00:01:09.041 --> 00:01:10.798
+still be hard to understand.
+
+00:01:10.961 --> 00:01:13.428
+A documentable, rerunnable search can
+
+00:01:13.448 --> 00:01:16.314
+leave individual results opaque.
+
+00:01:16.489 --> 00:01:19.330
+These qualities overlap, but one does not
+
+00:01:19.350 --> 00:01:20.914
+establish the others.
+
+00:01:21.808 --> 00:01:24.352
+In the source’s mock trace, the original
+
+00:01:24.372 --> 00:01:27.174
+input asks whether open access increases
+
+00:01:27.194 --> 00:01:30.305
+citations. The transformed query joins the
+
+00:01:30.325 --> 00:01:32.805
+phrase open access with a truncated
+
+00:01:32.825 --> 00:01:35.227
+citation term using AND.
+
+00:01:35.390 --> 00:01:38.063
+The recorded route is lexical retrieval
+
+00:01:38.083 --> 00:01:39.918
+over indexed abstracts.
+
+00:01:40.469 --> 00:01:42.737
+The mock paper’s abstract contains open
+
+00:01:42.757 --> 00:01:44.902
+access and citations.
+
+00:01:45.051 --> 00:01:47.634
+That links the candidate to recorded input
+
+00:01:47.654 --> 00:01:49.154
+and indexed evidence.
+
+00:01:49.316 --> 00:01:50.508
+It does not establish that the
+
+00:01:50.528 --> 00:01:52.763
+transformation preserved every part of the
+
+00:01:52.783 --> 00:01:55.392
+searcher’s intended need, or that omitted
+
+00:01:55.412 --> 00:01:57.312
+alternatives would leave the results
+
+00:01:57.332 --> 00:02:00.302
+unchanged. The exact expression is shown
+
+00:02:00.322 --> 00:02:01.255
+on screen.
+
+00:02:02.180 --> 00:02:05.075
+The supplied candidate rank is eighteen of
+
+00:02:05.095 --> 00:02:08.400
+one hundred. Reranking moves P to rank
+
+00:02:08.420 --> 00:02:11.673
+three, above the display cutoff of ten.
+
+00:02:11.835 --> 00:02:13.877
+This explains which recorded stages
+
+00:02:13.897 --> 00:02:15.939
+connected the candidate to the visible
+
+00:02:15.959 --> 00:02:19.044
+page. It does not identify the reranker’s
+
+00:02:19.064 --> 00:02:21.879
+undisclosed internal scoring factors.
+
+00:02:22.434 --> 00:02:25.054
+A generated description of topical fit
+
+00:02:25.074 --> 00:02:27.683
+cannot fill that gap as though it were an
+
+00:02:27.703 --> 00:02:29.100
+execution fact.
+
+00:02:29.250 --> 00:02:32.013
+In a real product, call this a trace only
+
+00:02:32.033 --> 00:02:33.830
+when the details come from the executed
+
+00:02:33.850 --> 00:02:36.588
+search. The mock example demonstrates the
+
+00:02:36.608 --> 00:02:38.804
+distinction without claiming that any
+
+00:02:38.824 --> 00:02:41.136
+vendor supplied these disclosures.
+
+00:02:42.044 --> 00:02:43.346
+Start at the record someone wants
+
+00:02:43.366 --> 00:02:46.400
+explained. Inspect fusion and display
+
+00:02:46.420 --> 00:02:50.150
+rules, then scoring and reranking, then
+
+00:02:50.170 --> 00:02:51.386
+matched evidence.
+
+00:02:51.549 --> 00:02:53.565
+Continue to the candidate source,
+
+00:02:53.585 --> 00:02:56.554
+transformed query and original input.
+
+00:02:56.716 --> 00:02:58.745
+Each step answers a different question
+
+00:02:58.765 --> 00:03:00.381
+about how the record arrived.
+
+00:03:00.934 --> 00:03:03.744
+This is inspection order, not the system’s
+
+00:03:03.764 --> 00:03:04.981
+execution order.
+
+00:03:05.156 --> 00:03:08.409
+A snippet, label, deduplication rule or
+
+00:03:08.429 --> 00:03:10.729
+diversification step may alter what is
+
+00:03:10.749 --> 00:03:13.190
+seen. A product that exposes a matched
+
+00:03:13.210 --> 00:03:15.626
+word but hides the transformed query has
+
+00:03:15.646 --> 00:03:18.305
+supplied only one part of the trail.
+
+00:03:18.468 --> 00:03:20.729
+Keep going until the evidence stops, and
+
+00:03:20.749 --> 00:03:22.068
+mark that boundary.
+
+00:03:22.971 --> 00:03:25.470
+Boolean conditions can show eligibility
+
+00:03:25.542 --> 00:03:27.339
+without proving relevance.
+
+00:03:27.514 --> 00:03:30.806
+Lexical evidence can show analysed terms
+
+00:03:30.826 --> 00:03:33.087
+and scoring contributions without making
+
+00:03:33.107 --> 00:03:35.560
+the score a probability of relevance.
+
+00:03:35.723 --> 00:03:38.357
+A later production reranker may also have
+
+00:03:38.377 --> 00:03:39.993
+changed the final order.
+
+00:03:40.539 --> 00:03:42.714
+Dense inspection can expose the indexed
+
+00:03:42.734 --> 00:03:46.580
+unit, encoder, similarity, candidate rank
+
+00:03:46.600 --> 00:03:48.371
+and approximate search settings.
+
+00:03:48.546 --> 00:03:51.078
+It does not automatically supply a simple
+
+00:03:51.098 --> 00:03:53.539
+human readable causal story about a latent
+
+00:03:53.559 --> 00:03:56.516
+feature. A highlighted word, citation
+
+00:03:56.536 --> 00:03:59.222
+count or attractive snippet is not proof
+
+00:03:59.242 --> 00:04:01.193
+that it caused the final position.
+
+00:04:02.110 --> 00:04:05.259
+Sparse expansion terms and weights, or
+
+00:04:05.279 --> 00:04:08.184
+late interaction token alignments, expose
+
+00:04:08.204 --> 00:04:10.942
+useful layers. They do not establish that
+
+00:04:10.962 --> 00:04:14.061
+those visible pieces describe the whole
+
+00:04:14.081 --> 00:04:15.168
+model decision.
+
+00:04:15.344 --> 00:04:18.184
+Inspect candidate lists, fusion rules,
+
+00:04:18.217 --> 00:04:20.813
+reranking, cutoffs and presentation as
+
+00:04:20.833 --> 00:04:21.483
+well.
+
+00:04:22.033 --> 00:04:25.106
+For agentic control, inspect each chosen
+
+00:04:25.126 --> 00:04:28.843
+tool, query, source, observation, next
+
+00:04:28.863 --> 00:04:30.595
+action and stopping point.
+
+00:04:30.757 --> 00:04:32.618
+The model’s account of its reasoning does
+
+00:04:32.638 --> 00:04:35.749
+not establish what caused those choices.
+
+00:04:35.925 --> 00:04:38.495
+A helpful narrative should be labelled as
+
+00:04:38.515 --> 00:04:41.265
+interpretation when it is not derived from
+
+00:04:41.285 --> 00:04:43.288
+recorded execution evidence.
+
+00:04:44.188 --> 00:04:46.731
+The goal is an actionable audit trail and
+
+00:04:46.751 --> 00:04:49.540
+an accurate mental model, not disclosure
+
+00:04:49.560 --> 00:04:51.473
+of every engineering detail.
+
+00:04:51.635 --> 00:04:53.677
+Distinguish what you observed, what the
+
+00:04:53.697 --> 00:04:56.975
+vendor documents and what remains unknown.
+
+00:04:57.138 --> 00:04:59.309
+Do not replace missing evidence with an
+
+00:04:59.329 --> 00:05:02.452
+explanation that merely sounds plausible.
+
+00:05:03.000 --> 00:05:05.543
+A reproducible search can remain poorly
+
+00:05:05.563 --> 00:05:08.005
+understood, and a clear explanation can
+
+00:05:08.025 --> 00:05:10.775
+remain impossible to rerun without saved
+
+00:05:10.795 --> 00:05:13.777
+inputs, versions and outputs.
+
+00:05:13.939 --> 00:05:16.806
+Documentation and inspection need separate
+
+00:05:16.826 --> 00:05:19.602
+questions. The final film turns those
+
+00:05:19.622 --> 00:05:22.553
+distinctions into requirements a library
+
+00:05:22.573 --> 00:05:24.847
+can ask for before licensing a tool.

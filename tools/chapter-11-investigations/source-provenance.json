@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "query-transformation",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "e361b1c2c77ba99e7e15ec59ff0377e2e45002cbaa40ee5ba358516f984b3ac8",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 11: Understanding, transforming and routing queries; source-exact query-object categories, structured-query example, hypothetical generated wording and scoped review-audit figures"
+}

@@ -1,0 +1,91 @@
+{
+  "recipe_sha256": "6cfbe7f34dd9fd9dbc89909072acaa0d94d412bcce9355f8ee3d6067981219ff",
+  "kind": "source-exact lexical vectors and declared illustrative weights",
+  "measured_model_outputs": false,
+  "checks": {
+    "source_binary_vectors": {
+      "D1": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "D2": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "D3": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "overlap_scores": {
+      "D1": 2,
+      "D2": 0,
+      "D3": 1
+    },
+    "AND": [
+      "D1"
+    ],
+    "OR": [
+      "D1",
+      "D3"
+    ],
+    "tfidf_variant": "raw TF * ln(N/df)",
+    "bm25_parameters": {
+      "k1": 1.2,
+      "b": 0.75,
+      "average_length": 3.3333333333333335
+    },
+    "bm25_idf": "ln(1+(N-df+0.5)/(df+0.5))",
+    "invented_expansion_weights": {
+      "heart": 1.2,
+      "attack": 1.0,
+      "myocardial": 0.8,
+      "infarction": 0.7
+    },
+    "measured_model_outputs": false,
+    "passage_matches": 4,
+    "distinct_papers": 2,
+    "groups": {
+      "A": [
+        2,
+        7,
+        9
+      ],
+      "B": [
+        3
+      ]
+    },
+    "unit_counts_are_alternative_teaching_cases": true,
+    "passed": true
+  },
+  "files": {
+    "binary-vectors.png": "5224f7b466ba567a2547014ed2dbc7e739d7ea0ff7742db2a99f959623a7400a",
+    "binary-vectors.svg": "a34d79f3bd4f1fd6ab60fb85ed7d5eeb71e01defe3f70ef9c6be6a61a3b71b44",
+    "lexical-weights.csv": "686e966a520833483870c50efe38c478aade6f370a26e37fee0037632bc20ab8",
+    "lexical-weights.png": "00cdaa82296d61877529a3676c657d9c491cbfea89ca0077a2a23efb46cb037d",
+    "lexical-weights.svg": "e3dab50b869911eb6feb8ea3a814b6a6a9362507f2a04998e99ccd2752e16a08",
+    "representation-cases.png": "d3a9d5256cd55cae32cf5bfffa57022574c00baaa4d783d8cd04be9c7a85710d",
+    "representation-cases.svg": "48b1cfd870ba12073adee7a32518f9cb36251faf34e4f54c1a9c3e10d6b19499",
+    "sparse-expansion.csv": "e97c505277bc39e333b6b3107642f63b2599c1d711fd10a461ffcf7891627cd5",
+    "sparse-expansion.png": "3fd5eb41ca4438c921655f3edf544094649e398b1715d4dd1d39233c9d16e0fa",
+    "sparse-expansion.svg": "726d0ad85302bd0650caf96618bf20add5c934e6e2bf86da546f47785d86ea34",
+    "term-counts.png": "c4f5028a8ef68008c051b4a408bc9d678c5a684d3295fd1c1569521d4680f928",
+    "term-counts.svg": "b527c03fe6e0b4f6f779b8f761c379445ea0fcceff20a989c93a1fdf5c2de176"
+  },
+  "passed": true
+}

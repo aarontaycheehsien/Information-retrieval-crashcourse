@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:41.868
+A fluent explanation is not automatically a trace
+
+00:00:41.868 --> 00:01:21.258
+Transparency, interpretability and understandability differ
+
+00:01:21.258 --> 00:02:01.630
+Trace the input actually sent to retrieval
+
+00:02:01.630 --> 00:02:41.494
+The trace can show a boundary without revealing internal scoring
+
+00:02:41.494 --> 00:03:22.421
+Walk backwards from the displayed record
+
+00:03:22.421 --> 00:04:01.560
+A useful explanation includes what it cannot establish
+
+00:04:01.560 --> 00:04:43.638
+Inspectable layers are not the whole model decision
+
+00:04:43.638 --> 00:05:27.767
+Preserve observations, documentation and unknowns separately

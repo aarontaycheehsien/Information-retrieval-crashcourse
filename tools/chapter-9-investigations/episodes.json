@@ -1,0 +1,282 @@
+{
+  "series": "Reranking and multi-stage retrieval",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#reranking-and-hybrid",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#reranking-and-hybrid",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-the-paper-the-reranker-never-saw",
+      "title": "The paper the reranker never saw",
+      "subtitle": "A richer comparison still depends on who enters the shortlist.",
+      "accent": "blue",
+      "scenes": [
+        {
+          "id": "shortlist_hook",
+          "title": "Can a better judge rescue a missing paper?",
+          "source_anchor": "rerankers-compare-more-carefully-after-retrieval",
+          "visual": "shortlist_hook",
+          "narration": [
+            "Imagine a paper that would be useful for your particular question. The first retrieval stage misses it. Now a much stronger model reranks the shortlist. Can that model put the missing paper first? Pause and predict what information it actually receives.",
+            "It receives the shortlisted candidates. Reranking can change their order, but the absent paper is unavailable. Our invented cards illustrate a boundary inherited by later stages."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "broad_then_deep",
+          "title": "Spend detailed comparison on fewer records",
+          "source_anchor": "why-search-systems-use-multiple-stages",
+          "visual": "broad_then_deep",
+          "narration": [
+            "Imagine millions of records. Applying an expensive query and document comparison to every record for every search would usually cost too much. Fast first stages retrieve a manageable set; later stages spend more computation on each survivor.",
+            "The first stage balances speed and retaining potentially relevant records. Reranking aims to improve the ordering within its pool. A later answer generator inherits that candidate boundary too, unless another operation explicitly brings in additional evidence."
+          ]
+        },
+        {
+          "id": "joint_encoding",
+          "title": "When does the query meet the passage?",
+          "source_anchor": "cross-encoder-reranking",
+          "visual": "joint_encoding",
+          "narration": [
+            "A conventional bi encoder represents the query and passage independently. Passage vectors can be stored before any query arrives. Their interaction happens after each text has been compressed. A cross encoder instead processes the query and one candidate together.",
+            "Attention can run across their tokens before producing a ranking score. That creates an opportunity to examine a qualifier, negation, entity or intent more closely. Cross encoder names an arrangement; the score still reflects training and the chosen relevance task."
+          ]
+        },
+        {
+          "id": "delulu_example",
+          "title": "Same topic, different information needs",
+          "source_anchor": "cross-encoder-reranking",
+          "visual": "delulu_example",
+          "narration": [
+            "The chapter’s query asks: am I being delulu about getting this job? One candidate explains how to recognise unrealistic expectations during a job search. Another lists ten signs that you performed well in your job interview.",
+            "Both concern job seeking and advice. For the stated need about unrealistic expectations, the first is the intended match; interview performance is the hard negative. Joint query and candidate processing exposes details that a pooled representation may blur."
+          ]
+        },
+        {
+          "id": "pair_cost",
+          "title": "A joint representation depends on this query",
+          "source_anchor": "bi-encoder-vs-cross-encoder-title",
+          "visual": "pair_cost",
+          "narration": [
+            "The cross encoder’s candidate representation depends on the incoming query, so it cannot be precomputed and reused in the same way. Reranking a hundred candidates requires roughly a hundred query and candidate evaluations, even when implementation batches the work.",
+            "That count is not a measured latency estimate. Truncation can also hide decisive text. A richer scoring arrangement makes more evidence accessible; it does not establish objective or infallible relevance."
+          ]
+        },
+        {
+          "id": "llm_modes",
+          "title": "Three ways to ask an LLM for an order",
+          "source_anchor": "llms-as-rerankers",
+          "visual": "llm_modes",
+          "narration": [
+            "An LLM can receive the query, candidate text and explicit criteria such as population, study design or whether a passage answers the question. Pointwise prompting judges each candidate separately. Pairwise prompting asks which of two candidates is more relevant.",
+            "Listwise prompting presents several candidates together and requests an ordering. Larger lists may require windows or repeated partial rankings. Here these names describe prompting, rather than classical learning to rank training objectives."
+          ]
+        },
+        {
+          "id": "judgement_limits",
+          "title": "A plausible explanation does not validate a ranking",
+          "source_anchor": "llm-reranking-strategies-title",
+          "visual": "judgement_limits",
+          "narration": [
+            "Each arrangement has failure modes. Separate scores may need calibration. Pairwise preferences can be inconsistent. Listwise outputs may depend on input order. Prompt wording, context limits, model updates and sampling settings can all affect an LLM reranker.",
+            "A fluent explanation can help someone inspect a decision, but it is not evidence that the decision was correct. Evaluate the complete pipeline against the actual information need, including candidates that an earlier stage failed to supply."
+          ]
+        },
+        {
+          "id": "documented_boundary",
+          "title": "A learnt ranker can still follow keyword retrieval",
+          "source_anchor": "why-search-systems-use-multiple-stages",
+          "visual": "documented_boundary",
+          "narration": [
+            "The chapter’s documented Semantic Scholar account from twenty twenty five uses Elasticsearch keyword retrieval over titles, abstracts and author names. Up to a thousand candidates then reach a LightGBM reranker using signals including title matches, citations and recency.",
+            "That is machine learnt ranking after lexical retrieval. It establishes neither dense first stage retrieval nor an LLM reranker, and does not explain the precise later interface behaviour. Ask what produced the pool, what text the ranker saw, and how many candidates reached it."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-one-vector-or-many-clues",
+      "title": "One vector, or many clues?",
+      "subtitle": "Follow token similarities into a score you can inspect.",
+      "accent": "teal",
+      "scenes": [
+        {
+          "id": "token_hook",
+          "title": "What if we keep the token vectors?",
+          "source_anchor": "where-colbert-style-late-interaction-fits",
+          "visual": "token_hook",
+          "narration": [
+            "A passage has a crucial phrase that one pooled vector may blur. Must we jointly encode it with every new query to preserve more detail? Predict what happens if we keep a set of token vectors instead.",
+            "ColBERT style late interaction takes that route. Query and document are encoded independently, but comparison happens between their token vectors. We can prepare document representations in advance while preserving more local matching evidence."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "token_sets",
+          "title": "Independent encoding, followed by token comparisons",
+          "source_anchor": "late-interaction-position-title",
+          "visual": "token_sets",
+          "narration": [
+            "A conventional bi encoder produces one pooled vector per indexed unit. ColBERT retains vectors for tokens, then compares the query’s token vectors with the document’s token vectors after encoding. The tokens are contextual representations, not simple word counts.",
+            "Late interaction can retrieve candidates or rerank an existing shortlist, depending on the implementation and scale. It generally needs more storage and computation than single vector retrieval, with less query time work than a full cross encoder over the same candidates."
+          ]
+        },
+        {
+          "id": "maxsim_score",
+          "title": "Keep each row’s maximum, then add",
+          "source_anchor": "maxsim-worked-title",
+          "visual": "maxsim_score",
+          "narration": [
+            "The chapter invents a tiny similarity table. Query tokens are citation and benefit. Document tokens are open, access, citation and advantage. Citation’s row is zero point one, zero point two, zero point nine, zero point four.",
+            "Benefit’s row is zero point two, zero point three, zero point five, zero point eight. Keep the maximum in each query row: zero point nine and zero point eight. Add them to get one point seven. Those invented similarities illustrate MaxSim, not model measurements."
+          ]
+        },
+        {
+          "id": "alignment_limits",
+          "title": "The alignments explain the score’s composition",
+          "source_anchor": "maxsim-worked-title",
+          "visual": "alignment_limits",
+          "narration": [
+            "The strongest alignment for citation is the document token citation. Benefit aligns most strongly with advantage in this table. The same document token could supply maxima for several query tokens; MaxSim does not enforce one to one matching.",
+            "This decomposition shows which comparisons contributed to the score. It does not explain why the learnt contextual vectors considered those tokens similar. Inspectable scoring is not complete model transparency."
+          ]
+        },
+        {
+          "id": "storage_tradeoff",
+          "title": "More retained vectors mean a larger index",
+          "source_anchor": "where-colbert-style-late-interaction-fits",
+          "visual": "storage_tradeoff",
+          "narration": [
+            "Keeping one vector per token instead of one per passage multiplies storage roughly by the number of retained tokens, before compression. A toy hundred token passage would require a hundred vectors under that simplified accounting.",
+            "The chapter reports ColBERT version two cutting earlier late interaction footprints six to tenfold with residual compression. This attributed comparison is not a promise for every index."
+          ]
+        },
+        {
+          "id": "three_arrangements",
+          "title": "The encoder’s arrangement changes the comparison",
+          "source_anchor": "bi-encoder-vs-cross-encoder-title",
+          "visual": "three_arrangements",
+          "narration": [
+            "Three arrangements are now visible. Independent pooled encoding compares one query vector with one stored passage vector. Joint encoding processes query and candidate together. Late interaction independently encodes sets of token vectors and compares them afterwards.",
+            "A pretrained encoder can be adapted for different arrangements. Its name alone does not identify the retrieval system. Ask when query and document interact, what can be precomputed, what evidence the comparison retains, and which ranking task shaped training."
+          ]
+        },
+        {
+          "id": "neural_sparse",
+          "title": "Neural retrieval can also remain sparse",
+          "source_anchor": "learnt-sparse-in-the-pipeline",
+          "visual": "neural_sparse",
+          "narration": [
+            "Neural information retrieval also includes learnt sparse models. Their active vocabulary dimensions can contain both typed terms and learnt expansions, so an inverted index can serve them. A nonzero term matching score still requires overlap in active dimensions; expansion can create it.",
+            "The chapter cites Elicit’s June twenty twenty four development work using SPLADE suggested terms with regular full text retrieval. That account does not confirm production deployment. Extra query terms can increase posting work and latency, even when the index technology is familiar."
+          ]
+        },
+        {
+          "id": "inspection_questions",
+          "title": "Look for the evidence exposed by each score",
+          "source_anchor": "neural-ir-broader-than-dense-retrieval",
+          "visual": "inspection_questions",
+          "narration": [
+            "SPLADE can expose weighted vocabulary terms. ColBERT can expose token alignments. Both offer more scoring evidence than a single pooled score, while remaining dependent on training, vocabulary and transfer to the task. Neither is transparent from end to end.",
+            "Neural is an umbrella label covering several representations and pipeline positions. Limited public deployment documentation for late interaction does not establish its absence. Identify the actual arrangement and evaluate the complete retrieval pipeline."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-the-best-next-result-may-rank-lower",
+      "title": "The best next result may rank lower",
+      "subtitle": "A useful list depends on coverage, candidate budgets, and surviving evidence.",
+      "accent": "red",
+      "scenes": [
+        {
+          "id": "list_hook",
+          "title": "Can three strong results make a weak list?",
+          "source_anchor": "ranking-a-useful-set-not-only-relevant-items",
+          "visual": "list_hook",
+          "narration": [
+            "Your first three papers all fit the query well, but cover the same aspect using similar evidence. A lower ranked paper covers another useful aspect. Which one would you want next when exploring the topic? Pause and predict.",
+            "Result diversification asks what a candidate adds to the items already selected. It changes the objective from sorting independent scores to constructing a useful set. The answer depends on the search task and what the system counts as different."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "aspect_example",
+          "title": "A strong match can leave room for other aspects",
+          "source_anchor": "diversification-worked-title",
+          "visual": "aspect_example",
+          "narration": [
+            "The chapter’s schematic pool concerns open access citation advantage. A, B and C cover overall advantage. D covers disciplinary differences. E covers selection bias methods. F is weakly related.",
+            "One selection is A, B, C: three strong individual matches with repeated aspect coverage. Another is A, D, E: retain a strong match and expose two other useful aspects. F stays out because being different is insufficient. These stipulated selections illustrate an objective, not a calculated algorithm output."
+          ]
+        },
+        {
+          "id": "distinct_objectives",
+          "title": "Diversity, reranking and deduplication ask different questions",
+          "source_anchor": "ranking-a-useful-set-not-only-relevant-items",
+          "visual": "distinct_objectives",
+          "narration": [
+            "Diversification names an objective. Reranking names a pipeline position. Deduplication removes records considered equivalent under a separate rule. B and C remain distinct studies even though they share an aspect with A; shared subject matter does not make them duplicates.",
+            "Difference might mean topic, method, geography, viewpoint or merely wording. Broader topical coverage does not automatically create viewpoint diversity, fairness or balanced evidence. The system’s representation of difference needs to match what the reader actually wants to explore."
+          ]
+        },
+        {
+          "id": "review_boundary",
+          "title": "A diverse display does not replace high recall",
+          "source_anchor": "ranking-a-useful-set-not-only-relevant-items",
+          "visual": "review_boundary",
+          "narration": [
+            "Exploratory search may benefit from less repetition. A systematic review may need every relevant study, including very similar ones. Diversity aware selection can push a highly relevant near neighbour below the displayed cut off. Similar papers can still contain separate evidence.",
+            "Diversification does not retrieve records missing from the pool. Evaluate retrieval, diversity and display limits separately. A broader looking list can be useful without being an exhaustive account of the evidence."
+          ]
+        },
+        {
+          "id": "product_budgets",
+          "title": "The second pass has a documented budget",
+          "source_anchor": "reranking-in-two-documented-academic-pipelines",
+          "visual": "product_budgets",
+          "narration": [
+            "The chapter’s published PubMed Best Match account starts with BM twenty five and applies LambdaMART to the top five hundred candidates. Its list continues below that reranked region in Best Match order.",
+            "Primo Research Assistant has another boundary: up to thirty candidates are reranked using embeddings, and five selected abstracts reach generation. These are documentation accounts, not new service tests. Neither count measures relevance, and the two products handle their tails differently."
+          ]
+        },
+        {
+          "id": "primo_chain",
+          "title": "Follow Primo’s candidates from question to shortlist",
+          "source_anchor": "primo-ra-pipeline-title",
+          "visual": "primo_chain",
+          "narration": [
+            "The documented Primo workflow starts when an LLM converts a question into Boolean variations connected with OR. Some filters can be refined automatically. CDI then retrieves through a largely lexical inverted index route.",
+            "Its ranking combines lexical and field evidence, phrase and proximity signals, and static signals such as recency and citations. The embedding reranking stage receives up to thirty leading candidates. An AI component later in the chain does not make the first retrieval stage dense."
+          ]
+        },
+        {
+          "id": "abstract_boundary",
+          "title": "Five abstracts are the evidence passed onward",
+          "source_anchor": "tbl-9-3",
+          "visual": "abstract_boundary",
+          "narration": [
+            "The documented working set for generation is five abstracts. A paper omitted before the thirty candidate reranking boundary cannot be reordered there. A candidate outside the five source boundary is also unavailable to that answer writer’s documented working set.",
+            "And an abstract is not the complete paper. A detail stated only in full text was not supplied in this documented abstract based context."
+          ]
+        },
+        {
+          "id": "pipeline_questions",
+          "title": "What survives each stage?",
+          "source_anchor": "reranking-in-two-documented-academic-pipelines",
+          "visual": "pipeline_questions",
+          "narration": [
+            "Learning to rank, including LambdaMART, learns to combine available features from training examples. Those features can be lexical matches, dates, publication types or usage; they need not be embeddings. Its limits include the evidence and labels it receives.",
+            "Ask which route supplied candidates, how many received each comparison, what text survived, and whether the selected set serves the task. Chapter Ten adds another decision: combining or routing multiple retrieval routes whose ranked lists and score scales may differ."
+          ]
+        }
+      ]
+    }
+  ]
+}

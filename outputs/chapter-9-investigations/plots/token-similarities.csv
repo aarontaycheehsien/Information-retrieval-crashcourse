@@ -1,0 +1,9 @@
+query_token,document_token,invented_similarity,row_maximum,selected_alignment,measured_model_output
+citation,open,0.10000000000000001,0.90000000000000002,False,False
+citation,access,0.20000000000000001,0.90000000000000002,False,False
+citation,citation,0.90000000000000002,0.90000000000000002,True,False
+citation,advantage,0.40000000000000002,0.90000000000000002,False,False
+benefit,open,0.20000000000000001,0.80000000000000004,False,False
+benefit,access,0.29999999999999999,0.80000000000000004,False,False
+benefit,citation,0.5,0.80000000000000004,False,False
+benefit,advantage,0.80000000000000004,0.80000000000000004,True,False

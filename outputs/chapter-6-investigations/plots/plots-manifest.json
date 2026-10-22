@@ -1,0 +1,57 @@
+{
+  "recipe_sha256": "e0ebc79f99ada22269a0ff5730261d4f4eaf2413b0dedc5e3afea02fec5082bd",
+  "kind": "declared cosine and pooling examples",
+  "measured_model_outputs": false,
+  "checks": {
+    "declared_toy_examples": true,
+    "measured_model_outputs": false,
+    "token_ids": [
+      3,
+      8,
+      11,
+      21,
+      11,
+      21
+    ],
+    "mean_pool": [
+      1.0,
+      1.0,
+      2.0
+    ],
+    "scores": {
+      "before": {
+        "positive": 0.17364817766693041,
+        "hard": 0.8660254037844387,
+        "easy": -0.7660444431189779
+      },
+      "after": {
+        "positive": 0.9396926207859084,
+        "hard": 0.3420201433256688,
+        "easy": -0.8660254037844387
+      }
+    },
+    "rankings": {
+      "before": [
+        "hard",
+        "positive",
+        "easy"
+      ],
+      "after": [
+        "positive",
+        "hard",
+        "easy"
+      ]
+    },
+    "scores_are_relevance_probabilities": false,
+    "passed": true
+  },
+  "files": {
+    "comparison-after.png": "777df0015af141f25d2197fa21ef9c3ff9b99fa2b916c3331674da284e02b996",
+    "comparison-after.svg": "c5518be88b7d8920152f77a25bbe09534a62d774c392f88ff9aedacd8ff1ed48",
+    "comparison-before.png": "71d5e02d5899cece70bfc4cc6508377ec07c52919573271a0e788e076bd7d370",
+    "comparison-before.svg": "babbfb0d10668b411cf49f352012d3098ec14dc1cf5d2824db52f3bf8b48aeaf",
+    "toy-pooling.csv": "9456d69c3ec272bbd38688bda457cd9319d8db013e045785d3c4addfd8ee9d1d",
+    "toy-scores.csv": "3f7f013cd8e5fd9df3c332bf0a6bc8606ea768925217a36e2c86d60efac51e93"
+  },
+  "passed": true
+}

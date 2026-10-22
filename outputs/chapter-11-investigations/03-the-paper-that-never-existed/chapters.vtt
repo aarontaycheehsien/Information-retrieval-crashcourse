@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:40.200
+Can an imagined paper help find a real one?
+
+00:00:40.200 --> 00:01:07.662
+Query2doc adds generated language to the query
+
+00:01:07.662 --> 00:01:39.986
+HyDE searches from the generated document’s vector
+
+00:01:39.986 --> 00:02:16.178
+Real retrieval does not validate invented details
+
+00:02:16.178 --> 00:02:53.689
+AI-assisted input does not name one architecture
+
+00:02:53.689 --> 00:03:34.746
+Supported natural-language limits are a defined subset
+
+00:03:34.746 --> 00:04:10.194
+An inferred filter and a selected filter need separate checks
+
+00:04:10.194 --> 00:04:48.400
+Preserve the strategy that actually reached retrieval

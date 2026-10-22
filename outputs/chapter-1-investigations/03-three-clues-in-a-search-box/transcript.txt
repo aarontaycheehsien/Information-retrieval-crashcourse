@@ -1,0 +1,36 @@
+Three clues in a search box
+
+[00:00:00.700]: Add an invented nonsense string to a genuine question. If every word is required and the invented string occurs nowhere, what should happen? Under that strict AND assumption, the result set should be empty.
+
+[00:00:17.027]: In the chapter's scite screenshot, useful-looking results remain and the interface reports millions. That challenges the strict-AND assumption. It does not prove the system stopped matching words, or identify a semantic retrieval architecture. Our on-screen nonsense token is a teaching illustration.
+
+[00:00:37.091]: The supplied Google Scholar example reports about nine point four million results for open access. Google's help documentation limits the viewable results for one query to a thousand.
+
+[00:00:50.185]: This diagram contains nine thousand four hundred equal marks. Each represents a thousand reported matches. One highlighted mark represents the documented display cap. The reported count does not establish that every matching record was individually scored or ranked. How was the visible fraction chosen?
+
+[00:01:11.113]: In the author's August twenty twenty-six Semantic Scholar observation, the natural-language question returned thirteen results. The shorter, unquoted keyword query returned about thirty-five thousand three hundred. The bars use a labeled logarithmic scale; they are not proportional counts.
+
+[00:01:30.357]: The author also judged the question's leading results less relevant, using the known literature and inspected results. That judgement does not follow from the counts alone. The comparison establishes visible behavior. The product's name does not establish its architecture.
+
+[00:01:49.122]: The first puzzle leaves an admission rule open. The second leaves ranking and display selection open. The third leaves query interpretation open. Screenshots show outputs; they do not expose a complete pipeline.
+
+[00:02:03.516]: The chapter revisits the first two through lexical retrieval in Chapter Four, and the third through mechanisms in Part Two, especially Chapter Seven. Keep the questions open while learning what could explain them. These observations were taken from the chapter, not rerun here.
+
+[00:02:21.478]: The chapter separates output format from retrieval iteration. Across: ranked records or a written answer. Upward: a single or limited pass, or repeated searches. That gives quick search, quick answer, iterative search and deep research.
+
+[00:02:39.268]: Neither axis records agency: who chooses the next action? A fixed workflow and an agent can occupy the same box. Repeated retrieval and model-chosen actions are different properties. This diagram maps concepts rather than assigning products to current categories.
+
+[00:02:58.246]: A language model can write a query, invent search text such as a pseudo-document, reorder candidates, or control the next retrieval action. Those are uses inside retrieval. It can also write the final answer.
+
+[00:03:12.060]: So a vendor saying uses an LLM has located no component. Ask which decision it makes, which evidence it receives and what can be inspected. A polished report alone cannot answer those questions.
+
+[00:03:25.938]: Return to the missing landmark paper. Ask whether it was searchable, whether it became a candidate, whether it reached the working set, and whether the writer cited it. Each answer needs different evidence.
+
+[00:03:38.884]: Then ask whether the selected papers help with the actual information need. Chapter One has given us the questions. Chapter Two starts with the strictest possible admission rule: words that a record must contain.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 1.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#intro
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

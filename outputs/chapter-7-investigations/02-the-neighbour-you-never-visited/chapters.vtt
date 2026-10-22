@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:26.921
+Both searches return three. Did both search the same way?
+
+00:00:26.921 --> 00:01:00.897
+A term pointer and a vector search are different routes
+
+00:01:00.897 --> 00:01:35.958
+Examine all six; keep the nearest three
+
+00:01:35.958 --> 00:02:12.497
+C was closer, but this run never saw it
+
+00:02:12.497 --> 00:02:46.439
+Navigate promising neighbours
+
+00:02:46.439 --> 00:03:22.299
+Four decisions behind the same top-k output
+
+00:03:22.299 --> 00:04:03.967
+Nearest means best available under the rule

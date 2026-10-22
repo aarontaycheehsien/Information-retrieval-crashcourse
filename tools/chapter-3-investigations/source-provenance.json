@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "bm25-ranking",
+  "collection_anchor": "boolean-admission",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "0f208c1034b5596cfdf320e3ab20e5fd0be69f1e7655847c7b733d3d647b5de6",
+  "collection_sha256": "c403d41e646dd1299f4374b2251b57eebcdc94bc7d4afae04de3bcf00937d8e5",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 3: BM25 and ranked lexical retrieval; the supporting D1\u2013D4 collection is from Chapter 2"
+}

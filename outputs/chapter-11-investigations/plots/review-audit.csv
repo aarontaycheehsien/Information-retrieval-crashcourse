@@ -1,0 +1,3 @@
+reported_route,reported_percentage,included_sources_in_one_audit,universal_estimate,exact_count_calculated
+Protocol-defined database and hand searches,30,495,False,False
+Snowballing,51,495,False,False

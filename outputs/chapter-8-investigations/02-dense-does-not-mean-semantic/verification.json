@@ -1,0 +1,95 @@
+{
+  "file": "02-dense-does-not-mean-semantic.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 276.4,
+  "decoded_frames": 8292,
+  "integrated_lufs": -15.9,
+  "true_peak_dbfs": -2.5,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 586 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 178 kb/s (default)",
+  "faststart": true,
+  "sha256": "80c4d67398c82622ad54fcc60fa11a5f4cb8e90f8934957ef72b028845164d0c",
+  "bytes": 26670305,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "a645fc1cebd6b15990c75bcc056ba8f37d1aff6f66ba87cb4a7df04cf095133f",
+  "passed": true,
+  "chapter_sha256": "b2ae6821e27996a65ada870091ffb58a79f4944e1909eef9aaea0143a3912171",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "21e4fef970d39c5a72244f063e6b84611f88ad4a9970eb1645025ff54e3be64d",
+  "embedded_captions_verified": true,
+  "caption_cues": 112,
+  "reviewed_animation_times": 90,
+  "worked_examples": {
+    "source_binary_vectors": {
+      "D1": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "D2": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "D3": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "overlap_scores": {
+      "D1": 2,
+      "D2": 0,
+      "D3": 1
+    },
+    "AND": [
+      "D1"
+    ],
+    "OR": [
+      "D1",
+      "D3"
+    ],
+    "tfidf_variant": "raw TF * ln(N/df)",
+    "bm25_parameters": {
+      "k1": 1.2,
+      "b": 0.75,
+      "average_length": 3.3333333333333335
+    },
+    "bm25_idf": "ln(1+(N-df+0.5)/(df+0.5))",
+    "invented_expansion_weights": {
+      "heart": 1.2,
+      "attack": 1.0,
+      "myocardial": 0.8,
+      "infarction": 0.7
+    },
+    "measured_model_outputs": false,
+    "passage_matches": 4,
+    "distinct_papers": 2,
+    "groups": {
+      "A": [
+        2,
+        7,
+        9
+      ],
+      "B": [
+        3
+      ]
+    },
+    "unit_counts_are_alternative_teaching_cases": true,
+    "passed": true
+  }
+}

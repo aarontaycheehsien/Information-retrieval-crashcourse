@@ -1,0 +1,40 @@
+Who changed your question?
+
+[00:00:00.700]: A system recognises a date in your request. Has it changed what retrieval receives? Has it selected a different search route? Those are three different questions. Pause and decide what recognising the date alone establishes.
+
+[00:00:16.855]: Understanding interprets the request and may leave retrieval input unchanged. Transformation creates changed or additional retrieval inputs. Retrieval control chooses where they go, which paths run, and whether another search happens.
+
+[00:00:33.822]: The chapter’s Web of Science Smart Search example asks for apple, oranges and bananas, from twenty twenty to twenty twenty four, with affiliation from the University of California. The displayed interpretation separates a year range, an organisation and topic conditions.
+
+[00:00:51.971]: The structured query joins those conditions with AND, including a separate topic condition for each fruit. Inspect the visible, editable interpretation. An omitted concept or a misread relationship changes the eligible candidate set before ranking.
+
+[00:01:10.837]: Primo VE NDE Natural Language Search documents GPT four point one Mini identifying fields, generating a basic Boolean query, and adding six related OR connected permutations. Advanced Search receives an inspectable, editable structured expression.
+
+[00:01:29.387]: That is distinct from Primo Research Assistant’s documented question to Boolean variations, CDI retrieval and embedding reranking pipeline. Do not transfer one feature’s architecture to the other. Natural language input can still lead to Boolean conditions and lexical retrieval.
+
+[00:01:48.623]: Explicit retrieval feedback uses the searcher’s judgements about accepted or rejected records to help construct another retrieval input. Pseudo relevance feedback asks the searcher for nothing: it assumes highly ranked records from an initial search are relevant.
+
+[00:02:05.537]: It selects useful looking terms from those results and constructs a second query. If the first ranking is off topic, the added terms can reinforce that mistake. The second pass may add candidates, but the relevance assumption was unverified.
+
+[00:02:22.489]: Active learning screening in systematic reviews also uses inclusion and exclusion judgements. But it repeatedly reprioritises the records already in an existing candidate pool. Those judgements do not inherently construct another retrieval pass or add records.
+
+[00:02:41.269]: Ask whether feedback changed the search sent to a collection, or changed the order of records awaiting screening. They address different candidate boundaries.
+
+[00:02:51.804]: Pseudo relevance feedback needs an initial ranking before it can build a later query. It is therefore a retrieval to transformation loop, not a step that happens entirely before searching. Yet a designer can prescribe exactly those two passes every time.
+
+[00:03:08.890]: The second query’s contents adapt to the results, while the control sequence remains fixed. That dependence alone does not make the workflow agentic. Chapter Twelve asks the separate question of who chooses the next action while a search runs.
+
+[00:03:26.273]: An LLM rewrite produces alternative retrieval text or a structured expression. SPLADE can instead assign weights to vocabulary dimensions, including terms absent from the original input. That weighted representation is a different form of retrieval input.
+
+[00:03:43.529]: Both can be inspected, and either can be passed between components. Handoff between components is not what distinguishes them. Record whether you received rewritten language, a Boolean expression or active vocabulary weights, rather than calling all three the same expansion.
+
+[00:04:01.515]: Keep the original request, the interpreted constraints, every transformed retrieval input, and the routes selected. If earlier results helped construct a later query, retain that intermediate ranking and the feedback decision too.
+
+[00:04:16.843]: Correction, mapping, expansion, decomposition, routing and coordination can coexist in one prescribed workflow. The interface label natural language search reveals none of those choices. Inspect the generated inputs and test the candidate boundaries they create.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 11.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#query-transformation
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

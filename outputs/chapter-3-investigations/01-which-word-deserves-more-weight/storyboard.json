@@ -1,0 +1,158 @@
+{
+  "series": "BM25 and ranked lexical retrieval",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#bm25-ranking",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#bm25-ranking",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-which-word-deserves-more-weight",
+  "title": "Which word deserves more weight?",
+  "subtitle": "Matching words are clues of unequal strength.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "prediction",
+      "title": "Everyone passed. Who comes first?",
+      "source_anchor": "bm25-words-as-weighted-clues",
+      "visual": "prediction",
+      "narration": [
+        "Several papers satisfy the same Boolean conditions. They are all eligible. Does that make them equally good matches? And if not, what evidence should put one paper above another? Make a prediction.",
+        "Ranked retrieval assigns graded scores and orders the candidates. That describes an operation, not a formula. Scores might use lexical evidence, vectors or several signals. Chapter Three examines one lexical method: BM twenty-five."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "match",
+      "title": "Start with shared analysed terms",
+      "source_anchor": "an-introduction-to-bm25",
+      "visual": "match",
+      "narration": [
+        "BM twenty-five adds weighted evidence from analysed terms shared by the query and document. For delulu plus job, the text unrealistic job expectations has a job match. It has no delulu match, so that term contributes nothing.",
+        "Matching another query term can add another contribution. But matches are not equally informative. The next question is how much a term discriminates among records in the collection. No query expansion is assumed in this example."
+      ]
+    },
+    {
+      "id": "rarity",
+      "title": "Two records or nine?",
+      "source_anchor": "idf-rewards-rare-terms-title",
+      "visual": "rarity",
+      "narration": [
+        "Use the chapter's illustrative collection of ten records. Delulu occurs in two. Job occurs in nine. All else equal, which matching term narrows the possibilities more?",
+        "The rarer term usually receives more weight through inverse document frequency, or IDF. Informative here means discriminating among documents. It does not guarantee that a paper is useful for the reader's actual task."
+      ],
+      "pause_before_second": 1.8
+    },
+    {
+      "id": "frequency",
+      "title": "Count documents, not repetitions",
+      "source_anchor": "bm25-four-questions-title",
+      "visual": "frequency",
+      "narration": [
+        "Document frequency counts how many documents contain the term. Repeating a word twenty times in one paper still adds just one document to that count. Term frequency counts occurrences inside the individual document.",
+        "Those are different signals. Collection rarity supplies a weight. Within-document repetition supplies evidence whose contribution will saturate. Confusing the two counts makes the score harder to interpret."
+      ]
+    },
+    {
+      "id": "addition",
+      "title": "Add weighted contributions",
+      "source_anchor": "an-introduction-to-bm25",
+      "visual": "addition",
+      "narration": [
+        "For a labeled positive-IDF variant, the two-of-ten term gets a weight of about one point four eight. The nine-of-ten term gets about zero point one five. Production variants can differ; these are calculated teaching values.",
+        "At average document length, with one occurrence of each term, the frequency factor is one. Add the two contributions: about one point six three. Different repetition and length change those contributions. The total is a score, not a probability of relevance."
+      ]
+    },
+    {
+      "id": "limits",
+      "title": "A lexical score cannot supply every missing expression",
+      "source_anchor": "bm25-four-questions-title",
+      "visual": "limits",
+      "narration": [
+        "Now consider the text unrealistic expectations. It shares neither analysed query term, delulu nor job. In our plain, unexpanded lexical example, neither term contributes evidence. Query expansion could change what matches; the scoring formula alone does not bridge every vocabulary gap.",
+        "A high score is also not a verdict about usefulness. A well-matching paper can concern the wrong population or fail to answer the task. Ask about match, rarity, repetition and length. The next film tests why twenty repetitions do not earn twenty times the credit."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "prediction_0",
+      "scene": "prediction",
+      "text": "Several papers satisfy the same Boolean conditions. They are all eligible. Does that make them equally good matches? And if not, what evidence should put one paper above another? Make a prediction.",
+      "gap": 1.0
+    },
+    {
+      "id": "prediction_1",
+      "scene": "prediction",
+      "text": "Ranked retrieval assigns graded scores and orders the candidates. That describes an operation, not a formula. Scores might use lexical evidence, vectors or several signals. Chapter Three examines one lexical method: BM twenty-five.",
+      "gap": 2.5
+    },
+    {
+      "id": "match_0",
+      "scene": "match",
+      "text": "BM twenty-five adds weighted evidence from analysed terms shared by the query and document. For delulu plus job, the text unrealistic job expectations has a job match. It has no delulu match, so that term contributes nothing.",
+      "gap": 1.0
+    },
+    {
+      "id": "match_1",
+      "scene": "match",
+      "text": "Matching another query term can add another contribution. But matches are not equally informative. The next question is how much a term discriminates among records in the collection. No query expansion is assumed in this example.",
+      "gap": 0.65
+    },
+    {
+      "id": "rarity_0",
+      "scene": "rarity",
+      "text": "Use the chapter's illustrative collection of ten records. Delulu occurs in two. Job occurs in nine. All else equal, which matching term narrows the possibilities more?",
+      "gap": 1.0
+    },
+    {
+      "id": "rarity_1",
+      "scene": "rarity",
+      "text": "The rarer term usually receives more weight through inverse document frequency, or IDF. Informative here means discriminating among documents. It does not guarantee that a paper is useful for the reader's actual task.",
+      "gap": 1.8
+    },
+    {
+      "id": "frequency_0",
+      "scene": "frequency",
+      "text": "Document frequency counts how many documents contain the term. Repeating a word twenty times in one paper still adds just one document to that count. Term frequency counts occurrences inside the individual document.",
+      "gap": 1.0
+    },
+    {
+      "id": "frequency_1",
+      "scene": "frequency",
+      "text": "Those are different signals. Collection rarity supplies a weight. Within-document repetition supplies evidence whose contribution will saturate. Confusing the two counts makes the score harder to interpret.",
+      "gap": 0.65
+    },
+    {
+      "id": "addition_0",
+      "scene": "addition",
+      "text": "For a labeled positive-IDF variant, the two-of-ten term gets a weight of about one point four eight. The nine-of-ten term gets about zero point one five. Production variants can differ; these are calculated teaching values.",
+      "gap": 1.0
+    },
+    {
+      "id": "addition_1",
+      "scene": "addition",
+      "text": "At average document length, with one occurrence of each term, the frequency factor is one. Add the two contributions: about one point six three. Different repetition and length change those contributions. The total is a score, not a probability of relevance.",
+      "gap": 0.65
+    },
+    {
+      "id": "limits_0",
+      "scene": "limits",
+      "text": "Now consider the text unrealistic expectations. It shares neither analysed query term, delulu nor job. In our plain, unexpanded lexical example, neither term contributes evidence. Query expansion could change what matches; the scoring formula alone does not bridge every vocabulary gap.",
+      "gap": 1.0
+    },
+    {
+      "id": "limits_1",
+      "scene": "limits",
+      "text": "A high score is also not a verdict about usefulness. A well-matching paper can concern the wrong population or fail to answer the task. Ask about match, rarity, repetition and length. The next film tests why twenty repetitions do not earn twenty times the credit.",
+      "gap": 0.65
+    }
+  ]
+}

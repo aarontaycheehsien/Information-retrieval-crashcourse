@@ -1,0 +1,256 @@
+<section class="chapter" id="sec-representations-and-units"><header class="chapter-head"><p class="chapter-eyebrow">Chapter 8</p>
+<p class="chapter-meta">About 16 min</p>
+<h2 id="representations-and-units">Representations and indexed units</h2>
+<p class="chapter-question"><span>Central question</span>What is actually stored, and what does one stored item stand for?</p>
+<div class="stage-map" role="group" aria-label="Pipeline map: the stage this chapter covers is highlighted">
+<div class="stage-controller off">Controller — chooses and sequences the stages below</div>
+<div class="stage-row">
+<a class="stage off" href="#query-transformation" title="Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them.">Query<br>transformation</a><a class="stage on" href="#boolean-admission" title="Chapter 2 — text becomes index terms, and the rules decide which records are eligible at all.">Analysis &amp;<br>execution rules</a><a class="stage on" href="#bm25-ranking" title="Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set.">First-stage<br>retrieval</a><a class="stage off" href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one.">Fusion</a><a class="stage off" href="#reranking-and-hybrid" title="Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed.">Reranking</a><a class="stage off" href="#library-practice" title="Chapter 15 — what the reader is finally shown, and what can be recorded about it.">Presentation</a>
+</div>
+</div>
+<div class="chapter-orient">
+<p>The previous chapter compared stored vectors without saying what one of them contains. It also used <em>indexed unit</em> as though the phrase were self-explanatory. What a retrieval stage can match depends on the indexed text, how it is divided into units and how those units are represented.</p>
+<p>This chapter views the lexical machinery you already know as coordinates: binary presence, term frequency, TF–IDF and BM25 weights. This is a comparison of representations, not a chronological claim that BM25 was derived from TF–IDF. That progression is enough to show that <em>vector</em> names the numerical object, while <em>sparse</em>, <em>learnt</em> and <em>semantic</em> name three independent properties. The chapter also distinguishes a source document from its searchable units and explains how matches from those units become displayed results.</p>
+</div></header>
+<p class="key-distinction-label" id="distinction-vector-semantic">Key distinction</p>
+<h3 id="a-vector-does-not-have-to-be-dense-or-semantic">A vector does not have to be dense or semantic<a aria-label="Link to A vector does not have to be dense or semantic" class="heading-anchor" href="#a-vector-does-not-have-to-be-dense-or-semantic">#</a>
+</h3>
+<p>Dense text embeddings are now the most visible vectors in search, but they are not the only kind. Long before dense retrieval, lexical systems could already represent a document as an ordered list of numbers. The easiest way to see this is to build the representation one decision at a time.</p>
+<h4 id="step-1-fix-the-coordinate-system">Step 1 — Fix the coordinate system: one vocabulary term per dimension</h4>
+<p>Suppose a tiny collection contains three documents:</p>
+<ul>
+<li>
+<strong>D1:</strong> <em>heart attack treatment</em>
+</li>
+<li>
+<strong>D2:</strong> <em>job interview tips</em>
+</li>
+<li>
+<strong>D3:</strong> <em>cancer treatment</em>
+</li>
+</ul>
+<p>After the text has been analysed, the collection vocabulary is <code>[attack, cancer, heart, interview, job, tips, treatment]</code>. That ordered vocabulary defines a seven-dimensional vector space. Coordinate 1 always means <code>attack</code>, coordinate 2 always means <code>cancer</code>, and so on. A real collection may have millions of vocabulary dimensions; the ordering is arbitrary, but it must remain consistent.</p>
+<p>This first choice determines what the coordinates <em>mean</em>. It does not yet determine what numbers to put in them.</p>
+<h4 id="step-2-binary-presence">Step 2 — Binary presence: a Boolean-like starting point</h4>
+<p>Put <code>1</code> in a coordinate when the term is present and <code>0</code> when it is absent:</p>
+<ul>
+<li>
+<strong>D1:</strong> <code>[1, 0, 1, 0, 0, 0, 1]</code>
+</li>
+<li>
+<strong>D2:</strong> <code>[0, 0, 0, 1, 1, 1, 0]</code>
+</li>
+<li>
+<strong>D3:</strong> <code>[0, 1, 0, 0, 0, 0, 1]</code>
+</li>
+</ul>
+<p>These are vectors. They are also <strong>sparse</strong>: each vector is defined over all seven vocabulary dimensions, but most coordinates are zero. In a million-term vocabulary, a short document might activate only a few hundred coordinates. Implementations therefore store the non-zero term–weight pairs rather than writing out every zero.</p>
+<p>The word <em>Boolean-like</em> needs care here. A binary vector records the same presence or absence evidence used by Boolean retrieval, but <strong>the vector does not itself specify AND, OR or NOT</strong>. For the query <em>heart treatment</em>, the query vector is <code>[0, 0, 1, 0, 0, 0, 1]</code>. Counting shared ones gives D1 two overlaps, D3 one and D2 none. That is a simple graded overlap score. By contrast, the strict Boolean query <code>heart AND treatment</code> admits only D1, while <code>heart OR treatment</code> admits D1 and D3. The coordinates supply term evidence; the retrieval rule decides how that evidence is used.</p>
+<figure class="ir-figure" aria-labelledby="binary-sparse-lexical-vector-space-title">
+<p class="figure-title" id="binary-sparse-lexical-vector-space-title">The same three documents in a full collection vocabulary</p>
+<img src="images/08%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/binary-sparse-lexical-vector-space.png" alt="A two-stage worked example. First, a collection dictionary is built from a corpus, running alphabetically from a and aardvark through attack, cancer, heart, interview, job and treatment to zygote, with an example vocabulary size of 2,345,678 terms. Second, the same three documents — heart attack treatment, job interview tips and cancer treatment — are written as binary vectors across that vocabulary: one column per term, a 1 where the term occurs and 0 everywhere else, so almost every entry is zero. Side panels note where the binary values come from, that documents match a query through overlapping ones, and that an inverted index stores only the terms that actually occur.">
+<figcaption><span class="asset-label-inline" id="fig-8-1">Figure 8.1</span> The seven-dimensional space used above is this same construction with the vocabulary shrunk to fit on a page. At collection scale the coordinate system has millions of columns and a short document activates a handful of them, which is why the zeros are never actually stored. The values here are binary for clarity; the steps that follow replace them with counts and then with weights. <a href="images/08%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/binary-sparse-lexical-vector-space.png">Open the full-resolution figure.</a></figcaption>
+</figure>
+<h4 id="step-3-term-frequency">Step 3 — Term frequency: replace “is it present?” with “how much is present?”</h4>
+<p>Binary presence treats one occurrence and ten occurrences alike. A <strong>term-frequency</strong> or <strong>TF</strong> vector keeps the same vocabulary dimensions but replaces the ones with counts or count-derived values. If D1 were <em>heart attack treatment treatment treatment</em>, its raw-TF vector would be <code>[1, 0, 1, 0, 0, 0, 3]</code>. The coordinate meanings have not changed; only the weighting rule has.</p>
+<p>TF captures repetition, which is often useful evidence that a document is about a term. Raw counts also create a problem: repetition can grow without limit, and longer documents have more opportunities to accumulate large counts. A better lexical weighting scheme should decide both how much repeated use helps and how document length should affect the score.</p>
+<h4 id="step-4-tf-idf">Step 4 — TF–IDF: let distinctive terms count more</h4>
+<p>Term frequency looks only inside one document. <strong>Inverse document frequency</strong>, or <strong>IDF</strong>, looks across the collection. A term that appears in nearly every document is usually less discriminating than one that appears in only a few. A common schematic form is <code>TF–IDF(t,d) = TF(t,d) × IDF(t)</code>, with <code>IDF(t)</code> increasing as the term’s document frequency decreases.</p>
+<p>In the toy collection, <code>treatment</code> occurs in D1 and D3, whereas <code>heart</code> occurs only in D1. TF–IDF therefore gives the rarer <code>heart</code> dimension more collection-level emphasis. The result is still a vocabulary-aligned sparse vector: absent terms remain zero, present terms receive calculated non-zero weights, and every coordinate can still be named.</p>
+<h4 id="step-5-bm25">Step 5 — BM25: add saturation and document-length normalisation</h4>
+<p><a href="#bm25-words-as-weighted-clues">BM25</a> develops the same lexical idea further. It retains IDF, but repeated occurrences show <strong>diminishing returns</strong>: the tenth occurrence of a term adds less evidence than the first. It also adjusts term-frequency evidence in relation to document length, so a long document does not receive an automatic advantage merely because it contains more words. Parameters control the strength of saturation and length normalisation.</p>
+<p>BM25 can therefore be viewed as a calculated sparse vector representation. Query terms activate vocabulary dimensions, document coordinates contain BM25-style term contributions, and the final score can be expressed as a dot-product-style sum over matching dimensions.<sup id="fnref:bm25-sparse-vector"><a class="footnote-ref" href="#fn:bm25-sparse-vector">34</a></sup> This is a mathematical view of the score, not a claim that a search engine writes millions of zeros or performs dense nearest-neighbour search. In practice, an <a href="#how-bm25-uses-the-same-inverted-index">inverted index</a> jumps directly to the postings for active query terms and accumulates their contributions.</p>
+<figure class="ir-figure" aria-labelledby="lexical-vector-weighting-progression-title">
+<p class="figure-title" id="lexical-vector-weighting-progression-title">One vocabulary space, progressively richer lexical weights</p>
+<img src="images/08%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/lexical-vector-weighting-progression.png" alt="A five-step worked example uses the same seven-term collection vocabulary to represent three documents as binary-presence, term-frequency, TF–IDF and BM25 vectors. The coordinates stay aligned with vocabulary terms while the weighting rule changes. A side panel shows that an inverted index stores only active term entries and accumulates their weights for a query.">
+<figcaption><span class="asset-label-inline" id="fig-8-2">Figure 8.2</span> Binary presence, TF, TF–IDF and BM25 can all use the same vocabulary-aligned coordinates. What changes is the value placed in each active coordinate and the rule used to score a query; the vectors remain sparse, so an inverted index can store only non-zero term entries. <a href="images/08%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/lexical-vector-weighting-progression.png">Open the full-resolution figure.</a></figcaption>
+</figure>
+<p class="asset-label" id="tbl-8-1">Table 8.1 — The lexical progression keeps vocabulary dimensions fixed while enriching the values and retrieval rule.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Representation or rule</th>
+<th>What a document coordinate stores</th>
+<th>What this adds</th>
+<th>Important limitation or qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binary presence</td>
+<td>
+<code>1</code> if the term occurs; otherwise <code>0</code>
+</td>
+<td>A compact record of term presence</td>
+<td>Does not distinguish one occurrence from many</td>
+</tr>
+<tr>
+<td>Strict Boolean retrieval</td>
+<td>May use the same presence evidence</td>
+<td>AND, OR and NOT impose hard admission conditions</td>
+<td>The operators are retrieval logic, not properties of the vector itself</td>
+</tr>
+<tr>
+<td>Term frequency</td>
+<td>A count or count-derived value</td>
+<td>Repeated use can provide more evidence</td>
+<td>Raw repetition and document length can dominate</td>
+</tr>
+<tr>
+<td>TF–IDF</td>
+<td>Term frequency weighted by collection rarity</td>
+<td>Distinctive terms contribute more than ubiquitous ones</td>
+<td>Exact TF and IDF formulas vary; basic forms do not provide BM25’s full saturation and length treatment</td>
+</tr>
+<tr>
+<td>BM25</td>
+<td>A calculated term contribution using IDF, saturated TF and length normalisation</td>
+<td>A strong ranked lexical score</td>
+<td>It remains lexical: normally at least one analysed query term must match</td>
+</tr>
+</tbody>
+</table></div>
+<p>The progression is therefore <strong>not</strong> “Boolean vectors become semantic vectors”. The dimensions remain lexical throughout. What changes is the value stored in each vocabulary coordinate and the rule that turns active coordinates into an eligible set or a ranking.</p>
+<p>A dense embedding is built the other way round. Nobody assigns its coordinates to stated vocabulary terms. They are <strong>latent dimensions</strong>, settled during training, and what any one of them contributes is spread across the representation rather than readable from that coordinate alone.</p>
+<figure class="ir-figure" aria-labelledby="lexical-and-dense-vector-dimensions-title">
+<p class="figure-title" id="lexical-and-dense-vector-dimensions-title">What vector dimensions mean in lexical and dense spaces</p>
+<img src="images/08%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/lexical-and-dense-vector-dimensions.png" alt="A side-by-side explanation of vector dimensions. In a sparse lexical space, a collection dictionary supplies one interpretable term dimension per column and most values are zero. In a dense embedding space, a model learns many latent dimensions, most values are non-zero and individual coordinates usually do not correspond to words. A lower panel contrasts the two approaches and shows SPLADE as a learnt sparse bridge that retains vocabulary dimensions.">
+<figcaption><span class="asset-label-inline" id="fig-8-3">Figure 8.3</span> A vector is a list of numbers, but the vector space determines what each number means. Sparse lexical vectors use explicit vocabulary dimensions and support efficient inverted indexing; dense embeddings use learnt latent dimensions whose meaning is distributed across the representation. SPLADE is a useful bridge: it is learnt and sparse while retaining vocabulary-aligned coordinates. <a href="images/08%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/lexical-and-dense-vector-dimensions.png">Open the full-resolution figure.</a></figcaption>
+</figure>
+<h3 id="four-questions-about-a-representation">Four questions about a representation<a aria-label="Link to Four questions about a representation" class="heading-anchor" href="#four-questions-about-a-representation">#</a>
+</h3>
+<ol>
+<li>
+<strong>Is it a vector?</strong> A vector is an ordered list of numbers. Binary presence, TF–IDF, BM25-style weights and dense embeddings can all be written as vectors.</li>
+<li>
+<strong>Is it sparse or dense?</strong> Sparse means that relatively few dimensions are active; dense means that most are active. This describes the shape of a representation.</li>
+<li>
+<strong>Was the weighting rule specified or learnt?</strong> Both routes calculate their numbers. TF–IDF and BM25 apply a specified formula to collection statistics; a neural model applies a weighting or mapping fitted during training.</li>
+<li>
+<strong>What evidence do the dimensions preserve?</strong> Dimensions may stand for words, metadata fields, locations, colours, citation patterns or distributed latent features. Their design and training—not density alone—determine whether the representation supports meaning-oriented matching.</li>
+</ol>
+<p>The same text could be represented by a sparse lexical vector such as <code>[1.6, 1.4, 2.2, 0, 0]</code> over <code>[open, access, citation, advantage, embargo]</code>, or by a toy dense embedding such as <code>[0.14, −0.37, 0.81, 0.05, −0.21, 0.63, −0.12, 0.28]</code>. In the first, each coordinate has a recognisable term label. In the second, most coordinates are active, but <code>latent 3 = 0.81</code> does not mean “citation” by itself. These values are illustrative of structure, not output from a named model.</p>
+<figure class="ir-figure" aria-labelledby="sparse-vs-dense-vectors-title">
+<p class="figure-title" id="sparse-vs-dense-vectors-title">Sparse and dense vectors compared</p>
+<img alt="A sparse vocabulary-aligned vector with mostly zero coordinates compared with a dense learnt vector with values in most latent coordinates" src="images/08%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/ChatGPT%20Image%20Jul%2026,%202026,%2009_35_31%20PM.png">
+<figcaption><span class="asset-label-inline" id="fig-8-4">Figure 8.4</span> A sparse lexical representation may be enormous in principle yet cheap to store because only a small number of term coordinates are active. A dense embedding is usually much shorter, but most of its latent coordinates contain non-zero values.</figcaption>
+</figure>
+<p>Density still says nothing by itself about semantics. An article described by <code>[year, pages, references, citations] = [2026, 14, 32, 87]</code> has a fully active—and therefore dense—feature vector. Its coordinates are explicit bibliographic facts, not a semantic text embedding.</p>
+<h3 id="learnt-sparse-representations">The converse case: learnt weights in vocabulary coordinates<a aria-label="Link to The converse case: learnt weights in vocabulary coordinates" class="heading-anchor" href="#learnt-sparse-representations">#</a>
+</h3>
+<p>A representation can be as sparse as BM25’s, and keep coordinates that each stand for a vocabulary term, while having every number in it computed by a learnt mapping. This is <strong>learnt sparse retrieval</strong>, and <a href="https://doi.org/10.1145/3404835.3463098"><strong>SPLADE</strong></a> is its principal example in this book.</p>
+<p>Each dimension still stands for one vocabulary term, and almost all of them are still zero. The vocabulary is not BM25’s, though: SPLADE’s coordinates are the output vocabulary of a transformer language model—<a href="#appendix-wordpiece-worked-example">WordPiece subword units</a> in the standard implementation—rather than whatever analysed terms a lexical index happens to hold.</p>
+<p>BM25 and learnt sparse models both use sparse, vocabulary-aligned representations, but calculate their weights differently. BM25 reads a count off the document and adjusts it using collection statistics. A learnt sparse model instead <em>predicts</em> a weight for each term in its vocabulary, having read the passage. The prediction ranges over the whole vocabulary, not only the words present, so a term the text never contained can still receive weight. A training penalty then drives the overwhelming majority of the remaining predictions to zero. That penalty is what keeps the representation sparse enough to hold in an inverted index.<sup id="fnref:splade-mechanics"><a class="footnote-ref" href="#fn:splade-mechanics">35</a></sup></p>
+<p>A toy representation of <em>heart attack</em> might therefore activate <code>heart</code>, <code>attack</code>, <code>myocardial</code> and <code>infarction</code> while leaving almost the whole vocabulary at zero. The last two were never typed and need not appear anywhere in the passage. They are still named coordinates, so the representation can be read back: an analyst can list which terms received weight and how much, which a pooled dense embedding does not permit. The whole words used here are schematic; a real model activates entries of its own subword vocabulary.</p>
+<figure class="ir-figure" aria-labelledby="splade-sparse-expansion-title">
+<p class="figure-title" id="splade-sparse-expansion-title">A learnt sparse model expands within the vocabulary</p>
+<img alt="Schematic SPLADE query expansion: delulu, job and expectations receive weights alongside additional terms unrealistic, career and search" src="images/08%20Representations%20and%20indexed%20units/ChatGPT%20Image%20Jul%2026,%202026,%2009_44_49%20PM.png">
+<figcaption><span class="asset-label-inline" id="fig-8-5">Figure 8.5</span> Because the weight for each vocabulary term is predicted rather than counted, terms absent from the input can receive weight. This schematic query example starts with “delulu job expectations” and also activates terms such as “unrealistic” and “career”; the displayed weights illustrate the mechanism, not measured output from a specified model. Every activated dimension still carries a term label, and almost every other dimension stays at zero.</figcaption>
+</figure>
+<p>Judged by the four questions above, the representation is <em>learnt</em>, like a dense embedding; <em>sparse</em> and vocabulary-labelled, like BM25; and more meaning-aware than literal typed-term matching. Learnt sparse retrieval is therefore one alternative to running separate lexical and dense retrievers, because a single inverted index can carry both exact terms and learnt expansions; it can also be one of the routes in a hybrid. <a href="#learnt-sparse-in-the-pipeline">Chapter 9</a> explains its use in a retrieval pipeline; <a href="#appendix-learnt-sparse-query-cost">Appendix C</a> examines the query-time cost of expansion.</p>
+<p class="asset-label" id="tbl-8-2">Table 8.2 — Representation shape, provenance and evidence are independent properties.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Method or case</th>
+<th>Shape</th>
+<th>Where the numbers come from</th>
+<th>What the dimensions or conditions represent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boolean conditions</td>
+<td>Not primarily a graded vector ranking</td>
+<td>Searcher-specified logic over indexed terms</td>
+<td>Hard lexical admission requirements</td>
+</tr>
+<tr>
+<td>BM25</td>
+<td>Sparse</td>
+<td>Specified formula over collection statistics</td>
+<td>Vocabulary terms and their lexical evidence</td>
+</tr>
+<tr>
+<td>Explicit bibliographic features</td>
+<td>Potentially dense</td>
+<td>Measured or recorded values</td>
+<td>Named fields such as year, pages and citations</td>
+</tr>
+<tr>
+<td>SPLADE-style retrieval</td>
+<td>Sparse</td>
+<td>Learnt mapping, trained under sparsity constraints</td>
+<td>Vocabulary terms, including learnt expansions</td>
+</tr>
+<tr>
+<td>Dense bi-encoder</td>
+<td>Dense</td>
+<td>Learnt neural mapping</td>
+<td>Distributed latent features</td>
+</tr>
+</tbody>
+</table></div>
+<figure class="ir-figure" aria-labelledby="density-and-learning-axes-title">
+<p class="figure-title" id="density-and-learning-axes-title">Density and learning are separate axes of a representation</p>
+<img alt="A two-by-two matrix. The horizontal axis, how the representation is produced, runs from a specified rule on the left to a learnt mapping on the right. The vertical axis, representation shape, runs from sparse at the top to dense at the bottom. Top left, BM25: sparse weights computed using a specified formula and collection statistics. Top right, learnt sparse retrieval such as SPLADE: sparse weights computed using a learnt neural mapping. Bottom left, latent semantic analysis: dense vectors from a specified decomposition of collection statistics using truncated SVD, not a mapping fitted to training data, and little used today. Bottom right, dense bi-encoder: dense embeddings computed using a learnt neural mapping. A panel to the side notes that Boolean search is primarily logical admission rules rather than graded vector ranking. A banner below reads: do not equate sparse with lexical and dense with semantic." src="images/08%20A%20vector%20does%20not%20have%20to%20be%20dense%20or%20semantic/density-and-learning-axes.png">
+<figcaption><span class="asset-label-inline" id="fig-8-6">Figure 8.6</span> BM25 is sparse and uses a specified weighting rule, SPLADE is sparse and uses a learnt one, and a dense bi-encoder produces dense embeddings from a learnt mapping. Latent semantic analysis fills the fourth quadrant: its dimensions come from a specified matrix decomposition over collection statistics rather than from a mapping fitted to training examples, which is why it sits on the specified side despite being derived from data. It is little used in current retrieval and is not otherwise covered in this book. Whether a representation is sparse or dense does not tell us whether the rule that produced it was specified or learnt.</figcaption>
+</figure>
+<p>How vectors are compared is one more independent choice. Dot product can combine sparse lexical weights or dense latent features; cosine similarity can likewise be applied to different numerical representations. Neither operation makes the underlying vector dense, learnt or semantic. <a href="#vector-similarity-explained">Chapter 7’s similarity explanation</a> and the <a href="vector-similarity-lab.html">Vector Similarity Lab</a> work through that arithmetic. <strong>The choice of representation does not determine the comparison rule or which scored records are returned.</strong></p>
+<p>Terminology varies across fields and systems. This book keeps <a href="#representation-vector-embedding-title">Chapter 5’s</a> terms; other sources may call SPLADE-style outputs <strong>sparse embeddings</strong>.<sup id="fnref:embedding-terms"><a class="footnote-ref" href="#fn:embedding-terms">36</a></sup></p>
+<h3 id="one-document-one-chunk-and-one-vector-are-not-the-same-thing">One document, one chunk and one vector are not the same thing<a aria-label="Link to One document, one chunk and one vector are not the same thing" class="heading-anchor" href="#one-document-one-chunk-and-one-vector-are-not-the-same-thing">#</a>
+</h3>
+<p>Dense retrieval also forces us to stop using <strong>document</strong> as though it meant only one thing.</p>
+<p>A source document might be an article, paper, report, webpage or book. The retrieval system may index its abstract, sections, paragraphs, sentences or overlapping token windows. Those are the <strong>indexed units</strong>.</p>
+<p>A 20-page article might therefore produce one indexed abstract, ten section units or 50 overlapping passages. In a conventional dense bi-encoder, each of those indexed units receives one pooled vector, so 50 passages become 50 independently searchable vectors. The units stay separate: no single vector captures the complete paper, and nothing automatically combines evidence spread across different chunks.</p>
+<figure class="ir-figure" aria-labelledby="chunking-strategies-title">
+<p class="figure-title" id="chunking-strategies-title">The same article indexed under different chunking strategies</p>
+<img alt="The same article indexed using different chunking strategies" src="images/08%20One%20document,%20one%20chunk%20and%20one%20vector%20are%20not%20the%20same%20thing/ChatGPT%20Image%20Jul%2026,%202026,%2009_41_43%20PM.png">
+<div class="worked-figure" role="group" aria-label="Four retrieved passages grouped into two article results">
+<p class="worked-kicker">After retrieval: group passages by their source article</p>
+<div class="worked-grid">
+<div class="worked-card">
+<strong>Four retrieved passages</strong><p class="worked-record"><b>A · passage 2</b> Paper A</p>
+<p class="worked-record"><b>A · passage 7</b> Paper A</p>
+<p class="worked-record"><b>B · passage 3</b> Paper B</p>
+<p class="worked-record"><b>A · passage 9</b> Paper A</p>
+</div>
+<div class="worked-card">
+<strong>Two article-level results</strong><p class="worked-paper"><b>Paper A</b><small>Matching passages: 2, 7 and 9</small></p>
+<p class="worked-paper"><b>Paper B</b><small>Matching passage: 3</small></p>
+</div>
+</div>
+<p class="worked-note">Illustrative grouping by source identity, not a rule for combining scores. Four retrieved chunks need not mean four papers. Grouping does not itself combine their evidence into an answer.</p>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-8-7">Figure 8.7</span> How finely the source is cut, how each unit is represented and how matches are grouped back into results are separate choices, and only the last is visible in a result list.</figcaption>
+</figure>
+<p>These are separate choices:</p>
+<ul>
+<li>
+<strong>Source-document granularity:</strong> the object a person thinks of as the document.</li>
+<li>
+<strong>Indexed-unit granularity:</strong> the text unit the system searches.</li>
+<li>
+<strong>Representation granularity:</strong> how each indexed unit is encoded.</li>
+<li>
+<strong>Result aggregation:</strong> whether matching passages are displayed separately or combined into one article-level result.</li>
+</ul>
+<figure class="ir-figure" aria-labelledby="paper-as-many-vectors-title">
+<p class="figure-title" id="paper-as-many-vectors-title">A paper split into many searchable chunks and vectors</p>
+<img alt="A paper split into many searchable chunks and vectors" src="images/08%20One%20document,%20one%20chunk%20and%20one%20vector%20are%20not%20the%20same%20thing/ChatGPT%20Image%20Jul%2026,%202026,%2009_41_26%20PM.png">
+<figcaption><span class="asset-label-inline" id="fig-8-8">Figure 8.8</span> Many independently searchable units do not mean that the complete paper has been captured faithfully, nor that evidence spread across chunks will be combined.</figcaption>
+</figure>
+<p>The <a href="https://aarontay.substack.com/p/from-fixed-search-workflows-to-agentic">Wiley AI Gateway</a> returns chunks of the <em>full text</em> that may be relevant to a query, alongside the paper’s metadata—so the indexed unit is a passage, and evidence buried in a methods section is reachable. A discovery layer built over <a href="#bm25-and-lexical-ranking-in-academic-search">records described by their metadata and abstracts</a> is working with a much coarser unit. Both may describe themselves as searching articles.</p>
+<p><strong>Indexed units determine what can match at a particular retrieval stage.</strong> An abstract index cannot directly match a claim found only in the results section. A later fetch of full text, neighbouring passages or a parent section may nevertheless supply that evidence. Ask separately what the system indexes, what it retrieves and what it supplies as context.</p>
+<p>When evaluating a product, ask what text was embedded, how large each unit was, and how matching passages are combined into article-level results.<sup id="fnref:chunking"><a class="footnote-ref" href="#fn:chunking">37</a></sup> In RAG systems chunking also decides what evidence is available for an answer. The system may supply the retrieved chunk itself, fetch a larger unit, or compress several retrieved units before the model’s context is assembled. These choices affect the evidence supplied to the answer generator. <a href="#appendix-rag">Appendix G</a> examines how retrieved passages become context for generation.</p>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>A <em>vector</em> is an ordered list of numbers. Binary presence, term frequency, TF–IDF and BM25 weights can all be written as vectors, so the word names the numerical object rather than any property of it.</li>
+<li>
+<em>Sparse</em> and <em>dense</em> describe the shape of a representation; <em>specified</em> and <em>learnt</em> describe how the rule that produced its numbers was obtained. The two axes vary independently—BM25 is sparse with a specified rule, SPLADE is sparse with a learnt one.</li>
+<li>Density alone does not establish whether a representation supports semantic matching. A fully active vector of bibliographic facts is dense and not semantic; a learnt sparse representation can be meaning-aware with almost every dimension left at zero.</li>
+<li>Source document, indexed unit, representation and result aggregation are four separate choices, and only the last of them is visible in a result list.</li>
+<li>A retrieval stage can match only its indexed evidence. A later fetch may supply more text, so indexed units and generator context must be documented separately.</li>
+</ol>
+<p class="chapter-transition">A first-stage retriever, lexical or dense, has to be fast enough to run against an entire collection—which limits how carefully it can compare anything. The next chapter asks what a system can afford once it has a shortlist.</p></aside><section class="self-check" aria-label="Questions on this chapter"><p class="self-check-label">Check yourself</p>
+<details class="self-check-q"><summary>A vendor says its product “uses vectors, not keywords”. What has that ruled out?</summary><p>Almost nothing. A vector is an ordered list of numbers, and the lexical representations in this chapter are vectors too—BM25 term weights can be written as one. The claim describes the numerical object, not whether the dimensions are vocabulary terms or latent features, not whether the rule behind them was specified or fitted during training, and not whether the comparison is meaning-aware.</p></details><details class="self-check-q"><summary>BM25 and SPLADE both produce sparse representations. What separates them, and what does that tell you about the word <em>sparse</em>?</summary><p>Provenance. BM25’s weights come from a specified formula over collection statistics; SPLADE’s come from a mapping trained under a sparsity constraint, which also lets it activate terms the document never contained. <em>Sparse</em> therefore describes only the shape—few active dimensions out of many—and settles neither where the numbers came from nor whether the representation is meaning-aware.</p></details><details class="self-check-q"><summary>A product advertises “semantic search over full text”. What two things must you establish?</summary><p>What the indexed unit actually is — titles, abstracts, sections or passages — because this controls what can match at that stage; also ask whether later steps fetch full text or expand context. And how several matching chunks from one paper are turned back into a single article-level result.</p></details></section><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#dense-at-scale"><span>Previous</span>Dense retrieval at collection scale</a><a class="cnav next" href="#reranking-and-hybrid"><span>Next</span>Reranking and multi-stage retrieval</a></nav></section>

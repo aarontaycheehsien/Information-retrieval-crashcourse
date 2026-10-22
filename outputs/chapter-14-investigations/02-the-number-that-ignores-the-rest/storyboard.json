@@ -1,0 +1,201 @@
+{
+  "series": "Measuring whether retrieval worked",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#evaluation",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#evaluation",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-the-number-that-ignores-the-rest",
+  "title": "The number that ignores the rest",
+  "subtitle": "Choosing a ranking metric means choosing what to reward.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "first_hit_hook",
+      "title": "Two relevant hits or six: can the score stay the same?",
+      "source_anchor": "rank-changes-the-question",
+      "visual": "first_hit_hook",
+      "narration": [
+        "Our source example improves from two to six relevant papers in the first ten. Yet its first relevant paper stays at rank one. Could a conventional ranking measure report no improvement at all? Pause and ask what that measure would have to ignore.",
+        "Reciprocal rank is one divided by the first relevant rank. Here it stays one before and after. It ignores every relevant paper following that first hit. Across queries, mean reciprocal rank averages those reciprocals. A useful number can be perfectly blind to the improvement your task values."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "depth_choice",
+      "title": "Evaluation depth is not automatically a retrieval budget",
+      "source_anchor": "rank-changes-the-question",
+      "visual": "depth_choice",
+      "narration": [
+        "Precision at k counts relevant records inside an evaluation depth. A relevant record at rank one and the same record at rank ten contribute equally to precision at ten. Rank eleven contributes nothing to that first page score.",
+        "Here k names the depth being evaluated. It need not equal the first stage candidate limit or the reranker\u2019s budget. State all those boundaries separately. Comparing one system\u2019s first ten with another system\u2019s first twenty changes the question along with the system."
+      ]
+    },
+    {
+      "id": "reciprocal_goal",
+      "title": "MRR rewards the first answer arriving early",
+      "source_anchor": "tbl-14-2",
+      "visual": "reciprocal_goal",
+      "narration": [
+        "Mean reciprocal rank is a natural fit when the task essentially has one right answer: finding a known paper, resolving a citation, or making a factual lookup. Moving the first relevant hit upward increases its reciprocal rank.",
+        "It does not establish broad evidence coverage. Two systems can share the same first hit while one finds many additional relevant records and the other finds none. Our displayed value is a single query\u2019s reciprocal rank; calling it a multi query comparison would imply evidence this illustration does not contain."
+      ]
+    },
+    {
+      "id": "average_precision_goal",
+      "title": "MAP rewards many relevant records placed high",
+      "source_anchor": "rank-changes-the-question",
+      "visual": "average_precision_goal",
+      "narration": [
+        "Average precision collects precision at the ranks where relevant papers appear, then averages using the judged relevant total for that query. For this complete twenty record illustration, the arithmetic rewards the improved placement of many relevant papers, even though the first hit stays unchanged.",
+        "Mean average precision then averages query level average precision values. It is closer to the goal of assembling a useful set, but treats relevance as binary. A marginal paper and a decisive paper count alike if both are labelled relevant. State the evaluation protocol and depth."
+      ]
+    },
+    {
+      "id": "graded_goal",
+      "title": "nDCG can reward decisive records more than marginal ones",
+      "source_anchor": "rank-changes-the-question",
+      "visual": "graded_goal",
+      "narration": [
+        "Normalised discounted cumulative gain accepts relevance grades and discounts contributions at lower ranks, relative to an ideal ordering at the evaluation depth. A highly relevant paper near the top can count more than a partly relevant one farther down.",
+        "That requires graded judgements and an explicit scoring convention. We are explaining the metric\u2019s goal, not inventing grades for the source\u2019s binary example. Its limitation remains: several highly graded records can repeat one aspect while another aspect is missing. High ranking quality does not automatically establish diverse coverage."
+      ]
+    },
+    {
+      "id": "metric_choice",
+      "title": "Each measure defines a different kind of better",
+      "source_anchor": "tbl-14-2",
+      "visual": "metric_choice",
+      "narration": [
+        "Precision at k values relevant items inside the cutoff. Mean reciprocal rank values an early first hit. Mean average precision values many binary relevant hits placed high. Normalised discounted gain values graded relevance discounted by position.",
+        "All four need judgements. These conventional relevance only measures treat record judgements independently; they do not directly reward coverage across known aspects. A metric choice is a task choice. Ask which benefit the number rewards, and which failure it cannot reveal."
+      ]
+    },
+    {
+      "id": "benchmark_controls",
+      "title": "A fair offline comparison holds the evaluation inputs still",
+      "source_anchor": "test-collections-and-benchmarks",
+      "visual": "benchmark_controls",
+      "narration": [
+        "The Cranfield arrangement fixes a document collection, queries or topics, and relevance judgements. Compare systems against those same inputs. Offline test collections answer that controlled question; user studies and task based evaluations ask complementary questions.",
+        "BEIR\u2019s cited cross collection finding is conditional on its topics and assessors: BM twenty five held up as a robust baseline, while several more expensive neural systems did better on average. That does not settle performance on your chemistry theses, languages, or local researchers\u2019 questions."
+      ]
+    },
+    {
+      "id": "judgement_pooling",
+      "title": "Unjudged is not the same as irrelevant",
+      "source_anchor": "test-collections-and-benchmarks",
+      "visual": "judgement_pooling",
+      "narration": [
+        "Large evaluations often judge the union of top results from several systems. Under the chapter\u2019s described scoring approach, unjudged records are treated as non relevant. A genuinely useful new result outside that pool can therefore receive no credit.",
+        "This judgement pooling is different from compressing token representations into a vector. It can bias evaluation against unfamiliar retrieval approaches. Read a leaderboard as evidence about its benchmark, then ask whether the topics, criteria and judged pool resemble your task. The next film builds an evaluation whose criteria a library controls."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "first_hit_hook_0",
+      "scene": "first_hit_hook",
+      "text": "Our source example improves from two to six relevant papers in the first ten. Yet its first relevant paper stays at rank one. Could a conventional ranking measure report no improvement at all? Pause and ask what that measure would have to ignore.",
+      "gap": 1.0
+    },
+    {
+      "id": "first_hit_hook_1",
+      "scene": "first_hit_hook",
+      "text": "Reciprocal rank is one divided by the first relevant rank. Here it stays one before and after. It ignores every relevant paper following that first hit. Across queries, mean reciprocal rank averages those reciprocals. A useful number can be perfectly blind to the improvement your task values.",
+      "gap": 2.5
+    },
+    {
+      "id": "depth_choice_0",
+      "scene": "depth_choice",
+      "text": "Precision at k counts relevant records inside an evaluation depth. A relevant record at rank one and the same record at rank ten contribute equally to precision at ten. Rank eleven contributes nothing to that first page score.",
+      "gap": 1.0
+    },
+    {
+      "id": "depth_choice_1",
+      "scene": "depth_choice",
+      "text": "Here k names the depth being evaluated. It need not equal the first stage candidate limit or the reranker\u2019s budget. State all those boundaries separately. Comparing one system\u2019s first ten with another system\u2019s first twenty changes the question along with the system.",
+      "gap": 0.65
+    },
+    {
+      "id": "reciprocal_goal_0",
+      "scene": "reciprocal_goal",
+      "text": "Mean reciprocal rank is a natural fit when the task essentially has one right answer: finding a known paper, resolving a citation, or making a factual lookup. Moving the first relevant hit upward increases its reciprocal rank.",
+      "gap": 1.0
+    },
+    {
+      "id": "reciprocal_goal_1",
+      "scene": "reciprocal_goal",
+      "text": "It does not establish broad evidence coverage. Two systems can share the same first hit while one finds many additional relevant records and the other finds none. Our displayed value is a single query\u2019s reciprocal rank; calling it a multi query comparison would imply evidence this illustration does not contain.",
+      "gap": 0.65
+    },
+    {
+      "id": "average_precision_goal_0",
+      "scene": "average_precision_goal",
+      "text": "Average precision collects precision at the ranks where relevant papers appear, then averages using the judged relevant total for that query. For this complete twenty record illustration, the arithmetic rewards the improved placement of many relevant papers, even though the first hit stays unchanged.",
+      "gap": 1.0
+    },
+    {
+      "id": "average_precision_goal_1",
+      "scene": "average_precision_goal",
+      "text": "Mean average precision then averages query level average precision values. It is closer to the goal of assembling a useful set, but treats relevance as binary. A marginal paper and a decisive paper count alike if both are labelled relevant. State the evaluation protocol and depth.",
+      "gap": 0.65
+    },
+    {
+      "id": "graded_goal_0",
+      "scene": "graded_goal",
+      "text": "Normalised discounted cumulative gain accepts relevance grades and discounts contributions at lower ranks, relative to an ideal ordering at the evaluation depth. A highly relevant paper near the top can count more than a partly relevant one farther down.",
+      "gap": 1.0
+    },
+    {
+      "id": "graded_goal_1",
+      "scene": "graded_goal",
+      "text": "That requires graded judgements and an explicit scoring convention. We are explaining the metric\u2019s goal, not inventing grades for the source\u2019s binary example. Its limitation remains: several highly graded records can repeat one aspect while another aspect is missing. High ranking quality does not automatically establish diverse coverage.",
+      "gap": 0.65
+    },
+    {
+      "id": "metric_choice_0",
+      "scene": "metric_choice",
+      "text": "Precision at k values relevant items inside the cutoff. Mean reciprocal rank values an early first hit. Mean average precision values many binary relevant hits placed high. Normalised discounted gain values graded relevance discounted by position.",
+      "gap": 1.0
+    },
+    {
+      "id": "metric_choice_1",
+      "scene": "metric_choice",
+      "text": "All four need judgements. These conventional relevance only measures treat record judgements independently; they do not directly reward coverage across known aspects. A metric choice is a task choice. Ask which benefit the number rewards, and which failure it cannot reveal.",
+      "gap": 0.65
+    },
+    {
+      "id": "benchmark_controls_0",
+      "scene": "benchmark_controls",
+      "text": "The Cranfield arrangement fixes a document collection, queries or topics, and relevance judgements. Compare systems against those same inputs. Offline test collections answer that controlled question; user studies and task based evaluations ask complementary questions.",
+      "gap": 1.0
+    },
+    {
+      "id": "benchmark_controls_1",
+      "scene": "benchmark_controls",
+      "text": "BEIR\u2019s cited cross collection finding is conditional on its topics and assessors: BM twenty five held up as a robust baseline, while several more expensive neural systems did better on average. That does not settle performance on your chemistry theses, languages, or local researchers\u2019 questions.",
+      "gap": 0.65
+    },
+    {
+      "id": "judgement_pooling_0",
+      "scene": "judgement_pooling",
+      "text": "Large evaluations often judge the union of top results from several systems. Under the chapter\u2019s described scoring approach, unjudged records are treated as non relevant. A genuinely useful new result outside that pool can therefore receive no credit.",
+      "gap": 1.0
+    },
+    {
+      "id": "judgement_pooling_1",
+      "scene": "judgement_pooling",
+      "text": "This judgement pooling is different from compressing token representations into a vector. It can bias evaluation against unfamiliar retrieval approaches. Read a leaderboard as evidence about its benchmark, then ask whether the topics, criteria and judged pool resemble your task. The next film builds an evaluation whose criteria a library controls.",
+      "gap": 0.65
+    }
+  ]
+}

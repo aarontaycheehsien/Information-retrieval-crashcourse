@@ -1,0 +1,313 @@
+{
+  "series": "Implications for library practice and tool evaluation",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#library-practice",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#library-practice",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-same-question-same-search",
+      "title": "Same question. Same search?",
+      "subtitle": "A saved question is only part of a documentable search.",
+      "accent": "blue",
+      "scenes": [
+        {
+          "id": "same_question_hook",
+          "title": "Saving the question does not save the whole search",
+          "source_anchor": "reproducibility-implication-title",
+          "visual": "same_question_hook",
+          "narration": [
+            "You save a natural language question and rerun it next year. The words are identical. Have you repeated the same search? Pause and name what could change between your question and the results: generated inputs, coverage, indexing, models, ranking or control.",
+            "No retrieval method guarantees the same records forever. The useful question is which parts were fixed, documented, exportable and versioned. An exact future recreation may be impossible, while a saved transformation, trace and result export still let you compare the later run with the original."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "four_record_areas",
+          "title": "Record four areas of the pipeline",
+          "source_anchor": "tbl-15-1",
+          "visual": "four_record_areas",
+          "narration": [
+            "The chapter names four areas. Query interpretation records what was typed and what was actually sent onward. Candidate retrieval records the database, fields, indexed unit, retrieval method, parameters and cutoffs. Ranking and fusion records the ordering stages, component lists and final depth.",
+            "Retrieval control records whether the sequence was fixed, adaptive or agentic, and the path actually taken. Saving only the question leaves all four partly unspecified. Some details are visible today; internal versions and budgets may require vendor disclosure. Mark them unknown when unavailable."
+          ]
+        },
+        {
+          "id": "lexical_repeatability",
+          "title": "Repeatability still depends on the indexed system",
+          "source_anchor": "tbl-15-2",
+          "visual": "lexical_repeatability",
+          "narration": [
+            "Strict Boolean makes inclusion and exclusion explicit. Eligibility should repeat given the same records, indexing, analyser and query interpretation. Record the exact query, database and platform, fields, limits, vocabulary version, date and count. An unchanged query can still meet a changed database.",
+            "Ranked lexical retrieval also needs analysis, stemming, field weights, rewriting, ranking configuration, sort order and depth. BM twenty five can move when new records change term rarity and document length statistics. A stable scoring formula is not a frozen collection or a permanent ranking."
+          ]
+        },
+        {
+          "id": "dense_repeatability",
+          "title": "Dense retrieval is not inherently random",
+          "source_anchor": "tbl-15-2",
+          "visual": "dense_repeatability",
+          "narration": [
+            "A fixed encoder, indexed units, stored vectors, similarity function and exact search procedure can produce repeatable scores. Dense retrieval is not inherently random. Record the model and tokeniser versions, embedded text and metadata, chunking, index version, filters and retrieval depth or threshold.",
+            "Ask whether the search was exact or approximate. Approximate index construction and search parameters can affect candidates near a boundary. That is a different question from whether a language model generated the query differently. Keep the component and the suspected source of variation separate."
+          ]
+        },
+        {
+          "id": "token_level_records",
+          "title": "Visible terms and alignments still need their versions",
+          "source_anchor": "tbl-15-2",
+          "visual": "token_level_records",
+          "narration": [
+            "Learnt sparse retrieval can expose generated vocabulary terms and weights. Those expansions may include terms the searcher never typed, so the original input alone is insufficient. Record the model, tokeniser, index, scoring configuration and depth, with expansions and weights where available.",
+            "Late interaction can expose query and document token alignments. It also needs indexed unit boundaries, compression and index versions, similarity and MaxSim settings, pruning or approximate search settings and depth. Inspectable alignments do not make contextual vectors portable between model versions."
+          ]
+        },
+        {
+          "id": "rewriting_variation",
+          "title": "Reusing an input differs from generating a new one",
+          "source_anchor": "tbl-15-2",
+          "visual": "rewriting_variation",
+          "narration": [
+            "An LLM rewrite may generate Boolean logic, expansion terms, subqueries or hypothetical text. Save the exact generated form, inferred filters, route, prompt or template, parser and model versions, and sampling settings or seed if exposed. Ask whether rerunning reuses that form or regenerates it.",
+            "Sampling can introduce deliberate variation. Model, prompt and hosted inference changes can affect outputs even at temperature zero or with greedy decoding. This does not mean every call must vary. Identical output needs a guarantee the complete system actually provides and tests, rather than an assumption."
+          ]
+        },
+        {
+          "id": "control_trace",
+          "title": "Record actions and observations, not narrated reasoning",
+          "source_anchor": "tbl-15-2",
+          "visual": "control_trace",
+          "narration": [
+            "Fixed and adaptive workflows can document rules in advance, but an adaptive branch and result dependent query still need a record of what happened. An agentic sequence can differ between runs because it chooses later actions from observations.",
+            "Record controller instructions, permitted tools and sources, executed queries and routes, intermediate results, order, budgets, stopping and final identifiers. What is needed is an action and observation trace: what the system did and what came back. A model\u2019s narrated reasoning is not a substitute for that record."
+          ]
+        },
+        {
+          "id": "record_today",
+          "title": "Start with the evidence you can preserve today",
+          "source_anchor": "reproducibility-implication-title",
+          "visual": "record_today",
+          "narration": [
+            "Keep input, product and mode, search date, visible transformations, filters, result identifiers, counts and observed limitations. Save a raw export where possible. Separate direct observation from vendor documentation and unknown internal details. Ask the institution to obtain traces, versions and change notices that individuals cannot access.",
+            "The chapter aligns this practice with PRISMA S reporting of strategies, databases, platforms, limits, dates and counts, while recognising replication limits. Documentation makes a later comparison possible; it does not by itself explain why a particular paper appeared. That is the next film\u2019s question."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-why-is-this-paper-here",
+      "title": "Why is this paper here?",
+      "subtitle": "A convincing rationale and a recorded result path are different evidence.",
+      "accent": "teal",
+      "scenes": [
+        {
+          "id": "rationale_hook",
+          "title": "A fluent explanation is not automatically a trace",
+          "source_anchor": "rationale-versus-trace-title",
+          "visual": "rationale_hook",
+          "narration": [
+            "A paper appears at rank three. Its explanation says: This paper closely addresses your question about open access and citations. Has that established why this result appeared, or why it occupies rank three? Pause and identify the missing evidence.",
+            "The chapter\u2019s mock result P has a hypothetical recorded path: lexical retrieval supplied it at rank eighteen among a hundred candidates; reranking moved it to three; the display showed ten. Internal reranker details remain undisclosed. All record details and ranks here are illustrative, not a search run for this film."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "three_qualities",
+          "title": "Transparency, interpretability and understandability differ",
+          "source_anchor": "interpretability-requires-an-inspectable-pipeline",
+          "visual": "three_qualities",
+          "narration": [
+            "Transparency exposes information about a system. Interpretability lets a librarian trace why a record was included, excluded, scored or reranked. Understandability provides an accurate, usable mental model without demanding that every equation or weight be inspected.",
+            "A broad ranking description can be transparent while explaining little about one record. A detailed score display can still be hard to understand. A documentable, rerunnable search can leave individual results opaque. These qualities overlap, but one does not establish the others."
+          ]
+        },
+        {
+          "id": "mock_inputs",
+          "title": "Trace the input actually sent to retrieval",
+          "source_anchor": "rationale-versus-trace-title",
+          "visual": "mock_inputs",
+          "narration": [
+            "In the source\u2019s mock trace, the original input asks whether open access increases citations. The transformed query joins the phrase open access with a truncated citation term using AND. The recorded route is lexical retrieval over indexed abstracts.",
+            "The mock paper\u2019s abstract contains open access and citations. That links the candidate to recorded input and indexed evidence. It does not establish that the transformation preserved every part of the searcher\u2019s intended need, or that omitted alternatives would leave the results unchanged. The exact expression is shown on screen."
+          ]
+        },
+        {
+          "id": "mock_rank_path",
+          "title": "The trace can show a boundary without revealing internal scoring",
+          "source_anchor": "rationale-versus-trace-title",
+          "visual": "mock_rank_path",
+          "narration": [
+            "The supplied candidate rank is eighteen of one hundred. Reranking moves P to rank three, above the display cutoff of ten. This explains which recorded stages connected the candidate to the visible page. It does not identify the reranker\u2019s undisclosed internal scoring factors.",
+            "A generated description of topical fit cannot fill that gap as though it were an execution fact. In a real product, call this a trace only when the details come from the executed search. The mock example demonstrates the distinction without claiming that any vendor supplied these disclosures."
+          ]
+        },
+        {
+          "id": "backward_inspection",
+          "title": "Walk backwards from the displayed record",
+          "source_anchor": "inspection-trail-title",
+          "visual": "backward_inspection",
+          "narration": [
+            "Start at the record someone wants explained. Inspect fusion and display rules, then scoring and reranking, then matched evidence. Continue to the candidate source, transformed query and original input. Each step answers a different question about how the record arrived.",
+            "This is inspection order, not the system\u2019s execution order. A snippet, label, deduplication rule or diversification step may alter what is seen. A product that exposes a matched word but hides the transformed query has supplied only one part of the trail. Keep going until the evidence stops, and mark that boundary."
+          ]
+        },
+        {
+          "id": "stage_limits",
+          "title": "A useful explanation includes what it cannot establish",
+          "source_anchor": "tbl-15-3",
+          "visual": "stage_limits",
+          "narration": [
+            "Boolean conditions can show eligibility without proving relevance. Lexical evidence can show analysed terms and scoring contributions without making the score a probability of relevance. A later production reranker may also have changed the final order.",
+            "Dense inspection can expose the indexed unit, encoder, similarity, candidate rank and approximate search settings. It does not automatically supply a simple human readable causal story about a latent feature. A highlighted word, citation count or attractive snippet is not proof that it caused the final position."
+          ]
+        },
+        {
+          "id": "alignment_and_agency",
+          "title": "Inspectable layers are not the whole model decision",
+          "source_anchor": "tbl-15-3",
+          "visual": "alignment_and_agency",
+          "narration": [
+            "Sparse expansion terms and weights, or late interaction token alignments, expose useful layers. They do not establish that those visible pieces describe the whole model decision. Inspect candidate lists, fusion rules, reranking, cutoffs and presentation as well.",
+            "For agentic control, inspect each chosen tool, query, source, observation, next action and stopping point. The model\u2019s account of its reasoning does not establish what caused those choices. A helpful narrative should be labelled as interpretation when it is not derived from recorded execution evidence."
+          ]
+        },
+        {
+          "id": "evidence_status",
+          "title": "Preserve observations, documentation and unknowns separately",
+          "source_anchor": "interpretability-requires-an-inspectable-pipeline",
+          "visual": "evidence_status",
+          "narration": [
+            "The goal is an actionable audit trail and an accurate mental model, not disclosure of every engineering detail. Distinguish what you observed, what the vendor documents and what remains unknown. Do not replace missing evidence with an explanation that merely sounds plausible.",
+            "A reproducible search can remain poorly understood, and a clear explanation can remain impossible to rerun without saved inputs, versions and outputs. Documentation and inspection need separate questions. The final film turns those distinctions into requirements a library can ask for before licensing a tool."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-what-are-you-actually-licensing",
+      "title": "What are you actually licensing?",
+      "subtitle": "Nineteen questions turn a marketing label into checkable requirements.",
+      "accent": "red",
+      "scenes": [
+        {
+          "id": "licensing_hook",
+          "title": "What does the query box let you start from?",
+          "source_anchor": "vendor-inputs",
+          "visual": "licensing_hook",
+          "narration": [
+            "Two products advertise semantic AI search. Their query boxes look alike. Are you licensing the same retrieval design? Pause and ask what each accepts: only text, or fields, a seed paper, citation links, saved judgements and API predicates?",
+            "For an agentic mode, ask whether both the task brief and its generated queries can be exported. A convenient text box can narrow the starting method before ranking begins. The chapter turns documentation and inspection into nineteen vendor questions, grouped into six areas. They are questions to verify, not answers supplied by this film."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "vendor_control",
+          "title": "Questions 1\u20132 \u00b7 Interpretation and control",
+          "source_anchor": "vendor-group-1",
+          "visual": "vendor_control",
+          "narration": [
+            "First, what does the system infer, change and decide? Separate recognising fields or intent, transforming inputs, selecting routes and constructing another query from earlier results. Ask to inspect and export each transformation, route and feedback record.",
+            "Second, who controls the trajectory? Is the sequence prescribed, selected among designer enumerated branches, or planned from observations? A rule, classifier or model may choose an adaptive branch. For model planned actions, ask which tools, sources and iteration limits bound the sequence and whether every action and stop is visible."
+          ],
+          "question_ids": [
+            "vendor-q01",
+            "vendor-q02"
+          ]
+        },
+        {
+          "id": "vendor_architecture",
+          "title": "Questions 3\u20137 \u00b7 Coverage and architecture",
+          "source_anchor": "vendor-group-2",
+          "visual": "vendor_architecture",
+          "narration": [
+            "Ask which retrieval and ranking components run, whether in parallel or sequence, and how many candidates survive. Ask what job the neural model performs: query interpretation, first stage representation, sparse expansion, joint reranking or final answer generation. A model name alone does not describe the architecture.",
+            "Ask the indexed unit and whether later full text fetching is separate. An abstract index cannot match full text only evidence at that stage. Ask how multiple passage matches from one paper are assembled. Finally, ask where hybrid component lists are fused, which cutoffs and rerankers follow, and whether component contributions can be inspected or controlled."
+          ],
+          "question_ids": [
+            "vendor-q03",
+            "vendor-q04",
+            "vendor-q05",
+            "vendor-q06",
+            "vendor-q07"
+          ]
+        },
+        {
+          "id": "vendor_exactness",
+          "title": "Questions 8\u201311 \u00b7 Exactness and failure testing",
+          "source_anchor": "vendor-group-3",
+          "visual": "vendor_exactness",
+          "narration": [
+            "Ask whether an exact lexical route survives for identifiers and quoted phrases. Ask how case, punctuation, hyphens and identifiers are analysed, and whether query and document analysis agree. For dense inputs, ask which token representation is used and how unfamiliar strings are tested.",
+            "Ask for exactness, negation, exclusions, contradictory claims and near duplicate name tests. Then ask what trained the relevance model and how it was adapted to local disciplines and document types. Web questions, citation links and scholarly judgements reward different relationships. A paraphrase demonstration does not answer these questions."
+          ],
+          "question_ids": [
+            "vendor-q08",
+            "vendor-q09",
+            "vendor-q10",
+            "vendor-q11"
+          ]
+        },
+        {
+          "id": "vendor_audit",
+          "title": "Questions 12\u201314 \u00b7 Auditability and repeatability",
+          "source_anchor": "vendor-group-4",
+          "visual": "vendor_audit",
+          "narration": [
+            "Ask whether users can trace a result backwards through actual inputs, constraints, candidate routes, evidence, ranking and display. Require a distinction between execution evidence and a post hoc explanation. Ask whether the exact generated inputs, routes, mode, versions, index date, cutoffs and identifiers can be exported.",
+            "On rerun, does the product reuse a saved transformation or generate it again? Ask whether model, index and ranking changes are disclosed, including which version produced a saved run. These are requirements for later comparison, not a promise of identical results forever."
+          ],
+          "question_ids": [
+            "vendor-q12",
+            "vendor-q13",
+            "vendor-q14"
+          ]
+        },
+        {
+          "id": "vendor_continuity",
+          "title": "Questions 15\u201316 \u00b7 Cost, limits and continuity",
+          "source_anchor": "vendor-group-5",
+          "visual": "vendor_continuity",
+          "narration": [
+            "Ask what a search costs: seats, queries or tokens, with which rate and iteration limits. What happens at a limit: refusal, truncation or a silently shallower search? Does agentic mode cost differently, and can the library inspect per query consumption?",
+            "Ask what happens when a mode is retired. Can saved searches, result sets and traces be exported, and how much notice is given? The chapter cites renamed and distinct product modes as reasons to ask. It does not claim a new retirement event. Continuity depends on exportable records and explicit change arrangements."
+          ],
+          "question_ids": [
+            "vendor-q15",
+            "vendor-q16"
+          ]
+        },
+        {
+          "id": "vendor_evaluation",
+          "title": "Questions 17\u201319 \u00b7 Institutional evaluation",
+          "source_anchor": "vendor-group-6",
+          "visual": "vendor_evaluation",
+          "narration": [
+            "Ask how performance is evaluated, and on whose queries. Include the institution\u2019s disciplines, vocabulary, languages, document types and known relevant records. Ask whether known failure cases belong in evaluation, rather than relying only on the product\u2019s strongest demonstrations.",
+            "Finally, can the library rerun local test queries across a model, index or ranking update? Save the baseline and inspect per query differences, so a regression omitted from release notes can become visible. These questions connect procurement to the local comparisons of Chapter fourteen; no vendor benchmark is being performed here."
+          ],
+          "question_ids": [
+            "vendor-q17",
+            "vendor-q18",
+            "vendor-q19"
+          ]
+        },
+        {
+          "id": "professional_requirements",
+          "title": "Record it. Inspect it. Test it locally.",
+          "source_anchor": "choosing-and-governing-search-tools",
+          "visual": "professional_requirements",
+          "narration": [
+            "Documentation and inspection cannot be relied on to arrive on a library\u2019s timetable after licensing. Ask for evidence, record the vendor\u2019s response, verify what the library can test and keep follow up for unknowns. The accompanying question sheet leaves those answers blank.",
+            "Libraries need enough visibility to establish what was searched, enough documentation to rerun or compare it later, and enough control to test it against their collections and users. That requires the distinctions developed through this course, rather than every model weight. A clear marketing label is the beginning of the investigation, not its conclusion."
+          ]
+        }
+      ]
+    }
+  ]
+}

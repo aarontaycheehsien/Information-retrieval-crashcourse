@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Library practice and tool evaluation · Three films</title><style>
+*{box-sizing:border-box}body{margin:0;background:#eee9e0;color:#252728;font:17px/1.65 system-ui,sans-serif}
+main{max-width:1140px;margin:auto;padding:60px 28px}header{max-width:850px;margin-bottom:65px}
+.eyebrow,.number{font-weight:750;font-size:12px;letter-spacing:.16em;color:#a34230}
+h1{font-size:clamp(44px,7vw,82px);line-height:1.03;letter-spacing:-.055em;margin:18px 0 28px}
+h2{font-size:clamp(27px,4vw,42px);line-height:1.14;letter-spacing:-.035em;margin:10px 0}
+p{max-width:880px}a{color:#88402e;text-underline-offset:4px}article{margin:0 0 74px}
+video{display:block;width:100%;aspect-ratio:16/9;background:#252728;border-radius:8px;margin-top:24px}
+.downloads{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:14px}summary{cursor:pointer;margin:14px 0}
+nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+button{font:inherit;font-size:14px;text-align:left;padding:12px;background:#faf8f3;border:1px solid #ccc3b5;border-radius:4px;cursor:pointer}
+button span{color:#a34230;display:inline-block;width:46px}button:hover,button:focus-visible{outline:2px solid #a34230}
+footer{border-top:1px solid #ccc3b5;padding-top:24px;font-size:13px;color:#615f59}
+@media(max-width:600px){main{padding:32px 15px}header{margin-bottom:44px}.downloads{gap:8px 18px}}
+</style><main><header><div class="eyebrow">HOW SEARCH DECIDES WHAT YOU SEE · CHAPTER 15</div>
+<h1>What did it<br>actually search?</h1><p>Three narrated investigations into documenting searches, inspecting result paths, and asking for evidence before licensing a tool.
+Adapted from Chapter 15 of Aaron Tay's <em>How Search Decides What You See</em>.</p>
+<p><a href="chapter-15-videos.zip" download>Download the complete series</a> · <a href="SOURCE.md">Source and production notes</a></p>
+<p class="downloads"><a href="plots/recording-layers.svg">What to record</a><a href="plots/inspection-limits.svg">What an explanation shows</a><a href="plots/vendor-questions.csv" download>Vendor questions</a></p></header><article id="episode-1">
+          <div class="number">FILM 01 · 5:49</div>
+          <h2>Same question. Same search?</h2><p>A saved question is only part of a documentable search.</p>
+          <video id="film-1" controls playsinline preload="metadata" poster="01-same-question-same-search/poster.jpg" src="01-same-question-same-search/01-same-question-same-search.mp4">
+            <track kind="captions" src="01-same-question-same-search/01-same-question-same-search.vtt" srclang="en" label="English">
+            <track kind="chapters" src="01-same-question-same-search/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-1" data-time="0.000"><span>0:00</span>Saving the question does not save the whole search</button><button data-film="film-1" data-time="40.558"><span>0:40</span>Record four areas of the pipeline</button><button data-film="film-1" data-time="85.452"><span>1:25</span>Repeatability still depends on the indexed system</button><button data-film="film-1" data-time="130.697"><span>2:10</span>Dense retrieval is not inherently random</button><button data-film="film-1" data-time="172.277"><span>2:52</span>Visible terms and alignments still need their versions</button><button data-film="film-1" data-time="215.588"><span>3:35</span>Reusing an input differs from generating a new one</button><button data-film="film-1" data-time="260.517"><span>4:20</span>Record actions and observations, not narrated reasoning</button><button data-film="film-1" data-time="298.695"><span>4:58</span>Start with the evidence you can preserve today</button></nav></details>
+          <p class="downloads"><a href="01-same-question-same-search/01-same-question-same-search.mp4" download>Download MP4</a>
+            <a href="01-same-question-same-search/01-same-question-same-search.srt" download>SRT captions</a>
+            <a href="01-same-question-same-search/transcript.txt">Transcript</a>
+            <a href="01-same-question-same-search/contact-sheet.jpg">Storyboard</a></p></article><article id="episode-2">
+          <div class="number">FILM 02 · 5:27</div>
+          <h2>Why is this paper here?</h2><p>A convincing rationale and a recorded result path are different evidence.</p>
+          <video id="film-2" controls playsinline preload="metadata" poster="02-why-is-this-paper-here/poster.jpg" src="02-why-is-this-paper-here/02-why-is-this-paper-here.mp4">
+            <track kind="captions" src="02-why-is-this-paper-here/02-why-is-this-paper-here.vtt" srclang="en" label="English">
+            <track kind="chapters" src="02-why-is-this-paper-here/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-2" data-time="0.000"><span>0:00</span>A fluent explanation is not automatically a trace</button><button data-film="film-2" data-time="41.868"><span>0:41</span>Transparency, interpretability and understandability differ</button><button data-film="film-2" data-time="81.258"><span>1:21</span>Trace the input actually sent to retrieval</button><button data-film="film-2" data-time="121.630"><span>2:01</span>The trace can show a boundary without revealing internal scoring</button><button data-film="film-2" data-time="161.494"><span>2:41</span>Walk backwards from the displayed record</button><button data-film="film-2" data-time="202.421"><span>3:22</span>A useful explanation includes what it cannot establish</button><button data-film="film-2" data-time="241.560"><span>4:01</span>Inspectable layers are not the whole model decision</button><button data-film="film-2" data-time="283.638"><span>4:43</span>Preserve observations, documentation and unknowns separately</button></nav></details>
+          <p class="downloads"><a href="02-why-is-this-paper-here/02-why-is-this-paper-here.mp4" download>Download MP4</a>
+            <a href="02-why-is-this-paper-here/02-why-is-this-paper-here.srt" download>SRT captions</a>
+            <a href="02-why-is-this-paper-here/transcript.txt">Transcript</a>
+            <a href="02-why-is-this-paper-here/contact-sheet.jpg">Storyboard</a></p></article><article id="episode-3">
+          <div class="number">FILM 03 · 5:58</div>
+          <h2>What are you actually licensing?</h2><p>Nineteen questions turn a marketing label into checkable requirements.</p>
+          <video id="film-3" controls playsinline preload="metadata" poster="03-what-are-you-actually-licensing/poster.jpg" src="03-what-are-you-actually-licensing/03-what-are-you-actually-licensing.mp4">
+            <track kind="captions" src="03-what-are-you-actually-licensing/03-what-are-you-actually-licensing.vtt" srclang="en" label="English">
+            <track kind="chapters" src="03-what-are-you-actually-licensing/chapters.vtt" srclang="en" label="Scenes">
+          </video><details><summary>Jump to a scene</summary><nav><button data-film="film-3" data-time="0.000"><span>0:00</span>What does the query box let you start from?</button><button data-film="film-3" data-time="44.340"><span>0:44</span>Questions 1–2 · Interpretation and control</button><button data-film="film-3" data-time="88.576"><span>1:28</span>Questions 3–7 · Coverage and architecture</button><button data-film="film-3" data-time="137.135"><span>2:17</span>Questions 8–11 · Exactness and failure testing</button><button data-film="film-3" data-time="183.854"><span>3:03</span>Questions 12–14 · Auditability and repeatability</button><button data-film="film-3" data-time="226.673"><span>3:46</span>Questions 15–16 · Cost, limits and continuity</button><button data-film="film-3" data-time="268.881"><span>4:28</span>Questions 17–19 · Institutional evaluation</button><button data-film="film-3" data-time="313.215"><span>5:13</span>Record it. Inspect it. Test it locally.</button></nav></details>
+          <p class="downloads"><a href="03-what-are-you-actually-licensing/03-what-are-you-actually-licensing.mp4" download>Download MP4</a>
+            <a href="03-what-are-you-actually-licensing/03-what-are-you-actually-licensing.srt" download>SRT captions</a>
+            <a href="03-what-are-you-actually-licensing/transcript.txt">Transcript</a>
+            <a href="03-what-are-you-actually-licensing/contact-sheet.jpg">Storyboard</a></p></article><footer><p>Adapted from <a href="https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#library-practice">Aaron Tay, <em>How Search Decides What You See</em>, Chapter 15</a>.
+CC BY 4.0. Source branch: more-readable, commit 37b16f7ffa64.</p>
+<p>Original animated teaching illustrations and script adaptation. Synthetic narration: Microsoft Andrew Multilingual.
+Independently produced; no affiliation with Veritasium. Curiosity-driven questions, prediction pauses and evidence-led reveals.
+Recording requirements and inspection limits follow the pinned chapter. The rank-3 paper and its trace reproduce a hypothetical source illustration. The questionnaire contains nineteen source questions; no vendor answers or new product tests are invented.</p></footer></main>
+<script>document.querySelectorAll('button[data-film]').forEach(b=>b.onclick=()=>{const v=document.getElementById(b.dataset.film);v.currentTime=Number(b.dataset.time);v.play().catch(()=>{})});</script></html>

@@ -1,0 +1,76 @@
+{
+  "recipe_sha256": "0f6a140e496f25d9ae5301ecba3ded9400bb8516e711c973bef56e77e72015e9",
+  "kind": "source control categories and dated selected recovery accounts",
+  "new_product_tests": false,
+  "checks": {
+    "source_control_categories": [
+      "Fixed workflow",
+      "Adaptive workflow",
+      "Agentic search"
+    ],
+    "source_output_patterns": [
+      "Scripted deep search",
+      "Agentic deep search",
+      "Scripted deep research",
+      "Agentic deep research"
+    ],
+    "invented_set_example": {
+      "related": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "references": [
+        "A",
+        "C"
+      ],
+      "remaining_candidates": [
+        "B",
+        "D"
+      ],
+      "verified_citation_omissions": false
+    },
+    "source_one_shot_expression": "(autism) OR (autistic disorder) OR (ASD) OR (autism spectrum) OR (neurodevelopmental disorder) OR (pervasive developmental disorder)",
+    "source_broadening": [
+      "psychology",
+      "medicine",
+      "education",
+      "disability"
+    ],
+    "reported_selected_database_results": [
+      "PsycINFO",
+      "Education Research Complete",
+      "SocINDEX"
+    ],
+    "source_evidence_dates": {
+      "task_probe": "December 2025",
+      "architecture_comparison": "April 2026",
+      "catalogue_demonstration": "June 2026",
+      "zero_result_logs": "2023",
+      "scite_mcp_documentation": "October 2026"
+    },
+    "catalogue_examples_selected_not_sampled": true,
+    "measured_success_rate": false,
+    "new_product_tests": false,
+    "coverage_established_by_round_limit": false,
+    "passed": true
+  },
+  "files": {
+    "approval-and-stopping.png": "d61cb1a9173f22b23ea531e1dd11175269995643e0278994b3368fc06a7861ec",
+    "approval-and-stopping.svg": "2b2bfb6a52c8be3b6d61889d2b24fe492c59ab4fa719248662b331fca3e4c91d",
+    "catalogue-comparison.png": "4788b916839cc04cc4a8e6c5cf7c262711375a9df94767dd89bd2e28ca8bdbe7",
+    "catalogue-comparison.svg": "6ba47d69aa80446b06bf2997e450ba565a5a349197d08430e8bb6362205084ad",
+    "catalogue-examples.csv": "3b9acc67b646d5d44ccfb7316c26a078d03a81f254f191de43a34e14913d4785",
+    "control-arrangements.csv": "27dc156e604afa41af7190507da86a05a26c66451a69d3875e60eadd172cd131",
+    "control-arrangements.png": "604472d2bb4113a393e794b66484d7cafdb8f020c847ba7e920b2809b28e5172",
+    "control-arrangements.svg": "9be84b6079aa9b0f08cf50de8602c0bb06300b1556c9ae1a3543d91c099ca700",
+    "independent-properties.png": "4b0374428635a9833234c1dea327c103cb607e6e02719ed3c8bd67d04ce9705e",
+    "independent-properties.svg": "d5c0b35a56994b2287fe6f162323097a82ebfd7b6f538184bb2921d49afab754",
+    "loop-boundaries.png": "f6875e59b3095338a1ae69cff6454eea1ad9aadf074bfde2fddeb5cca09482e3",
+    "loop-boundaries.svg": "40c9b3566646d2583e9a5bdd45be73aea25b4a039779f68ab3eb08122eb981c0",
+    "output-patterns.png": "8164a3650d76cda89a042655a3161214d7ee26594238a7ee7501c216ba3f6b93",
+    "output-patterns.svg": "7ef345530bb98c69f8c6fd78d1ab431ddc83cafc07dfaa023501430f25a6e8fb"
+  },
+  "passed": true
+}

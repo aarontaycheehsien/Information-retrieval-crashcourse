@@ -1,0 +1,180 @@
+{
+  "series": "The retrieval problem",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#intro",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#intro",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-the-paper-your-ai-never-saw",
+  "title": "The paper your AI never saw",
+  "subtitle": "Five real citations. One missing piece of evidence.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "opening",
+      "title": "Five accurate summaries. What is missing?",
+      "source_anchor": "an-answer-appears",
+      "visual": "opening",
+      "narration": [
+        "Here are five imaginary papers. Every citation is real within our illustration. Every summary is accurate. Would you trust the answer? Now add a sixth paper: the landmark study that the answer never mentioned. Which part of the system failed?",
+        "A missing citation alone cannot tell us. Chapter One asks us to follow the evidence before the writing begins."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "pipeline",
+      "title": "Follow a documented example",
+      "source_anchor": "anatomy-of-a-cited-answer",
+      "visual": "pipeline",
+      "narration": [
+        "Primo Research Assistant provides a documented example. In the account checked by September twenty twenty-six, a language model converts a question into Boolean variations connected by OR. The query searches the Central Discovery Index and returns up to thirty results.",
+        "Embeddings rerank those candidates to identify five sources. Those five become the working set. Only then does GPT four point one Mini write an overview from their abstracts. This is the chapter's dated documentation account, not a fresh test of the service."
+      ]
+    },
+    {
+      "id": "scope",
+      "title": "Before ranking: can the assistant search it?",
+      "source_anchor": "primo-ra-content-scope",
+      "visual": "coverage",
+      "narration": [
+        "Coverage comes first. The chapter's October twenty twenty-six documentation check says the assistant searches CDI metadata and abstracts, subject to exclusions including insufficient metadata or abstracts and some provider collections.",
+        "A record in the library's wider discovery system may still fall outside the assistant's searchable scope. A better query or reranker cannot recover a record from a collection the assistant cannot search. These nested sets are schematic, not measured coverage proportions."
+      ]
+    },
+    {
+      "id": "experiment",
+      "title": "Can reordering thirty cards add a thirty-first?",
+      "source_anchor": "retrieval-not-generation",
+      "visual": "candidates",
+      "narration": [
+        "Try the paper-card experiment. Thirty cards enter the candidate set. Reranking can change their order, and selection can keep five. Our gold landmark paper never entered those thirty. Can a better reranker bring it back?",
+        "Reordering a fixed set cannot add another member. A new retrieval round could add evidence. Fluent writing cannot establish source-supported coverage of a paper absent from the supplied evidence. Retrieval does not delete the original records from the index."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "diagnosis",
+      "title": "Locate the loss before naming the failure",
+      "source_anchor": "retrieval-not-generation",
+      "visual": "losses",
+      "narration": [
+        "Compare three imaginary cases. Paper A is outside the assistant's searchable scope. Paper B reaches the thirty candidates but misses the five-source working set. Paper C reaches the writer but is not cited.",
+        "A needs coverage evidence. B needs candidate and selection traces. C needs a comparison between the supplied sources and the answer. If intermediate evidence is hidden, record the uncertainty. Finding a paper in a new direct search does not reconstruct its earlier path."
+      ]
+    },
+    {
+      "id": "map",
+      "title": "Six stages, with a controller above them",
+      "source_anchor": "anatomy-of-a-cited-answer",
+      "visual": "stages",
+      "narration": [
+        "The chapter maps six possible stages: query transformation; analysis and execution rules; first-stage retrieval; fusion; reranking; and presentation. Fusion combines candidate lists. A controller chooses and sequences the actions. Not every product uses every stage.",
+        "No separate fusion stage is documented in the Primo account. Elsevier's twenty twenty-four Scopus AI account describes query variants, vector retrieval and rank fusion. That historical example does not establish the architecture of every later mode."
+      ]
+    },
+    {
+      "id": "rag",
+      "title": "The writer is a separate machine",
+      "source_anchor": "rag-definition-title",
+      "visual": "rag",
+      "narration": [
+        "Retrieval-augmented generation means retrieval selects evidence and a language model generates an answer conditioned on it. Retrieval limits the supplied evidence. It does not guarantee that every generated statement comes from that evidence.",
+        "A model can draw on its parameters, invent a citation or omit a supplied source. Before blaming retrieval or generation for our missing landmark paper, ask what the writer actually received."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "opening_0",
+      "scene": "opening",
+      "text": "Here are five imaginary papers. Every citation is real within our illustration. Every summary is accurate. Would you trust the answer? Now add a sixth paper: the landmark study that the answer never mentioned. Which part of the system failed?",
+      "gap": 1.0
+    },
+    {
+      "id": "opening_1",
+      "scene": "opening",
+      "text": "A missing citation alone cannot tell us. Chapter One asks us to follow the evidence before the writing begins.",
+      "gap": 2.5
+    },
+    {
+      "id": "pipeline_0",
+      "scene": "pipeline",
+      "text": "Primo Research Assistant provides a documented example. In the account checked by September twenty twenty-six, a language model converts a question into Boolean variations connected by OR. The query searches the Central Discovery Index and returns up to thirty results.",
+      "gap": 1.0
+    },
+    {
+      "id": "pipeline_1",
+      "scene": "pipeline",
+      "text": "Embeddings rerank those candidates to identify five sources. Those five become the working set. Only then does GPT four point one Mini write an overview from their abstracts. This is the chapter's dated documentation account, not a fresh test of the service.",
+      "gap": 0.65
+    },
+    {
+      "id": "scope_0",
+      "scene": "scope",
+      "text": "Coverage comes first. The chapter's October twenty twenty-six documentation check says the assistant searches CDI metadata and abstracts, subject to exclusions including insufficient metadata or abstracts and some provider collections.",
+      "gap": 1.0
+    },
+    {
+      "id": "scope_1",
+      "scene": "scope",
+      "text": "A record in the library's wider discovery system may still fall outside the assistant's searchable scope. A better query or reranker cannot recover a record from a collection the assistant cannot search. These nested sets are schematic, not measured coverage proportions.",
+      "gap": 0.65
+    },
+    {
+      "id": "experiment_0",
+      "scene": "experiment",
+      "text": "Try the paper-card experiment. Thirty cards enter the candidate set. Reranking can change their order, and selection can keep five. Our gold landmark paper never entered those thirty. Can a better reranker bring it back?",
+      "gap": 1.0
+    },
+    {
+      "id": "experiment_1",
+      "scene": "experiment",
+      "text": "Reordering a fixed set cannot add another member. A new retrieval round could add evidence. Fluent writing cannot establish source-supported coverage of a paper absent from the supplied evidence. Retrieval does not delete the original records from the index.",
+      "gap": 2.5
+    },
+    {
+      "id": "diagnosis_0",
+      "scene": "diagnosis",
+      "text": "Compare three imaginary cases. Paper A is outside the assistant's searchable scope. Paper B reaches the thirty candidates but misses the five-source working set. Paper C reaches the writer but is not cited.",
+      "gap": 1.0
+    },
+    {
+      "id": "diagnosis_1",
+      "scene": "diagnosis",
+      "text": "A needs coverage evidence. B needs candidate and selection traces. C needs a comparison between the supplied sources and the answer. If intermediate evidence is hidden, record the uncertainty. Finding a paper in a new direct search does not reconstruct its earlier path.",
+      "gap": 0.65
+    },
+    {
+      "id": "map_0",
+      "scene": "map",
+      "text": "The chapter maps six possible stages: query transformation; analysis and execution rules; first-stage retrieval; fusion; reranking; and presentation. Fusion combines candidate lists. A controller chooses and sequences the actions. Not every product uses every stage.",
+      "gap": 1.0
+    },
+    {
+      "id": "map_1",
+      "scene": "map",
+      "text": "No separate fusion stage is documented in the Primo account. Elsevier's twenty twenty-four Scopus AI account describes query variants, vector retrieval and rank fusion. That historical example does not establish the architecture of every later mode.",
+      "gap": 0.65
+    },
+    {
+      "id": "rag_0",
+      "scene": "rag",
+      "text": "Retrieval-augmented generation means retrieval selects evidence and a language model generates an answer conditioned on it. Retrieval limits the supplied evidence. It does not guarantee that every generated statement comes from that evidence.",
+      "gap": 1.0
+    },
+    {
+      "id": "rag_1",
+      "scene": "rag",
+      "text": "A model can draw on its parameters, invent a citation or omit a supplied source. Before blaming retrieval or generation for our missing landmark paper, ask what the writer actually received.",
+      "gap": 0.65
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+The paper your AI never saw
+
+[00:00:00.700]: Here are five imaginary papers. Every citation is real within our illustration. Every summary is accurate. Would you trust the answer? Now add a sixth paper: the landmark study that the answer never mentioned. Which part of the system failed?
+
+[00:00:19.738]: A missing citation alone cannot tell us. Chapter One asks us to follow the evidence before the writing begins.
+
+[00:00:28.263]: Primo Research Assistant provides a documented example. In the account checked by September twenty twenty-six, a language model converts a question into Boolean variations connected by OR. The query searches the Central Discovery Index and returns up to thirty results.
+
+[00:00:46.554]: Embeddings rerank those candidates to identify five sources. Those five become the working set. Only then does GPT four point one Mini write an overview from their abstracts. This is the chapter's dated documentation account, not a fresh test of the service.
+
+[00:01:05.608]: Coverage comes first. The chapter's October twenty twenty-six documentation check says the assistant searches CDI metadata and abstracts, subject to exclusions including insufficient metadata or abstracts and some provider collections.
+
+[00:01:22.981]: A record in the library's wider discovery system may still fall outside the assistant's searchable scope. A better query or reranker cannot recover a record from a collection the assistant cannot search. These nested sets are schematic, not measured coverage proportions.
+
+[00:01:42.658]: Try the paper-card experiment. Thirty cards enter the candidate set. Reranking can change their order, and selection can keep five. Our gold landmark paper never entered those thirty. Can a better reranker bring it back?
+
+[00:01:59.766]: Reordering a fixed set cannot add another member. A new retrieval round could add evidence. Fluent writing cannot establish source-supported coverage of a paper absent from the supplied evidence. Retrieval does not delete the original records from the index.
+
+[00:02:17.748]: Compare three imaginary cases. Paper A is outside the assistant's searchable scope. Paper B reaches the thirty candidates but misses the five-source working set. Paper C reaches the writer but is not cited.
+
+[00:02:33.418]: A needs coverage evidence. B needs candidate and selection traces. C needs a comparison between the supplied sources and the answer. If intermediate evidence is hidden, record the uncertainty. Finding a paper in a new direct search does not reconstruct its earlier path.
+
+[00:02:53.065]: The chapter maps six possible stages: query transformation; analysis and execution rules; first-stage retrieval; fusion; reranking; and presentation. Fusion combines candidate lists. A controller chooses and sequences the actions. Not every product uses every stage.
+
+[00:03:15.100]: No separate fusion stage is documented in the Primo account. Elsevier's twenty twenty-four Scopus AI account describes query variants, vector retrieval and rank fusion. That historical example does not establish the architecture of every later mode.
+
+[00:03:33.459]: Retrieval-augmented generation means retrieval selects evidence and a language model generates an answer conditioned on it. Retrieval limits the supplied evidence. It does not guarantee that every generated statement comes from that evidence.
+
+[00:03:49.553]: A model can draw on its parameters, invent a citation or omit a supplied source. Before blaming retrieval or generation for our missing landmark paper, ask what the writer actually received.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 1.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#intro
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

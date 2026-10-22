@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8818/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8818/01-the-paper-your-ai-never-saw/01-the-paper-your-ai-never-saw.mp4",
+      "duration": 245.633333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 96,
+      "seek_seconds": 122.816666,
+      "byte_range": "bytes 0-1023/23935080",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8818/02-a-match-is-not-a-verdict/02-a-match-is-not-a-verdict.mp4",
+      "duration": 229.8,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 92,
+      "seek_seconds": 114.9,
+      "byte_range": "bytes 0-1023/20478595",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8818/03-three-clues-in-a-search-box/03-three-clues-in-a-search-box.mp4",
+      "duration": 234.366667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 98,
+      "seek_seconds": 117.183333,
+      "byte_range": "bytes 0-1023/28293634",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

@@ -1,0 +1,447 @@
+1
+00:00:00,700 --> 00:00:03,202
+Here is an article vector: twenty twenty
+
+2
+00:00:03,222 --> 00:00:07,518
+six, fourteen, thirty two, eighty seven.
+
+3
+00:00:07,693 --> 00:00:10,186
+Every coordinate is active, so it is
+
+4
+00:00:10,206 --> 00:00:12,583
+dense. Would you trust it to match heart
+
+5
+00:00:12,603 --> 00:00:14,850
+attack with myocardial infarction?
+
+6
+00:00:17,271 --> 00:00:19,853
+They are publication year, pages,
+
+7
+00:00:19,873 --> 00:00:22,288
+references and citations.
+
+8
+00:00:22,464 --> 00:00:25,085
+The vector records bibliographic facts.
+
+9
+00:00:25,247 --> 00:00:27,972
+Being dense tells us how many coordinates
+
+10
+00:00:27,992 --> 00:00:30,704
+are active; it does not establish semantic
+
+11
+00:00:30,724 --> 00:00:31,412
+matching.
+
+12
+00:00:32,337 --> 00:00:35,230
+First, is it a vector: an ordered list of
+
+13
+00:00:35,250 --> 00:00:39,392
+numbers? Second, is it sparse or dense:
+
+14
+00:00:39,631 --> 00:00:42,201
+relatively few active coordinates, or
+
+15
+00:00:42,221 --> 00:00:43,863
+mostly active coordinates?
+
+16
+00:00:44,077 --> 00:00:47,497
+Third, was the rule specified explicitly
+
+17
+00:00:47,531 --> 00:00:48,992
+or learnt through training?
+
+18
+00:00:49,219 --> 00:00:51,609
+Fourth, what evidence do the dimensions
+
+19
+00:00:51,629 --> 00:00:52,471
+preserve?
+
+20
+00:00:53,037 --> 00:00:54,808
+These questions describe different
+
+21
+00:00:54,828 --> 00:00:58,055
+properties. BM twenty five is sparse with
+
+22
+00:00:58,075 --> 00:01:00,142
+a specified weighting formula.
+
+23
+00:01:00,292 --> 00:01:02,823
+A conventional dense bi encoder uses a
+
+24
+00:01:02,843 --> 00:01:05,439
+learnt mapping into latent features.
+
+25
+00:01:05,601 --> 00:01:07,901
+A learnt sparse model provides a third
+
+26
+00:01:07,921 --> 00:01:08,867
+combination.
+
+27
+00:01:09,810 --> 00:01:12,227
+In a lexical representation, we can name a
+
+28
+00:01:12,247 --> 00:01:15,449
+coordinate: heart, treatment, or a term
+
+29
+00:01:15,469 --> 00:01:17,020
+from the index vocabulary.
+
+30
+00:01:17,183 --> 00:01:19,778
+In a dense text embedding, coordinates are
+
+31
+00:01:19,798 --> 00:01:22,704
+latent. Their contribution to meaning is
+
+32
+00:01:22,724 --> 00:01:25,178
+distributed across the representation and
+
+33
+00:01:25,198 --> 00:01:26,608
+shaped by training.
+
+34
+00:01:27,175 --> 00:01:30,379
+A value of zero point eight one in latent
+
+35
+00:01:30,399 --> 00:01:33,060
+coordinate three does not label that
+
+36
+00:01:33,080 --> 00:01:34,528
+coordinate citation.
+
+37
+00:01:34,665 --> 00:01:37,299
+Even a trained dense text embedding still
+
+38
+00:01:37,319 --> 00:01:39,786
+needs evaluation on the intended retrieval
+
+39
+00:01:39,806 --> 00:01:40,598
+task.
+
+40
+00:01:41,517 --> 00:01:43,402
+SPLADE offers another route.
+
+41
+00:01:43,577 --> 00:01:45,632
+It predicts weights over the output
+
+42
+00:01:45,652 --> 00:01:47,797
+vocabulary of a transformer language
+
+43
+00:01:47,817 --> 00:01:50,322
+model. In the standard implementation
+
+44
+00:01:50,394 --> 00:01:52,810
+those coordinates are WordPiece subword
+
+45
+00:01:52,830 --> 00:01:53,686
+units.
+
+46
+00:01:54,237 --> 00:01:56,610
+Having read the text, the model can assign
+
+47
+00:01:56,630 --> 00:01:59,483
+weight to terms absent from the input.
+
+48
+00:01:59,633 --> 00:02:02,267
+A training penalty encourages almost all
+
+49
+00:02:02,287 --> 00:02:04,690
+the remaining weights to be zero.
+
+50
+00:02:04,865 --> 00:02:07,796
+The result is learnt and sparse, while its
+
+51
+00:02:07,816 --> 00:02:10,450
+active coordinates still carry vocabulary
+
+52
+00:02:10,470 --> 00:02:11,313
+labels.
+
+53
+00:02:12,199 --> 00:02:14,351
+Use the chapter’s schematic heart attack
+
+54
+00:02:14,371 --> 00:02:16,593
+example. Imagine a learnt sparse
+
+55
+00:02:16,613 --> 00:02:19,634
+representation activates heart and attack,
+
+56
+00:02:19,783 --> 00:02:22,366
+but also myocardial and infarction.
+
+57
+00:02:22,541 --> 00:02:24,660
+The extra words need not occur in the
+
+58
+00:02:24,680 --> 00:02:27,418
+original text. Our displayed weights are
+
+59
+00:02:27,438 --> 00:02:29,905
+invented teaching values, not measured
+
+60
+00:02:29,925 --> 00:02:31,258
+outputs from SPLADE.
+
+61
+00:02:31,816 --> 00:02:34,271
+A query activating myocardial and
+
+62
+00:02:34,291 --> 00:02:36,758
+infarction can now share coordinates with
+
+63
+00:02:36,778 --> 00:02:37,995
+that representation.
+
+64
+00:02:38,170 --> 00:02:40,869
+The mechanism can bridge vocabulary,
+
+65
+00:02:40,889 --> 00:02:42,363
+conditional on training.
+
+66
+00:02:42,539 --> 00:02:44,799
+Whole words make the drawing readable; a
+
+67
+00:02:44,819 --> 00:02:47,184
+real model activates its own subword
+
+68
+00:02:47,204 --> 00:02:48,111
+entries.
+
+69
+00:02:48,997 --> 00:02:51,435
+If nearly every vocabulary term received
+
+70
+00:02:51,455 --> 00:02:54,296
+weight, posting lists would grow and more
+
+71
+00:02:54,316 --> 00:02:56,473
+work could be needed at search time.
+
+72
+00:02:56,623 --> 00:02:59,309
+Sparsity constraints limit the active
+
+73
+00:02:59,329 --> 00:03:00,507
+representation.
+
+74
+00:03:00,682 --> 00:03:02,647
+The exact cost depends on which terms
+
+75
+00:03:02,667 --> 00:03:05,211
+activate, their posting lists and the
+
+76
+00:03:05,231 --> 00:03:06,293
+implementation.
+
+77
+00:03:06,853 --> 00:03:09,508
+A single inverted index can carry exact
+
+78
+00:03:09,528 --> 00:03:12,317
+term evidence and learnt expansions.
+
+79
+00:03:12,454 --> 00:03:14,753
+Learnt sparse retrieval can therefore be
+
+80
+00:03:14,773 --> 00:03:17,356
+an alternative to separate lexical and
+
+81
+00:03:17,376 --> 00:03:18,683
+dense retrievers.
+
+82
+00:03:18,845 --> 00:03:21,055
+It can also supply one route within a
+
+83
+00:03:21,075 --> 00:03:22,188
+hybrid system.
+
+84
+00:03:23,092 --> 00:03:25,801
+Dot product can combine sparse vocabulary
+
+85
+00:03:25,821 --> 00:03:28,416
+weights or dense latent features.
+
+86
+00:03:28,579 --> 00:03:30,827
+Cosine can also compare different
+
+87
+00:03:30,847 --> 00:03:32,682
+numerical representations.
+
+88
+00:03:32,844 --> 00:03:35,260
+Choosing either arithmetic operation does
+
+89
+00:03:35,280 --> 00:03:37,554
+not make the underlying representation
+
+90
+00:03:37,574 --> 00:03:40,027
+dense, learnt or semantic.
+
+91
+00:03:40,177 --> 00:03:42,631
+Representation and comparison remain
+
+92
+00:03:42,651 --> 00:03:44,099
+separate decisions.
+
+93
+00:03:44,664 --> 00:03:46,435
+And neither operation tells us which
+
+94
+00:03:46,455 --> 00:03:48,071
+scored items are returned.
+
+95
+00:03:48,233 --> 00:03:51,577
+Admission rules, filters, result limits
+
+96
+00:03:51,597 --> 00:03:53,535
+and later stages still matter.
+
+97
+00:03:54,438 --> 00:03:56,762
+Our bibliographic vector was dense and
+
+98
+00:03:56,782 --> 00:03:58,965
+described explicit facts.
+
+99
+00:03:59,140 --> 00:04:01,775
+BM twenty five was sparse and used a
+
+100
+00:04:01,795 --> 00:04:03,450
+specified formula.
+
+101
+00:04:03,612 --> 00:04:06,066
+SPLADE was sparse and used a learnt
+
+102
+00:04:06,086 --> 00:04:08,179
+mapping that could expand vocabulary.
+
+103
+00:04:08,341 --> 00:04:11,221
+The dense bi encoder used a learnt mapping
+
+104
+00:04:11,241 --> 00:04:13,347
+with distributed latent coordinates.
+
+105
+00:04:13,908 --> 00:04:17,144
+For each, ask what evidence survives, and
+
+106
+00:04:17,164 --> 00:04:19,026
+test whether that evidence serves the
+
+107
+00:04:19,046 --> 00:04:22,608
+user’s need. Density is a shape, training
+
+108
+00:04:22,628 --> 00:04:25,056
+describes where the rule came from, and
+
+109
+00:04:25,076 --> 00:04:27,582
+semantic matching is a capability to
+
+110
+00:04:27,602 --> 00:04:30,172
+investigate. Next we ask what piece of a
+
+111
+00:04:30,192 --> 00:04:32,582
+paper those representations actually
+
+112
+00:04:32,602 --> 00:04:33,458
+describe.

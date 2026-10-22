@@ -1,0 +1,179 @@
+{
+  "series": "The retrieval problem",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#intro",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#intro",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-three-clues-in-a-search-box",
+  "title": "Three clues in a search box",
+  "subtitle": "Visible behavior leaves hidden mechanisms open.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "impossible",
+      "title": "Puzzle one: the impossible word",
+      "source_anchor": "three-familiar-search-results-and-three-puzzles",
+      "visual": "impossible",
+      "narration": [
+        "Add an invented nonsense string to a genuine question. If every word is required and the invented string occurs nowhere, what should happen? Under that strict AND assumption, the result set should be empty.",
+        "In the chapter's scite screenshot, useful-looking results remain and the interface reports millions. That challenges the strict-AND assumption. It does not prove the system stopped matching words, or identify a semantic retrieval architecture. Our on-screen nonsense token is a teaching illustration."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "window",
+      "title": "Puzzle two: millions reported, a thousand viewable",
+      "source_anchor": "three-familiar-search-results-and-three-puzzles",
+      "visual": "window",
+      "narration": [
+        "The supplied Google Scholar example reports about nine point four million results for open access. Google's help documentation limits the viewable results for one query to a thousand.",
+        "This diagram contains nine thousand four hundred equal marks. Each represents a thousand reported matches. One highlighted mark represents the documented display cap. The reported count does not establish that every matching record was individually scored or ranked. How was the visible fraction chosen?"
+      ]
+    },
+    {
+      "id": "question",
+      "title": "Puzzle three: the shorter query finds more",
+      "source_anchor": "three-familiar-search-results-and-three-puzzles",
+      "visual": "question",
+      "narration": [
+        "In the author's August twenty twenty-six Semantic Scholar observation, the natural-language question returned thirteen results. The shorter, unquoted keyword query returned about thirty-five thousand three hundred. The bars use a labeled logarithmic scale; they are not proportional counts.",
+        "The author also judged the question's leading results less relevant, using the known literature and inspected results. That judgement does not follow from the counts alone. The comparison establishes visible behavior. The product's name does not establish its architecture."
+      ]
+    },
+    {
+      "id": "limits",
+      "title": "What each clue leaves open",
+      "source_anchor": "a-map-of-the-arguments-ahead",
+      "visual": "limits",
+      "narration": [
+        "The first puzzle leaves an admission rule open. The second leaves ranking and display selection open. The third leaves query interpretation open. Screenshots show outputs; they do not expose a complete pipeline.",
+        "The chapter revisits the first two through lexical retrieval in Chapter Four, and the third through mechanisms in Part Two, especially Chapter Seven. Keep the questions open while learning what could explain them. These observations were taken from the chapter, not rerun here."
+      ]
+    },
+    {
+      "id": "axes",
+      "title": "Two axes\u2014and a third question",
+      "source_anchor": "retrieval-not-generation",
+      "visual": "axes",
+      "narration": [
+        "The chapter separates output format from retrieval iteration. Across: ranked records or a written answer. Upward: a single or limited pass, or repeated searches. That gives quick search, quick answer, iterative search and deep research.",
+        "Neither axis records agency: who chooses the next action? A fixed workflow and an agent can occupy the same box. Repeated retrieval and model-chosen actions are different properties. This diagram maps concepts rather than assigning products to current categories."
+      ]
+    },
+    {
+      "id": "llms",
+      "title": "Uses an LLM. But where?",
+      "source_anchor": "llms-in-retrieval-title",
+      "visual": "llms",
+      "narration": [
+        "A language model can write a query, invent search text such as a pseudo-document, reorder candidates, or control the next retrieval action. Those are uses inside retrieval. It can also write the final answer.",
+        "So a vendor saying uses an LLM has located no component. Ask which decision it makes, which evidence it receives and what can be inspected. A polished report alone cannot answer those questions."
+      ]
+    },
+    {
+      "id": "closing",
+      "title": "Your investigation starts with the working set",
+      "source_anchor": "a-map-of-the-arguments-ahead",
+      "visual": "closing",
+      "narration": [
+        "Return to the missing landmark paper. Ask whether it was searchable, whether it became a candidate, whether it reached the working set, and whether the writer cited it. Each answer needs different evidence.",
+        "Then ask whether the selected papers help with the actual information need. Chapter One has given us the questions. Chapter Two starts with the strictest possible admission rule: words that a record must contain."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "impossible_0",
+      "scene": "impossible",
+      "text": "Add an invented nonsense string to a genuine question. If every word is required and the invented string occurs nowhere, what should happen? Under that strict AND assumption, the result set should be empty.",
+      "gap": 1.0
+    },
+    {
+      "id": "impossible_1",
+      "scene": "impossible",
+      "text": "In the chapter's scite screenshot, useful-looking results remain and the interface reports millions. That challenges the strict-AND assumption. It does not prove the system stopped matching words, or identify a semantic retrieval architecture. Our on-screen nonsense token is a teaching illustration.",
+      "gap": 2.5
+    },
+    {
+      "id": "window_0",
+      "scene": "window",
+      "text": "The supplied Google Scholar example reports about nine point four million results for open access. Google's help documentation limits the viewable results for one query to a thousand.",
+      "gap": 1.0
+    },
+    {
+      "id": "window_1",
+      "scene": "window",
+      "text": "This diagram contains nine thousand four hundred equal marks. Each represents a thousand reported matches. One highlighted mark represents the documented display cap. The reported count does not establish that every matching record was individually scored or ranked. How was the visible fraction chosen?",
+      "gap": 0.65
+    },
+    {
+      "id": "question_0",
+      "scene": "question",
+      "text": "In the author's August twenty twenty-six Semantic Scholar observation, the natural-language question returned thirteen results. The shorter, unquoted keyword query returned about thirty-five thousand three hundred. The bars use a labeled logarithmic scale; they are not proportional counts.",
+      "gap": 1.0
+    },
+    {
+      "id": "question_1",
+      "scene": "question",
+      "text": "The author also judged the question's leading results less relevant, using the known literature and inspected results. That judgement does not follow from the counts alone. The comparison establishes visible behavior. The product's name does not establish its architecture.",
+      "gap": 0.65
+    },
+    {
+      "id": "limits_0",
+      "scene": "limits",
+      "text": "The first puzzle leaves an admission rule open. The second leaves ranking and display selection open. The third leaves query interpretation open. Screenshots show outputs; they do not expose a complete pipeline.",
+      "gap": 1.0
+    },
+    {
+      "id": "limits_1",
+      "scene": "limits",
+      "text": "The chapter revisits the first two through lexical retrieval in Chapter Four, and the third through mechanisms in Part Two, especially Chapter Seven. Keep the questions open while learning what could explain them. These observations were taken from the chapter, not rerun here.",
+      "gap": 0.65
+    },
+    {
+      "id": "axes_0",
+      "scene": "axes",
+      "text": "The chapter separates output format from retrieval iteration. Across: ranked records or a written answer. Upward: a single or limited pass, or repeated searches. That gives quick search, quick answer, iterative search and deep research.",
+      "gap": 1.0
+    },
+    {
+      "id": "axes_1",
+      "scene": "axes",
+      "text": "Neither axis records agency: who chooses the next action? A fixed workflow and an agent can occupy the same box. Repeated retrieval and model-chosen actions are different properties. This diagram maps concepts rather than assigning products to current categories.",
+      "gap": 0.65
+    },
+    {
+      "id": "llms_0",
+      "scene": "llms",
+      "text": "A language model can write a query, invent search text such as a pseudo-document, reorder candidates, or control the next retrieval action. Those are uses inside retrieval. It can also write the final answer.",
+      "gap": 1.0
+    },
+    {
+      "id": "llms_1",
+      "scene": "llms",
+      "text": "So a vendor saying uses an LLM has located no component. Ask which decision it makes, which evidence it receives and what can be inspected. A polished report alone cannot answer those questions.",
+      "gap": 0.65
+    },
+    {
+      "id": "closing_0",
+      "scene": "closing",
+      "text": "Return to the missing landmark paper. Ask whether it was searchable, whether it became a candidate, whether it reached the working set, and whether the writer cited it. Each answer needs different evidence.",
+      "gap": 1.0
+    },
+    {
+      "id": "closing_1",
+      "scene": "closing",
+      "text": "Then ask whether the selected papers help with the actual information need. Chapter One has given us the questions. Chapter Two starts with the strictest possible admission rule: words that a record must contain.",
+      "gap": 0.65
+    }
+  ]
+}

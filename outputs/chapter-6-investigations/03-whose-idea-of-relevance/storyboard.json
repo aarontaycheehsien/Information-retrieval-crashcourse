@@ -1,0 +1,179 @@
+{
+  "series": "From language model to retrieval encoder",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#retrieval-encoder",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#retrieval-encoder",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-whose-idea-of-relevance",
+  "title": "Whose idea of relevance?",
+  "subtitle": "Training signals teach different relationships\u2014and their limits travel with them.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "signals_hook",
+      "title": "Who taught the model what belongs together?",
+      "source_anchor": "where-the-training-signal-comes-from",
+      "visual": "signals_hook",
+      "narration": [
+        "Two retrievers have the same architecture and search the same collection. One learnt from question and answer pairs. The other learnt from citation-linked papers. Should they produce the same ranking? Make a prediction.",
+        "They can learn different relationships because their training examples reward different things. The targets and negative examples give a retriever an operational model of relevance. To understand its high scores, ask where that lesson came from."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "clicks_answers",
+      "title": "Clicks and answers teach different lessons",
+      "source_anchor": "where-the-training-signal-comes-from",
+      "visual": "clicks_answers",
+      "narration": [
+        "A clicked result records an action. Clicks can reward popularity and ranking position as well as usefulness. A question paired with an answer passage instead rewards an answer-bearing relationship. Neither source directly observes everything a searcher means by relevance.",
+        "Titles paired with abstracts may mainly reward topical similarity. Human judgements, generated queries and neighbouring passages can supply other training signals. Each has advantages and limitations. Knowing the signal helps you ask which relationship a model was encouraged to preserve."
+      ]
+    },
+    {
+      "id": "citations",
+      "title": "A citation supplies a scholarly relationship",
+      "source_anchor": "where-the-training-signal-comes-from",
+      "visual": "citations",
+      "narration": [
+        "The chapter gives SPECTER as a deliberate scholarly example. It trains document-level paper embeddings using the citation graph. Citation-linked relationships shape a space intended to reflect scholarly relatedness.",
+        "That is a different target from finding a direct answer to a question. Relatedness can be useful, but it does not prove that a paper answers this search, supports another paper's conclusion, or meets a review's eligibility criteria. The training relationship needs to fit the use."
+      ]
+    },
+    {
+      "id": "transfer",
+      "title": "The same architecture can receive a different education",
+      "source_anchor": "where-the-training-signal-comes-from",
+      "visual": "transfer",
+      "narration": [
+        "A retriever trained on general web question and answer pairs learns from that literature, genre and style of question. A systematic reviewer, a chemistry researcher, or someone searching another language may need distinctions barely represented in those examples.",
+        "Changing the examples can change what ranks highly even with the same architecture. A strong benchmark result may transfer poorly to another collection or query population. Treat transfer as something to evaluate locally, not as a guarantee supplied by a model name."
+      ]
+    },
+    {
+      "id": "fine_distinctions",
+      "title": "A small difference can carry the whole need",
+      "source_anchor": "what-the-space-ends-up-preserving",
+      "visual": "fine_distinctions",
+      "narration": [
+        "If exact identifiers rarely matter during training, an embedding may blur them. If negatives rarely contain contradictions or specialised senses, the space may fail to preserve those distinctions. Our invented labels C M P one zero four and C M P one four zero illustrate an identifier distinction.",
+        "These are teaching identifiers, not chemical facts or a model test. A useful evaluation should include the exact identifiers, relations, contradictions and specialised senses that matter to your real task. Broad topical similarity alone cannot settle those cases."
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Poor results do not identify the cause",
+      "source_anchor": "sec-retrieval-encoder",
+      "visual": "diagnosis",
+      "narration": [
+        "Suppose the web-trained retriever performs poorly over a chemistry collection. Training mismatch is a plausible hypothesis. Before attributing the failure to training, inspect collection coverage, searchable fields, query processing and candidate cut-offs.",
+        "Then compare performance across a local set of judged queries. The scenario says how retrieval training was supplied; it does not tell you whether domain pretraining occurred. Different stages can produce the same missing-paper symptom, and neither training lever alone guarantees a fit."
+      ]
+    },
+    {
+      "id": "three_questions",
+      "title": "Ask what is stored, what taught it, and what works",
+      "source_anchor": "what-the-space-ends-up-preserving",
+      "visual": "three_questions",
+      "narration": [
+        "Take three questions back to the library. What text unit does each stored vector represent? Which positives, negatives and training signals taught its comparisons? Does it retrieve useful material for our own task, collection and query population?",
+        "Model tokenisation supplies inputs. Contextual encoding and pooling produce a representation. Retrieval training shapes which comparisons score highly. Local evidence tests whether those comparisons serve your need. Chapter Seven puts the encoder to work across a whole collection."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "signals_hook_0",
+      "scene": "signals_hook",
+      "text": "Two retrievers have the same architecture and search the same collection. One learnt from question and answer pairs. The other learnt from citation-linked papers. Should they produce the same ranking? Make a prediction.",
+      "gap": 1.0
+    },
+    {
+      "id": "signals_hook_1",
+      "scene": "signals_hook",
+      "text": "They can learn different relationships because their training examples reward different things. The targets and negative examples give a retriever an operational model of relevance. To understand its high scores, ask where that lesson came from.",
+      "gap": 2.5
+    },
+    {
+      "id": "clicks_answers_0",
+      "scene": "clicks_answers",
+      "text": "A clicked result records an action. Clicks can reward popularity and ranking position as well as usefulness. A question paired with an answer passage instead rewards an answer-bearing relationship. Neither source directly observes everything a searcher means by relevance.",
+      "gap": 1.0
+    },
+    {
+      "id": "clicks_answers_1",
+      "scene": "clicks_answers",
+      "text": "Titles paired with abstracts may mainly reward topical similarity. Human judgements, generated queries and neighbouring passages can supply other training signals. Each has advantages and limitations. Knowing the signal helps you ask which relationship a model was encouraged to preserve.",
+      "gap": 0.65
+    },
+    {
+      "id": "citations_0",
+      "scene": "citations",
+      "text": "The chapter gives SPECTER as a deliberate scholarly example. It trains document-level paper embeddings using the citation graph. Citation-linked relationships shape a space intended to reflect scholarly relatedness.",
+      "gap": 1.0
+    },
+    {
+      "id": "citations_1",
+      "scene": "citations",
+      "text": "That is a different target from finding a direct answer to a question. Relatedness can be useful, but it does not prove that a paper answers this search, supports another paper's conclusion, or meets a review's eligibility criteria. The training relationship needs to fit the use.",
+      "gap": 0.65
+    },
+    {
+      "id": "transfer_0",
+      "scene": "transfer",
+      "text": "A retriever trained on general web question and answer pairs learns from that literature, genre and style of question. A systematic reviewer, a chemistry researcher, or someone searching another language may need distinctions barely represented in those examples.",
+      "gap": 1.0
+    },
+    {
+      "id": "transfer_1",
+      "scene": "transfer",
+      "text": "Changing the examples can change what ranks highly even with the same architecture. A strong benchmark result may transfer poorly to another collection or query population. Treat transfer as something to evaluate locally, not as a guarantee supplied by a model name.",
+      "gap": 0.65
+    },
+    {
+      "id": "fine_distinctions_0",
+      "scene": "fine_distinctions",
+      "text": "If exact identifiers rarely matter during training, an embedding may blur them. If negatives rarely contain contradictions or specialised senses, the space may fail to preserve those distinctions. Our invented labels C M P one zero four and C M P one four zero illustrate an identifier distinction.",
+      "gap": 1.0
+    },
+    {
+      "id": "fine_distinctions_1",
+      "scene": "fine_distinctions",
+      "text": "These are teaching identifiers, not chemical facts or a model test. A useful evaluation should include the exact identifiers, relations, contradictions and specialised senses that matter to your real task. Broad topical similarity alone cannot settle those cases.",
+      "gap": 0.65
+    },
+    {
+      "id": "diagnosis_0",
+      "scene": "diagnosis",
+      "text": "Suppose the web-trained retriever performs poorly over a chemistry collection. Training mismatch is a plausible hypothesis. Before attributing the failure to training, inspect collection coverage, searchable fields, query processing and candidate cut-offs.",
+      "gap": 1.0
+    },
+    {
+      "id": "diagnosis_1",
+      "scene": "diagnosis",
+      "text": "Then compare performance across a local set of judged queries. The scenario says how retrieval training was supplied; it does not tell you whether domain pretraining occurred. Different stages can produce the same missing-paper symptom, and neither training lever alone guarantees a fit.",
+      "gap": 0.65
+    },
+    {
+      "id": "three_questions_0",
+      "scene": "three_questions",
+      "text": "Take three questions back to the library. What text unit does each stored vector represent? Which positives, negatives and training signals taught its comparisons? Does it retrieve useful material for our own task, collection and query population?",
+      "gap": 1.0
+    },
+    {
+      "id": "three_questions_1",
+      "scene": "three_questions",
+      "text": "Model tokenisation supplies inputs. Contextual encoding and pooling produce a representation. Retrieval training shapes which comparisons score highly. Local evidence tests whether those comparisons serve your need. Chapter Seven puts the encoder to work across a whole collection.",
+      "gap": 0.65
+    }
+  ]
+}

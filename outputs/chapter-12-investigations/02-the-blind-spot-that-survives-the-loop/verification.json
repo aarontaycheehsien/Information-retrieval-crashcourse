@@ -1,0 +1,78 @@
+{
+  "file": "02-the-blind-spot-that-survives-the-loop.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 279.53333333333336,
+  "decoded_frames": 8386,
+  "integrated_lufs": -16.1,
+  "true_peak_dbfs": -2.4,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 674 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 178 kb/s (default)",
+  "faststart": true,
+  "sha256": "7b4572cc8d76dfb2236692d77d86986a27c505b363e8bd9cbcdb8d4b95d061d5",
+  "bytes": 30071437,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "85d2f7b419b9f14d6f848565ce058c56b9e59be20d3700da7e4876706e581643",
+  "passed": true,
+  "chapter_sha256": "c55489da84d480c748460fddb9d51aeca987b56b0fb69b58e1206fc9e67a073a",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "1149c9093d8677b9565195ef9c0c834b8b9427c020670e8fb65e81504512ae73",
+  "embedded_captions_verified": true,
+  "caption_cues": 107,
+  "reviewed_animation_times": 90,
+  "worked_examples": {
+    "source_control_categories": [
+      "Fixed workflow",
+      "Adaptive workflow",
+      "Agentic search"
+    ],
+    "source_output_patterns": [
+      "Scripted deep search",
+      "Agentic deep search",
+      "Scripted deep research",
+      "Agentic deep research"
+    ],
+    "invented_set_example": {
+      "related": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "references": [
+        "A",
+        "C"
+      ],
+      "remaining_candidates": [
+        "B",
+        "D"
+      ],
+      "verified_citation_omissions": false
+    },
+    "source_one_shot_expression": "(autism) OR (autistic disorder) OR (ASD) OR (autism spectrum) OR (neurodevelopmental disorder) OR (pervasive developmental disorder)",
+    "source_broadening": [
+      "psychology",
+      "medicine",
+      "education",
+      "disability"
+    ],
+    "reported_selected_database_results": [
+      "PsycINFO",
+      "Education Research Complete",
+      "SocINDEX"
+    ],
+    "source_evidence_dates": {
+      "task_probe": "December 2025",
+      "architecture_comparison": "April 2026",
+      "catalogue_demonstration": "June 2026",
+      "zero_result_logs": "2023",
+      "scite_mcp_documentation": "October 2026"
+    },
+    "catalogue_examples_selected_not_sampled": true,
+    "measured_success_rate": false,
+    "new_product_tests": false,
+    "coverage_established_by_round_limit": false,
+    "passed": true
+  }
+}

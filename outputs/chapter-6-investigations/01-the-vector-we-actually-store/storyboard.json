@@ -1,0 +1,179 @@
+{
+  "series": "From language model to retrieval encoder",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#retrieval-encoder",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#retrieval-encoder",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-the-vector-we-actually-store",
+  "title": "The vector we actually store",
+  "subtitle": "Follow text through the encoder, then separate its inputs from its output.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "vector_hook",
+      "title": "Which of these numbers goes into the search index?",
+      "source_anchor": "encoder-assembly-line-title",
+      "visual": "vector_hook",
+      "narration": [
+        "A question enters an encoder. Out come tokens, vocabulary identifiers, initial vectors, contextual representations, and eventually one vector for the complete text. Which of these does a conventional single-vector dense retriever store and compare? Take a moment before following the assembly line.",
+        "Only the final pooled representation plays that role here. The earlier units are working material inside the encoder. Calling several of them tokens or embeddings can hide the boundaries that matter for search."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "two_units",
+      "title": "One name, two different jobs",
+      "source_anchor": "tbl-6-1",
+      "visual": "two_units",
+      "narration": [
+        "A lexical index term comes from text analysis and can lead directly to a posting list. A model token is an input unit processed with surrounding units inside an encoder. It does not acquire a posting list simply because we call it a token.",
+        "The collection determines which analysed terms have postings. A pretrained model instead has a fixed input-token vocabulary or byte inventory. These processes serve different jobs; their units are not interchangeable."
+      ]
+    },
+    {
+      "id": "coverage",
+      "title": "A string can be split without being understood",
+      "source_anchor": "model-tokens-are-not-indexed-terms",
+      "visual": "coverage",
+      "narration": [
+        "Classic word two vec uses a fixed word vocabulary, so an unseen complete word may become an unknown token. Modern encoders usually split unfamiliar strings into reusable subwords, characters or bytes. This improves input coverage.",
+        "For our declared toy tokenizer, delulu becomes six characters: d, e, l, u, l, u. That is not a named model's tokenizer. Being able to split the slang does not establish that an encoder has learnt its use or the searcher's need."
+      ]
+    },
+    {
+      "id": "ids",
+      "title": "Token IDs are lookup keys, not search coordinates",
+      "source_anchor": "encoder-assembly-line-title",
+      "visual": "ids",
+      "narration": [
+        "In our toy vocabulary, d has identifier three, e eight, l eleven, and u twenty-one. The sequence becomes three, eight, eleven, twenty-one, eleven, twenty-one. These identifiers are lookup keys, not similarity scores or the final embedding dimensions.",
+        "A lookup supplies an initial vector for each identifier. Both occurrences of l start from the same toy lookup vector. Their representations can later differ because they occupy different places in the sequence. All of these numbers are teaching values, not measured encoder outputs."
+      ]
+    },
+    {
+      "id": "context_pool",
+      "title": "Six working vectors become one representation",
+      "source_anchor": "encoder-assembly-line-title",
+      "visual": "context_pool",
+      "narration": [
+        "The contextual encoder combines information across the sequence. It still produces per-token representations. Pooling then combines that working material into one representation for the complete query or passage. Averaging is one option; a sequence-opening representation is another.",
+        "Our six supplied three-number vectors sum to six, six, twelve. Divide each total by six and the mean is one, one, two. This arithmetic illustrates pooling, not an actual language-model computation. Pooling alone does not guarantee useful retrieval."
+      ]
+    },
+    {
+      "id": "independent",
+      "title": "A question and passage can be encoded separately",
+      "source_anchor": "how-a-contextual-encoder-becomes-a-retrieval-encoder",
+      "visual": "independent",
+      "narration": [
+        "In a bi-encoder arrangement, a query and a passage are encoded independently, then their output vectors are compared. Their encoding paths can share parameters or use different parameters. Matching the arrangement and training to the task matters.",
+        "Independent passage encoding means its vector can be prepared before a new query arrives. The passage need not be encoded again with every question. Chapter Seven takes this arrangement to a whole collection; here we are identifying what produces the comparable representations."
+      ]
+    },
+    {
+      "id": "stored_boundary",
+      "title": "One stored vector is a design choice",
+      "source_anchor": "encoder-assembly-line-title",
+      "visual": "stored_boundary",
+      "narration": [
+        "Return to the assembly line: text, model tokens, identifiers, initial vectors, contextual representations, pooling, one embedding. Model tokens are inputs; they are not the dimensions of the final vector and are not automatically searchable lexical terms.",
+        "This chapter follows a conventional single-vector arrangement. Late-interaction methods retain multiple token vectors for comparison instead. Producing a stored representation is one decision. Teaching its comparisons to reward useful passages is the next one."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "vector_hook_0",
+      "scene": "vector_hook",
+      "text": "A question enters an encoder. Out come tokens, vocabulary identifiers, initial vectors, contextual representations, and eventually one vector for the complete text. Which of these does a conventional single-vector dense retriever store and compare? Take a moment before following the assembly line.",
+      "gap": 1.0
+    },
+    {
+      "id": "vector_hook_1",
+      "scene": "vector_hook",
+      "text": "Only the final pooled representation plays that role here. The earlier units are working material inside the encoder. Calling several of them tokens or embeddings can hide the boundaries that matter for search.",
+      "gap": 2.5
+    },
+    {
+      "id": "two_units_0",
+      "scene": "two_units",
+      "text": "A lexical index term comes from text analysis and can lead directly to a posting list. A model token is an input unit processed with surrounding units inside an encoder. It does not acquire a posting list simply because we call it a token.",
+      "gap": 1.0
+    },
+    {
+      "id": "two_units_1",
+      "scene": "two_units",
+      "text": "The collection determines which analysed terms have postings. A pretrained model instead has a fixed input-token vocabulary or byte inventory. These processes serve different jobs; their units are not interchangeable.",
+      "gap": 0.65
+    },
+    {
+      "id": "coverage_0",
+      "scene": "coverage",
+      "text": "Classic word two vec uses a fixed word vocabulary, so an unseen complete word may become an unknown token. Modern encoders usually split unfamiliar strings into reusable subwords, characters or bytes. This improves input coverage.",
+      "gap": 1.0
+    },
+    {
+      "id": "coverage_1",
+      "scene": "coverage",
+      "text": "For our declared toy tokenizer, delulu becomes six characters: d, e, l, u, l, u. That is not a named model's tokenizer. Being able to split the slang does not establish that an encoder has learnt its use or the searcher's need.",
+      "gap": 0.65
+    },
+    {
+      "id": "ids_0",
+      "scene": "ids",
+      "text": "In our toy vocabulary, d has identifier three, e eight, l eleven, and u twenty-one. The sequence becomes three, eight, eleven, twenty-one, eleven, twenty-one. These identifiers are lookup keys, not similarity scores or the final embedding dimensions.",
+      "gap": 1.0
+    },
+    {
+      "id": "ids_1",
+      "scene": "ids",
+      "text": "A lookup supplies an initial vector for each identifier. Both occurrences of l start from the same toy lookup vector. Their representations can later differ because they occupy different places in the sequence. All of these numbers are teaching values, not measured encoder outputs.",
+      "gap": 0.65
+    },
+    {
+      "id": "context_pool_0",
+      "scene": "context_pool",
+      "text": "The contextual encoder combines information across the sequence. It still produces per-token representations. Pooling then combines that working material into one representation for the complete query or passage. Averaging is one option; a sequence-opening representation is another.",
+      "gap": 1.0
+    },
+    {
+      "id": "context_pool_1",
+      "scene": "context_pool",
+      "text": "Our six supplied three-number vectors sum to six, six, twelve. Divide each total by six and the mean is one, one, two. This arithmetic illustrates pooling, not an actual language-model computation. Pooling alone does not guarantee useful retrieval.",
+      "gap": 0.65
+    },
+    {
+      "id": "independent_0",
+      "scene": "independent",
+      "text": "In a bi-encoder arrangement, a query and a passage are encoded independently, then their output vectors are compared. Their encoding paths can share parameters or use different parameters. Matching the arrangement and training to the task matters.",
+      "gap": 1.0
+    },
+    {
+      "id": "independent_1",
+      "scene": "independent",
+      "text": "Independent passage encoding means its vector can be prepared before a new query arrives. The passage need not be encoded again with every question. Chapter Seven takes this arrangement to a whole collection; here we are identifying what produces the comparable representations.",
+      "gap": 0.65
+    },
+    {
+      "id": "stored_boundary_0",
+      "scene": "stored_boundary",
+      "text": "Return to the assembly line: text, model tokens, identifiers, initial vectors, contextual representations, pooling, one embedding. Model tokens are inputs; they are not the dimensions of the final vector and are not automatically searchable lexical terms.",
+      "gap": 1.0
+    },
+    {
+      "id": "stored_boundary_1",
+      "scene": "stored_boundary",
+      "text": "This chapter follows a conventional single-vector arrangement. Late-interaction methods retain multiple token vectors for comparison instead. Producing a stored representation is one decision. Teaching its comparisons to reward useful passages is the next one.",
+      "gap": 0.65
+    }
+  ]
+}

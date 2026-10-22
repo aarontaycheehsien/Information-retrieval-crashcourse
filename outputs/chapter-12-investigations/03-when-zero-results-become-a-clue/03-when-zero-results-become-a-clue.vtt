@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.034
+A student wants a database for autism
+
+00:00:03.054 --> 00:00:05.611
+research. A catalogue search returns
+
+00:00:05.631 --> 00:00:08.034
+nothing. Should the system conclude that
+
+00:00:08.054 --> 00:00:11.024
+the library has nothing useful, or treat
+
+00:00:11.044 --> 00:00:12.789
+the failure as information for another
+
+00:00:12.809 --> 00:00:14.864
+attempt? Pause and consider what a
+
+00:00:14.884 --> 00:00:17.415
+database record is likely to say.
+
+00:00:19.833 --> 00:00:21.691
+The chapter’s loop broadens to related
+
+00:00:21.711 --> 00:00:24.462
+subject areas and recovers useful database
+
+00:00:24.482 --> 00:00:27.194
+names. The request was for a database
+
+00:00:27.214 --> 00:00:29.694
+about a subject, not necessarily a
+
+00:00:29.714 --> 00:00:32.167
+database named after that subject.
+
+00:00:32.330 --> 00:00:35.312
+Recovery changes how the search is used.
+
+00:00:36.227 --> 00:00:38.038
+The author’s June twenty twenty six
+
+00:00:38.058 --> 00:00:40.951
+demonstration replayed selected database
+
+00:00:40.971 --> 00:00:42.987
+queries from twenty twenty three zero
+
+00:00:43.007 --> 00:00:45.577
+result logs against the library’s Primo
+
+00:00:45.597 --> 00:00:49.507
+index, through a model and an MCP server.
+
+00:00:49.669 --> 00:00:52.175
+The request asked for a database for each
+
+00:00:52.195 --> 00:00:52.948
+topic.
+
+00:00:53.511 --> 00:00:55.172
+The examples were selected rather than
+
+00:00:55.192 --> 00:00:58.174
+sampled, and newer models answered older
+
+00:00:58.194 --> 00:01:01.319
+queries. Read the account as exploratory
+
+00:01:01.339 --> 00:01:04.437
+failure recovery, not a success rate, a
+
+00:01:04.457 --> 00:01:07.015
+controlled benchmark, or a comparison
+
+00:01:07.035 --> 00:01:09.785
+proving superiority over human searchers.
+
+00:01:10.680 --> 00:01:13.513
+The comparison used Primo’s single pass
+
+00:01:13.533 --> 00:01:15.510
+Natural Language Search over the same
+
+00:01:15.530 --> 00:01:19.222
+index. For autism it produced a plausible
+
+00:01:19.242 --> 00:01:22.172
+OR expression including autistic disorder,
+
+00:01:22.438 --> 00:01:25.601
+ASD, autism spectrum, neurodevelopmental
+
+00:01:25.621 --> 00:01:27.714
+disorder and pervasive developmental
+
+00:01:27.734 --> 00:01:30.999
+disorder. It still returned zero results.
+
+00:01:31.565 --> 00:01:33.534
+The source’s six terms stayed at the
+
+00:01:33.554 --> 00:01:34.874
+autism concept.
+
+00:01:35.036 --> 00:01:37.413
+The single pass rewrite did not use the
+
+00:01:37.433 --> 00:01:40.209
+zero result response to revise the query.
+
+00:01:40.371 --> 00:01:42.954
+More synonyms were not the same operation
+
+00:01:42.974 --> 00:01:45.170
+as choosing a broader subject area.
+
+00:01:46.076 --> 00:01:49.205
+The loop broadened autism into psychology,
+
+00:01:49.225 --> 00:01:52.001
+medicine, education and disability.
+
+00:01:52.164 --> 00:01:53.832
+In the selected example it returned
+
+00:01:53.852 --> 00:01:58.084
+PsycINFO, Education Research Complete and
+
+00:01:58.182 --> 00:02:00.726
+SocINDEX. Those names are reported
+
+00:02:00.746 --> 00:02:03.110
+outcomes from the chapter, not searches
+
+00:02:03.130 --> 00:02:04.733
+conducted for this video.
+
+00:02:05.303 --> 00:02:08.262
+The keyword oriented endpoint did not need
+
+00:02:08.282 --> 00:02:10.891
+a new scoring formula for that sequence to
+
+00:02:10.911 --> 00:02:13.430
+become useful. The controller reformulated
+
+00:02:13.450 --> 00:02:15.530
+the request and tried again.
+
+00:02:16.451 --> 00:02:18.891
+Other selected examples turned cost of
+
+00:02:18.911 --> 00:02:21.197
+living into inflation, household
+
+00:02:21.217 --> 00:02:23.736
+expenditure and consumer prices.
+
+00:02:23.872 --> 00:02:26.082
+Rolex watches became a question about
+
+00:02:26.102 --> 00:02:28.904
+luxury goods, producing Statista and
+
+00:02:28.924 --> 00:02:31.906
+Passport. The typo statis resolved to
+
+00:02:31.926 --> 00:02:32.949
+Statista.
+
+00:02:33.533 --> 00:02:37.260
+The refinituv example reached LSEG, but
+
+00:02:37.281 --> 00:02:39.670
+that illustrates the dating problem: the
+
+00:02:39.690 --> 00:02:42.235
+recovered rebrand postdated the original
+
+00:02:42.255 --> 00:02:45.302
+query. A newer model knows things an older
+
+00:02:45.322 --> 00:02:46.448
+model might not.
+
+00:02:46.598 --> 00:02:49.052
+Do not attribute every improvement to the
+
+00:02:49.072 --> 00:02:50.108
+loop alone.
+
+00:02:51.031 --> 00:02:53.702
+The chapter reports that a holdings CSV
+
+00:02:53.722 --> 00:02:56.563
+also worked for the selected examples, and
+
+00:02:56.583 --> 00:02:58.560
+a smaller model made little difference
+
+00:02:58.580 --> 00:03:01.060
+there. That does not establish that model
+
+00:03:01.080 --> 00:03:03.998
+capability is generally irrelevant, or
+
+00:03:04.018 --> 00:03:06.665
+that MCP itself caused recovery.
+
+00:03:07.219 --> 00:03:10.196
+The examples support feedback, broadening
+
+00:03:10.216 --> 00:03:12.335
+and another attempt, while changing other
+
+00:03:12.355 --> 00:03:13.804
+parts of the setup too.
+
+00:03:13.979 --> 00:03:16.511
+They do not isolate the loop as the sole
+
+00:03:16.531 --> 00:03:19.810
+cause. Fixed or adaptive workflows could
+
+00:03:19.830 --> 00:03:22.890
+also implement useful retries; better
+
+00:03:22.910 --> 00:03:24.989
+retrieval still matters.
+
+00:03:25.885 --> 00:03:27.588
+The model can draw on public knowledge
+
+00:03:27.608 --> 00:03:30.062
+about familiar databases and subject
+
+00:03:30.082 --> 00:03:33.168
+areas. A little known or newly licensed
+
+00:03:33.188 --> 00:03:35.655
+database may receive less help.
+
+00:03:35.830 --> 00:03:38.696
+Current coverage, field quirks, embargo
+
+00:03:38.716 --> 00:03:41.274
+dates and this institution’s actual
+
+00:03:41.294 --> 00:03:43.645
+entitlements are local facts it cannot
+
+00:03:43.665 --> 00:03:44.997
+safely infer.
+
+00:03:45.553 --> 00:03:47.971
+Those facts need authoritative library
+
+00:03:47.991 --> 00:03:50.767
+information. Recovery does not remove that
+
+00:03:50.787 --> 00:03:53.215
+work; it changes where it belongs.
+
+00:03:53.377 --> 00:03:55.394
+A specialised request about particular
+
+00:03:55.414 --> 00:03:57.971
+variables, companies and years can still
+
+00:03:57.991 --> 00:04:00.805
+exceed the available knowledge or tools.
+
+00:04:01.700 --> 00:04:04.099
+A zero result can become an observation
+
+00:04:04.119 --> 00:04:06.457
+that informs the next action, while the
+
+00:04:06.477 --> 00:04:08.571
+retriever’s scoring function stays
+
+00:04:08.591 --> 00:04:11.534
+unchanged. In these selected examples,
+
+00:04:11.554 --> 00:04:13.750
+that helped recover useful results.
+
+00:04:13.926 --> 00:04:17.101
+It does not show that every retry succeeds
+
+00:04:17.121 --> 00:04:19.304
+or requires agentic control.
+
+00:04:19.851 --> 00:04:22.585
+Record the failed query, the new action,
+
+00:04:22.851 --> 00:04:25.305
+what came back and why the search stopped.
+
+00:04:25.467 --> 00:04:28.037
+Choose control for the actual task and
+
+00:04:28.057 --> 00:04:30.395
+supply current local knowledge.
+
+00:04:30.583 --> 00:04:33.385
+The completed pipeline now lets us ask a
+
+00:04:33.405 --> 00:04:35.382
+diagnostic question: where did a
+
+00:04:35.402 --> 00:04:37.057
+particular search go wrong?

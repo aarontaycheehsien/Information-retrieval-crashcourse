@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="403.2pt" viewBox="0 0 1008 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Original library-practice teaching illustration; not a model measurement</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 1008 403.2 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #eee9e0"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 25.2 134.313984 
+L 216.72 134.313984 
+L 216.72 96.12288 
+L 25.2 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="120.96" y="119.081557" transform="rotate(-0 120.96 119.081557)">Component</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 216.72 134.313984 
+L 676.368 134.313984 
+L 676.368 96.12288 
+L 216.72 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="446.544" y="119.02687" transform="rotate(-0 446.544 119.02687)">Version and record the relevant settings</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 676.368 134.313984 
+L 982.8 134.313984 
+L 982.8 96.12288 
+L 676.368 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="829.584" y="119.081557" transform="rotate(-0 829.584 119.081557)">A qualification to retain</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 25.2 172.505088 
+L 216.72 172.505088 
+L 216.72 134.313984 
+L 25.2 134.313984 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="120.96" y="157.272661" transform="rotate(-0 120.96 157.272661)">Ranked lexical</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 216.72 172.505088 
+L 676.368 172.505088 
+L 676.368 134.313984 
+L 216.72 134.313984 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="446.544" y="157.272661" transform="rotate(-0 446.544 157.272661)">Analysis, weights, configuration, rewriting, sort and k</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 676.368 172.505088 
+L 982.8 172.505088 
+L 982.8 134.313984 
+L 676.368 134.313984 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="829.584" y="157.272661" transform="rotate(-0 829.584 157.272661)">Collection statistics can move rankings</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 25.2 210.696192 
+L 216.72 210.696192 
+L 216.72 172.505088 
+L 25.2 172.505088 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="120.96" y="195.463765" transform="rotate(-0 120.96 195.463765)">Single-vector dense</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 216.72 210.696192 
+L 676.368 210.696192 
+L 676.368 172.505088 
+L 216.72 172.505088 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="446.544" y="195.463765" transform="rotate(-0 446.544 195.463765)">Encoder, units, vectors, index, similarity and search</text>
+    </g>
+    <g id="patch_10">
+     <path d="M 676.368 210.696192 
+L 982.8 210.696192 
+L 982.8 172.505088 
+L 676.368 172.505088 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="829.584" y="195.463765" transform="rotate(-0 829.584 195.463765)">Fixed exact retrieval can be repeatable</text>
+    </g>
+    <g id="patch_11">
+     <path d="M 25.2 248.887296 
+L 216.72 248.887296 
+L 216.72 210.696192 
+L 25.2 210.696192 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="120.96" y="233.654869" transform="rotate(-0 120.96 233.654869)">Learnt sparse</text>
+    </g>
+    <g id="patch_12">
+     <path d="M 216.72 248.887296 
+L 676.368 248.887296 
+L 676.368 210.696192 
+L 216.72 210.696192 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_11">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="446.544" y="233.654869" transform="rotate(-0 446.544 233.654869)">Model, vocabulary terms/weights, index and scoring</text>
+    </g>
+    <g id="patch_13">
+     <path d="M 676.368 248.887296 
+L 982.8 248.887296 
+L 982.8 210.696192 
+L 676.368 210.696192 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_12">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="829.584" y="233.654869" transform="rotate(-0 829.584 233.654869)">Typed words alone omit generated terms</text>
+    </g>
+    <g id="patch_14">
+     <path d="M 25.2 287.0784 
+L 216.72 287.0784 
+L 216.72 248.887296 
+L 25.2 248.887296 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="120.96" y="271.845973" transform="rotate(-0 120.96 271.845973)">Late interaction</text>
+    </g>
+    <g id="patch_15">
+     <path d="M 216.72 287.0784 
+L 676.368 287.0784 
+L 676.368 248.887296 
+L 216.72 248.887296 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="446.544" y="271.845973" transform="rotate(-0 446.544 271.845973)">Model, units, compression, MaxSim, pruning and k</text>
+    </g>
+    <g id="patch_16">
+     <path d="M 676.368 287.0784 
+L 982.8 287.0784 
+L 982.8 248.887296 
+L 676.368 248.887296 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_15">
+     <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="829.584" y="271.845973" transform="rotate(-0 829.584 271.845973)">Alignments do not make vectors portable</text>
+    </g>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="504" y="36.384" transform="rotate(-0 504 36.384)">Repeatability depends on fixed components and recorded settings</text>
+   </g>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 379.89125)">Table 15.2 summary. Boolean also needs database, platform, fields, limits, vocabulary version and date. Query generation and</text>
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 394.448406)">orchestration add their own records.</text>
+  </g>
+ </g>
+</svg>

@@ -1,0 +1,303 @@
+<section class="chapter" id="sec-boolean-admission"><span id="ch1" class="legacy-anchor"></span><header class="chapter-head"><p class="chapter-eyebrow">Chapter 2</p>
+<p class="chapter-meta">About 14 min</p>
+<h2 id="boolean-admission">Boolean admission and the inverted index</h2>
+<p class="chapter-question"><span>Central question</span>How does a system decide which records are eligible?</p>
+<div class="stage-map" role="group" aria-label="Pipeline map: the stage this chapter covers is highlighted">
+<div class="stage-controller off">Controller — chooses and sequences the stages below</div>
+<div class="stage-row">
+<a class="stage off" href="#query-transformation" title="Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them.">Query<br>transformation</a><a class="stage on" href="#boolean-admission" title="Chapter 2 — text becomes index terms, and the rules decide which records are eligible at all.">Analysis &amp;<br>execution rules</a><a class="stage on" href="#bm25-ranking" title="Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set.">First-stage<br>retrieval</a><a class="stage off" href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one.">Fusion</a><a class="stage off" href="#reranking-and-hybrid" title="Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed.">Reranking</a><a class="stage off" href="#library-practice" title="Chapter 15 — what the reader is finally shown, and what can be recorded about it.">Presentation</a>
+</div>
+</div>
+<div class="chapter-orient">
+<p>Strict Boolean retrieval is the oldest answer to the retrieval problem and still the clearest. A query states conditions; a record either satisfies them or it does not. There is no notion of a better or a worse match, only membership of an eligible set.</p>
+<p>That simplicity is worth understanding precisely, because everything later in this book is a departure from it. This chapter follows a document from raw text through tokenisation, stemming and indexing, then shows how Boolean conditions are evaluated over the resulting structure—and why the answer arrives so quickly.</p>
+</div></header><h3 id="strict-boolean-search-words-as-admission-rules">Strict Boolean search: words as admission rules<a aria-label="Link to Strict Boolean search: words as admission rules" class="heading-anchor" href="#strict-boolean-search-words-as-admission-rules">#</a>
+</h3>
+<!-- BEGIN PRODUCT CLAIMS LINKS strict-boolean-search-words-as-admission-rules -->
+<details class="claim-links"><summary>Evidence register · 5 claims</summary><p><a href="#claim-pubmed-advanced"><strong>PubMed · Advanced Search.</strong> Advanced Search offers a search-history builder and MeSH terms.</a></p>
+<p><a href="#claim-wos-advanced"><strong>Web of Science · Advanced Search.</strong> Advanced Search supports field-tagged queries.</a></p>
+<p><a href="#claim-scopus-advanced"><strong>Scopus · Advanced Search.</strong> An advanced-search interface supports structured bibliographic searching.</a></p>
+<p><a href="#claim-ebsco-advanced"><strong>EBSCOhost · Advanced Search.</strong> An advanced-search interface supports structured bibliographic searching.</a></p>
+<p><a href="#claim-ovid-advanced"><strong>Ovid · Advanced Search.</strong> An advanced-search interface supports structured bibliographic searching.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS strict-boolean-search-words-as-admission-rules -->
+
+<p>Consider the query:</p>
+<blockquote>
+<p>delulu AND job</p>
+</blockquote>
+<p>A Boolean system requires a record to satisfy both conditions.</p>
+<p>Boolean operators create hard decisions:</p>
+<ul>
+<li>
+<code>AND</code> requires conditions to occur together.</li>
+<li>
+<code>OR</code> allows alternatives.</li>
+<li>
+<code>NOT</code> excludes records.</li>
+</ul>
+<p>A record that passes all of the query’s hard conditions is <strong>eligible</strong> to enter the result set.</p>
+<p>Boolean retrieval tells us whether a record meets the conditions the searcher expressed, <a href="#distinction-match-relevance">not whether it is relevant to the underlying need</a>. Boolean conditions let a searcher specify and inspect the rules for including records, then rerun the same strategy.</p>
+<p>Boolean logic underlies the advanced-search interfaces librarians use most: <a href="https://pubmed.ncbi.nlm.nih.gov/advanced/">PubMed’s Advanced Search</a> with its search-history builder and MeSH terms, <a href="https://webofscience.zendesk.com/hc/en-us/articles/28470463061265-Advanced-Search">Web of Science Advanced Search</a> with its field tags, and the equivalent screens in Scopus, EBSCOhost and Ovid. Conventional bibliographic database strategies for systematic reviews typically combine Boolean logic with controlled vocabulary, free-text terms, fields, proximity operators and other database-specific syntax. These explicit admission rules are only one part of systematic study identification; <a href="#appendix-evidence-synthesis-high-recall-retrieval">Appendix F treats the wider process as a high-recall retrieval problem</a>.</p>
+<p><strong>Boolean logic does not by itself assign graded ranking scores.</strong> Once several records are eligible, Boolean alone supplies no rule for deciding which should appear first.</p>
+<blockquote>
+<p>Boolean conditions decide which records may compete; ranking decides their order.</p>
+</blockquote>
+<p>This distinction matters when query expansion goes wrong.</p>
+<p>Suppose an LLM expands <code>delulu</code> into:</p>
+<blockquote>
+<p>delulu OR unrealistic OR irrational OR foolish</p>
+</blockquote>
+<p>If <code>foolish</code> is a poor alternative, records containing it may enter the result set. Ranking may push them down, but Boolean has already admitted them.</p>
+<figure class="ir-figure" aria-labelledby="poor-synonym-expansion-title">
+<p class="figure-title" id="poor-synonym-expansion-title">A poor synonym expansion changes which records can enter</p>
+<img alt="A poor synonym expansion changes which records can enter" src="images/02%20Boolean%20search%20-%20words%20as%20admission%20rules/ChatGPT%20Image%20Jul%2026,%202026,%2009_49_10%20PM.png">
+<figcaption><span class="asset-label-inline" id="fig-2-1">Figure 2.1</span> Ranking can push a weakly matched record down, but Boolean has already admitted it.</figcaption>
+</figure>
+<p>The reverse error is more serious. If a relevant record fails a compulsory <code>AND</code> condition, ranking cannot rescue it. It never enters the competition.</p>
+<p>This is why LLM-generated synonyms require particular care in formal Boolean strategies. A weak suggestion is not merely given a low weight. It changes which documents can be returned.</p>
+<aside class="common-confusion" aria-labelledby="boolean-matching-in-practice-title">
+<p class="common-confusion-label">In practice</p>
+<p id="boolean-matching-in-practice-title"><strong>What counts as satisfying a condition depends on how the database represents and interprets text.</strong></p>
+<p>Before the Boolean operators are applied, the database will usually <a href="#before-the-index-text-becomes-tokens">tokenise and normalise</a> the query and records, apply <a href="#after-tokenisation-stemming-and-lemmatisation">stemming or lemmatisation</a>, interpret quotation marks as phrase instructions and restrict matching to <a href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">particular fields</a>. Its <a href="#from-analysed-tokens-to-a-term-first-map">indexing choices</a> determine which analysed query terms can meet which indexed document terms.</p>
+<p>The final Boolean decision is still yes or no, but the path to that decision is not straightforward exact matching.</p>
+</aside>
+<span id="how-boolean-and-bm25-use-an-inverted-index" class="legacy-anchor"></span><h3 id="how-boolean-search-uses-an-inverted-index">How Boolean search uses an inverted index<a aria-label="Link to How Boolean search uses an inverted index" class="heading-anchor" href="#how-boolean-search-uses-an-inverted-index">#</a>
+</h3>
+<!-- BEGIN PRODUCT CLAIMS LINKS how-boolean-search-uses-an-inverted-index -->
+<details class="claim-links"><summary>Evidence register · 3 claims</summary><p><a href="#claim-openalex-scale"><strong>OpenAlex · Academic index.</strong> The book describes this index as spanning hundreds of millions of records.</a></p>
+<p><a href="#claim-semantic-scholar-scale"><strong>Semantic Scholar · Academic index.</strong> The book describes this index as spanning hundreds of millions of records.</a></p>
+<p><a href="#claim-ex-libris-cdi-scale"><strong>Ex Libris CDI · Academic index.</strong> The book describes this index as spanning hundreds of millions of records.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS how-boolean-search-uses-an-inverted-index -->
+
+<p>Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives.</p>
+<p>It instead uses an <strong>inverted index</strong>: a structure that starts with searchable terms and points to the records containing them. The next five sections build it in order: text becomes tokens; tokens may be reduced by stemming or lemmatisation; the analysed terms become a term-first map; Boolean operators work over that map as sets; and the map’s ordering is what makes the answer fast.</p>
+<h3 id="before-the-index-text-becomes-tokens">Before the index: text becomes tokens<a aria-label="Link to Before the index: text becomes tokens" class="heading-anchor" href="#before-the-index-text-becomes-tokens">#</a>
+</h3>
+<p>A computer does not begin with an intuitive understanding of words. It needs a rule for dividing a string of text into units it can process. <strong>Tokenisation</strong> is that division, and each resulting unit is a <strong>token</strong>. A token is often a word, but it can also be punctuation, part of a word, a character or another unit chosen by the system.</p>
+<p>For a simple English lexical index, the analysis might proceed as follows:</p>
+<p class="asset-label" id="tbl-2-1">Table 2.1 — Stages of lexical analysis, and what a sample string looks like after each.</p>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Stage</th>
+<th>Illustrative output</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Original text</td>
+<td><code>Delulu about jobs!</code></td>
+</tr>
+<tr>
+<td>Tokenisation</td>
+<td>
+<code>Delulu</code> · <code>about</code> · <code>jobs</code> · <code>!</code>
+</td>
+</tr>
+<tr>
+<td>Case normalisation</td>
+<td>
+<code>delulu</code> · <code>about</code> · <code>jobs</code> · <code>!</code>
+</td>
+</tr>
+<tr>
+<td>Optional stop-word and punctuation removal</td>
+<td>
+<code>delulu</code> · <code>jobs</code>
+</td>
+</tr>
+<tr>
+<td>Optional stemming</td>
+<td>
+<code>delulu</code> · <code>job</code>
+</td>
+</tr>
+<tr>
+<td>Terms entered in this index</td>
+<td>
+<code>delulu</code> · <code>job</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>There are different ways to do tokenisation. A different analyser might retain <code>about</code>, keep <code>jobs</code> unchanged, treat the exclamation mark as a token or preserve the complete string in a keyword field. Languages without spaces between every word require different boundary rules, while names, apostrophes, hyphens, URLs and identifiers create choices even in English.</p>
+<p><strong>Tokenisation is only the first step.</strong> Lowercasing, stemming, stop-word removal and synonym or controlled-vocabulary mapping are separate operations. The broader sequence is often called <strong>text analysis</strong>. Its final output supplies the terms that can enter a lexical index.</p>
+<p>At search time, the query is also tokenised and analysed. Lexical matching becomes possible when a resulting query term corresponds to an indexed document term. Query and document analysis need not be identical in every system, but incompatible choices can create missed or unexpected matches.</p>
+<blockquote>
+<p>Text becomes tokens; analysis turns selected tokens into searchable terms.</p>
+</blockquote>
+<h3 id="after-tokenisation-stemming-and-lemmatisation">After tokenisation: stemming and lemmatisation<a aria-label="Link to After tokenisation: stemming and lemmatisation" class="heading-anchor" href="#after-tokenisation-stemming-and-lemmatisation">#</a>
+</h3>
+<p>Tokenisation decides where one unit ends and another begins. <strong>Stemming</strong> and <strong>lemmatisation</strong> are later analysis steps that may transform some of those units before matching. Their practical purpose is to let related grammatical forms share searchable evidence even when the user and the document do not contain exactly the same surface form.</p>
+<p class="asset-label" id="tbl-2-2">Table 2.2 — Stemming and lemmatisation compared: how each reduces a word, and what to remember about the difference.</p>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Method</th>
+<th>How it works</th>
+<th>Illustrative output</th>
+<th>What to remember</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Stemming</strong></td>
+<td>Uses rules or heuristics to remove or replace common endings.</td>
+<td>
+<code>studies</code>, <code>studying</code> and <code>studied</code> might become <code>studi</code>.</td>
+<td>The stem is a matching key and need not be a valid word.</td>
+</tr>
+<tr>
+<td><strong>Lemmatisation</strong></td>
+<td>Uses vocabulary and morphological analysis, often including part of speech, to identify a dictionary form.</td>
+<td>The same forms might become <code>study</code>; adjectival <code>better</code> may become <code>good</code>.</td>
+<td>The output is a word, but the analyser must still choose the correct grammatical interpretation.</td>
+</tr>
+</tbody>
+</table></div>
+<p>These outputs are illustrative rather than guaranteed. Algorithms, dictionaries and languages differ, and a product may use neither method or may apply different analysers to different fields. A title-and-abstract field might reduce <code>jobs</code> to <code>job</code>, while an exact-name, code or identifier field deliberately preserves the original string.</p>
+<p>The benefit is usually recall. If both query and document analysis reduce <code>jobs</code> and <code>job</code> to the same term, either form can retrieve the other. The risk is lost precision through <strong>over-stemming</strong>, when unrelated words collapse to the same term. The reverse problem is <strong>under-stemming</strong>: related forms remain separate and a potentially useful match is missed. Lemmatisation uses grammatical information to choose a base form. An incorrect interpretation can still produce a poor match, so it needs testing on the collection.</p>
+<p>Compatibility matters: Figure 2.2, below, shows what happens when the two analysers disagree. When forms do converge, the analysed term determines which indexed-term entry is consulted, how occurrences are counted and how many documents contain that term. These choices affect Boolean matching and the collection statistics used by ranked lexical methods introduced later.</p>
+<p>Neither technique is the same as user-entered truncation such as <code>librar*</code>, whose expansion depends on database syntax. Nor are they synonym expansion, controlled-vocabulary mapping, semantic query rewriting or dense retrieval. Those operations can connect different expressions or concepts; stemming and lemmatisation primarily normalise grammatical form within a lexical analysis pipeline. For a fuller technical account, see Manning, Raghavan and Schütze, “<a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html">Stemming and lemmatization</a>”, in <em>Introduction to Information Retrieval</em>.</p>
+<figure class="ir-figure worked-figure" aria-labelledby="compatible-analysis-title">
+<p class="figure-title" id="compatible-analysis-title">Different surface forms can meet at the same indexed term</p>
+<div class="worked-grid">
+<div class="worked-card">
+<strong>Document side · when indexing</strong>
+<div class="worked-path">
+<span>Text contains <span class="worked-term">jobs</span><small>Document analyser stems the word.</small></span><span class="worked-arrow" aria-hidden="true">→</span><span>Stored term <span class="worked-term">job</span></span>
+</div>
+</div>
+<div class="worked-card">
+<strong>Query side · when searching</strong>
+<div class="worked-path">
+<span>You type <span class="worked-term">job</span><small>Query analyser keeps this form.</small></span><span class="worked-arrow" aria-hidden="true">→</span><span>Lookup term <span class="worked-term">job</span></span>
+</div>
+</div>
+</div>
+<p class="worked-result"><strong>They meet:</strong> the query looks up <code>job</code>; that index entry points to the document containing “jobs”.</p>
+<p class="worked-result caution"><strong>If the analysers disagree:</strong> the index stores only <code>jobs</code>, but the query looks up only <code>job</code>. Without another mapping, this document is missed.</p>
+<figcaption><span class="asset-label-inline" id="fig-2-2">Figure 2.2</span> Illustrative analysis choices. The match is between processed terms, so the query and the displayed text need not have identical surface forms. Stemming is optional and is separate from user-entered truncation such as <code>librar*</code>.</figcaption>
+</figure>
+<p>Whatever analysis choices are made, their final terms become the keys used to build the inverted index.</p>
+<h3 id="from-analysed-tokens-to-a-term-first-map">From analysed tokens to a term-first map<a aria-label="Link to From analysed tokens to a term-first map" class="heading-anchor" href="#from-analysed-tokens-to-a-term-first-map">#</a>
+</h3>
+<p>A collection is naturally organised document first: open a record, then read the words inside it. An inverted index reverses that direction for searching. It starts with an analysed term and points to the documents in which that term occurs.</p>
+<p>Imagine four tiny records:</p>
+<p class="asset-label" id="tbl-2-3">Table 2.3 — A miniature four-record collection, used throughout this chapter and returned to in Appendix C.</p>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Record</th>
+<th>Text</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>Delulu job interview expectations</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>Job interview preparation guide</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>Unrealistic job expectations</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>Delulu about my dream job</td>
+</tr>
+</tbody>
+</table></div>
+<p>After the analysis described above (without the optional stemming step), the index maintains a <strong>dictionary</strong> of searchable terms. Each dictionary term points to a <strong>posting list</strong>: an ordered list of entries identifying the documents that contain it. A selected part of the dictionary for these records might look like this:</p>
+<p class="asset-label" id="tbl-2-4">Table 2.4 — The same four records as an inverted index: each term paired with its posting list.</p>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Indexed term</th>
+<th>Posting list</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>delulu</code></td>
+<td>D1, D4</td>
+</tr>
+<tr>
+<td><code>job</code></td>
+<td>D1, D2, D3, D4</td>
+</tr>
+<tr>
+<td><code>interview</code></td>
+<td>D1, D2</td>
+</tr>
+<tr>
+<td><code>expectations</code></td>
+<td>D1, D3</td>
+</tr>
+<tr>
+<td><code>unrealistic</code></td>
+<td>D3</td>
+</tr>
+<tr>
+<td><code>preparation</code></td>
+<td>D2</td>
+</tr>
+</tbody>
+</table></div>
+<figure class="ir-figure worked-figure" aria-labelledby="records-to-postings-title">
+<p class="figure-title" id="records-to-postings-title">The same collection, viewed in two directions</p>
+<div class="worked-grid">
+<div class="worked-card">
+<strong>Document first: record → words</strong>
+<p class="worked-record"><b>D1</b> <span class="worked-term">Delulu</span> job <span class="worked-term second">interview</span> expectations</p>
+<p class="worked-record"><b>D2</b> Job <span class="worked-term second">interview</span> preparation guide</p>
+<p class="worked-record"><b>D3</b> Unrealistic job expectations</p>
+<p class="worked-record"><b>D4</b> <span class="worked-term">Delulu</span> about my dream job</p>
+</div>
+<div class="worked-card">
+<strong>Term first: indexed term → records</strong>
+<p class="worked-record"><span class="worked-term">delulu</span> → <b>D1, D4</b></p>
+<p class="worked-record"><span class="worked-term second">interview</span> → <b>D1, D2</b></p>
+<p class="worked-record"><code>job</code> → <b>D1, D2, D3, D4</b></p>
+<p class="worked-note">Selected posting lists, ordered by record identifier. Other indexed terms are omitted here.</p>
+</div>
+</div>
+<div class="worked-result">
+<p class="worked-kicker">Search: delulu AND interview</p>
+<p>Look up <code>delulu</code>: <strong>D1</strong>, D4.<br>Look up <code>interview</code>: <strong>D1</strong>, D2.</p>
+<p><strong>Shared identifier: D1.</strong> The engine intersects these two lists; it does not reread all four records.</p>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-2-3">Figure 2.3</span> The same D1–D4 records as the tables above. The direction reverses from records containing words to terms pointing at records—like a book’s back-of-book index, but pointing to records instead of pages. Highlighting follows the two queried terms; identifiers establish the match.</figcaption>
+</figure>
+<p>A <strong>posting</strong> is one entry in such a list. Real postings normally store more than a document identifier. They may also record how often the term occurs, which field contains it and the positions at which it appears. Those additions support later relevance scoring, field weighting, phrase searching, proximity scoring and result highlighting.</p>
+<p>The earlier analysis choices determine which dictionary term and posting list a query consults. They can therefore change which records match even before any ranking method is applied.</p>
+<blockquote>
+<p>An inverted index is best understood as a term-to-document map built from analysed text.</p>
+<aside class="common-confusion" aria-labelledby="what-full-text-search-means-in-ir">
+<p class="common-confusion-label">Terminology</p>
+<p id="what-full-text-search-means-in-ir"><strong>Information retrieval often uses the term FTS, or full-text search. What does that mean?</strong></p>
+<p>In search engineering, <strong>full-text search</strong> usually means a facility for searching natural-language text rather than looking up only exact database values, such as the record whose DOI is <code>10.1234/example</code> or the records whose publication year equals <code>2025</code>. Full-text search instead analyses words inside fields such as titles, abstracts or document text so that a query can match within their language. The text is analysed into searchable terms, associated with documents in an index and matched against an analysed query; the matches may then be ranked.</p>
+<p><a href="https://www.postgresql.org/docs/current/textsearch-intro.html">PostgreSQL, for example, describes full-text search</a> as finding natural-language documents that satisfy a query and optionally ordering them by relevance. Its searchable “document” may be one text field or a combination of several fields rather than a complete publication.</p>
+<p>This can be confusing for librarians, because <strong>full text</strong> commonly means the complete content of an article, book or report rather than a citation or abstract. Here, “full text” concerns how much of the publication is covered, whereas “full-text search” names a way of searching text fields. A system may call its facility full-text search even when the indexed text consists only of titles and abstracts, selected database fields, OCR text or passages. Conversely, possessing a complete article does not guarantee that every part of it has been indexed or made searchable.</p>
+<p>FTS also does not identify one query rule or ranking method. A full-text engine may apply strict Boolean conditions, soft conjunction, BM25 or another lexical score, and it may participate in a hybrid pipeline. Nor does “full” guarantee that every word survives analysis: stop-word removal, normalisation and stemming may change the indexed terms. The practical questions are therefore <strong>which text is indexed, what is the indexed unit, and how are matches admitted and ranked?</strong> The distinction between a source document and its searchable units is developed in <a href="#one-document-one-chunk-and-one-vector-are-not-the-same-thing">Chapter 8</a>.</p>
+</aside>
+</blockquote>
+<h3 id="boolean-treats-postings-as-sets">Boolean treats postings as sets<a aria-label="Link to Boolean treats postings as sets" class="heading-anchor" href="#boolean-treats-postings-as-sets">#</a>
+</h3>
+<p>For the query:</p>
+<blockquote><p><code>delulu AND interview</code></p></blockquote>
+<p>the engine does not need to reread all four records. It looks up two posting lists and intersects their ordered document identifiers:</p>
+<pre><code>delulu   → D1, D4
+interview→ D1, D2
+
+intersection → D1</code></pre>
+<p><code>OR</code> combines lists, while <code>NOT</code> removes documents found in an excluded list. At this level, Boolean retrieval is largely set processing over postings.</p>
+<h3 id="why-inverted-indexes-can-be-so-fast">Why inverted indexes can be so fast<a aria-label="Link to Why inverted indexes can be so fast" class="heading-anchor" href="#why-inverted-indexes-can-be-so-fast">#</a>
+</h3>
+<p>The first advantage is <strong>selective access</strong>. The engine goes directly from each analysed query term to its posting list rather than scanning every document. Rare terms are especially selective because their lists are short.</p>
+<p>The second advantage is <strong>ordered access</strong>. Posting lists are normally sorted by document identifier. For a Boolean <code>AND</code> query, this makes it quick to find identifiers that appear in more than one list: the engine can work forwards through the lists instead of repeatedly searching earlier entries. A worked two-list example appears in <a href="#how-two-ordered-posting-lists-are-intersected">Appendix C</a>.</p>
+<p>The posting lists identify the eligible set. To order it by estimated relevance, the system also needs a scoring rule.</p>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>In this lexical index, matching uses the terms produced by text analysis. Tokenisation, case folding, stop-word handling and stemming all happen before anything is indexed.</li>
+<li>Query and document must be analysed compatibly. A mismatch between the two is a silent and common source of retrieval failure.</li>
+<li>An inverted index maps terms to posting lists, which is why Boolean evaluation is set intersection and union rather than a scan of documents.</li>
+<li>Boolean retrieval produces an eligible set, not an ordering.</li>
+</ol>
+<p class="chapter-transition">A large eligible set can be hard to browse. Chapter 3 asks how a lexical system can order it.</p></aside><section class="self-check" aria-label="Questions on this chapter"><p class="self-check-label">Check yourself</p>
+<details class="self-check-q"><summary>A truncated search for <code>librar*</code> returns records containing “library” and “librarian” but not “libraries”. Which layer would you look at first, and why is it not the Boolean operator?</summary><p>Analysis — how the truncation is expanded, and which surface forms the index actually holds as terms. Boolean operators only combine whatever posting lists analysis produced. <code>AND</code>, <code>OR</code> and <code>NOT</code> never decide which forms of a word map to which term.</p></details><details class="self-check-q"><summary>A query analyser stems <em>jobs</em> to <em>job</em>, but the index stored <em>jobs</em> unstemmed. What happens, and why is this failure easy to miss?</summary><p>The query consults a dictionary entry that does not exist, finds no posting list, and the term contributes nothing. It is analyser incompatibility between the query and document sides. It is easy to miss because there is no error — only a smaller result set than expected.</p></details><details class="self-check-q"><summary>Why can a Boolean system answer a query over two hundred million records in under a second without reading any of them?</summary><p>Two properties of the inverted index. Selective access: it goes straight from each analysed term to that term’s posting list rather than scanning documents. And ordered access: posting lists are sorted by document identifier, so an intersection moves forward through both lists without ever going back.</p></details></section><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#intro"><span>Previous</span>The retrieval problem</a><a class="cnav next" href="#bm25-ranking"><span>Next</span>BM25 and ranked lexical retrieval</a></nav></section>

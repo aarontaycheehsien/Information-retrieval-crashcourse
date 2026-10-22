@@ -1,0 +1,36 @@
+Same index. Three different controls.
+
+[00:00:00.700]: Do we need a completely different index to rank the records that passed our Boolean search? We already have terms and posting lists. What extra evidence would a scoring rule need?
+
+[00:00:14.084]: BM twenty-five can use the same inverted index. Postings supply within-document term frequencies, the dictionary supplies document frequencies, and document metadata supplies lengths. Eligibility and scoring use the same underlying map.
+
+[00:00:32.492]: Reuse Chapter Two's four records. Our illustrative analyser lowercases the words and retains them all. Their lengths are four, four, three and five terms; the average is four. Delulu occurs in two records. Job occurs in all four.
+
+[00:00:50.518]: With delulu AND job, only D one and D four are eligible. Both use each query term once. The data here are a tiny worked example, not measurements of a production search service.
+
+[00:01:03.568]: Using our positive-IDF version, k one at one point two and b at zero point seven five, D one scores about zero point eight zero. D four scores about zero point seven two. Totals are calculated before rounding.
+
+[00:01:19.160]: Their matching term counts are the same. In this example, the length adjustment makes the difference. These numbers order the two candidates; they do not establish which is useful for a particular reader.
+
+[00:01:32.806]: A top-one request retains D one. Top two retains both eligible records, with the same scores. Top k specifies an output boundary, not a scoring method.
+
+[00:01:44.277]: A strict AND gate is not compulsory for BM twenty-five. Direct retrieval can score the union of records matching any query term. Our job-only records then compete too, giving the order D one, D four, D three, D two. Eligibility, scoring and output size remain separate controls.
+
+[00:02:06.843]: PubMed's published Best Match architecture starts with BM twenty-five, then uses LambdaMART to rerank the top five hundred candidates. The chapter also describes Scopus and Primo CDI documentation of lexical evidence with additional ranking signals.
+
+[00:02:25.404]: Only the PubMed example identifies BM twenty-five directly. The other accounts do not prove plain BM twenty-five ranking. A relevance label can conceal field weighting, phrases, proximity, static signals and later reranking. These are the chapter's cited accounts, not fresh service tests.
+
+[00:02:47.145]: Selective and ordered access still help. Compression and blocks reduce storage and memory traffic. Valid score upper bounds can avoid scoring candidates that cannot enter the leading results.
+
+[00:03:00.526]: In this separate illustration, a full top-k has cutoff five. A block with a valid upper bound of three cannot compete. A bound of seven requires inspection; it does not guarantee a winner. Safe pruning preserves the result under the scoring rule. No speedup is measured here.
+
+[00:03:19.850]: Ask what admits candidates, what scores them and where the output stops. BM twenty-five is a lexical baseline, not the name of every relevance sort. Hardware, index design and query mix also affect performance; there is no universal speed guarantee.
+
+[00:03:38.130]: Next, Chapter Four changes the admission question: what happens when a query term is optional or matches nothing? The same index can support behavior that strict AND alone would never predict.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 3.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#bm25-ranking
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

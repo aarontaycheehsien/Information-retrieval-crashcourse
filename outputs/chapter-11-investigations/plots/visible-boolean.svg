@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="403.2pt" viewBox="0 0 1008 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Original query-mechanism teaching illustration; not a model measurement</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 1008 403.2 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #eee9e0"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 40.32 127.9488 
+L 299.9808 127.9488 
+L 299.9808 96.12288 
+L 40.32 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="170.1504" y="117.002715" transform="rotate(-0 170.1504 117.002715)">Interpreted part</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 299.9808 127.9488 
+L 967.68 127.9488 
+L 967.68 96.12288 
+L 299.9808 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="633.8304" y="116.932403" transform="rotate(-0 633.8304 116.932403)">Displayed structured clause</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 40.32 159.77472 
+L 299.9808 159.77472 
+L 299.9808 127.9488 
+L 40.32 127.9488 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="170.1504" y="148.828635" transform="rotate(-0 170.1504 148.828635)">Year range</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 299.9808 159.77472 
+L 967.68 159.77472 
+L 967.68 127.9488 
+L 299.9808 127.9488 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="633.8304" y="148.828635" transform="rotate(-0 633.8304 148.828635)">PY=(2020-2024)</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 40.32 191.60064 
+L 299.9808 191.60064 
+L 299.9808 159.77472 
+L 40.32 159.77472 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="170.1504" y="180.654555" transform="rotate(-0 170.1504 180.654555)">Organisation</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 299.9808 191.60064 
+L 967.68 191.60064 
+L 967.68 159.77472 
+L 299.9808 159.77472 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="633.8304" y="180.404242" transform="rotate(-0 633.8304 180.404242)">OG_SMART=(university of california)</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 40.32 223.42656 
+L 299.9808 223.42656 
+L 299.9808 191.60064 
+L 40.32 191.60064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="170.1504" y="212.480475" transform="rotate(-0 170.1504 212.480475)">Topic 1</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 299.9808 223.42656 
+L 967.68 223.42656 
+L 967.68 191.60064 
+L 299.9808 191.60064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="633.8304" y="212.480475" transform="rotate(-0 633.8304 212.480475)">TS=(apple)</text>
+    </g>
+    <g id="patch_10">
+     <path d="M 40.32 255.25248 
+L 299.9808 255.25248 
+L 299.9808 223.42656 
+L 40.32 223.42656 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="170.1504" y="244.306395" transform="rotate(-0 170.1504 244.306395)">Topic 2</text>
+    </g>
+    <g id="patch_11">
+     <path d="M 299.9808 255.25248 
+L 967.68 255.25248 
+L 967.68 223.42656 
+L 299.9808 223.42656 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="633.8304" y="244.306395" transform="rotate(-0 633.8304 244.306395)">TS=(oranges)</text>
+    </g>
+    <g id="patch_12">
+     <path d="M 40.32 287.0784 
+L 299.9808 287.0784 
+L 299.9808 255.25248 
+L 40.32 255.25248 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_11">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="170.1504" y="276.132315" transform="rotate(-0 170.1504 276.132315)">Topic 3</text>
+    </g>
+    <g id="patch_13">
+     <path d="M 299.9808 287.0784 
+L 967.68 287.0784 
+L 967.68 255.25248 
+L 299.9808 255.25248 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_12">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="633.8304" y="276.132315" transform="rotate(-0 633.8304 276.132315)">TS=(bananas)</text>
+    </g>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="504" y="36.384" transform="rotate(-0 504 36.384)">Web of Science Smart Search · Source example · All five clauses joined with AND</text>
+   </g>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 379.89125)">The chapter’s visible, editable interpretation of the fruit/year/affiliation request. Original illustration; no new product</text>
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 394.448406)">test or screenshot.</text>
+  </g>
+ </g>
+</svg>

@@ -1,0 +1,40 @@
+Same question. Same search?
+
+[00:00:00.700]: You save a natural language question and rerun it next year. The words are identical. Have you repeated the same search? Pause and name what could change between your question and the results: generated inputs, coverage, indexing, models, ranking or control.
+
+[00:00:20.002]: No retrieval method guarantees the same records forever. The useful question is which parts were fixed, documented, exportable and versioned. An exact future recreation may be impossible, while a saved transformation, trace and result export still let you compare the later run with the original.
+
+[00:00:41.108]: The chapter names four areas. Query interpretation records what was typed and what was actually sent onward. Candidate retrieval records the database, fields, indexed unit, retrieval method, parameters and cutoffs. Ranking and fusion records the ordering stages, component lists and final depth.
+
+[00:01:02.601]: Retrieval control records whether the sequence was fixed, adaptive or agentic, and the path actually taken. Saving only the question leaves all four partly unspecified. Some details are visible today; internal versions and budgets may require vendor disclosure. Mark them unknown when unavailable.
+
+[00:01:26.002]: Strict Boolean makes inclusion and exclusion explicit. Eligibility should repeat given the same records, indexing, analyser and query interpretation. Record the exact query, database and platform, fields, limits, vocabulary version, date and count. An unchanged query can still meet a changed database.
+
+[00:01:49.303]: Ranked lexical retrieval also needs analysis, stemming, field weights, rewriting, ranking configuration, sort order and depth. BM twenty five can move when new records change term rarity and document length statistics. A stable scoring formula is not a frozen collection or a permanent ranking.
+
+[00:02:11.247]: A fixed encoder, indexed units, stored vectors, similarity function and exact search procedure can produce repeatable scores. Dense retrieval is not inherently random. Record the model and tokeniser versions, embedded text and metadata, chunking, index version, filters and retrieval depth or threshold.
+
+[00:02:33.899]: Ask whether the search was exact or approximate. Approximate index construction and search parameters can affect candidates near a boundary. That is a different question from whether a language model generated the query differently. Keep the component and the suspected source of variation separate.
+
+[00:02:52.827]: Learnt sparse retrieval can expose generated vocabulary terms and weights. Those expansions may include terms the searcher never typed, so the original input alone is insufficient. Record the model, tokeniser, index, scoring configuration and depth, with expansions and weights where available.
+
+[00:03:14.045]: Late interaction can expose query and document token alignments. It also needs indexed unit boundaries, compression and index versions, similarity and MaxSim settings, pruning or approximate search settings and depth. Inspectable alignments do not make contextual vectors portable between model versions.
+
+[00:03:36.138]: An LLM rewrite may generate Boolean logic, expansion terms, subqueries or hypothetical text. Save the exact generated form, inferred filters, route, prompt or template, parser and model versions, and sampling settings or seed if exposed. Ask whether rerunning reuses that form or regenerates it.
+
+[00:03:59.327]: Sampling can introduce deliberate variation. Model, prompt and hosted inference changes can affect outputs even at temperature zero or with greedy decoding. This does not mean every call must vary. Identical output needs a guarantee the complete system actually provides and tests, rather than an assumption.
+
+[00:04:21.067]: Fixed and adaptive workflows can document rules in advance, but an adaptive branch and result dependent query still need a record of what happened. An agentic sequence can differ between runs because it chooses later actions from observations.
+
+[00:04:37.024]: Record controller instructions, permitted tools and sources, executed queries and routes, intermediate results, order, budgets, stopping and final identifiers. What is needed is an action and observation trace: what the system did and what came back. A model’s narrated reasoning is not a substitute for that record.
+
+[00:04:59.245]: Keep input, product and mode, search date, visible transformations, filters, result identifiers, counts and observed limitations. Save a raw export where possible. Separate direct observation from vendor documentation and unknown internal details. Ask the institution to obtain traces, versions and change notices that individuals cannot access.
+
+[00:05:26.251]: The chapter aligns this practice with PRISMA S reporting of strategies, databases, platforms, limits, dates and counts, while recognising replication limits. Documentation makes a later comparison possible; it does not by itself explain why a particular paper appeared. That is the next film’s question.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 15.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#library-practice
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

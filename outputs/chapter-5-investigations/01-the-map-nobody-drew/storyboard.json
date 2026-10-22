@@ -1,0 +1,201 @@
+{
+  "series": "Embeddings: what the learnt geometry encodes",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#embeddings",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#embeddings",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-the-map-nobody-drew",
+  "title": "The map nobody drew",
+  "subtitle": "How a prediction task can leave useful geometry behind.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "map_hook",
+      "title": "Who decided where the words should go?",
+      "source_anchor": "from-word2vec-to-retrieval-embeddings",
+      "visual": "map_hook",
+      "narration": [
+        "Imagine a map where words occupy locations, and related words often sit near one another. Who drew the map? Did someone label an axis meaning, another axis emotion, and tell the computer where every word belongs? Make a prediction.",
+        "The chapter gives a more surprising route. Train a model to predict patterns in text. Adjust its parameters when predictions miss their targets. Useful relationships can emerge in the resulting vectors without anyone drawing those relationships explicitly."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "representations",
+      "title": "A representation, a vector, an embedding",
+      "source_anchor": "representation-vector-embedding-title",
+      "visual": "representations",
+      "narration": [
+        "A representation is any form used to stand for an item. A vector is one form: an ordered list of numbers. Two numbers can specify a location on paper. Real language-model vectors often have hundreds or thousands of dimensions.",
+        "An embedding is a mapping into a vector space, usually learnt during training in modern language processing. We also call the output vector an embedding. A vector need not come from a learnt mapping; these words do different jobs."
+      ]
+    },
+    {
+      "id": "two_routes",
+      "title": "Both routes calculate numbers",
+      "source_anchor": "calculated-weights-and-learnt-parameters-title",
+      "visual": "two_routes",
+      "narration": [
+        "BM twenty-five also calculates numbers. Its weights come from term counts, document lengths and collection statistics through a specified formula. A neural encoder calculates an output from text, tokenisation and learnt parameters.",
+        "The distinction is how the mapping was obtained. Training fits the encoder's parameters; inference uses the fitted mapping on new input. A learnt calculation is still a calculation. Being able to reproduce its output does not make every dimension easy to interpret."
+      ]
+    },
+    {
+      "id": "self_targets",
+      "title": "The text already contains an answer",
+      "source_anchor": "text-that-supplies-its-own-targets",
+      "visual": "self_targets",
+      "narration": [
+        "Training needs a target. Where can one come from without a person labelling the meaning of every word? Hide part of a sentence. Ask the model to recover it. The original text supplies the answer.",
+        "The distributional hypothesis suggests that words used in similar contexts tend to be used in similar ways. Predicting those contexts turns an observation about language into a training task. It does not supply a universal definition of meaning."
+      ]
+    },
+    {
+      "id": "word2vec_games",
+      "title": "Two prediction games; keep the vectors",
+      "source_anchor": "word2vec-predicting-context-title",
+      "visual": "word2vec_games",
+      "narration": [
+        "Word two vec has two familiar arrangements. Continuous bag of words, or C B O W, predicts a target word from its neighbours. Skip-gram reverses that direction: use a target word to predict neighbouring words.",
+        "Across many examples, predictions are compared with targets and parameters are adjusted. After training, the word vectors can be reused without running the original prediction task. Their dimensions are usually anonymous, and useful patterns are distributed across them."
+      ]
+    },
+    {
+      "id": "analogy",
+      "title": "A relationship can become a reusable direction",
+      "source_anchor": "word2vec-analogy-offsets-title",
+      "visual": "analogy",
+      "narration": [
+        "The famous demonstration takes king, subtracts man, and adds woman. In some trained spaces, queen is the nearest candidate after excluding the three input words. The step from man to woman resembles the step from king to queen.",
+        "Our coordinates are deliberately invented to show that arithmetic exactly. They are not measurements from a trained model. Real analogies can fail. A successful example demonstrates a geometric regularity, not a universal equation about meaning."
+      ]
+    },
+    {
+      "id": "projection",
+      "title": "A two-dimensional picture can hide a difference",
+      "source_anchor": "word2vec-country-capital-pca-title",
+      "visual": "projection",
+      "narration": [
+        "The chapter also shows selected country-to-capital directions in a two-dimensional projection of thousand-dimensional vectors. That picture is a shadow of a larger space. Projection can discard differences that matter.",
+        "Our separate toy example makes the loss visible. Two three-dimensional points differ by ten units in their third coordinate. Drop that coordinate and both appear at the same location. This is a simple coordinate projection, not the chapter's P C A experiment."
+      ]
+    },
+    {
+      "id": "geometry_limits",
+      "title": "Near according to what training?",
+      "source_anchor": "what-the-learnt-geometry-appears-to-encode",
+      "visual": "geometry_limits",
+      "narration": [
+        "The geometry reflects patterns rewarded by training. Predicting word contexts can produce useful relationships, but the task never directly asked which passage answers which question. Nearby does not automatically mean relevant to a particular search.",
+        "Classic word vectors are a stepping stone. Modern encoders can read a whole sequence, produce context-dependent representations, and be trained for a retrieval task. To judge the resulting map, ask what it learnt to preserve, then test it on the queries and relevance judgments that matter."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "map_hook_0",
+      "scene": "map_hook",
+      "text": "Imagine a map where words occupy locations, and related words often sit near one another. Who drew the map? Did someone label an axis meaning, another axis emotion, and tell the computer where every word belongs? Make a prediction.",
+      "gap": 1.0
+    },
+    {
+      "id": "map_hook_1",
+      "scene": "map_hook",
+      "text": "The chapter gives a more surprising route. Train a model to predict patterns in text. Adjust its parameters when predictions miss their targets. Useful relationships can emerge in the resulting vectors without anyone drawing those relationships explicitly.",
+      "gap": 2.5
+    },
+    {
+      "id": "representations_0",
+      "scene": "representations",
+      "text": "A representation is any form used to stand for an item. A vector is one form: an ordered list of numbers. Two numbers can specify a location on paper. Real language-model vectors often have hundreds or thousands of dimensions.",
+      "gap": 1.0
+    },
+    {
+      "id": "representations_1",
+      "scene": "representations",
+      "text": "An embedding is a mapping into a vector space, usually learnt during training in modern language processing. We also call the output vector an embedding. A vector need not come from a learnt mapping; these words do different jobs.",
+      "gap": 0.65
+    },
+    {
+      "id": "two_routes_0",
+      "scene": "two_routes",
+      "text": "BM twenty-five also calculates numbers. Its weights come from term counts, document lengths and collection statistics through a specified formula. A neural encoder calculates an output from text, tokenisation and learnt parameters.",
+      "gap": 1.0
+    },
+    {
+      "id": "two_routes_1",
+      "scene": "two_routes",
+      "text": "The distinction is how the mapping was obtained. Training fits the encoder's parameters; inference uses the fitted mapping on new input. A learnt calculation is still a calculation. Being able to reproduce its output does not make every dimension easy to interpret.",
+      "gap": 0.65
+    },
+    {
+      "id": "self_targets_0",
+      "scene": "self_targets",
+      "text": "Training needs a target. Where can one come from without a person labelling the meaning of every word? Hide part of a sentence. Ask the model to recover it. The original text supplies the answer.",
+      "gap": 1.0
+    },
+    {
+      "id": "self_targets_1",
+      "scene": "self_targets",
+      "text": "The distributional hypothesis suggests that words used in similar contexts tend to be used in similar ways. Predicting those contexts turns an observation about language into a training task. It does not supply a universal definition of meaning.",
+      "gap": 0.65
+    },
+    {
+      "id": "word2vec_games_0",
+      "scene": "word2vec_games",
+      "text": "Word two vec has two familiar arrangements. Continuous bag of words, or C B O W, predicts a target word from its neighbours. Skip-gram reverses that direction: use a target word to predict neighbouring words.",
+      "gap": 1.0
+    },
+    {
+      "id": "word2vec_games_1",
+      "scene": "word2vec_games",
+      "text": "Across many examples, predictions are compared with targets and parameters are adjusted. After training, the word vectors can be reused without running the original prediction task. Their dimensions are usually anonymous, and useful patterns are distributed across them.",
+      "gap": 0.65
+    },
+    {
+      "id": "analogy_0",
+      "scene": "analogy",
+      "text": "The famous demonstration takes king, subtracts man, and adds woman. In some trained spaces, queen is the nearest candidate after excluding the three input words. The step from man to woman resembles the step from king to queen.",
+      "gap": 1.0
+    },
+    {
+      "id": "analogy_1",
+      "scene": "analogy",
+      "text": "Our coordinates are deliberately invented to show that arithmetic exactly. They are not measurements from a trained model. Real analogies can fail. A successful example demonstrates a geometric regularity, not a universal equation about meaning.",
+      "gap": 0.65
+    },
+    {
+      "id": "projection_0",
+      "scene": "projection",
+      "text": "The chapter also shows selected country-to-capital directions in a two-dimensional projection of thousand-dimensional vectors. That picture is a shadow of a larger space. Projection can discard differences that matter.",
+      "gap": 1.0
+    },
+    {
+      "id": "projection_1",
+      "scene": "projection",
+      "text": "Our separate toy example makes the loss visible. Two three-dimensional points differ by ten units in their third coordinate. Drop that coordinate and both appear at the same location. This is a simple coordinate projection, not the chapter's P C A experiment.",
+      "gap": 0.65
+    },
+    {
+      "id": "geometry_limits_0",
+      "scene": "geometry_limits",
+      "text": "The geometry reflects patterns rewarded by training. Predicting word contexts can produce useful relationships, but the task never directly asked which passage answers which question. Nearby does not automatically mean relevant to a particular search.",
+      "gap": 1.0
+    },
+    {
+      "id": "geometry_limits_1",
+      "scene": "geometry_limits",
+      "text": "Classic word vectors are a stepping stone. Modern encoders can read a whole sequence, produce context-dependent representations, and be trained for a retrieval task. To judge the resulting map, ask what it learnt to preserve, then test it on the queries and relevance judgments that matter.",
+      "gap": 0.65
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "series": "Boolean admission and the inverted index",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#boolean-admission",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#boolean-admission",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-the-word-you-never-searched",
+  "title": "The word you never searched",
+  "subtitle": "The text you see and the term looked up can differ.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "prediction",
+      "title": "You type job. The record says jobs.",
+      "source_anchor": "compatible-analysis-title",
+      "visual": "prediction",
+      "narration": [
+        "You type job. The record on screen contains jobs. Can an ordinary lexical search match them? If it can, does that mean the system used semantic search? Take a moment.",
+        "It can match when text analysis brings the forms to a compatible indexed term. That does not require dense retrieval. The important comparison is between the processed terms, not just the visible spellings."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "tokens",
+      "title": "First choose the boundaries",
+      "source_anchor": "before-the-index-text-becomes-tokens",
+      "visual": "tokens",
+      "narration": [
+        "Follow the chapter's sample: Delulu about jobs, followed by an exclamation mark. Its illustrative tokenizer makes four units: Delulu, about, jobs, and the punctuation. Each unit is a token.",
+        "Tokens are not always whole words. They can be punctuation, parts of words, characters or other units. Names, hyphens, identifiers and languages with different boundary conventions require choices. Tokenisation divides the string; it is only one step in text analysis."
+      ]
+    },
+    {
+      "id": "analysis",
+      "title": "Then decide which terms survive",
+      "source_anchor": "tbl-2-1",
+      "visual": "analysis",
+      "narration": [
+        "In this example, case normalisation lowercases Delulu. Optional removal drops about and the exclamation mark. Optional stemming changes jobs to job. The final indexed terms are delulu and job.",
+        "These are separate operations, not a universal recipe. Another analyser might retain about, preserve jobs or keep an entire value in a keyword field. Never assume every displayed word becomes a searchable term."
+      ]
+    },
+    {
+      "id": "morphology",
+      "title": "A matching key or a dictionary form?",
+      "source_anchor": "after-tokenisation-stemming-and-lemmatisation",
+      "visual": "morphology",
+      "narration": [
+        "Stemming uses rules or heuristics to reduce forms. Studies, studying and studied might become studi. That matching key need not be a dictionary word. Lemmatisation uses vocabulary and morphology to choose a dictionary form, such as study.",
+        "Grammar still matters: adjectival better may become good. These outputs are illustrative, not guaranteed. Different algorithms, languages, dictionaries and fields can behave differently, or apply neither process."
+      ]
+    },
+    {
+      "id": "risks",
+      "title": "Convergence helps\u2014and can go wrong",
+      "source_anchor": "after-tokenisation-stemming-and-lemmatisation",
+      "visual": "risks",
+      "narration": [
+        "When related grammatical forms meet at one term, useful matches can become possible. Over-stemming can also collapse unrelated words and lose precision. Under-stemming leaves related forms separate and can miss a useful match.",
+        "An incorrect grammatical interpretation can also harm lemmatisation. Neither method is synonym expansion, controlled-vocabulary mapping or a guarantee of meaning. Test the analysis on the collection and fields you actually search."
+      ]
+    },
+    {
+      "id": "compatibility",
+      "title": "Two analysers must meet at lookup",
+      "source_anchor": "compatible-analysis-title",
+      "visual": "compatibility",
+      "narration": [
+        "On the document side, jobs may be stored as indexed job. On the query side, job may remain job. Both sides consult the same dictionary entry, so the document can match despite the different surface form.",
+        "Now let the index store only jobs while the query looks up only job. Without another mapping, that document is missed. No error message is required. Query and document analysis need to be compatible, even when their operations are not identical."
+      ]
+    },
+    {
+      "id": "truncation",
+      "title": "Truncation is another operation",
+      "source_anchor": "after-tokenisation-stemming-and-lemmatisation",
+      "visual": "truncation",
+      "narration": [
+        "User-entered truncation, such as librar star, is separate from stemming and lemmatisation. Its expansion depends on platform syntax and indexed forms. If related words unexpectedly fail to match, inspect that analysis and expansion before blaming AND or OR.",
+        "Fields can differ too. A title-and-abstract field might reduce grammatical forms, while a code, exact name or identifier deliberately preserves the original value. Ask what was indexed, how it was analysed, and what the query actually looked up."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "prediction_0",
+      "scene": "prediction",
+      "text": "You type job. The record on screen contains jobs. Can an ordinary lexical search match them? If it can, does that mean the system used semantic search? Take a moment.",
+      "gap": 1.0
+    },
+    {
+      "id": "prediction_1",
+      "scene": "prediction",
+      "text": "It can match when text analysis brings the forms to a compatible indexed term. That does not require dense retrieval. The important comparison is between the processed terms, not just the visible spellings.",
+      "gap": 2.5
+    },
+    {
+      "id": "tokens_0",
+      "scene": "tokens",
+      "text": "Follow the chapter's sample: Delulu about jobs, followed by an exclamation mark. Its illustrative tokenizer makes four units: Delulu, about, jobs, and the punctuation. Each unit is a token.",
+      "gap": 1.0
+    },
+    {
+      "id": "tokens_1",
+      "scene": "tokens",
+      "text": "Tokens are not always whole words. They can be punctuation, parts of words, characters or other units. Names, hyphens, identifiers and languages with different boundary conventions require choices. Tokenisation divides the string; it is only one step in text analysis.",
+      "gap": 0.65
+    },
+    {
+      "id": "analysis_0",
+      "scene": "analysis",
+      "text": "In this example, case normalisation lowercases Delulu. Optional removal drops about and the exclamation mark. Optional stemming changes jobs to job. The final indexed terms are delulu and job.",
+      "gap": 1.0
+    },
+    {
+      "id": "analysis_1",
+      "scene": "analysis",
+      "text": "These are separate operations, not a universal recipe. Another analyser might retain about, preserve jobs or keep an entire value in a keyword field. Never assume every displayed word becomes a searchable term.",
+      "gap": 0.65
+    },
+    {
+      "id": "morphology_0",
+      "scene": "morphology",
+      "text": "Stemming uses rules or heuristics to reduce forms. Studies, studying and studied might become studi. That matching key need not be a dictionary word. Lemmatisation uses vocabulary and morphology to choose a dictionary form, such as study.",
+      "gap": 1.0
+    },
+    {
+      "id": "morphology_1",
+      "scene": "morphology",
+      "text": "Grammar still matters: adjectival better may become good. These outputs are illustrative, not guaranteed. Different algorithms, languages, dictionaries and fields can behave differently, or apply neither process.",
+      "gap": 0.65
+    },
+    {
+      "id": "risks_0",
+      "scene": "risks",
+      "text": "When related grammatical forms meet at one term, useful matches can become possible. Over-stemming can also collapse unrelated words and lose precision. Under-stemming leaves related forms separate and can miss a useful match.",
+      "gap": 1.0
+    },
+    {
+      "id": "risks_1",
+      "scene": "risks",
+      "text": "An incorrect grammatical interpretation can also harm lemmatisation. Neither method is synonym expansion, controlled-vocabulary mapping or a guarantee of meaning. Test the analysis on the collection and fields you actually search.",
+      "gap": 0.65
+    },
+    {
+      "id": "compatibility_0",
+      "scene": "compatibility",
+      "text": "On the document side, jobs may be stored as indexed job. On the query side, job may remain job. Both sides consult the same dictionary entry, so the document can match despite the different surface form.",
+      "gap": 1.0
+    },
+    {
+      "id": "compatibility_1",
+      "scene": "compatibility",
+      "text": "Now let the index store only jobs while the query looks up only job. Without another mapping, that document is missed. No error message is required. Query and document analysis need to be compatible, even when their operations are not identical.",
+      "gap": 0.65
+    },
+    {
+      "id": "truncation_0",
+      "scene": "truncation",
+      "text": "User-entered truncation, such as librar star, is separate from stemming and lemmatisation. Its expansion depends on platform syntax and indexed forms. If related words unexpectedly fail to match, inspect that analysis and expansion before blaming AND or OR.",
+      "gap": 1.0
+    },
+    {
+      "id": "truncation_1",
+      "scene": "truncation",
+      "text": "Fields can differ too. A title-and-abstract field might reduce grammatical forms, while a code, exact name or identifier deliberately preserves the original value. Ask what was indexed, how it was analysed, and what the query actually looked up.",
+      "gap": 0.65
+    }
+  ]
+}

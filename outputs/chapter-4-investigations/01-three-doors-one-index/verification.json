@@ -1,0 +1,51 @@
+{
+  "file": "01-three-doors-one-index.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 220.73333333333332,
+  "decoded_frames": 6622,
+  "integrated_lufs": -16.1,
+  "true_peak_dbfs": -2.5,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 425 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 174 kb/s (default)",
+  "faststart": true,
+  "sha256": "c93b095e7e46c6f98baed7c30d243e9d4d743156fd08f9a4e4d1f37e00820807",
+  "bytes": 16766980,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "876aa105d00c24377c5afec4e961ea67e3ba8e42521f121e2f24e6b4a02fe78e",
+  "passed": true,
+  "chapter_sha256": "e9a757ecb284b9828c66e213f02b144d7e21d4dd01fe880f04b99aad504f69ce",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "6d1e3e3fe9ddf6f03bc700b66b5bd2533f50c781bb5420bf6d5d75f109517974",
+  "embedded_captions_verified": true,
+  "caption_cues": 89,
+  "reviewed_animation_times": 79,
+  "worked_examples": {
+    "all_three": [
+      "A"
+    ],
+    "minimum_two": [
+      "A",
+      "B"
+    ],
+    "any_one": [
+      "A",
+      "B",
+      "C"
+    ],
+    "stipulated_order": [
+      "B",
+      "A",
+      "C"
+    ],
+    "top_two": [
+      "B",
+      "A"
+    ],
+    "foolish_document_frequency": 1,
+    "lab_collection_size": 6,
+    "numerical_ranking_asserted": false,
+    "passed": true
+  }
+}

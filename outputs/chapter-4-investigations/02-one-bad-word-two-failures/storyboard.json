@@ -1,0 +1,179 @@
+{
+  "series": "Lexical search beyond strict Boolean",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#beyond-boolean",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#beyond-boolean",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-one-bad-word-two-failures",
+  "title": "One bad word, two failures",
+  "subtitle": "A weak expansion can exclude a useful record\u2014or distort its competition.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "weak_prediction",
+      "title": "One more word. Better search?",
+      "source_anchor": "impact-of-bm25-compared-to-boolean-on-poor-query-terms",
+      "visual": "weak_prediction",
+      "narration": [
+        "Start with delulu, job, interview, expectations. Someone adds foolish as a supposed alternative for delulu. Does adding this word make the search safer because the original terms are still there? Try to predict what happens under two different admission rules.",
+        "The same weak term can cause two different kinds of damage. A compulsory term can exclude a record. An optional scoring term can shift the competition. Neither result requires the engine to malfunction."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "lab_pair",
+      "title": "Two records from the Evidence Lab",
+      "source_anchor": "poor-term-two-rules-title",
+      "visual": "lab_pair",
+      "narration": [
+        "Meet two records from the chapter's BM twenty-five Evidence Lab. Record A is Delulu expectations during a job interview. It contains all four original query terms and no foolish. Record F is Why foolish job applicants misread the interview.",
+        "F contains foolish, job and interview, but lacks delulu and expectations. These are teaching records from a six-record collection. Their usefulness still depends on the searcher's need; term matches alone do not settle that judgment."
+      ]
+    },
+    {
+      "id": "compulsory_failure",
+      "title": "All five required: both records fail",
+      "source_anchor": "poor-term-two-rules-title",
+      "visual": "compulsory_failure",
+      "narration": [
+        "Under implied AND, all five terms are compulsory. A passed the original four conditions. Adding foolish now excludes it before ranking begins. F fails too, because it lacks delulu and expectations.",
+        "Imagine A is exactly what you needed. A better ranker cannot recover it from this candidate set: A never arrived. You would need to change the retrieval conditions or run another retrieval pass."
+      ]
+    },
+    {
+      "id": "optional_failure",
+      "title": "Any match: the extra evidence stays",
+      "source_anchor": "poor-term-two-rules-title",
+      "visual": "optional_failure",
+      "narration": [
+        "Switch to any-match BM twenty-five. A remains eligible through its original matches. F also remains eligible through its matches. Adding foolish gives F an additional matching term that contributes to its score.",
+        "A has not been excluded, but its competition can change. We are not asserting a numerical order for A and F here. Admission and scoring influence are enough to explain the two different risks."
+      ]
+    },
+    {
+      "id": "rarity_quality",
+      "title": "Rare does not mean a good synonym",
+      "source_anchor": "impact-of-bm25-compared-to-boolean-on-poor-query-terms",
+      "visual": "rarity_quality",
+      "narration": [
+        "In the lab's six-record collection, only F contains foolish. A rare term can receive high inverse document frequency, giving its matches extra weight. But rarity answers a collection question: how widely does this term occur?",
+        "It does not answer the searcher's question: is this a good way to express my need? A statistical weight cannot turn a weak substitute into a good concept. More weight can amplify a poor choice."
+      ]
+    },
+    {
+      "id": "saturation_limit",
+      "title": "Saturation cannot repair the concept",
+      "source_anchor": "impact-of-bm25-compared-to-boolean-on-poor-query-terms",
+      "visual": "saturation_limit",
+      "narration": [
+        "Could term-frequency saturation fix it? Saturation limits the extra benefit of repeating the same term inside a document. That is useful when twenty mentions should not get twenty times the credit. It is a different problem.",
+        "Saturation does not inspect whether foolish represents the intended concept. A weak query term can still contribute lexical evidence. Neither a smooth score nor a sophisticated ranking formula guarantees a well-formed query."
+      ]
+    },
+    {
+      "id": "inspect_expansion",
+      "title": "Check the term, then check its job",
+      "source_anchor": "impact-of-bm25-compared-to-boolean-on-poor-query-terms",
+      "visual": "inspect_expansion",
+      "narration": [
+        "Compare the search with and without the weak term. Inspect which records enter, which disappear, and which gain scoring evidence. Keep the collection and other settings fixed so the comparison has a clear interpretation.",
+        "Then ask what job the extra term is doing. Is it compulsory, one alternative in a group, or optional scoring evidence? The engine can execute your instructions correctly while those instructions express the wrong need. Inspect the proposed expansion before trusting it."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "weak_prediction_0",
+      "scene": "weak_prediction",
+      "text": "Start with delulu, job, interview, expectations. Someone adds foolish as a supposed alternative for delulu. Does adding this word make the search safer because the original terms are still there? Try to predict what happens under two different admission rules.",
+      "gap": 1.0
+    },
+    {
+      "id": "weak_prediction_1",
+      "scene": "weak_prediction",
+      "text": "The same weak term can cause two different kinds of damage. A compulsory term can exclude a record. An optional scoring term can shift the competition. Neither result requires the engine to malfunction.",
+      "gap": 2.5
+    },
+    {
+      "id": "lab_pair_0",
+      "scene": "lab_pair",
+      "text": "Meet two records from the chapter's BM twenty-five Evidence Lab. Record A is Delulu expectations during a job interview. It contains all four original query terms and no foolish. Record F is Why foolish job applicants misread the interview.",
+      "gap": 1.0
+    },
+    {
+      "id": "lab_pair_1",
+      "scene": "lab_pair",
+      "text": "F contains foolish, job and interview, but lacks delulu and expectations. These are teaching records from a six-record collection. Their usefulness still depends on the searcher's need; term matches alone do not settle that judgment.",
+      "gap": 0.65
+    },
+    {
+      "id": "compulsory_failure_0",
+      "scene": "compulsory_failure",
+      "text": "Under implied AND, all five terms are compulsory. A passed the original four conditions. Adding foolish now excludes it before ranking begins. F fails too, because it lacks delulu and expectations.",
+      "gap": 1.0
+    },
+    {
+      "id": "compulsory_failure_1",
+      "scene": "compulsory_failure",
+      "text": "Imagine A is exactly what you needed. A better ranker cannot recover it from this candidate set: A never arrived. You would need to change the retrieval conditions or run another retrieval pass.",
+      "gap": 0.65
+    },
+    {
+      "id": "optional_failure_0",
+      "scene": "optional_failure",
+      "text": "Switch to any-match BM twenty-five. A remains eligible through its original matches. F also remains eligible through its matches. Adding foolish gives F an additional matching term that contributes to its score.",
+      "gap": 1.0
+    },
+    {
+      "id": "optional_failure_1",
+      "scene": "optional_failure",
+      "text": "A has not been excluded, but its competition can change. We are not asserting a numerical order for A and F here. Admission and scoring influence are enough to explain the two different risks.",
+      "gap": 0.65
+    },
+    {
+      "id": "rarity_quality_0",
+      "scene": "rarity_quality",
+      "text": "In the lab's six-record collection, only F contains foolish. A rare term can receive high inverse document frequency, giving its matches extra weight. But rarity answers a collection question: how widely does this term occur?",
+      "gap": 1.0
+    },
+    {
+      "id": "rarity_quality_1",
+      "scene": "rarity_quality",
+      "text": "It does not answer the searcher's question: is this a good way to express my need? A statistical weight cannot turn a weak substitute into a good concept. More weight can amplify a poor choice.",
+      "gap": 0.65
+    },
+    {
+      "id": "saturation_limit_0",
+      "scene": "saturation_limit",
+      "text": "Could term-frequency saturation fix it? Saturation limits the extra benefit of repeating the same term inside a document. That is useful when twenty mentions should not get twenty times the credit. It is a different problem.",
+      "gap": 1.0
+    },
+    {
+      "id": "saturation_limit_1",
+      "scene": "saturation_limit",
+      "text": "Saturation does not inspect whether foolish represents the intended concept. A weak query term can still contribute lexical evidence. Neither a smooth score nor a sophisticated ranking formula guarantees a well-formed query.",
+      "gap": 0.65
+    },
+    {
+      "id": "inspect_expansion_0",
+      "scene": "inspect_expansion",
+      "text": "Compare the search with and without the weak term. Inspect which records enter, which disappear, and which gain scoring evidence. Keep the collection and other settings fixed so the comparison has a clear interpretation.",
+      "gap": 1.0
+    },
+    {
+      "id": "inspect_expansion_1",
+      "scene": "inspect_expansion",
+      "text": "Then ask what job the extra term is doing. Is it compulsory, one alternative in a group, or optional scoring evidence? The engine can execute your instructions correctly while those instructions express the wrong need. Inspect the proposed expansion before trusting it.",
+      "gap": 0.65
+    }
+  ]
+}

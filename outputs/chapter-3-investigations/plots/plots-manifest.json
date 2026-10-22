@@ -1,0 +1,19 @@
+{
+  "recipe_sha256": "8c6f2765253eeccdf2b6ca0544f60645eda72e7a6d70918f8e32159788784d4f",
+  "model": "single-field BM25 with positive IDF",
+  "files": {
+    "frequency-factors.csv": "52c70528195c0ffbcbb48f9e0ccd0a0294e5625885328406aea86fcd8c38e3fb",
+    "k1-curves.png": "0b51e2206e8d7e98d384fa8501f046f85b289ad3a220cda187fae52bd03556b8",
+    "k1-curves.svg": "d0b0bc6ed0318ea013921526f0e8532af4f4705621b6b2433a4229353cf719b3",
+    "length-factors.csv": "13e676eac0c6929508b943a9c3b0cb75a4d311f5a6a07871275fb0dccf5caea4",
+    "length-normalisation.png": "4e0e4038a03c1cb2732310fd58bb651d8194665ffe0d2b1ef81cc35f5c93e244",
+    "length-normalisation.svg": "6a50f54afe0503d4ed264be6d4c7e1c4a17245f99ec9a545552ddef82201e2f3",
+    "saturation.png": "b157b6f9decb4de750e0399b232f0bdbbf5d45d95c312630e852f06c0872d6ea",
+    "saturation.svg": "446c2d39c22d0c9d0c74735782caca6723ae3156181480f6ec40299fea10157f",
+    "toy-scores.csv": "e4adf466ef1c4d1eeed404dad607c0396bc4ee0510a172f9564383e3e5c00d99"
+  },
+  "k1": 1.2,
+  "b": 0.75,
+  "axes": "linear",
+  "passed": true
+}

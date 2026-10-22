@@ -1,0 +1,7 @@
+point,x,y,euclidean_distance,exact_examined,exact_returned,approximate_examined,approximate_returned
+A,1.0,0.0,1,True,True,True,True
+B,0.0,2.0,2,True,True,True,True
+C,2.0,2.0,2.8284271247461903,True,True,False,False
+D,3.0,1.0,3.1622776601683795,True,False,True,True
+E,4.0,3.0,5,True,False,False,False
+F,1.0,5.0,5.0990195135927845,True,False,True,False

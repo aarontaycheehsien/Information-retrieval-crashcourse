@@ -1,0 +1,4069 @@
+{
+  "repository": "aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "video_count": 48,
+  "chapters": [
+    {
+      "label": "Preface",
+      "folder": "pre-chapter-1-investigations",
+      "archive": "outputs/pre-chapter-1-investigations/pre-chapter-1-videos.zip",
+      "films": [
+        {
+          "title": "Two decisions hiding in every search",
+          "path": "outputs/pre-chapter-1-investigations/01-two-decisions/01-two-decisions.mp4",
+          "duration_seconds": 197.43333333333334,
+          "sha256": "1bf8942915de9af93d829fe4aa626dce3052d18f186ee8c5575b8c66a6f325f5"
+        },
+        {
+          "title": "The evidence you never see",
+          "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/02-the-evidence-you-never-see.mp4",
+          "duration_seconds": 192.76666666666668,
+          "sha256": "27795edcf7610c9dd7b87405bbfa24ca1d882d2d62045db935810b6b342b0e9f"
+        },
+        {
+          "title": "Your route through the machine",
+          "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/03-your-route-through-the-machine.mp4",
+          "duration_seconds": 268.56666666666666,
+          "sha256": "2752da1fb0c072e0b25bab637b7fae200fe47cbfd8319f1d1a8ca7b6105a2632"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 1",
+      "folder": "chapter-1-investigations",
+      "archive": "outputs/chapter-1-investigations/chapter-1-videos.zip",
+      "films": [
+        {
+          "title": "The paper your AI never saw",
+          "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/01-the-paper-your-ai-never-saw.mp4",
+          "duration_seconds": 245.63333333333333,
+          "sha256": "04c31399305dd4c4619179be44f8b3d11a2c0a18215d7966217cd9025fcf7778"
+        },
+        {
+          "title": "A match is not a verdict",
+          "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/02-a-match-is-not-a-verdict.mp4",
+          "duration_seconds": 229.8,
+          "sha256": "2470b3c175b5006e9e80f6310b3e8166039c0bd92e1a4b1cc5f99b124cabc968"
+        },
+        {
+          "title": "Three clues in a search box",
+          "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/03-three-clues-in-a-search-box.mp4",
+          "duration_seconds": 234.36666666666667,
+          "sha256": "83fba1f8b8c81f469bc86623412da8264acdbb984d84fdcf2a84af1e87a20c19"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 2",
+      "folder": "chapter-2-investigations",
+      "archive": "outputs/chapter-2-investigations/chapter-2-videos.zip",
+      "films": [
+        {
+          "title": "The word that opened the gate",
+          "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/01-the-word-that-opened-the-gate.mp4",
+          "duration_seconds": 207.23333333333332,
+          "sha256": "b9acb2fd86b14ed1f9d2ffefde29225fd38d0675070998e820272b9769ad15f9"
+        },
+        {
+          "title": "The word you never searched",
+          "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/02-the-word-you-never-searched.mp4",
+          "duration_seconds": 227.56666666666666,
+          "sha256": "205968fc9d05567daf8b62ebed932930fc1343d5482d52faa4235f65ca308e95"
+        },
+        {
+          "title": "Search without rereading the papers",
+          "path": "outputs/chapter-2-investigations/03-search-without-rereading/03-search-without-rereading.mp4",
+          "duration_seconds": 244.16666666666666,
+          "sha256": "34a02903ebbd874f108736f75601afae460e7e790d8ec64f1e9d63c6da2acde3"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 3",
+      "folder": "chapter-3-investigations",
+      "archive": "outputs/chapter-3-investigations/chapter-3-videos.zip",
+      "films": [
+        {
+          "title": "Which word deserves more weight?",
+          "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/01-which-word-deserves-more-weight.mp4",
+          "duration_seconds": 204.36666666666667,
+          "sha256": "271668275f13bd9615977da5efad6b4efc11defcbd8dae32111d7e79db407120"
+        },
+        {
+          "title": "Twenty mentions. Twice the credit?",
+          "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/02-twenty-mentions-twice-the-credit.mp4",
+          "duration_seconds": 193.63333333333333,
+          "sha256": "af4aeccb07eff1a5773c29a1d5d7ac30c97dfb306fa14006852d449d3fb83eb3"
+        },
+        {
+          "title": "Same index. Three different controls.",
+          "path": "outputs/chapter-3-investigations/03-same-index-three-controls/03-same-index-three-controls.mp4",
+          "duration_seconds": 233.06666666666666,
+          "sha256": "6039c809e6f9e88c300c99f8f80688c0f287a52a2baaef50edefc8eb39ff7121"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 4",
+      "folder": "chapter-4-investigations",
+      "archive": "outputs/chapter-4-investigations/chapter-4-videos.zip",
+      "films": [
+        {
+          "title": "Three doors, one index",
+          "path": "outputs/chapter-4-investigations/01-three-doors-one-index/01-three-doors-one-index.mp4",
+          "duration_seconds": 220.73333333333332,
+          "sha256": "c93b095e7e46c6f98baed7c30d243e9d4d743156fd08f9a4e4d1f37e00820807"
+        },
+        {
+          "title": "One bad word, two failures",
+          "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/02-one-bad-word-two-failures.mp4",
+          "duration_seconds": 226.0,
+          "sha256": "4c6450d0925540524c19d5c10b59c6c06d12cff96832b3a664faa3eb05fc5875"
+        },
+        {
+          "title": "Four lives of a missing word",
+          "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/03-four-lives-of-a-missing-word.mp4",
+          "duration_seconds": 277.1666666666667,
+          "sha256": "d0e22cd1af6be38bae77ba1ecacd5e25fb9708f8195118e42908cb18beeab32f"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 5",
+      "folder": "chapter-5-investigations",
+      "archive": "outputs/chapter-5-investigations/chapter-5-videos.zip",
+      "films": [
+        {
+          "title": "The map nobody drew",
+          "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/01-the-map-nobody-drew.mp4",
+          "duration_seconds": 272.1333333333333,
+          "sha256": "427028e24aebad0a7e2f0dded391d5ba2ab2d18f80fa76859010ac0a4709e7ec"
+        },
+        {
+          "title": "One word, two locations",
+          "path": "outputs/chapter-5-investigations/02-one-word-two-locations/02-one-word-two-locations.mp4",
+          "duration_seconds": 251.83333333333334,
+          "sha256": "325331f07bc245066d18e0ed997930f46efd2bf92b3843b837a7f56eec290b28"
+        },
+        {
+          "title": "The wrong prediction game",
+          "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/03-the-wrong-prediction-game.mp4",
+          "duration_seconds": 289.1333333333333,
+          "sha256": "1a9e2cd3f920c682c298eaed256eb70e7a2ed1ba70061fb086f0e6d8e077b442"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 6",
+      "folder": "chapter-6-investigations",
+      "archive": "outputs/chapter-6-investigations/chapter-6-videos.zip",
+      "films": [
+        {
+          "title": "The vector we actually store",
+          "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/01-the-vector-we-actually-store.mp4",
+          "duration_seconds": 258.4,
+          "sha256": "677999d69e6bc3decc8af6026665822828e49fd53f0b07ddb28e188696864549"
+        },
+        {
+          "title": "The result that almost answers",
+          "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/02-the-result-that-almost-answers.mp4",
+          "duration_seconds": 249.76666666666668,
+          "sha256": "138fe2c113f4e083ce8c27f88a2af6ed794ef740ce6d2faf86da89e85d5e8349"
+        },
+        {
+          "title": "Whose idea of relevance?",
+          "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/03-whose-idea-of-relevance.mp4",
+          "duration_seconds": 260.23333333333335,
+          "sha256": "380a4cedca17dab9298adc559a464dcad48a469440b5a924fa78595eb16394e0"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 7",
+      "folder": "chapter-7-investigations",
+      "archive": "outputs/chapter-7-investigations/chapter-7-videos.zip",
+      "films": [
+        {
+          "title": "Same vectors, different winner",
+          "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/01-same-vectors-different-winner.mp4",
+          "duration_seconds": 233.76666666666668,
+          "sha256": "6bf447ec8421a2e496391e04f06f3949511964a0dc75ddbd25e5848bb4fd6ae6"
+        },
+        {
+          "title": "The neighbour you never visited",
+          "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/02-the-neighbour-you-never-visited.mp4",
+          "duration_seconds": 243.96666666666667,
+          "sha256": "f7d501385fa9b2779315fde0a4d217f613ff25d315c19722e6d9f679eaa8dbf0"
+        },
+        {
+          "title": "Where does meaning enter?",
+          "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/03-where-does-meaning-enter.mp4",
+          "duration_seconds": 292.76666666666665,
+          "sha256": "e93928eb090f4439f35c210967c4934b87bceec3b3a2447c4b25b0bccd5a7136"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 8",
+      "folder": "chapter-8-investigations",
+      "archive": "outputs/chapter-8-investigations/chapter-8-videos.zip",
+      "films": [
+        {
+          "title": "The vector hiding in keyword search",
+          "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/01-the-vector-hiding-in-keyword-search.mp4",
+          "duration_seconds": 266.03333333333336,
+          "sha256": "58a03613f9150507c1c13e7adb83079d87e46c275c3bed99a1c2f113e195f24e"
+        },
+        {
+          "title": "Dense does not mean semantic",
+          "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/02-dense-does-not-mean-semantic.mp4",
+          "duration_seconds": 276.4,
+          "sha256": "80c4d67398c82622ad54fcc60fa11a5f4cb8e90f8934957ef72b028845164d0c"
+        },
+        {
+          "title": "One paper, fifty searchable objects",
+          "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/03-one-paper-fifty-searchable-objects.mp4",
+          "duration_seconds": 271.1,
+          "sha256": "088f51593adf19823789e3a5bee2b2f3303b3ce2f4c0184df06c0aa6e37e4f6c"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 9",
+      "folder": "chapter-9-investigations",
+      "archive": "outputs/chapter-9-investigations/chapter-9-videos.zip",
+      "films": [
+        {
+          "title": "The paper the reranker never saw",
+          "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/01-the-paper-the-reranker-never-saw.mp4",
+          "duration_seconds": 289.6,
+          "sha256": "51ab714fd974d8ba946a94b800ff7aaf02195c5990707857059b4aaed1420101"
+        },
+        {
+          "title": "One vector, or many clues?",
+          "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/02-one-vector-or-many-clues.mp4",
+          "duration_seconds": 287.56666666666666,
+          "sha256": "615a49d7b66a31130ca7ed194e162d68e47d069edd45fd5a09033e35e02d9426"
+        },
+        {
+          "title": "The best next result may rank lower",
+          "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/03-the-best-next-result-may-rank-lower.mp4",
+          "duration_seconds": 292.3333333333333,
+          "sha256": "c73adffb3b4780deff6e4899c64efe04cf875b7ac12a8bb34229cfe82fc313cc"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 10",
+      "folder": "chapter-10-investigations",
+      "archive": "outputs/chapter-10-investigations/chapter-10-videos.zip",
+      "films": [
+        {
+          "title": "Two models do not make a hybrid",
+          "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/01-two-models-do-not-make-a-hybrid.mp4",
+          "duration_seconds": 253.8,
+          "sha256": "3709c4cf9c28e2d844e704a0bb9f2bcf3aee6fa294c93675a5e62a936c2237d0"
+        },
+        {
+          "title": "How two lists become one",
+          "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/02-how-two-lists-become-one.mp4",
+          "duration_seconds": 248.7,
+          "sha256": "1cabb800ff07b4639641f8cb66cdcf7f234150e81099c97c7c3a9e1f0a25f655"
+        },
+        {
+          "title": "What the fused ranking cannot tell you",
+          "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/03-what-the-fused-ranking-cannot-tell-you.mp4",
+          "duration_seconds": 271.0,
+          "sha256": "d483fffea90907b25b9c5b0c35d7c1edf80d0aa11fabf72dfd098aff61135c3c"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 11",
+      "folder": "chapter-11-investigations",
+      "archive": "outputs/chapter-11-investigations/chapter-11-videos.zip",
+      "films": [
+        {
+          "title": "What if your query is a paper?",
+          "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/01-what-if-your-query-is-a-paper.mp4",
+          "duration_seconds": 288.0,
+          "sha256": "25666e400900dff4de6b0ae166b36b335199af0918f7aa64e4b01fb26875d151"
+        },
+        {
+          "title": "Who changed your question?",
+          "path": "outputs/chapter-11-investigations/02-who-changed-your-question/02-who-changed-your-question.mp4",
+          "duration_seconds": 278.6666666666667,
+          "sha256": "0d5a5846e6251557c2c39f2f442279b757a27f2c54bf9a41e258f4d4768d3580"
+        },
+        {
+          "title": "The paper that never existed",
+          "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/03-the-paper-that-never-existed.mp4",
+          "duration_seconds": 288.4,
+          "sha256": "4362ea202bd16a8ea621778581376dda55e3a5cf9e100f3bdaab1c6c1957e779"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 12",
+      "folder": "chapter-12-investigations",
+      "archive": "outputs/chapter-12-investigations/chapter-12-videos.zip",
+      "films": [
+        {
+          "title": "Who chooses the next search?",
+          "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/01-who-chooses-the-next-search.mp4",
+          "duration_seconds": 281.43333333333334,
+          "sha256": "a037a4f663aacc87e86e5dac90b0e9f84c59ce0f29b9a4210083146c52f07aa1"
+        },
+        {
+          "title": "The blind spot that survives the loop",
+          "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/02-the-blind-spot-that-survives-the-loop.mp4",
+          "duration_seconds": 279.53333333333336,
+          "sha256": "7b4572cc8d76dfb2236692d77d86986a27c505b363e8bd9cbcdb8d4b95d061d5"
+        },
+        {
+          "title": "When zero results become a clue",
+          "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/03-when-zero-results-become-a-clue.mp4",
+          "duration_seconds": 280.0,
+          "sha256": "b2848f4f786b49a87ac9d540d614c00c6f2204282eb1dd9dbdf95e1b53dc5926"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 13",
+      "folder": "chapter-13-investigations",
+      "archive": "outputs/chapter-13-investigations/chapter-13-videos.zip",
+      "films": [
+        {
+          "title": "Where did the paper go?",
+          "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/01-where-did-the-paper-go.mp4",
+          "duration_seconds": 307.56666666666666,
+          "sha256": "14374616a226b783f62f658fe1909aecb6f3d68a4a0f6a77ab0a8ca634693f14"
+        },
+        {
+          "title": "It can spell it. Can it find it?",
+          "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/02-it-can-spell-it-can-it-find-it.mp4",
+          "duration_seconds": 315.1666666666667,
+          "sha256": "a8ee9fbf34bbca6a0f4b64bd69bff71c2b84800ed3f4d3fac5bc9974e6da0fd9"
+        },
+        {
+          "title": "Every word was there",
+          "path": "outputs/chapter-13-investigations/03-every-word-was-there/03-every-word-was-there.mp4",
+          "duration_seconds": 333.6,
+          "sha256": "463423370ee11a63b1f417b5a2e49b46eb15e7a25eb2fb100d6201aea37f847b"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 14",
+      "folder": "chapter-14-investigations",
+      "archive": "outputs/chapter-14-investigations/chapter-14-videos.zip",
+      "films": [
+        {
+          "title": "Can both scores improve?",
+          "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/01-can-both-scores-improve.mp4",
+          "duration_seconds": 321.6,
+          "sha256": "d4b18cde2a49aedb26ab75273e6201883b88cec41a65db5a88e4369b55d35bb0"
+        },
+        {
+          "title": "The number that ignores the rest",
+          "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/02-the-number-that-ignores-the-rest.mp4",
+          "duration_seconds": 313.56666666666666,
+          "sha256": "3762f08556f364529ed6a7fc6523a485a0732ca3aa08a15465d74b8bcf7b3f47"
+        },
+        {
+          "title": "The average went up. The search got worse.",
+          "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/03-the-average-went-up-the-search-got-worse.mp4",
+          "duration_seconds": 316.43333333333334,
+          "sha256": "cfdb8e3e212aad7ec2334f36da3896fd2f3531d379f1a7188ffbe86656e891ea"
+        }
+      ]
+    },
+    {
+      "label": "Chapter 15",
+      "folder": "chapter-15-investigations",
+      "archive": "outputs/chapter-15-investigations/chapter-15-videos.zip",
+      "films": [
+        {
+          "title": "Same question. Same search?",
+          "path": "outputs/chapter-15-investigations/01-same-question-same-search/01-same-question-same-search.mp4",
+          "duration_seconds": 349.93333333333334,
+          "sha256": "a80848038166953d74466c575a0f6d6ae3901f14d9ce5cfd4ee6fe99d98f1061"
+        },
+        {
+          "title": "Why is this paper here?",
+          "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/02-why-is-this-paper-here.mp4",
+          "duration_seconds": 327.76666666666665,
+          "sha256": "4b7982310f45377426c92b4a27b9889a9b4d39dd4758f78f8cc3af7dd34bd29d"
+        },
+        {
+          "title": "What are you actually licensing?",
+          "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/03-what-are-you-actually-licensing.mp4",
+          "duration_seconds": 358.6,
+          "sha256": "6bb8b13534fa2d43e345d9a05ff01f9b558d7d8ae611cb63f0190825ac202007"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "outputs/pre-chapter-1-investigations/01-two-decisions/01-two-decisions.mp4",
+      "bytes": 16303284,
+      "sha256": "1bf8942915de9af93d829fe4aa626dce3052d18f186ee8c5575b8c66a6f325f5"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/01-two-decisions/01-two-decisions.srt",
+      "bytes": 5707,
+      "sha256": "61f2b2f12e2373cf33dbb99d92d743dc4be865679744a38739267e851d43b35a"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/01-two-decisions/01-two-decisions.vtt",
+      "bytes": 5469,
+      "sha256": "9bbf0e34a1869e6ae9fe29cc9e79a8070164fb2f4f4bbf833c7fc2a22550de2a"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/01-two-decisions/chapters.vtt",
+      "bytes": 451,
+      "sha256": "7796c3c305f8f9af1b58c82281574b0c8d3e40318f4a357bde2a550fd6777afa"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/01-two-decisions/contact-sheet.jpg",
+      "bytes": 415929,
+      "sha256": "a9d29b54b1bc9ce3d7950522605abf85e085e843b5cb240b470a6ea21fb15569"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/01-two-decisions/poster.jpg",
+      "bytes": 141787,
+      "sha256": "ba2a6368620b930952eb72738e6415e98484fa3af2c54c39890e676c0b2f4d33"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/01-two-decisions/storyboard.json",
+      "bytes": 9219,
+      "sha256": "b763d78bb47975332ed64c5741b0ca592475ca9726eb5366af0be781105e4398"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/01-two-decisions/transcript.txt",
+      "bytes": 3539,
+      "sha256": "3c55333777707f4ab3291f3a6a4ec0eb1a3b2e66fb75251858a20936c7ec2201"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/01-two-decisions/verification.json",
+      "bytes": 1069,
+      "sha256": "46a4382005905caadf8a7164621f93bda5cb7b6807144c3b1502d1a4d72b9f13"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/02-the-evidence-you-never-see.mp4",
+      "bytes": 15699599,
+      "sha256": "27795edcf7610c9dd7b87405bbfa24ca1d882d2d62045db935810b6b342b0e9f"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/02-the-evidence-you-never-see.srt",
+      "bytes": 5619,
+      "sha256": "23090f58d76be9a6e94a24d3d5535e954feff9a1f8076e3cbf95c0e05f70a3b2"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/02-the-evidence-you-never-see.vtt",
+      "bytes": 5384,
+      "sha256": "5d71a6d3aebffb4383929c69ab2445934326d535ee8db94a68eef9665dc5098b"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/chapters.vtt",
+      "bytes": 483,
+      "sha256": "76f965110297b0037e9286e950c07991741d149f9e079c60a4d385a76a962599"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/contact-sheet.jpg",
+      "bytes": 410439,
+      "sha256": "9a975234e8a382dd5a81d0fafe9cd61678f4b31cf2af171ff47d64ee6e4a50b6"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/poster.jpg",
+      "bytes": 133148,
+      "sha256": "14c390c7c05ec840a04a1befc056ccb08bb7929b5d779d5f2be7e06e4b991816"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/storyboard.json",
+      "bytes": 9302,
+      "sha256": "85b9501093bc310a15c8077b5e8ebe7333631882419edf56a5e83fee2fbf7fd4"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/transcript.txt",
+      "bytes": 3475,
+      "sha256": "2b1ea9010c43ce80c80588935a8ed416bccd3859733064e7b659995ee7e114e1"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/02-the-evidence-you-never-see/verification.json",
+      "bytes": 1082,
+      "sha256": "355dff07cf23339f72756e4f7eefeda759b8997913b243ff67da72fd9304a283"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/03-your-route-through-the-machine.mp4",
+      "bytes": 24284982,
+      "sha256": "2752da1fb0c072e0b25bab637b7fae200fe47cbfd8319f1d1a8ca7b6105a2632"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/03-your-route-through-the-machine.srt",
+      "bytes": 7515,
+      "sha256": "919fa475be4366b245f3b9952a100ea09087a385b9bb11781e201b6c946855c4"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/03-your-route-through-the-machine.vtt",
+      "bytes": 7199,
+      "sha256": "d9e17c0045a8111c84ec2b6efffdca4b25726a6e46878a6a5c92ed3434f66769"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/chapters.vtt",
+      "bytes": 589,
+      "sha256": "833e49e3150366f4d39d7bc9b82430a8b3ade74eecda43442953a6677cc5ffd3"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/contact-sheet.jpg",
+      "bytes": 559042,
+      "sha256": "6e6820e2cea46810754e558b528d0f99b59f5ebc70cf3d7ef7e0b8a4f31a06ab"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/poster.jpg",
+      "bytes": 140769,
+      "sha256": "5031be5139b4d305584dc1d7c79249df75199df5366640aef53031693447bd1d"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/storyboard.json",
+      "bytes": 12073,
+      "sha256": "4e0edea74fe4e012118a21ec2a1e48fb2793f88ff634a9afd05c6706714ef59c"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/transcript.txt",
+      "bytes": 4618,
+      "sha256": "baa937aac9b96e4e4515460032f5e148c0afa38704dbe78cb9d6635216119a9d"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/03-your-route-through-the-machine/verification.json",
+      "bytes": 1088,
+      "sha256": "d01201fc6d9045b18ddb9a416438070cab2ad1be4683e39f124570a63a48eeb3"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/SOURCE.md",
+      "bytes": 4957,
+      "sha256": "f3e104baf9c39c510a97cb01eed3b4d6c760052bdaae8a09009ee7307f914a8a"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/browser-verification.json",
+      "bytes": 1251,
+      "sha256": "ffc3c427d78436fc7d88663c6bcd6d5ee6a8d6a7ca1b2c55f7cae639922ec23d"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/gallery-1440.png",
+      "bytes": 562107,
+      "sha256": "6032097843df17f32444560709b94628f45ff0656ba009f4f61db0f5f5781991"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/gallery-390.png",
+      "bytes": 202074,
+      "sha256": "62360dd7eba8b6ebe4b5cd16619b72c9961129b7c8312da7b51d069b50746e4c"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/gallery-768.png",
+      "bytes": 332190,
+      "sha256": "f874aae9034d665e6f9f7d77294a684713129d1d7aac297b6478d2063905bd48"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/index.html",
+      "bytes": 8446,
+      "sha256": "d3d2fe0ccac55ed2c854438e6a20a3bc1f62d71bcf325ad4b927d53ab7707677"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/pre-chapter-1-videos.zip",
+      "bytes": 59293397,
+      "sha256": "0442f96dc2d53d85cf1287e171d775452203e5a9648289e0f41e4922377d837a"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/source-provenance.json",
+      "bytes": 494,
+      "sha256": "886d476bc8de573482922954eeb34b2e99bbcb9ade3e30c1f3c973f86f888396"
+    },
+    {
+      "path": "outputs/pre-chapter-1-investigations/verification.json",
+      "bytes": 3570,
+      "sha256": "90dd470e02c61dacad87d8fe967000429055de22df213abb1429ac46084857ba"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/01-the-paper-your-ai-never-saw.mp4",
+      "bytes": 23935080,
+      "sha256": "04c31399305dd4c4619179be44f8b3d11a2c0a18215d7966217cd9025fcf7778"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/01-the-paper-your-ai-never-saw.srt",
+      "bytes": 6554,
+      "sha256": "9c69bcab2363ffd23f29faca788e2df01fb3b2a02ce1477fcf1837f5095476ec"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/01-the-paper-your-ai-never-saw.vtt",
+      "bytes": 6283,
+      "sha256": "e6a7553120ad44d5005f2fd9e2cc04a3c301da765d66ad058282a024c709b87a"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/chapters.vtt",
+      "bytes": 503,
+      "sha256": "24199d01233e7b9aa83fe068b9c6155526cb09201571759636e3f287749570fc"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/contact-sheet.jpg",
+      "bytes": 470244,
+      "sha256": "3f45b5c904b88acbc3033ea4f319705419114270f51cd3f140e5b44c00273938"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/poster.jpg",
+      "bytes": 142321,
+      "sha256": "ca9c2565dbc6237543ec4910f5677ed229d8bb8a786fee39882ea53f760d77b1"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/storyboard.json",
+      "bytes": 10252,
+      "sha256": "40aa35713635b3ca8f61abd5540ce90e0b158a45837deeaab6f30ceaa19bbdd0"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/transcript.txt",
+      "bytes": 4003,
+      "sha256": "698a6bd6a6d9eb996127154fe1ec7b51d2032a5c36ec453803f5cb0edebe3546"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/01-the-paper-your-ai-never-saw/verification.json",
+      "bytes": 1083,
+      "sha256": "95abd8f55d1ad152f10a9149269c8db73c1bf4930d73309e055e9dc9dee44962"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/02-a-match-is-not-a-verdict.mp4",
+      "bytes": 20478595,
+      "sha256": "2470b3c175b5006e9e80f6310b3e8166039c0bd92e1a4b1cc5f99b124cabc968"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/02-a-match-is-not-a-verdict.srt",
+      "bytes": 6349,
+      "sha256": "2ebc9c97e1efa91a9a027ce2e7e54885df02d012db8a1fbc0213524284135773"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/02-a-match-is-not-a-verdict.vtt",
+      "bytes": 6090,
+      "sha256": "fd844bd8737e1ad166f759ed99fe6bb4c9670d677684567af2cd26e4989a069b"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/chapters.vtt",
+      "bytes": 492,
+      "sha256": "1d4af262175c8cc51c6328b50f694778004049476001fd7be3c98303e9926ec2"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/contact-sheet.jpg",
+      "bytes": 440880,
+      "sha256": "1746308787c990c9fe338b1242dd82f959ef8e2ceed8624f59d52ca8bd858516"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/poster.jpg",
+      "bytes": 134741,
+      "sha256": "61b4dfb278aeed84305ec4bba85b9f4b1a1945bda1bbb24b26af8fd94dbabf01"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/storyboard.json",
+      "bytes": 10173,
+      "sha256": "000cf560953a981920fc17b2c79040bfb277f9185247946f7d335b67725ceb9b"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/transcript.txt",
+      "bytes": 3931,
+      "sha256": "67a57f059f3d4cde5ddcdf79f72f3267c220d9ed8783e39766d585fbf56d8673"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/02-a-match-is-not-a-verdict/verification.json",
+      "bytes": 1067,
+      "sha256": "85372dea211ead206a583107b85cf96773d79feb9d13f66543b91bb5b8dae9af"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/03-three-clues-in-a-search-box.mp4",
+      "bytes": 28293634,
+      "sha256": "83fba1f8b8c81f469bc86623412da8264acdbb984d84fdcf2a84af1e87a20c19"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/03-three-clues-in-a-search-box.srt",
+      "bytes": 6698,
+      "sha256": "6f8c2e288c357d44d1c3fe457ce0d214f8552ee4436c3999c92ab70ca7da5b5a"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/03-three-clues-in-a-search-box.vtt",
+      "bytes": 6421,
+      "sha256": "caeabda8d90b90adf80087c22e7764a5234bf01f93e3be7cbc56bba12fc14a30"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/chapters.vtt",
+      "bytes": 480,
+      "sha256": "c8d39689976d8ce41992f1a09343b67a28fabd02ff7e9179dbc66207d9e3536b"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/contact-sheet.jpg",
+      "bytes": 450253,
+      "sha256": "94718f04b5fe2acb9c90b0f2792a7b4316a2e8ea5b3e44d2eec0253880f40664"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/poster.jpg",
+      "bytes": 141638,
+      "sha256": "c0710d73c890d170c5cb43e03ceb780b5bc2e08b2efafecf430c4b9a8ab1094c"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/storyboard.json",
+      "bytes": 10430,
+      "sha256": "d8a41001197bb37088d143e43e8ed289f3c6bba489f4f53e0626a01005b236fa"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/transcript.txt",
+      "bytes": 4079,
+      "sha256": "f7b412e0d32750e2b933a297b143e2e08305ea48947db6e31e5ca594a4fc9c16"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/03-three-clues-in-a-search-box/verification.json",
+      "bytes": 1083,
+      "sha256": "0fafc20b9d2e597743431088d4281e146637a248f21bac3f6c59f9aa9a1ac8df"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/SOURCE.md",
+      "bytes": 6428,
+      "sha256": "491f9422d5c1f9fa3cce4c92b144030a1c01c607ec5e9b064b2e76dcce25027e"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/browser-verification.json",
+      "bytes": 1260,
+      "sha256": "af67be8745f4bf1e828d023740098890d1d12606668b4a3e5889345e8a930480"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/chapter-1-videos.zip",
+      "bytes": 75693006,
+      "sha256": "856da7a9f551e4ab9fda0fc58e5a4797aba358ec98bb15236850d046957b99e8"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/gallery-1440.png",
+      "bytes": 564471,
+      "sha256": "8d9a3ab52f06974b3e059c55837a6b03fb6efc988b783e24939ca69321d510dd"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/gallery-390.png",
+      "bytes": 197146,
+      "sha256": "00e4d609b679cfaf3bb5a2aca1b0129706c39d8a47668f337195bece135054c2"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/gallery-768.png",
+      "bytes": 332124,
+      "sha256": "3c69caa21a98ce53229d3f85039da87c949c5643751bf2798bc3e602d1f512d2"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/index.html",
+      "bytes": 8429,
+      "sha256": "a850cdc211972727a7e1084a2c668496a217423b85b43b5fcac84ad7fc72528f"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/source-provenance.json",
+      "bytes": 563,
+      "sha256": "bdecb7afbc0615d2414da92c31c646ddc119fdc198d2317f7ed6ea2a603b71ca"
+    },
+    {
+      "path": "outputs/chapter-1-investigations/verification.json",
+      "bytes": 3564,
+      "sha256": "74dd32f767690f87db9c2acd6a030fff7bb9f5472030357c484b3e62d1c8140f"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/01-the-word-that-opened-the-gate.mp4",
+      "bytes": 18382275,
+      "sha256": "b9acb2fd86b14ed1f9d2ffefde29225fd38d0675070998e820272b9769ad15f9"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/01-the-word-that-opened-the-gate.srt",
+      "bytes": 5512,
+      "sha256": "80ef52b24e569d82a59d5a8654edd12c4b5b3fee82171376f8c9b8f329599219"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/01-the-word-that-opened-the-gate.vtt",
+      "bytes": 5286,
+      "sha256": "18527b6a90d2ba5cc074b520fbb9542ff3714b4903015818f31660a53527e3c9"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/chapters.vtt",
+      "bytes": 471,
+      "sha256": "345e9452fa731eeecfa05bacf163f09f7c7f4283b131cc5c44c00dceee95cb3b"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/contact-sheet.jpg",
+      "bytes": 431689,
+      "sha256": "9fd55ef4432e28998f941d37217e1dc3fc4517a98273d7c9195f28044bd2c1af"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/poster.jpg",
+      "bytes": 147701,
+      "sha256": "7c96601351958d628bcc0608d1663d435f4b4b01a20e9179393fc8d2ba16eefa"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/storyboard.json",
+      "bytes": 9271,
+      "sha256": "a57b84e019ed27ee39d1337b27b01305b52a14897b78e021494adca7c2042af1"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/transcript.txt",
+      "bytes": 3485,
+      "sha256": "c3a639b0f1abd5652c6685d5b04fabc73462120c11ca02d3a62ebf90cad47d06"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/01-the-word-that-opened-the-gate/verification.json",
+      "bytes": 1085,
+      "sha256": "1ad392e2f6510a42b75154a99f5f1e6452d59c5c6bdc253ccfec80b3fed267cf"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/02-the-word-you-never-searched.mp4",
+      "bytes": 18898044,
+      "sha256": "205968fc9d05567daf8b62ebed932930fc1343d5482d52faa4235f65ca308e95"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/02-the-word-you-never-searched.srt",
+      "bytes": 6219,
+      "sha256": "da2cb37a6ddc1189c370eb01bbf84aa86817f35dceb4a86b49fdb70d8ec1bf6d"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/02-the-word-you-never-searched.vtt",
+      "bytes": 5960,
+      "sha256": "130a6812f27738755d724da8a15aeb5a96e02c14ab4a4764b32b4961189c4327"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/chapters.vtt",
+      "bytes": 460,
+      "sha256": "ce02207c9da6ad282df52d425c3be8772c8cf0d5de37bb5944b0134b3cb1859d"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/contact-sheet.jpg",
+      "bytes": 418020,
+      "sha256": "1ed7786b973e4244863f188a2dc04a36085ba4fb59eadba0b9b011ccbe12b863"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/poster.jpg",
+      "bytes": 148579,
+      "sha256": "1f33c2c07d81250ae57e3c21d6ae6f6be3cb5066143fe4c4ccb8aaa3766b04f9"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/storyboard.json",
+      "bytes": 9994,
+      "sha256": "7c54f07bb2cd9705bd466983610156d0815829b820423887413657c0ed935f08"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/transcript.txt",
+      "bytes": 3816,
+      "sha256": "417a20e10b53f3e3aa620fc9b1c43eacc674be35b758e743379fc1458b4fae39"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/02-the-word-you-never-searched/verification.json",
+      "bytes": 1083,
+      "sha256": "f4a36124a8f6e1287b624d59f64f031d69ec3965f748a918dd6a893367fb138f"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/03-search-without-rereading/03-search-without-rereading.mp4",
+      "bytes": 21204232,
+      "sha256": "34a02903ebbd874f108736f75601afae460e7e790d8ec64f1e9d63c6da2acde3"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/03-search-without-rereading/03-search-without-rereading.srt",
+      "bytes": 6538,
+      "sha256": "50224882ae0016865889b07b276eb5ff98ad71499a22c704c36e503c8b97268c"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/03-search-without-rereading/03-search-without-rereading.vtt",
+      "bytes": 6270,
+      "sha256": "5bef57e68e6c69f918b24195117652c8ecd0cc427a4e95dbe0b942e557d41985"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/03-search-without-rereading/chapters.vtt",
+      "bytes": 557,
+      "sha256": "f9e4f2a76ee8eb4b4f8cc8314c0efb3cd33e02e8d7445528d5984b2ad9fe3fe7"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/03-search-without-rereading/contact-sheet.jpg",
+      "bytes": 481501,
+      "sha256": "cc2157f6da76b6000b5321330b93d2001ec9f6d2d557cd255a949e25e7182650"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/03-search-without-rereading/poster.jpg",
+      "bytes": 164203,
+      "sha256": "9c5230c93ea12c2407e0ab8054675d12abac9d57557a4e03a6693a8829de96f1"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/03-search-without-rereading/storyboard.json",
+      "bytes": 10780,
+      "sha256": "42cc0f5487cb0fffc64af9edceb7f1ea84ed5a626bf2432339780b83f50a73db"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/03-search-without-rereading/transcript.txt",
+      "bytes": 4075,
+      "sha256": "f0fc092485dd8a454dcf4218c370064629d1057e7700964dc3943e1c309f897e"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/03-search-without-rereading/verification.json",
+      "bytes": 1080,
+      "sha256": "46670b4d5abcde9d3f4a83b396b82ed128d4720226507170fa911820ccd34a44"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/SOURCE.md",
+      "bytes": 5957,
+      "sha256": "d514162c40783ea98ca0f4764c5ed1f08fc0e8dae2847ad6043d0a248a1769fd"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/browser-verification.json",
+      "bytes": 1274,
+      "sha256": "ddf27463454162f10fbf33846528ae58d11e8b389671b2daefb00698ae03a2d3"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/chapter-2-videos.zip",
+      "bytes": 61523625,
+      "sha256": "94bcf24cdc09b7776086d1466207c69e5dfb41be6c75339967f04a0df0a5843c"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/gallery-1440.png",
+      "bytes": 588297,
+      "sha256": "ad739a876bc88a514d3ffe5343baac09de3ba3066e1a0c5a56fca628517db348"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/gallery-390.png",
+      "bytes": 203508,
+      "sha256": "0ea0d2f0efddd31f887a54ee31ca829e9427aa0465c7916fa25ebb3d7551f919"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/gallery-768.png",
+      "bytes": 347953,
+      "sha256": "9ce286867e8614da5e74069b76e0094a40577c972eea03a9b9d4bf24a09c986f"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/index.html",
+      "bytes": 8557,
+      "sha256": "17b0c66f2a14114827d96df1a0380c2ca60beabd5bc91fca60c3e38ca5165034"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/source-provenance.json",
+      "bytes": 602,
+      "sha256": "07a9e007eddf841cfaf3dbbfef3f910537059f3679c8e81c910c701a343118b2"
+    },
+    {
+      "path": "outputs/chapter-2-investigations/verification.json",
+      "bytes": 3579,
+      "sha256": "63322e0d6b607ed6f896fa10ed290e08e5cfdaae533bdb078163cf75eb0345d2"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/01-which-word-deserves-more-weight.mp4",
+      "bytes": 17677308,
+      "sha256": "271668275f13bd9615977da5efad6b4efc11defcbd8dae32111d7e79db407120"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/01-which-word-deserves-more-weight.srt",
+      "bytes": 5439,
+      "sha256": "186efb95e4a24635a0c4ac0e4e0246e68201e9b632e9f0d1058a96fad9a30049"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/01-which-word-deserves-more-weight.vtt",
+      "bytes": 5216,
+      "sha256": "382ee1af4dc6f9d8d637d49550a2c3b2b0137489d0d14e3d904ad6e2af489005"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/chapters.vtt",
+      "bytes": 396,
+      "sha256": "576a87aeddb8caf344ef423954cbbfe2cefda3ae66adea164665bc5dfb1ea82f"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/contact-sheet.jpg",
+      "bytes": 367124,
+      "sha256": "80771a7684d9c1ef5bc02b6b9c367705377edb563d73a8b4d318be431b6712c5"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/poster.jpg",
+      "bytes": 156053,
+      "sha256": "7638544fc194ea2782826674106858a137b74a9d43df145c3630c6e181a4ae90"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/storyboard.json",
+      "bytes": 8736,
+      "sha256": "c4edfa8692469ee2830a20a0690435762b55a566bb9737a8b0f3f625722ed0df"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/transcript.txt",
+      "bytes": 3410,
+      "sha256": "132a36475a4fc2daaa33b51ae7c0713f763ee64ddb9ce30682ade7eefe02eb45"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/01-which-word-deserves-more-weight/verification.json",
+      "bytes": 1087,
+      "sha256": "6dcdb47c564ff955fed34028f706c5b8591b05a23cb90f55fd503f294dbb48e2"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/02-twenty-mentions-twice-the-credit.mp4",
+      "bytes": 18415720,
+      "sha256": "af4aeccb07eff1a5773c29a1d5d7ac30c97dfb306fa14006852d449d3fb83eb3"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/02-twenty-mentions-twice-the-credit.srt",
+      "bytes": 5240,
+      "sha256": "3298b758c350b5eabd11d1d201a18610422c92692cd1d5f943d9656f4655e557"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/02-twenty-mentions-twice-the-credit.vtt",
+      "bytes": 5026,
+      "sha256": "cee6e510fc2903fe210b0ade483e71075f0ff5cf9a167b1c5ddbb3d36a3262b5"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/chapters.vtt",
+      "bytes": 402,
+      "sha256": "d77851de4dc49622d59b83f28ea4e8cf3abc85faabcbe637807b2c386e813f8b"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/contact-sheet.jpg",
+      "bytes": 381362,
+      "sha256": "83f743b74b3c94baf2c090df77dbe4a6171e363d0f3bcd77e7f8dc8bda058f22"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/poster.jpg",
+      "bytes": 152431,
+      "sha256": "9d9541b7c8342aa9d83f03b9437183b9450594e1cb3462bc6d6295858dff00b6"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/storyboard.json",
+      "bytes": 8446,
+      "sha256": "f0d734edf47b5cfc2a91a6079e811225bdbad10bde4323687a889984897e59ed"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/transcript.txt",
+      "bytes": 3315,
+      "sha256": "f4762417b4ddcf15d6cf38b94f53c623c6c33f6406745f497643a19d9e3b0aea"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/02-twenty-mentions-twice-the-credit/verification.json",
+      "bytes": 1088,
+      "sha256": "5c27cdb386ddff4cf33ade0e08c1ad7599c123a28d07b5b5d842e285c8603b26"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/03-same-index-three-controls/03-same-index-three-controls.mp4",
+      "bytes": 22290794,
+      "sha256": "6039c809e6f9e88c300c99f8f80688c0f287a52a2baaef50edefc8eb39ff7121"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/03-same-index-three-controls/03-same-index-three-controls.srt",
+      "bytes": 6206,
+      "sha256": "8846144dc75d20b1861b07a62e27b6205f92ee7c97515b87985bbcca342b89ca"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/03-same-index-three-controls/03-same-index-three-controls.vtt",
+      "bytes": 5950,
+      "sha256": "e65a4c98e3a7105ff1464d7c59ea5047f5e8c922205f5fa6d2b0b86447e438f7"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/03-same-index-three-controls/chapters.vtt",
+      "bytes": 511,
+      "sha256": "3c21521db2ac461cde151e3b1cd4a3d12e0b19bd01470fd8bca7e82ff5b60b8d"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/03-same-index-three-controls/contact-sheet.jpg",
+      "bytes": 469672,
+      "sha256": "38567fae1a86bf6fe0eaa4cb4ca92a90682594e87b5553053cb1e1100b46ce0a"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/03-same-index-three-controls/poster.jpg",
+      "bytes": 159586,
+      "sha256": "55e8a5f37293d0bceb87ce37129df6138e732314892ede3594e72e858df512d9"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/03-same-index-three-controls/storyboard.json",
+      "bytes": 10101,
+      "sha256": "1fba35e48f2d7813a3b880b576ba078aca467e5113aef038997614a1b1eed33e"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/03-same-index-three-controls/transcript.txt",
+      "bytes": 3842,
+      "sha256": "db7dbe8c9b6ff876d13fa1725469732be99d54c40b41308319fff5a632f856c3"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/03-same-index-three-controls/verification.json",
+      "bytes": 1081,
+      "sha256": "72834f436aa65ad67eb2f5f827424a871778b640c7a0aa10cc49edb8d9d1421f"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/SOURCE.md",
+      "bytes": 6862,
+      "sha256": "ba47b94fc691bab5d1234c39985e6ebd71b6c2f5cc730e4540a71e73ebd9cea5"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/browser-verification.json",
+      "bytes": 1289,
+      "sha256": "b73df4cbd67368ef6b4490873ae6eb13688040330c8e6aabbae4902a9f51fbc7"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/chapter-3-videos.zip",
+      "bytes": 61581056,
+      "sha256": "f71993ac9c6f2baf42526d2130aaf45a84f6db28f149d7b6bca247981a29ef71"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/gallery-1440.png",
+      "bytes": 603289,
+      "sha256": "21ae3164f8f76f73973b7f56aa73e38a160f5de683b90167faeb23a136bc010a"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/gallery-390.png",
+      "bytes": 211474,
+      "sha256": "b3e4373705208f6b0147cb057330f3d42118d281041a4ed60c5391b3fde89f62"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/gallery-768.png",
+      "bytes": 360084,
+      "sha256": "5957fbbfb19e49355e6ecc608ce677772ef6a5b0c47918b3430b5eecdb2e801f"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/index.html",
+      "bytes": 8379,
+      "sha256": "7596797a85c92997a5a8c95748c2c0951403cb460689956edf93b557d77797df"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/frequency-factors.csv",
+      "bytes": 1327,
+      "sha256": "52c70528195c0ffbcbb48f9e0ccd0a0294e5625885328406aea86fcd8c38e3fb"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/k1-curves.png",
+      "bytes": 75333,
+      "sha256": "0b51e2206e8d7e98d384fa8501f046f85b289ad3a220cda187fae52bd03556b8"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/k1-curves.svg",
+      "bytes": 14299,
+      "sha256": "d0b0bc6ed0318ea013921526f0e8532af4f4705621b6b2433a4229353cf719b3"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/length-factors.csv",
+      "bytes": 153,
+      "sha256": "13e676eac0c6929508b943a9c3b0cb75a4d311f5a6a07871275fb0dccf5caea4"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/length-normalisation.png",
+      "bytes": 63779,
+      "sha256": "4e0e4038a03c1cb2732310fd58bb651d8194665ffe0d2b1ef81cc35f5c93e244"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/length-normalisation.svg",
+      "bytes": 10376,
+      "sha256": "6a50f54afe0503d4ed264be6d4c7e1c4a17245f99ec9a545552ddef82201e2f3"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/plots-manifest.json",
+      "bytes": 1060,
+      "sha256": "b0e7aa0bef1054efff8a3ea1a19a061fbd685885e0fe13b929d796e058c1b0ea"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/saturation.png",
+      "bytes": 54229,
+      "sha256": "b157b6f9decb4de750e0399b232f0bdbbf5d45d95c312630e852f06c0872d6ea"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/saturation.svg",
+      "bytes": 11812,
+      "sha256": "446c2d39c22d0c9d0c74735782caca6723ae3156181480f6ec40299fea10157f"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/plots/toy-scores.csv",
+      "bytes": 359,
+      "sha256": "e4adf466ef1c4d1eeed404dad607c0396bc4ee0510a172f9564383e3e5c00d99"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/source-provenance.json",
+      "bytes": 691,
+      "sha256": "4e8d9f508fa338b9a0509dad2587be7271e6342db662b0d4d055a5cd3ddb30be"
+    },
+    {
+      "path": "outputs/chapter-3-investigations/verification.json",
+      "bytes": 3587,
+      "sha256": "2a65dbbfbb92d1866f2f5172904fa834cf2bc72468be72c4cc94a125c192fead"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/01-three-doors-one-index/01-three-doors-one-index.mp4",
+      "bytes": 16766980,
+      "sha256": "c93b095e7e46c6f98baed7c30d243e9d4d743156fd08f9a4e4d1f37e00820807"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/01-three-doors-one-index/01-three-doors-one-index.srt",
+      "bytes": 6000,
+      "sha256": "87a1eb4c1937867c5d0913d96c69a119b4cd1242ae194ebe1abce3e9ed8411f3"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/01-three-doors-one-index/01-three-doors-one-index.vtt",
+      "bytes": 5750,
+      "sha256": "36c8da7c4148324de87ddd7d17b9c21b8cb557ad1358d84d6b73c526412780f6"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/01-three-doors-one-index/chapters.vtt",
+      "bytes": 470,
+      "sha256": "6c0a599e89807c12635bceff1cf2ec8bad182be3e8a512eeea3d8e6e4272dd92"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/01-three-doors-one-index/contact-sheet.jpg",
+      "bytes": 406914,
+      "sha256": "c1237e23901b15ac54798d3ba679cd3e0b17a5bcaeec37f839c849058228a648"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/01-three-doors-one-index/poster.jpg",
+      "bytes": 136443,
+      "sha256": "d72ee2a480a930fb6ab9c5681ae4a0a02321cba28b85218782e1447820129b36"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/01-three-doors-one-index/storyboard.json",
+      "bytes": 9960,
+      "sha256": "02850396eddc6c5d62b5847ed49f9c8fbf4f55156980e1d3e7e3ef9b68e54f4a"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/01-three-doors-one-index/transcript.txt",
+      "bytes": 3691,
+      "sha256": "d73203a61fcc93750207d44d3876c4128d7288bf583e6f4056e757ca44cdf1a2"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/01-three-doors-one-index/verification.json",
+      "bytes": 1483,
+      "sha256": "de5fc6b0c99893e7c0e37a614729b216f037da2f260872fc140ccfb9ae93b7dc"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/02-one-bad-word-two-failures.mp4",
+      "bytes": 19225521,
+      "sha256": "4c6450d0925540524c19d5c10b59c6c06d12cff96832b3a664faa3eb05fc5875"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/02-one-bad-word-two-failures.srt",
+      "bytes": 6114,
+      "sha256": "d50442e3f6b21021da3f9efbd723a8c153de9fa31e69dc71147f6d5a6a92aaa2"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/02-one-bad-word-two-failures.vtt",
+      "bytes": 5864,
+      "sha256": "6810afccf20c88b5dd993ea409cb4f1433fd66bf4baa1bb08f3b1ba6ec9fec50"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/chapters.vtt",
+      "bytes": 467,
+      "sha256": "a17dfb644a4d12f9e7feee50599797d1ab2de80476b8c8cf79745022407d4aba"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/contact-sheet.jpg",
+      "bytes": 437554,
+      "sha256": "a55afe14c2aaadb3c10f5fc950199692288e41fd50c4236f87f601e5081fab03"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/poster.jpg",
+      "bytes": 144507,
+      "sha256": "35cdc643702d265708b236b780ea713e084276ba97b3151783faa5709a98f3d1"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/storyboard.json",
+      "bytes": 10319,
+      "sha256": "4246095e33afd45c0f40653e2d3fa545463ed2f06cb0f309ed6909660b67eb23"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/transcript.txt",
+      "bytes": 3809,
+      "sha256": "173693bf79a17dae2240645d3f7d86974c3169b8bb84bf1be0292b2ef4ee0216"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/02-one-bad-word-two-failures/verification.json",
+      "bytes": 1474,
+      "sha256": "43f467c05612ab5afaf4dfae8f6d2c849fefe316e3efc47619cdd8df40e73d88"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/03-four-lives-of-a-missing-word.mp4",
+      "bytes": 23596085,
+      "sha256": "d0e22cd1af6be38bae77ba1ecacd5e25fb9708f8195118e42908cb18beeab32f"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/03-four-lives-of-a-missing-word.srt",
+      "bytes": 7491,
+      "sha256": "7d8d0ba8c8e42e080f4247fa1e436dd348d5924843b099c7c357ae8c5695c856"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/03-four-lives-of-a-missing-word.vtt",
+      "bytes": 7171,
+      "sha256": "0c157dac5199b8cc6727f4d3198c834a291e2bc60adf35e15f9acab5818d8892"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/chapters.vtt",
+      "bytes": 568,
+      "sha256": "df2ac3df57deca89e5e58c33fea451efcb6342fb81ac649488e6892179f692c8"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/contact-sheet.jpg",
+      "bytes": 509578,
+      "sha256": "c54a5c38c0f2ceceed20e7681340c1ed070b6d30b90eff896fcfb4610ea9468b"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/poster.jpg",
+      "bytes": 138387,
+      "sha256": "3ed506dcd3bb89b3a849055f1a38840ad4daa7fdb4e085fa9efd25c550c464fe"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/storyboard.json",
+      "bytes": 12154,
+      "sha256": "efc823799165b72308494c02440b02ffbb96b2b6dee6c76e1bf2874cfd999a14"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/transcript.txt",
+      "bytes": 4532,
+      "sha256": "e9fa9302b16ea760d3ae1f779fd2f25494eb5278877429c439db98515f8a8032"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/03-four-lives-of-a-missing-word/verification.json",
+      "bytes": 1490,
+      "sha256": "f180a4f3eab0f8c00996a1bcb4290e21b61c6781d889e06bf538842d9a50b750"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/SOURCE.md",
+      "bytes": 6105,
+      "sha256": "2556a4766241f30ec5eb846607b517d43280340078478bae20d45a668b3b283c"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/browser-verification.json",
+      "bytes": 1249,
+      "sha256": "246b72163d681d4adeb9008ff5b883c233bd9c905031fdbf602c3b965df6d147"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/chapter-4-videos.zip",
+      "bytes": 62494441,
+      "sha256": "4746ee79bf209e46d25ecf8a541087a6c8f5a22bd21a936c2a43e38c62fc3754"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/gallery-1440.png",
+      "bytes": 512476,
+      "sha256": "68fadaece50c73150f9b4807bc4716e88b3fab965b9e91f6ac3c4892907d6f64"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/gallery-390.png",
+      "bytes": 192043,
+      "sha256": "617508c0b6daceb4a6890c13ba3d5d5cff5f823a626ab5d59f99b4413aca1a09"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/gallery-768.png",
+      "bytes": 311907,
+      "sha256": "c7365c54e983145550e3446427296df3eb6b5bb04357f9b3f3f3e062b1ca0b91"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/index.html",
+      "bytes": 8545,
+      "sha256": "af58cb79cc778e946e333d322cf51df543eec804909af0d3520a0be44950dd7f"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/source-provenance.json",
+      "bytes": 670,
+      "sha256": "756e6d68a05988670de02c60697ee30513a494de9e9be599c465ca9c87413161"
+    },
+    {
+      "path": "outputs/chapter-4-investigations/verification.json",
+      "bytes": 5102,
+      "sha256": "a5da922e3c02ad62a0a3d9df23f09665eb49255783e6cae83b8688927dd973ee"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/01-the-map-nobody-drew.mp4",
+      "bytes": 24865071,
+      "sha256": "427028e24aebad0a7e2f0dded391d5ba2ab2d18f80fa76859010ac0a4709e7ec"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/01-the-map-nobody-drew.srt",
+      "bytes": 7674,
+      "sha256": "11c4fec1bf7719ef3d557018bbda1b5d97053a2762fe1164c448db42b2c21cb5"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/01-the-map-nobody-drew.vtt",
+      "bytes": 7342,
+      "sha256": "d82c25d7fb76f8a46b76c682db9e93cbd0ab70098b5455329194ff11b00ff104"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/chapters.vtt",
+      "bytes": 568,
+      "sha256": "c63114efcd72418520001f67f3f52c12f01480cfdd494df34f27c07b57c43033"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/contact-sheet.jpg",
+      "bytes": 498046,
+      "sha256": "589b43eccabf60b7563d2e455268bd5bd8f3985c8a1b2c7f3d93f2b072d7c481"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/poster.jpg",
+      "bytes": 127248,
+      "sha256": "3342584a40b736f10f5dce380a60e3c36f5d7fac4eaaef2d762a0d1e597d9269"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/storyboard.json",
+      "bytes": 12122,
+      "sha256": "4839dc92c79af43ed57a265a3c0f28e316e2e2f4be13b3066b0c0edf21049bf1"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/transcript.txt",
+      "bytes": 4597,
+      "sha256": "f04ff84b9a15e0f4625589b6f6073fe7b6b0a39bb36a7d7142b29b64afdd23cc"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/01-the-map-nobody-drew/verification.json",
+      "bytes": 1571,
+      "sha256": "360b27cce2b8dd079ae167dc8f41ab7f6fb39b97527b515cab46e49160ab815b"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/02-one-word-two-locations/02-one-word-two-locations.mp4",
+      "bytes": 20983034,
+      "sha256": "325331f07bc245066d18e0ed997930f46efd2bf92b3843b837a7f56eec290b28"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/02-one-word-two-locations/02-one-word-two-locations.srt",
+      "bytes": 7003,
+      "sha256": "1092793d9f2d86b63cd1f38c4fbf903de769cc1de81bd36b7d4de282d86b4cc3"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/02-one-word-two-locations/02-one-word-two-locations.vtt",
+      "bytes": 6711,
+      "sha256": "4a5e2ba42db3adcc569b9a2e462d762a05e298e2d700d261dd7f809a9753116a"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/02-one-word-two-locations/chapters.vtt",
+      "bytes": 528,
+      "sha256": "ad6c86fd5b943200bf644715d2ae6fcc56575e670b25aeb8515cdc32cabfc1cd"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/02-one-word-two-locations/contact-sheet.jpg",
+      "bytes": 445277,
+      "sha256": "369eef055169e7a1e8f8203091fbbcbd31b4618f4d64381d75aec7cfbe74a02b"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/02-one-word-two-locations/poster.jpg",
+      "bytes": 133029,
+      "sha256": "3fd3bd7414ede1291cf26ecdaa2615b6bf89898e185251f4dba73556f6422a9f"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/02-one-word-two-locations/storyboard.json",
+      "bytes": 11038,
+      "sha256": "df691d8b6fe0fe55933166b408174f67d6979357c8f39a01636664e2e44b4b76"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/02-one-word-two-locations/transcript.txt",
+      "bytes": 4246,
+      "sha256": "4522c0a4271b6515b358b700b9649692b7509ce2f80672f9b32c8fb173742e51"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/02-one-word-two-locations/verification.json",
+      "bytes": 1575,
+      "sha256": "9e1a9ab336aeb8e9b44e529447e5adb64c2f0ab673f324d996fb755bb36d8482"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/03-the-wrong-prediction-game.mp4",
+      "bytes": 26429289,
+      "sha256": "1a9e2cd3f920c682c298eaed256eb70e7a2ed1ba70061fb086f0e6d8e077b442"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/03-the-wrong-prediction-game.srt",
+      "bytes": 8137,
+      "sha256": "b0a4fe7cbef0c4293633ce85d030c2a0a95b263a7d70f9ef831af4f86404bf17"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/03-the-wrong-prediction-game.vtt",
+      "bytes": 7781,
+      "sha256": "57e0ba368bec01ef1c5e7f95ffcc562b831a13ba23a790259ce45e93fc8cf4ea"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/chapters.vtt",
+      "bytes": 612,
+      "sha256": "95c95257653d3e186ff5b6768d5ef1439387759e4ce70f859ed9afce154f1d69"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/contact-sheet.jpg",
+      "bytes": 540598,
+      "sha256": "2818c2b40244e87785e856eb5696d638578e21b026efd08321825d3f6d35d2fd"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/poster.jpg",
+      "bytes": 137778,
+      "sha256": "fe3f714ec626a9c2ef12f1a57134a0dec541b1f1c3d18dd2e5c08ee10d83db07"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/storyboard.json",
+      "bytes": 12662,
+      "sha256": "cb2bf94cebfb760d7ae74dcdc7629a334fd0e77045a662b453acffca8afa3a53"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/transcript.txt",
+      "bytes": 4856,
+      "sha256": "c8ec81c3ef5f67b2ffd29b91e341b8805d7ec5cf19c3fc36ad99ab05fa32cb6c"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/03-the-wrong-prediction-game/verification.json",
+      "bytes": 1577,
+      "sha256": "a6f4223170bf24e03459ba2c7b44f1c9f5ad4c99602f2c92e037ea1bd11f43f8"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/SOURCE.md",
+      "bytes": 7014,
+      "sha256": "21d19f6f45b17b58f7b403dd66b8c9ad585cf47638f8ea49b44caf4894102f53"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/browser-verification.json",
+      "bytes": 1249,
+      "sha256": "7351093aba671c5a93a79abe0a02bb65b4a5b3c1864ce54604ea5e3af1d220a6"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/chapter-5-videos.zip",
+      "bytes": 75607329,
+      "sha256": "f2b128bc27f02765b299cc2591b67a4c3ee23011d833662aedd6218a9a435afc"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/gallery-1440.png",
+      "bytes": 502231,
+      "sha256": "9fa9535a582c80a84934e90052a931c54ed6e28b599958f748a48ac68e773011"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/gallery-390.png",
+      "bytes": 195154,
+      "sha256": "774004d9bb6ca99329bd749742cccf650d71fe6d34e0779cb4371dd3685e37b1"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/gallery-768.png",
+      "bytes": 310645,
+      "sha256": "bfca9c4febd535030da3df8ffc6a8988021ed2c0e02ea1330bed3518abefaeb0"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/index.html",
+      "bytes": 8900,
+      "sha256": "78285e10c8d792e9225bec4cec36922cc9d14342625a84905fce5e5ec38415b6"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/plots/analogy-after.png",
+      "bytes": 75793,
+      "sha256": "d50eec1f7f0eab8118b9f52da10a6a78725c30c94167d81e96700a9677e78ea2"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/plots/analogy-after.svg",
+      "bytes": 17316,
+      "sha256": "5033a2fe83ec96ef33797a1687ad7fa9e418f96d1b0909f9297d4c9d3711c9c0"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/plots/analogy-before.png",
+      "bytes": 68754,
+      "sha256": "fe28b6e328e3c0ecce489f9b284d1b0670bb013f2eeea860add06e2e78ce4458"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/plots/analogy-before.svg",
+      "bytes": 16546,
+      "sha256": "48cb9438df24a25b10aa633440bf02945afecc9ef2dc7fbb4211e28bb847fff7"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/plots/plots-manifest.json",
+      "bytes": 1337,
+      "sha256": "f8578288a92d664cac649efbe4e18835336992516341b487353d86fea603d114"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/plots/projection-loss.png",
+      "bytes": 109296,
+      "sha256": "bbb0716dabaa651298930ef145689e49f9edb188914581c8fd6c24048ab1749e"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/plots/projection-loss.svg",
+      "bytes": 20560,
+      "sha256": "66508d3c763ad01b7b73975ffc6429a062bdde35c1172762e368e41bbdc4817a"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/plots/toy-geometry.csv",
+      "bytes": 286,
+      "sha256": "c7f1f1ecd43f95fc705ab60ec583922b937f54dec73ffbafbf12f40877d923d2"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/source-provenance.json",
+      "bytes": 594,
+      "sha256": "9b0271d31890215d3f1ad22226f5e87d13c80221588d2b8d9853dfa4ae8ab914"
+    },
+    {
+      "path": "outputs/chapter-5-investigations/verification.json",
+      "bytes": 5318,
+      "sha256": "cf6f5d0f050b7473d0b7e421ade166899ae1ef06c9246aa4f12c048e16804547"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/01-the-vector-we-actually-store.mp4",
+      "bytes": 22132925,
+      "sha256": "677999d69e6bc3decc8af6026665822828e49fd53f0b07ddb28e188696864549"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/01-the-vector-we-actually-store.srt",
+      "bytes": 7034,
+      "sha256": "4f9b183f7a1e0d26c513b098895d8d918da708f9dfd60fc24e988640318b580f"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/01-the-vector-we-actually-store.vtt",
+      "bytes": 6738,
+      "sha256": "575d05e56ca95bf4094542c00c59c38f40911a1862e4dcede12bdc4aff47a6b4"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/chapters.vtt",
+      "bytes": 533,
+      "sha256": "823a6bfd795365432a1840adad1237aa3e7fe16749a36cf6c00d46a9426d5342"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/contact-sheet.jpg",
+      "bytes": 450874,
+      "sha256": "5b659bb89f77341d202982b304ca86d6a12dcad8ec9179105862b44af45262d5"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/poster.jpg",
+      "bytes": 135428,
+      "sha256": "f7f5cdb618856bfda9274c5e507ea0ebffe35bf86ab430ce62d2bc3ce60ec42c"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/storyboard.json",
+      "bytes": 10978,
+      "sha256": "c50c0c69bfa62e532367e7b8b93962c60a06839444288f0df2b4ccdbe4a14779"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/transcript.txt",
+      "bytes": 4254,
+      "sha256": "9185e521959e3ad26660741a8902dbfa71adeac873ad5cc9ad660099206bea11"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/01-the-vector-we-actually-store/verification.json",
+      "bytes": 1860,
+      "sha256": "e655d52568b60c203361f35202703b393c1d65dae79545991e9606ffe0952136"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/02-the-result-that-almost-answers.mp4",
+      "bytes": 23054510,
+      "sha256": "138fe2c113f4e083ce8c27f88a2af6ed794ef740ce6d2faf86da89e85d5e8349"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/02-the-result-that-almost-answers.srt",
+      "bytes": 7133,
+      "sha256": "99e3aa794aad960bff45a32232f9fdf35bb6ac15d29f9fca3b1c957964490366"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/02-the-result-that-almost-answers.vtt",
+      "bytes": 6829,
+      "sha256": "db0ea7f81be02d050744fe1974305e44d21f6ccf39f1caa6baeb6d18acb5098f"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/chapters.vtt",
+      "bytes": 489,
+      "sha256": "1c63dc8bea85fadbc769cd065b59d47de41f7356507d596d122b7b46789a056d"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/contact-sheet.jpg",
+      "bytes": 466000,
+      "sha256": "9a9eb422fa401817d8e5ddde8a7b6fdeea0cc0310a309ac0dcecb3d173ae8f99"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/poster.jpg",
+      "bytes": 139596,
+      "sha256": "53eda428e831852747cd53ce9a6830d2f36829f1b98076ee2f0093f7ef2f64fd"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/storyboard.json",
+      "bytes": 11127,
+      "sha256": "e7a3813192ba2aa820dc61d49d5566b0a1b0c48f08918927d2ce0b8605b7961a"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/transcript.txt",
+      "bytes": 4285,
+      "sha256": "040f762f1b5fe4dadea71a88bcf7945f186d186a6842150057a599d414286e26"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/02-the-result-that-almost-answers/verification.json",
+      "bytes": 1875,
+      "sha256": "d4e03ff3f370f25c425e108bff2a4666cf77dff779702c9299bfe52b8144ccc4"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/03-whose-idea-of-relevance.mp4",
+      "bytes": 23536366,
+      "sha256": "380a4cedca17dab9298adc559a464dcad48a469440b5a924fa78595eb16394e0"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/03-whose-idea-of-relevance.srt",
+      "bytes": 7295,
+      "sha256": "0f7526ff6e181cb32d21be9be7dd9ee863ad8d64ccb775d551ccbbfb1d7c581a"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/03-whose-idea-of-relevance.vtt",
+      "bytes": 6987,
+      "sha256": "64ef8ab68e9901cca24b6cd65bf96fe108e06063075842df4e436d0da2ec3850"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/chapters.vtt",
+      "bytes": 546,
+      "sha256": "efd06ea4872dc71bdfccb97dcddfb2b84ef751f3e9b2433658cfbc5950a54618"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/contact-sheet.jpg",
+      "bytes": 468966,
+      "sha256": "e64da644d439df20cdffa4e3a9486abc5643848df14849213a31297a61909d17"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/poster.jpg",
+      "bytes": 132178,
+      "sha256": "38174e81bd401fe60233ed0cccdb40e1fc43ea86b3bf1fa838264aa7e8764975"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/storyboard.json",
+      "bytes": 11426,
+      "sha256": "de5e2ac8df3aa43301c0f865533c9452900289ebba6161669da3e9ec5a955eda"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/transcript.txt",
+      "bytes": 4406,
+      "sha256": "f3b8e8bd3c269eb306934c12c24c5df8e9ec7436618d6b9d513a810d371f35ea"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/03-whose-idea-of-relevance/verification.json",
+      "bytes": 1868,
+      "sha256": "e60eaadc6a072340787757c71c98e6843b0b87e15fb06949044ba09954d629ae"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/SOURCE.md",
+      "bytes": 7288,
+      "sha256": "d32c3116b595b58369c32442ce8bfb805c084b6a753124c4a3d7d74103337a00"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/browser-verification.json",
+      "bytes": 1274,
+      "sha256": "4b45cfb78b672e84e43ef45e5a779ffc42e81d2bfa176e6050192d893f5ab7f8"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/chapter-6-videos.zip",
+      "bytes": 71868127,
+      "sha256": "70be3aa4ba12058b471e042b6758351205749507a4718bc5db99dacff55bd8e3"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/gallery-1440.png",
+      "bytes": 487490,
+      "sha256": "4c77be41b0e29d3fe8dc80d9eb536bdd474f879ea207d5bc756cdad1d8962790"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/gallery-390.png",
+      "bytes": 195365,
+      "sha256": "345221fbd692e4c95317ee45c77fc9fd53e0b4ffb0bf4fd92261fd1a9a9fc1dd"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/gallery-768.png",
+      "bytes": 303304,
+      "sha256": "c82c68fffc5e7eb5086ee666bb482f1c52523e1dbba5862c95890447e291a62d"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/index.html",
+      "bytes": 8962,
+      "sha256": "05a87c5072f8e2bcb5a57ee133ba86ab29508f0bfc8b982a6f45ff20d686fc2b"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/plots/comparison-after.png",
+      "bytes": 98491,
+      "sha256": "777df0015af141f25d2197fa21ef9c3ff9b99fa2b916c3331674da284e02b996"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/plots/comparison-after.svg",
+      "bytes": 20223,
+      "sha256": "c5518be88b7d8920152f77a25bbe09534a62d774c392f88ff9aedacd8ff1ed48"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/plots/comparison-before.png",
+      "bytes": 96981,
+      "sha256": "71d5e02d5899cece70bfc4cc6508377ec07c52919573271a0e788e076bd7d370"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/plots/comparison-before.svg",
+      "bytes": 20217,
+      "sha256": "babbfb0d10668b411cf49f352012d3098ec14dc1cf5d2824db52f3bf8b48aeaf"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/plots/plots-manifest.json",
+      "bytes": 1556,
+      "sha256": "5a3a25b8c6875106bd4e05ac3f988c8bb41c6f1f7e6d37eb3c073952eb4d15b8"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/plots/toy-pooling.csv",
+      "bytes": 238,
+      "sha256": "9456d69c3ec272bbd38688bda457cd9319d8db013e045785d3c4addfd8ee9d1d"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/plots/toy-scores.csv",
+      "bytes": 603,
+      "sha256": "3f7f013cd8e5fd9df3c332bf0a6bc8606ea768925217a36e2c86d60efac51e93"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/source-provenance.json",
+      "bytes": 567,
+      "sha256": "3683f40543a385b6d3e3319cda45251d13a3df19a47e0dbd07d6f987fab7fc7a"
+    },
+    {
+      "path": "outputs/chapter-6-investigations/verification.json",
+      "bytes": 6450,
+      "sha256": "fa33ffecf305b4bc90ddc8118b4a0f8daf943c0c455e350e7a84d02055ffbe50"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/01-same-vectors-different-winner.mp4",
+      "bytes": 22119591,
+      "sha256": "6bf447ec8421a2e496391e04f06f3949511964a0dc75ddbd25e5848bb4fd6ae6"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/01-same-vectors-different-winner.srt",
+      "bytes": 6352,
+      "sha256": "aa00df86dfb4358f34d89ea57de5d39cb7c99e5049de1174e9bd92ea6d3c043b"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/01-same-vectors-different-winner.vtt",
+      "bytes": 6090,
+      "sha256": "1760e32522c28b3c9ab97d2f0bfd25f2b7a65d8c043befcb59f36be3d5f0550e"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/chapters.vtt",
+      "bytes": 504,
+      "sha256": "4d2ea026842943b2acad2e9f1ef5af9bc6aec58b6e0519d0f4281e84d0360964"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/contact-sheet.jpg",
+      "bytes": 453061,
+      "sha256": "df239c51c3ae30e83931181bfe73552df5d6f46c958974144e4eaaca8e2e87ac"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/poster.jpg",
+      "bytes": 137928,
+      "sha256": "a6cc93e4ffc6820b9cfcaaf8498bb593a61e839b7f6943674765633579e4f455"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/storyboard.json",
+      "bytes": 10390,
+      "sha256": "8f45e6abcd72547d25fd94e85ad5025f6fc9907f7e3b00ed6144b05ce942364c"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/transcript.txt",
+      "bytes": 3915,
+      "sha256": "eacdb995c5dd2e84c411224d390ae49330acf51d17f7731378c23a2f83769b53"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/01-same-vectors-different-winner/verification.json",
+      "bytes": 1977,
+      "sha256": "5312cabd294f46d2d1d3ecbf17ae72cc9d1bab46f4209303a3be5cd51f666c9a"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/02-the-neighbour-you-never-visited.mp4",
+      "bytes": 23552229,
+      "sha256": "f7d501385fa9b2779315fde0a4d217f613ff25d315c19722e6d9f679eaa8dbf0"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/02-the-neighbour-you-never-visited.srt",
+      "bytes": 6448,
+      "sha256": "ac04ddfa87d4fd91830a05c08655d3ae134ec958068a6bc092082c61965f939d"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/02-the-neighbour-you-never-visited.vtt",
+      "bytes": 6183,
+      "sha256": "d741d092c70f4274cde5d10f1d11855b351963be3566372b2f4b5d3ffc8e8180"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/chapters.vtt",
+      "bytes": 536,
+      "sha256": "ce81caa8486230d540b3e2b1da3c55ccfb41951b84ff66c5dd7386d858fe28b1"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/contact-sheet.jpg",
+      "bytes": 464199,
+      "sha256": "dd34dea3f89d64379f48e97ce21a0973d30efbc01d06c54a4237ef837e25067f"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/poster.jpg",
+      "bytes": 140598,
+      "sha256": "d716f0fca5dc8e194eb86d9bd0bb18a8863ef3774090c3ae12202700052fdd78"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/storyboard.json",
+      "bytes": 10689,
+      "sha256": "81bb997f8b0fcb9a97fd161fd7efb8368d5883ce65378fb3f9b66087f5b160c0"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/transcript.txt",
+      "bytes": 3978,
+      "sha256": "716ac9b2ad50a8efd5829d263a9bb04d975f08ae3e16a8871de86256dc3735c9"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/02-the-neighbour-you-never-visited/verification.json",
+      "bytes": 1979,
+      "sha256": "c42dacbc53ef52c99f4f42df72394c112f3d823ce22da9bbd9a6b79b829bbae9"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/03-where-does-meaning-enter.mp4",
+      "bytes": 29662408,
+      "sha256": "e93928eb090f4439f35c210967c4934b87bceec3b3a2447c4b25b0bccd5a7136"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/03-where-does-meaning-enter.srt",
+      "bytes": 8035,
+      "sha256": "95f9e5e1ee26f282e6b764a3ea49db5c479c335e8c2ef06957b0e20c49e008da"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/03-where-does-meaning-enter.vtt",
+      "bytes": 7687,
+      "sha256": "7934471391388e938de531d598a95ab310e9bd785323e77ebd3c10e1a663fa39"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/chapters.vtt",
+      "bytes": 619,
+      "sha256": "42f2a596b58611d4434127cc01afcbd0c08db28b3d6c7685fa4aebe0bbd0c122"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/contact-sheet.jpg",
+      "bytes": 570848,
+      "sha256": "92f477857d947169c40fe5034371fc803682bfafbdb64696939ada31374ccc22"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/poster.jpg",
+      "bytes": 134194,
+      "sha256": "86cd1c739aaca9a78358879b37e6f5c5309d3acf8c272b3141952a9d93e90fa4"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/storyboard.json",
+      "bytes": 12825,
+      "sha256": "258619eb534b238a512a0e2ba89394008cf6a47f4844bf4bb7e12a0f8a2dc6ec"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/transcript.txt",
+      "bytes": 4828,
+      "sha256": "b22a7fb88e4a2f0ab89eee697171cead56dbe42870a308abbee21c414a77d611"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/03-where-does-meaning-enter/verification.json",
+      "bytes": 1973,
+      "sha256": "10c6e29b62cd7a87f16bad2ab75d4ce24dbe03f704d505e49a9c9a3ae7f847d7"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/SOURCE.md",
+      "bytes": 7596,
+      "sha256": "dec68152d73c75ed14a082a80adc6d61f72bfd43538c6f6f2268c14b7454b441"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/browser-verification.json",
+      "bytes": 1283,
+      "sha256": "d443994d41c4f92be0a062a1863794a05767eab46fdb08464881e7cfa042f473"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/chapter-7-videos.zip",
+      "bytes": 78865875,
+      "sha256": "db2f1d527b726dff722ba660a7bcd95289cbe240743cb96b06cd71e75e5910ec"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/gallery-1440.png",
+      "bytes": 524779,
+      "sha256": "76bb1dc2755cae68fcd1b9c39f58f7fe31f91eb42f4c4e658b46e51a552fbca5"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/gallery-390.png",
+      "bytes": 205119,
+      "sha256": "04eb371f81031df263cf57623ce0dcf4078ed4dbff788aeea6dd82eaf0b887db"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/gallery-768.png",
+      "bytes": 322903,
+      "sha256": "7f96fcc1b6de659dc6b68fd673a8beebacb14b325d47303d59b2f6cff7db4d00"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/index.html",
+      "bytes": 9151,
+      "sha256": "79ae0b73cc89aef5dd71e900e572d85f4120c3e065d9609a5b36d81a4031750c"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/comparison-rules.png",
+      "bytes": 90954,
+      "sha256": "935fb7032912ca584ba8d7fff3cc191f0bbf86ba72b89194869934a252dea2f2"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/comparison-rules.svg",
+      "bytes": 19958,
+      "sha256": "74cd388bc5a52b8137b486c989c6f6b16528297e77093bbd1aa1f65f9140ae90"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/neighbour-search.csv",
+      "bytes": 359,
+      "sha256": "8842ab4135c72a867586bd849e944cea84217e49a53241d2909a2091004eb6f4"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/neighbours-approximate.png",
+      "bytes": 84723,
+      "sha256": "b8d2902f94b34cd1346be2bd8ab9fc724defbd0031b6268c501840e2e96d5731"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/neighbours-approximate.svg",
+      "bytes": 28888,
+      "sha256": "62348709fb2c91f4da89dd02f0df0c093ea6b9658174fa74dbe5c7200982079a"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/neighbours-exact.png",
+      "bytes": 86876,
+      "sha256": "806519c48423246da249e07d111e0ffa03458424c2f29bc080333060f8997c72"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/neighbours-exact.svg",
+      "bytes": 28343,
+      "sha256": "9292ae53ea8d879793651fa167c5b1747576949b883deb92fe47aa925710b65e"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/plots-manifest.json",
+      "bytes": 2100,
+      "sha256": "3f1a23c4630b90b2ce4097026eab898b32a7685c80cbdf7ed8e848e3c3c23e70"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/similarity-scores.csv",
+      "bytes": 583,
+      "sha256": "71a3e7e77d20335ff3ec8612085aeea69380faac9e0b5c18b1b7875c94893e53"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/unit-rules.png",
+      "bytes": 87682,
+      "sha256": "a2110d8dbd1196e13790669be5cc34e878c187ba3aad0b1d695598b4bb9c74b5"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/plots/unit-rules.svg",
+      "bytes": 19956,
+      "sha256": "be6e3832f128b3fb8c6c8cef368527a72bb5f1aca926aee556e111a92da49dbd"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/source-provenance.json",
+      "bytes": 578,
+      "sha256": "257743eaf69076957419afe7fb9c10f077814658533f312c5bd5b6cf08b70e26"
+    },
+    {
+      "path": "outputs/chapter-7-investigations/verification.json",
+      "bytes": 6764,
+      "sha256": "6250485ecf0db14c299d136ddd69d12d5ed29264b74fa603c93af89423b1337f"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/01-the-vector-hiding-in-keyword-search.mp4",
+      "bytes": 24081862,
+      "sha256": "58a03613f9150507c1c13e7adb83079d87e46c275c3bed99a1c2f113e195f24e"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/01-the-vector-hiding-in-keyword-search.srt",
+      "bytes": 7302,
+      "sha256": "f6b542e7cf8e4d131cbed72a224043f7c8c59506ca16d2ddefb30a69fb8fbc4b"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/01-the-vector-hiding-in-keyword-search.vtt",
+      "bytes": 6986,
+      "sha256": "33a893632f8471ef03771a26b20c078b01b19d974dfd2d612643ca792a6ba68e"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/chapters.vtt",
+      "bytes": 569,
+      "sha256": "dc4095ca7e24b93358b85fd71a94cc16026ef61d3cf4ce8e87827dc3ce492484"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/contact-sheet.jpg",
+      "bytes": 518794,
+      "sha256": "01b42f8909e0bff5361b1d93f786e9a488ebcfa922e3484a41f17954463318a5"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/poster.jpg",
+      "bytes": 141091,
+      "sha256": "8d5042ce32725d14a5c984b99ffa2d97956170a53911d4f330c53d4f2eae5dc7"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/storyboard.json",
+      "bytes": 11701,
+      "sha256": "b8abcd17f1da9ac049a0e96d474e66414e040c3f3fe349b2d4715c6eeca3637d"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/transcript.txt",
+      "bytes": 4396,
+      "sha256": "8e8c7a2fe017dff8777e2d2185e391c6c69216e2c2a58aaa953cd8e392283705"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/01-the-vector-hiding-in-keyword-search/verification.json",
+      "bytes": 2203,
+      "sha256": "eed9b1a4014d911874ffae137a64bd562ea8c5db9cb035461d079a41470a4fbc"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/02-dense-does-not-mean-semantic.mp4",
+      "bytes": 26670305,
+      "sha256": "80c4d67398c82622ad54fcc60fa11a5f4cb8e90f8934957ef72b028845164d0c"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/02-dense-does-not-mean-semantic.srt",
+      "bytes": 7622,
+      "sha256": "e835f81a95a9583af17b3dde3070b6a75edabb26e3529a6f17ecb2dcfb24fedb"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/02-dense-does-not-mean-semantic.vtt",
+      "bytes": 7290,
+      "sha256": "cb56befe86e7d2caad1d9d963a4589abab46b1c7abfd216010c34cd3e061b172"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/chapters.vtt",
+      "bytes": 634,
+      "sha256": "0a1a4d57c03793547ab19ab3865f2649038f90a4de8dc08ce94eea88e6421fa5"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/contact-sheet.jpg",
+      "bytes": 534139,
+      "sha256": "1dc956f68dc2a3df2e93b8372936bb64f9e7a490cab2811a999eac7d1191b4d1"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/poster.jpg",
+      "bytes": 134102,
+      "sha256": "7481d9eea5a62ea70b775bada0228e3e67446615ce852a77d2077e77ac21db54"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/storyboard.json",
+      "bytes": 12357,
+      "sha256": "f8402ac8d27bc20eb4e57a21a0efbc0f70fc40389bfbb13597801ef1b985d147"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/transcript.txt",
+      "bytes": 4569,
+      "sha256": "4258a2e43b98c440e0cd462487f98a85d1b94909dfd7c6eddf1bd8f07e0af527"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/02-dense-does-not-mean-semantic/verification.json",
+      "bytes": 2183,
+      "sha256": "fd322d6003087bfcce5bba7e06dd1f5bdc8c43decc4439eb03c86557f7a4ebe1"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/03-one-paper-fifty-searchable-objects.mp4",
+      "bytes": 24094538,
+      "sha256": "088f51593adf19823789e3a5bee2b2f3303b3ce2f4c0184df06c0aa6e37e4f6c"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/03-one-paper-fifty-searchable-objects.srt",
+      "bytes": 7296,
+      "sha256": "9a5f75cb6809b8935a53ab09c7ea6e3bdd78959201dcef43a566754e2efa8083"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/03-one-paper-fifty-searchable-objects.vtt",
+      "bytes": 6988,
+      "sha256": "298bcb4eeaf13f1ca3874acd8525faaac234e46cad94e7423fecdd76d44f0bfc"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/chapters.vtt",
+      "bytes": 612,
+      "sha256": "d78328e6e58938b5d74f3da890d43e454425b66c7c8e78a005f4992b14ebb8d7"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/contact-sheet.jpg",
+      "bytes": 518665,
+      "sha256": "6a7653bdf8135bdbac18a76ded1aa88089c66f1354d38652d256e9839b85afe4"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/poster.jpg",
+      "bytes": 141987,
+      "sha256": "710ccd54d7adff4a6e1818bb0c691b30a4afd10e955493cf7b7a67aa42d7a018"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/storyboard.json",
+      "bytes": 12037,
+      "sha256": "e6efd3cc5c0dbacebfe726b20a721bbcf730b02c15a181d95e2194fce6c73a21"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/transcript.txt",
+      "bytes": 4460,
+      "sha256": "929773d23ddb13551e98d152bf702baa14cb1ffa1cecb4421643aff428f7806c"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/03-one-paper-fifty-searchable-objects/verification.json",
+      "bytes": 2189,
+      "sha256": "50f0ec12525a40e07e5616b63682d499be88ffa5b7f2ae1c2def7db25b9dec2d"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/SOURCE.md",
+      "bytes": 8630,
+      "sha256": "a929b435b27889f7fbad898d545e06aaa63d0f7961d5773a9870c12ded6b60d7"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/browser-verification.json",
+      "bytes": 1292,
+      "sha256": "c5a939297be47e97f242709eebf6fef8ce6a3fd2ce2549707e936dc0f9c5b435"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/chapter-8-videos.zip",
+      "bytes": 78414754,
+      "sha256": "9269d6108bb9e67481f94fffdd36cf2d472840db2d40d5d7d0f0bf9c5e3e5cdf"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/gallery-1440.png",
+      "bytes": 505118,
+      "sha256": "fed77ca90741d2974050bcc4c3d5c914699ac99060a6b7e424568346d730d35e"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/gallery-390.png",
+      "bytes": 210277,
+      "sha256": "429e64f690a3ea8b2f94f8d99549fa1af2dee99981dd848bf5c28868a0008414"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/gallery-768.png",
+      "bytes": 319630,
+      "sha256": "5bbe05e4b09d4ee1eafb102ff22de74f87e3e6546d8ab18ee8db7ae0ce97c5e1"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/index.html",
+      "bytes": 9634,
+      "sha256": "a5fc56d56ba42d4fb9c2c2d727637dbc35103e2f2378b733d5ba30e2394beda8"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/binary-vectors.png",
+      "bytes": 55951,
+      "sha256": "5224f7b466ba567a2547014ed2dbc7e739d7ea0ff7742db2a99f959623a7400a"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/binary-vectors.svg",
+      "bytes": 18206,
+      "sha256": "a34d79f3bd4f1fd6ab60fb85ed7d5eeb71e01defe3f70ef9c6be6a61a3b71b44"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/lexical-weights.csv",
+      "bytes": 747,
+      "sha256": "686e966a520833483870c50efe38c478aade6f370a26e37fee0037632bc20ab8"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/lexical-weights.png",
+      "bytes": 73079,
+      "sha256": "00cdaa82296d61877529a3676c657d9c491cbfea89ca0077a2a23efb46cb037d"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/lexical-weights.svg",
+      "bytes": 8314,
+      "sha256": "e3dab50b869911eb6feb8ea3a814b6a6a9362507f2a04998e99ccd2752e16a08"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/plots-manifest.json",
+      "bytes": 2481,
+      "sha256": "9649b0984a25fc3088a59d8be0725949f93ea52465b17a34a806569c3e1415a7"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/representation-cases.png",
+      "bytes": 85414,
+      "sha256": "d3a9d5256cd55cae32cf5bfffa57022574c00baaa4d783d8cd04be9c7a85710d"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/representation-cases.svg",
+      "bytes": 10130,
+      "sha256": "48b1cfd870ba12073adee7a32518f9cb36251faf34e4f54c1a9c3e10d6b19499"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/sparse-expansion.csv",
+      "bytes": 164,
+      "sha256": "e97c505277bc39e333b6b3107642f63b2599c1d711fd10a461ffcf7891627cd5"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/sparse-expansion.png",
+      "bytes": 75416,
+      "sha256": "3fd5eb41ca4438c921655f3edf544094649e398b1715d4dd1d39233c9d16e0fa"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/sparse-expansion.svg",
+      "bytes": 9326,
+      "sha256": "726d0ad85302bd0650caf96618bf20add5c934e6e2bf86da546f47785d86ea34"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/term-counts.png",
+      "bytes": 53092,
+      "sha256": "c4f5028a8ef68008c051b4a408bc9d678c5a684d3295fd1c1569521d4680f928"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/plots/term-counts.svg",
+      "bytes": 14859,
+      "sha256": "b527c03fe6e0b4f6f779b8f761c379445ea0fcceff20a989c93a1fdf5c2de176"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/source-provenance.json",
+      "bytes": 595,
+      "sha256": "041fe8e5b6b781f393aa75b3529a2ca72756eae0dd936209dd4384fbb711440b"
+    },
+    {
+      "path": "outputs/chapter-8-investigations/verification.json",
+      "bytes": 7758,
+      "sha256": "3214d993dee179916a02466524b2d5f6e3a32279b28a75a9ab9e57f33089e482"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/01-the-paper-the-reranker-never-saw.mp4",
+      "bytes": 28751896,
+      "sha256": "51ab714fd974d8ba946a94b800ff7aaf02195c5990707857059b4aaed1420101"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/01-the-paper-the-reranker-never-saw.srt",
+      "bytes": 7760,
+      "sha256": "640b8a1c9fcbdc81cd6112b0d86983843aa1e835e637b2d7a5844b0d772acb8c"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/01-the-paper-the-reranker-never-saw.vtt",
+      "bytes": 7432,
+      "sha256": "7799d73d9f5818dd4f9e3da166847f44bb9a6c69709387e5f3a75dec6c1ed54a"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/chapters.vtt",
+      "bytes": 605,
+      "sha256": "eba228a136e9911efced3917b9d6e20a428dac6847ecd30c1ed49b0566d916c7"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/contact-sheet.jpg",
+      "bytes": 564106,
+      "sha256": "50717e80d5d16b0bb1a8a317c5a9fa2cfd9770b94f14178b0d6bcaf683ebb852"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/poster.jpg",
+      "bytes": 138050,
+      "sha256": "f728d7ecd66cf6a8eee71c4a06470725a9dbea991e10ce6fac5b3423d41618af"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/storyboard.json",
+      "bytes": 12534,
+      "sha256": "70fc3a419fd02e7b1d902d2f102f20383852a615a5d5ccf7d1a4d1dfae218e4b"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/transcript.txt",
+      "bytes": 4741,
+      "sha256": "b36b5f277f4263327d5ebd5fba2cd2259c85394b802f1793f35cbddbb7e625c6"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/01-the-paper-the-reranker-never-saw/verification.json",
+      "bytes": 2115,
+      "sha256": "485ac29dc969c967fb22f3691251742606d9b42258344873d0ad8f61345eae94"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/02-one-vector-or-many-clues.mp4",
+      "bytes": 29366214,
+      "sha256": "615a49d7b66a31130ca7ed194e162d68e47d069edd45fd5a09033e35e02d9426"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/02-one-vector-or-many-clues.srt",
+      "bytes": 7748,
+      "sha256": "21f8611daab269b28ca40fbca57ad9f6dec907f134674b633007290f8a66e42c"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/02-one-vector-or-many-clues.vtt",
+      "bytes": 7420,
+      "sha256": "dbf2091761471cfde74033502632469ce080f35d9ef4948bfe189267a736d911"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/chapters.vtt",
+      "bytes": 604,
+      "sha256": "76bed0411139f56af44f58a9e22d382c63ba881d15f03445e759e9f922632c14"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/contact-sheet.jpg",
+      "bytes": 563389,
+      "sha256": "b0ee3a7c5b55959b3649c91229d58a63e84187310f3331d04e33ec1782317fa3"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/poster.jpg",
+      "bytes": 127114,
+      "sha256": "a9930c051a5c48c491fba9e0d096f8e52b666f7746c1c34782beed7b722edff0"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/storyboard.json",
+      "bytes": 12540,
+      "sha256": "95fbe423b1b4260153a91170fecbfdadb40198cd324916f7cecbc3247a59f040"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/transcript.txt",
+      "bytes": 4723,
+      "sha256": "ffabc4d220705453a53d4550b5d606db6d96e891533fbce8ef719f6231546cef"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/02-one-vector-or-many-clues/verification.json",
+      "bytes": 2120,
+      "sha256": "33973cafd80ea3d1c6f2323bedaadbbbd0cb5be2c30c9f864b6e1b817eba44b9"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/03-the-best-next-result-may-rank-lower.mp4",
+      "bytes": 30325694,
+      "sha256": "c73adffb3b4780deff6e4899c64efe04cf875b7ac12a8bb34229cfe82fc313cc"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/03-the-best-next-result-may-rank-lower.srt",
+      "bytes": 7849,
+      "sha256": "5d3d4260a69f80fa46de618d9ae09a18f508593ea8bcb125392bc326c3535d64"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/03-the-best-next-result-may-rank-lower.vtt",
+      "bytes": 7509,
+      "sha256": "c0028bda6f44778a265c5b59f47db19022d907adfb8ab64ddcaff1143c85af69"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/chapters.vtt",
+      "bytes": 623,
+      "sha256": "c086b588d659606980f8807f574fa2197dab599f630d518e2adb31a7391c1479"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/contact-sheet.jpg",
+      "bytes": 573813,
+      "sha256": "3f27234001ebdeaef2fe594e675e215bf5a4f034845bdcd764979d1fcbe0e5e5"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/poster.jpg",
+      "bytes": 141860,
+      "sha256": "56bf58824dcbc54063dabb52394cc40bb717c9a1ccc756f80687a501791c3283"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/storyboard.json",
+      "bytes": 12629,
+      "sha256": "1942173bcf4f426e21624f01cef4558ffa9f3431bdbdba6d4ae36219a033f661"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/transcript.txt",
+      "bytes": 4728,
+      "sha256": "4314e35742fe8752d08367fca487cdf1c21d68b14fd739e93767caccdebed712"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/03-the-best-next-result-may-rank-lower/verification.json",
+      "bytes": 2130,
+      "sha256": "251b8bb05f8972c2e9d1bdbb07d20fb498b9d7240803bc58011aa859dbcfbf04"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/SOURCE.md",
+      "bytes": 9914,
+      "sha256": "6500f16fd5d59725311a4aaca5c44b16c566784e0caa69f94098524acf9f41b9"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/browser-verification.json",
+      "bytes": 1289,
+      "sha256": "70dc6dc26466090bf89a2ade14322b0133d0f7475fe20bc25c93b168d2ccaff1"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/chapter-9-videos.zip",
+      "bytes": 92187006,
+      "sha256": "e6c56a9b3e7db1c6bdde3872e0657ad74e9e1f2ace7e07c6733dc87a4be4571f"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/gallery-1440.png",
+      "bytes": 496374,
+      "sha256": "4f0c239f163379657c40335c34d5c607bb0fd20a4bae25000029a7582797893a"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/gallery-390.png",
+      "bytes": 205175,
+      "sha256": "12214928d281d9f0a0c4bd7dbb6359efd2eb9c5c35fb42728d2cc7706cafdf26"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/gallery-768.png",
+      "bytes": 312077,
+      "sha256": "85e5c97042714e666b93928fbca491ebfa0bfcfe1460b07fba124cc05b3a2fbe"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/index.html",
+      "bytes": 9551,
+      "sha256": "f4de4427dd63ef11027fa69303565b49c94c293939da1b977931e3d64d59265d"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/aspect-coverage.png",
+      "bytes": 109853,
+      "sha256": "9666d1e3737d2f88dd59341cdef4bd4191961c8933ccd7e8db3a09adaa3b3119"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/aspect-coverage.svg",
+      "bytes": 13356,
+      "sha256": "08fb44a25e1657f8af3694508ef4b4ce4bc8f468559ad35941728237c30a04ef"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/aspect-selections.csv",
+      "bytes": 367,
+      "sha256": "b9dd3ba8463b7359417805d1d500ab6d39b934ea8cf2543951d9bfb02bfff67b"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/encoding-arrangements.png",
+      "bytes": 80300,
+      "sha256": "6e612d7a6922ad6252a44d95dc2ccc0f3229a2ac187aaaee14291d4f40c126b8"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/encoding-arrangements.svg",
+      "bytes": 8298,
+      "sha256": "39ca12612f791678c850d05e83168a9d80c5cbaf6a06548b56f2d6125e01a867"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/maxsim-table.png",
+      "bytes": 82084,
+      "sha256": "c211ef3214f7030fcf5a070744dc8e7b7d687f8c0355ed76f7f7c4ad8f88ee02"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/maxsim-table.svg",
+      "bytes": 8785,
+      "sha256": "12a525880380e83d19ff5e5931fc88e40a34c15ab9ad6c060fffb26e38e1d703"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/maxsim.png",
+      "bytes": 76736,
+      "sha256": "847101afec28b0bdc47354194a5dd9600c4a7d70f3c2c8603317643009f991e4"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/maxsim.svg",
+      "bytes": 8796,
+      "sha256": "1128022dd6219691135bf117039b27eb190910636bc5ecc16b56ce2ee3fa70db"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/plots-manifest.json",
+      "bytes": 2401,
+      "sha256": "b930d852730a7eef94ca0c718c33c7a019ded4a94a81c706302962f8bc373f52"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/reranking-modes.png",
+      "bytes": 79214,
+      "sha256": "82cb135704c0d87fbcd55ed5bcbc8c275f5fb816f1a843dbdd06471b431cac4c"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/reranking-modes.svg",
+      "bytes": 8315,
+      "sha256": "2f3c01881dacc0683c924a399691eaba7d650eb8273146533c64d0058970160f"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/plots/token-similarities.csv",
+      "bytes": 637,
+      "sha256": "6636b69afca7088fa49c0ea8c0f01933cc679e0c7fb887a8dbdf4784a5145e13"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/source-provenance.json",
+      "bytes": 606,
+      "sha256": "a2f0a6414bf37327e262ba25ee40235843516adcbed9956d619b0adc0e4975dc"
+    },
+    {
+      "path": "outputs/chapter-9-investigations/verification.json",
+      "bytes": 7332,
+      "sha256": "06f7c9ce62ea704449564e4f7700c5608ae38a6e7457b6553eae89d84164e35a"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/01-two-models-do-not-make-a-hybrid.mp4",
+      "bytes": 24684326,
+      "sha256": "3709c4cf9c28e2d844e704a0bb9f2bcf3aee6fa294c93675a5e62a936c2237d0"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/01-two-models-do-not-make-a-hybrid.srt",
+      "bytes": 6918,
+      "sha256": "d68f4f37a1e462ea41b0df5ff2dcf4a6c1f18dcad5bb786cb828528c600ca31d"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/01-two-models-do-not-make-a-hybrid.vtt",
+      "bytes": 6634,
+      "sha256": "825f9738a386af1743fb9094da7d5c4b414099764470703d71a9dd1e790ad4de"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/chapters.vtt",
+      "bytes": 611,
+      "sha256": "f791c59b88644ccb70490ff25464e13064be83aa18e28021b7eb1120f43a597b"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/contact-sheet.jpg",
+      "bytes": 539363,
+      "sha256": "90a1571bca95496d8a4cfdd2e3bd5071ec3236a49621c3200f9c572f08151e8d"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/poster.jpg",
+      "bytes": 141954,
+      "sha256": "73b021c06f2db8b3e00f34d73e920097bd0c66ec2988c3893bc4fada10309922"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/storyboard.json",
+      "bytes": 11805,
+      "sha256": "752e7aea88111ace5b916713a44a5e7e2ac37e0a32ad54b0c9026091c75f3175"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/transcript.txt",
+      "bytes": 4281,
+      "sha256": "beec297f3641edda04da76cfd9a6f78d591f05eeead776b5549cd32143fe06cd"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/01-two-models-do-not-make-a-hybrid/verification.json",
+      "bytes": 2017,
+      "sha256": "b58d8f9ca9e59f9ead6be81acd15bf8a213dad6261889dfbebd037bf6f0e9159"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/02-how-two-lists-become-one.mp4",
+      "bytes": 23228764,
+      "sha256": "1cabb800ff07b4639641f8cb66cdcf7f234150e81099c97c7c3a9e1f0a25f655"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/02-how-two-lists-become-one.srt",
+      "bytes": 6603,
+      "sha256": "8b6efd46f9af18efb68574bbd898815e243c49e5867530a082b0f52d4dfdde58"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/02-how-two-lists-become-one.vtt",
+      "bytes": 6329,
+      "sha256": "9fd483f42f5c8eaa9dd3e0af9d5a408e352314503f76a657d169cf9310ed1afc"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/chapters.vtt",
+      "bytes": 568,
+      "sha256": "efed4ed7069fd77b01449ec4284e472217e30a8b6dfbd18b92becf25ecd22860"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/contact-sheet.jpg",
+      "bytes": 511982,
+      "sha256": "90ab64007e4e5cdea83b588721831111ce1250f3ef5dbf8f91d1560735eca9e8"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/poster.jpg",
+      "bytes": 128857,
+      "sha256": "4ca117eca12f3a9543328194bb331c74e54dfe43c285a80a55d9c59607beab9b"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/storyboard.json",
+      "bytes": 11018,
+      "sha256": "54d74ede17f1f81ad172879e4ea8cee57b1a782ccdf642878a8cf02e7824ba99"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/transcript.txt",
+      "bytes": 4062,
+      "sha256": "373ad898b5631fdcacdd67a1b2b78bf6cb1b86eec0856d45d9e490ffea5afc4c"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/02-how-two-lists-become-one/verification.json",
+      "bytes": 2009,
+      "sha256": "97aae1de478341491aa2c2d44aad16d7b51135c443970b94f93f4eb306d6d15c"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/03-what-the-fused-ranking-cannot-tell-you.mp4",
+      "bytes": 30223431,
+      "sha256": "d483fffea90907b25b9c5b0c35d7c1edf80d0aa11fabf72dfd098aff61135c3c"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/03-what-the-fused-ranking-cannot-tell-you.srt",
+      "bytes": 7261,
+      "sha256": "77939887bd3ff467923edac0877dc480901ae32d041daafe0884f1355bc55734"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/03-what-the-fused-ranking-cannot-tell-you.vtt",
+      "bytes": 6957,
+      "sha256": "c938bf50fd8b2a2e7ca8f51878fd4321a7a80a12d18a574b4c998fd8b06032d1"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/chapters.vtt",
+      "bytes": 615,
+      "sha256": "3beeb48e266265f8d714595efcb92e8ada5bf5089cd81ab9d7f0e802c13d7828"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/contact-sheet.jpg",
+      "bytes": 590932,
+      "sha256": "de741e13a47016cbfcdd3f4afdd36f30d03519b0313a37d9499a0984dc7dc618"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/poster.jpg",
+      "bytes": 146232,
+      "sha256": "020a262fbb806f82af1d91e462566a0d7b8411b61b8aa5cec954a4d4719ee7ef"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/storyboard.json",
+      "bytes": 12114,
+      "sha256": "8de3dfe5dce8133b245132034ffb501cc1f82e495c150a93e03b5edbdfedfd65"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/transcript.txt",
+      "bytes": 4456,
+      "sha256": "9bc9c9931feabeadd33e53d3dfefe8ac0800a1808a2d7da48c64eda8a1180682"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/03-what-the-fused-ranking-cannot-tell-you/verification.json",
+      "bytes": 2024,
+      "sha256": "250581319bc4cd9d333f59833bd5131dc6a44b2288173e807accd5400bc3b75d"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/SOURCE.md",
+      "bytes": 9692,
+      "sha256": "d0a9cecda0ca96037165f177a5dbe06fe6a3b3f6c53d636615e43c7bb1c06890"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/browser-verification.json",
+      "bytes": 1271,
+      "sha256": "83fcdbb1c979772981a82041f3c274cc66fd3318cf1dc975403cc46f68ed6c8c"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/chapter-10-videos.zip",
+      "bytes": 82126531,
+      "sha256": "874908f376e7892eb6dea749b07a5712ae7a8525f5c44cdddd76eff3a6cd7e78"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/gallery-1440.png",
+      "bytes": 503059,
+      "sha256": "7325df67a7a3fde1c6b41fce00801fdb70bcd3e605dfe11973371687b19cdc37"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/gallery-390.png",
+      "bytes": 206311,
+      "sha256": "6af55708acea2b8ed92328563c6c9be3bbae163831236eedbe8942db24b374f2"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/gallery-768.png",
+      "bytes": 316171,
+      "sha256": "29e9827fb57b747b7e9e8f56b4037d57ea64d130eb24eb173672896a4e93995b"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/index.html",
+      "bytes": 9551,
+      "sha256": "cb9c7187561a420eee5c5918b01afca216746323bedba69a80b4c1914225ef85"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/constant-curves.csv",
+      "bytes": 351,
+      "sha256": "2e08bcc03331d657f79dc5ff76feabb1446c2f29999ddf6d3d0646694202ffb4"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/constant-effect.png",
+      "bytes": 78124,
+      "sha256": "35538c0eb7a36824cec19df06dae5349458d365940c669572b2863416b9fc339"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/constant-effect.svg",
+      "bytes": 18102,
+      "sha256": "55384f5800c70f02507b113e83efafcf2984c1eca0135d3e4d2e7b1962832b61"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/cutoff-effect.png",
+      "bytes": 87762,
+      "sha256": "85740cce0812555bdc8e2e743cfbb0e212293a146610d1a683b6e49eb3e586c5"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/cutoff-effect.svg",
+      "bytes": 10314,
+      "sha256": "5ebfc7d9633ccff0fe8bc70d32e401056f4b9c8d69ec2f9187f0e867472be2c4"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/plots-manifest.json",
+      "bytes": 2836,
+      "sha256": "5f0827221cd4a91b5153a86d91d6c63cf6cac77af0dd3872ddf70ec89b7584b2"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/rrf-a.png",
+      "bytes": 82670,
+      "sha256": "d4be927e3a2e25dbc8a7c445599dea712100c676b1eb0a5dfecd6ec093e6dbc8"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/rrf-a.svg",
+      "bytes": 14369,
+      "sha256": "9f9d40e07b9d0287bd4d26e44cfa8d2de282676d87de5101763677a5d0d87592"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/rrf-c.png",
+      "bytes": 82710,
+      "sha256": "566af65a7b13e65218e3544c3c1e75a1a48a316a0a4d2ba8840573a31853fb6b"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/rrf-c.svg",
+      "bytes": 14369,
+      "sha256": "dc7f050ab67fe159112cf9f70049e0d0a1f1823a3e5ae11c952ba764836d8497"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/rrf-contributions.png",
+      "bytes": 84185,
+      "sha256": "b4361a6f61f958c2de4db992902b08b731409b652cfaf3bbc63fde18e8048afc"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/rrf-contributions.svg",
+      "bytes": 14369,
+      "sha256": "290e112d418cd08659a8d1596bb135ce4886f2ec48067de078c8cf529010d4a4"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/rrf-singletons.png",
+      "bytes": 83766,
+      "sha256": "879f191ab02d86864e8cc53aaccc1736abff629f4a7d608320922847c5f8f17e"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/rrf-singletons.svg",
+      "bytes": 14369,
+      "sha256": "1ee24eae0bfc43fbf6d4d5c9d08507e6341b1be7707699ea46c99d508cf1cf4b"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/rrf-values.csv",
+      "bytes": 327,
+      "sha256": "dca68641f513078238cf710b4512f25185d4fc4c481ab1e46ad7ce8c9c29d47f"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/score-gaps.png",
+      "bytes": 77245,
+      "sha256": "560c537eecd5d40a6bb801d5ee1fac1244815a7dfdb41274fcb8978b5b4c0886"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/score-gaps.svg",
+      "bytes": 10279,
+      "sha256": "10d19c232046fab8dd75f680a27c8d1b4397dbf47f863d5e5676c79860114f8c"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/weighted-fusion.png",
+      "bytes": 83788,
+      "sha256": "b9bc013652b62e3fa550deb5a4dc68ced961190ec5aa6c2272e33797804e039d"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/plots/weighted-fusion.svg",
+      "bytes": 12467,
+      "sha256": "c85e0f33b8ef2788a15bcc2095cadc63109f880f66e9aefb51ec60751e86c462"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/source-provenance.json",
+      "bytes": 606,
+      "sha256": "c2c7f02583dd27c96c0a54ebf3dada9f1458c65fb6f08e99532cdfc304c2aa0a"
+    },
+    {
+      "path": "outputs/chapter-10-investigations/verification.json",
+      "bytes": 7041,
+      "sha256": "5ebd24cc8f08209eefae9e2920a7c5f1dde8f2b01feabe65bbb5aeb837cb110e"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/01-what-if-your-query-is-a-paper.mp4",
+      "bytes": 31213782,
+      "sha256": "25666e400900dff4de6b0ae166b36b335199af0918f7aa64e4b01fb26875d151"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/01-what-if-your-query-is-a-paper.srt",
+      "bytes": 7765,
+      "sha256": "3705537780e4402e34687c25f1d617c3684020a4656db627c3f6a1e3d055557b"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/01-what-if-your-query-is-a-paper.vtt",
+      "bytes": 7433,
+      "sha256": "8fb3b449829602d29ddc0d75465df99002a31619674139c77374ed888f047fed"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/chapters.vtt",
+      "bytes": 660,
+      "sha256": "e397042ffa3eabcfc15a25687a4bdc250c4ee59101b38606267ec10f58c8e5d1"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/contact-sheet.jpg",
+      "bytes": 576819,
+      "sha256": "7b433a4259cdc0ec63a616d7c88e0b61dfb90fd18510e9693156711157c9bfbb"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/poster.jpg",
+      "bytes": 135503,
+      "sha256": "42bd2fe61fbc4cd2c85a7a63c16551585e0515277e647d47f596298f5531c2fd"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/storyboard.json",
+      "bytes": 12669,
+      "sha256": "330757c69aa7b2a84f020b476231d60c8166566e30705e4dad30b5422ac6c550"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/transcript.txt",
+      "bytes": 4710,
+      "sha256": "7df1042e5f2fee392bf16757f4f6a7cc848cdb9ca9ffd80471f4495896b98aca"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/01-what-if-your-query-is-a-paper/verification.json",
+      "bytes": 2660,
+      "sha256": "d7a68c1edba58354be4cada02510a2519bb0660b7e3a97e79cc43cd4f4cb1324"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/02-who-changed-your-question/02-who-changed-your-question.mp4",
+      "bytes": 30226148,
+      "sha256": "0d5a5846e6251557c2c39f2f442279b757a27f2c54bf9a41e258f4d4768d3580"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/02-who-changed-your-question/02-who-changed-your-question.srt",
+      "bytes": 7816,
+      "sha256": "61f42d79a189902171d1c8b96eb3cc5fce743142a5d251775ae56893e1869613"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/02-who-changed-your-question/02-who-changed-your-question.vtt",
+      "bytes": 7480,
+      "sha256": "670ee34d29cbd38d5b925d58a04fd1ee74d4153b3bab3a065cc4585c30c3b0cd"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/02-who-changed-your-question/chapters.vtt",
+      "bytes": 629,
+      "sha256": "2887d5240d74d7da6cb3ac8690140f2b77b3b4790bb662a5d4708baebcc01b34"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/02-who-changed-your-question/contact-sheet.jpg",
+      "bytes": 586307,
+      "sha256": "e262b67133a3cbeb35fdd7ea61ecaeeae78e132d4a0beeae213ad832c57b927c"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/02-who-changed-your-question/poster.jpg",
+      "bytes": 135860,
+      "sha256": "7b77c6b1c561118e7f671725fabd83b837ab4ed0a34cc9e25b5d67a56f5b02af"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/02-who-changed-your-question/storyboard.json",
+      "bytes": 12777,
+      "sha256": "d411fc4915edaa44fd2a8401e25c0da6af7d7432211edf37fdfb5e339e133d3a"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/02-who-changed-your-question/transcript.txt",
+      "bytes": 4722,
+      "sha256": "e9c2afc59ea8ef6cf59cb847f3c613fefac6028296c392d8b649bf69dea83337"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/02-who-changed-your-question/verification.json",
+      "bytes": 2668,
+      "sha256": "86ecdb9a4a4845f172d5baafd00f1fe897761bd2cfd2f51d15305b40ac412354"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/03-the-paper-that-never-existed.mp4",
+      "bytes": 31407978,
+      "sha256": "4362ea202bd16a8ea621778581376dda55e3a5cf9e100f3bdaab1c6c1957e779"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/03-the-paper-that-never-existed.srt",
+      "bytes": 7763,
+      "sha256": "a1dd6ee3ab27c9f3120d23742ba32d2f47b187cd813bb4dd802d4fc0b332649f"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/03-the-paper-that-never-existed.vtt",
+      "bytes": 7439,
+      "sha256": "6294522b00c7e39230f19bef7de3f3824e0c0e2b20a4cb269c9e1d786a236624"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/chapters.vtt",
+      "bytes": 669,
+      "sha256": "ab1354904f2db2a027dd9436e64650381baa2b166532ec2c05ccc183d3e1eef4"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/contact-sheet.jpg",
+      "bytes": 590135,
+      "sha256": "fb9acbe46509beab6ae6eb9e025858ab333381063c448de637343cb9bdd150d5"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/poster.jpg",
+      "bytes": 134566,
+      "sha256": "0b753c351754eb5a851b83334d6a457dbc8ce86e604d237f8e48076baaceb2ce"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/storyboard.json",
+      "bytes": 12782,
+      "sha256": "b562c84507e0ab219cd21848ccff05bb88b4311c1daca9839b6d1092dc7e515d"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/transcript.txt",
+      "bytes": 4776,
+      "sha256": "85d1bf19b9f0c926d4da919f0ad0a18ed3fc4af0c74022f9e821e474541382ae"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/03-the-paper-that-never-existed/verification.json",
+      "bytes": 2659,
+      "sha256": "68d175f376b62751b379625b571413702db8ae8039125820e304bd22103dd761"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/SOURCE.md",
+      "bytes": 11064,
+      "sha256": "86159fedc80bc399b5923c137d20bcbff3aa46f4824c2849d801daca498aeaa3"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/browser-verification.json",
+      "bytes": 1257,
+      "sha256": "7d60711cb1ec35f140a7c9eaaab4a5132cc916d7a172addc9d4745f860f03e76"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/chapter-11-videos.zip",
+      "bytes": 96759333,
+      "sha256": "9867ba3c6c577e1ab99ad51a6ba2f245dfb67e3fb57d302768680e2486e3b4ce"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/gallery-1440.png",
+      "bytes": 498943,
+      "sha256": "db80e3649e17e42067f2429c28e4bd447cf063ba615a0b25f5e5a5a4cacfff6c"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/gallery-390.png",
+      "bytes": 210565,
+      "sha256": "97fec2e5e74f16bf2c9965863c2ccfbc3390135d3410aa24078ab71b8dbb57aa"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/gallery-768.png",
+      "bytes": 314746,
+      "sha256": "3e6904b5bb8c82c27e933c8508135d36b6c7312f02f53d9fdabd5dd1d360064a"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/index.html",
+      "bytes": 9597,
+      "sha256": "1de0e9e167a6ec5a4c691f751dc369c83345a8dc7c9e4734d43073b551fa995c"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/feedback-boundaries.png",
+      "bytes": 77836,
+      "sha256": "9184da2d622c68c01f0a99705c4fd37384bde423b624f5ba7b55d4b4ea4c56b6"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/feedback-boundaries.svg",
+      "bytes": 6814,
+      "sha256": "62b61c071c3073b0bfda94a1b541ce890c530ae7bffdfcadbf9402024ea31afe"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/generated-paths.png",
+      "bytes": 71194,
+      "sha256": "2786e7856113be32e11f9ba2eaa93890713a24b97897ac6dcbb1a095bf8d50ed"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/generated-paths.svg",
+      "bytes": 6752,
+      "sha256": "0d075561409a81f24036a9199a61122f2c83e6936920aa4ac4f36d84ec231279"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/plots-manifest.json",
+      "bytes": 3159,
+      "sha256": "457b473b2156dec238e81a564e2def8f2bf5d0bb0a4ebf6275fea5780bd39404"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/query-objects.csv",
+      "bytes": 550,
+      "sha256": "206bd7a906c9f260423211adba9219dcc4d94ce6f2409b40b6fd9ed42411c35f"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/query-objects.png",
+      "bytes": 123081,
+      "sha256": "20ec41fae445e31aa9858caaca34bc5c16f43ec84c64baa97cc59db418ea5cc0"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/query-objects.svg",
+      "bytes": 9452,
+      "sha256": "f8868af7530818bf5acc2356c8a885e0847aa2fb1fe649b6bf6767e102271a59"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/receiving-components.png",
+      "bytes": 111765,
+      "sha256": "5f2004d3ef45fff84b76a1627959fab887c5cf192b5635071d7596581136a356"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/receiving-components.svg",
+      "bytes": 9329,
+      "sha256": "25b14b857a3835bee282ba843f2d31221848bb8a9da5d2574b7c9cffad6a10e6"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/review-audit.csv",
+      "bytes": 204,
+      "sha256": "da9ca15d7b7eee6fabc70b72560012325bb61c04df0f35daf3fb2d8b2e452c28"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/review-audit.png",
+      "bytes": 64580,
+      "sha256": "7cb996011bdd2e2e55f1d529d718a19662cefff36f20a2f9ab8652b1957ac121"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/review-audit.svg",
+      "bytes": 6748,
+      "sha256": "944cd4088829175579d9fcfcff5770f28ac9dd32b6e66c603684c16b974f855b"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/visible-boolean.png",
+      "bytes": 82494,
+      "sha256": "3b8fbe5da71875fde3b738efe742da4763cdbe1f6241673ae808bc3768df2446"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/plots/visible-boolean.svg",
+      "bytes": 6815,
+      "sha256": "5fe08dfd454ed2b39e9a5efddb1c11cfba343d084415e537168de1cc661655d9"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/source-provenance.json",
+      "bytes": 651,
+      "sha256": "a9fb8cc6720c094ea872ad4c8c12c8ea2d221758c1300e20d7e6be3041b1691a"
+    },
+    {
+      "path": "outputs/chapter-11-investigations/verification.json",
+      "bytes": 8906,
+      "sha256": "0e692773e4f85ccc8e9097f872b04cca23b411bffcc6325debdb26204116dcf9"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/01-who-chooses-the-next-search.mp4",
+      "bytes": 31671913,
+      "sha256": "a037a4f663aacc87e86e5dac90b0e9f84c59ce0f29b9a4210083146c52f07aa1"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/01-who-chooses-the-next-search.srt",
+      "bytes": 7424,
+      "sha256": "8f70d4e104b0569600d9f5b91caf814208541191b84942c76ba35c1160f37e4c"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/01-who-chooses-the-next-search.vtt",
+      "bytes": 7120,
+      "sha256": "69a26bda9ad31a397363a7ac093d676123e902cdda3be2501d4cb1d2872fd586"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/chapters.vtt",
+      "bytes": 648,
+      "sha256": "78e6452cce54b595911e9347ec89208d1aa53945d7e5bd0c221ef35af2fe8465"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/contact-sheet.jpg",
+      "bytes": 590627,
+      "sha256": "b932106e9826cc82b70395e8c88e38ddeaf849c4e1cc42867cd9088cdbac7fe2"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/poster.jpg",
+      "bytes": 138418,
+      "sha256": "0ce6a76280068b8ae4e540b779df9fdeb10d48cd6eb9963905f46d468cbe0675"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/storyboard.json",
+      "bytes": 12355,
+      "sha256": "4d524c3e4f4b8f957bd4a97ae52270e33ead2492044bb3356d84988fbdfab68b"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/transcript.txt",
+      "bytes": 4606,
+      "sha256": "456c3a66905ab722d546eeb63e5b2fa39a6ed30dc119996a5b57075baf4a8cbe"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/01-who-chooses-the-next-search/verification.json",
+      "bytes": 2512,
+      "sha256": "7d26a003113f5f7d580c74830a7f3297242d4f94a2e80e08ceb294058ae51504"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/02-the-blind-spot-that-survives-the-loop.mp4",
+      "bytes": 30071437,
+      "sha256": "7b4572cc8d76dfb2236692d77d86986a27c505b363e8bd9cbcdb8d4b95d061d5"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/02-the-blind-spot-that-survives-the-loop.srt",
+      "bytes": 7516,
+      "sha256": "b1c3b8a76c7aed73e078ba8620bb833d6e29c8df8179602963f8c9500787f06c"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/02-the-blind-spot-that-survives-the-loop.vtt",
+      "bytes": 7204,
+      "sha256": "6f40dd11509ed124345107d389743e1235287149d3305dff5ed0e3bebb51831c"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/chapters.vtt",
+      "bytes": 646,
+      "sha256": "67b40441635c8e0c4ac4d441357c59b8fdff5b30d18b7e1a5f39b2d02bfb413a"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/contact-sheet.jpg",
+      "bytes": 576462,
+      "sha256": "931f0214bc4a31484809a63cfe25dd7967faaa9155af7df805d86d57a05499b5"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/poster.jpg",
+      "bytes": 139840,
+      "sha256": "c2ebd9395ee6daaba03509049da88389a07fe73f645eb660a3877092e33841fa"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/storyboard.json",
+      "bytes": 12466,
+      "sha256": "4f5d430a889145f5169d89e5c1654e28b89c432030e43b847a91084bc9c965e4"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/transcript.txt",
+      "bytes": 4637,
+      "sha256": "80e3b789a5889b1eee2d1c4bfcef66cd0afe76755fd52d9d0e32f90b8e70bd08"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/02-the-blind-spot-that-survives-the-loop/verification.json",
+      "bytes": 2522,
+      "sha256": "2739bbedec07ae4ce869b11570b1cad39d94ef70ccaa6c45c65e2a9d84532944"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/03-when-zero-results-become-a-clue.mp4",
+      "bytes": 28607832,
+      "sha256": "b2848f4f786b49a87ac9d540d614c00c6f2204282eb1dd9dbdf95e1b53dc5926"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/03-when-zero-results-become-a-clue.srt",
+      "bytes": 7462,
+      "sha256": "a819f50a88a244fe0720cfff2a9b7f7dcba26d43fe2996d50529a2dc3662ce7f"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/03-when-zero-results-become-a-clue.vtt",
+      "bytes": 7158,
+      "sha256": "7e0e9a0c1f1964782f8b601bbc7865cb49b198bbebd82f3f46e59088c364117c"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/chapters.vtt",
+      "bytes": 632,
+      "sha256": "02ea0eba47242fbcfc2ce12a143232a377849658e0463f2e5ce2e0a2a8eab5d6"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/contact-sheet.jpg",
+      "bytes": 564081,
+      "sha256": "6e258e80e90af8b234f6e9b935bb14256acdeb3657780624b9f267d97642de2d"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/poster.jpg",
+      "bytes": 141024,
+      "sha256": "7034a6c44e5e6991316fac924c92ca71830aa432d241e67d9254fe32298029b5"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/storyboard.json",
+      "bytes": 12536,
+      "sha256": "21d374beee4bfb7face54eaedf717d6e666ca1c6c6a89b254f5f680c4bfa3b77"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/transcript.txt",
+      "bytes": 4647,
+      "sha256": "93daca4ce4867b087b0ebaac07b0ed1695f8a53b393dd5fbe4f506f673fca16d"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/03-when-zero-results-become-a-clue/verification.json",
+      "bytes": 2503,
+      "sha256": "481f2408e1d8b3aa9cb05bbbc9f40eb2596ed6a349ecbe9aa070567782fd4dc1"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/SOURCE.md",
+      "bytes": 11163,
+      "sha256": "75adab0b5085372c8956235fe28f5c8b4bbef0da33699d586262dee42df54419"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/browser-verification.json",
+      "bytes": 1293,
+      "sha256": "eab6b93fdb26eda695887b9e8b4be9478a995d2d9b8a200e50a380926f1a9a10"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/chapter-12-videos.zip",
+      "bytes": 94258676,
+      "sha256": "fb9263be78ca97e77e43c63a6cc583071efdbae82eaf7976ee662a002fa299d7"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/gallery-1440.png",
+      "bytes": 514677,
+      "sha256": "90a32f0dbfb267588a8e675f9b6a9b53642baa954e3493afb5fac49a9e4cf848"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/gallery-390.png",
+      "bytes": 211263,
+      "sha256": "b4225bd4bc9f7db45d3bfe34f496dff99f0641e763739b1df33ae1db412b6d1f"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/gallery-768.png",
+      "bytes": 323665,
+      "sha256": "5bb5f7a9a66e54470695728fac990828fa61f6508f96b4bb065d7fe5c400b1ad"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/index.html",
+      "bytes": 9679,
+      "sha256": "991380f18669c88540415c410708a719a6b282af55bc7485b138eada4eb57a1e"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/approval-and-stopping.png",
+      "bytes": 81085,
+      "sha256": "d61cb1a9173f22b23ea531e1dd11175269995643e0278994b3368fc06a7861ec"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/approval-and-stopping.svg",
+      "bytes": 6807,
+      "sha256": "2b2bfb6a52c8be3b6d61889d2b24fe492c59ab4fa719248662b331fca3e4c91d"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/catalogue-comparison.png",
+      "bytes": 87243,
+      "sha256": "4788b916839cc04cc4a8e6c5cf7c262711375a9df94767dd89bd2e28ca8bdbe7"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/catalogue-comparison.svg",
+      "bytes": 5772,
+      "sha256": "6ba47d69aa80446b06bf2997e450ba565a5a349197d08430e8bb6362205084ad"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/catalogue-examples.csv",
+      "bytes": 634,
+      "sha256": "3b9acc67b646d5d44ccfb7316c26a078d03a81f254f191de43a34e14913d4785"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/control-arrangements.csv",
+      "bytes": 76,
+      "sha256": "27dc156e604afa41af7190507da86a05a26c66451a69d3875e60eadd172cd131"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/control-arrangements.png",
+      "bytes": 90343,
+      "sha256": "604472d2bb4113a393e794b66484d7cafdb8f020c847ba7e920b2809b28e5172"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/control-arrangements.svg",
+      "bytes": 6869,
+      "sha256": "9be84b6079aa9b0f08cf50de8602c0bb06300b1556c9ae1a3543d91c099ca700"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/independent-properties.png",
+      "bytes": 87233,
+      "sha256": "4b0374428635a9833234c1dea327c103cb607e6e02719ed3c8bd67d04ce9705e"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/independent-properties.svg",
+      "bytes": 6809,
+      "sha256": "d5c0b35a56994b2287fe6f162323097a82ebfd7b6f538184bb2921d49afab754"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/loop-boundaries.png",
+      "bytes": 87407,
+      "sha256": "f6875e59b3095338a1ae69cff6454eea1ad9aadf074bfde2fddeb5cca09482e3"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/loop-boundaries.svg",
+      "bytes": 6849,
+      "sha256": "40c9b3566646d2583e9a5bdd45be73aea25b4a039779f68ab3eb08122eb981c0"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/output-patterns.png",
+      "bytes": 85367,
+      "sha256": "8164a3650d76cda89a042655a3161214d7ee26594238a7ee7501c216ba3f6b93"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/output-patterns.svg",
+      "bytes": 7973,
+      "sha256": "7ef345530bb98c69f8c6fd78d1ab431ddc83cafc07dfaa023501430f25a6e8fb"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/plots/plots-manifest.json",
+      "bytes": 3034,
+      "sha256": "d97ab7487f61be86034ecc80319987f91da2f411e570fd26055774bff9b74dd0"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/source-provenance.json",
+      "bytes": 621,
+      "sha256": "0148191a2b6f81d12d5fce3fd640b00c50ca440b7120be60abdd3cbc90a0d10c"
+    },
+    {
+      "path": "outputs/chapter-12-investigations/verification.json",
+      "bytes": 8516,
+      "sha256": "8cbfb55df0110d396465e34cd4aaf63a0f60c020c11c49d5eb1cb00c488499c6"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/01-where-did-the-paper-go.mp4",
+      "bytes": 34169156,
+      "sha256": "14374616a226b783f62f658fe1909aecb6f3d68a4a0f6a77ab0a8ca634693f14"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/01-where-did-the-paper-go.srt",
+      "bytes": 8510,
+      "sha256": "d10e68744fcdf1f58f4ece4bd66106675e8820fe0b06bce77f3a6356717faafe"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/01-where-did-the-paper-go.vtt",
+      "bytes": 8134,
+      "sha256": "29937564d5d3e2c8527366827dfb2d22e9b75a09af9c62b1f395edae5cf7fc89"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/chapters.vtt",
+      "bytes": 680,
+      "sha256": "43ea4a8c0121371801562ba7f15149e8eb7ef6446289bfbb1ab2efcbf07a1fb5"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/contact-sheet.jpg",
+      "bytes": 611974,
+      "sha256": "aab41b9d59406553e3b0678835dad4f4781607dd8f32b2c10963ce33e69aa064"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/poster.jpg",
+      "bytes": 127565,
+      "sha256": "76aa5177b820ca1f33856fb977c7c5c1ea77d0f6fceb77f584ae6a12d4a66f9d"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/storyboard.json",
+      "bytes": 13252,
+      "sha256": "3a212c97d017da317be366470ecc905608b002ea90665e197152430951adf1c0"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/transcript.txt",
+      "bytes": 5061,
+      "sha256": "248080c50342c41b95b3265b5488f713f8a9ba0d498670e3f85194e947306609"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/01-where-did-the-paper-go/verification.json",
+      "bytes": 2724,
+      "sha256": "158052fe871452180fb7441c722f252857120e3e3a2584116b9737cb60f1a7ff"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/02-it-can-spell-it-can-it-find-it.mp4",
+      "bytes": 32547648,
+      "sha256": "a8ee9fbf34bbca6a0f4b64bd69bff71c2b84800ed3f4d3fac5bc9974e6da0fd9"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/02-it-can-spell-it-can-it-find-it.srt",
+      "bytes": 8530,
+      "sha256": "d25fa45d06225fabb669793794054a1e9c638eb7a8ed864f3f6427d3c7244931"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/02-it-can-spell-it-can-it-find-it.vtt",
+      "bytes": 8158,
+      "sha256": "2f06267639676395b65bbcf31bc9e29b9a729fd573bdcd73cf2fc1b46a969e2c"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/chapters.vtt",
+      "bytes": 668,
+      "sha256": "b72101883c4cd50785fbc456e666975f2eaf46808d642583dd7fc47b8255e321"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/contact-sheet.jpg",
+      "bytes": 584904,
+      "sha256": "782094845d392055b613ce0b7fe2149289f1e04df1520f87f55d8438b6ee556e"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/poster.jpg",
+      "bytes": 127047,
+      "sha256": "64f7b582aa240248144d67113cab86212805e1189d19bf1cd47b3722294d32a7"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/storyboard.json",
+      "bytes": 13362,
+      "sha256": "0000bb011ed3e820eb7de073aa82e21d28ca2ad15791d9bb062bbd7d7656308d"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/transcript.txt",
+      "bytes": 5125,
+      "sha256": "f449fa103b8fa7ce6700f778be558a8854bcf4574608c4c1b9e3ae41ed020aec"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/02-it-can-spell-it-can-it-find-it/verification.json",
+      "bytes": 2731,
+      "sha256": "615b7adb38f2e8ba8158421739818847ca01f9a6f8b0c839b46d649a9e9822e3"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/03-every-word-was-there/03-every-word-was-there.mp4",
+      "bytes": 36693097,
+      "sha256": "463423370ee11a63b1f417b5a2e49b46eb15e7a25eb2fb100d6201aea37f847b"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/03-every-word-was-there/03-every-word-was-there.srt",
+      "bytes": 8967,
+      "sha256": "2d74870ffc5bcac38059a69dac4345f3076007b34b3b7b497843fc102e116c19"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/03-every-word-was-there/03-every-word-was-there.vtt",
+      "bytes": 8571,
+      "sha256": "b8c978f07fe6ebe3af4a41b6ec36b4d34978bd991ade56536ee145f088650790"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/03-every-word-was-there/chapters.vtt",
+      "bytes": 679,
+      "sha256": "91f4c5d5eb5a2155178b34e645ac12856a708acf4ffe3fa80fcdc6851788d5e1"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/03-every-word-was-there/contact-sheet.jpg",
+      "bytes": 615251,
+      "sha256": "adf8e3829fbb7751cbb4021e3aa17e7b749ccdd0e29ec7387e28b81aa94f184f"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/03-every-word-was-there/poster.jpg",
+      "bytes": 125639,
+      "sha256": "d6e80bc270b02917969a0be69c41271290b9387fe3a41dc849b81e36978a536a"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/03-every-word-was-there/storyboard.json",
+      "bytes": 13843,
+      "sha256": "c335c6a4f4032a71787b4029764bee21fb5f653ee72cd23eb174fe471f77bcc5"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/03-every-word-was-there/transcript.txt",
+      "bytes": 5340,
+      "sha256": "1dfe1e69384dc8e6ec6698116de429815c3f3dc634f6529d780ef684b8070d8d"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/03-every-word-was-there/verification.json",
+      "bytes": 2710,
+      "sha256": "9a092271bb47d0a6081ff5d491c6450dfacd872c577dec32bc4c72bb16f49df7"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/SOURCE.md",
+      "bytes": 11531,
+      "sha256": "d254a5c3204f15fa9420b84af9588b01da4c1c44c2ff1aeaf1361b6849d070bb"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/browser-verification.json",
+      "bytes": 1251,
+      "sha256": "33aea3cebfb966670b322336124d77f96c6bce8fbe8a72591d9138f3fb9442b9"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/chapter-13-videos.zip",
+      "bytes": 107318218,
+      "sha256": "69e055aa5eef105b10f068bd95c6c72518fd6f0adfdb28b7db7e21a9254bd165"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/gallery-1440.png",
+      "bytes": 463293,
+      "sha256": "68d232a5811fdbf83108281c14f713bb1fad2a57a7b309071113244921823482"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/gallery-390.png",
+      "bytes": 193332,
+      "sha256": "88508d56b7003ea29bad90453b13efdddf705b638491bf8da5f4aa6ed5c6d791"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/gallery-768.png",
+      "bytes": 293050,
+      "sha256": "49c4de83e8aca519cb0beed67600126f0fa1ec9c12efd4ab8c5748c776cc482e"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/index.html",
+      "bytes": 9494,
+      "sha256": "c501651bee2ddfb3db59f4e0549f5154afbab774c80549ac1f8edb99057148c3"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/diagnostic-contrasts.csv",
+      "bytes": 363,
+      "sha256": "04593cd6375e59bf6b3b735c21d01dc2d29c0be1f22335e2e17e51c8894ce5a9"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/diagnostic-lenses.png",
+      "bytes": 99193,
+      "sha256": "55d96681f9ea43d6a0c0c92aeb8589d58afce32447545e7ea3ca74f063485122"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/diagnostic-lenses.svg",
+      "bytes": 8253,
+      "sha256": "62c4474773ff7a4d35ad28cdfb3fc03313be7f214c1697d8b1356824767079bb"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/distribution-shifts.png",
+      "bytes": 84393,
+      "sha256": "28e4dce32851ccd292de2bbbb64cfdf09cbd931d636f37eb4f33b6c362f76de2"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/distribution-shifts.svg",
+      "bytes": 5184,
+      "sha256": "3b84b9784800de6709c1ab83ec0978366031a18643e58a16667a3e172688b6f4"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/first-stage-preservation.png",
+      "bytes": 90612,
+      "sha256": "e8d460c3e4c5f0533c28271d123b0437d87330dcb7ed83f2b1d429feff48b47c"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/first-stage-preservation.svg",
+      "bytes": 6954,
+      "sha256": "00b86db1debcd9f307659133851dc7f56e5343f21b6c7cd2ff3c0dd447606e1d"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/keyword-field-example.csv",
+      "bytes": 172,
+      "sha256": "1f54603d8604d62b7e8d4e519c15743052ae59ffc99c12d737d9958ed3bdb33f"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/missing-record-boundaries.png",
+      "bytes": 102128,
+      "sha256": "d30de53f1075cb12e08d2d8dac2f9e4d05e0f73e4b59ee254fdd47fdea9c96ed"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/missing-record-boundaries.svg",
+      "bytes": 8185,
+      "sha256": "b9892ba50ac77c4243a1c268e9207b3a9f3b4ea4c8861628fb3baf8ec34ac503"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/plots-manifest.json",
+      "bytes": 3268,
+      "sha256": "22af63d99ef93485f0a019345f8f97844804f450332239288f501f97bcc3672c"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/remedy-tests.png",
+      "bytes": 100219,
+      "sha256": "3e64f4ada2b2bfe6ba7b7289637dff55ccc8cda063356de0dbfd24ef475cedf9"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/remedy-tests.svg",
+      "bytes": 8254,
+      "sha256": "1f2798bb5450b8a8675f4c41533d97a3c67309cb216b68a392118af6e12930f1"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/vocabulary-layers.png",
+      "bytes": 85504,
+      "sha256": "1b0896c471c1f28b0e9b177e94175ce4193efd64cfff49a550c8014c7b0f71c8"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/plots/vocabulary-layers.svg",
+      "bytes": 6839,
+      "sha256": "0fd442f8dbbe4a72820021df1a46ba8d7619bf98bd9fcd14c1d3c28c5c70ffa0"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/source-provenance.json",
+      "bytes": 664,
+      "sha256": "cbdba8b0f3a3a06946509a8388731d02f60386ad6e52bb871f5acab0a25845c1"
+    },
+    {
+      "path": "outputs/chapter-13-investigations/verification.json",
+      "bytes": 9228,
+      "sha256": "412d5ef94a814b2f9bc6031f76fc09edaf9976b393ebbf0b6aeb050d0ff7422a"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/01-can-both-scores-improve.mp4",
+      "bytes": 35749568,
+      "sha256": "d4b18cde2a49aedb26ab75273e6201883b88cec41a65db5a88e4369b55d35bb0"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/01-can-both-scores-improve.srt",
+      "bytes": 8831,
+      "sha256": "ea36a5a68ab40ac7db2743abb9fff1bc1b53b8038513cb586c1fb16995cb850a"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/01-can-both-scores-improve.vtt",
+      "bytes": 8439,
+      "sha256": "f68bcb292dd07dd90f70615fe9f5f0ebd4d3e5e5da3fdd6659d71213d2434a59"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/chapters.vtt",
+      "bytes": 642,
+      "sha256": "c73f699b4ceacb0df00ca8b9cdb2cda390cc24e88873c848c1d430b3c3037ac3"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/contact-sheet.jpg",
+      "bytes": 636306,
+      "sha256": "523b0e80aba58e0f0756bbf0cdef53a678bbf6ad6b73dbe7ff14bf548f36421e"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/poster.jpg",
+      "bytes": 129767,
+      "sha256": "3aff30dca4b4d4ac96dff7453c429d30d42688918fd0997c7dabc1c5cc81c24c"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/storyboard.json",
+      "bytes": 13610,
+      "sha256": "ffac19e02578bcd07fa5bcdc0546080aa456e57d8c3a4b0e8a87661be8f1287a"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/transcript.txt",
+      "bytes": 5235,
+      "sha256": "f4bce49986ca6cee2d998a20494af38b45ab1a5533a1f2348a413cfd22f18ab8"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/01-can-both-scores-improve/verification.json",
+      "bytes": 2963,
+      "sha256": "eee3204f41d44cf7598ee94610699eeb4bf5f959591c42bf34dabe9e46b70ab9"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/02-the-number-that-ignores-the-rest.mp4",
+      "bytes": 35254643,
+      "sha256": "3762f08556f364529ed6a7fc6523a485a0732ca3aa08a15465d74b8bcf7b3f47"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/02-the-number-that-ignores-the-rest.srt",
+      "bytes": 8695,
+      "sha256": "a2043792952eb83d18b23069c2716814391194907c9e991e2a3713cc735694a3"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/02-the-number-that-ignores-the-rest.vtt",
+      "bytes": 8315,
+      "sha256": "e92f6f168a752646340de44058927e36bdd2a452e250ae97080fd57483449a02"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/chapters.vtt",
+      "bytes": 661,
+      "sha256": "753017bbbcfc485f013363a19a2fd4d0974d95232b4e569e35a24ccbee6776a6"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/contact-sheet.jpg",
+      "bytes": 605549,
+      "sha256": "66fbc49132ec8fdd383bc81d0b71c7aa3cb6618826ed3f3fc37f8723cec66ebd"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/poster.jpg",
+      "bytes": 134796,
+      "sha256": "a00f8828e3d4ee0ab63670677d47e5e9e5f54cd75f08223e335af6c75e6ecd47"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/storyboard.json",
+      "bytes": 13559,
+      "sha256": "1ce3e3b716dc50b1139e9a22721296b5836691986c10be77afe1f93d6f3867b4"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/transcript.txt",
+      "bytes": 5212,
+      "sha256": "0e8d2cf5c17437ce158b8611d975c76177df3bf65d6790da4f50924245620dea"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/02-the-number-that-ignores-the-rest/verification.json",
+      "bytes": 2985,
+      "sha256": "64dbdae5358e6e744b6933cd8308f424211ff60a30a39124ec6846b8fb15bdd3"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/03-the-average-went-up-the-search-got-worse.mp4",
+      "bytes": 35460005,
+      "sha256": "cfdb8e3e212aad7ec2334f36da3896fd2f3531d379f1a7188ffbe86656e891ea"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/03-the-average-went-up-the-search-got-worse.srt",
+      "bytes": 8727,
+      "sha256": "4b88daf279b16e1e5203f0bf830e02da0a0506aefa560c45dfd1721bee25ad2c"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/03-the-average-went-up-the-search-got-worse.vtt",
+      "bytes": 8343,
+      "sha256": "897c898d02bc4d6de7784a26544fd246e815077b279c0710bd7053341c30ba77"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/chapters.vtt",
+      "bytes": 649,
+      "sha256": "38d9ecc2a36e4a4cdcad4a956b43262291be0124f1a6951f937312091b1b8d38"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/contact-sheet.jpg",
+      "bytes": 617373,
+      "sha256": "2e06e0fdc1c0623de4c14129e8503501b0a38cd8584c7d6802ac8a92e7c5ed01"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/poster.jpg",
+      "bytes": 149459,
+      "sha256": "defdf88e5b9fa3c60610c35b5e22d869f66cdf1613b0b43886d49ce6a87bf959"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/storyboard.json",
+      "bytes": 13522,
+      "sha256": "7398d788102634779675e0f3c4dc97471700542ad18470e1f287a9e15f163d26"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/transcript.txt",
+      "bytes": 5219,
+      "sha256": "9d80d32168bdf015ddb621ab2093bfa3dff16ad33256b469d8720cb6e26a7cc4"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/03-the-average-went-up-the-search-got-worse/verification.json",
+      "bytes": 2993,
+      "sha256": "4dce632c4108ef77f343392860d8d2fbc479a77f3a1bf874ac87ea8db3fe4166"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/SOURCE.md",
+      "bytes": 12300,
+      "sha256": "c30b3e34779de71eaba02c61dd43750571750b43f8c115109e5aaaa2937fbdd5"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/browser-verification.json",
+      "bytes": 1297,
+      "sha256": "163de6bcad4e8763dfcb6345f9ff862013f2a2218d28883af79362a015390e2f"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/chapter-14-videos.zip",
+      "bytes": 110500784,
+      "sha256": "4b0fd4e5408b0d3f3efba41812b557a9fa9286965a1c297ebbb131193b223259"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/gallery-1440.png",
+      "bytes": 504114,
+      "sha256": "e98d5b68693d221362b05e4c3c4c024b8e85fc5b3bf19cd9e5611f0d1747cc17"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/gallery-390.png",
+      "bytes": 205217,
+      "sha256": "131a9f826629ec4b9b0ce3ea4edec690cc67d621b5727345cabb41f40b371066"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/gallery-768.png",
+      "bytes": 318666,
+      "sha256": "cfa4e54a96ffb6e8920448b0b2b39d1b2c761b1c6d50331b737992418d51dbd1"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/index.html",
+      "bytes": 9728,
+      "sha256": "a22a8fe1e707005d88517001513dce14badffd8a13c08486983ca8558571ee84"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/benchmark-controls.png",
+      "bytes": 98826,
+      "sha256": "d31c19feab781f0af0a93720ac52560adea1a093e3734ef66046ffa9f1cfacd3"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/benchmark-controls.svg",
+      "bytes": 8207,
+      "sha256": "61ceac6452b2519b83f4c2d00b43ad275292d6092f0aca7730a1fdb83788574d"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/denominators.png",
+      "bytes": 96850,
+      "sha256": "560dfd745cb1b4e6229d877ce22da949fce50f041053e3141e257dd6138e8cba"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/denominators.svg",
+      "bytes": 8215,
+      "sha256": "26f18c3937a0edf2665f57983e685b738e383872d4bdcc1a87f9c62d4f9737a9"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/local-regression.csv",
+      "bytes": 335,
+      "sha256": "10edff559c8674873a3b8b60852f7420559134cea22a114b5659bcf927227175"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/local-regression.png",
+      "bytes": 73816,
+      "sha256": "cf7f6a4e35704f1232c70eef486d833b9179a8011fbaaca190bd033dbb8f4ccd"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/local-regression.svg",
+      "bytes": 11517,
+      "sha256": "36a9683e59fd5ba7790ba98b1975e52c65ea9bc8ef50e4d6fce681b1d64e7eba"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/plots-manifest.json",
+      "bytes": 3490,
+      "sha256": "978086bda1b48991066efcfc8c3b3c027639319dc07edef4e8894836b4820df0"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/ranking-goals.png",
+      "bytes": 99389,
+      "sha256": "37cf7c4e8eb726acc3b8e3711f178f1410c3cd9521abf1008070c7a15df7d2c8"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/ranking-goals.svg",
+      "bytes": 8196,
+      "sha256": "fd3e07281aa7d801ad6ad4eb6a2536c817f622f89978e0d83ed3912264a447ca"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/reranking-metrics.png",
+      "bytes": 71895,
+      "sha256": "e49b9d06d5ffa2594bfd755da487ce4559e6b99d1dd5775928712c6893d56148"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/reranking-metrics.svg",
+      "bytes": 9871,
+      "sha256": "8e59a2198db2f7774c853c3f380203c03b11239d35002095c9bd39b7b6d442b2"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/single-query-scores.png",
+      "bytes": 76250,
+      "sha256": "f6cac1f9f623ca1cb95b431fbe43d7ea5398f9caa6fb55fa7c4c133addf9bba9"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/single-query-scores.svg",
+      "bytes": 6789,
+      "sha256": "93883ca5216c992fd2972cffb01fd4589d584c3d0bc0cedafda15bce127fec6a"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/plots/source-rankings.csv",
+      "bytes": 706,
+      "sha256": "fd21d737fb0fec852af5f53b6c5df403a9524b20b88a1c9a23d733b3d339ec4d"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/source-provenance.json",
+      "bytes": 648,
+      "sha256": "4a51be6d5d944b5f4ce7f4367d95a052d2751c9dbc925a9394eb74fa887981df"
+    },
+    {
+      "path": "outputs/chapter-14-investigations/verification.json",
+      "bytes": 10412,
+      "sha256": "7e31e2f018d7cdb6c4c2ae8a7610a0e3d394c151a7016433151d357fe00a1a6b"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/01-same-question-same-search/01-same-question-same-search.mp4",
+      "bytes": 38359345,
+      "sha256": "a80848038166953d74466c575a0f6d6ae3901f14d9ce5cfd4ee6fe99d98f1061"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/01-same-question-same-search/01-same-question-same-search.srt",
+      "bytes": 9458,
+      "sha256": "9173825cfb2975cf9a6bf61e37585252c004cc5bf88f5c327df7dc2ae50f879d"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/01-same-question-same-search/01-same-question-same-search.vtt",
+      "bytes": 9026,
+      "sha256": "7de09ad22cae4f577c0f3e0c90ae04f70ac597545412cd3115f6def479d217c4"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/01-same-question-same-search/chapters.vtt",
+      "bytes": 640,
+      "sha256": "8a58fb6174f429f970983f86e99b238c9d4de397498036e827d35adf68e71905"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/01-same-question-same-search/contact-sheet.jpg",
+      "bytes": 616029,
+      "sha256": "f5c150ed8c361a850cfec0ec123e9089c98646090c254b128943cdf93639b010"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/01-same-question-same-search/poster.jpg",
+      "bytes": 134397,
+      "sha256": "32dfaa3073c09c42a88fa98dcbf71ce274e296d8e728872d464daf5345c8fd82"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/01-same-question-same-search/storyboard.json",
+      "bytes": 14162,
+      "sha256": "f0ccc919eba192d8648911fc69de492cf84a0dbdae8d5acb8a0113c6b7c6cad3"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/01-same-question-same-search/transcript.txt",
+      "bytes": 5521,
+      "sha256": "70f4a4934c670f7b0bfb445d8250f526f5bbf00ab38b43717e3a1d75cc41e649"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/01-same-question-same-search/verification.json",
+      "bytes": 2572,
+      "sha256": "27ce24550326d86c08c94646b526ad6f6e12911dd8c8f180d556491e4a03a0d4"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/02-why-is-this-paper-here.mp4",
+      "bytes": 38980776,
+      "sha256": "4b7982310f45377426c92b4a27b9889a9b4d39dd4758f78f8cc3af7dd34bd29d"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/02-why-is-this-paper-here.srt",
+      "bytes": 8896,
+      "sha256": "708461fd1d0d5370d2924cdd6ecf700650b64d9569366155fe172ede9c23debe"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/02-why-is-this-paper-here.vtt",
+      "bytes": 8508,
+      "sha256": "b43d3f225c6fa88a3d968991757225c83c9a4884efa361b4b9fb1bfa5e680f7d"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/chapters.vtt",
+      "bytes": 682,
+      "sha256": "a2134d351043df9a9a345f7938d77eb8de673c0d0459314cbe633d46cb8e13de"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/contact-sheet.jpg",
+      "bytes": 623997,
+      "sha256": "6f6e52a1c92c179ecf664bc4551f3779bab37f231224260ee50db7346019c100"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/poster.jpg",
+      "bytes": 129755,
+      "sha256": "2c6c80f004e5ec0a8350e8b3b3c4ccd36a7063d29c25ab681e0d995342067c1b"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/storyboard.json",
+      "bytes": 13889,
+      "sha256": "205f2bc491c99409be96c87786b7bb245016259f42c4994b194881663969bd7d"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/transcript.txt",
+      "bytes": 5340,
+      "sha256": "a070331b81298db6e94e8c87de07f5b0d795edf3ac9db8c5eab77eb8b1f44ffe"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/02-why-is-this-paper-here/verification.json",
+      "bytes": 2568,
+      "sha256": "0ec67a472fcb5aa3e72d6d0be35ebe00ed5a35fc2f912ad09111f45fe2133cc0"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/03-what-are-you-actually-licensing.mp4",
+      "bytes": 40138315,
+      "sha256": "6bb8b13534fa2d43e345d9a05ff01f9b558d7d8ae611cb63f0190825ac202007"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/03-what-are-you-actually-licensing.srt",
+      "bytes": 9535,
+      "sha256": "eb7108f1213810e209652cbde17b6ff1db75b5c7cdaf7814ebd104c0d24029a1"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/03-what-are-you-actually-licensing.vtt",
+      "bytes": 9111,
+      "sha256": "bb75c49e1f20d7db71f28ad070ce195eaa526e9c021b9d1a0111c76ffa42bc12"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/chapters.vtt",
+      "bytes": 627,
+      "sha256": "a77428614fcf85722a2dd0a27968f179b21522d11931593f0e879a4c804696dd"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/contact-sheet.jpg",
+      "bytes": 628613,
+      "sha256": "e8a3d5015d93483e8dbe3c41869b95991a2079d32ec3ae20518b711c68e9f0fc"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/poster.jpg",
+      "bytes": 142311,
+      "sha256": "1c23a8ddcbf746fa8a0d7952631c6ff5e5fa574e68b5761db842062e546e6fb8"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/storyboard.json",
+      "bytes": 15126,
+      "sha256": "1602faf0d2ce4cffebb5defdd5fb7724315e43b67a47301959f77d711a480dd4"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/transcript.txt",
+      "bytes": 5673,
+      "sha256": "9e45d2096ae7464727e4b6c26328a1add127a748bcf4e2a87eefa3184856e945"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/03-what-are-you-actually-licensing/verification.json",
+      "bytes": 2565,
+      "sha256": "01f38ad98a893efc0572ad8ea9565a13fb1ab96c55f15ec573f41ed14d58d844"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/SOURCE.md",
+      "bytes": 13929,
+      "sha256": "6b07907786a3a925884ffec5bf45eb83c150b62e779e975e1cb4e31984529260"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/browser-verification.json",
+      "bytes": 1263,
+      "sha256": "27137c5b240978ca545a4b4d540eaaa8c2093c7f963ab0d45e1383b236c71458"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/chapter-15-videos.zip",
+      "bytes": 121590787,
+      "sha256": "72a66faa0b5c7ee79a411b6ce5ec9d79f952a227d7d5a88ef0001de30e7acd89"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/gallery-1440.png",
+      "bytes": 495710,
+      "sha256": "1159534937f2ac1139497a281c5d6b8b9b17617793591caf9ab0cbc8b2206f61"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/gallery-390.png",
+      "bytes": 207977,
+      "sha256": "74ac5702229cea4bee9ca347e652499631ba02fc30b5140fd7955d65eee1f448"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/gallery-768.png",
+      "bytes": 314665,
+      "sha256": "2c5d501c7ffeb9196be276f28a119b8390b7936826eea71f92a174828ef0dca7"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/index.html",
+      "bytes": 9528,
+      "sha256": "7678d94db6203b480fcea8cd51e85d31e9306a3bcb0427e1c137287fb9b6d988"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/component-records.png",
+      "bytes": 114487,
+      "sha256": "feeb0a490fb8c61b172ce11e83d17ecfd1ef33783bad96b0ce0f9ac4f9341256"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/component-records.svg",
+      "bytes": 8330,
+      "sha256": "2a4087a7cbdbd8f595e7007fc6b3c2435c6387c748e74498ba4c2b04b62b7bc9"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/evidence-status.png",
+      "bytes": 92314,
+      "sha256": "db59a6668ec25913560d2af2cbc9c4574da1ad24b175ce8c6f888fbe779bf92c"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/evidence-status.svg",
+      "bytes": 6920,
+      "sha256": "f0559f88658bfdba2c8a265303a91591bbb31837d3b9f005cea01ee8d157484c"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/hypothetical-trace.csv",
+      "bytes": 577,
+      "sha256": "3d28391e4ea838bdde83edd8b9c6df0756616466f02a8d8d8959f251bc6eb8f9"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/inspection-limits.png",
+      "bytes": 113560,
+      "sha256": "98c0bebf58cabf812051c2b9641865691d07c758304f4e11a67e65a7eb06c957"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/inspection-limits.svg",
+      "bytes": 8276,
+      "sha256": "c5ae0c258c5614c59ef421836297a9530a7e656223becac1b00253b87e1f6f4e"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/mock-record-trace.png",
+      "bytes": 91828,
+      "sha256": "79df2a8e21ff1fed2a33e367a0c81842e8df3a08804084d53dd117354b9598b0"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/mock-record-trace.svg",
+      "bytes": 8083,
+      "sha256": "752e3fe41b641023ded4a65a0427293c6eb1f570d51aee1b0be10c2690dcdd25"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/plots-manifest.json",
+      "bytes": 3080,
+      "sha256": "592fea88371abff5d48a1d90626b39c6ef6be2812390d05984a18dfbd93fcb84"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/recording-layers.png",
+      "bytes": 95640,
+      "sha256": "950dde50151aaecd4577de69e66666aca943e3146646ce76753600ce3156c99f"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/recording-layers.svg",
+      "bytes": 6153,
+      "sha256": "6fb3c6fa1c3a1230868a7e09409fff085c04c079c139479ca341c2559e4167e6"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/six-vendor-groups.png",
+      "bytes": 91924,
+      "sha256": "3ce303c87cac8d04a52feabf0406c119c967f81bd2d7e6bd255eb8e5384e2450"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/six-vendor-groups.svg",
+      "bytes": 10482,
+      "sha256": "bc2d0c9d7ae085372f2d0c2d5f5a49e0eea2654bff9a792d39f64f2b12523e5e"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/plots/vendor-questions.csv",
+      "bytes": 1727,
+      "sha256": "62f0cc37633fa339677caff96435b96dbebe3d53cfba78d007a2823e06d053fa"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/source-provenance.json",
+      "bytes": 663,
+      "sha256": "cf2543941d4659d9bb500180cb340cafaeddd1034b51d3058ee286bc4ee671b2"
+    },
+    {
+      "path": "outputs/chapter-15-investigations/verification.json",
+      "bytes": 8636,
+      "sha256": "3400add31f1f7c883ac05995f45023ad025c0b14ffe859c9e8c4b218c517ab30"
+    }
+  ]
+}

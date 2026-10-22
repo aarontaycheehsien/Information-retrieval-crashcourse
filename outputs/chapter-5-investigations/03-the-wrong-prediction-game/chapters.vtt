@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:34.766
+Excellent at filling blanks. Good at search?
+
+00:00:34.766 --> 00:01:11.216
+CBOW: predict the word from its neighbours
+
+00:01:11.216 --> 00:01:44.673
+Masked prediction: context on both sides
+
+00:01:44.673 --> 00:02:20.962
+Next-token prediction: the future is hidden
+
+00:02:20.962 --> 00:02:57.098
+Language, domain, and retrieval are separate jobs
+
+00:02:57.098 --> 00:03:39.350
+Knowing the domain does not specify the ranking
+
+00:03:39.350 --> 00:04:11.925
+The same model family can do different jobs
+
+00:04:11.925 --> 00:04:49.133
+Ask what it learnt—and where it is used

@@ -1,0 +1,73 @@
+{
+  "recipe_sha256": "c6e55a1e4266d7ea85296be884f4dc5669360467198eb85257a9136d5f344fd9",
+  "kind": "source-exact invented similarities and schematic diversification",
+  "measured_model_outputs": false,
+  "checks": {
+    "invented_source_similarities": [
+      [
+        0.1,
+        0.2,
+        0.9,
+        0.4
+      ],
+      [
+        0.2,
+        0.3,
+        0.5,
+        0.8
+      ]
+    ],
+    "row_maxima": [
+      0.9,
+      0.8
+    ],
+    "maxsim": 1.7000000000000002,
+    "winning_document_tokens": [
+      "citation",
+      "advantage"
+    ],
+    "maxsim_allows_reused_document_tokens": true,
+    "measured_model_output": false,
+    "reranking_preserves_candidate_set": true,
+    "excluded_record": "X",
+    "stipulated_selections": {
+      "individual": [
+        "A",
+        "B",
+        "C"
+      ],
+      "diversified": [
+        "A",
+        "D",
+        "E"
+      ]
+    },
+    "aspect_counts": {
+      "individual": 1,
+      "diversified": 3
+    },
+    "calculated_diversification_algorithm": false,
+    "documented_budgets_not_relevance_counts": {
+      "Semantic Scholar (2025)": 1000,
+      "PubMed Best Match": 500,
+      "Primo reranking": 30,
+      "Primo abstract context": 5
+    },
+    "passed": true
+  },
+  "files": {
+    "aspect-coverage.png": "9666d1e3737d2f88dd59341cdef4bd4191961c8933ccd7e8db3a09adaa3b3119",
+    "aspect-coverage.svg": "08fb44a25e1657f8af3694508ef4b4ce4bc8f468559ad35941728237c30a04ef",
+    "aspect-selections.csv": "b9dd3ba8463b7359417805d1d500ab6d39b934ea8cf2543951d9bfb02bfff67b",
+    "encoding-arrangements.png": "6e612d7a6922ad6252a44d95dc2ccc0f3229a2ac187aaaee14291d4f40c126b8",
+    "encoding-arrangements.svg": "39ca12612f791678c850d05e83168a9d80c5cbaf6a06548b56f2d6125e01a867",
+    "maxsim-table.png": "c211ef3214f7030fcf5a070744dc8e7b7d687f8c0355ed76f7f7c4ad8f88ee02",
+    "maxsim-table.svg": "12a525880380e83d19ff5e5931fc88e40a34c15ab9ad6c060fffb26e38e1d703",
+    "maxsim.png": "847101afec28b0bdc47354194a5dd9600c4a7d70f3c2c8603317643009f991e4",
+    "maxsim.svg": "1128022dd6219691135bf117039b27eb190910636bc5ecc16b56ce2ee3fa70db",
+    "reranking-modes.png": "82cb135704c0d87fbcd55ed5bcbc8c275f5fb816f1a843dbdd06471b431cac4c",
+    "reranking-modes.svg": "2f3c01881dacc0683c924a399691eaba7d650eb8273146533c64d0058970160f",
+    "token-similarities.csv": "6636b69afca7088fa49c0ea8c0f01933cc679e0c7fb887a8dbdf4784a5145e13"
+  },
+  "passed": true
+}

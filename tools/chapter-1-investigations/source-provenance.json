@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "intro",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "92c7b6e43c10df4f9bd53cc469cc563bc429b12f5630a8665a4a889deee71558",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 1: The retrieval problem, including relevance, search-resistant concepts, puzzles and reflection questions"
+}

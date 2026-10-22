@@ -1,0 +1,370 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.113
+A paper you know is relevant is missing
+
+00:00:03.133 --> 00:00:04.259
+from the results.
+
+00:00:04.421 --> 00:00:06.630
+Did the search misunderstand your words?
+
+00:00:06.793 --> 00:00:08.899
+Before adding a synonym or replacing the
+
+00:00:08.919 --> 00:00:11.979
+model, pause. The same screen could hide
+
+00:00:11.999 --> 00:00:13.679
+several different failures.
+
+00:00:13.854 --> 00:00:15.612
+What evidence would distinguish them?
+
+00:00:18.044 --> 00:00:19.672
+The chapter gives four alternative
+
+00:00:19.692 --> 00:00:22.545
+explanations: outside the collection,
+
+00:00:22.695 --> 00:00:25.110
+excluded by a filter, absent from the
+
+00:00:25.130 --> 00:00:28.126
+candidate pool, or retrieved but below the
+
+00:00:28.146 --> 00:00:29.517
+display boundary.
+
+00:00:29.666 --> 00:00:32.417
+Our diagrams show possible paths for the
+
+00:00:32.437 --> 00:00:34.866
+same hypothetical paper, not a traced
+
+00:00:34.886 --> 00:00:35.651
+search.
+
+00:00:36.581 --> 00:00:38.018
+Start with eligibility.
+
+00:00:38.167 --> 00:00:40.660
+Was the source covered, and had indexing
+
+00:00:40.680 --> 00:00:43.276
+caught up? Did a date condition, format
+
+00:00:43.296 --> 00:00:46.575
+facet or access filter exclude the record?
+
+00:00:46.737 --> 00:00:49.217
+A paper outside the searchable collection
+
+00:00:49.237 --> 00:00:51.871
+or eligible set was never in play.
+
+00:00:52.033 --> 00:00:55.132
+Vocabulary expansion cannot recover it
+
+00:00:55.152 --> 00:00:57.425
+through that unchanged boundary.
+
+00:00:57.983 --> 00:01:00.710
+Inspect coverage, limits and the record’s
+
+00:01:00.730 --> 00:01:04.266
+metadata. Some evidence is visible; some
+
+00:01:04.286 --> 00:01:05.748
+needs documentation.
+
+00:01:05.923 --> 00:01:08.157
+Record what remains unknown.
+
+00:01:08.307 --> 00:01:11.212
+An unavailable internal trace is not proof
+
+00:01:11.232 --> 00:01:12.951
+that the record was excluded.
+
+00:01:13.867 --> 00:01:15.906
+Now separate the candidate pool from the
+
+00:01:15.926 --> 00:01:17.207
+displayed results.
+
+00:01:17.357 --> 00:01:19.875
+An eligible paper can fail to enter the
+
+00:01:19.895 --> 00:01:21.808
+first stage shortlist.
+
+00:01:21.957 --> 00:01:24.785
+Investigate the query, indexed evidence,
+
+00:01:24.805 --> 00:01:27.401
+retrieval method and candidate cutoff.
+
+00:01:27.550 --> 00:01:30.752
+A later reranker cannot assess a paper it
+
+00:01:30.772 --> 00:01:31.950
+never received.
+
+00:01:32.503 --> 00:01:35.115
+A different paper may reach the pool and
+
+00:01:35.135 --> 00:01:37.821
+then fall below a later ranking or
+
+00:01:37.841 --> 00:01:39.161
+presentation limit.
+
+00:01:39.336 --> 00:01:40.811
+That is matched but hidden.
+
+00:01:41.024 --> 00:01:43.646
+Filter order and cutoff order can also
+
+00:01:43.666 --> 00:01:45.475
+change which records survive.
+
+00:01:45.638 --> 00:01:48.453
+A failed lookup alone does not identify
+
+00:01:48.473 --> 00:01:49.973
+the responsible boundary.
+
+00:01:50.903 --> 00:01:52.504
+Check the indexed unit too.
+
+00:01:52.666 --> 00:01:55.520
+If the system ranks passages, a relevant
+
+00:01:55.540 --> 00:01:58.870
+claim split across two passages may leave
+
+00:01:58.890 --> 00:02:01.112
+neither unit with enough evidence.
+
+00:02:01.300 --> 00:02:03.123
+The whole document can contain the answer
+
+00:02:03.143 --> 00:02:05.494
+while each searchable unit carries only
+
+00:02:05.514 --> 00:02:06.331
+part of it.
+
+00:02:06.903 --> 00:02:09.018
+And a typed word missing from the visible
+
+00:02:09.038 --> 00:02:11.531
+excerpt is a different question from a
+
+00:02:11.551 --> 00:02:12.600
+missing record.
+
+00:02:12.762 --> 00:02:15.345
+A match may occur in another indexed field
+
+00:02:15.365 --> 00:02:18.451
+or version. Revisit analysis and matching
+
+00:02:18.471 --> 00:02:20.770
+explanations before deciding what the
+
+00:02:20.790 --> 00:02:22.239
+interface has proved.
+
+00:02:23.128 --> 00:02:25.703
+Once eligibility is established, the
+
+00:02:25.723 --> 00:02:28.589
+chapter offers four diagnostic lenses.
+
+00:02:28.764 --> 00:02:31.399
+Vocabulary mismatch compares a query’s
+
+00:02:31.419 --> 00:02:33.357
+language with a relevant record.
+
+00:02:33.519 --> 00:02:36.502
+Out of vocabulary is relative to a named
+
+00:02:36.522 --> 00:02:39.569
+vocabulary. Out of distribution compares
+
+00:02:39.589 --> 00:02:41.076
+training with deployment.
+
+00:02:41.238 --> 00:02:43.190
+Composition asks whether matching
+
+00:02:43.210 --> 00:02:45.715
+preserved the required relationship.
+
+00:02:46.275 --> 00:02:48.613
+These are prompts for investigation, not
+
+00:02:48.633 --> 00:02:51.860
+exhaustive or mutually exclusive boxes.
+
+00:02:52.010 --> 00:02:54.670
+A specialised identifier can be poorly
+
+00:02:54.690 --> 00:02:58.213
+represented inside an unfamiliar corpus.
+
+00:02:58.388 --> 00:03:01.267
+One paper can support several hypotheses,
+
+00:03:01.391 --> 00:03:03.188
+which require different evidence and
+
+00:03:03.208 --> 00:03:04.425
+different remedies.
+
+00:03:05.334 --> 00:03:07.278
+The source example searches for heart
+
+00:03:07.298 --> 00:03:10.035
+attack recovery, while the relevant title
+
+00:03:10.120 --> 00:03:12.381
+is Rehabilitation after myocardial
+
+00:03:12.401 --> 00:03:15.319
+infarction. That visible relationship is
+
+00:03:15.339 --> 00:03:17.135
+vocabulary mismatch.
+
+00:03:17.298 --> 00:03:19.804
+Neither expression is necessarily absent
+
+00:03:19.824 --> 00:03:22.535
+from the index or model vocabulary.
+
+00:03:22.710 --> 00:03:25.345
+Different wording alone does not establish
+
+00:03:25.365 --> 00:03:26.684
+out of vocabulary.
+
+00:03:27.267 --> 00:03:29.603
+Librarians already build bridges with
+
+00:03:29.623 --> 00:03:32.593
+synonyms, controlled vocabulary, spelling
+
+00:03:32.613 --> 00:03:35.763
+variants, citation searching and iterative
+
+00:03:35.783 --> 00:03:38.250
+reformulation. Boolean OR can make an
+
+00:03:38.270 --> 00:03:39.924
+alternative term explicit.
+
+00:03:40.087 --> 00:03:42.361
+Query transformation can add a bridge
+
+00:03:42.381 --> 00:03:44.925
+automatically, but the generated input
+
+00:03:44.945 --> 00:03:46.445
+still needs checking.
+
+00:03:47.359 --> 00:03:50.263
+BM twenty five changes ranking, not term
+
+00:03:50.283 --> 00:03:52.815
+identity. It can use partial lexical
+
+00:03:52.835 --> 00:03:55.276
+overlap, and analysis may connect
+
+00:03:55.296 --> 00:03:57.054
+morphological variants.
+
+00:03:57.203 --> 00:03:59.451
+Its formula does not itself make heart
+
+00:03:59.471 --> 00:04:01.707
+attack synonymous with myocardial
+
+00:04:01.727 --> 00:04:04.348
+infarction. Do not credit the scoring rule
+
+00:04:04.368 --> 00:04:06.667
+for an expansion performed elsewhere.
+
+00:04:07.221 --> 00:04:09.729
+A suitably trained dense retriever may
+
+00:04:09.749 --> 00:04:12.294
+connect the complete query and document
+
+00:04:12.314 --> 00:04:14.110
+without exact overlap.
+
+00:04:14.285 --> 00:04:16.160
+That is a newer response to an old
+
+00:04:16.180 --> 00:04:18.892
+problem, not a guarantee for every
+
+00:04:18.912 --> 00:04:21.881
+paraphrase. Compare the suspected bridge
+
+00:04:21.901 --> 00:04:24.613
+against known relevant records; hybrid
+
+00:04:24.633 --> 00:04:27.499
+retrieval is another remedy to test.
+
+00:04:28.413 --> 00:04:30.720
+Preserve the original query, known
+
+00:04:30.740 --> 00:04:33.489
+relevant record, visible limits,
+
+00:04:33.652 --> 00:04:36.222
+indexed-unit information and any available
+
+00:04:36.242 --> 00:04:38.606
+trace. Separate what you observed from
+
+00:04:38.626 --> 00:04:39.649
+what you inferred.
+
+00:04:39.812 --> 00:04:41.596
+Then choose an intervention that could
+
+00:04:41.616 --> 00:04:44.392
+test the suspected loss of evidence.
+
+00:04:44.967 --> 00:04:47.936
+For a vocabulary mismatch, try an explicit
+
+00:04:47.956 --> 00:04:50.501
+synonym or controlled term and check the
+
+00:04:50.521 --> 00:04:52.936
+outcome. For an unknown candidate
+
+00:04:52.956 --> 00:04:55.810
+boundary, seek documentation or a trace
+
+00:04:55.830 --> 00:04:59.469
+first. Diagnosis accumulates evidence.
+
+00:04:59.657 --> 00:05:01.519
+The next film asks why encoding a word
+
+00:05:01.539 --> 00:05:03.941
+still does not establish that search can
+
+00:05:03.961 --> 00:05:04.637
+use it.

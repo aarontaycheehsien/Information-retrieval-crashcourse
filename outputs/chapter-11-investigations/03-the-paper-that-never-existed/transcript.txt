@@ -1,0 +1,40 @@
+The paper that never existed
+
+[00:00:00.700]: You ask whether open access increases citations. An LLM writes a plausible paragraph about a study comparing open and subscription articles while accounting for discipline and publication year. No identified study supports that paragraph. Could the invented text still help a search? Pause and predict.
+
+[00:00:23.794]: It can serve as a retrieval aid. Query2doc and HyDE use generated language in different ways to find real indexed sources. Neither method turns the imagined paragraph into evidence, or establishes that the described study exists.
+
+[00:00:40.750]: Query2doc generates a pseudo document and uses its language to expand the original query. The additional vocabulary may resemble wording found in relevant documents. The expanded input can go to a sparse retriever such as BM twenty five.
+
+[00:00:58.417]: Dense retrieval is also possible; the diagram follows the lexical route. Its effect depends on what the next retriever does with those words.
+
+[00:01:08.212]: HyDE means Hypothetical Document Embeddings. An LLM generates a hypothetical relevant document, then a dense encoder embeds that document. Retrieval compares the resulting vector with stored vectors for real indexed documents.
+
+[00:01:25.044]: The generated document is a pivot into the vector space. It is not the final answer or a verified source. Unlike Query2doc’s language expansion, this path uses the generated document’s embedding to conduct the search.
+
+[00:01:40.536]: The chapter’s illustrative paragraph mentions comparisons and adjustment for discipline and year. Those details may steer retrieval towards particular vocabulary or study designs. They are not findings about an identified paper, and may import assumptions the searcher did not intend.
+
+[00:01:59.807]: Retrieving real sources does not retroactively make every generated detail true. Read and assess the actual sources, and retain the generated text in the search record. It is part of the retrieval strategy, not supporting evidence.
+
+[00:02:16.728]: The chapter’s product accounts describe different receivers. EBSCOhost and EDS AI Assisted Search parse keyword and noun phrases for the established engine; the cited public page does not identify the parsing model as an LLM.
+
+[00:02:33.335]: Web of Science Smart Search combines structured parsing with keyword and vector document paths. Primo NDE documents generative Boolean construction for Advanced Search. These pinned documentation accounts are not fresh service tests; the shared interface language does not identify a common architecture.
+
+[00:02:54.239]: Natural language filter extraction is useful but partial. Primo NDE recognises a defined list of fields and facets, with documented author detection failures and unintended OR relationships. Web of Science Research Assistant supports some institution, geography and date constraints.
+
+[00:03:15.832]: That Research Assistant’s guidance also lists complex field tagged Boolean queries as unsupported. Supported natural language patterns do not replace the database’s complete advanced search language. Keep product features distinct and inspect the actual generated conditions.
+
+[00:03:35.296]: A filter inferred from the question is different from one the user selects explicitly. Primo Research Assistant documents limited automatic refinements; manually changing a refinement switches that field to manual handling, so it is no longer inferred automatically.
+
+[00:03:52.712]: Test which supported phrasings activate each constraint, whether the generated filter is visible, and what happens with unsupported or ambiguous limits. Compare variants against known relevant records rather than assuming a fluent request was fully obeyed.
+
+[00:04:10.744]: Keep the original input, generated text, structured expressions, inferred and manual filters, chosen routes, and intermediate results used for feedback. A compulsory clause or hidden route can exclude evidence before ranking; an early mistaken ranking can steer the next query.
+
+[00:04:30.150]: Understanding interprets, transformation changes inputs, and control decides where they go. All can occur in a prescribed workflow. The next chapter moves to the separate question of who chooses what happens next while the search is running.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 11.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#query-transformation
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

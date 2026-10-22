@@ -1,0 +1,40 @@
+Can both scores improve?
+
+[00:00:00.700]: Twenty candidate papers contain all ten papers judged relevant. On the first page, only two of ten are relevant. Reranking adds no paper. Can precision and recall both improve? Pause and decide which set, and which denominator, each number describes.
+
+[00:00:21.974]: In the chapter’s controlled example, six relevant papers reach the first ten after reranking. Precision at ten and recall at ten both rise from point two to point six. Recall over the entire candidate pool stays at one. The boundary makes the difference.
+
+[00:00:40.433]: Before counting, decide what relevant means. The same paper may help a researcher trace a method, fail to inform an undergraduate seeking an overview, and fail a reviewer’s inclusion criteria. Those verdicts concern different needs and tasks, without the paper itself changing.
+
+[00:00:59.343]: The chapter separates algorithmic estimates, topical aboutness, usefulness given the reader’s knowledge, and usefulness for a task in context. This is a teaching simplification, not a complete taxonomy. A high model score is evidence the system uses, not the human judgement itself.
+
+[00:01:18.881]: A reference interview establishes what would count as a useful answer. Evaluation writes those criteria and judgements down so systems can be compared against the same ones. Some test collections use mainly topical criteria; others encode detailed task or inclusion rules.
+
+[00:01:38.018]: The formula cannot tell which conception was used. A topically relevant paper can have the wrong population, date or method, or be superseded. Report who judged, for which purpose, and whether relevance was binary or graded. The number measures agreement with those operational judgements.
+
+[00:01:58.295]: Precision divides retrieved relevant papers by retrieved papers. Recall divides retrieved relevant papers by all relevant papers under the evaluation protocol. In this example the first page holds ten records, and the complete relevance set also has ten. The denominators happen to agree numerically.
+
+[00:02:19.848]: They still count different things. Before reranking, both fractions are two over ten. Afterward, both are six over ten. The complete relevant set is stipulated here. Finding ten known seeds in a live database would not establish that those are every relevant paper.
+
+[00:02:39.029]: All twenty records remain candidates before and after. Reranking moves relevant ones across the display cutoff without increasing the pool’s recall. For any later stage that only processes this fixed output, excluded records remain unavailable.
+
+[00:02:56.322]: This is compatible with a better first page. Extending a fixed ranking cannot lower recall, but precision can rise or fall as the added record changes the fraction. A better ranking or representation can improve both measures at a chosen depth. The trade is not an unavoidable law between systems.
+
+[00:03:17.152]: Hybrid routes and another retrieval round can expand the cumulative pool. Their recall gain comes from newly contributed relevant records, before that new candidate boundary. Merely rearranging one existing list cannot add evidence that it never contained.
+
+[00:03:34.271]: Duplicates and irrelevant additions do not raise recall. They can enlarge the pool or push useful records below a displayed cutoff. Ask where candidate generation ends, and distinguish its ceiling from recall at the depth the reader actually sees. A generated answer cannot recover an excluded source by summarising harder.
+
+[00:03:57.552]: Precision requires judging what came back. Absolute recall also requires knowing how many relevant records the collection holds. In a live database, that total is usually unknown. A large result count does not answer the question.
+
+[00:04:13.428]: Practitioners compare the relevant union found by several strategies, or test recovery of known relevant seeds. These are useful relative comparisons and regression checks, not the true denominator of an entire collection. Report the scope rather than turning known seed recovery into an absolute recall claim.
+
+[00:04:35.027]: Ready reference often values precision; evidence reviews lean heavily on recall. The chapter’s August twenty twenty six methodological note keeps structured database searching as the formal review core, supplemented by other routes. That describes practice, not an inherent Boolean recall advantage.
+
+[00:04:56.423]: Boolean strategies can miss synonyms or depend on incomplete coverage. Ranked boundaries can constrain BM twenty five as well as dense retrieval. Test the complete workflow for the task, with inspectable conditions and stated judgements. Next, we examine the different definitions of better hidden inside ranking metrics.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 14.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#evaluation
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

@@ -1,0 +1,40 @@
+The blind spot that survives the loop
+
+[00:00:00.700]: Find related papers that an article could have cited but did not. The chapter’s probe requires identifying the article, extracting its references, finding related work, and comparing identities. Would running more searches alone complete that task? Pause and identify the missing operation.
+
+[00:00:22.149]: The comparison must actually happen. Our invented set diagram removes already cited identities from a related candidate pool. The remaining records are candidates for checking, not verified citation omissions; timing, relevance and metadata still need assessment.
+
+[00:00:41.481]: The author’s December twenty twenty five probe reports Asta stopping at the target lookup, and Consensus returning already cited papers despite four sub agents. SciSpace attempted reference extraction and comparison; most suggestions were uncited, but metadata caused some matching failures and completion was unclear.
+
+[00:01:03.324]: General assistants also depended on access to the full text. This was one task type, not a general capability ranking. Passing or failing it does not establish robust agency across tasks or identify a failure’s sole cause.
+
+[00:01:20.262]: A trace records what the system did. It does not reveal every action it could have taken. Missing reference extraction or source access can block the task.
+
+[00:01:30.430]: MCP can expose search operations to a controller: their inputs, outputs and purpose. Scite and Wiley AI Gateway provide examples in the chapter. The underlying retrieval algorithm stays separate.
+
+[00:01:45.969]: Wiley’s documented server returns relevant full text chunks with paper metadata. Scite documents tools and Search API filters, but does not document ranking parity with its web interface; its Assistant is not offered through MCP.
+
+[00:02:02.051]: The controller chooses when to call those operations, what to ask and whether to search again. The exposed operations, authentication and library entitlements still apply. An endpoint does not provide every interface feature or a route around a subscription.
+
+[00:02:19.780]: The chapter illustrates a hypothetical search about open access and citations. Round one returns papers about overall citation differences, while selection bias methods are missing. Later searches follow the returned terminology and references, reinforcing the same aspect.
+
+[00:02:39.181]: After three rounds the budget ends, with selection bias methods still unexplored. These are hypothetical recorded actions and observations, not private model reasoning. The example shows how a shortlist bottleneck can recur and influence the next search.
+
+[00:02:57.365]: An alternative second action explicitly searches for open access, citation advantage and selection bias methods. Suppose that action retrieves methodological papers absent from the first round. The cumulative candidate pool can then expand, informing later choices.
+
+[00:03:16.066]: The task brief, a librarian or the controller could prompt that action. It is not guaranteed to occur or succeed. Citation searching does not always stay inside one aspect; the illustration contrasts possible trajectories, not universal outcomes.
+
+[00:03:34.114]: A workflow may stop because its steps ended. A harness may impose a round limit or budget, or the user may interrupt. A model may instead decide that the evidence it has seen is sufficient.
+
+[00:03:47.519]: That last decision applies a relevance criterion to results the user may not have inspected. Record it. A budget reached, declining yield or a model saying enough does not prove completeness, and two runs may stop differently.
+
+[00:04:03.951]: Evaluating the loop requires the available action menu as well as the executed trace, intermediate results and stopping conditions. Otherwise an access limit can look like reasoning failure, and an early omission can disappear behind a fluent final answer.
+
+[00:04:21.709]: More rounds add latency and tokens. A known procedure may be cheaper and more reproducible when prescribed in advance. Choose the arrangement for the task, and evaluate what it recovered and what it failed to explore.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 12.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#agentic-search
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

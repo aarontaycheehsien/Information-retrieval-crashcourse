@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8826/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8826/01-the-paper-the-reranker-never-saw/01-the-paper-the-reranker-never-saw.mp4",
+      "duration": 289.6,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 111,
+      "seek_seconds": 144.8,
+      "byte_range": "bytes 0-1023/28751896",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8826/02-one-vector-or-many-clues/02-one-vector-or-many-clues.mp4",
+      "duration": 287.566667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 111,
+      "seek_seconds": 143.783333,
+      "byte_range": "bytes 0-1023/29366214",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8826/03-the-best-next-result-may-rank-lower/03-the-best-next-result-may-rank-lower.mp4",
+      "duration": 292.333333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 114,
+      "seek_seconds": 146.166666,
+      "byte_range": "bytes 0-1023/30325694",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

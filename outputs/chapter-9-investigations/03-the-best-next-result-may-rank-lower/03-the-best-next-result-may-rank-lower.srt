@@ -1,0 +1,455 @@
+1
+00:00:00,700 --> 00:00:03,619
+Your first three papers all fit the query
+
+2
+00:00:03,639 --> 00:00:06,273
+well, but cover the same aspect using
+
+3
+00:00:06,293 --> 00:00:07,549
+similar evidence.
+
+4
+00:00:07,685 --> 00:00:10,320
+A lower ranked paper covers another useful
+
+5
+00:00:10,340 --> 00:00:12,498
+aspect. Which one would you want next when
+
+6
+00:00:12,518 --> 00:00:13,837
+exploring the topic?
+
+7
+00:00:13,987 --> 00:00:15,113
+Pause and predict.
+
+8
+00:00:17,516 --> 00:00:19,525
+Result diversification asks what a
+
+9
+00:00:19,545 --> 00:00:22,153
+candidate adds to the items already
+
+10
+00:00:22,173 --> 00:00:24,898
+selected. It changes the objective from
+
+11
+00:00:24,918 --> 00:00:27,888
+sorting independent scores to constructing
+
+12
+00:00:27,908 --> 00:00:30,079
+a useful set. The answer depends on the
+
+13
+00:00:30,099 --> 00:00:32,592
+search task and what the system counts as
+
+14
+00:00:32,612 --> 00:00:33,338
+different.
+
+15
+00:00:34,246 --> 00:00:36,619
+The chapter’s schematic pool concerns open
+
+16
+00:00:36,639 --> 00:00:38,926
+access citation advantage.
+
+17
+00:00:39,088 --> 00:00:42,456
+A, B and C cover overall advantage.
+
+18
+00:00:42,619 --> 00:00:45,085
+D covers disciplinary differences.
+
+19
+00:00:45,248 --> 00:00:47,753
+E covers selection bias methods.
+
+20
+00:00:47,902 --> 00:00:49,802
+F is weakly related.
+
+21
+00:00:50,384 --> 00:00:55,070
+One selection is A, B, C: three strong
+
+22
+00:00:55,090 --> 00:00:57,234
+individual matches with repeated aspect
+
+23
+00:00:57,254 --> 00:01:02,028
+coverage. Another is A, D, E: retain a
+
+24
+00:01:02,048 --> 00:01:04,657
+strong match and expose two other useful
+
+25
+00:01:04,677 --> 00:01:07,750
+aspects. F stays out because being
+
+26
+00:01:07,770 --> 00:01:09,566
+different is insufficient.
+
+27
+00:01:09,742 --> 00:01:12,093
+These stipulated selections illustrate an
+
+28
+00:01:12,113 --> 00:01:14,541
+objective, not a calculated algorithm
+
+29
+00:01:14,561 --> 00:01:15,327
+output.
+
+30
+00:01:16,173 --> 00:01:18,708
+Diversification names an objective.
+
+31
+00:01:18,857 --> 00:01:21,904
+Reranking names a pipeline position.
+
+32
+00:01:22,079 --> 00:01:24,636
+Deduplication removes records considered
+
+33
+00:01:24,656 --> 00:01:26,736
+equivalent under a separate rule.
+
+34
+00:01:26,886 --> 00:01:29,675
+B and C remain distinct studies even
+
+35
+00:01:29,695 --> 00:01:32,278
+though they share an aspect with A; shared
+
+36
+00:01:32,298 --> 00:01:34,211
+subject matter does not make them
+
+37
+00:01:34,231 --> 00:01:35,229
+duplicates.
+
+38
+00:01:35,781 --> 00:01:37,987
+Difference might mean topic, method,
+
+39
+00:01:38,007 --> 00:01:41,015
+geography, viewpoint or merely wording.
+
+40
+00:01:41,229 --> 00:01:42,975
+Broader topical coverage does not
+
+41
+00:01:42,995 --> 00:01:45,745
+automatically create viewpoint diversity,
+
+42
+00:01:45,868 --> 00:01:48,154
+fairness or balanced evidence.
+
+43
+00:01:48,317 --> 00:01:50,449
+The system’s representation of difference
+
+44
+00:01:50,469 --> 00:01:52,382
+needs to match what the reader actually
+
+45
+00:01:52,402 --> 00:01:53,670
+wants to explore.
+
+46
+00:01:54,578 --> 00:01:57,367
+Exploratory search may benefit from less
+
+47
+00:01:57,387 --> 00:02:00,704
+repetition. A systematic review may need
+
+48
+00:02:00,724 --> 00:02:03,359
+every relevant study, including very
+
+49
+00:02:03,379 --> 00:02:06,155
+similar ones. Diversity aware selection
+
+50
+00:02:06,175 --> 00:02:08,707
+can push a highly relevant near neighbour
+
+51
+00:02:08,727 --> 00:02:11,464
+below the displayed cut off.
+
+52
+00:02:11,639 --> 00:02:14,222
+Similar papers can still contain separate
+
+53
+00:02:14,242 --> 00:02:15,124
+evidence.
+
+54
+00:02:15,687 --> 00:02:18,752
+Diversification does not retrieve records
+
+55
+00:02:18,772 --> 00:02:20,143
+missing from the pool.
+
+56
+00:02:20,306 --> 00:02:23,714
+Evaluate retrieval, diversity and display
+
+57
+00:02:23,734 --> 00:02:25,350
+limits separately.
+
+58
+00:02:25,499 --> 00:02:27,902
+A broader looking list can be useful
+
+59
+00:02:27,922 --> 00:02:30,247
+without being an exhaustive account of the
+
+60
+00:02:30,267 --> 00:02:31,187
+evidence.
+
+61
+00:02:32,079 --> 00:02:34,332
+The chapter’s published PubMed Best Match
+
+62
+00:02:34,352 --> 00:02:37,283
+account starts with BM twenty five and
+
+63
+00:02:37,303 --> 00:02:39,757
+applies LambdaMART to the top five hundred
+
+64
+00:02:39,777 --> 00:02:42,540
+candidates. Its list continues below that
+
+65
+00:02:42,560 --> 00:02:45,362
+reranked region in Best Match order.
+
+66
+00:02:45,910 --> 00:02:47,706
+Primo Research Assistant has another
+
+67
+00:02:47,726 --> 00:02:50,322
+boundary: up to thirty candidates are
+
+68
+00:02:50,342 --> 00:02:52,976
+reranked using embeddings, and five
+
+69
+00:02:52,996 --> 00:02:55,321
+selected abstracts reach generation.
+
+70
+00:02:55,496 --> 00:02:57,886
+These are documentation accounts, not new
+
+71
+00:02:57,906 --> 00:03:00,528
+service tests. Neither count measures
+
+72
+00:03:00,548 --> 00:03:03,028
+relevance, and the two products handle
+
+73
+00:03:03,048 --> 00:03:04,548
+their tails differently.
+
+74
+00:03:05,447 --> 00:03:07,823
+The documented Primo workflow starts when
+
+75
+00:03:07,843 --> 00:03:10,825
+an LLM converts a question into Boolean
+
+76
+00:03:10,845 --> 00:03:13,402
+variations connected with OR.
+
+77
+00:03:13,564 --> 00:03:16,495
+Some filters can be refined automatically.
+
+78
+00:03:16,670 --> 00:03:19,201
+CDI then retrieves through a largely
+
+79
+00:03:19,221 --> 00:03:21,572
+lexical inverted index route.
+
+80
+00:03:22,137 --> 00:03:24,784
+Its ranking combines lexical and field
+
+81
+00:03:24,804 --> 00:03:27,889
+evidence, phrase and proximity signals,
+
+82
+00:03:27,910 --> 00:03:30,609
+and static signals such as recency and
+
+83
+00:03:30,629 --> 00:03:33,856
+citations. The embedding reranking stage
+
+84
+00:03:33,876 --> 00:03:37,077
+receives up to thirty leading candidates.
+
+85
+00:03:37,227 --> 00:03:39,410
+An AI component later in the chain does
+
+86
+00:03:39,430 --> 00:03:42,502
+not make the first retrieval stage dense.
+
+87
+00:03:43,393 --> 00:03:45,806
+The documented working set for generation
+
+88
+00:03:45,852 --> 00:03:47,610
+is five abstracts.
+
+89
+00:03:47,772 --> 00:03:49,595
+A paper omitted before the thirty
+
+90
+00:03:49,615 --> 00:03:52,610
+candidate reranking boundary cannot be
+
+91
+00:03:52,630 --> 00:03:53,692
+reordered there.
+
+92
+00:03:53,855 --> 00:03:56,141
+A candidate outside the five source
+
+93
+00:03:56,161 --> 00:03:59,015
+boundary is also unavailable to that
+
+94
+00:03:59,035 --> 00:04:01,398
+answer writer’s documented working set.
+
+95
+00:04:01,955 --> 00:04:04,830
+And an abstract is not the complete paper.
+
+96
+00:04:04,979 --> 00:04:07,859
+A detail stated only in full text was not
+
+97
+00:04:07,879 --> 00:04:10,243
+supplied in this documented abstract based
+
+98
+00:04:10,263 --> 00:04:11,183
+context.
+
+99
+00:04:12,088 --> 00:04:15,170
+Learning to rank, including LambdaMART,
+
+100
+00:04:15,384 --> 00:04:17,581
+learns to combine available features from
+
+101
+00:04:17,601 --> 00:04:18,946
+training examples.
+
+102
+00:04:19,121 --> 00:04:21,254
+Those features can be lexical matches,
+
+103
+00:04:21,274 --> 00:04:24,643
+dates, publication types or usage; they
+
+104
+00:04:24,663 --> 00:04:26,214
+need not be embeddings.
+
+105
+00:04:26,377 --> 00:04:29,114
+Its limits include the evidence and labels
+
+106
+00:04:29,134 --> 00:04:30,235
+it receives.
+
+107
+00:04:30,787 --> 00:04:33,449
+Ask which route supplied candidates, how
+
+108
+00:04:33,469 --> 00:04:36,310
+many received each comparison, what text
+
+109
+00:04:36,330 --> 00:04:38,539
+survived, and whether the selected set
+
+110
+00:04:38,559 --> 00:04:39,789
+serves the task.
+
+111
+00:04:39,951 --> 00:04:42,946
+Chapter Ten adds another decision:
+
+112
+00:04:43,096 --> 00:04:45,537
+combining or routing multiple retrieval
+
+113
+00:04:45,557 --> 00:04:48,488
+routes whose ranked lists and score scales
+
+114
+00:04:48,508 --> 00:04:49,441
+may differ.

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="403.2pt" viewBox="0 0 1008 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Original search-control teaching illustration; not a model measurement</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 1008 403.2 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #eee9e0"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 25.2 134.313984 
+L 302.904 134.313984 
+L 302.904 96.12288 
+L 25.2 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="119.633432" transform="rotate(-0 164.052 119.633432)">Pattern</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 302.904 134.313984 
+L 743.4 134.313984 
+L 743.4 96.12288 
+L 302.904 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="523.152" y="119.570932" transform="rotate(-0 523.152 119.570932)">Search trajectory</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 743.4 134.313984 
+L 982.8 134.313984 
+L 982.8 96.12288 
+L 743.4 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="863.1" y="119.633432" transform="rotate(-0 863.1 119.633432)">Main output</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 25.2 172.505088 
+L 302.904 172.505088 
+L 302.904 134.313984 
+L 25.2 134.313984 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="157.824536" transform="rotate(-0 164.052 157.824536)">Scripted deep search</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 302.904 172.505088 
+L 743.4 172.505088 
+L 743.4 134.313984 
+L 302.904 134.313984 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="523.152" y="157.824536" transform="rotate(-0 523.152 157.824536)">Predetermined repeated retrieval</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 743.4 172.505088 
+L 982.8 172.505088 
+L 982.8 134.313984 
+L 743.4 134.313984 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="863.1" y="157.824536" transform="rotate(-0 863.1 157.824536)">Records</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 25.2 210.696192 
+L 302.904 210.696192 
+L 302.904 172.505088 
+L 25.2 172.505088 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="196.01564" transform="rotate(-0 164.052 196.01564)">Agentic deep search</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 302.904 210.696192 
+L 743.4 210.696192 
+L 743.4 172.505088 
+L 302.904 172.505088 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="523.152" y="196.01564" transform="rotate(-0 523.152 196.01564)">Model-planned retrieval trajectory</text>
+    </g>
+    <g id="patch_10">
+     <path d="M 743.4 210.696192 
+L 982.8 210.696192 
+L 982.8 172.505088 
+L 743.4 172.505088 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="863.1" y="196.01564" transform="rotate(-0 863.1 196.01564)">Records</text>
+    </g>
+    <g id="patch_11">
+     <path d="M 25.2 248.887296 
+L 302.904 248.887296 
+L 302.904 210.696192 
+L 25.2 210.696192 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="234.206744" transform="rotate(-0 164.052 234.206744)">Scripted deep research</text>
+    </g>
+    <g id="patch_12">
+     <path d="M 302.904 248.887296 
+L 743.4 248.887296 
+L 743.4 210.696192 
+L 302.904 210.696192 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_11">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="523.152" y="234.206744" transform="rotate(-0 523.152 234.206744)">Predetermined retrieval then synthesis</text>
+    </g>
+    <g id="patch_13">
+     <path d="M 743.4 248.887296 
+L 982.8 248.887296 
+L 982.8 210.696192 
+L 743.4 210.696192 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_12">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="863.1" y="234.206744" transform="rotate(-0 863.1 234.206744)">Report / answer</text>
+    </g>
+    <g id="patch_14">
+     <path d="M 25.2 287.0784 
+L 302.904 287.0784 
+L 302.904 248.887296 
+L 25.2 248.887296 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="164.052" y="272.397848" transform="rotate(-0 164.052 272.397848)">Agentic deep research</text>
+    </g>
+    <g id="patch_15">
+     <path d="M 302.904 287.0784 
+L 743.4 287.0784 
+L 743.4 248.887296 
+L 302.904 248.887296 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="523.152" y="272.397848" transform="rotate(-0 523.152 272.397848)">Model-planned retrieval and synthesis</text>
+    </g>
+    <g id="patch_16">
+     <path d="M 743.4 287.0784 
+L 982.8 287.0784 
+L 982.8 248.887296 
+L 743.4 248.887296 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_15">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="863.1" y="272.397848" transform="rotate(-0 863.1 272.397848)">Report / answer</text>
+    </g>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="504" y="36.384" transform="rotate(-0 504 36.384)">Output form and control are independent properties</text>
+   </g>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6e6b63" x="55.44" y="394.448406" transform="rotate(-0 55.44 394.448406)">Repeated retrieval does not establish agency. A long report demonstrates generation; its search procedure may still be fixed.</text>
+  </g>
+ </g>
+</svg>

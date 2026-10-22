@@ -1,0 +1,4 @@
+contrast,left,right,interpretation,measured_model_result
+direction,A causes B,B causes A,Equal term counts; different causal direction,False
+negation,The intervention does not increase risk,The intervention does increase risk,Decisive proposition differs,False
+exact identity,DELULU-427,DELULU-428,Literal keyword-field identity in declared toy records,False

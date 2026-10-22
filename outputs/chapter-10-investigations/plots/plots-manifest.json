@@ -1,0 +1,81 @@
+{
+  "recipe_sha256": "c16941da7edd22d0cd4f4002a1be2f5a9571219fb31ad601941adda5927dff61",
+  "kind": "source-exact rank-fusion arithmetic and declared mathematical variations",
+  "measured_retrieval_results": false,
+  "checks": {
+    "source_lists": [
+      [
+        "A",
+        "B",
+        "C"
+      ],
+      [
+        "C",
+        "A",
+        "D"
+      ]
+    ],
+    "constant": 60,
+    "exact_fraction_scores": {
+      "A": "123/3782",
+      "C": "124/3843",
+      "B": "1/62",
+      "D": "1/63"
+    },
+    "rounded_source_scores": {
+      "A": "0.03252",
+      "C": "0.03227",
+      "B": "0.01613",
+      "D": "0.01587"
+    },
+    "baseline_order": [
+      "A",
+      "C",
+      "B",
+      "D"
+    ],
+    "input_occurrences": 6,
+    "distinct_candidates": 4,
+    "shallower_order": [
+      "A",
+      "C",
+      "B"
+    ],
+    "shallower_candidates": [
+      "A",
+      "B",
+      "C"
+    ],
+    "dense_double_weight_order": [
+      "C",
+      "A",
+      "D",
+      "B"
+    ],
+    "score_gap_examples_are_invented": true,
+    "measured_retrieval_results": false,
+    "fused_scores_are_relevance_probabilities": false,
+    "passed": true
+  },
+  "files": {
+    "constant-curves.csv": "2e08bcc03331d657f79dc5ff76feabb1446c2f29999ddf6d3d0646694202ffb4",
+    "constant-effect.png": "35538c0eb7a36824cec19df06dae5349458d365940c669572b2863416b9fc339",
+    "constant-effect.svg": "55384f5800c70f02507b113e83efafcf2984c1eca0135d3e4d2e7b1962832b61",
+    "cutoff-effect.png": "85740cce0812555bdc8e2e743cfbb0e212293a146610d1a683b6e49eb3e586c5",
+    "cutoff-effect.svg": "5ebfc7d9633ccff0fe8bc70d32e401056f4b9c8d69ec2f9187f0e867472be2c4",
+    "rrf-a.png": "d4be927e3a2e25dbc8a7c445599dea712100c676b1eb0a5dfecd6ec093e6dbc8",
+    "rrf-a.svg": "9f9d40e07b9d0287bd4d26e44cfa8d2de282676d87de5101763677a5d0d87592",
+    "rrf-c.png": "566af65a7b13e65218e3544c3c1e75a1a48a316a0a4d2ba8840573a31853fb6b",
+    "rrf-c.svg": "dc7f050ab67fe159112cf9f70049e0d0a1f1823a3e5ae11c952ba764836d8497",
+    "rrf-contributions.png": "b4361a6f61f958c2de4db992902b08b731409b652cfaf3bbc63fde18e8048afc",
+    "rrf-contributions.svg": "290e112d418cd08659a8d1596bb135ce4886f2ec48067de078c8cf529010d4a4",
+    "rrf-singletons.png": "879f191ab02d86864e8cc53aaccc1736abff629f4a7d608320922847c5f8f17e",
+    "rrf-singletons.svg": "1ee24eae0bfc43fbf6d4d5c9d08507e6341b1be7707699ea46c99d508cf1cf4b",
+    "rrf-values.csv": "dca68641f513078238cf710b4512f25185d4fc4c481ab1e46ad7ce8c9c29d47f",
+    "score-gaps.png": "560c537eecd5d40a6bb801d5ee1fac1244815a7dfdb41274fcb8978b5b4c0886",
+    "score-gaps.svg": "10d19c232046fab8dd75f680a27c8d1b4397dbf47f863d5e5676c79860114f8c",
+    "weighted-fusion.png": "b9bc013652b62e3fa550deb5a4dc68ced961190ec5aa6c2272e33797804e039d",
+    "weighted-fusion.svg": "c85e0f33b8ef2788a15bcc2095cadc63109f880f66e9aefb51ec60751e86c462"
+  },
+  "passed": true
+}

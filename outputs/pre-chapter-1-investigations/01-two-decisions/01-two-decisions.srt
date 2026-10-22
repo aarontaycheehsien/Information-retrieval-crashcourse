@@ -1,0 +1,339 @@
+1
+00:00:00,700 --> 00:00:03,483
+Here are eight imaginary papers.
+
+2
+00:00:03,645 --> 00:00:05,493
+A search returns three of them.
+
+3
+00:00:05,669 --> 00:00:07,903
+You move the third result to the top.
+
+4
+00:00:08,078 --> 00:00:09,565
+Have you improved the search?
+
+5
+00:00:09,728 --> 00:00:11,203
+Take a moment. What would you need to
+
+6
+00:00:11,223 --> 00:00:11,769
+know?
+
+7
+00:00:14,702 --> 00:00:16,004
+You have changed the order.
+
+8
+00:00:16,180 --> 00:00:17,848
+But you have learned nothing about the
+
+9
+00:00:17,868 --> 00:00:20,090
+five papers that never made it into the
+
+10
+00:00:20,110 --> 00:00:22,358
+results. One of those could have been the
+
+11
+00:00:22,378 --> 00:00:24,020
+paper you needed most.
+
+12
+00:00:24,921 --> 00:00:27,035
+Aaron Tay opens this book with two
+
+13
+00:00:27,055 --> 00:00:28,852
+questions that are easily blurred
+
+14
+00:00:28,872 --> 00:00:31,984
+together. First: why did this record get
+
+15
+00:00:32,004 --> 00:00:33,813
+into the candidate set at all?
+
+16
+00:00:34,001 --> 00:00:36,326
+Think of a gate deciding which papers are
+
+17
+00:00:36,346 --> 00:00:37,434
+allowed through.
+
+18
+00:00:37,978 --> 00:00:40,825
+This is a schematic example, not a model
+
+19
+00:00:40,845 --> 00:00:42,229
+of a particular product.
+
+20
+00:00:42,391 --> 00:00:44,716
+The important thing is the boundary.
+
+21
+00:00:44,879 --> 00:00:47,410
+A paper outside the set cannot be moved to
+
+22
+00:00:47,430 --> 00:00:49,498
+the top just by reordering the papers
+
+23
+00:00:49,518 --> 00:00:50,373
+inside it.
+
+24
+00:00:51,273 --> 00:00:53,554
+The second question is: why did a record
+
+25
+00:00:53,574 --> 00:00:54,958
+rank where it did?
+
+26
+00:00:55,133 --> 00:00:56,969
+Now we are comparing papers that are
+
+27
+00:00:56,989 --> 00:00:58,386
+already in the set.
+
+28
+00:00:58,561 --> 00:01:00,783
+Admission asks who participates.
+
+29
+00:01:00,945 --> 00:01:02,562
+Ranking asks how the participants are
+
+30
+00:01:02,582 --> 00:01:03,257
+ordered.
+
+31
+00:01:03,824 --> 00:01:06,296
+Both matter. A good order can make useful
+
+32
+00:01:06,316 --> 00:01:08,280
+evidence easier to see.
+
+33
+00:01:08,442 --> 00:01:11,296
+But a beautiful ranking is not evidence
+
+34
+00:01:11,316 --> 00:01:13,036
+that the right papers were available in
+
+35
+00:01:13,056 --> 00:01:14,311
+the first place.
+
+36
+00:01:15,204 --> 00:01:17,902
+Tay describes learning search syntax
+
+37
+00:01:17,922 --> 00:01:20,337
+thoroughly, while retrieval mechanics
+
+38
+00:01:20,357 --> 00:01:22,670
+received little attention in his library
+
+39
+00:01:22,690 --> 00:01:25,865
+education. For years, he says, that was
+
+40
+00:01:25,885 --> 00:01:27,076
+enough for his work.
+
+41
+00:01:27,239 --> 00:01:29,641
+Around twenty twenty-two, understanding
+
+42
+00:01:29,661 --> 00:01:31,716
+the engine became much more important to
+
+43
+00:01:31,736 --> 00:01:32,244
+him.
+
+44
+00:01:32,815 --> 00:01:34,960
+The explanations he needed were scattered
+
+45
+00:01:34,980 --> 00:01:37,950
+across courses, engineering blogs,
+
+46
+00:01:37,970 --> 00:01:40,334
+conference talks, documentation and
+
+47
+00:01:40,354 --> 00:01:41,661
+research papers.
+
+48
+00:01:41,823 --> 00:01:43,994
+His questions were practical: how does
+
+49
+00:01:44,014 --> 00:01:46,313
+this differ from Boolean search, how
+
+50
+00:01:46,333 --> 00:01:48,684
+should I phrase a query, and which papers
+
+51
+00:01:48,704 --> 00:01:50,127
+will my researchers find?
+
+52
+00:01:51,032 --> 00:01:53,281
+Now put a label on the box: semantic
+
+53
+00:01:53,301 --> 00:01:55,561
+search. Or vector search.
+
+54
+00:01:55,723 --> 00:02:00,264
+Or neural, embedding, agentic, AI-powered.
+
+55
+00:02:00,427 --> 00:02:02,688
+Which of our two decisions does that label
+
+56
+00:02:02,708 --> 00:02:03,538
+explain?
+
+57
+00:02:05,240 --> 00:02:07,919
+Usually, the label alone cannot answer
+
+58
+00:02:07,939 --> 00:02:10,380
+that. These terms can refer to different
+
+59
+00:02:10,400 --> 00:02:13,022
+representations, matching methods,
+
+60
+00:02:13,042 --> 00:02:15,419
+pipeline stages or advertised
+
+61
+00:02:15,439 --> 00:02:18,306
+capabilities. In particular, semantic
+
+62
+00:02:18,326 --> 00:02:20,883
+search is not simply another name for
+
+63
+00:02:20,903 --> 00:02:22,094
+dense retrieval.
+
+64
+00:02:22,996 --> 00:02:25,350
+No single neural architecture has simply
+
+65
+00:02:25,370 --> 00:02:27,592
+replaced lexical retrieval.
+
+66
+00:02:27,754 --> 00:02:30,401
+So the useful move is to ask what happens
+
+67
+00:02:30,421 --> 00:02:32,257
+at each layer. What has the vendor
+
+68
+00:02:32,277 --> 00:02:34,731
+documented? What is your own observation?
+
+69
+00:02:34,893 --> 00:02:36,509
+And what remains unknown?
+
+70
+00:02:37,094 --> 00:02:39,291
+A true statement about one part of a
+
+71
+00:02:39,311 --> 00:02:41,855
+system can sound like a stronger claim
+
+72
+00:02:41,875 --> 00:02:43,259
+about the whole system.
+
+73
+00:02:43,396 --> 00:02:45,399
+Keeping the mechanism and the evidence
+
+74
+00:02:45,419 --> 00:02:47,898
+together helps you hear the difference.
+
+75
+00:02:48,799 --> 00:02:50,698
+Return to our three results.
+
+76
+00:02:50,848 --> 00:02:53,391
+Moving a paper changes its position.
+
+77
+00:02:53,592 --> 00:02:55,789
+Finding a previously excluded paper
+
+78
+00:02:55,809 --> 00:02:57,657
+changes what is available.
+
+79
+00:02:57,806 --> 00:02:59,706
+Those are different interventions, and
+
+80
+00:02:59,726 --> 00:03:01,471
+they answer different questions.
+
+81
+00:03:02,024 --> 00:03:04,555
+Before trusting a ranked list, keep both
+
+82
+00:03:04,575 --> 00:03:06,913
+questions in view: why did these papers
+
+83
+00:03:06,933 --> 00:03:09,464
+get in, and why are they in this order?
+
+84
+00:03:09,639 --> 00:03:11,926
+That distinction is the starting point of
+
+85
+00:03:11,946 --> 00:03:14,516
+How Search Decides What You See.

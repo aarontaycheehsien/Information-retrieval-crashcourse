@@ -1,0 +1,201 @@
+{
+  "series": "Reranking and multi-stage retrieval",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#reranking-and-hybrid",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#reranking-and-hybrid",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-the-best-next-result-may-rank-lower",
+  "title": "The best next result may rank lower",
+  "subtitle": "A useful list depends on coverage, candidate budgets, and surviving evidence.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "list_hook",
+      "title": "Can three strong results make a weak list?",
+      "source_anchor": "ranking-a-useful-set-not-only-relevant-items",
+      "visual": "list_hook",
+      "narration": [
+        "Your first three papers all fit the query well, but cover the same aspect using similar evidence. A lower ranked paper covers another useful aspect. Which one would you want next when exploring the topic? Pause and predict.",
+        "Result diversification asks what a candidate adds to the items already selected. It changes the objective from sorting independent scores to constructing a useful set. The answer depends on the search task and what the system counts as different."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "aspect_example",
+      "title": "A strong match can leave room for other aspects",
+      "source_anchor": "diversification-worked-title",
+      "visual": "aspect_example",
+      "narration": [
+        "The chapter\u2019s schematic pool concerns open access citation advantage. A, B and C cover overall advantage. D covers disciplinary differences. E covers selection bias methods. F is weakly related.",
+        "One selection is A, B, C: three strong individual matches with repeated aspect coverage. Another is A, D, E: retain a strong match and expose two other useful aspects. F stays out because being different is insufficient. These stipulated selections illustrate an objective, not a calculated algorithm output."
+      ]
+    },
+    {
+      "id": "distinct_objectives",
+      "title": "Diversity, reranking and deduplication ask different questions",
+      "source_anchor": "ranking-a-useful-set-not-only-relevant-items",
+      "visual": "distinct_objectives",
+      "narration": [
+        "Diversification names an objective. Reranking names a pipeline position. Deduplication removes records considered equivalent under a separate rule. B and C remain distinct studies even though they share an aspect with A; shared subject matter does not make them duplicates.",
+        "Difference might mean topic, method, geography, viewpoint or merely wording. Broader topical coverage does not automatically create viewpoint diversity, fairness or balanced evidence. The system\u2019s representation of difference needs to match what the reader actually wants to explore."
+      ]
+    },
+    {
+      "id": "review_boundary",
+      "title": "A diverse display does not replace high recall",
+      "source_anchor": "ranking-a-useful-set-not-only-relevant-items",
+      "visual": "review_boundary",
+      "narration": [
+        "Exploratory search may benefit from less repetition. A systematic review may need every relevant study, including very similar ones. Diversity aware selection can push a highly relevant near neighbour below the displayed cut off. Similar papers can still contain separate evidence.",
+        "Diversification does not retrieve records missing from the pool. Evaluate retrieval, diversity and display limits separately. A broader looking list can be useful without being an exhaustive account of the evidence."
+      ]
+    },
+    {
+      "id": "product_budgets",
+      "title": "The second pass has a documented budget",
+      "source_anchor": "reranking-in-two-documented-academic-pipelines",
+      "visual": "product_budgets",
+      "narration": [
+        "The chapter\u2019s published PubMed Best Match account starts with BM twenty five and applies LambdaMART to the top five hundred candidates. Its list continues below that reranked region in Best Match order.",
+        "Primo Research Assistant has another boundary: up to thirty candidates are reranked using embeddings, and five selected abstracts reach generation. These are documentation accounts, not new service tests. Neither count measures relevance, and the two products handle their tails differently."
+      ]
+    },
+    {
+      "id": "primo_chain",
+      "title": "Follow Primo\u2019s candidates from question to shortlist",
+      "source_anchor": "primo-ra-pipeline-title",
+      "visual": "primo_chain",
+      "narration": [
+        "The documented Primo workflow starts when an LLM converts a question into Boolean variations connected with OR. Some filters can be refined automatically. CDI then retrieves through a largely lexical inverted index route.",
+        "Its ranking combines lexical and field evidence, phrase and proximity signals, and static signals such as recency and citations. The embedding reranking stage receives up to thirty leading candidates. An AI component later in the chain does not make the first retrieval stage dense."
+      ]
+    },
+    {
+      "id": "abstract_boundary",
+      "title": "Five abstracts are the evidence passed onward",
+      "source_anchor": "tbl-9-3",
+      "visual": "abstract_boundary",
+      "narration": [
+        "The documented working set for generation is five abstracts. A paper omitted before the thirty candidate reranking boundary cannot be reordered there. A candidate outside the five source boundary is also unavailable to that answer writer\u2019s documented working set.",
+        "And an abstract is not the complete paper. A detail stated only in full text was not supplied in this documented abstract based context."
+      ]
+    },
+    {
+      "id": "pipeline_questions",
+      "title": "What survives each stage?",
+      "source_anchor": "reranking-in-two-documented-academic-pipelines",
+      "visual": "pipeline_questions",
+      "narration": [
+        "Learning to rank, including LambdaMART, learns to combine available features from training examples. Those features can be lexical matches, dates, publication types or usage; they need not be embeddings. Its limits include the evidence and labels it receives.",
+        "Ask which route supplied candidates, how many received each comparison, what text survived, and whether the selected set serves the task. Chapter Ten adds another decision: combining or routing multiple retrieval routes whose ranked lists and score scales may differ."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "list_hook_0",
+      "scene": "list_hook",
+      "text": "Your first three papers all fit the query well, but cover the same aspect using similar evidence. A lower ranked paper covers another useful aspect. Which one would you want next when exploring the topic? Pause and predict.",
+      "gap": 1.0
+    },
+    {
+      "id": "list_hook_1",
+      "scene": "list_hook",
+      "text": "Result diversification asks what a candidate adds to the items already selected. It changes the objective from sorting independent scores to constructing a useful set. The answer depends on the search task and what the system counts as different.",
+      "gap": 2.5
+    },
+    {
+      "id": "aspect_example_0",
+      "scene": "aspect_example",
+      "text": "The chapter\u2019s schematic pool concerns open access citation advantage. A, B and C cover overall advantage. D covers disciplinary differences. E covers selection bias methods. F is weakly related.",
+      "gap": 1.0
+    },
+    {
+      "id": "aspect_example_1",
+      "scene": "aspect_example",
+      "text": "One selection is A, B, C: three strong individual matches with repeated aspect coverage. Another is A, D, E: retain a strong match and expose two other useful aspects. F stays out because being different is insufficient. These stipulated selections illustrate an objective, not a calculated algorithm output.",
+      "gap": 0.65
+    },
+    {
+      "id": "distinct_objectives_0",
+      "scene": "distinct_objectives",
+      "text": "Diversification names an objective. Reranking names a pipeline position. Deduplication removes records considered equivalent under a separate rule. B and C remain distinct studies even though they share an aspect with A; shared subject matter does not make them duplicates.",
+      "gap": 1.0
+    },
+    {
+      "id": "distinct_objectives_1",
+      "scene": "distinct_objectives",
+      "text": "Difference might mean topic, method, geography, viewpoint or merely wording. Broader topical coverage does not automatically create viewpoint diversity, fairness or balanced evidence. The system\u2019s representation of difference needs to match what the reader actually wants to explore.",
+      "gap": 0.65
+    },
+    {
+      "id": "review_boundary_0",
+      "scene": "review_boundary",
+      "text": "Exploratory search may benefit from less repetition. A systematic review may need every relevant study, including very similar ones. Diversity aware selection can push a highly relevant near neighbour below the displayed cut off. Similar papers can still contain separate evidence.",
+      "gap": 1.0
+    },
+    {
+      "id": "review_boundary_1",
+      "scene": "review_boundary",
+      "text": "Diversification does not retrieve records missing from the pool. Evaluate retrieval, diversity and display limits separately. A broader looking list can be useful without being an exhaustive account of the evidence.",
+      "gap": 0.65
+    },
+    {
+      "id": "product_budgets_0",
+      "scene": "product_budgets",
+      "text": "The chapter\u2019s published PubMed Best Match account starts with BM twenty five and applies LambdaMART to the top five hundred candidates. Its list continues below that reranked region in Best Match order.",
+      "gap": 1.0
+    },
+    {
+      "id": "product_budgets_1",
+      "scene": "product_budgets",
+      "text": "Primo Research Assistant has another boundary: up to thirty candidates are reranked using embeddings, and five selected abstracts reach generation. These are documentation accounts, not new service tests. Neither count measures relevance, and the two products handle their tails differently.",
+      "gap": 0.65
+    },
+    {
+      "id": "primo_chain_0",
+      "scene": "primo_chain",
+      "text": "The documented Primo workflow starts when an LLM converts a question into Boolean variations connected with OR. Some filters can be refined automatically. CDI then retrieves through a largely lexical inverted index route.",
+      "gap": 1.0
+    },
+    {
+      "id": "primo_chain_1",
+      "scene": "primo_chain",
+      "text": "Its ranking combines lexical and field evidence, phrase and proximity signals, and static signals such as recency and citations. The embedding reranking stage receives up to thirty leading candidates. An AI component later in the chain does not make the first retrieval stage dense.",
+      "gap": 0.65
+    },
+    {
+      "id": "abstract_boundary_0",
+      "scene": "abstract_boundary",
+      "text": "The documented working set for generation is five abstracts. A paper omitted before the thirty candidate reranking boundary cannot be reordered there. A candidate outside the five source boundary is also unavailable to that answer writer\u2019s documented working set.",
+      "gap": 1.0
+    },
+    {
+      "id": "abstract_boundary_1",
+      "scene": "abstract_boundary",
+      "text": "And an abstract is not the complete paper. A detail stated only in full text was not supplied in this documented abstract based context.",
+      "gap": 0.65
+    },
+    {
+      "id": "pipeline_questions_0",
+      "scene": "pipeline_questions",
+      "text": "Learning to rank, including LambdaMART, learns to combine available features from training examples. Those features can be lexical matches, dates, publication types or usage; they need not be embeddings. Its limits include the evidence and labels it receives.",
+      "gap": 1.0
+    },
+    {
+      "id": "pipeline_questions_1",
+      "scene": "pipeline_questions",
+      "text": "Ask which route supplied candidates, how many received each comparison, what text survived, and whether the selected set serves the task. Chapter Ten adds another decision: combining or routing multiple retrieval routes whose ranked lists and score scales may differ.",
+      "gap": 0.65
+    }
+  ]
+}

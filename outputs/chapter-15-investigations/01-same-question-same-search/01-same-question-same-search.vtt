@@ -1,0 +1,412 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.632
+You save a natural language question and
+
+00:00:02.652 --> 00:00:04.010
+rerun it next year.
+
+00:00:04.172 --> 00:00:05.647
+The words are identical.
+
+00:00:05.796 --> 00:00:07.683
+Have you repeated the same search?
+
+00:00:07.871 --> 00:00:09.784
+Pause and name what could change between
+
+00:00:09.804 --> 00:00:12.374
+your question and the results: generated
+
+00:00:12.394 --> 00:00:15.776
+inputs, coverage, indexing, models,
+
+00:00:15.951 --> 00:00:17.605
+ranking or control.
+
+00:00:20.002 --> 00:00:22.848
+No retrieval method guarantees the same
+
+00:00:22.868 --> 00:00:24.214
+records forever.
+
+00:00:24.376 --> 00:00:25.928
+The useful question is which parts were
+
+00:00:25.948 --> 00:00:28.892
+fixed, documented, exportable and
+
+00:00:28.912 --> 00:00:32.062
+versioned. An exact future recreation may
+
+00:00:32.082 --> 00:00:33.854
+be impossible, while a saved
+
+00:00:33.874 --> 00:00:36.779
+transformation, trace and result export
+
+00:00:36.799 --> 00:00:39.279
+still let you compare the later run with
+
+00:00:39.299 --> 00:00:40.206
+the original.
+
+00:00:41.108 --> 00:00:43.277
+The chapter names four areas.
+
+00:00:43.452 --> 00:00:45.430
+Query interpretation records what was
+
+00:00:45.450 --> 00:00:48.110
+typed and what was actually sent onward.
+
+00:00:48.285 --> 00:00:51.036
+Candidate retrieval records the database,
+
+00:00:51.056 --> 00:00:54.167
+fields, indexed unit, retrieval method,
+
+00:00:54.187 --> 00:00:56.177
+parameters and cutoffs.
+
+00:00:56.326 --> 00:00:58.690
+Ranking and fusion records the ordering
+
+00:00:58.710 --> 00:01:02.040
+stages, component lists and final depth.
+
+00:01:02.601 --> 00:01:04.614
+Retrieval control records whether the
+
+00:01:04.634 --> 00:01:08.505
+sequence was fixed, adaptive or agentic,
+
+00:01:08.706 --> 00:01:10.567
+and the path actually taken.
+
+00:01:10.729 --> 00:01:13.505
+Saving only the question leaves all four
+
+00:01:13.525 --> 00:01:15.296
+partly unspecified.
+
+00:01:15.458 --> 00:01:18.853
+Some details are visible today; internal
+
+00:01:18.873 --> 00:01:21.611
+versions and budgets may require vendor
+
+00:01:21.631 --> 00:01:24.137
+disclosure. Mark them unknown when
+
+00:01:24.157 --> 00:01:25.077
+unavailable.
+
+00:01:26.002 --> 00:01:28.333
+Strict Boolean makes inclusion and
+
+00:01:28.353 --> 00:01:29.943
+exclusion explicit.
+
+00:01:30.093 --> 00:01:32.302
+Eligibility should repeat given the same
+
+00:01:32.322 --> 00:01:35.601
+records, indexing, analyser and query
+
+00:01:35.621 --> 00:01:36.670
+interpretation.
+
+00:01:36.807 --> 00:01:39.467
+Record the exact query, database and
+
+00:01:39.487 --> 00:01:42.908
+platform, fields, limits, vocabulary
+
+00:01:42.928 --> 00:01:44.892
+version, date and count.
+
+00:01:45.054 --> 00:01:47.276
+An unchanged query can still meet a
+
+00:01:47.296 --> 00:01:48.745
+changed database.
+
+00:01:49.303 --> 00:01:51.346
+Ranked lexical retrieval also needs
+
+00:01:51.366 --> 00:01:54.335
+analysis, stemming, field weights,
+
+00:01:54.368 --> 00:01:57.248
+rewriting, ranking configuration, sort
+
+00:01:57.268 --> 00:01:58.549
+order and depth.
+
+00:01:58.724 --> 00:02:01.720
+BM twenty five can move when new records
+
+00:02:01.740 --> 00:02:04.426
+change term rarity and document length
+
+00:02:04.446 --> 00:02:07.261
+statistics. A stable scoring formula is
+
+00:02:07.281 --> 00:02:09.619
+not a frozen collection or a permanent
+
+00:02:09.639 --> 00:02:10.327
+ranking.
+
+00:02:11.247 --> 00:02:14.065
+A fixed encoder, indexed units, stored
+
+00:02:14.085 --> 00:02:16.797
+vectors, similarity function and exact
+
+00:02:16.817 --> 00:02:19.014
+search procedure can produce repeatable
+
+00:02:19.034 --> 00:02:22.506
+scores. Dense retrieval is not inherently
+
+00:02:22.526 --> 00:02:25.367
+random. Record the model and tokeniser
+
+00:02:25.387 --> 00:02:28.137
+versions, embedded text and metadata,
+
+00:02:28.299 --> 00:02:31.256
+chunking, index version, filters and
+
+00:02:31.276 --> 00:02:33.343
+retrieval depth or threshold.
+
+00:02:33.899 --> 00:02:35.940
+Ask whether the search was exact or
+
+00:02:35.960 --> 00:02:38.080
+approximate. Approximate index
+
+00:02:38.100 --> 00:02:40.283
+construction and search parameters can
+
+00:02:40.303 --> 00:02:42.576
+affect candidates near a boundary.
+
+00:02:42.726 --> 00:02:44.381
+That is a different question from whether
+
+00:02:44.401 --> 00:02:46.830
+a language model generated the query
+
+00:02:46.850 --> 00:02:49.252
+differently. Keep the component and the
+
+00:02:49.272 --> 00:02:51.919
+suspected source of variation separate.
+
+00:02:52.827 --> 00:02:54.954
+Learnt sparse retrieval can expose
+
+00:02:54.974 --> 00:02:57.968
+generated vocabulary terms and weights.
+
+00:02:58.118 --> 00:03:00.366
+Those expansions may include terms the
+
+00:03:00.386 --> 00:03:03.085
+searcher never typed, so the original
+
+00:03:03.105 --> 00:03:05.481
+input alone is insufficient.
+
+00:03:05.657 --> 00:03:08.600
+Record the model, tokeniser, index,
+
+00:03:08.620 --> 00:03:11.320
+scoring configuration and depth, with
+
+00:03:11.340 --> 00:03:13.497
+expansions and weights where available.
+
+00:03:14.045 --> 00:03:16.702
+Late interaction can expose query and
+
+00:03:16.722 --> 00:03:18.699
+document token alignments.
+
+00:03:18.874 --> 00:03:21.341
+It also needs indexed unit boundaries,
+
+00:03:21.361 --> 00:03:24.253
+compression and index versions, similarity
+
+00:03:24.273 --> 00:03:26.547
+and MaxSim settings, pruning or
+
+00:03:26.567 --> 00:03:29.098
+approximate search settings and depth.
+
+00:03:29.248 --> 00:03:31.547
+Inspectable alignments do not make
+
+00:03:31.567 --> 00:03:34.318
+contextual vectors portable between model
+
+00:03:34.338 --> 00:03:35.232
+versions.
+
+00:03:36.138 --> 00:03:39.528
+An LLM rewrite may generate Boolean logic,
+
+00:03:39.652 --> 00:03:41.887
+expansion terms, subqueries or
+
+00:03:41.907 --> 00:03:43.278
+hypothetical text.
+
+00:03:43.441 --> 00:03:46.088
+Save the exact generated form, inferred
+
+00:03:46.108 --> 00:03:49.967
+filters, route, prompt or template, parser
+
+00:03:49.987 --> 00:03:52.519
+and model versions, and sampling settings
+
+00:03:52.539 --> 00:03:54.142
+or seed if exposed.
+
+00:03:54.291 --> 00:03:57.609
+Ask whether rerunning reuses that form or
+
+00:03:57.629 --> 00:03:58.768
+regenerates it.
+
+00:03:59.327 --> 00:04:01.472
+Sampling can introduce deliberate
+
+00:04:01.492 --> 00:04:04.474
+variation. Model, prompt and hosted
+
+00:04:04.494 --> 00:04:06.897
+inference changes can affect outputs even
+
+00:04:06.917 --> 00:04:08.894
+at temperature zero or with greedy
+
+00:04:08.914 --> 00:04:11.394
+decoding. This does not mean every call
+
+00:04:11.414 --> 00:04:13.997
+must vary. Identical output needs a
+
+00:04:14.017 --> 00:04:16.871
+guarantee the complete system actually
+
+00:04:16.891 --> 00:04:19.294
+provides and tests, rather than an
+
+00:04:19.314 --> 00:04:20.157
+assumption.
+
+00:04:21.080 --> 00:04:23.766
+Fixed and adaptive workflows can document
+
+00:04:23.786 --> 00:04:26.279
+rules in advance, but an adaptive branch
+
+00:04:26.299 --> 00:04:28.637
+and result dependent query still need a
+
+00:04:28.657 --> 00:04:30.067
+record of what happened.
+
+00:04:30.217 --> 00:04:32.697
+An agentic sequence can differ between
+
+00:04:32.717 --> 00:04:35.261
+runs because it chooses later actions from
+
+00:04:35.281 --> 00:04:36.485
+observations.
+
+00:04:37.024 --> 00:04:39.397
+Record controller instructions, permitted
+
+00:04:39.417 --> 00:04:42.361
+tools and sources, executed queries and
+
+00:04:42.381 --> 00:04:45.209
+routes, intermediate results, order,
+
+00:04:45.229 --> 00:04:48.443
+budgets, stopping and final identifiers.
+
+00:04:48.605 --> 00:04:50.273
+What is needed is an action and
+
+00:04:50.293 --> 00:04:53.134
+observation trace: what the system did and
+
+00:04:53.154 --> 00:04:54.242
+what came back.
+
+00:04:54.391 --> 00:04:56.549
+A model’s narrated reasoning is not a
+
+00:04:56.569 --> 00:04:58.327
+substitute for that record.
+
+00:04:59.245 --> 00:05:02.671
+Keep input, product and mode, search date,
+
+00:05:02.718 --> 00:05:05.791
+visible transformations, filters, result
+
+00:05:05.811 --> 00:05:08.407
+identifiers, counts and observed
+
+00:05:08.427 --> 00:05:10.971
+limitations. Save a raw export where
+
+00:05:10.991 --> 00:05:14.425
+possible. Separate direct observation from
+
+00:05:14.445 --> 00:05:17.401
+vendor documentation and unknown internal
+
+00:05:17.421 --> 00:05:20.198
+details. Ask the institution to obtain
+
+00:05:20.218 --> 00:05:23.523
+traces, versions and change notices that
+
+00:05:23.543 --> 00:05:25.687
+individuals cannot access.
+
+00:05:26.251 --> 00:05:28.182
+The chapter aligns this practice with
+
+00:05:28.202 --> 00:05:30.579
+PRISMA S reporting of strategies,
+
+00:05:30.599 --> 00:05:34.058
+databases, platforms, limits, dates and
+
+00:05:34.078 --> 00:05:36.636
+counts, while recognising replication
+
+00:05:36.656 --> 00:05:39.497
+limits. Documentation makes a later
+
+00:05:39.517 --> 00:05:42.254
+comparison possible; it does not by itself
+
+00:05:42.274 --> 00:05:45.282
+explain why a particular paper appeared.
+
+00:05:45.457 --> 00:05:46.996
+That is the next film’s question.

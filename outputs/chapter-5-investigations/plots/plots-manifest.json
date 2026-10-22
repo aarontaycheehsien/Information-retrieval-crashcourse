@@ -1,0 +1,37 @@
+{
+  "recipe_sha256": "5de150cd88b9484fd3db49f111430f97c2502a40209e60cf61ca56dbd6b8a0dc",
+  "kind": "declared toy geometry",
+  "trained_model_outputs": false,
+  "checks": {
+    "declared_toy_examples": true,
+    "trained_model_outputs": false,
+    "analogy_result": [
+      5.0,
+      5.0
+    ],
+    "nearest_after_input_exclusion": "queen",
+    "distance_before_projection": 10,
+    "distance_after_projection": 0,
+    "mean_pool": [
+      2.0,
+      2.0
+    ],
+    "training_targets": {
+      "cbow": "heart",
+      "masked": "treatment",
+      "next_token": "after"
+    },
+    "hidden_targets_absent_from_input": true,
+    "passed": true
+  },
+  "files": {
+    "analogy-after.png": "d50eec1f7f0eab8118b9f52da10a6a78725c30c94167d81e96700a9677e78ea2",
+    "analogy-after.svg": "5033a2fe83ec96ef33797a1687ad7fa9e418f96d1b0909f9297d4c9d3711c9c0",
+    "analogy-before.png": "fe28b6e328e3c0ecce489f9b284d1b0670bb013f2eeea860add06e2e78ce4458",
+    "analogy-before.svg": "48cb9438df24a25b10aa633440bf02945afecc9ef2dc7fbb4211e28bb847fff7",
+    "projection-loss.png": "bbb0716dabaa651298930ef145689e49f9edb188914581c8fd6c24048ab1749e",
+    "projection-loss.svg": "66508d3c763ad01b7b73975ffc6429a062bdde35c1172762e368e41bbdc4817a",
+    "toy-geometry.csv": "c7f1f1ecd43f95fc705ab60ec583922b937f54dec73ffbafbf12f40877d923d2"
+  },
+  "passed": true
+}

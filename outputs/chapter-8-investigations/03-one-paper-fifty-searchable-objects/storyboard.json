@@ -1,0 +1,201 @@
+{
+  "series": "Representations and indexed units",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#representations-and-units",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#representations-and-units",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-one-paper-fifty-searchable-objects",
+  "title": "One paper, fifty searchable objects",
+  "subtitle": "Follow evidence from a source article to indexed passages and answer context.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "units_hook",
+      "title": "Four matches. How many papers?",
+      "source_anchor": "chunking-strategies-title",
+      "visual": "units_hook",
+      "narration": [
+        "A search retrieves four matches: passage two from paper A, passage seven from paper A, passage three from paper B, and passage nine from paper A. How many papers did it find? Four matches, two papers. Would the interface show four results, or two? Make a prediction.",
+        "Either display is possible. Matching passages may appear separately or be grouped by source identity. The visible result list hides earlier decisions about what was indexed and represented. Those decisions determine which evidence can reach the list in the first place."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "unit_strategies",
+      "title": "One source can produce very different indexes",
+      "source_anchor": "one-document-one-chunk-and-one-vector-are-not-the-same-thing",
+      "visual": "unit_strategies",
+      "narration": [
+        "Take the chapter\u2019s illustrative twenty page article. A system might index one abstract, ten sections, or fifty overlapping passages. These are alternative choices, not measurements of a named service. They produce different searchable objects from the same source document.",
+        "An abstract is a compact account. A section can preserve more local context. A short overlapping window may expose a narrow passage. The right unit depends on the question and pipeline."
+      ]
+    },
+    {
+      "id": "independent_units",
+      "title": "Fifty vectors stay fifty separate representations",
+      "source_anchor": "paper-as-many-vectors-title",
+      "visual": "independent_units",
+      "narration": [
+        "In a conventional dense bi encoder, each indexed passage receives one pooled vector. Fifty passages therefore become fifty independently searchable vectors. No single one automatically represents the complete paper.",
+        "Nothing automatically combines evidence spread across those fifty chunks. A passage might describe the study population while another reports the outcome. Finding one passage does not prove that both facts were compared jointly when the retrieval score was calculated."
+      ]
+    },
+    {
+      "id": "split_evidence",
+      "title": "Related evidence can land in different chunks",
+      "source_anchor": "paper-as-many-vectors-title",
+      "visual": "split_evidence",
+      "narration": [
+        "Here is a declared illustration. One chunk says the participants were adults. Another contains a numerical outcome, while a neighbouring paragraph explains a limitation. A question that needs all three facts can outgrow any one retrieved unit.",
+        "Overlapping windows may retain some shared context, but an overlap is no guarantee that every decisive relationship fits. A later stage might gather neighbours, fetch the parent section, or combine evidence."
+      ]
+    },
+    {
+      "id": "indexed_limit",
+      "title": "A stage can match only the evidence it indexes",
+      "source_anchor": "one-document-one-chunk-and-one-vector-are-not-the-same-thing",
+      "visual": "indexed_limit",
+      "narration": [
+        "Now hide a claim in the results section and leave it out of the abstract. An abstract only index cannot directly match that claim as indexed text. It might retrieve the paper for other evidence, but the missing section was not available to that retrieval stage.",
+        "The chapter contrasts Wiley AI Gateway\u2019s documented full text chunks with discovery records described by metadata and abstracts."
+      ]
+    },
+    {
+      "id": "later_context",
+      "title": "Retrieved text and supplied context can differ",
+      "source_anchor": "one-document-one-chunk-and-one-vector-are-not-the-same-thing",
+      "visual": "later_context",
+      "narration": [
+        "Retrieval is not always the final evidence boundary. After selecting an abstract or passage, a system might fetch full text, expand to a parent section, or add neighbouring passages.",
+        "Ask three separate questions: what text was indexed, what unit was retrieved, and what evidence was supplied as context? A later fetch can supply previously absent text. Whether that evidence reaches an answer correctly remains another question to check."
+      ]
+    },
+    {
+      "id": "group_matches",
+      "title": "Grouping by source does not combine the argument",
+      "source_anchor": "chunking-strategies-title",
+      "visual": "group_matches",
+      "narration": [
+        "Return to passages A two, A seven, B three and A nine. Grouping by source produces paper A with three matching passages, and paper B with one. It does not, by itself, specify how passage scores become a paper score.",
+        "It also does not merge their claims into a supported answer. A system needs explicit choices for aggregation and any later reasoning. Four returned chunks are not necessarily four distinct papers, and two displayed papers do not reveal how many chunks competed."
+      ]
+    },
+    {
+      "id": "unit_questions",
+      "title": "Follow the evidence through four choices",
+      "source_anchor": "chunking-strategies-title",
+      "visual": "unit_questions",
+      "narration": [
+        "Write down four choices: the source document, the indexed unit, the representation of each unit, and the way matches become displayed results. Then record any later context expansion.",
+        "Ask what text was embedded, how large the units were, and how matching passages were combined at article level. The next chapter asks what a system can afford after a fast first stage has produced a shortlist: more careful comparison, with a new candidate boundary."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "units_hook_0",
+      "scene": "units_hook",
+      "text": "A search retrieves four matches: passage two from paper A, passage seven from paper A, passage three from paper B, and passage nine from paper A. How many papers did it find? Four matches, two papers. Would the interface show four results, or two? Make a prediction.",
+      "gap": 1.0
+    },
+    {
+      "id": "units_hook_1",
+      "scene": "units_hook",
+      "text": "Either display is possible. Matching passages may appear separately or be grouped by source identity. The visible result list hides earlier decisions about what was indexed and represented. Those decisions determine which evidence can reach the list in the first place.",
+      "gap": 2.5
+    },
+    {
+      "id": "unit_strategies_0",
+      "scene": "unit_strategies",
+      "text": "Take the chapter\u2019s illustrative twenty page article. A system might index one abstract, ten sections, or fifty overlapping passages. These are alternative choices, not measurements of a named service. They produce different searchable objects from the same source document.",
+      "gap": 1.0
+    },
+    {
+      "id": "unit_strategies_1",
+      "scene": "unit_strategies",
+      "text": "An abstract is a compact account. A section can preserve more local context. A short overlapping window may expose a narrow passage. The right unit depends on the question and pipeline.",
+      "gap": 0.65
+    },
+    {
+      "id": "independent_units_0",
+      "scene": "independent_units",
+      "text": "In a conventional dense bi encoder, each indexed passage receives one pooled vector. Fifty passages therefore become fifty independently searchable vectors. No single one automatically represents the complete paper.",
+      "gap": 1.0
+    },
+    {
+      "id": "independent_units_1",
+      "scene": "independent_units",
+      "text": "Nothing automatically combines evidence spread across those fifty chunks. A passage might describe the study population while another reports the outcome. Finding one passage does not prove that both facts were compared jointly when the retrieval score was calculated.",
+      "gap": 0.65
+    },
+    {
+      "id": "split_evidence_0",
+      "scene": "split_evidence",
+      "text": "Here is a declared illustration. One chunk says the participants were adults. Another contains a numerical outcome, while a neighbouring paragraph explains a limitation. A question that needs all three facts can outgrow any one retrieved unit.",
+      "gap": 1.0
+    },
+    {
+      "id": "split_evidence_1",
+      "scene": "split_evidence",
+      "text": "Overlapping windows may retain some shared context, but an overlap is no guarantee that every decisive relationship fits. A later stage might gather neighbours, fetch the parent section, or combine evidence.",
+      "gap": 0.65
+    },
+    {
+      "id": "indexed_limit_0",
+      "scene": "indexed_limit",
+      "text": "Now hide a claim in the results section and leave it out of the abstract. An abstract only index cannot directly match that claim as indexed text. It might retrieve the paper for other evidence, but the missing section was not available to that retrieval stage.",
+      "gap": 1.0
+    },
+    {
+      "id": "indexed_limit_1",
+      "scene": "indexed_limit",
+      "text": "The chapter contrasts Wiley AI Gateway\u2019s documented full text chunks with discovery records described by metadata and abstracts.",
+      "gap": 0.65
+    },
+    {
+      "id": "later_context_0",
+      "scene": "later_context",
+      "text": "Retrieval is not always the final evidence boundary. After selecting an abstract or passage, a system might fetch full text, expand to a parent section, or add neighbouring passages.",
+      "gap": 1.0
+    },
+    {
+      "id": "later_context_1",
+      "scene": "later_context",
+      "text": "Ask three separate questions: what text was indexed, what unit was retrieved, and what evidence was supplied as context? A later fetch can supply previously absent text. Whether that evidence reaches an answer correctly remains another question to check.",
+      "gap": 0.65
+    },
+    {
+      "id": "group_matches_0",
+      "scene": "group_matches",
+      "text": "Return to passages A two, A seven, B three and A nine. Grouping by source produces paper A with three matching passages, and paper B with one. It does not, by itself, specify how passage scores become a paper score.",
+      "gap": 1.0
+    },
+    {
+      "id": "group_matches_1",
+      "scene": "group_matches",
+      "text": "It also does not merge their claims into a supported answer. A system needs explicit choices for aggregation and any later reasoning. Four returned chunks are not necessarily four distinct papers, and two displayed papers do not reveal how many chunks competed.",
+      "gap": 0.65
+    },
+    {
+      "id": "unit_questions_0",
+      "scene": "unit_questions",
+      "text": "Write down four choices: the source document, the indexed unit, the representation of each unit, and the way matches become displayed results. Then record any later context expansion.",
+      "gap": 1.0
+    },
+    {
+      "id": "unit_questions_1",
+      "scene": "unit_questions",
+      "text": "Ask what text was embedded, how large the units were, and how matching passages were combined at article level. The next chapter asks what a system can afford after a fast first stage has produced a shortlist: more careful comparison, with a new candidate boundary.",
+      "gap": 0.65
+    }
+  ]
+}

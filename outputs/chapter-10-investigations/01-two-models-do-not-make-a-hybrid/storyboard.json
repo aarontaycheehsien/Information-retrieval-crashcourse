@@ -1,0 +1,201 @@
+{
+  "series": "Hybrid retrieval and rank fusion",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#hybrid-and-fusion",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#hybrid-and-fusion",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-two-models-do-not-make-a-hybrid",
+  "title": "Two models do not make a hybrid",
+  "subtitle": "Count the candidate routes, then follow what happens to their evidence.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "hybrid_hook",
+      "title": "Two models. But how many retrieval routes?",
+      "source_anchor": "why-hybrid-retrieval-remains-attractive",
+      "visual": "hybrid_hook",
+      "narration": [
+        "A system retrieves candidates with BM twenty five, then scores that shortlist with a neural model. Two kinds of machinery appear in the diagram. Does that make this hybrid retrieval? Pause and count the routes that actually supplied candidates.",
+        "Under this chapter\u2019s definition, it is multi stage with one candidate generation route. Hybrid combines candidates or scores from multiple retrieval routes."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "complementary_evidence",
+      "title": "Different representations can preserve different clues",
+      "source_anchor": "why-hybrid-retrieval-remains-attractive",
+      "visual": "complementary_evidence",
+      "narration": [
+        "Why combine retrieval routes? Their blind spots can be partly complementary. A lexical route may preserve an analysed rare identifier that a dense representation blurs. A dense route may bridge a paraphrase without a useful shared indexed term.",
+        "Our identifier and wording examples are illustrations, not model runs. Neither route is guaranteed to recover the intended evidence. Boolean conditions can add explicit control, and all routes remain sensitive to their indexed text, analysis, representations and settings."
+      ]
+    },
+    {
+      "id": "parallel_candidates",
+      "title": "Two lists supply overlapping candidate sets",
+      "source_anchor": "rrf-record-journey-title",
+      "visual": "parallel_candidates",
+      "narration": [
+        "The chapter gives a lexical list containing A, B, C, and a dense list containing C, A, D. A and C occur in both. B arrives only through the lexical list; D only through the dense list.",
+        "Merging those supplied identities gives four distinct records. List only means outside the other supplied list, not irrelevant. The system still needs a rule for turning the routes\u2019 evidence into one order."
+      ]
+    },
+    {
+      "id": "sequential_case",
+      "title": "One route can support several later stages",
+      "source_anchor": "hybrid-pipeline-comparison-title",
+      "visual": "sequential_case",
+      "narration": [
+        "Follow the first arrangement: BM twenty five retrieves a shortlist, a cross encoder reranks it, and the leading records are displayed. Candidate generation still came from one route.",
+        "This is a multi stage cascade. It is not hybrid under the book\u2019s operational definition. Vendor terminology varies; inspect which stages actually supplied records."
+      ]
+    },
+    {
+      "id": "single_stage_blend",
+      "title": "Multiple routes can feed one scoring stage",
+      "source_anchor": "hybrid-pipeline-comparison-title",
+      "visual": "single_stage_blend",
+      "narration": [
+        "Now consider one scoring stage that blends lexical and dense candidate generation evidence into a ranking. It combines multiple retrieval routes without requiring a separate reranking cascade. That is the chapter\u2019s example of hybrid without a multi stage arrangement.",
+        "The distinction is about two different design questions: where candidate evidence comes from, and whether later operations process an earlier stage\u2019s output. A merged score still needs an explicit combination rule and appropriate treatment of its inputs."
+      ]
+    },
+    {
+      "id": "both_arrangements",
+      "title": "Parallel retrieval can feed a later reranker",
+      "source_anchor": "hybrid-pipeline-comparison-title",
+      "visual": "both_arrangements",
+      "narration": [
+        "A common combined arrangement runs lexical and dense retrieval, fuses their lists, then sends a shortlist to a richer reranker. This has multiple candidate routes and later processing stages. It is both hybrid and multi stage.",
+        "The additional route may admit useful material missed by the other route. But the later reranker still inherits the merged candidate boundary. Neither it nor an answer writer can inspect a record omitted by every earlier route without another retrieval operation."
+      ]
+    },
+    {
+      "id": "routing_choice",
+      "title": "Choosing routes is a separate decision",
+      "source_anchor": "two-hybrids-that-combine-differently",
+      "visual": "routing_choice",
+      "narration": [
+        "A blend runs prescribed paths and combines what they return. Routing chooses which path or paths to run for this query: lexical, dense, or both. If both supply lists, those lists still need to be combined.",
+        "A one route run combines nothing under this definition, even if the product has several available retrievers. Routing may be controlled by a rule, classifier or model."
+      ]
+    },
+    {
+      "id": "architecture_questions",
+      "title": "Ask what the hybrid label leaves unanswered",
+      "source_anchor": "hybrid-and-fusion",
+      "visual": "architecture_questions",
+      "narration": [
+        "For a concrete explanation, ask which candidate routes ran, what text each searched, how deep each supplied list was, how duplicate identities were reconciled, and what rule combined the evidence.",
+        "Hybrid retrieval is not a quality guarantee. It depends on the evidence preserved, the allowed candidate depths and the combination rule. The next film follows four records through reciprocal rank fusion, a simple baseline that uses positions instead of unlike raw scores."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "hybrid_hook_0",
+      "scene": "hybrid_hook",
+      "text": "A system retrieves candidates with BM twenty five, then scores that shortlist with a neural model. Two kinds of machinery appear in the diagram. Does that make this hybrid retrieval? Pause and count the routes that actually supplied candidates.",
+      "gap": 1.0
+    },
+    {
+      "id": "hybrid_hook_1",
+      "scene": "hybrid_hook",
+      "text": "Under this chapter\u2019s definition, it is multi stage with one candidate generation route. Hybrid combines candidates or scores from multiple retrieval routes.",
+      "gap": 2.5
+    },
+    {
+      "id": "complementary_evidence_0",
+      "scene": "complementary_evidence",
+      "text": "Why combine retrieval routes? Their blind spots can be partly complementary. A lexical route may preserve an analysed rare identifier that a dense representation blurs. A dense route may bridge a paraphrase without a useful shared indexed term.",
+      "gap": 1.0
+    },
+    {
+      "id": "complementary_evidence_1",
+      "scene": "complementary_evidence",
+      "text": "Our identifier and wording examples are illustrations, not model runs. Neither route is guaranteed to recover the intended evidence. Boolean conditions can add explicit control, and all routes remain sensitive to their indexed text, analysis, representations and settings.",
+      "gap": 0.65
+    },
+    {
+      "id": "parallel_candidates_0",
+      "scene": "parallel_candidates",
+      "text": "The chapter gives a lexical list containing A, B, C, and a dense list containing C, A, D. A and C occur in both. B arrives only through the lexical list; D only through the dense list.",
+      "gap": 1.0
+    },
+    {
+      "id": "parallel_candidates_1",
+      "scene": "parallel_candidates",
+      "text": "Merging those supplied identities gives four distinct records. List only means outside the other supplied list, not irrelevant. The system still needs a rule for turning the routes\u2019 evidence into one order.",
+      "gap": 0.65
+    },
+    {
+      "id": "sequential_case_0",
+      "scene": "sequential_case",
+      "text": "Follow the first arrangement: BM twenty five retrieves a shortlist, a cross encoder reranks it, and the leading records are displayed. Candidate generation still came from one route.",
+      "gap": 1.0
+    },
+    {
+      "id": "sequential_case_1",
+      "scene": "sequential_case",
+      "text": "This is a multi stage cascade. It is not hybrid under the book\u2019s operational definition. Vendor terminology varies; inspect which stages actually supplied records.",
+      "gap": 0.65
+    },
+    {
+      "id": "single_stage_blend_0",
+      "scene": "single_stage_blend",
+      "text": "Now consider one scoring stage that blends lexical and dense candidate generation evidence into a ranking. It combines multiple retrieval routes without requiring a separate reranking cascade. That is the chapter\u2019s example of hybrid without a multi stage arrangement.",
+      "gap": 1.0
+    },
+    {
+      "id": "single_stage_blend_1",
+      "scene": "single_stage_blend",
+      "text": "The distinction is about two different design questions: where candidate evidence comes from, and whether later operations process an earlier stage\u2019s output. A merged score still needs an explicit combination rule and appropriate treatment of its inputs.",
+      "gap": 0.65
+    },
+    {
+      "id": "both_arrangements_0",
+      "scene": "both_arrangements",
+      "text": "A common combined arrangement runs lexical and dense retrieval, fuses their lists, then sends a shortlist to a richer reranker. This has multiple candidate routes and later processing stages. It is both hybrid and multi stage.",
+      "gap": 1.0
+    },
+    {
+      "id": "both_arrangements_1",
+      "scene": "both_arrangements",
+      "text": "The additional route may admit useful material missed by the other route. But the later reranker still inherits the merged candidate boundary. Neither it nor an answer writer can inspect a record omitted by every earlier route without another retrieval operation.",
+      "gap": 0.65
+    },
+    {
+      "id": "routing_choice_0",
+      "scene": "routing_choice",
+      "text": "A blend runs prescribed paths and combines what they return. Routing chooses which path or paths to run for this query: lexical, dense, or both. If both supply lists, those lists still need to be combined.",
+      "gap": 1.0
+    },
+    {
+      "id": "routing_choice_1",
+      "scene": "routing_choice",
+      "text": "A one route run combines nothing under this definition, even if the product has several available retrievers. Routing may be controlled by a rule, classifier or model.",
+      "gap": 0.65
+    },
+    {
+      "id": "architecture_questions_0",
+      "scene": "architecture_questions",
+      "text": "For a concrete explanation, ask which candidate routes ran, what text each searched, how deep each supplied list was, how duplicate identities were reconciled, and what rule combined the evidence.",
+      "gap": 1.0
+    },
+    {
+      "id": "architecture_questions_1",
+      "scene": "architecture_questions",
+      "text": "Hybrid retrieval is not a quality guarantee. It depends on the evidence preserved, the allowed candidate depths and the combination rule. The next film follows four records through reciprocal rank fusion, a simple baseline that uses positions instead of unlike raw scores.",
+      "gap": 0.65
+    }
+  ]
+}

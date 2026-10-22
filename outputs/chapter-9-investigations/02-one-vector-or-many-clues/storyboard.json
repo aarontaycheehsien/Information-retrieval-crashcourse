@@ -1,0 +1,201 @@
+{
+  "series": "Reranking and multi-stage retrieval",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#reranking-and-hybrid",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#reranking-and-hybrid",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-one-vector-or-many-clues",
+  "title": "One vector, or many clues?",
+  "subtitle": "Follow token similarities into a score you can inspect.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "token_hook",
+      "title": "What if we keep the token vectors?",
+      "source_anchor": "where-colbert-style-late-interaction-fits",
+      "visual": "token_hook",
+      "narration": [
+        "A passage has a crucial phrase that one pooled vector may blur. Must we jointly encode it with every new query to preserve more detail? Predict what happens if we keep a set of token vectors instead.",
+        "ColBERT style late interaction takes that route. Query and document are encoded independently, but comparison happens between their token vectors. We can prepare document representations in advance while preserving more local matching evidence."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "token_sets",
+      "title": "Independent encoding, followed by token comparisons",
+      "source_anchor": "late-interaction-position-title",
+      "visual": "token_sets",
+      "narration": [
+        "A conventional bi encoder produces one pooled vector per indexed unit. ColBERT retains vectors for tokens, then compares the query\u2019s token vectors with the document\u2019s token vectors after encoding. The tokens are contextual representations, not simple word counts.",
+        "Late interaction can retrieve candidates or rerank an existing shortlist, depending on the implementation and scale. It generally needs more storage and computation than single vector retrieval, with less query time work than a full cross encoder over the same candidates."
+      ]
+    },
+    {
+      "id": "maxsim_score",
+      "title": "Keep each row\u2019s maximum, then add",
+      "source_anchor": "maxsim-worked-title",
+      "visual": "maxsim_score",
+      "narration": [
+        "The chapter invents a tiny similarity table. Query tokens are citation and benefit. Document tokens are open, access, citation and advantage. Citation\u2019s row is zero point one, zero point two, zero point nine, zero point four.",
+        "Benefit\u2019s row is zero point two, zero point three, zero point five, zero point eight. Keep the maximum in each query row: zero point nine and zero point eight. Add them to get one point seven. Those invented similarities illustrate MaxSim, not model measurements."
+      ]
+    },
+    {
+      "id": "alignment_limits",
+      "title": "The alignments explain the score\u2019s composition",
+      "source_anchor": "maxsim-worked-title",
+      "visual": "alignment_limits",
+      "narration": [
+        "The strongest alignment for citation is the document token citation. Benefit aligns most strongly with advantage in this table. The same document token could supply maxima for several query tokens; MaxSim does not enforce one to one matching.",
+        "This decomposition shows which comparisons contributed to the score. It does not explain why the learnt contextual vectors considered those tokens similar. Inspectable scoring is not complete model transparency."
+      ]
+    },
+    {
+      "id": "storage_tradeoff",
+      "title": "More retained vectors mean a larger index",
+      "source_anchor": "where-colbert-style-late-interaction-fits",
+      "visual": "storage_tradeoff",
+      "narration": [
+        "Keeping one vector per token instead of one per passage multiplies storage roughly by the number of retained tokens, before compression. A toy hundred token passage would require a hundred vectors under that simplified accounting.",
+        "The chapter reports ColBERT version two cutting earlier late interaction footprints six to tenfold with residual compression. This attributed comparison is not a promise for every index."
+      ]
+    },
+    {
+      "id": "three_arrangements",
+      "title": "The encoder\u2019s arrangement changes the comparison",
+      "source_anchor": "bi-encoder-vs-cross-encoder-title",
+      "visual": "three_arrangements",
+      "narration": [
+        "Three arrangements are now visible. Independent pooled encoding compares one query vector with one stored passage vector. Joint encoding processes query and candidate together. Late interaction independently encodes sets of token vectors and compares them afterwards.",
+        "A pretrained encoder can be adapted for different arrangements. Its name alone does not identify the retrieval system. Ask when query and document interact, what can be precomputed, what evidence the comparison retains, and which ranking task shaped training."
+      ]
+    },
+    {
+      "id": "neural_sparse",
+      "title": "Neural retrieval can also remain sparse",
+      "source_anchor": "learnt-sparse-in-the-pipeline",
+      "visual": "neural_sparse",
+      "narration": [
+        "Neural information retrieval also includes learnt sparse models. Their active vocabulary dimensions can contain both typed terms and learnt expansions, so an inverted index can serve them. A nonzero term matching score still requires overlap in active dimensions; expansion can create it.",
+        "The chapter cites Elicit\u2019s June twenty twenty four development work using SPLADE suggested terms with regular full text retrieval. That account does not confirm production deployment. Extra query terms can increase posting work and latency, even when the index technology is familiar."
+      ]
+    },
+    {
+      "id": "inspection_questions",
+      "title": "Look for the evidence exposed by each score",
+      "source_anchor": "neural-ir-broader-than-dense-retrieval",
+      "visual": "inspection_questions",
+      "narration": [
+        "SPLADE can expose weighted vocabulary terms. ColBERT can expose token alignments. Both offer more scoring evidence than a single pooled score, while remaining dependent on training, vocabulary and transfer to the task. Neither is transparent from end to end.",
+        "Neural is an umbrella label covering several representations and pipeline positions. Limited public deployment documentation for late interaction does not establish its absence. Identify the actual arrangement and evaluate the complete retrieval pipeline."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "token_hook_0",
+      "scene": "token_hook",
+      "text": "A passage has a crucial phrase that one pooled vector may blur. Must we jointly encode it with every new query to preserve more detail? Predict what happens if we keep a set of token vectors instead.",
+      "gap": 1.0
+    },
+    {
+      "id": "token_hook_1",
+      "scene": "token_hook",
+      "text": "ColBERT style late interaction takes that route. Query and document are encoded independently, but comparison happens between their token vectors. We can prepare document representations in advance while preserving more local matching evidence.",
+      "gap": 2.5
+    },
+    {
+      "id": "token_sets_0",
+      "scene": "token_sets",
+      "text": "A conventional bi encoder produces one pooled vector per indexed unit. ColBERT retains vectors for tokens, then compares the query\u2019s token vectors with the document\u2019s token vectors after encoding. The tokens are contextual representations, not simple word counts.",
+      "gap": 1.0
+    },
+    {
+      "id": "token_sets_1",
+      "scene": "token_sets",
+      "text": "Late interaction can retrieve candidates or rerank an existing shortlist, depending on the implementation and scale. It generally needs more storage and computation than single vector retrieval, with less query time work than a full cross encoder over the same candidates.",
+      "gap": 0.65
+    },
+    {
+      "id": "maxsim_score_0",
+      "scene": "maxsim_score",
+      "text": "The chapter invents a tiny similarity table. Query tokens are citation and benefit. Document tokens are open, access, citation and advantage. Citation\u2019s row is zero point one, zero point two, zero point nine, zero point four.",
+      "gap": 1.0
+    },
+    {
+      "id": "maxsim_score_1",
+      "scene": "maxsim_score",
+      "text": "Benefit\u2019s row is zero point two, zero point three, zero point five, zero point eight. Keep the maximum in each query row: zero point nine and zero point eight. Add them to get one point seven. Those invented similarities illustrate MaxSim, not model measurements.",
+      "gap": 0.65
+    },
+    {
+      "id": "alignment_limits_0",
+      "scene": "alignment_limits",
+      "text": "The strongest alignment for citation is the document token citation. Benefit aligns most strongly with advantage in this table. The same document token could supply maxima for several query tokens; MaxSim does not enforce one to one matching.",
+      "gap": 1.0
+    },
+    {
+      "id": "alignment_limits_1",
+      "scene": "alignment_limits",
+      "text": "This decomposition shows which comparisons contributed to the score. It does not explain why the learnt contextual vectors considered those tokens similar. Inspectable scoring is not complete model transparency.",
+      "gap": 0.65
+    },
+    {
+      "id": "storage_tradeoff_0",
+      "scene": "storage_tradeoff",
+      "text": "Keeping one vector per token instead of one per passage multiplies storage roughly by the number of retained tokens, before compression. A toy hundred token passage would require a hundred vectors under that simplified accounting.",
+      "gap": 1.0
+    },
+    {
+      "id": "storage_tradeoff_1",
+      "scene": "storage_tradeoff",
+      "text": "The chapter reports ColBERT version two cutting earlier late interaction footprints six to tenfold with residual compression. This attributed comparison is not a promise for every index.",
+      "gap": 0.65
+    },
+    {
+      "id": "three_arrangements_0",
+      "scene": "three_arrangements",
+      "text": "Three arrangements are now visible. Independent pooled encoding compares one query vector with one stored passage vector. Joint encoding processes query and candidate together. Late interaction independently encodes sets of token vectors and compares them afterwards.",
+      "gap": 1.0
+    },
+    {
+      "id": "three_arrangements_1",
+      "scene": "three_arrangements",
+      "text": "A pretrained encoder can be adapted for different arrangements. Its name alone does not identify the retrieval system. Ask when query and document interact, what can be precomputed, what evidence the comparison retains, and which ranking task shaped training.",
+      "gap": 0.65
+    },
+    {
+      "id": "neural_sparse_0",
+      "scene": "neural_sparse",
+      "text": "Neural information retrieval also includes learnt sparse models. Their active vocabulary dimensions can contain both typed terms and learnt expansions, so an inverted index can serve them. A nonzero term matching score still requires overlap in active dimensions; expansion can create it.",
+      "gap": 1.0
+    },
+    {
+      "id": "neural_sparse_1",
+      "scene": "neural_sparse",
+      "text": "The chapter cites Elicit\u2019s June twenty twenty four development work using SPLADE suggested terms with regular full text retrieval. That account does not confirm production deployment. Extra query terms can increase posting work and latency, even when the index technology is familiar.",
+      "gap": 0.65
+    },
+    {
+      "id": "inspection_questions_0",
+      "scene": "inspection_questions",
+      "text": "SPLADE can expose weighted vocabulary terms. ColBERT can expose token alignments. Both offer more scoring evidence than a single pooled score, while remaining dependent on training, vocabulary and transfer to the task. Neither is transparent from end to end.",
+      "gap": 1.0
+    },
+    {
+      "id": "inspection_questions_1",
+      "scene": "inspection_questions",
+      "text": "Neural is an umbrella label covering several representations and pipeline positions. Limited public deployment documentation for late interaction does not establish its absence. Identify the actual arrangement and evaluate the complete retrieval pipeline.",
+      "gap": 0.65
+    }
+  ]
+}

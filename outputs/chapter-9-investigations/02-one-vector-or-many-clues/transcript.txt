@@ -1,0 +1,40 @@
+One vector, or many clues?
+
+[00:00:00.700]: A passage has a crucial phrase that one pooled vector may blur. Must we jointly encode it with every new query to preserve more detail? Predict what happens if we keep a set of token vectors instead.
+
+[00:00:15.953]: ColBERT style late interaction takes that route. Query and document are encoded independently, but comparison happens between their token vectors. We can prepare document representations in advance while preserving more local matching evidence.
+
+[00:00:32.317]: A conventional bi encoder produces one pooled vector per indexed unit. ColBERT retains vectors for tokens, then compares the query’s token vectors with the document’s token vectors after encoding. The tokens are contextual representations, not simple word counts.
+
+[00:00:50.141]: Late interaction can retrieve candidates or rerank an existing shortlist, depending on the implementation and scale. It generally needs more storage and computation than single vector retrieval, with less query time work than a full cross encoder over the same candidates.
+
+[00:01:08.626]: The chapter invents a tiny similarity table. Query tokens are citation and benefit. Document tokens are open, access, citation and advantage. Citation’s row is zero point one, zero point two, zero point nine, zero point four.
+
+[00:01:27.931]: Benefit’s row is zero point two, zero point three, zero point five, zero point eight. Keep the maximum in each query row: zero point nine and zero point eight. Add them to get one point seven. Those invented similarities illustrate MaxSim, not model measurements.
+
+[00:01:48.832]: The strongest alignment for citation is the document token citation. Benefit aligns most strongly with advantage in this table. The same document token could supply maxima for several query tokens; MaxSim does not enforce one to one matching.
+
+[00:02:07.405]: This decomposition shows which comparisons contributed to the score. It does not explain why the learnt contextual vectors considered those tokens similar. Inspectable scoring is not complete model transparency.
+
+[00:02:22.620]: Keeping one vector per token instead of one per passage multiplies storage roughly by the number of retained tokens, before compression. A toy hundred token passage would require a hundred vectors under that simplified accounting.
+
+[00:02:38.299]: The chapter reports ColBERT version two cutting earlier late interaction footprints six to tenfold with residual compression. This attributed comparison is not a promise for every index.
+
+[00:02:51.609]: Three arrangements are now visible. Independent pooled encoding compares one query vector with one stored passage vector. Joint encoding processes query and candidate together. Late interaction independently encodes sets of token vectors and compares them afterwards.
+
+[00:03:10.960]: A pretrained encoder can be adapted for different arrangements. Its name alone does not identify the retrieval system. Ask when query and document interact, what can be precomputed, what evidence the comparison retains, and which ranking task shaped training.
+
+[00:03:28.632]: Neural information retrieval also includes learnt sparse models. Their active vocabulary dimensions can contain both typed terms and learnt expansions, so an inverted index can serve them. A nonzero term matching score still requires overlap in active dimensions; expansion can create it.
+
+[00:03:48.795]: The chapter cites Elicit’s June twenty twenty four development work using SPLADE suggested terms with regular full text retrieval. That account does not confirm production deployment. Extra query terms can increase posting work and latency, even when the index technology is familiar.
+
+[00:04:09.341]: SPLADE can expose weighted vocabulary terms. ColBERT can expose token alignments. Both offer more scoring evidence than a single pooled score, while remaining dependent on training, vocabulary and transfer to the task. Neither is transparent from end to end.
+
+[00:04:27.015]: Neural is an umbrella label covering several representations and pipeline positions. Limited public deployment documentation for late interaction does not establish its absence. Identify the actual arrangement and evaluate the complete retrieval pipeline.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 9.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#reranking-and-hybrid
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

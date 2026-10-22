@@ -1,0 +1,282 @@
+{
+  "series": "Hybrid retrieval and rank fusion",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#hybrid-and-fusion",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#hybrid-and-fusion",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-two-models-do-not-make-a-hybrid",
+      "title": "Two models do not make a hybrid",
+      "subtitle": "Count the candidate routes, then follow what happens to their evidence.",
+      "accent": "blue",
+      "scenes": [
+        {
+          "id": "hybrid_hook",
+          "title": "Two models. But how many retrieval routes?",
+          "source_anchor": "why-hybrid-retrieval-remains-attractive",
+          "visual": "hybrid_hook",
+          "narration": [
+            "A system retrieves candidates with BM twenty five, then scores that shortlist with a neural model. Two kinds of machinery appear in the diagram. Does that make this hybrid retrieval? Pause and count the routes that actually supplied candidates.",
+            "Under this chapter’s definition, it is multi stage with one candidate generation route. Hybrid combines candidates or scores from multiple retrieval routes."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "complementary_evidence",
+          "title": "Different representations can preserve different clues",
+          "source_anchor": "why-hybrid-retrieval-remains-attractive",
+          "visual": "complementary_evidence",
+          "narration": [
+            "Why combine retrieval routes? Their blind spots can be partly complementary. A lexical route may preserve an analysed rare identifier that a dense representation blurs. A dense route may bridge a paraphrase without a useful shared indexed term.",
+            "Our identifier and wording examples are illustrations, not model runs. Neither route is guaranteed to recover the intended evidence. Boolean conditions can add explicit control, and all routes remain sensitive to their indexed text, analysis, representations and settings."
+          ]
+        },
+        {
+          "id": "parallel_candidates",
+          "title": "Two lists supply overlapping candidate sets",
+          "source_anchor": "rrf-record-journey-title",
+          "visual": "parallel_candidates",
+          "narration": [
+            "The chapter gives a lexical list containing A, B, C, and a dense list containing C, A, D. A and C occur in both. B arrives only through the lexical list; D only through the dense list.",
+            "Merging those supplied identities gives four distinct records. List only means outside the other supplied list, not irrelevant. The system still needs a rule for turning the routes’ evidence into one order."
+          ]
+        },
+        {
+          "id": "sequential_case",
+          "title": "One route can support several later stages",
+          "source_anchor": "hybrid-pipeline-comparison-title",
+          "visual": "sequential_case",
+          "narration": [
+            "Follow the first arrangement: BM twenty five retrieves a shortlist, a cross encoder reranks it, and the leading records are displayed. Candidate generation still came from one route.",
+            "This is a multi stage cascade. It is not hybrid under the book’s operational definition. Vendor terminology varies; inspect which stages actually supplied records."
+          ]
+        },
+        {
+          "id": "single_stage_blend",
+          "title": "Multiple routes can feed one scoring stage",
+          "source_anchor": "hybrid-pipeline-comparison-title",
+          "visual": "single_stage_blend",
+          "narration": [
+            "Now consider one scoring stage that blends lexical and dense candidate generation evidence into a ranking. It combines multiple retrieval routes without requiring a separate reranking cascade. That is the chapter’s example of hybrid without a multi stage arrangement.",
+            "The distinction is about two different design questions: where candidate evidence comes from, and whether later operations process an earlier stage’s output. A merged score still needs an explicit combination rule and appropriate treatment of its inputs."
+          ]
+        },
+        {
+          "id": "both_arrangements",
+          "title": "Parallel retrieval can feed a later reranker",
+          "source_anchor": "hybrid-pipeline-comparison-title",
+          "visual": "both_arrangements",
+          "narration": [
+            "A common combined arrangement runs lexical and dense retrieval, fuses their lists, then sends a shortlist to a richer reranker. This has multiple candidate routes and later processing stages. It is both hybrid and multi stage.",
+            "The additional route may admit useful material missed by the other route. But the later reranker still inherits the merged candidate boundary. Neither it nor an answer writer can inspect a record omitted by every earlier route without another retrieval operation."
+          ]
+        },
+        {
+          "id": "routing_choice",
+          "title": "Choosing routes is a separate decision",
+          "source_anchor": "two-hybrids-that-combine-differently",
+          "visual": "routing_choice",
+          "narration": [
+            "A blend runs prescribed paths and combines what they return. Routing chooses which path or paths to run for this query: lexical, dense, or both. If both supply lists, those lists still need to be combined.",
+            "A one route run combines nothing under this definition, even if the product has several available retrievers. Routing may be controlled by a rule, classifier or model."
+          ]
+        },
+        {
+          "id": "architecture_questions",
+          "title": "Ask what the hybrid label leaves unanswered",
+          "source_anchor": "hybrid-and-fusion",
+          "visual": "architecture_questions",
+          "narration": [
+            "For a concrete explanation, ask which candidate routes ran, what text each searched, how deep each supplied list was, how duplicate identities were reconciled, and what rule combined the evidence.",
+            "Hybrid retrieval is not a quality guarantee. It depends on the evidence preserved, the allowed candidate depths and the combination rule. The next film follows four records through reciprocal rank fusion, a simple baseline that uses positions instead of unlike raw scores."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-how-two-lists-become-one",
+      "title": "How two lists become one",
+      "subtitle": "Follow A, B, C and D through reciprocal rank fusion.",
+      "accent": "teal",
+      "scenes": [
+        {
+          "id": "fusion_hook",
+          "title": "How do we combine scores with unlike meanings?",
+          "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+          "visual": "fusion_hook",
+          "narration": [
+            "Two retrievers return different score scales. A large lexical score and a small vector similarity are not automatically comparable measurements. Could we combine the lists using a different piece of information? Make a prediction.",
+            "Reciprocal rank fusion uses each record’s position in each supplied list. It ignores the raw scores. It avoids a shared score scale, while discarding information examined in the next film."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "input_lists",
+          "title": "Keep record identity while recording position",
+          "source_anchor": "rrf-record-journey-title",
+          "visual": "input_lists",
+          "narration": [
+            "Keep the chapter’s exact lists in view. The lexical order is A, B, C. The dense order is C, A, D. Positions begin at one. Matching letters identify the same record across both routes.",
+            "Each occurrence contributes according to its position. A record absent from a supplied list contributes zero from that list. This is absence from the supplied input, not a judgement that the record is irrelevant or absent from the collection."
+          ]
+        },
+        {
+          "id": "fusion_formula",
+          "title": "One over the constant plus the rank",
+          "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+          "visual": "fusion_formula",
+          "narration": [
+            "For every supplied ranking, take one divided by the constant plus the record’s rank. Then add those contributions. The chapter uses the constant sixty, following the original paper’s baseline choice. This unsupervised rule does not learn a relevance model.",
+            "Here the three possible contributions are one over sixty one, one over sixty two, and one over sixty three. The constant softens the advantage of the first positions. It can be tuned; sixty is not a universal optimum."
+          ]
+        },
+        {
+          "id": "record_a",
+          "title": "A is near the top of both lists",
+          "source_anchor": "tbl-10-1",
+          "visual": "record_a",
+          "narration": [
+            "A appears first in the lexical list and second in the dense list. Its two contributions are one over sixty one and one over sixty two. Add them to obtain approximately zero point zero three two five two.",
+            "Both occurrences refer to one A record. They are evidence about the same identity. A receives credit from both supplied lists, without adding their original retrieval scores."
+          ]
+        },
+        {
+          "id": "record_c",
+          "title": "C combines third place with first place",
+          "source_anchor": "tbl-10-1",
+          "visual": "record_c",
+          "narration": [
+            "C appears third lexically and first in the dense list. One over sixty three plus one over sixty one is approximately zero point zero three two two seven. C therefore follows A in this particular example.",
+            "Both records received two contributions. A’s advantage comes from its second place versus C’s third place in the other list. Fused scores are not probabilities of usefulness."
+          ]
+        },
+        {
+          "id": "single_route_records",
+          "title": "B and D receive one contribution each",
+          "source_anchor": "tbl-10-1",
+          "visual": "single_route_records",
+          "narration": [
+            "B appears second in the lexical list and outside the supplied dense list. Its score is one over sixty two, approximately zero point zero one six one three. D appears third only in the dense list.",
+            "D receives one over sixty three, approximately zero point zero one five eight seven. B and D remain candidates. Receiving one contribution does not mean a record is unimportant; it describes which lists supplied it."
+          ]
+        },
+        {
+          "id": "fused_order",
+          "title": "The four identities now have one order",
+          "source_anchor": "rrf-record-journey-title",
+          "visual": "fused_order",
+          "narration": [
+            "Sort the fused scores from largest to smallest. The result is A, C, B, D. A and C benefit from agreement near the top. The two routes have supplied six occurrences representing four distinct records.",
+            "RRF is a fusion rule. It does not jointly read query and passage text, supply a new trained relevance estimate, or search the rest of the collection."
+          ]
+        },
+        {
+          "id": "three_depths",
+          "title": "The constant is not a result count",
+          "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+          "visual": "three_depths",
+          "narration": [
+            "Three numbers describe different choices here: input depth three per route, fusion constant sixty, and four distinct supplied identities. A final display could show just the top two, but that would be another boundary after fusion.",
+            "Records below an input cutoff contribute nothing from that list. Reducing output depth instead hides already fused records below the display boundary. Keep those decisions separate when documenting or evaluating a hybrid search."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-what-the-fused-ranking-cannot-tell-you",
+      "title": "What the fused ranking cannot tell you",
+      "subtitle": "Rank fusion trades score detail for a simple shared rule.",
+      "accent": "red",
+      "scenes": [
+        {
+          "id": "score_gap_hook",
+          "title": "Same ranks. Very different score gaps.",
+          "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+          "visual": "score_gap_hook",
+          "narration": [
+            "Imagine one score list where first place barely beats second, and another where first place wins by a huge margin. Both order the records A, B, C. Would reciprocal rank fusion notice how different those gaps were? Pause and predict.",
+            "It would not. Once the scores become ranks, those gaps disappear from the fusion input. Our score sets are invented illustrations. RRF preserves position and record identity, not the strength of the original numerical separation."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "constant_effect",
+          "title": "The constant softens the advantage of first place",
+          "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+          "visual": "constant_effect",
+          "narration": [
+            "The constant changes how much a high position is worth. With constant zero, first place contributes one and third contributes one third. With constant sixty, the contributions are one over sixty one and one over sixty three: much closer.",
+            "This changes the balance between very high positions and agreement across lists. That baseline constant can be tuned for a different task. It does not set the number of retrieved or displayed records."
+          ]
+        },
+        {
+          "id": "input_cutoff",
+          "title": "A shallower input changes the evidence available",
+          "source_anchor": "rrf-record-journey-title",
+          "visual": "input_cutoff",
+          "narration": [
+            "Cut each supplied list from three records to two. The lexical list becomes A, B; the dense list becomes C, A. C loses its lexical third place contribution, while D disappears from the supplied candidate pool altogether.",
+            "That is different from fusing the original four identities and displaying just A and C. In the latter case, B and D had fused scores but fell below the output boundary. Input cutoffs change what fusion receives."
+          ]
+        },
+        {
+          "id": "route_weights",
+          "title": "Equal list contributions are a choice",
+          "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+          "visual": "route_weights",
+          "narration": [
+            "The baseline gives every supplied list equal weight. An implementation can instead multiply each list’s contributions by an explicit weight. In a declared extension of the same example, give dense contributions twice the weight of lexical contributions.",
+            "C then narrowly overtakes A. The arithmetic is reproducible, but the weighting choice is not a quality recommendation. The hybrid label leaves those weighting choices unspecified."
+          ]
+        },
+        {
+          "id": "blend_and_route",
+          "title": "Web of Science blends; Scopus AI can route",
+          "source_anchor": "two-hybrids-that-combine-differently",
+          "visual": "blend_and_route",
+          "narration": [
+            "The chapter describes Web of Science Smart Search document search combining a Boolean keyword path and a semantic vector path. A parser first structures the query; combining the retrieval paths makes it hybrid.",
+            "Scopus AI can choose lexical retrieval, vector retrieval, or both per question. A one path run combines nothing under the book’s definition. When both paths run, their results still need a fusion rule. These are pinned documentation accounts, not new service tests."
+          ]
+        },
+        {
+          "id": "routing_explanation",
+          "title": "Expose the path chosen for this question",
+          "source_anchor": "two-hybrids-that-combine-differently",
+          "visual": "routing_explanation",
+          "narration": [
+            "With a blend, the prescribed evidence sources give the explanation a fixed shape. With routing, the answer to was this lexical or vector search can change from query to query. Expose the routing choice before explaining a result.",
+            "A rule, classifier or model can choose routes. Routing alone does not establish agency. Nor does naming RRF identify the candidate architecture: the same fusion formula can combine lists produced by other arrangements."
+          ]
+        },
+        {
+          "id": "query_variant_fusion",
+          "title": "RRF can combine several versions of one question",
+          "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+          "visual": "query_variant_fusion",
+          "narration": [
+            "Elsevier’s twenty twenty four Scopus AI RAG Fusion account describes generated query variants. Vector retrieval runs for each variant, and reciprocal rank fusion merges their result lists before top results support a summary with references for claims.",
+            "This account concerns multiple variant lists, rather than lexical and dense lists for one query. Its presence establishes neither different retrieval methods nor a later version’s route choices."
+          ]
+        },
+        {
+          "id": "fusion_evaluation",
+          "title": "Compare the full design with its individual routes",
+          "source_anchor": "hybrid-and-fusion",
+          "visual": "fusion_evaluation",
+          "narration": [
+            "Use RRF as a baseline and compare it with the individual retrievers on representative queries. Document the routes, candidate depths, duplicate identity handling, constant, weights, output cutoff and any later reranker. Evaluate the actual task, rather than the hybrid label.",
+            "The result depends on which evidence survives each choice. Rank fusion avoids incompatible score scales by discarding score gaps; routing decides which lists can contribute at all. Chapter Eleven follows query interpretation, transformation and routing in more detail."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,356 @@
+<section class="chapter" id="sec-intro"><header class="chapter-head"><p class="chapter-eyebrow">Chapter 1</p>
+<p class="chapter-meta">About 17 min</p>
+<h2 id="intro">The retrieval problem</h2>
+<!-- BEGIN PRODUCT CLAIMS LINKS intro -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-semantic-scholar-question-quality"><strong>Semantic Scholar · Main search · author’s assessment of the opening comparison.</strong> The author judged the natural-language question’s search quality worse than the keyword query, based on the known literature and inspection of leading results.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS intro -->
+<p class="chapter-question"><span>Central question</span>When an academic AI search tool hands you an answer with citations, what decided which papers were supplied as evidence?</p>
+<div class="chapter-orient">
+<h3 id="an-answer-appears">An answer appears<a aria-label="Link to An answer appears" class="heading-anchor" href="#an-answer-appears">#</a>
+</h3>
+<p>As documented in September 2026, a student signs into the library discovery layer, opens Primo Research Assistant and asks, in plain English, “Is there an open access citation advantage?” The panel shows five article cards under Sources, followed by an Overview of sources with numbered inline citation markers—the visible answer assembled from the selected records.</p>
+</div></header>
+<figure class="ir-figure" aria-labelledby="primo-ra-opening-caption">
+<p class="figure-title">Primo Research Assistant: five sources and an overview</p>
+<img src="images/primoresearchassistant.png" alt="Primo Research Assistant showing the question is there an open access citation advantage, five source cards and an Overview of sources with numbered citation markers">
+<figcaption id="primo-ra-opening-caption"><span class="asset-label-inline" id="fig-1-1">Figure 1.1</span> <strong>Primo Research Assistant’s visible answer surface.</strong> The panel shows five article cards under Sources and an Overview of sources with numbered inline citations. The screenshot establishes what the interface presents, not how the records were selected.<span class="as-of">Screenshot checked September 2026.</span></figcaption><!-- BEGIN PRODUCT CLAIMS LINKS primo-ra-opening-caption -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-primo-answer-surface"><strong>Primo · Research Assistant.</strong> The supplied answer surface shows five article cards and an overview with numbered citations.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS primo-ra-opening-caption -->
+
+</figure>
+<details><summary>Optional comparison: the Scopus AI answer surface</summary><p>Ask Scopus AI the same question and the furniture changes. In the supplied screenshot, Scopus AI presents a Deep research report headed “Open access citation advantage”, with a quick-reference/key-findings table, supporting citation links and a follow-up question field. The offer is identical—natural-language question in, synthesised cited answer out.</p>
+<figure class="ir-figure" aria-labelledby="scopus-ai-opening-caption">
+<p class="figure-title">Scopus AI: a deep-research report with cited findings</p>
+<img src="images/scopus-ai-deep-research.png" alt="Scopus AI deep-research report for open access citation advantage showing a key findings table, supporting citations and a follow-up question field">
+<figcaption id="scopus-ai-opening-caption"><span class="asset-label-inline" id="fig-1-2">Figure 1.2</span> <strong>Scopus AI’s visible deep-research view.</strong> The report presents a quick-reference and key-findings table with supporting citation links and a field for a follow-up question. The screenshot establishes the output surface, not the undocumented retrieval details.<span class="as-of">Screenshot checked September 2026.</span></figcaption><!-- BEGIN PRODUCT CLAIMS LINKS scopus-ai-opening-caption -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-scopus-deep-research-surface"><strong>Scopus AI · Deep research.</strong> The supplied view presents a cited report, findings table and follow-up field.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS scopus-ai-opening-caption -->
+
+</figure></details>
+<p>These tools are where most librarians now meet “AI search”, and where most professional discussion begins and ends: is the summary accurate, are the citations real, did it invent a paper? Those are reasonable worries—but they concern the last thing the tool did. This book is about everything it did first.</p>
+<h3 id="anatomy-of-a-cited-answer">Anatomy of a cited answer<a aria-label="Link to Anatomy of a cited answer" class="heading-anchor" href="#anatomy-of-a-cited-answer">#</a>
+</h3>
+<!-- BEGIN PRODUCT CLAIMS LINKS anatomy-of-a-cited-answer -->
+<details class="claim-links"><summary>Evidence register · 9 claims</summary><p><a href="#claim-primo-query-conversion"><strong>Primo · Research Assistant.</strong> An LLM converts a question to Boolean variations connected with OR.</a></p>
+<p><a href="#claim-primo-candidate-budget"><strong>Primo · Research Assistant.</strong> CDI retrieval supplies up to 30 results to the subsequent stages.</a></p>
+<p><a href="#claim-primo-embedding-rerank"><strong>Primo · Research Assistant.</strong> The documented reranking step uses embeddings.</a></p>
+<p><a href="#claim-primo-five-source-budget"><strong>Primo · Research Assistant.</strong> Five selected sources form the working set passed to the answer writer.</a></p>
+<p><a href="#claim-primo-generation-model"><strong>Primo · Research Assistant.</strong> GPT-4.1 Mini writes the overview from the five abstracts.</a></p>
+<p><a href="#claim-scopus-rag-variants"><strong>Scopus AI · 2024 RAG Fusion account.</strong> The 2024 account describes LLM-generated query variants.</a></p>
+<p><a href="#claim-scopus-rag-vector"><strong>Scopus AI · 2024 RAG Fusion account.</strong> Vector retrieval runs against each generated variant.</a></p>
+<p><a href="#claim-scopus-rag-rrf"><strong>Scopus AI · 2024 RAG Fusion account.</strong> Reciprocal rank fusion merges the variant result lists.</a></p>
+<p><a href="#claim-scopus-rag-generation"><strong>Scopus AI · 2024 RAG Fusion account.</strong> Summaries use top merged results with references required for claims.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS anatomy-of-a-cited-answer -->
+
+<p>For once, we do not have to guess. Ex Libris documents the <a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_(English)/015_Getting_Started_with_Primo_Research_Assistant">Primo Research Assistant pipeline</a> in unusual detail. For teaching purposes, we can group that account into five steps, separating source selection from reranking and leaving response delivery implicit:</p>
+<ol>
+<li>
+<strong>Query conversion.</strong> The user’s natural-language question is sent to an LLM, which converts it to a Boolean query containing several variations connected with <code>OR</code>.</li>
+<li>
+<strong>Retrieval.</strong> That query runs against the Central Discovery Index (CDI) and returns up to 30 results.</li>
+<li>
+<strong>Reranking.</strong> The top results are reranked using embeddings to identify the five sources that best address the query.</li>
+<li>
+<strong>Selection.</strong> Those top five sources become the working set.</li>
+<li>
+<strong>Generation.</strong> GPT-4.1 Mini writes an overview from the five abstracts and supplies inline citations.</li>
+</ol>
+<p>Read that list again. The steps are not equal in cost or importance, but notice where they fall: only the final step writes prose. Steps 1–4 select the evidence the final step receives.</p>
+<p id="primo-ra-content-scope"><strong>Coverage comes before ranking.</strong> Research Assistant searches CDI metadata and abstracts, subject to content exclusions such as insufficient metadata or abstracts and some provider collections. A record available through the library’s wider discovery system may therefore fall outside the assistant’s searchable scope. If it cannot enter that scope, changing the query or reranking cannot bring it into the working set.<span class="as-of">Content scope documentation checked October 2026.</span></p>
+<!-- BEGIN PRODUCT CLAIMS LINKS primo-ra-content-scope -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-primo-ra-content-scope"><strong>Primo · Research Assistant · content scope.</strong> Research Assistant searches CDI metadata and abstracts subject to content exclusions; its searchable scope can exclude records available through the library’s wider discovery system.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS primo-ra-content-scope -->
+
+<p><a href="https://www.elsevier.com/products/scopus/scopus-ai">Scopus AI</a> is documented more thinly. In Elsevier’s 2024 account, it expands a question into multiple query variants, fuses the retrieved lists using what Elsevier calls “RAG Fusion”, and generates a Topic Summary or Expanded Summary with references required for claims. The same two-part architecture is visible, with a different index and a fusion step. This is a historical architecture example, developed in <a href="#appendix-rag">Appendix G</a>, rather than a description of every later mode; where the documentation runs out, so does this description.</p>
+<p>Strip away the product names and a general shape emerges. The strip below shows the stages an AI search pipeline can contain, in the order they run. Not every product uses all six stages, and no stage is guaranteed to be present; Table 1.1 maps Primo Research Assistant onto them. Reading a product against this map—which stages exist, which are absent, which are documented and which are guesswork—is the core skill this book teaches.</p>
+<div class="stage-map" role="group" aria-label="Pipeline map: the stage this chapter covers is highlighted">
+<div class="stage-controller off">Controller — chooses and sequences the stages below</div>
+<div class="stage-row">
+<a class="stage off" href="#query-transformation" title="Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them.">Query<br>transformation</a><a class="stage off" href="#boolean-admission" title="Chapter 2 — text becomes index terms, and the rules decide which records are eligible at all.">Analysis &amp;<br>execution rules</a><a class="stage off" href="#bm25-ranking" title="Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set.">First-stage<br>retrieval</a><a class="stage off" href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one.">Fusion</a><a class="stage off" href="#reranking-and-hybrid" title="Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed.">Reranking</a><a class="stage off" href="#library-practice" title="Chapter 15 — what the reader is finally shown, and what can be recorded about it.">Presentation</a>
+</div>
+</div>
+<dl class="stage-key">
+<dt><a href="#query-transformation">Query transformation</a></dt>
+<dd>The words you typed may be rewritten, expanded, translated into filters or split into several queries before retrieval ever sees them.</dd>
+<dt><a href="#boolean-admission">Analysis &amp; execution rules</a></dt>
+<dd>Text becomes index terms, and the rules decide which records are eligible to be returned at all.</dd>
+<dt><a href="#bm25-ranking">First-stage retrieval</a></dt>
+<dd>One pass fast enough to run against the entire collection, producing the candidate set. It may be lexical, dense or both.</dd>
+<dt><a href="#hybrid-and-fusion">Fusion</a></dt>
+<dd>Several candidate lists — from different retrieval methods or different queries — are combined into a single list.</dd>
+<dt><a href="#reranking-and-hybrid">Reranking</a></dt>
+<dd>A shortlist is compared again, more carefully than collection-scale retrieval could afford. Nothing excluded earlier can be recovered here. In the tool dissected above, this is where 30 candidates became 5.</dd>
+<dt><a href="#library-practice">Presentation</a></dt>
+<dd>What the reader is finally shown, in what order and with what explanation — and what a library can record about it.</dd>
+</dl>
+<p class="asset-label" id="tbl-1-1">Table 1.1 — The book’s six pipeline stages mapped onto Primo Research Assistant’s documented workflow. No separate fusion stage is described.</p>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Pipeline stage</th>
+<th>Documented Primo behaviour mapped to this stage</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Query transformation</td>
+<td>LLM Boolean conversion</td>
+</tr>
+<tr>
+<td>Analysis &amp; execution</td>
+<td>Query executed against CDI</td>
+</tr>
+<tr>
+<td>First-stage retrieval</td>
+<td>Up to 30 results</td>
+</tr>
+<tr>
+<td>Fusion</td>
+<td>No separate fusion stage documented (contrast: Scopus AI RAG Fusion)</td>
+</tr>
+<tr>
+<td>Reranking</td>
+<td>Embedding rerank, top 5</td>
+</tr>
+<tr>
+<td>Presentation</td>
+<td>Five sources plus generated overview</td>
+</tr>
+</tbody>
+</table></div>
+<p>Do not infer the controller—the bar above the stages, which chooses and sequences them—from the answer format. Primo’s documented pipeline specifies a sequence of stages. The historical Scopus RAG Fusion account illustrates query expansion and fusion; later Scopus modes can use adaptive routing. <a href="#agentic-search-who-chooses-the-next-retrieval-action">Chapter 12</a> distinguishes fixed, adaptive and agentic control by how the next action is chosen.</p>
+<aside class="common-confusion" aria-labelledby="rag-definition-title">
+<p class="common-confusion-label">Key definition</p>
+<h4 id="rag-definition-title">Retrieval-augmented generation (RAG)</h4>
+<p>In RAG, retrieval selects evidence and a language model generates an answer conditioned on it. Retrieval limits the <em>supplied evidence</em>; it does not guarantee that every generated statement comes from that evidence. A model can draw on its parameters, invent a citation or omit a retrieved source.</p>
+<p><a href="#appendix-rag">Appendix G</a> treats RAG as a consumer of everything this book covers, not a rival to it.</p>
+</aside>
+<h3 id="retrieval-not-generation">Two machines, one product<a aria-label="Link to Two machines, one product" class="heading-anchor" href="#retrieval-not-generation">#</a>
+</h3>
+<p>Two different problems sit inside answer-generating AI search products:</p>
+<ul>
+<li>
+<strong>Retrieval</strong> selects which records become available for consideration and helps order them.</li>
+<li>
+<strong>Generation</strong> turns some of those records into prose.</li>
+</ul>
+<p>Two things follow from that split, and together they are why this book spends fifteen chapters on the first machine and none on the second.</p>
+<p><strong>Retrieval sets a ceiling generation cannot raise.</strong> That overview was written from the abstracts of exactly five papers. Fluent generation cannot establish source-supported coverage of a paper absent from the supplied evidence—the <a href="#why-search-systems-use-multiple-stages">shortlist bottleneck examined in Chapter 9</a>. Whatever shape a tool takes, the ordering holds: a quick answer is retrieval followed by generation,<sup id="fnref:rag-basic-pattern"><a class="footnote-ref" href="#fn:rag-basic-pattern">2</a></sup> and deep research is many rounds of retrieval followed by generation.</p>
+<p><strong>Missing evidence is especially hard to notice.</strong> A paper absent from an answer may never have been retrieved, or it may have been retrieved and then omitted. A fluent answer alone does not tell us which happened. This book concentrates on the first possibility: evidence the retrieval process failed to supply.</p>
+<figure class="ir-figure" aria-labelledby="ai-search-2x2-caption">
+<p class="figure-title">Four shapes of AI academic search</p>
+<div class="svg-scroll"><img src="images/2x2.png" alt="A two-by-two matrix of AI academic search tools. The horizontal axis, primary user-facing output, runs from ranked records or search results on the left to a synthesised answer or report on the right. The vertical axis, degree of retrieval iteration, runs from single-pass or limited retrieval at the bottom to iterative, multi-step retrieval at the top. Bottom left, quick search: Scopus, Google Scholar, Web of Science Smart Search, Primo Natural Language Search in NDE, EBSCOhost Natural Language Search. Bottom right, quick answer: Scopus AI, Web of Science Research Assistant, Primo Research Assistant, Consensus Pro Mode. Top left, iterative search: Ai2 Asta Find Paper, Google Scholar Labs. Top right, deep research: Undermind.ai, SciSpace Deep Review and Agents, Consensus Deep Search."></div>
+<figcaption id="ai-search-2x2-caption"><span class="asset-label-inline" id="fig-1-3">Figure 1.3</span> <strong>Output format on the horizontal axis; retrieval iteration on the vertical.</strong> I introduced this framework in “<a href="https://aarontay.substack.com/p/why-i-think-academic-deep-research">Why I Think Academic Deep Research—or at Least Deep Search—Will ‘Win’</a>”. The boxes are softer than they look and products migrate between them: Scopus AI has since added a deep-search mode, and Web of Science Research Assistant now describes itself as <a href="#agentic-search-who-chooses-the-next-retrieval-action">agentic</a>. <a href="#where-current-academic-tools-actually-sit">Chapter 12</a> examines that claim, and where these tools actually sit. Treat it as a snapshot rather than a taxonomy.<span class="as-of">Products placed as of August 2026.</span></figcaption><!-- BEGIN PRODUCT CLAIMS LINKS ai-search-2x2-caption -->
+<details class="claim-links"><summary>Evidence register · 14 claims</summary><p><a href="#claim-placement-scopus-search"><strong>Scopus · Search.</strong> Figure 1.3 places this mode in quick search.</a></p>
+<p><a href="#claim-placement-google-scholar-search"><strong>Google Scholar · Search.</strong> Figure 1.3 places this mode in quick search.</a></p>
+<p><a href="#claim-placement-web-of-science-smart-search"><strong>Web of Science · Smart Search.</strong> Figure 1.3 places this mode in quick search.</a></p>
+<p><a href="#claim-placement-primo-nde-natural-language-search"><strong>Primo · NDE Natural Language Search.</strong> Figure 1.3 places this mode in quick search.</a></p>
+<p><a href="#claim-placement-ebscohost-natural-language-search"><strong>EBSCOhost · Natural Language Search.</strong> Figure 1.3 places this mode in quick search.</a></p>
+<p><a href="#claim-placement-scopus-ai-answer-mode"><strong>Scopus AI · Answer mode.</strong> Figure 1.3 places this mode in quick answer.</a></p>
+<p><a href="#claim-placement-web-of-science-research-assistant"><strong>Web of Science · Research Assistant.</strong> Figure 1.3 places this mode in quick answer.</a></p>
+<p><a href="#claim-placement-primo-research-assistant"><strong>Primo · Research Assistant.</strong> Figure 1.3 places this mode in quick answer.</a></p>
+<p><a href="#claim-placement-consensus-pro-mode"><strong>Consensus · Pro Mode.</strong> Figure 1.3 places this mode in quick answer.</a></p>
+<p><a href="#claim-placement-ai2-asta-find-paper"><strong>Ai2 · Asta Find Paper.</strong> Figure 1.3 places this mode in iterative search.</a></p>
+<p><a href="#claim-placement-google-scholar-labs"><strong>Google Scholar · Labs.</strong> Figure 1.3 places this mode in iterative search.</a></p>
+<p><a href="#claim-placement-undermind-august-snapshot"><strong>Undermind · August snapshot.</strong> Figure 1.3 places this mode in deep research.</a></p>
+<p><a href="#claim-placement-scispace-deep-review-and-agents"><strong>SciSpace · Deep Review and Agents.</strong> Figure 1.3 places this mode in deep research.</a></p>
+<p><a href="#claim-placement-consensus-deep-search"><strong>Consensus · Deep Search.</strong> Figure 1.3 places this mode in deep research.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS ai-search-2x2-caption -->
+
+</figure>
+<p>The diagram sorts current academic tools along two axes. Horizontally: what the tool hands you—a ranked list of records, or a synthesised answer or report. Vertically: how much retrieval it performs—a single pass, or repeated, multi-step searching. That produces four recognisable shapes: quick search, quick answer, iterative search and deep research.<sup id="fnref:iterative-not-agentic"><a class="footnote-ref" href="#fn:iterative-not-agentic">3</a></sup></p>
+<p>Primo Research Assistant and the core Scopus AI experience sit in the quick-answer quadrant: a single or limited retrieval pass, followed by generation. The deep-research tools in the upper right differ from them not mainly in how they write, but in how much they retrieve.</p>
+<p>The important point for this book is that the two axes describe different things. The horizontal axis describes output format. The vertical axis is <strong>entirely a retrieval property</strong>: how extensively the system retrieves—a single or limited pass, or repeated multi-step searching. Retrieval deserves attention independently of output format.</p>
+<p>Agency is a separate question: who decides what to search for next? Neither axis records that choice. A tool in the upper half may follow a workflow fixed by an engineer, or may let a model choose each subsequent action from what the previous round returned. That third property—agency—is examined in <a href="#agentic-search-who-chooses-the-next-retrieval-action">Chapter 12</a>, once there are enough retrieval components for a controller to choose among.</p>
+<aside class="common-confusion" aria-labelledby="llms-in-retrieval-title">
+<p class="common-confusion-label">Common confusion</p>
+<h4 id="llms-in-retrieval-title">Leaving out generation does not mean leaving out large language models</h4>
+<p>An LLM can sit inside the <em>retrieval</em> half of a pipeline, and the pipeline dissected at the start of this chapter puts it there. Those uses are covered here:</p>
+<ul>
+<li>
+<strong>Writing the query.</strong> An LLM can turn a natural-language question into a Boolean expression, complete with fields and filters, before any searching happens—exactly what Primo Research Assistant is documented to do. <a href="#when-a-system-writes-the-boolean-query">Chapter 11</a> discusses this.</li>
+<li>
+<strong>Inventing text to search with.</strong> An LLM can draft a passage resembling a relevant document and use it to expand the query or as the input to dense retrieval. <a href="#query2doc-and-hyde">Chapter 11</a> covers Query2doc and HyDE.</li>
+<li>
+<strong>Reordering candidates.</strong> An LLM can act as a reranker, judging or ordering a shortlist that an earlier retriever produced. <a href="#llms-as-rerankers">Chapter 9</a> discusses this.</li>
+<li>
+<strong>Controlling the loop.</strong> An LLM can inspect intermediate results and decide what to search or examine next. Repeated retrieval is what places a tool in the upper half of the diagram; letting a model select those actions is what may make the process <a href="#agentic-search-who-chooses-the-next-retrieval-action">agentic</a>. The two are separate properties.</li>
+</ul>
+<p>What falls outside this book is the generation of prose for the reader. These earlier uses of an LLM help construct, select or order the evidence. Each raises the same questions as other retrieval components: which records became candidates, which were excluded, and whether you can inspect why.</p>
+</aside>
+<p>So this book does not cover how language models generate text, how to detect a fabricated citation, how to write prompts, or how general-purpose agent architectures and planning algorithms work. It covers what happens before any of that: how text becomes searchable, how a system decides which records are eligible, how it ranks them, and how much of that you can establish from the outside. It does examine one narrow slice of agent behaviour—<a href="#agentic-search-who-chooses-the-next-retrieval-action">how an agent selects, repeats and stops retrieval actions</a>—because that slice is retrieval design.</p>
+<span id="distinction-map-title" class="legacy-anchor"></span>
+<p class="key-distinction-label" id="distinction-match-relevance">Key distinction</p>
+<h3 id="what-does-relevant-actually-mean">What does “relevant” actually mean?<a aria-label="Link to What does “relevant” actually mean?" class="heading-anchor" href="#what-does-relevant-actually-mean">#</a>
+</h3>
+<p>A carefully built search strategy makes its conditions explicit, inspectable and reproducible. A record that meets those conditions has passed a useful test. But that is different from establishing whether it helps the searcher accomplish a particular task. Even a strong match needs to be judged against the purpose of the search.</p>
+<blockquote class="pull-quote"><p>A match is evidence about relevance, not a guarantee of usefulness.</p></blockquote>
+<p>Behind every query stands a person who wants something—an answer, an overview, evidence for a decision. That fuller purpose is the <strong>information need</strong>. Queries, filters and task briefs can communicate substantial detail about it, using terms, headings, fields or other supplied criteria. <strong>The query represents the information need; it is not the need itself.</strong> How fully it expresses that need depends on what the searcher supplies and what the system can use. <a href="#distinction-query-object">Chapter 11 returns to this</a> once the choice between expressions starts to matter.</p>
+<figure class="query-flow" aria-labelledby="relevance-chain-title">
+<p class="figure-title" id="relevance-chain-title">From a need to a relevance judgement</p>
+<!-- BEGIN PRODUCT CLAIMS LINKS relevance-chain-title -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-primo-five-source-budget"><strong>Primo · Research Assistant.</strong> Five selected sources form the working set passed to the answer writer.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS relevance-chain-title -->
+
+<div class="query-flow-track five-step">
+<div class="query-flow-step">
+<strong>Information need</strong><span>what the person wants to know or accomplish</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Query or representation</strong><span>words, a question, a seed record or another expression</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Retrieval signals</strong><span>terms, fields, citations, embeddings and scores</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Retrieved or ranked records</strong><span>the candidates the system makes available</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Human judgement</strong><span>whether each record helps with this need</span>
+</div>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-1-4">Figure 1.4</span> The middle three boxes show what the system works with directly. A detailed request can communicate the purpose at the left, and feedback can communicate judgements from the right. The system can use these to estimate suitability; the reader still assesses whether a record helps with the task.</figcaption>
+</figure>
+<p>Consider a hypothetical search for recent empirical studies of generative-AI services for research support in academic libraries. The librarian builds a strategy using alternative terminology—<em>generative AI</em> or <em>large language models</em>, <em>academic library</em> or <em>university library</em>, <em>research support</em> or <em>research consultation</em>—and limits publication dates to 2024 onwards. Now imagine two purposes for using the same search results: preparing a workshop introducing possible applications, and deciding whether the library should introduce such a service.</p>
+<p>The search retrieves an empirical study reporting positive participant reactions after a short demonstration of a university library’s generative-AI research-support service. It meets the search conditions and is topically suitable. For the workshop, it provides a useful example of a service and how participants responded.</p>
+<p>For the decision about introducing the service, the same study contributes less. Positive reactions alone provide insufficient evidence for deciding whether the library should introduce the service: they do not establish answer accuracy, staff workload or performance during actual research consultations. The paper still contributes evidence about participant reactions; its usefulness differs even though its match to the search conditions has not changed.</p>
+<p>A librarian might look specifically for evaluations of answer accuracy, staff workload or real-world use through targeted follow-up searches. These could retrieve evidence better suited to the service-adoption decision. Making every issue a compulsory search condition, however, could miss useful studies that describe these issues using unexpected terminology or report them only in the full text.</p>
+<p><strong><a class="term-mark" href="#term-relevance-judgement" aria-describedby="definition-relevance-judgement" data-term="Relevance judgement" data-def="A recorded decision that a particular record does or does not satisfy the relevance criteria for a represented information need. Retrieval metrics compare systems against these operational judgements rather than objective truth.">Relevance judgement</a> assesses whether a document is useful for the purpose of the search.</strong> The librarian must still examine what each study measured, under what conditions, and whether its findings help answer the service-adoption question. Searching brings documents forward for consideration; those judgements can also guide subsequent searching.</p>
+<aside class="practice-callout" aria-labelledby="evidence-synthesis-search-resistant">
+  <p class="practice-callout-label">Evidence synthesis</p>
+  <h4 id="evidence-synthesis-search-resistant">Search-resistant concepts</h4>
+  <p>Evidence-synthesis searchers will recognise this distinction. Not every part of a review question or eligibility criterion can be represented reliably in a search strategy. Some concepts are poorly indexed, inconsistently described or difficult to express as dependable search terms. These are sometimes called <strong>search-resistant concepts</strong>.</p>
+  <p>Rather than make every criterion a compulsory search condition, the strategy may retrieve a broader set of potentially relevant records and leave some criteria to screening. This lets reviewers assess what retrieval cannot reliably encode.</p>
+</aside>
+<p>When Primo Research Assistant selects five sources, the score is an estimate based on the evidence and training available to the system. It does not establish that the sources answer this reader’s need. A high score for the demonstration study would not turn participant reactions into evidence of answer accuracy.</p>
+<p>Information-retrieval researchers distinguish several perspectives on relevance: how strongly a system estimates that a document matches a query, whether it addresses the topic, whether it adds to the reader’s understanding, and whether it is useful for a particular task. These perspectives are related, with no single hierarchy among them. <a href="#relevance-is-a-judgement">Chapter 14 separates the four</a>, with the research behind them, and puts them to work on evaluation. Their common point is that <strong>relevance is a relationship, not a property.</strong> No document is relevant on its own. It is relevant <em>to</em> someone, <em>for</em> something.</p>
+<p>Boolean matching, BM25 scores, embedding similarity and neural rerankers all help systems estimate relevance. Even sophisticated retrieval methods cannot guarantee that the documents they rank highly will meet a particular reader’s information need. That distinction matters when evaluating what an academic search tool actually delivers.</p>
+<aside class="orientation" aria-labelledby="opening-vocabulary-title">
+<p class="orientation-label">Before the opening puzzles</p>
+<h4 id="opening-vocabulary-title">Seven terms to carry forward</h4>
+<dl>
+<dt>Retrieval</dt>
+<dd>Selecting and ordering records for an information need.</dd>
+<dt>Candidate set</dt>
+<dd>The records available to the next stage of a search pipeline.</dd>
+<dt>Index</dt>
+<dd>The searchable representation of a collection.</dd>
+<dt>Ranking</dt>
+<dd>Ordering candidates by a score or other rule.</dd>
+<dt>Reranking</dt>
+<dd>Reordering a shortlist produced by an earlier stage.</dd>
+<dt>Generation</dt>
+<dd>Producing prose from retrieved material; a separate operation from retrieval.</dd>
+<dt>Information need</dt>
+<dd>The fuller purpose behind a query, which queries, filters and task briefs can express in varying detail. <a href="#what-does-relevant-actually-mean">Just established above</a>.</dd>
+</dl>
+<p>The <a href="#glossary">complete glossary</a> is in the end matter. Other terms are introduced where their mechanisms first appear.</p>
+</aside>
+
+<span id="two-familiar-search-results-and-two-puzzles" class="legacy-anchor"></span><h3 id="three-familiar-search-results-and-three-puzzles">Three familiar search results—and three puzzles<a aria-label="Link to Three familiar search results—and three puzzles" class="heading-anchor" href="#three-familiar-search-results-and-three-puzzles">#</a>
+</h3>
+<!-- BEGIN PRODUCT CLAIMS LINKS three-familiar-search-results-and-three-puzzles -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-scite-nonsense-query"><strong>scite · Search interface in the opening puzzle.</strong> Adding an invented string left useful-looking results and a reported total in the millions.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS three-familiar-search-results-and-three-puzzles -->
+
+<p>Most librarians understand Boolean searching. That understanding predicts certain behaviour: add a required word, and the result set shrinks; add an impossible word, and it empties. Here are three searches—all real, all screenshotted below—where that prediction fails or falls short.</p>
+<p><strong>Puzzle 1.</strong> Take a genuine question—is there an open-access citation advantage?—and append a string of invented nonsense, a word that appears in no paper anywhere. Run it in scite. Under Boolean logic, that one impossible term should empty the result list. Instead, nothing breaks: useful papers still appear near the top, and the interface still reports millions of results. <em>Why didn’t the impossible term kill the search?</em></p>
+<div class="evidence-stack" aria-label="Puzzle one screenshot">
+<figure class="ir-figure evidence-card" aria-labelledby="scite-opening-caption">
+<p class="figure-title">Puzzle one: the nonsense term did not empty the result list</p>
+<img alt="Scite paper search returning results for a meaningful open-access question followed by an invented string" src="images/scite.png">
+<figcaption id="scite-opening-caption"><span class="asset-label-inline" id="fig-1-5">Figure 1.5</span> <strong>Observed behaviour:</strong> relevant-looking results remain even though the query contains a string that is unlikely to occur in the collection.</figcaption><!-- BEGIN PRODUCT CLAIMS LINKS scite-opening-caption -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-scite-nonsense-query"><strong>scite · Search interface in the opening puzzle.</strong> Adding an invented string left useful-looking results and a reported total in the millions.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS scite-opening-caption -->
+
+</figure>
+</div>
+<p><strong>Puzzle 2.</strong> Search <code>open access</code> in Google Scholar and it reports about 9.4 million results. Now try to see them. The interface stops at page 100—one thousand records—and Google’s own help documentation confirms that no more than 1,000 results will ever be shown for a single query. <em>So what are the other 9,399,000 “results”? Were they ranked? Were they even scored?</em></p>
+<div class="evidence-stack" aria-label="Puzzle two screenshot">
+<figure class="ir-figure evidence-card" aria-labelledby="scholar-opening-caption">
+<p class="figure-title">Puzzle two: the reported result set is much larger than the viewable list</p>
+<img alt="Google Scholar page 100 for an open access search reporting about 9.4 million results" src="images/googlescholar1000.png">
+<figcaption id="scholar-opening-caption"><span class="asset-label-inline" id="fig-1-6">Figure 1.6</span> <strong>Observed behaviour:</strong> the interface reports millions of matches, while <a href="https://scholar.google.com/intl/us/scholar/help.html">Google Scholar documents a 1,000-result display limit</a>.</figcaption><!-- BEGIN PRODUCT CLAIMS LINKS scholar-opening-caption -->
+<details class="claim-links"><summary>Evidence register · 2 claims</summary><p><a href="#claim-scholar-reported-total"><strong>Google Scholar · Search interface in the opening puzzle.</strong> The open access query reported about 9.4 million matches in the supplied example.</a></p>
+<p><a href="#claim-scholar-display-limit"><strong>Google Scholar · Search results.</strong> Help documentation limits display to 1,000 results for a single query.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS scholar-opening-caption -->
+
+</figure>
+</div>
+<p><strong>Puzzle 3.</strong> The name <em>Semantic Scholar</em> invites the expectation that it will handle a natural-language question well. In August 2026, <code>Is there an open access citation advantage</code> returned just 13 results, for an established topic with dozens to hundreds of relevant studies. Strip the question down to its keywords—<code>open access citation advantage</code>—and the same system returned about 35,300. Inspection of the leading results also showed poorer relevance for the natural-language question. The question performed worse in this comparison; the judgement rests on the known literature and the inspected results, not on the counts alone. <em>Why did the more natural query perform worse?</em></p>
+<div class="evidence-stack" aria-label="Puzzle three screenshots">
+<figure class="ir-figure evidence-card" aria-labelledby="semantic-scholar-opening-caption">
+<p class="figure-title">Puzzle three: a natural-language question retrieved fewer papers than a short keyword query</p>
+<div class="semantic-scholar-comparison">
+<div class="semantic-scholar-shot">
+<p>Natural-language question</p>
+<img alt="Semantic Scholar showing 13 results for the query Is there an open access citation advantage" src="images/semantic-scholar-natural-language-question.png">
+</div>
+<div class="semantic-scholar-shot">
+<p>Short keyword query</p>
+<img alt="Semantic Scholar showing about 35,300 results for the query open access citation advantage" src="images/semantic-scholar-keyword-query.png">
+</div>
+</div>
+<figcaption id="semantic-scholar-opening-caption"><span class="asset-label-inline" id="fig-1-7">Figure 1.7</span> <strong>Observed behaviour in August 2026:</strong> the natural-language question returned 13 results, while the unquoted keyword query returned about 35,300. The contrast establishes a difference in visible behaviour; it does not reveal how Semantic Scholar parsed or executed either query.</figcaption><!-- BEGIN PRODUCT CLAIMS LINKS semantic-scholar-opening-caption -->
+<details class="claim-links"><summary>Evidence register · 2 claims</summary><p><a href="#claim-semantic-scholar-question-counts"><strong>Semantic Scholar · Main search, observed August 2026.</strong> The question returned 13 results; the unquoted keyword query returned about 35,300.</a></p>
+<p><a href="#claim-semantic-scholar-question-quality"><strong>Semantic Scholar · Main search · author’s assessment of the opening comparison.</strong> The author judged the natural-language question’s search quality worse than the keyword query, based on the known literature and inspection of leading results.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS semantic-scholar-opening-caption -->
+
+</figure>
+</div>
+<p>Hold on to all three. These screenshots establish visible behaviour, not the products’ complete internal architectures, and this book will not resolve them immediately—part of the point is discovering which of them <em>can</em> be resolved from the outside at all. The outcome is not the one most readers expect.</p>
+<p id="puzzles-under-answer-layers">The puzzles carry extra weight because systems like these can sit underneath an answer-generating layer. Primo Research Assistant converts questions to Boolean queries, so Puzzle 3—natural language meets a query parser—is not academic. A reranker chooses five survivors from thirty, so Puzzle 2—which fraction of the reported results was ever scored—is not academic either.</p>
+<!-- BEGIN PRODUCT CLAIMS LINKS puzzles-under-answer-layers -->
+<details class="claim-links"><summary>Evidence register · 3 claims</summary><p><a href="#claim-primo-query-conversion"><strong>Primo · Research Assistant.</strong> An LLM converts a question to Boolean variations connected with OR.</a></p>
+<p><a href="#claim-primo-candidate-budget"><strong>Primo · Research Assistant.</strong> CDI retrieval supplies up to 30 results to the subsequent stages.</a></p>
+<p><a href="#claim-primo-five-source-budget"><strong>Primo · Research Assistant.</strong> Five selected sources form the working set passed to the answer writer.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS puzzles-under-answer-layers -->
+
+<h3 id="a-map-of-the-arguments-ahead">A map of the arguments ahead<a aria-label="Link to A map of the arguments ahead" class="heading-anchor" href="#a-map-of-the-arguments-ahead">#</a>
+</h3>
+<p>Each of the three puzzles leaves a question open and tempts you into a mistake, and naming those mistakes now is most of what the rest of Part I and Part II are for.</p>
+<span id="opening-puzzles-title" class="legacy-anchor"></span><p class="asset-label" id="tbl-1-2">Table 1.2 — The three opening puzzles: the question each leaves open, the mistake it tempts, and where the book takes it up.</p>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Puzzle: the question to keep open</th>
+<th>The tempting mistake, and where the book takes it up</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<strong>1 · scite.</strong> Why did the invented string not exclude every scite result?</td>
+<td>A record that came back without one of your words tempts you to conclude the system stopped matching words at all. <em>Taken up: <a href="#returning-to-the-opening-puzzles">Chapter 4</a>.</em>
+</td>
+</tr>
+<tr>
+<td>
+<strong>2 · Google Scholar.</strong> How does Google Scholar decide which tiny fraction of the reported results appears first?</td>
+<td>A hit count of 9.4 million beside a thousand viewable records tempts you to read a reported total as a set of ranked results. <em>Taken up: <a href="#returning-to-the-opening-puzzles">Chapter 4</a>.</em>
+</td>
+</tr>
+<tr>
+<td>
+<strong>3 · Semantic Scholar.</strong> Why did expressing the information need as a natural-language question make Semantic Scholar’s search perform worse?</td>
+<td>A product named <em>Semantic Scholar</em> tempts you to read a label as an architecture. <em>Taken up: <a href="#distinction-map-vocabulary">Part II</a>; <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Chapter 7</a>.</em>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Puzzles 1 and 2 are the same mistake in different clothes: each reads a property of the display as a property of the machinery. Four chapters of ordinary lexical retrieval are enough to correct them, and <a href="#distinction-map-interface">the end of Part I</a> settles both. Puzzle 3 is a different kind of error altogether. It mistakes vocabulary for architecture, and no amount of squinting at an interface will ever settle it; it needs mechanisms that do not arrive until <a href="#distinction-map-vocabulary">the opening of Part II</a>. Between them they cover a great deal of what a product description can say truthfully and still be heard as something stronger than it is. <a href="#appendix-misleading-overlaps">Appendix D collects the wider terminology overlaps</a>.</p>
+<p><span class="as-of">The answer-surface screenshots that open the chapter were checked in September 2026; the Semantic Scholar counts were observed in August 2026. The Primo pipeline is described from documentation checked by September 2026; the Scopus RAG Fusion account dates to 2024. A documentation check is not a behavioural test of every stage.</span></p>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Answer-generating academic search tools combine retrieval of source material with generation of an overview. The Primo walkthrough shows how several decisions constrain the evidence before writing begins.</li>
+<li>Retrieval and generation are separate problems. A fabricated citation is a generation failure; a missing paper may have been lost during retrieval or omitted from the answer. Inspect the working set before diagnosing.</li>
+<li>The shortlist bottleneck: retrieval limits the evidence supplied to generation. Coverage limits which records can enter the search at all; candidate and source-selection limits narrow the working set further. In Primo Research Assistant, five records supply the abstracts for the overview.</li>
+<li>An LLM can sit inside the retrieval half of a pipeline; its presence says nothing about which retrieval method is being used.</li>
+<li>Tools differ along two independent axes: output format and retrieval iteration. Neither records agency.</li>
+<li>The query represents the information need. Matching helps a system estimate relevance; usefulness must be assessed against the reader’s purpose. Those judgements can guide later searches.</li>
+<li>Three familiar results—a nonsense term that did not empty a result list, a reported count far larger than the viewable list, and a natural-language question that produced fewer papers and poorer leading results than a shorter keyword query—leave three questions about admission, ranking and architecture open.</li>
+</ol>
+<p class="chapter-transition">Explaining these puzzles—and auditing pipelines like the one that opened this chapter—requires knowing what a search system does with words before it does anything else. Chapter 2 begins with the strictest possible answer: words as admission rules.</p></aside><section class="self-check" aria-label="Questions on this chapter"><p class="self-check-label">Check yourself</p>
+<details class="self-check-q"><summary>Primo Research Assistant’s answer to your question cites five real, accurately summarised papers—but misses the one paper everybody in the field would name. Which machine failed, and how would you tell?</summary><p>First distinguish the retrieved working set from the sources used in the answer. If the paper was retrieved but omitted, generation or source selection may explain its absence. If it never entered the working set, inspect the Boolean conversion, CDI coverage and representation, the top-30 boundary and the embedding rerank to five sources. Searching for the paper directly tests availability, but does not prove where the original run lost it.</p></details><details class="self-check-q"><summary>A vendor says its discovery tool “uses a large language model”. Which half of the product does that tell you about?</summary><p>Neither, on its own. An LLM can sit in the retrieval half—writing a Boolean query (as Primo Research Assistant’s does), generating a pseudo-document, reranking a shortlist, choosing the next action—or only in the final generation step. Naming the model locates no component.</p></details><details class="self-check-q"><summary>Paper A is outside the assistant’s searchable scope; Paper B reaches its 30 candidates but misses its five-source working set; Paper C reaches that working set but is uncited. Where was each lost, and what evidence would distinguish the cases?</summary><p><strong>A · Coverage.</strong> Compare the paper’s record and collection with the assistant’s documented scope. Finding it in the library’s wider discovery system does not establish that the assistant can search it.</p>
+<p><strong>B · Reranking and source selection.</strong> Compare the candidate list with the five-source working set. This requires a retrieval trace or another way to inspect the intermediate candidates.</p>
+<p><strong>C · Answer generation.</strong> Compare the supplied working set with the overview’s citations. A source can be supplied without being cited. If the tool exposes only the final answer, record the remaining uncertainty rather than infer the exclusion point.</p></details><details class="self-check-q"><summary>The opening diagram has two axes. Which one is a retrieval property, and what third property does neither axis record?</summary><p>The vertical axis is the retrieval property: how extensively the system retrieves, in one pass or many. The horizontal axis is output format. Neither records agency — who decides what to search for next — which is why a fixed workflow and an agentic one can occupy the same quadrant.</p></details><details class="self-check-q"><summary>A search returns forty records, every one of which contains all three of your search terms. A colleague says the search worked. What has been established, and what has not?</summary><p>That forty records satisfy the representation you supplied. Not that any of them helps with the need behind it — a record can match every term and still be an opinion piece, the wrong population or the wrong decade. And not that the database holds nothing better: the records your wording never reached are not in the set to be judged. Matching is evidence about relevance. Assess usefulness against the task, and use those judgements to guide another search if needed.</p></details><details class="self-check-q"><summary>Why can the demonstration study in this chapter be useful for an introductory workshop yet insufficient for deciding whether to introduce the service? What further evidence would you seek?</summary><p>The workshop needs a concrete example of a service and participants’ reactions. The adoption decision also needs evidence about answer accuracy, staff workload and performance in actual consultations. The study’s contribution changes with the purpose, even though it still matches the same search. Seek evaluations addressing those questions, then assess their methods and conditions; adding terms alone does not establish usefulness.</p></details></section><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#preface"><span>Previous</span>Why this book exists</a><a class="cnav next" href="#boolean-admission"><span>Next</span>Boolean admission and the inverted index</a></nav></section>

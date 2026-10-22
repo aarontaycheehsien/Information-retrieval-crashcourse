@@ -1,0 +1,439 @@
+1
+00:00:00,700 --> 00:00:02,958
+You ask whether open access increases
+
+2
+00:00:02,978 --> 00:00:06,476
+citations. An LLM writes a plausible
+
+3
+00:00:06,496 --> 00:00:09,620
+paragraph about a study comparing open and
+
+4
+00:00:09,640 --> 00:00:11,863
+subscription articles while accounting for
+
+5
+00:00:11,883 --> 00:00:14,207
+discipline and publication year.
+
+6
+00:00:14,383 --> 00:00:16,515
+No identified study supports that
+
+7
+00:00:16,535 --> 00:00:19,028
+paragraph. Could the invented text still
+
+8
+00:00:19,048 --> 00:00:21,372
+help a search? Pause and predict.
+
+9
+00:00:23,794 --> 00:00:25,509
+It can serve as a retrieval aid.
+
+10
+00:00:25,671 --> 00:00:28,886
+Query2doc and HyDE use generated language
+
+11
+00:00:28,906 --> 00:00:31,476
+in different ways to find real indexed
+
+12
+00:00:31,496 --> 00:00:34,478
+sources. Neither method turns the imagined
+
+13
+00:00:34,498 --> 00:00:37,713
+paragraph into evidence, or establishes
+
+14
+00:00:37,733 --> 00:00:39,851
+that the described study exists.
+
+15
+00:00:40,750 --> 00:00:44,129
+Query2doc generates a pseudo document and
+
+16
+00:00:44,149 --> 00:00:46,436
+uses its language to expand the original
+
+17
+00:00:46,456 --> 00:00:49,400
+query. The additional vocabulary may
+
+18
+00:00:49,420 --> 00:00:51,552
+resemble wording found in relevant
+
+19
+00:00:51,572 --> 00:00:54,310
+documents. The expanded input can go to a
+
+20
+00:00:54,330 --> 00:00:57,853
+sparse retriever such as BM twenty five.
+
+21
+00:00:58,417 --> 00:01:01,103
+Dense retrieval is also possible; the
+
+22
+00:01:01,123 --> 00:01:03,538
+diagram follows the lexical route.
+
+23
+00:01:03,701 --> 00:01:05,266
+Its effect depends on what the next
+
+24
+00:01:05,286 --> 00:01:07,314
+retriever does with those words.
+
+25
+00:01:08,212 --> 00:01:09,875
+HyDE means Hypothetical Document
+
+26
+00:01:09,895 --> 00:01:12,697
+Embeddings. An LLM generates a
+
+27
+00:01:12,717 --> 00:01:15,210
+hypothetical relevant document, then a
+
+28
+00:01:15,230 --> 00:01:18,431
+dense encoder embeds that document.
+
+29
+00:01:18,594 --> 00:01:20,919
+Retrieval compares the resulting vector
+
+30
+00:01:20,939 --> 00:01:23,509
+with stored vectors for real indexed
+
+31
+00:01:23,529 --> 00:01:24,488
+documents.
+
+32
+00:01:25,044 --> 00:01:27,384
+The generated document is a pivot into the
+
+33
+00:01:27,404 --> 00:01:30,297
+vector space. It is not the final answer
+
+34
+00:01:30,317 --> 00:01:31,881
+or a verified source.
+
+35
+00:01:32,044 --> 00:01:34,935
+Unlike Query2doc’s language expansion,
+
+36
+00:01:35,123 --> 00:01:37,462
+this path uses the generated document’s
+
+37
+00:01:37,482 --> 00:01:39,613
+embedding to conduct the search.
+
+38
+00:01:40,536 --> 00:01:42,407
+The chapter’s illustrative paragraph
+
+39
+00:01:42,427 --> 00:01:44,984
+mentions comparisons and adjustment for
+
+40
+00:01:45,004 --> 00:01:46,620
+discipline and year.
+
+41
+00:01:46,795 --> 00:01:49,842
+Those details may steer retrieval towards
+
+42
+00:01:49,862 --> 00:01:52,857
+particular vocabulary or study designs.
+
+43
+00:01:53,033 --> 00:01:55,203
+They are not findings about an identified
+
+44
+00:01:55,223 --> 00:01:57,317
+paper, and may import assumptions the
+
+45
+00:01:57,337 --> 00:01:59,262
+searcher did not intend.
+
+46
+00:01:59,807 --> 00:02:02,199
+Retrieving real sources does not
+
+47
+00:02:02,219 --> 00:02:05,175
+retroactively make every generated detail
+
+48
+00:02:05,195 --> 00:02:08,912
+true. Read and assess the actual sources,
+
+49
+00:02:09,036 --> 00:02:10,910
+and retain the generated text in the
+
+50
+00:02:10,930 --> 00:02:13,217
+search record. It is part of the retrieval
+
+51
+00:02:13,237 --> 00:02:15,832
+strategy, not supporting evidence.
+
+52
+00:02:16,728 --> 00:02:19,083
+The chapter’s product accounts describe
+
+53
+00:02:19,129 --> 00:02:20,449
+different receivers.
+
+54
+00:02:20,598 --> 00:02:24,998
+EBSCOhost and EDS AI Assisted Search parse
+
+55
+00:02:25,018 --> 00:02:26,918
+keyword and noun phrases for the
+
+56
+00:02:26,938 --> 00:02:29,393
+established engine; the cited public page
+
+57
+00:02:29,413 --> 00:02:31,970
+does not identify the parsing model as an
+
+58
+00:02:31,990 --> 00:02:32,768
+LLM.
+
+59
+00:02:33,335 --> 00:02:35,668
+Web of Science Smart Search combines
+
+60
+00:02:35,688 --> 00:02:38,335
+structured parsing with keyword and vector
+
+61
+00:02:38,355 --> 00:02:39,572
+document paths.
+
+62
+00:02:39,734 --> 00:02:42,369
+Primo NDE documents generative Boolean
+
+63
+00:02:42,389 --> 00:02:44,546
+construction for Advanced Search.
+
+64
+00:02:44,683 --> 00:02:46,982
+These pinned documentation accounts are
+
+65
+00:02:47,002 --> 00:02:49,573
+not fresh service tests; the shared
+
+66
+00:02:49,593 --> 00:02:51,931
+interface language does not identify a
+
+67
+00:02:51,951 --> 00:02:53,348
+common architecture.
+
+68
+00:02:54,239 --> 00:02:56,513
+Natural language filter extraction is
+
+69
+00:02:56,533 --> 00:02:58,394
+useful but partial.
+
+70
+00:02:58,557 --> 00:03:01,990
+Primo NDE recognises a defined list of
+
+71
+00:03:02,010 --> 00:03:05,006
+fields and facets, with documented author
+
+72
+00:03:05,026 --> 00:03:07,300
+detection failures and unintended OR
+
+73
+00:03:07,320 --> 00:03:09,877
+relationships. Web of Science Research
+
+74
+00:03:09,897 --> 00:03:12,686
+Assistant supports some institution,
+
+75
+00:03:12,706 --> 00:03:15,276
+geography and date constraints.
+
+76
+00:03:15,832 --> 00:03:17,986
+That Research Assistant’s guidance also
+
+77
+00:03:18,006 --> 00:03:21,361
+lists complex field tagged Boolean queries
+
+78
+00:03:21,382 --> 00:03:22,856
+as unsupported.
+
+79
+00:03:23,006 --> 00:03:25,486
+Supported natural language patterns do not
+
+80
+00:03:25,506 --> 00:03:28,269
+replace the database’s complete advanced
+
+81
+00:03:28,289 --> 00:03:29,390
+search language.
+
+82
+00:03:29,565 --> 00:03:32,109
+Keep product features distinct and inspect
+
+83
+00:03:32,129 --> 00:03:34,403
+the actual generated conditions.
+
+84
+00:03:35,296 --> 00:03:37,535
+A filter inferred from the question is
+
+85
+00:03:37,555 --> 00:03:39,455
+different from one the user selects
+
+86
+00:03:39,475 --> 00:03:42,148
+explicitly. Primo Research Assistant
+
+87
+00:03:42,168 --> 00:03:45,008
+documents limited automatic refinements;
+
+88
+00:03:45,042 --> 00:03:47,148
+manually changing a refinement switches
+
+89
+00:03:47,168 --> 00:03:49,803
+that field to manual handling, so it is no
+
+90
+00:03:49,823 --> 00:03:52,160
+longer inferred automatically.
+
+91
+00:03:52,712 --> 00:03:55,375
+Test which supported phrasings activate
+
+92
+00:03:55,395 --> 00:03:57,476
+each constraint, whether the generated
+
+93
+00:03:57,496 --> 00:04:00,208
+filter is visible, and what happens with
+
+94
+00:04:00,228 --> 00:04:02,604
+unsupported or ambiguous limits.
+
+95
+00:04:02,767 --> 00:04:05,143
+Compare variants against known relevant
+
+96
+00:04:05,163 --> 00:04:07,837
+records rather than assuming a fluent
+
+97
+00:04:07,857 --> 00:04:09,834
+request was fully obeyed.
+
+98
+00:04:10,744 --> 00:04:13,309
+Keep the original input, generated text,
+
+99
+00:04:13,329 --> 00:04:15,809
+structured expressions, inferred and
+
+100
+00:04:15,829 --> 00:04:18,747
+manual filters, chosen routes, and
+
+101
+00:04:18,767 --> 00:04:21,053
+intermediate results used for feedback.
+
+102
+00:04:21,216 --> 00:04:23,812
+A compulsory clause or hidden route can
+
+103
+00:04:23,832 --> 00:04:26,930
+exclude evidence before ranking; an early
+
+104
+00:04:26,950 --> 00:04:29,597
+mistaken ranking can steer the next query.
+
+105
+00:04:30,150 --> 00:04:32,621
+Understanding interprets, transformation
+
+106
+00:04:32,641 --> 00:04:35,598
+changes inputs, and control decides where
+
+107
+00:04:35,618 --> 00:04:38,021
+they go. All can occur in a prescribed
+
+108
+00:04:38,041 --> 00:04:40,688
+workflow. The next chapter moves to the
+
+109
+00:04:40,708 --> 00:04:43,137
+separate question of who chooses what
+
+110
+00:04:43,157 --> 00:04:45,469
+happens next while the search is running.

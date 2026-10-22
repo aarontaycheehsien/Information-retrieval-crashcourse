@@ -1,0 +1,201 @@
+{
+  "series": "Understanding, transforming and routing queries",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#query-transformation",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#query-transformation",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-who-changed-your-question",
+  "title": "Who changed your question?",
+  "subtitle": "Separate interpretation, changed inputs, and decisions about retrieval.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "understanding_hook",
+      "title": "The system understood a date. Did the query change?",
+      "source_anchor": "common-query-understanding-techniques",
+      "visual": "understanding_hook",
+      "narration": [
+        "A system recognises a date in your request. Has it changed what retrieval receives? Has it selected a different search route? Those are three different questions. Pause and decide what recognising the date alone establishes.",
+        "Understanding interprets the request and may leave retrieval input unchanged. Transformation creates changed or additional retrieval inputs. Retrieval control chooses where they go, which paths run, and whether another search happens."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "visible_boolean",
+      "title": "Make the generated expression visible",
+      "source_anchor": "web-of-science-smart-search-caption",
+      "visual": "visible_boolean",
+      "narration": [
+        "The chapter\u2019s Web of Science Smart Search example asks for apple, oranges and bananas, from twenty twenty to twenty twenty four, with affiliation from the University of California. The displayed interpretation separates a year range, an organisation and topic conditions.",
+        "The structured query joins those conditions with AND, including a separate topic condition for each fruit. Inspect the visible, editable interpretation. An omitted concept or a misread relationship changes the eligible candidate set before ranking."
+      ]
+    },
+    {
+      "id": "primo_distinction",
+      "title": "Two Primo features are different workflows",
+      "source_anchor": "when-a-system-writes-the-boolean-query",
+      "visual": "primo_distinction",
+      "narration": [
+        "Primo VE NDE Natural Language Search documents GPT four point one Mini identifying fields, generating a basic Boolean query, and adding six related OR connected permutations. Advanced Search receives an inspectable, editable structured expression.",
+        "That is distinct from Primo Research Assistant\u2019s documented question to Boolean variations, CDI retrieval and embedding reranking pipeline. Do not transfer one feature\u2019s architecture to the other. Natural language input can still lead to Boolean conditions and lexical retrieval."
+      ]
+    },
+    {
+      "id": "retrieval_feedback",
+      "title": "A later query can depend on earlier results",
+      "source_anchor": "what-changed-and-when",
+      "visual": "retrieval_feedback",
+      "narration": [
+        "Explicit retrieval feedback uses the searcher\u2019s judgements about accepted or rejected records to help construct another retrieval input. Pseudo relevance feedback asks the searcher for nothing: it assumes highly ranked records from an initial search are relevant.",
+        "It selects useful looking terms from those results and constructs a second query. If the first ranking is off topic, the added terms can reinforce that mistake. The second pass may add candidates, but the relevance assumption was unverified."
+      ]
+    },
+    {
+      "id": "screening_boundary",
+      "title": "Reordering a screening pool is a different operation",
+      "source_anchor": "before-phrasing-identify-the-query-object",
+      "visual": "screening_boundary",
+      "narration": [
+        "Active learning screening in systematic reviews also uses inclusion and exclusion judgements. But it repeatedly reprioritises the records already in an existing candidate pool. Those judgements do not inherently construct another retrieval pass or add records.",
+        "Ask whether feedback changed the search sent to a collection, or changed the order of records awaiting screening. They address different candidate boundaries."
+      ]
+    },
+    {
+      "id": "fixed_feedback_loop",
+      "title": "The query can adapt while the sequence stays fixed",
+      "source_anchor": "query-understanding-flow-title",
+      "visual": "fixed_feedback_loop",
+      "narration": [
+        "Pseudo relevance feedback needs an initial ranking before it can build a later query. It is therefore a retrieval to transformation loop, not a step that happens entirely before searching. Yet a designer can prescribe exactly those two passes every time.",
+        "The second query\u2019s contents adapt to the results, while the control sequence remains fixed. That dependence alone does not make the workflow agentic. Chapter Twelve asks the separate question of who chooses the next action while a search runs."
+      ]
+    },
+    {
+      "id": "representation_boundary",
+      "title": "An added term can be a weight or rewritten text",
+      "source_anchor": "what-changed-and-when",
+      "visual": "representation_boundary",
+      "narration": [
+        "An LLM rewrite produces alternative retrieval text or a structured expression. SPLADE can instead assign weights to vocabulary dimensions, including terms absent from the original input. That weighted representation is a different form of retrieval input.",
+        "Both can be inspected, and either can be passed between components. Handoff between components is not what distinguishes them. Record whether you received rewritten language, a Boolean expression or active vocabulary weights, rather than calling all three the same expansion."
+      ]
+    },
+    {
+      "id": "transformation_record",
+      "title": "Record what changed, when, and where it went",
+      "source_anchor": "query-transformation",
+      "visual": "transformation_record",
+      "narration": [
+        "Keep the original request, the interpreted constraints, every transformed retrieval input, and the routes selected. If earlier results helped construct a later query, retain that intermediate ranking and the feedback decision too.",
+        "Correction, mapping, expansion, decomposition, routing and coordination can coexist in one prescribed workflow. The interface label natural language search reveals none of those choices. Inspect the generated inputs and test the candidate boundaries they create."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "understanding_hook_0",
+      "scene": "understanding_hook",
+      "text": "A system recognises a date in your request. Has it changed what retrieval receives? Has it selected a different search route? Those are three different questions. Pause and decide what recognising the date alone establishes.",
+      "gap": 1.0
+    },
+    {
+      "id": "understanding_hook_1",
+      "scene": "understanding_hook",
+      "text": "Understanding interprets the request and may leave retrieval input unchanged. Transformation creates changed or additional retrieval inputs. Retrieval control chooses where they go, which paths run, and whether another search happens.",
+      "gap": 2.5
+    },
+    {
+      "id": "visible_boolean_0",
+      "scene": "visible_boolean",
+      "text": "The chapter\u2019s Web of Science Smart Search example asks for apple, oranges and bananas, from twenty twenty to twenty twenty four, with affiliation from the University of California. The displayed interpretation separates a year range, an organisation and topic conditions.",
+      "gap": 1.0
+    },
+    {
+      "id": "visible_boolean_1",
+      "scene": "visible_boolean",
+      "text": "The structured query joins those conditions with AND, including a separate topic condition for each fruit. Inspect the visible, editable interpretation. An omitted concept or a misread relationship changes the eligible candidate set before ranking.",
+      "gap": 0.65
+    },
+    {
+      "id": "primo_distinction_0",
+      "scene": "primo_distinction",
+      "text": "Primo VE NDE Natural Language Search documents GPT four point one Mini identifying fields, generating a basic Boolean query, and adding six related OR connected permutations. Advanced Search receives an inspectable, editable structured expression.",
+      "gap": 1.0
+    },
+    {
+      "id": "primo_distinction_1",
+      "scene": "primo_distinction",
+      "text": "That is distinct from Primo Research Assistant\u2019s documented question to Boolean variations, CDI retrieval and embedding reranking pipeline. Do not transfer one feature\u2019s architecture to the other. Natural language input can still lead to Boolean conditions and lexical retrieval.",
+      "gap": 0.65
+    },
+    {
+      "id": "retrieval_feedback_0",
+      "scene": "retrieval_feedback",
+      "text": "Explicit retrieval feedback uses the searcher\u2019s judgements about accepted or rejected records to help construct another retrieval input. Pseudo relevance feedback asks the searcher for nothing: it assumes highly ranked records from an initial search are relevant.",
+      "gap": 1.0
+    },
+    {
+      "id": "retrieval_feedback_1",
+      "scene": "retrieval_feedback",
+      "text": "It selects useful looking terms from those results and constructs a second query. If the first ranking is off topic, the added terms can reinforce that mistake. The second pass may add candidates, but the relevance assumption was unverified.",
+      "gap": 0.65
+    },
+    {
+      "id": "screening_boundary_0",
+      "scene": "screening_boundary",
+      "text": "Active learning screening in systematic reviews also uses inclusion and exclusion judgements. But it repeatedly reprioritises the records already in an existing candidate pool. Those judgements do not inherently construct another retrieval pass or add records.",
+      "gap": 1.0
+    },
+    {
+      "id": "screening_boundary_1",
+      "scene": "screening_boundary",
+      "text": "Ask whether feedback changed the search sent to a collection, or changed the order of records awaiting screening. They address different candidate boundaries.",
+      "gap": 0.65
+    },
+    {
+      "id": "fixed_feedback_loop_0",
+      "scene": "fixed_feedback_loop",
+      "text": "Pseudo relevance feedback needs an initial ranking before it can build a later query. It is therefore a retrieval to transformation loop, not a step that happens entirely before searching. Yet a designer can prescribe exactly those two passes every time.",
+      "gap": 1.0
+    },
+    {
+      "id": "fixed_feedback_loop_1",
+      "scene": "fixed_feedback_loop",
+      "text": "The second query\u2019s contents adapt to the results, while the control sequence remains fixed. That dependence alone does not make the workflow agentic. Chapter Twelve asks the separate question of who chooses the next action while a search runs.",
+      "gap": 0.65
+    },
+    {
+      "id": "representation_boundary_0",
+      "scene": "representation_boundary",
+      "text": "An LLM rewrite produces alternative retrieval text or a structured expression. SPLADE can instead assign weights to vocabulary dimensions, including terms absent from the original input. That weighted representation is a different form of retrieval input.",
+      "gap": 1.0
+    },
+    {
+      "id": "representation_boundary_1",
+      "scene": "representation_boundary",
+      "text": "Both can be inspected, and either can be passed between components. Handoff between components is not what distinguishes them. Record whether you received rewritten language, a Boolean expression or active vocabulary weights, rather than calling all three the same expansion.",
+      "gap": 0.65
+    },
+    {
+      "id": "transformation_record_0",
+      "scene": "transformation_record",
+      "text": "Keep the original request, the interpreted constraints, every transformed retrieval input, and the routes selected. If earlier results helped construct a later query, retain that intermediate ranking and the feedback decision too.",
+      "gap": 1.0
+    },
+    {
+      "id": "transformation_record_1",
+      "scene": "transformation_record",
+      "text": "Correction, mapping, expansion, decomposition, routing and coordination can coexist in one prescribed workflow. The interface label natural language search reveals none of those choices. Inspect the generated inputs and test the candidate boundaries they create.",
+      "gap": 0.65
+    }
+  ]
+}

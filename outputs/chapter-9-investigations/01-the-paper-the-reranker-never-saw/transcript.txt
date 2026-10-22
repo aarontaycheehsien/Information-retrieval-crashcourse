@@ -1,0 +1,40 @@
+The paper the reranker never saw
+
+[00:00:00.700]: Imagine a paper that would be useful for your particular question. The first retrieval stage misses it. Now a much stronger model reranks the shortlist. Can that model put the missing paper first? Pause and predict what information it actually receives.
+
+[00:00:19.174]: It receives the shortlisted candidates. Reranking can change their order, but the absent paper is unavailable. Our invented cards illustrate a boundary inherited by later stages.
+
+[00:00:32.922]: Imagine millions of records. Applying an expensive query and document comparison to every record for every search would usually cost too much. Fast first stages retrieve a manageable set; later stages spend more computation on each survivor.
+
+[00:00:51.118]: The first stage balances speed and retaining potentially relevant records. Reranking aims to improve the ordering within its pool. A later answer generator inherits that candidate boundary too, unless another operation explicitly brings in additional evidence.
+
+[00:01:09.568]: A conventional bi encoder represents the query and passage independently. Passage vectors can be stored before any query arrives. Their interaction happens after each text has been compressed. A cross encoder instead processes the query and one candidate together.
+
+[00:01:28.742]: Attention can run across their tokens before producing a ranking score. That creates an opportunity to examine a qualifier, negation, entity or intent more closely. Cross encoder names an arrangement; the score still reflects training and the chosen relevance task.
+
+[00:01:48.619]: The chapter’s query asks: am I being delulu about getting this job? One candidate explains how to recognise unrealistic expectations during a job search. Another lists ten signs that you performed well in your job interview.
+
+[00:02:04.348]: Both concern job seeking and advice. For the stated need about unrealistic expectations, the first is the intended match; interview performance is the hard negative. Joint query and candidate processing exposes details that a pooled representation may blur.
+
+[00:02:23.724]: The cross encoder’s candidate representation depends on the incoming query, so it cannot be precomputed and reused in the same way. Reranking a hundred candidates requires roughly a hundred query and candidate evaluations, even when implementation batches the work.
+
+[00:02:41.856]: That count is not a measured latency estimate. Truncation can also hide decisive text. A richer scoring arrangement makes more evidence accessible; it does not establish objective or infallible relevance.
+
+[00:02:56.364]: An LLM can receive the query, candidate text and explicit criteria such as population, study design or whether a passage answers the question. Pointwise prompting judges each candidate separately. Pairwise prompting asks which of two candidates is more relevant.
+
+[00:03:15.342]: Listwise prompting presents several candidates together and requests an ordering. Larger lists may require windows or repeated partial rankings. Here these names describe prompting, rather than classical learning to rank training objectives.
+
+[00:03:32.539]: Each arrangement has failure modes. Separate scores may need calibration. Pairwise preferences can be inconsistent. Listwise outputs may depend on input order. Prompt wording, context limits, model updates and sampling settings can all affect an LLM reranker.
+
+[00:03:51.828]: A fluent explanation can help someone inspect a decision, but it is not evidence that the decision was correct. Evaluate the complete pipeline against the actual information need, including candidates that an earlier stage failed to supply.
+
+[00:04:07.949]: The chapter’s documented Semantic Scholar account from twenty twenty five uses Elasticsearch keyword retrieval over titles, abstracts and author names. Up to a thousand candidates then reach a LightGBM reranker using signals including title matches, citations and recency.
+
+[00:04:28.378]: That is machine learnt ranking after lexical retrieval. It establishes neither dense first stage retrieval nor an LLM reranker, and does not explain the precise later interface behaviour. Ask what produced the pool, what text the ranker saw, and how many candidates reached it.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 9.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#reranking-and-hybrid
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

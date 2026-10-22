@@ -1,0 +1,201 @@
+{
+  "series": "Embeddings: what the learnt geometry encodes",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#embeddings",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#embeddings",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-the-wrong-prediction-game",
+  "title": "The wrong prediction game",
+  "subtitle": "Why language knowledge alone does not specify a search ranking.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "training_hook",
+      "title": "Excellent at filling blanks. Good at search?",
+      "source_anchor": "what-bert-is-and-what-it-still-needs",
+      "visual": "training_hook",
+      "narration": [
+        "Suppose a model is excellent at recovering hidden words in medical papers. Would you expect it to be an excellent search engine for medical questions? It sounds plausible: it has learnt the vocabulary and can use the surrounding context.",
+        "But a prediction task rewards a particular relationship. Filling a gap in a sentence is not the same task as placing a separately encoded question near a useful answering passage. Start by examining what the model was trained to predict."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "cbow",
+      "title": "CBOW: predict the word from its neighbours",
+      "source_anchor": "shapes-of-the-blank-title",
+      "visual": "cbow",
+      "narration": [
+        "Use the chapter's sentence: The patient received heart treatment after the attack. In our C B O W illustration, hide heart. A local window gives the model patient, received, treatment and after. The target, taken from the original sentence, is heart.",
+        "The neighbouring words supply evidence on both sides. This row illustrates continuous bag of words. Skip-gram uses the opposite direction, predicting neighbouring words from the target word. Neither arrangement requires a person to label the sentence's meaning."
+      ]
+    },
+    {
+      "id": "masked",
+      "title": "Masked prediction: context on both sides",
+      "source_anchor": "shapes-of-the-blank-title",
+      "visual": "masked",
+      "narration": [
+        "Now hide treatment. A masked-language objective can use the words before and after that position to recover the missing token. BERT's pretraining chiefly uses this kind of bidirectional prediction to learn broad language patterns.",
+        "Our word boxes simplify a task that operates on model tokens. The answer comes from the text itself, which makes this self-supervised learning. The available context and the target define the prediction problem; self-attention is the mechanism that combines information."
+      ]
+    },
+    {
+      "id": "next_token",
+      "title": "Next-token prediction: the future is hidden",
+      "source_anchor": "shapes-of-the-blank-title",
+      "visual": "next_token",
+      "narration": [
+        "For next-token prediction, show only The patient received heart treatment. The next target is after. Everything to the right is unavailable to the model at that prediction step. Revealing the next token in the input would give away the answer.",
+        "GPT-style training uses preceding context this way. Historically, bidirectional encoders often started retrieval models and decoders often powered generation. That division has blurred. An architecture family alone does not establish a present-day model's task or role."
+      ]
+    },
+    {
+      "id": "three_training_jobs",
+      "title": "Language, domain, and retrieval are separate jobs",
+      "source_anchor": "what-bert-is-and-what-it-still-needs",
+      "visual": "three_training_jobs",
+      "narration": [
+        "Pretraining learns broad language patterns. Domain pretraining changes the material behind those patterns. Retrieval-oriented training rewards relationships useful for the search task, such as a question and a relevant passage.",
+        "That retrieval signal need not be a human relevance label. It can come from human judgments, behavior, weak labels, synthetic labels or self-supervised pairs. Ask what those examples and targets teach the model to preserve, and how well that transfers to the searches you care about."
+      ]
+    },
+    {
+      "id": "domain_models",
+      "title": "Knowing the domain does not specify the ranking",
+      "source_anchor": "what-bert-is-and-what-it-still-needs",
+      "visual": "domain_models",
+      "narration": [
+        "The chapter distinguishes three domain examples. BioBERT continues pretraining on biomedical literature. BiomedBERT starts with biomedical text and vocabulary. SciBERT learns from scientific literature. These choices change the language experience behind the representations.",
+        "They do not by themselves specify which query should rank near which passage. Generic BERT has no direct requirement from masked-word prediction to make those independent embeddings useful for retrieval. Sentence-BERT changes architecture and training to make complete-text representations useful for comparison."
+      ]
+    },
+    {
+      "id": "pipeline_roles",
+      "title": "The same model family can do different jobs",
+      "source_anchor": "what-bert-is-and-what-it-still-needs",
+      "visual": "pipeline_roles",
+      "narration": [
+        "A product can use a BERT-family model to interpret a query, to produce vectors for first-stage retrieval, or to compare records in an existing shortlist as a reranker. These positions expose the model to different inputs and give it different responsibilities.",
+        "A family name therefore leaves the pipeline open. Knowing that BERT appears somewhere does not tell you how the whole collection was searched, what candidates reached a later stage, or whether the model was trained for that particular retrieval task."
+      ]
+    },
+    {
+      "id": "two_questions",
+      "title": "Ask what it learnt\u2014and where it is used",
+      "source_anchor": "what-bert-is-and-what-it-still-needs",
+      "visual": "two_questions",
+      "narration": [
+        "Carry two questions out of Chapter Five. Was this model trained for retrieval, and what relationship did its targets reward? Where does it sit in the search pipeline? Contextualisation, domain knowledge and useful retrieval are related, but distinct.",
+        "The vectors are calculated. Their geometry is shaped by training. Whether that geometry helps a searcher must be tested. Chapter Six asks what one vector should represent and how training can make comparisons between queries and documents useful."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "training_hook_0",
+      "scene": "training_hook",
+      "text": "Suppose a model is excellent at recovering hidden words in medical papers. Would you expect it to be an excellent search engine for medical questions? It sounds plausible: it has learnt the vocabulary and can use the surrounding context.",
+      "gap": 1.0
+    },
+    {
+      "id": "training_hook_1",
+      "scene": "training_hook",
+      "text": "But a prediction task rewards a particular relationship. Filling a gap in a sentence is not the same task as placing a separately encoded question near a useful answering passage. Start by examining what the model was trained to predict.",
+      "gap": 2.5
+    },
+    {
+      "id": "cbow_0",
+      "scene": "cbow",
+      "text": "Use the chapter's sentence: The patient received heart treatment after the attack. In our C B O W illustration, hide heart. A local window gives the model patient, received, treatment and after. The target, taken from the original sentence, is heart.",
+      "gap": 1.0
+    },
+    {
+      "id": "cbow_1",
+      "scene": "cbow",
+      "text": "The neighbouring words supply evidence on both sides. This row illustrates continuous bag of words. Skip-gram uses the opposite direction, predicting neighbouring words from the target word. Neither arrangement requires a person to label the sentence's meaning.",
+      "gap": 0.65
+    },
+    {
+      "id": "masked_0",
+      "scene": "masked",
+      "text": "Now hide treatment. A masked-language objective can use the words before and after that position to recover the missing token. BERT's pretraining chiefly uses this kind of bidirectional prediction to learn broad language patterns.",
+      "gap": 1.0
+    },
+    {
+      "id": "masked_1",
+      "scene": "masked",
+      "text": "Our word boxes simplify a task that operates on model tokens. The answer comes from the text itself, which makes this self-supervised learning. The available context and the target define the prediction problem; self-attention is the mechanism that combines information.",
+      "gap": 0.65
+    },
+    {
+      "id": "next_token_0",
+      "scene": "next_token",
+      "text": "For next-token prediction, show only The patient received heart treatment. The next target is after. Everything to the right is unavailable to the model at that prediction step. Revealing the next token in the input would give away the answer.",
+      "gap": 1.0
+    },
+    {
+      "id": "next_token_1",
+      "scene": "next_token",
+      "text": "GPT-style training uses preceding context this way. Historically, bidirectional encoders often started retrieval models and decoders often powered generation. That division has blurred. An architecture family alone does not establish a present-day model's task or role.",
+      "gap": 0.65
+    },
+    {
+      "id": "three_training_jobs_0",
+      "scene": "three_training_jobs",
+      "text": "Pretraining learns broad language patterns. Domain pretraining changes the material behind those patterns. Retrieval-oriented training rewards relationships useful for the search task, such as a question and a relevant passage.",
+      "gap": 1.0
+    },
+    {
+      "id": "three_training_jobs_1",
+      "scene": "three_training_jobs",
+      "text": "That retrieval signal need not be a human relevance label. It can come from human judgments, behavior, weak labels, synthetic labels or self-supervised pairs. Ask what those examples and targets teach the model to preserve, and how well that transfers to the searches you care about.",
+      "gap": 0.65
+    },
+    {
+      "id": "domain_models_0",
+      "scene": "domain_models",
+      "text": "The chapter distinguishes three domain examples. BioBERT continues pretraining on biomedical literature. BiomedBERT starts with biomedical text and vocabulary. SciBERT learns from scientific literature. These choices change the language experience behind the representations.",
+      "gap": 1.0
+    },
+    {
+      "id": "domain_models_1",
+      "scene": "domain_models",
+      "text": "They do not by themselves specify which query should rank near which passage. Generic BERT has no direct requirement from masked-word prediction to make those independent embeddings useful for retrieval. Sentence-BERT changes architecture and training to make complete-text representations useful for comparison.",
+      "gap": 0.65
+    },
+    {
+      "id": "pipeline_roles_0",
+      "scene": "pipeline_roles",
+      "text": "A product can use a BERT-family model to interpret a query, to produce vectors for first-stage retrieval, or to compare records in an existing shortlist as a reranker. These positions expose the model to different inputs and give it different responsibilities.",
+      "gap": 1.0
+    },
+    {
+      "id": "pipeline_roles_1",
+      "scene": "pipeline_roles",
+      "text": "A family name therefore leaves the pipeline open. Knowing that BERT appears somewhere does not tell you how the whole collection was searched, what candidates reached a later stage, or whether the model was trained for that particular retrieval task.",
+      "gap": 0.65
+    },
+    {
+      "id": "two_questions_0",
+      "scene": "two_questions",
+      "text": "Carry two questions out of Chapter Five. Was this model trained for retrieval, and what relationship did its targets reward? Where does it sit in the search pipeline? Contextualisation, domain knowledge and useful retrieval are related, but distinct.",
+      "gap": 1.0
+    },
+    {
+      "id": "two_questions_1",
+      "scene": "two_questions",
+      "text": "The vectors are calculated. Their geometry is shaped by training. Whether that geometry helps a searcher must be tested. Chapter Six asks what one vector should represent and how training can make comparisons between queries and documents useful.",
+      "gap": 0.65
+    }
+  ]
+}

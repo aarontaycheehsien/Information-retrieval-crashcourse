@@ -1,0 +1,282 @@
+{
+  "series": "Diagnosing retrieval failure",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#diagnosing-failure",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#diagnosing-failure",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-where-did-the-paper-go",
+      "title": "Where did the paper go?",
+      "subtitle": "The same missing result can point to different stages.",
+      "accent": "blue",
+      "scenes": [
+        {
+          "id": "missing_hook",
+          "title": "One missing paper. Several possible boundaries.",
+          "source_anchor": "missing-paper-boundaries-title",
+          "visual": "missing_hook",
+          "narration": [
+            "A paper you know is relevant is missing from the results. Did the search misunderstand your words? Before adding a synonym or replacing the model, pause. The same screen could hide several different failures. What evidence would distinguish them?",
+            "The chapter gives four alternative explanations: outside the collection, excluded by a filter, absent from the candidate pool, or retrieved but below the display boundary. Our diagrams show possible paths for the same hypothetical paper, not a traced search."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "eligibility_first",
+          "title": "First establish whether the paper could have been returned",
+          "source_anchor": "could-the-record-have-been-returned",
+          "visual": "eligibility_first",
+          "narration": [
+            "Start with eligibility. Was the source covered, and had indexing caught up? Did a date condition, format facet or access filter exclude the record? A paper outside the searchable collection or eligible set was never in play. Vocabulary expansion cannot recover it through that unchanged boundary.",
+            "Inspect coverage, limits and the record\u2019s metadata. Some evidence is visible; some needs documentation. Record what remains unknown. An unavailable internal trace is not proof that the record was excluded."
+          ]
+        },
+        {
+          "id": "pool_or_display",
+          "title": "Absent from the pool and hidden after it need different checks",
+          "source_anchor": "missing-paper-boundaries-title",
+          "visual": "pool_or_display",
+          "narration": [
+            "Now separate the candidate pool from the displayed results. An eligible paper can fail to enter the first stage shortlist. Investigate the query, indexed evidence, retrieval method and candidate cutoff. A later reranker cannot assess a paper it never received.",
+            "A different paper may reach the pool and then fall below a later ranking or presentation limit. That is matched but hidden. Filter order and cutoff order can also change which records survive. A failed lookup alone does not identify the responsible boundary."
+          ]
+        },
+        {
+          "id": "units_and_excerpts",
+          "title": "The indexed evidence may differ from the visible excerpt",
+          "source_anchor": "could-the-record-have-been-returned",
+          "visual": "units_and_excerpts",
+          "narration": [
+            "Check the indexed unit too. If the system ranks passages, a relevant claim split across two passages may leave neither unit with enough evidence. The whole document can contain the answer while each searchable unit carries only part of it.",
+            "And a typed word missing from the visible excerpt is a different question from a missing record. A match may occur in another indexed field or version. Revisit analysis and matching explanations before deciding what the interface has proved."
+          ]
+        },
+        {
+          "id": "four_lenses",
+          "title": "Four lenses ask different kinds of question",
+          "source_anchor": "four-diagnostic-lenses",
+          "visual": "four_lenses",
+          "narration": [
+            "Once eligibility is established, the chapter offers four diagnostic lenses. Vocabulary mismatch compares a query\u2019s language with a relevant record. Out of vocabulary is relative to a named vocabulary. Out of distribution compares training with deployment. Composition asks whether matching preserved the required relationship.",
+            "These are prompts for investigation, not exhaustive or mutually exclusive boxes. A specialised identifier can be poorly represented inside an unfamiliar corpus. One paper can support several hypotheses, which require different evidence and different remedies."
+          ]
+        },
+        {
+          "id": "heart_bridge",
+          "title": "Different words can express a sufficiently related concept",
+          "source_anchor": "vocabulary-mismatch",
+          "visual": "heart_bridge",
+          "narration": [
+            "The source example searches for heart attack recovery, while the relevant title is Rehabilitation after myocardial infarction. That visible relationship is vocabulary mismatch. Neither expression is necessarily absent from the index or model vocabulary. Different wording alone does not establish out of vocabulary.",
+            "Librarians already build bridges with synonyms, controlled vocabulary, spelling variants, citation searching and iterative reformulation. Boolean OR can make an alternative term explicit. Query transformation can add a bridge automatically, but the generated input still needs checking."
+          ]
+        },
+        {
+          "id": "retrieval_bridges",
+          "title": "BM25 and dense retrieval offer different bridges",
+          "source_anchor": "vocabulary-mismatch",
+          "visual": "retrieval_bridges",
+          "narration": [
+            "BM twenty five changes ranking, not term identity. It can use partial lexical overlap, and analysis may connect morphological variants. Its formula does not itself make heart attack synonymous with myocardial infarction. Do not credit the scoring rule for an expansion performed elsewhere.",
+            "A suitably trained dense retriever may connect the complete query and document without exact overlap. That is a newer response to an old problem, not a guarantee for every paraphrase. Compare the suspected bridge against known relevant records; hybrid retrieval is another remedy to test."
+          ]
+        },
+        {
+          "id": "diagnostic_record",
+          "title": "A result screen supplies symptoms, not causes",
+          "source_anchor": "diagnose-before-choosing-a-remedy",
+          "visual": "diagnostic_record",
+          "narration": [
+            "Preserve the original query, known relevant record, visible limits, indexed-unit information and any available trace. Separate what you observed from what you inferred. Then choose an intervention that could test the suspected loss of evidence.",
+            "For a vocabulary mismatch, try an explicit synonym or controlled term and check the outcome. For an unknown candidate boundary, seek documentation or a trace first. Diagnosis accumulates evidence. The next film asks why encoding a word still does not establish that search can use it."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-it-can-spell-it-can-it-find-it",
+      "title": "It can spell it. Can it find it?",
+      "subtitle": "Encoding a string does not establish useful retrieval evidence.",
+      "accent": "teal",
+      "scenes": [
+        {
+          "id": "encodable_hook",
+          "title": "The identifier is visible. Why is the result missing?",
+          "source_anchor": "out-of-vocabulary",
+          "visual": "encodable_hook",
+          "narration": [
+            "A chemical identifier is plainly printed in a record, and a model can encode every piece of it. Searching still fails. Has that ruled out a representation problem? Pause and name the separate components between the string you see and the evidence a retriever can use.",
+            "Out of vocabulary only means something relative to a named vocabulary. The index may lack a corresponding analysed term. A tokeniser may lack a complete word entry. Or every token may exist while the retriever\u2019s representation remains poor. Those are different conditions."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "three_questions",
+          "title": "Out of whose vocabulary?",
+          "source_anchor": "tbl-13-2",
+          "visual": "three_questions",
+          "narration": [
+            "Ask three questions separately. Is there a corresponding term and posting list in the lexical index? Can the model tokeniser encode the string? Has the retrieval model learnt a useful representation of those pieces in context?",
+            "The first two concern literal vocabularies. The third concerns representation or training exposure. A tokeniser passing its question does not answer the other two. Inspect the field, lexical analysis, model tokenisation and retrieval behaviour as separate layers."
+          ]
+        },
+        {
+          "id": "word_and_subword",
+          "title": "A reader\u2019s decomposition need not be the model\u2019s",
+          "source_anchor": "out-of-vocabulary",
+          "visual": "word_and_subword",
+          "narration": [
+            "An older word level model may have no complete entry for a new word. A subword model can instead encode known pieces. That often avoids literal whole word absence, while making no promise about how informative the resulting representation will be.",
+            "The chapter\u2019s appendix reports Bert splitting rizzlord into the three pieces shown here, rather than a neat rizz plus lord. That is a reported tokenisation example, not a tokeniser run for this film. Another model may split exactly the same string differently."
+          ]
+        },
+        {
+          "id": "bytes_are_not_meaning",
+          "title": "Encoding coverage and useful meaning are separate properties",
+          "source_anchor": "out-of-vocabulary",
+          "visual": "bytes_are_not_meaning",
+          "narration": [
+            "A pure byte level model can encode valid UTF eight input. A character level model depends on its supported character inventory or fallback. Either can represent an expression\u2019s form without having learnt how people use it for this retrieval task.",
+            "So tokenisable does not mean understood, and understood in some language task does not establish good retrieval. The source\u2019s new expressions illustrate why naming the representation matters. Avoid calling every weak response out of vocabulary when no literal vocabulary entry is missing."
+          ]
+        },
+        {
+          "id": "exact_identity",
+          "title": "Exact identity can be preserved without semantic training",
+          "source_anchor": "out-of-vocabulary",
+          "visual": "exact_identity",
+          "narration": [
+            "Now reverse the problem. The source supposes an identifier, delulu four twenty seven, occurs in three indexed documents. Our invented keyword field example stores that exact string in three records and a neighbouring identifier in a fourth. Literal equality selects the three intended identities.",
+            "That calculation demonstrates exact field identity only. An ordinary text analyser might split the string into word and numeric components. Query and document analysis must agree. BM twenty five can weight rare matching components without previously encountering the identifier during model training."
+          ]
+        },
+        {
+          "id": "pooled_identity",
+          "title": "A pooled representation can blur a decisive distinction",
+          "source_anchor": "out-of-vocabulary",
+          "visual": "pooled_identity",
+          "narration": [
+            "A standard single vector dense retriever usually can encode the identifier as model tokens. Contextualisation and pooling may still blur it with related strings or concepts. A small local difference can determine relevance even when the overall meanings look similar.",
+            "The chapter cites research showing that better training can mitigate this weakness. It does not claim dense retrieval always fails on identifiers. Our neighbouring strings are a teaching contrast, not measured vectors, model scores or a reported ranking."
+          ]
+        },
+        {
+          "id": "preserve_a_route",
+          "title": "When exact identity determines relevance, keep a lexical route",
+          "source_anchor": "out-of-vocabulary",
+          "visual": "preserve_a_route",
+          "narration": [
+            "Gene names, chemical strings, dataset titles, model names, article identifiers, personal names and new terminology can all make exact identity important. Preserve a suitable lexical route and inspect fields and analysis. Do not assume an embedding alone preserves the distinction.",
+            "A synonym or controlled term may work around some lexical absence, while a keyword field may preserve an exact identifier. Neither remedy by itself fixes an unfamiliar deployment task or a failure to preserve negation. Choose the remedy for the component that lost the evidence."
+          ]
+        },
+        {
+          "id": "layered_evidence",
+          "title": "Test the layers before choosing the repair",
+          "source_anchor": "diagnose-before-choosing-a-remedy",
+          "visual": "layered_evidence",
+          "narration": [
+            "Use a known relevant record and a controlled contrast. Record the literal input, field selected, available analysis information and model tokenisation if documented. Establish eligibility first, then compare what each layer preserves. Mark internal details unknown when the system does not expose them.",
+            "A good diagnosis can combine lexical absence, weak representation and unfamiliar deployment conditions. Tokenisation gives evidence about encoding, not a complete cause of retrieval failure. The next film considers failures where every word is familiar and the missing information is a relationship."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-every-word-was-there",
+      "title": "Every word was there",
+      "subtitle": "Familiar vocabulary can still hide transfer and relation failures.",
+      "accent": "red",
+      "scenes": [
+        {
+          "id": "relation_hook",
+          "title": "A causes B is different from B causes A",
+          "source_anchor": "composition-failure",
+          "visual": "relation_hook",
+          "narration": [
+            "A query asks whether A causes B. Two candidate passages contain exactly the same words: A causes B, and B causes A. Would counting matching terms distinguish them? Pause and identify what information determines relevance.",
+            "The word inventory is identical; direction differs. A missing relationship is not automatically a missing vocabulary entry. Negation, causal direction and the binding of two concepts can fail even when lexical overlap is complete and the query is familiar."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "shift_sites",
+          "title": "Training and deployment can reward different relationships",
+          "source_anchor": "out-of-distribution",
+          "visual": "shift_sites",
+          "narration": [
+            "Another failure appears across settings. A retriever works plausibly on ordinary web questions but poorly on biomedical papers or high recall evidence searches. Investigate out of distribution transfer: deployment may differ from the retrieval conditions represented during training.",
+            "The chapter identifies three useful sites: query shift in style or intent; corpus or domain shift in discipline, genre, language or time; and task or relevance shift in the relationship that should rank. Every word can be familiar while the rewarded retrieval behaviour is wrong for the task."
+          ]
+        },
+        {
+          "id": "training_relevance",
+          "title": "The learnt operational meaning of relevance may not travel",
+          "source_anchor": "out-of-distribution",
+          "visual": "training_relevance",
+          "narration": [
+            "Training pairs, negatives and relevance judgements teach what should rank together. Finding one answer bearing web passage rewards something different from recovering all studies meeting review criteria, finding a known item or discovering citations. More synonyms do not repair that difference by themselves.",
+            "Conversely, one new discipline can combine distribution shift, specialised vocabulary and mismatched terminology. These hypotheses can overlap. Out of distribution is a training to deployment relationship, not a synonym for a strange word or an unexplained bad result."
+          ]
+        },
+        {
+          "id": "local_comparison",
+          "title": "A single poor result cannot prove distribution shift",
+          "source_anchor": "out-of-distribution",
+          "visual": "local_comparison",
+          "narration": [
+            "The hypothesis becomes stronger when plausible performance on familiar queries degrades systematically for a discipline, collection, query style or purpose. Compare locally using known relevance evidence before adapting, retraining or replacing a model. Undisclosed training data limits what can be concluded.",
+            "The chapter cites BEIR\u2019s heterogeneous zero shot evaluation: BM twenty five was a robust baseline, while some more expensive neural and reranking approaches performed better on average. That benchmark finding is not a universal law about lexical or dense transfer, nor a new comparison run here."
+          ]
+        },
+        {
+          "id": "logic_and_proximity",
+          "title": "Explicit term logic does not automatically bind a proposition",
+          "source_anchor": "composition-failure",
+          "visual": "logic_and_proximity",
+          "narration": [
+            "Now return to the relation problem. Boolean logic preserves the explicit inclusion and exclusion you state over analysed terms. Ordinary conjunction still does not encode who caused what. Simply excluding a word is different from correctly interpreting the scope of a negated proposition.",
+            "Phrase operators, positional indexes and proximity can preserve adjacency and local order. They are useful controls to test, but adjacency alone does not solve causality, negation or relation binding. Our opposite statements are controlled text contrasts, not predictions of any particular system\u2019s scores."
+          ]
+        },
+        {
+          "id": "interaction_limits",
+          "title": "Joint interaction creates an opportunity, not a guarantee",
+          "source_anchor": "composition-failure",
+          "visual": "interaction_limits",
+          "narration": [
+            "A cross encoder reads query and candidate together, offering the strongest architectural opportunity to model these relationships. Late interaction preserves more token evidence than a pooled vector, but still encodes the query and document separately. Neither architecture guarantees correct logic.",
+            "The cited NevIR evaluation found cross encoders strongest and late interaction next, yet most evaluated systems still ranked at or below a random baseline. Keep that qualification. And no reranker can rescue a paper absent from its first stage shortlist."
+          ]
+        },
+        {
+          "id": "preservation_patterns",
+          "title": "Ask what each first stage preserves",
+          "source_anchor": "tbl-13-3",
+          "visual": "preservation_patterns",
+          "narration": [
+            "The chapter contrasts three reference patterns. Strict Boolean preserves explicit logic over analysed terms. BM twenty five preserves lexical evidence, especially rare matching terms. Single vector dense retrieval preserves overall learnt similarity. Each has characteristic strengths and blind spots.",
+            "This is not an exhaustive list: learnt sparse and late interaction methods can also retrieve first stage candidates. Transformation changes inputs, control selects operations, and rerankers compare shortlists. A product saying it uses vectors does not tell you which evidence its full pipeline preserves."
+          ]
+        },
+        {
+          "id": "hypothesis_to_test",
+          "title": "Choose the next test from the suspected loss of evidence",
+          "source_anchor": "diagnose-before-choosing-a-remedy",
+          "visual": "hypothesis_to_test",
+          "narration": [
+            "Begin with a known relevant record or controlled contrast and establish that it could have been returned. Then inspect terminology, component vocabularies, training transfer and relationships. Save the available evidence and mark unknowns. Several failures can coexist.",
+            "Test a remedy against the suspected cause: expansion, an exact lexical route, local adaptation, explicit logic, reranking or a combined system. No representation preserves everything equally well. Diagnosis supplies hypotheses. Chapter fourteen asks how to compare them and decide what better retrieval means for the task."
+          ]
+        }
+      ]
+    }
+  ]
+}

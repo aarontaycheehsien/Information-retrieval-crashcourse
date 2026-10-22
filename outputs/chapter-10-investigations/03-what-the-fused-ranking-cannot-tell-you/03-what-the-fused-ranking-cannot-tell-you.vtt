@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.841
+Imagine one score list where first place
+
+00:00:02.861 --> 00:00:05.058
+barely beats second, and another where
+
+00:00:05.078 --> 00:00:07.570
+first place wins by a huge margin.
+
+00:00:07.745 --> 00:00:10.753
+Both order the records A, B, C.
+
+00:00:10.915 --> 00:00:13.692
+Would reciprocal rank fusion notice how
+
+00:00:13.712 --> 00:00:15.238
+different those gaps were?
+
+00:00:15.413 --> 00:00:16.591
+Pause and predict.
+
+00:00:18.998 --> 00:00:20.999
+It would not. Once the scores become
+
+00:00:21.019 --> 00:00:23.396
+ranks, those gaps disappear from the
+
+00:00:23.416 --> 00:00:26.463
+fusion input. Our score sets are invented
+
+00:00:26.483 --> 00:00:29.955
+illustrations. RRF preserves position and
+
+00:00:29.975 --> 00:00:32.520
+record identity, not the strength of the
+
+00:00:32.540 --> 00:00:34.607
+original numerical separation.
+
+00:00:35.533 --> 00:00:37.488
+The constant changes how much a high
+
+00:00:37.508 --> 00:00:38.905
+position is worth.
+
+00:00:39.067 --> 00:00:41.019
+With constant zero, first place
+
+00:00:41.039 --> 00:00:43.957
+contributes one and third contributes one
+
+00:00:43.977 --> 00:00:46.470
+third. With constant sixty, the
+
+00:00:46.490 --> 00:00:49.266
+contributions are one over sixty one and
+
+00:00:49.286 --> 00:00:52.410
+one over sixty three: much closer.
+
+00:00:52.931 --> 00:00:55.025
+This changes the balance between very high
+
+00:00:55.045 --> 00:00:57.924
+positions and agreement across lists.
+
+00:00:58.086 --> 00:01:00.373
+That baseline constant can be tuned for a
+
+00:01:00.393 --> 00:01:01.506
+different task.
+
+00:01:01.668 --> 00:01:03.929
+It does not set the number of retrieved or
+
+00:01:03.949 --> 00:01:05.321
+displayed records.
+
+00:01:06.226 --> 00:01:08.602
+Cut each supplied list from three records
+
+00:01:08.622 --> 00:01:12.648
+to two. The lexical list becomes A, B; the
+
+00:01:12.668 --> 00:01:15.457
+dense list becomes C, A.
+
+00:01:15.774 --> 00:01:17.777
+C loses its lexical third place
+
+00:01:17.797 --> 00:01:20.123
+contribution, while D disappears from the
+
+00:01:20.143 --> 00:01:22.764
+supplied candidate pool altogether.
+
+00:01:23.300 --> 00:01:25.194
+That is different from fusing the original
+
+00:01:25.214 --> 00:01:28.686
+four identities and displaying just A and
+
+00:01:28.706 --> 00:01:31.805
+C. In the latter case, B and D had fused
+
+00:01:31.825 --> 00:01:34.833
+scores but fell below the output boundary.
+
+00:01:35.008 --> 00:01:37.964
+Input cutoffs change what fusion receives.
+
+00:01:38.864 --> 00:01:41.905
+The baseline gives every supplied list
+
+00:01:41.925 --> 00:01:44.082
+equal weight. An implementation can
+
+00:01:44.102 --> 00:01:47.240
+instead multiply each list’s contributions
+
+00:01:47.260 --> 00:01:48.708
+by an explicit weight.
+
+00:01:48.845 --> 00:01:50.435
+In a declared extension of the same
+
+00:01:50.455 --> 00:01:53.683
+example, give dense contributions twice
+
+00:01:53.703 --> 00:01:56.234
+the weight of lexical contributions.
+
+00:01:56.787 --> 00:01:58.986
+C then narrowly overtakes A.
+
+00:01:59.148 --> 00:02:01.924
+The arithmetic is reproducible, but the
+
+00:02:01.944 --> 00:02:04.064
+weighting choice is not a quality
+
+00:02:04.084 --> 00:02:05.120
+recommendation.
+
+00:02:05.269 --> 00:02:07.028
+The hybrid label leaves those weighting
+
+00:02:07.048 --> 00:02:09.115
+choices unspecified.
+
+00:02:10.029 --> 00:02:12.326
+The chapter describes Web of Science Smart
+
+00:02:12.346 --> 00:02:14.955
+Search document search combining a Boolean
+
+00:02:14.975 --> 00:02:18.008
+keyword path and a semantic vector path.
+
+00:02:18.183 --> 00:02:20.534
+A parser first structures the query;
+
+00:02:20.658 --> 00:02:22.764
+combining the retrieval paths makes it
+
+00:02:22.784 --> 00:02:23.524
+hybrid.
+
+00:02:24.089 --> 00:02:27.149
+Scopus AI can choose lexical retrieval,
+
+00:02:27.311 --> 00:02:30.087
+vector retrieval, or both per question.
+
+00:02:30.262 --> 00:02:33.168
+A one path run combines nothing under the
+
+00:02:33.188 --> 00:02:34.275
+book’s definition.
+
+00:02:34.463 --> 00:02:37.072
+When both paths run, their results still
+
+00:02:37.092 --> 00:02:38.721
+need a fusion rule.
+
+00:02:38.871 --> 00:02:41.144
+These are pinned documentation accounts,
+
+00:02:41.164 --> 00:02:42.871
+not new service tests.
+
+00:02:43.773 --> 00:02:45.956
+With a blend, the prescribed evidence
+
+00:02:45.976 --> 00:02:48.456
+sources give the explanation a fixed
+
+00:02:48.476 --> 00:02:50.969
+shape. With routing, the answer to was
+
+00:02:50.989 --> 00:02:53.830
+this lexical or vector search can change
+
+00:02:53.850 --> 00:02:55.247
+from query to query.
+
+00:02:55.409 --> 00:02:57.413
+Expose the routing choice before
+
+00:02:57.433 --> 00:02:58.662
+explaining a result.
+
+00:02:59.222 --> 00:03:01.864
+A rule, classifier or model can choose
+
+00:03:01.884 --> 00:03:04.943
+routes. Routing alone does not establish
+
+00:03:04.963 --> 00:03:08.913
+agency. Nor does naming RRF identify the
+
+00:03:08.933 --> 00:03:11.413
+candidate architecture: the same fusion
+
+00:03:11.433 --> 00:03:13.603
+formula can combine lists produced by
+
+00:03:13.623 --> 00:03:14.878
+other arrangements.
+
+00:03:15.774 --> 00:03:18.744
+Elsevier’s twenty twenty four Scopus AI
+
+00:03:18.764 --> 00:03:21.747
+RAG Fusion account describes generated
+
+00:03:21.767 --> 00:03:23.151
+query variants.
+
+00:03:23.326 --> 00:03:26.450
+Vector retrieval runs for each variant,
+
+00:03:26.638 --> 00:03:29.208
+and reciprocal rank fusion merges their
+
+00:03:29.228 --> 00:03:31.889
+result lists before top results support a
+
+00:03:31.909 --> 00:03:34.672
+summary with references for claims.
+
+00:03:35.198 --> 00:03:37.292
+This account concerns multiple variant
+
+00:03:37.312 --> 00:03:40.101
+lists, rather than lexical and dense lists
+
+00:03:40.121 --> 00:03:42.807
+for one query. Its presence establishes
+
+00:03:42.827 --> 00:03:45.410
+neither different retrieval methods nor a
+
+00:03:45.430 --> 00:03:47.665
+later version’s route choices.
+
+00:03:48.577 --> 00:03:51.996
+Use RRF as a baseline and compare it with
+
+00:03:52.016 --> 00:03:53.606
+the individual retrievers on
+
+00:03:53.626 --> 00:03:55.075
+representative queries.
+
+00:03:55.250 --> 00:03:57.859
+Document the routes, candidate depths,
+
+00:03:57.879 --> 00:04:00.526
+duplicate identity handling, constant,
+
+00:04:00.572 --> 00:04:03.477
+weights, output cutoff and any later
+
+00:04:03.497 --> 00:04:07.305
+reranker. Evaluate the actual task, rather
+
+00:04:07.325 --> 00:04:08.554
+than the hybrid label.
+
+00:04:09.088 --> 00:04:11.087
+The result depends on which evidence
+
+00:04:11.107 --> 00:04:13.393
+survives each choice.
+
+00:04:13.556 --> 00:04:16.383
+Rank fusion avoids incompatible score
+
+00:04:16.403 --> 00:04:19.476
+scales by discarding score gaps; routing
+
+00:04:19.496 --> 00:04:21.885
+decides which lists can contribute at all.
+
+00:04:22.061 --> 00:04:23.780
+Chapter Eleven follows query
+
+00:04:23.800 --> 00:04:26.860
+interpretation, transformation and routing
+
+00:04:26.880 --> 00:04:28.097
+in more detail.

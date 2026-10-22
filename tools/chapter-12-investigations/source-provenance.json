@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "agentic-search",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "c55489da84d480c748460fddb9d51aeca987b56b0fb69b58e1206fc9e67a073a",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 12: Agentic search; source control/output categories, dated task probes and selected catalogue-recovery examples, declared set and trajectory illustrations"
+}

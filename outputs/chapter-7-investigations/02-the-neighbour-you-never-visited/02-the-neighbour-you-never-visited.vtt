@@ -1,0 +1,283 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.820
+Two searches each return three results.
+
+00:00:03.995 --> 00:00:06.358
+One examined every stored vector.
+
+00:00:06.508 --> 00:00:08.111
+The other took a shortcut and missed a
+
+00:00:08.131 --> 00:00:09.528
+closer candidate.
+
+00:00:09.704 --> 00:00:11.552
+Could you tell which search ran just by
+
+00:00:11.572 --> 00:00:13.175
+counting the results on screen?
+
+00:00:13.351 --> 00:00:14.348
+Make a prediction.
+
+00:00:16.757 --> 00:00:19.346
+The output count does not reveal the work
+
+00:00:19.366 --> 00:00:20.879
+or the guarantee behind it.
+
+00:00:21.042 --> 00:00:23.277
+We need to separate the comparison rule,
+
+00:00:23.297 --> 00:00:25.339
+the search procedure, and the number of
+
+00:00:25.359 --> 00:00:26.562
+leaders requested.
+
+00:00:27.471 --> 00:00:29.643
+An inverted index can jump from an
+
+00:00:29.663 --> 00:00:32.272
+analysed term to documents containing it.
+
+00:00:32.421 --> 00:00:34.837
+A dense vector has no equivalent posting
+
+00:00:34.857 --> 00:00:37.156
+list for all passages expressing a
+
+00:00:37.176 --> 00:00:39.824
+meaning. Its dimensions do not directly
+
+00:00:39.844 --> 00:00:42.581
+correspond to recognisable words, and a
+
+00:00:42.601 --> 00:00:45.777
+useful passage need not share query terms.
+
+00:00:46.312 --> 00:00:49.527
+The exact baseline is flat vector search:
+
+00:00:49.547 --> 00:00:51.332
+compare the query with every stored
+
+00:00:51.352 --> 00:00:53.870
+vector. Its work grows with collection
+
+00:00:53.890 --> 00:00:55.957
+size and dimensionality.
+
+00:00:56.120 --> 00:00:58.509
+It can construct a complete ranking or
+
+00:00:58.529 --> 00:01:00.545
+retain only the leaders.
+
+00:01:01.447 --> 00:01:03.895
+Use the chapter's six points and put the
+
+00:01:03.915 --> 00:01:05.608
+query at zero, zero.
+
+00:01:05.783 --> 00:01:08.714
+This example uses Euclidean distance, not
+
+00:01:08.734 --> 00:01:10.853
+the cosine rule from the first film.
+
+00:01:11.015 --> 00:01:12.734
+Smaller distance wins.
+
+00:01:12.897 --> 00:01:15.544
+Exhaustive search examines A through F and
+
+00:01:15.564 --> 00:01:18.508
+returns A, B and C.
+
+00:01:19.075 --> 00:01:22.870
+A is one unit away, B two, and C about two
+
+00:01:22.890 --> 00:01:23.952
+point eight three.
+
+00:01:24.127 --> 00:01:26.633
+D is about three point one six away.
+
+00:01:26.795 --> 00:01:29.507
+Exact here means exact under the chosen
+
+00:01:29.527 --> 00:01:30.692
+comparison rule.
+
+00:01:30.867 --> 00:01:32.857
+It does not guarantee that those nearest
+
+00:01:32.877 --> 00:01:35.602
+points represent relevant passages.
+
+00:01:36.508 --> 00:01:39.579
+Now stipulate a run that examines only A,
+
+00:01:39.625 --> 00:01:44.759
+B, D and F. It returns A, B and D.
+
+00:01:45.076 --> 00:01:47.350
+C was closer than D, but was never
+
+00:01:47.370 --> 00:01:49.876
+examined. Both runs still requested the
+
+00:01:49.896 --> 00:01:51.267
+same top three.
+
+00:01:51.838 --> 00:01:53.646
+Approximate nearest-neighbour structures
+
+00:01:53.666 --> 00:01:56.687
+reduce search work by exploring selected
+
+00:01:56.707 --> 00:01:58.555
+regions or neighbours.
+
+00:01:58.731 --> 00:02:01.068
+They may miss a true nearest neighbour.
+
+00:02:01.243 --> 00:02:03.156
+This small example illustrates one
+
+00:02:03.176 --> 00:02:06.997
+possible miss, not a measured system, an H
+
+00:02:07.017 --> 00:02:09.806
+N S W simulation, or a claim that
+
+00:02:09.826 --> 00:02:12.151
+approximate search always misses.
+
+00:02:13.047 --> 00:02:16.399
+H N S W is one widely used approximate
+
+00:02:16.419 --> 00:02:19.092
+approach. It organises vectors as a
+
+00:02:19.112 --> 00:02:21.939
+navigable graph with multiple layers.
+
+00:02:22.115 --> 00:02:24.015
+Connections help a search explore
+
+00:02:24.035 --> 00:02:26.631
+promising neighbours instead of comparing
+
+00:02:26.651 --> 00:02:27.803
+every vector.
+
+00:02:28.347 --> 00:02:30.146
+Our graph is schematic.
+
+00:02:30.321 --> 00:02:31.963
+It does not show the algorithm's real
+
+00:02:31.983 --> 00:02:33.831
+links or a measured path.
+
+00:02:33.981 --> 00:02:36.718
+Other index designs partition the space,
+
+00:02:36.751 --> 00:02:40.030
+compress vectors, or combine strategies.
+
+00:02:40.192 --> 00:02:42.775
+Indexing changes how the search runs; the
+
+00:02:42.795 --> 00:02:45.185
+requested k still describes its output
+
+00:02:45.205 --> 00:02:46.099
+size.
+
+00:02:46.989 --> 00:02:50.286
+Keep four controls apart: who may compete,
+
+00:02:50.552 --> 00:02:52.684
+what rule scores them, how the engine
+
+00:02:52.704 --> 00:02:55.724
+searches, and how many leaders it retains.
+
+00:02:55.874 --> 00:02:59.191
+Our exact and approximate runs requested k
+
+00:02:59.276 --> 00:03:02.413
+equals three while examining six and four
+
+00:03:02.433 --> 00:03:03.675
+points respectively.
+
+00:03:04.237 --> 00:03:06.986
+Top k does not mean only k candidates were
+
+00:03:07.006 --> 00:03:10.362
+examined. Exact lexical pruning can safely
+
+00:03:10.382 --> 00:03:12.463
+skip candidates that cannot enter the
+
+00:03:12.483 --> 00:03:15.362
+leaders; approximate vector search offers
+
+00:03:15.382 --> 00:03:16.689
+a different guarantee.
+
+00:03:16.851 --> 00:03:20.220
+Lexical, dense and hybrid systems can all
+
+00:03:20.240 --> 00:03:21.946
+return top-k results.
+
+00:03:22.849 --> 00:03:24.731
+Dense retrieval has no comparable
+
+00:03:24.751 --> 00:03:25.968
+term-match floor.
+
+00:03:26.117 --> 00:03:28.532
+Unless filters narrow the collection,
+
+00:03:28.759 --> 00:03:30.917
+every stored vector can receive a
+
+00:03:30.937 --> 00:03:32.321
+similarity score.
+
+00:03:32.457 --> 00:03:35.144
+An unrelated passage can still be nearest
+
+00:03:35.164 --> 00:03:37.939
+when every alternative is farther away.
+
+00:03:38.504 --> 00:03:41.593
+Metadata filters, lexical evidence and
+
+00:03:41.613 --> 00:03:44.570
+vectors can coexist in one product.
+
+00:03:44.745 --> 00:03:47.714
+The candidate boundary and output size
+
+00:03:47.747 --> 00:03:49.634
+remain separate questions.
+
+00:03:49.796 --> 00:03:52.715
+To assess a search, inspect its filters,
+
+00:03:52.735 --> 00:03:55.717
+scoring rule, exact or approximate
+
+00:03:55.737 --> 00:03:58.939
+execution, and result boundary—then judge
+
+00:03:58.959 --> 00:04:01.077
+whether the returned material is useful.

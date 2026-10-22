@@ -1,0 +1,160 @@
+<section class="chapter" id="sec-bm25-ranking"><span id="ch2" class="legacy-anchor"></span><header class="chapter-head"><p class="chapter-eyebrow">Chapter 3</p>
+<p class="chapter-meta">About 12 min</p>
+<h2 id="bm25-ranking">BM25 and ranked lexical retrieval</h2>
+<p class="chapter-question"><span>Central question</span>How does matching evidence become a relevance ranking?</p>
+<div class="stage-map" role="group" aria-label="Pipeline map: the stage this chapter covers is highlighted">
+<div class="stage-controller off">Controller — chooses and sequences the stages below</div>
+<div class="stage-row">
+<a class="stage off" href="#query-transformation" title="Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them.">Query<br>transformation</a><a class="stage off" href="#boolean-admission" title="Chapter 2 — text becomes index terms, and the rules decide which records are eligible at all.">Analysis &amp;<br>execution rules</a><a class="stage on" href="#bm25-ranking" title="Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set.">First-stage<br>retrieval</a><a class="stage off" href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one.">Fusion</a><a class="stage off" href="#reranking-and-hybrid" title="Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed.">Reranking</a><a class="stage off" href="#library-practice" title="Chapter 15 — what the reader is finally shown, and what can be recorded about it.">Presentation</a>
+</div>
+</div>
+<div class="chapter-orient">
+<p>Boolean retrieval treats every matching term as equally informative and every eligible record as equally good. Neither is true. A term occurring in three records is far more discriminating than one occurring in three hundred thousand, and a record using a term eight times is usually more about it than a record using it once.</p>
+<p>This motivates <strong>ranked retrieval</strong>. Rather than leaving every retrieved record tied, a ranked retrieval system assigns candidates graded scores and orders them from higher to lower scoring. Ranked retrieval does not specify how those scores are calculated: they may come from lexical evidence, as with TF-IDF or BM25; from <a href="#single-vector-dense-retrieval-compress-first-compare-later">dense-vector similarity</a>; from <a href="#learnt-sparse-representations">learnt sparse representations</a>; or from combinations of several signals.</p>
+<p>Once candidates have scores, the system can completely order them or retain only the highest-scoring results. The latter is <a href="#top-k-is-a-result-boundary-not-a-dense-retrieval-method"><strong>a top-<em>k</em> request</strong></a>: a result boundary, not a scoring method.</p>
+<p>BM25 is a standard way of turning those intuitions into a score. This chapter explains what it measures, why repetition saturates rather than counting linearly, and how it runs over exactly the same inverted index the previous chapter built.</p>
+</div></header><h3 id="bm25-words-as-weighted-clues">BM25: words as weighted clues<a aria-label="Link to BM25: words as weighted clues" class="heading-anchor" href="#bm25-words-as-weighted-clues">#</a>
+</h3>
+<!-- BEGIN PRODUCT CLAIMS LINKS bm25-words-as-weighted-clues -->
+<details class="claim-links"><summary>Evidence register · 3 claims</summary><p><a href="#claim-scopus-relevance-sort"><strong>Scopus · Document search.</strong> Users can choose relevance sorting rather than date or citation ordering.</a></p>
+<p><a href="#claim-wos-relevance-sort"><strong>Web of Science · Document search.</strong> Users can choose relevance sorting rather than date or citation ordering.</a></p>
+<p><a href="#claim-pubmed-default-best-match"><strong>PubMed · Best Match.</strong> Best Match is the default relevance sort.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS bm25-words-as-weighted-clues -->
+
+<p>Most academic databases allow a relevance sort, under user-facing labels such as <strong>Relevance</strong> or <strong>Best Match</strong>. <a href="https://service.elsevier.com/app/answers/detail/a_id/11423/supporthub/scopus/">Scopus</a> and <a href="https://webofscience.help.clarivate.com/en-us/Content/search-results.htm?Highlight=sort">Web of Science</a>, for example, let a searcher choose relevance rather than date or citation-based ordering. The label tells us that records will be ordered, but not how: <a href="https://pubmed.ncbi.nlm.nih.gov/help/">PubMed calls its default relevance sort Best Match</a>, a label whose <a href="#bm25-and-lexical-ranking-in-academic-search">documented architecture</a> this chapter opens up below.</p>
+<p>A common academic-search pattern has two controls. A Boolean expression first defines the eligible set; a separate scoring method then orders the records that survive. Strict Boolean logic can decide who passes, but it cannot distinguish among records that all pass.</p>
+<blockquote><p>The ranking stage need not be plain BM25. Production systems may combine lexical scores with field weights, phrase and proximity boosts, citations, recency, resource type or peer-review status, and may rerank a shortlist later. “Relevance” or “Best Match” therefore names an ordering, not a formula.</p></blockquote>
+<p>BM25 is one standard lexical answer to the ranking problem: it turns matching terms into unequal, graded evidence. Chapter 4 will show another valid architecture—BM25 retrieving and ranking candidates directly, without a strict Boolean <code>AND</code> gate.</p>
+<h3 id="an-introduction-to-bm25">An introduction to BM25<a aria-label="Link to An introduction to BM25" class="heading-anchor" href="#an-introduction-to-bm25">#</a>
+</h3>
+<!-- BEGIN PRODUCT CLAIMS LINKS an-introduction-to-bm25 -->
+<details class="claim-links"><summary>Evidence register · 4 claims</summary><p><a href="#claim-apache-lucene-bm25"><strong>Apache Lucene · Default text similarity.</strong> BM25 is documented as the default text similarity; configuration and later stages may change final ranking.</a></p>
+<p><a href="#claim-elasticsearch-bm25"><strong>Elasticsearch · Default text similarity.</strong> BM25 is documented as the default text similarity; configuration and later stages may change final ranking.</a></p>
+<p><a href="#claim-apache-solr-bm25"><strong>Apache Solr · Default text similarity.</strong> BM25 is documented as the default text similarity; configuration and later stages may change final ranking.</a></p>
+<p><a href="#claim-opensearch-bm25"><strong>OpenSearch · Default text similarity.</strong> BM25 is documented as the default text similarity; configuration and later stages may change final ranking.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS an-introduction-to-bm25 -->
+
+<p><strong>BM25 is a lexical scoring function: it ranks documents by adding up weighted evidence from the analysed terms they share with the query.</strong> A record that matches more of your terms, rarer terms, or terms repeated at a sensible rate scores higher, and higher scores rank first.</p>
+<p>BM25 is the default text-scoring model in Apache Lucene, and therefore in Elasticsearch, Solr and OpenSearch—the engines beneath a large share of the search tools libraries license. It remains the standard baseline that newer retrieval methods are still measured against.<sup id="fnref:lucene-family"><a class="footnote-ref" href="#fn:lucene-family">4</a></sup></p>
+<p>If you have met <strong>TF-IDF</strong>, you already know BM25’s central intuition: a matching word is evidence, and a rare word is stronger evidence than one that appears throughout the collection. The word <code>delulu</code> matching tells you far more than the word <code>the</code> matching. Like TF-IDF, BM25 can only see terms the query and the document share. Unlike strict Boolean, it does not stop at yes-or-no. Every match contributes to a graded score, and the grades are what produce the ranking. Historically, BM25 developed within the probabilistic relevance tradition, independently of TF-IDF, although the two use some similar signals.<sup id="fnref:bm25-probability"><a class="footnote-ref" href="#fn:bm25-probability">5</a></sup></p>
+<blockquote><p>BM25 combines weighted term matches into a score used to rank candidates. The score is neither a probability of <a href="#distinction-match-relevance">relevance</a> nor a direct judgement of whether the record meets the reader’s need.</p></blockquote>
+<p>In simplified form, BM25 adds a contribution for each matching query term. Each contribution is built from four observable things—whether the term occurs, how rare it is, how often it appears and how long the document is—which amount to four questions:</p>
+<ol>
+<li>
+<strong>Did the term match at all?</strong> A term that does not appear in the document contributes nothing.</li>
+<li>
+<strong>How rare is the term in the collection?</strong> A term found in relatively few documents usually contributes more (higher score) than one found almost everywhere. This is inverse document frequency.<sup id="fnref:bm25-idf"><a class="footnote-ref" href="#fn:bm25-idf">6</a></sup>
+</li>
+<li>
+<strong>How often does it occur in the document, with diminishing returns?</strong> Repeated occurrences provide more evidence that the document concerns the term, but each additional occurrence adds progressively less evidence. Seeing <code>delulu</code> twice may be more informative than seeing it once. Seeing <code>delulu</code> 100 times does not make a document 100 times more relevant. How quickly the extra evidence levels off—<em>term saturation</em>—is controlled in BM25 by a parameter conventionally written <em>k</em><sub>1</sub>.<sup id="fnref:bm25-query-frequency"><a class="footnote-ref" href="#fn:bm25-query-frequency">7</a></sup>
+</li>
+<li>
+<strong>Is that frequency unusually high given the document’s length?</strong> Five occurrences in a short abstract may be stronger evidence (higher score) than five occurrences in a very long document. This is document-length normalisation and, like term saturation, the strength of this normalisation is controlled by a second parameter, conventionally written <em>b</em>.</li>
+</ol>
+<p>None of these four ideas is exclusive to BM25—TF-IDF variants can use all of them. BM25 specifies a particular way to combine term-frequency saturation with document-length normalisation. Typical defaults are <em>k</em><sub>1</sub> = 1.2 and <em>b</em> = 0.75, the values used in <a href="#how-bm25-actually-uses-the-posting-lists">Appendix C’s worked example</a>.</p>
+<figure class="ir-figure worked-figure" aria-labelledby="bm25-four-questions-title">
+<p class="figure-title" id="bm25-four-questions-title">The four questions BM25 asks about each matching term</p>
+<div class="worked-grid">
+<div class="worked-card">
+<strong>1 · Did the term match?</strong><p>Query term: <span class="worked-term">delulu</span></p>
+<p class="worked-paper">Text: “<span class="worked-term">delulu</span> job expectations”<small>A match can contribute to the score.</small></p>
+<p class="worked-paper">Text: “unrealistic job expectations”<small>No delulu match: zero contribution from this term.</small></p>
+<p class="worked-note">Compare analysed terms; no expansion is assumed here.</p>
+</div>
+<div class="worked-card">
+<strong>2 · How rare is it?</strong><p class="worked-paper"><span class="worked-term">delulu</span><small>In 2 of 10 documents.</small><b>Higher IDF</b></p>
+<p class="worked-paper"><span class="worked-term second">job</span><small>In 9 of 10 documents.</small><b>Lower IDF</b></p>
+<p>All else equal, the rarer matching term contributes more.</p>
+<p class="worked-note">Illustrative collection; the figure below shows these ten documents.</p>
+</div>
+<div class="worked-card">
+<strong>3 · How often, with diminishing returns?</strong><svg class="worked-plot" viewbox="0 0 310 232" role="img" aria-labelledby="bm25-curve-title bm25-curve-desc">
+<title id="bm25-curve-title">Term frequency has diminishing returns</title>
+<desc id="bm25-curve-desc">For k1 equals 1.2 and a document of average length, the BM25 term-frequency factor is 1 at one occurrence, 1.375 at two, and about 2.08 at twenty. Axes are linear; the limiting value is 2.2.</desc>
+<g font-size="14"><text x="44" y="17">Term-frequency factor</text>
+<path d="M44 34H286" fill="none" stroke="#596462" stroke-dasharray="4 4"></path><text x="286" y="29" text-anchor="end">Limit: 2.2</text>
+<g stroke="#596462" fill="none"><path d="M44 34V174H286"></path><path d="M44 174v5"></path><text x="44" y="196" text-anchor="middle">0</text><path d="M104.5 174v5"></path><text x="104.5" y="196" text-anchor="middle">5</text><path d="M165 174v5"></path><text x="165" y="196" text-anchor="middle">10</text><path d="M225.5 174v5"></path><text x="225.5" y="196" text-anchor="middle">15</text><path d="M286 174v5"></path><text x="286" y="196" text-anchor="middle">20</text><path d="M39 174h5"></path><text x="34" y="179" text-anchor="end">0</text><path d="M39 110.364h5"></path><text x="34" y="115.364" text-anchor="end">1</text><path d="M39 46.7273h5"></path><text x="34" y="51.7273" text-anchor="end">2</text></g>
+<polyline points="44.00,174.00 45.21,163.23 46.42,154.00 47.63,146.00 48.84,139.00 50.05,132.82 51.26,127.33 52.47,122.42 53.68,118.00 54.89,114.00 56.10,110.36 57.31,107.04 58.52,104.00 59.73,101.20 60.94,98.62 62.15,96.22 63.36,94.00 64.57,91.93 65.78,90.00 66.99,88.19 68.20,86.50 69.41,84.91 70.62,83.41 71.83,82.00 73.04,80.67 74.25,79.41 75.46,78.21 76.67,77.08 77.88,76.00 79.09,74.98 80.30,74.00 81.51,73.07 82.72,72.18 83.93,71.33 85.14,70.52 86.35,69.74 87.56,69.00 88.77,68.29 89.98,67.60 91.19,66.94 92.40,66.31 93.61,65.70 94.82,65.11 96.03,64.55 97.24,64.00 98.45,63.47 99.66,62.97 100.87,62.47 102.08,62.00 103.29,61.54 104.50,61.10 105.71,60.67 106.92,60.25 108.13,59.85 109.34,59.45 110.55,59.07 111.76,58.71 112.97,58.35 114.18,58.00 115.39,57.66 116.60,57.33 117.81,57.01 119.02,56.70 120.23,56.40 121.44,56.11 122.65,55.82 123.86,55.54 125.07,55.27 126.28,55.00 127.49,54.74 128.70,54.49 129.91,54.24 131.12,54.00 132.33,53.76 133.54,53.53 134.75,53.31 135.96,53.09 137.17,52.88 138.38,52.67 139.59,52.46 140.80,52.26 142.01,52.06 143.22,51.87 144.43,51.68 145.64,51.50 146.85,51.32 148.06,51.14 149.27,50.97 150.48,50.80 151.69,50.63 152.90,50.47 154.11,50.31 155.32,50.15 156.53,50.00 157.74,49.85 158.95,49.70 160.16,49.56 161.37,49.41 162.58,49.27 163.79,49.14 165.00,49.00 166.21,48.87 167.42,48.74 168.63,48.61 169.84,48.48 171.05,48.36 172.26,48.24 173.47,48.12 174.68,48.00 175.89,47.88 177.10,47.77 178.31,47.66 179.52,47.55 180.73,47.44 181.94,47.33 183.15,47.23 184.36,47.12 185.57,47.02 186.78,46.92 187.99,46.82 189.20,46.73 190.41,46.63 191.62,46.54 192.83,46.44 194.04,46.35 195.25,46.26 196.46,46.17 197.67,46.09 198.88,46.00 200.09,45.91 201.30,45.83 202.51,45.75 203.72,45.67 204.93,45.59 206.14,45.51 207.35,45.43 208.56,45.35 209.77,45.28 210.98,45.20 212.19,45.13 213.40,45.05 214.61,44.98 215.82,44.91 217.03,44.84 218.24,44.77 219.45,44.70 220.66,44.63 221.87,44.57 223.08,44.50 224.29,44.43 225.50,44.37 226.71,44.31 227.92,44.24 229.13,44.18 230.34,44.12 231.55,44.06 232.76,44.00 233.97,43.94 235.18,43.88 236.39,43.82 237.60,43.77 238.81,43.71 240.02,43.66 241.23,43.60 242.44,43.55 243.65,43.49 244.86,43.44 246.07,43.39 247.28,43.33 248.49,43.28 249.70,43.23 250.91,43.18 252.12,43.13 253.33,43.08 254.54,43.03 255.75,42.98 256.96,42.94 258.17,42.89 259.38,42.84 260.59,42.80 261.80,42.75 263.01,42.70 264.22,42.66 265.43,42.62 266.64,42.57 267.85,42.53 269.06,42.48 270.27,42.44 271.48,42.40 272.69,42.36 273.90,42.32 275.11,42.28 276.32,42.24 277.53,42.20 278.74,42.16 279.95,42.12 281.16,42.08 282.37,42.04 283.58,42.00 284.79,41.96 286.00,41.92" fill="none" stroke="#1d5b59" stroke-width="3"></polyline>
+<text x="165" y="222" text-anchor="middle">Occurrences in this document</text></g></svg><p>One occurrence gives a factor of <b>1.00</b>; two give <b>1.375</b>; twenty give about <b>2.08</b>.</p>
+<p class="worked-note">Calculated with <i>k</i><sub>1</sub> = 1.2 and document length equal to the collection average. Multiply this factor by IDF to obtain the term’s contribution.</p>
+</div>
+<div class="worked-card">
+<strong>4 · How long is the document?</strong><p class="worked-paper"><span class="worked-term">delulu</span><small>One occurrence in 40 analysed terms.</small><b>Stronger contribution</b></p>
+<p class="worked-paper long"><span class="worked-term">delulu</span><small>One occurrence in 400 analysed terms.</small><b>Weaker contribution</b></p>
+<p class="worked-note">Same query term and collection, with length normalisation enabled (<i>b</i> &gt; 0 and <i>k</i><sub>1</sub> &gt; 0). With <i>b</i> = 0, length does not change the contribution.</p>
+</div>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-3-1">Figure 3.1</span> BM25 adds the contributions of matching query terms. Repetition saturates through <em>k</em><sub>1</sub>; document length moderates the contribution through <em>b</em>. The plot has linear axes and shows the term-frequency factor, not a probability of relevance.</figcaption>
+</figure>
+<figure class="ir-figure" aria-labelledby="idf-rewards-rare-terms-title">
+<p class="figure-title" id="idf-rewards-rare-terms-title">Rare query terms contribute stronger lexical evidence through IDF</p>
+<img alt="Rare query terms contribute stronger lexical evidence through IDF" src="images/03%20BM25%20-%20words%20as%20weighted%20clues/ChatGPT%20Image%20Jul%2026,%202026,%2009_33_13%20PM.png">
+<figcaption><span class="asset-label-inline" id="fig-3-2">Figure 3.2</span> In this illustrative ten-document collection, <code>delulu</code> occurs in two records and <code>job</code> in nine. The rarer term has higher IDF; all else equal, a match contributes more. “Informative” here means discriminating between documents, not guaranteed usefulness for the reader’s need.</figcaption>
+</figure>
+<blockquote>
+<p><strong>Try it:</strong> <a href="bm25-evidence-lab.html">The BM25 Evidence Lab</a> lets you change one source of evidence at a time — term rarity, repetition, document length — and watch a six-record ranking respond. Allow about five minutes for an initial exploration or fifteen minutes for the full seven-step guided tour, before discussion. No prior knowledge of the equation is needed.</p>
+</blockquote>
+<p>This description uses the standard single-field form of BM25 as a simplifying reference; related variants adapt it to structured records and very long documents.<sup id="fnref:bm25-variants"><a class="footnote-ref" href="#fn:bm25-variants">8</a></sup></p>
+<h3 id="bm25-and-lexical-ranking-in-academic-search">BM25 and lexical ranking in academic search<a aria-label="Link to BM25 and lexical ranking in academic search" class="heading-anchor" href="#bm25-and-lexical-ranking-in-academic-search">#</a>
+</h3>
+<p>Academic search products document lexical evidence in their live ranking today, and one of them names BM25 directly.</p>
+<figure class="ir-figure" aria-labelledby="bm25-academic-search-title">
+<p class="figure-title" id="bm25-academic-search-title">BM25 and lexical ranking in academic search</p>
+<!-- BEGIN PRODUCT CLAIMS LINKS bm25-academic-search-title -->
+<details class="claim-links"><summary>Evidence register · 4 claims</summary><p><a href="#claim-scopus-ranking-signals"><strong>Scopus · Relevance sort.</strong> Ranking documentation describes term frequency and IDF with field, position and proximity signals.</a></p>
+<p><a href="#claim-cdi-ranking-signals"><strong>Ex Libris CDI · Relevance ranking.</strong> Ranking combines lexical, phrase and proximity evidence with static signals including type, recency, peer review and citations.</a></p>
+<p><a href="#claim-pubmed-bm25"><strong>PubMed · Best Match.</strong> The published Best Match architecture begins with BM25.</a></p>
+<p><a href="#claim-pubmed-rerank-budget"><strong>PubMed · Best Match.</strong> LambdaMART reranks the top 500 first-stage candidates.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS bm25-academic-search-title -->
+
+<img alt="BM25 and lexical ranking in academic search" src="images/03%20BM25%20-%20words%20as%20weighted%20clues/BM25%20and%20lexical%20ranking%20in%20academic%20search.png">
+<figcaption><span class="asset-label-inline" id="fig-3-3">Figure 3.3</span> Scholarly products describe live ranking pipelines built on term frequency and inverse document frequency, supplemented by field, position and proximity signals.</figcaption>
+</figure>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6112631/">PubMed offers an unusually clear documented BM25 example</a>. Its published <a href="#why-search-systems-use-multiple-stages">multi-stage architecture</a> for Best Match first retrieves and orders matching records with BM25, then uses LambdaMART<sup id="fnref:lambdamart"><a class="footnote-ref" href="#fn:lambdamart">9</a></sup> to rerank the top 500. PubMed’s current help still describes a weighted term-frequency stage followed by machine-learning reranking. It therefore shows both BM25’s continuing role and why a production ranking pipeline should not be reduced to one formula.</p>
+<p>Two product descriptions show how lexical evidence is usually embedded in richer ranking. <a href="https://service.elsevier.com/app/answers/detail/a_id/14182/supporthub/scopus/">Scopus describes term frequency and inverse document frequency</a> alongside field, position and proximity signals. <a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI">Primo’s Central Discovery Index</a> combines field and rare-term weighting, term frequency, field length, phrase and proximity boosts with static signals such as resource type, recency, peer-review status and citations.</p>
+<figure class="ir-figure" aria-labelledby="primo-cdi-ranking-signals-title">
+<p class="figure-title" id="primo-cdi-ranking-signals-title">One discovery index documents its ranking signals</p>
+<!-- BEGIN PRODUCT CLAIMS LINKS primo-cdi-ranking-signals-title -->
+<details class="claim-links"><summary>Evidence register · 2 claims</summary><p><a href="#claim-scopus-ranking-signals"><strong>Scopus · Relevance sort.</strong> Ranking documentation describes term frequency and IDF with field, position and proximity signals.</a></p>
+<p><a href="#claim-cdi-ranking-signals"><strong>Ex Libris CDI · Relevance ranking.</strong> Ranking combines lexical, phrase and proximity evidence with static signals including type, recency, peer review and citations.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS primo-cdi-ranking-signals-title -->
+
+<img src="images/04%20Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/primocdi.png" alt="Primo Central Discovery Index documentation describing its ranking signals">
+<figcaption><span class="asset-label-inline" id="fig-3-4">Figure 3.4</span> Field and rare-term weighting, term frequency, field length, phrase and proximity boosts, combined with static signals such as resource type, recency, peer-review status and citations. Vendor screenshot, reproduced for comment.</figcaption>
+</figure><p>Only the PubMed example identifies BM25 directly. The Scopus and Primo descriptions establish that lexical evidence is active in current academic search, but not that either user-facing ranking is plain BM25.<sup id="fnref:lucene-family-examples"><a class="footnote-ref" href="#fn:lucene-family-examples">10</a></sup></p>
+<h3 id="how-bm25-uses-the-same-inverted-index">How BM25 uses the same inverted index<a aria-label="Link to How BM25 uses the same inverted index" class="heading-anchor" href="#how-bm25-uses-the-same-inverted-index">#</a>
+</h3>
+<p>The earlier Boolean explanation introduced the <a href="#from-analysed-tokens-to-a-term-first-map">dictionary and posting lists</a> as a term-to-document map. BM25 can use the same structure. <a href="#boolean-treats-postings-as-sets">Boolean operators treat postings mainly as sets</a>; BM25 uses term frequency, document frequency and document length to calculate graded scores.</p>
+<figure class="ir-figure" aria-labelledby="boolean-then-bm25-title">
+<p class="figure-title" id="boolean-then-bm25-title">A common two-stage pattern: Boolean eligibility, then BM25 ranking</p>
+<img alt="Two stages of search: Boolean eligibility followed by BM25 relevance ranking" src="images/02%20Boolean%20search%20-%20words%20as%20admission%20rules/ChatGPT%20Image%20Jul%2026,%202026,%2009_49_01%20PM.png">
+<figcaption><span class="asset-label-inline" id="fig-3-5">Figure 3.5</span> In this common academic-search arrangement, a Boolean expression restricts which records may proceed and BM25 ranks the survivors. Both controls use the same inverted index. BM25 can also retrieve directly, as Chapter 4 explains.</figcaption>
+</figure>
+<p>In this two-stage arrangement, query processing has five conceptual steps:</p>
+<ol>
+<li>
+<strong>Look up each analysed query term.</strong> The dictionary points to the corresponding posting lists.</li>
+<li>
+<strong>Gather the eligible records.</strong> Boolean operations over those posting lists determine which records satisfy the query.</li>
+<li>
+<strong>Obtain the scoring evidence.</strong> Postings can supply within-document term frequency, the dictionary supplies document frequency, and document metadata supplies length.</li>
+<li>
+<strong>Add the contributions.</strong> BM25 combines the evidence for each matching query term into a document score.</li>
+<li>
+<strong>Choose the output boundary.</strong> The engine may completely order the scored candidates or retain only a top-<em>k</em>.</li>
+</ol>
+<p>The Boolean admission rule, BM25 scoring rule and top-<em>k</em> output boundary remain separate controls, even when a product executes them in one request. In direct BM25 retrieval, the second step changes: the engine gathers the union of records matching any analysed query term and scores them without first enforcing a strict Boolean <code>AND</code>.</p>
+<h3 id="why-the-same-index-remains-fast-for-ranked-retrieval">Why the same index remains fast for ranked retrieval<a aria-label="Link to Why the same index remains fast for ranked retrieval" class="heading-anchor" href="#why-the-same-index-remains-fast-for-ranked-retrieval">#</a>
+</h3>
+<p>Selective access still matters. The Boolean query obtains its eligible records from posting lists rather than scanning every document, and BM25 can read the scoring evidence stored with those same postings. Ordered postings also help the engine bring together the score contributions belonging to the same document while moving forwards through the lists.</p>
+<p>Production indexes add further engineering to store posting lists compactly and avoid unnecessary work. Compression and blocks reduce storage and memory traffic, while score upper bounds and safe pruning can avoid scoring candidates that cannot enter the leading results. These techniques change how efficiently the same term-to-document map is stored and traversed while preserving BM25’s term-based scoring. <a href="#how-bm25-actually-uses-the-posting-lists">Appendix C</a> provides a complete worked scoring example and explains these techniques, including the pruning methods MaxScore, WAND and Block-Max WAND, in more detail. The classic <a href="https://nlp.stanford.edu/IR-book/html/htmledition/the-term-vocabulary-and-postings-lists-1.html"><em>Introduction to Information Retrieval</em></a> provides another introduction to dictionaries, postings and basic query processing.</p>
+<p>As a broad practical rule, lexical retrieval over an inverted index is generally fast and often less computationally demanding than dense retrieval at a similar scale. That is not a universal benchmark result: hardware, index design, query mix and accuracy settings all matter. The different candidate-generation machinery used for dense vectors is explained in <a href="#how-nearest-neighbour-indexing-makes-dense-retrieval-practical">Chapter 7</a>, after vectors and embeddings have been introduced.</p>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Ranked retrieval assigns graded scores and orders candidates; it does not specify where the scores come from. BM25 is one lexical answer.</li>
+<li>Rarer terms carry more weight, repeated terms saturate, and document length is normalised against the collection average, to a degree set by <em>b</em>.</li>
+<li>The index does not change. The same posting lists that answered a Boolean query support a ranked one.</li>
+<li>PubMed documents BM25 as the first stage of Best Match, and other academic systems document lexical evidence in their live ranking.</li>
+</ol>
+<p class="chapter-transition">Chapter 4 asks what happens to a query term that is optional or matches no record, which is the question behind the first opening puzzle.</p></aside><section class="self-check" aria-label="Questions on this chapter"><p class="self-check-label">Check yourself</p>
+<details class="self-check-q"><summary>Two documents of the same length contain the same query term. It appears once in Document A and ten times in Document B. Does BM25 give Document B ten times as much credit? Why or why not?</summary><p>No. BM25 applies term-frequency saturation: repeated occurrences add evidence, but each additional occurrence contributes progressively less than the previous one. Ten occurrences therefore do not produce ten times the contribution of one occurrence.</p></details><details class="self-check-q"><summary>The same query term appears five times in a short abstract and five times in a much longer document. Under BM25, should those five occurrences contribute the same amount? Why or why not?</summary><p>Usually no. BM25 normalises term frequency by document length, so five occurrences in a short document will generally provide stronger evidence than five occurrences in a much longer one. How strongly length matters depends on the setting of the parameter <em>b</em>; if length normalisation is turned off, document length has no effect.</p></details><details class="self-check-q"><summary>A database says it uses BM25 for relevance ranking. What does that tell you about how the eligible records are ranked, and what remains unknown?</summary><p>It tells you that matching records receive graded lexical scores based on matching analysed terms, with rarer terms contributing more, repeated occurrences showing diminishing returns, and document length affecting the contribution. It does not tell you the <em>k</em><sub>1</sub> and <em>b</em> settings, how different fields are weighted, what phrase, proximity or other ranking signals are added, or whether a later stage reranks the results.</p></details></section><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#boolean-admission"><span>Previous</span>Boolean admission and the inverted index</a><a class="cnav next" href="#beyond-boolean"><span>Next</span>Lexical search beyond strict Boolean</a></nav></section>

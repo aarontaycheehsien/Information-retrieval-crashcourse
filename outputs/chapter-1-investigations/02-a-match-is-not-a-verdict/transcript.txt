@@ -1,0 +1,36 @@
+A match is not a verdict
+
+[00:00:00.700]: An empirical study passes every condition in a carefully built search. It concerns the right service, the right setting and the right dates. Have we established that it answers the reader's question? Take a moment.
+
+[00:00:16.305]: We have established a useful match. Whether it helps depends on what the reader is trying to accomplish. Relevance is a relationship: relevant to someone, for something.
+
+[00:00:27.345]: The information need is the fuller purpose behind a search. Queries, filters and task briefs can communicate substantial detail about it. A query represents that need; it is not the need itself.
+
+[00:00:41.772]: Follow the chain: information need, representation, retrieval signals, retrieved records, human judgement. The system works directly with the middle three. Detailed requests and feedback can help it estimate suitability. The reader still assesses usefulness.
+
+[00:01:00.342]: The chapter's hypothetical librarian wants recent empirical studies of generative AI services for research support in academic libraries. The strategy combines alternatives: generative AI or large language models; academic library or university library; research support or research consultation.
+
+[00:01:22.272]: Publication dates are limited to twenty twenty-four onwards. These explicit conditions communicate much more than a handful of broad keywords. Now keep the resulting study fixed while we change the purpose.
+
+[00:01:36.720]: The invented study reports positive participant reactions after a short demonstration of a university library's generative AI research-support service. It matches the search and is topically suitable. For an introductory workshop, it provides a useful example of a service and participants' responses.
+
+[00:01:56.675]: For a service-adoption decision, those reactions are insufficient. They do not establish answer accuracy, staff workload or performance in real consultations. The study still contributes evidence about reactions. Its contribution changes with the purpose; its search match has not changed.
+
+[00:02:17.253]: Targeted follow-up searches can seek accuracy evaluations, workload evidence and real-world use. Then inspect what each study measured, under what conditions, and whether the findings support the decision.
+
+[00:02:30.512]: Making every issue a compulsory search condition can also miss useful studies. They may use unexpected terminology or report the issue only in full text. Better searching and relevance judgement work together.
+
+[00:02:45.903]: Evidence-synthesis searchers call some of these search-resistant concepts. A review criterion may be poorly indexed, inconsistently described or difficult to express as dependable search terms.
+
+[00:03:00.657]: A strategy may retrieve a broader set of potentially relevant records and leave some criteria to screening. This is a deliberate division of work between retrieval and assessment. It does not make searching or eligibility criteria unimportant.
+
+[00:03:17.179]: Relevance can concern a system's estimated match, topical suitability, a contribution to the reader's understanding, or usefulness for a task. These are related perspectives, with no single hierarchy among them.
+
+[00:03:31.125]: Boolean matching, BM twenty-five, embeddings and neural rerankers help estimate relevance. A high score cannot turn participant reactions into evidence of answer accuracy. Ask what the record contributes to this reader's purpose.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 1.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#intro
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

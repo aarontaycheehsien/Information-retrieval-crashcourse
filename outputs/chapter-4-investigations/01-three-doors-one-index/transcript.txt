@@ -1,0 +1,36 @@
+Three doors, one index
+
+[00:00:00.700]: You search for apple, orange, banana. A result appears that contains apple and orange, but no banana. Has the engine stopped searching for words? Has it understood some deeper meaning? Make a prediction before looking behind the search box.
+
+[00:00:18.182]: A perfectly ordinary lexical system can do this. The crucial question is which analysed terms were compulsory. Matching words and requiring every word are different decisions.
+
+[00:00:30.969]: Keep the chapter's tiny collection fixed. A contains apple, orange and banana. B contains apple and orange. C contains apple. D contains pear and grape. These cards show term presence, not repetition counts or complete document lengths.
+
+[00:00:49.624]: Nothing about the vocabulary or the index has changed. Now turn just one control: how many of the three query terms must a record match to become eligible?
+
+[00:01:00.617]: Require all three terms, and only A gets in. Require at least two, and A and B get in. Let any one term suffice, and A, B and C get in. D has no query terms and stays out.
+
+[00:01:15.778]: Every arrangement still uses lexical evidence. The any-match eligible set is the union of the posting lists, expressible as Boolean OR. A separate scoring rule can supply graded rankings.
+
+[00:01:31.191]: Keep any-match admission. A, B and C may compete. Suppose a scoring rule orders them B, A, C. This order is stipulated, exactly as in the chapter. These cards do not contain enough information to calculate BM twenty-five scores.
+
+[00:01:49.612]: Matching more distinct terms does not guarantee a higher BM twenty-five score. Term rarity, frequency and document length also matter. Three matches do not automatically beat two.
+
+[00:02:03.938]: Now retain only the first two records. B and A are returned. C qualified, but fell below the output boundary. D never qualified. Both are absent from the final pair, for completely different reasons.
+
+[00:02:18.598]: Admission asks who may compete. Ranking asks how the candidates are ordered. A top k boundary asks how many leaders are retained. Changing one control need not change the other two.
+
+[00:02:31.346]: The chapter's Google Scholar example separates another three things: the reported match count, relevance ordering, and the set a person can actually view. Its supplied example reports about nine point four million matches, while help documents a one thousand result display limit.
+
+[00:02:49.664]: That limit is an observable presentation boundary. It does not reveal every scoring signal, whether every match received a final score, or whether the displayed set is a global top k. We are reading the chapter's evidence, not testing today's service.
+
+[00:03:07.296]: Return to the missing banana. A result lacking a typed word can be consistent with lexical retrieval. It does not identify the complete architecture behind the interface. Even the apparent absence of a match may need closer inspection.
+
+[00:03:22.854]: Before naming the engine, separate the controls. What terms reached retrieval? Which conditions were required? How were candidates scored? And what output could you see? The next investigation changes a query term while keeping those questions separate.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 4.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#beyond-boolean
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

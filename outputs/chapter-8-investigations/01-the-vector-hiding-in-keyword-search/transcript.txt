@@ -1,0 +1,40 @@
+The vector hiding in keyword search
+
+[00:00:00.700]: A search product says it uses vectors. What does that tell you? Before answering, look at three ordinary keyword records. Heart attack treatment. Job interview tips. Cancer treatment. We can turn every one into a vector without training a neural network. Make a prediction: what will the coordinates mean?
+
+[00:00:23.348]: They will mean vocabulary terms. Vector names a numerical object: an ordered list of numbers. Chapter Eight makes those hidden choices visible.
+
+[00:00:34.115]: Fix this vocabulary order: attack, cancer, heart, interview, job, tips, treatment. Every document now lives in the same seven dimensional space. Coordinate three always means heart.
+
+[00:00:49.297]: Put one where a term occurs and zero where it does not. The first document activates attack, heart and treatment. The second activates interview, job and tips. The third activates cancer and treatment. These are sparse, vocabulary aligned vectors.
+
+[00:01:07.569]: Now search for heart treatment. Its two active coordinates overlap the first document twice, the third once, and the second not at all. Counting shared ones gives a graded score.
+
+[00:01:19.708]: Heart AND treatment admits only the first document. Heart OR treatment admits the first and third. The binary vector did not contain either operator. The retrieval rule decides whether term evidence becomes a hard requirement or a contribution to a ranking.
+
+[00:01:38.417]: Change the first document to heart attack treatment treatment treatment. Binary presence barely notices: the same three coordinates are active. Raw term frequency instead puts three in the treatment coordinate. The vocabulary has stayed fixed; the values have changed.
+
+[00:01:57.705]: Repetition can be useful evidence of topic. But raw counts keep growing, and long documents get more chances to accumulate them. We need a rule for how much another occurrence contributes.
+
+[00:02:10.569]: Term frequency looks inside a document. Inverse document frequency looks across the collection. Treatment occurs in two of our three documents. Heart occurs in only one. Heart therefore distinguishes a smaller group and receives more rarity weight under the illustrated rule.
+
+[00:02:30.489]: The figure uses raw counts times the natural logarithm of collection size divided by document frequency. The coordinates still mean words. Adding collection statistics has not turned them into latent semantic dimensions.
+
+[00:02:46.428]: BM twenty five adds diminishing returns from repetition and adjusts term frequency evidence for document length, while retaining inverse document frequency. Our figure declares one standard parameter setting and computes the resulting term contributions.
+
+[00:03:03.698]: This is a comparison of representations, not a historical claim that one method was derived from another. Binary presence, raw counts, TF IDF and BM twenty five can all use vocabulary coordinates.
+
+[00:03:19.626]: A real vocabulary might contain millions of terms, but a short document activates only a few hundred. The implementation can store term and weight pairs for active coordinates.
+
+[00:03:32.786]: An inverted index lets a query jump to the posting lists for its active terms and accumulate contributions. A dot product style mathematical description of BM twenty five does not imply that the engine scans dense vectors or runs nearest neighbour search.
+
+[00:03:51.237]: Return to the product claim: we use vectors. Ask what each coordinate represents, which values are active, how the weighting rule was obtained, and how matching evidence becomes an eligible set or a score.
+
+[00:04:04.833]: The same numerical object can hold term presence, calculated lexical weights, recorded facts or learnt latent features. Calling it a vector settles none of those choices. In the next film, a dense vector fails a semantic test while a sparse one bridges a wording gap.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 8.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#representations-and-units
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

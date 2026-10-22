@@ -1,0 +1,40 @@
+The average went up. The search got worse.
+
+[00:00:00.700]: A discovery update improves the equally weighted mean of three displayed evaluation rows from point three zero to about point three three. Would you call it better? Pause before looking at the rows. What change could that average conceal?
+
+[00:00:16.886]: In the chapter’s hypothetical table, the identifier row falls from point three to point one precision at ten: a two thirds relative loss. Another row improves enough to lift the mean. These are illustrative source numbers, not a product update or experiment performed for this film.
+
+[00:00:36.268]: The identifier query concerns S L C six A four promoter polymorphism. The hypothetical expansion drops the gene symbol. A vocabulary mismatch row rises from point two to point five. The composition row stays at point four.
+
+[00:00:54.567]: That last row averages two opposite meaning queries, each judged separately. The chapter’s reported average equally weights the three displayed rows; it is not a mean of four equally weighted individual queries. Known relevant counts are seed information, not proof of exhaustive relevance. Keep both qualifications with the table.
+
+[00:01:17.651]: Thirty to fifty queries are a practical starting range. Use reference enquiries, loan requests, consultations and training questions, carrying the disciplines, languages and document types your library encounters. Include searches already known to fail, rather than only demonstration friendly examples.
+
+[00:01:37.828]: Rerunning an established set may fit an afternoon. Constructing needs and judging hundreds of results can take much longer. Write down the task and what counts as useful, then record known relevant items and grades where staff can defend them. This is a local baseline, not an exhaustive research collection.
+
+[00:01:59.716]: Choose a fixed depth, such as ten or twenty, and keep it fixed across runs. Pool and deduplicate both runs’ results at that depth. Judge every pooled record under the same written criteria, ideally without seeing which system supplied it.
+
+[00:02:16.852]: Calculate precision at that depth from those judgements. Report known seed recovery separately. If a run returns fewer records, record the count and denominator convention. Otherwise a change in depth, missing judgements or an unstated denominator can masquerade as a system improvement.
+
+[00:02:37.432]: Include an exact identifier, gene name or chemical string. Include a phrase appearing only in full text you hold. Include a query whose known relevant record shares almost none of its wording. Include near identical queries with opposite meaning.
+
+[00:02:55.324]: These probe a surviving lexical route, indexed units, vocabulary bridging and composition. They are diagnostic comparisons, not a guarantee that one score can explain every failure. Preserve the record and capture details needed to investigate a change. The earlier chapter supplies hypotheses about why a query lost.
+
+[00:03:18.886]: Inspect queries that moved sharply, including differences by discipline, language or document type. A mean can absorb systematic harm to a small group of searches. A difference smaller than ordinary run to run variation may need further evidence before you can distinguish it from that variation.
+
+[00:03:38.987]: Ask a vendor which queries, which collection, whose binary or graded judgements, which depth, which metric and which baseline produced the claimed gain. Then rerun the hard local questions. The local set generalises narrowly by design; its value is that the library chose the relevance criteria.
+
+[00:04:00.071]: If the product also writes an answer, evaluate whether it is faithful to the retrieved material and whether each claim traces to a source that contains it. Those are additional questions, not substitutes for evaluating retrieval.
+
+[00:04:14.943]: A perfectly faithful summary of the wrong ten documents is still built on the wrong shortlist. A groundedness check cannot reveal every relevant paper that retrieval missed. Keep retrieval quality, answer faithfulness and source support visible as separate requirements.
+
+[00:04:34.743]: Rerun the fixed local set after a model update, index change, platform migration or before renewal. Compare per query against the saved baseline, keep the criteria and depth stable, and investigate regressions instead of letting a small mean gain settle the decision.
+
+[00:04:52.856]: Measurement can identify which system performed better on these queries against these judgements. It does not explain the internal cause or make the search repeatable next year. Chapter fifteen turns to what must be recorded, inspected and required. The evaluation is useful because its comparison is explicit.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 14.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#evaluation
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

@@ -1,0 +1,40 @@
+Search without rereading the papers
+
+[00:00:00.700]: A collection may contain hundreds of millions of records. Must a Boolean search reread all of them whenever you type a query? Imagine doing that for every new search.
+
+[00:00:13.630]: An inverted index provides a different route. Start from an analysed term and follow its pointers to records containing it. Our four-record illustration shows the mechanism; it is not a speed benchmark.
+
+[00:00:27.341]: The chapter starts with D one: Delulu job interview expectations. D two: Job interview preparation guide. D three: Unrealistic job expectations. D four: Delulu about my dream job.
+
+[00:00:41.984]: Document first means opening a record and reading its words. Term first reverses the direction: begin with a dictionary term, then look up its posting list. A posting identifies a document containing that analysed term.
+
+[00:00:57.355]: In the selected dictionary, delulu points to D one and D four. Interview points to D one and D two. Job points to all four. These are selected lists, not every term in the collection.
+
+[00:01:10.482]: For delulu AND interview, intersect the two lists. D one is the shared identifier, so D one passes. The engine does not need to reread all four texts to make this Boolean decision.
+
+[00:01:24.514]: Use OR instead, and combine the identifiers: D one, D two and D four. Use delulu NOT interview, and remove the overlap: only D four remains.
+
+[00:01:37.098]: The same posting lists support different admission rules. The dictionary tells you which lists to consult. The Boolean operator tells you how to combine them. Neither step, by itself, decides the best order for the resulting records.
+
+[00:01:51.987]: Two properties make this efficient. Selective access goes directly to the query terms' lists instead of scanning every document. Rare terms tend to have shorter lists. Ordered access keeps identifiers sorted, so intersection can move forwards through the lists.
+
+[00:02:10.413]: Our moving pointers compare identifiers, advance the smaller one, and retain an equal identifier. Appendix C develops the fuller mechanism. This is an algorithm illustration, not a universal response-time promise.
+
+[00:02:27.055]: Real postings may also record term frequency, the field containing a term and its positions. These additions support scoring, field weighting, phrase searching, proximity and highlighting. A list of identifiers is the simplest teaching view.
+
+[00:02:44.810]: The analysis that created the dictionary also affects these entries and the collection statistics used by later lexical ranking methods. Text analysis has shaped the evidence before a ranking formula ever runs.
+
+[00:02:59.619]: In search engineering, full-text search names a capability for searching natural-language text fields. Those fields might contain titles and abstracts, selected passages or OCR text. They need not contain a complete publication.
+
+[00:03:15.514]: Conversely, possessing a complete article does not guarantee every part is indexed. The label also specifies no single admission rule or ranking method. Ask which text and units are searchable, how analysis treats them, and how matches are admitted and ranked.
+
+[00:03:33.936]: We can now follow the whole chain: text, tokens, analysed terms, a dictionary with posting lists, and Boolean set operations. Compatible analysis matters on both document and query sides.
+
+[00:03:48.110]: The result is an eligible set. To order it by estimated relevance, the system still needs a scoring rule. That is Chapter Three's question: how does a lexical system rank the records that got through?
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 2.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#boolean-admission
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

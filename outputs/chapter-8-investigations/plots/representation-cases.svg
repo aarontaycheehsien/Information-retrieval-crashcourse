@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="403.2pt" viewBox="0 0 1008 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Original vector teaching illustration; not a model measurement</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 1008 403.2 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #eee9e0"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 35.28 132.056064 
+L 260.2656 132.056064 
+L 260.2656 91.28448 
+L 35.28 91.28448 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="147.7728" y="116.085272" transform="rotate(-0 147.7728 116.085272)">Case</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 260.2656 132.056064 
+L 382.1328 132.056064 
+L 382.1328 91.28448 
+L 260.2656 91.28448 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="321.1992" y="116.085272" transform="rotate(-0 321.1992 116.085272)">Shape</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 382.1328 132.056064 
+L 616.4928 132.056064 
+L 616.4928 91.28448 
+L 382.1328 91.28448 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="499.3128" y="116.085272" transform="rotate(-0 499.3128 116.085272)">Rule / provenance</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 616.4928 132.056064 
+L 972.72 132.056064 
+L 972.72 91.28448 
+L 616.4928 91.28448 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="794.6064" y="116.085272" transform="rotate(-0 794.6064 116.085272)">Evidence coordinates</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 35.28 172.827648 
+L 260.2656 172.827648 
+L 260.2656 132.056064 
+L 35.28 132.056064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="147.7728" y="156.856856" transform="rotate(-0 147.7728 156.856856)">BM25</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 260.2656 172.827648 
+L 382.1328 172.827648 
+L 382.1328 132.056064 
+L 260.2656 132.056064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="321.1992" y="156.856856" transform="rotate(-0 321.1992 156.856856)">Sparse</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 382.1328 172.827648 
+L 616.4928 172.827648 
+L 616.4928 132.056064 
+L 382.1328 132.056064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="499.3128" y="156.856856" transform="rotate(-0 499.3128 156.856856)">Specified formula</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 616.4928 172.827648 
+L 972.72 172.827648 
+L 972.72 132.056064 
+L 616.4928 132.056064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="794.6064" y="156.856856" transform="rotate(-0 794.6064 156.856856)">Vocabulary terms</text>
+    </g>
+    <g id="patch_10">
+     <path d="M 35.28 213.599232 
+L 260.2656 213.599232 
+L 260.2656 172.827648 
+L 35.28 172.827648 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="147.7728" y="197.62844" transform="rotate(-0 147.7728 197.62844)">Bibliographic facts</text>
+    </g>
+    <g id="patch_11">
+     <path d="M 260.2656 213.599232 
+L 382.1328 213.599232 
+L 382.1328 172.827648 
+L 260.2656 172.827648 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="321.1992" y="197.62844" transform="rotate(-0 321.1992 197.62844)">Dense here</text>
+    </g>
+    <g id="patch_12">
+     <path d="M 382.1328 213.599232 
+L 616.4928 213.599232 
+L 616.4928 172.827648 
+L 382.1328 172.827648 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_11">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="499.3128" y="197.62844" transform="rotate(-0 499.3128 197.62844)">Recorded values</text>
+    </g>
+    <g id="patch_13">
+     <path d="M 616.4928 213.599232 
+L 972.72 213.599232 
+L 972.72 172.827648 
+L 616.4928 172.827648 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_12">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="794.6064" y="197.62844" transform="rotate(-0 794.6064 197.62844)">Year, pages, counts</text>
+    </g>
+    <g id="patch_14">
+     <path d="M 35.28 254.370816 
+L 260.2656 254.370816 
+L 260.2656 213.599232 
+L 35.28 213.599232 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="147.7728" y="238.400024" transform="rotate(-0 147.7728 238.400024)">SPLADE-style</text>
+    </g>
+    <g id="patch_15">
+     <path d="M 260.2656 254.370816 
+L 382.1328 254.370816 
+L 382.1328 213.599232 
+L 260.2656 213.599232 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="321.1992" y="238.400024" transform="rotate(-0 321.1992 238.400024)">Sparse</text>
+    </g>
+    <g id="patch_16">
+     <path d="M 382.1328 254.370816 
+L 616.4928 254.370816 
+L 616.4928 213.599232 
+L 382.1328 213.599232 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_15">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="499.3128" y="238.400024" transform="rotate(-0 499.3128 238.400024)">Learnt mapping</text>
+    </g>
+    <g id="patch_17">
+     <path d="M 616.4928 254.370816 
+L 972.72 254.370816 
+L 972.72 213.599232 
+L 616.4928 213.599232 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_16">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="794.6064" y="238.400024" transform="rotate(-0 794.6064 238.400024)">Subword vocabulary</text>
+    </g>
+    <g id="patch_18">
+     <path d="M 35.28 295.1424 
+L 260.2656 295.1424 
+L 260.2656 254.370816 
+L 35.28 254.370816 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_17">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="147.7728" y="279.171608" transform="rotate(-0 147.7728 279.171608)">Dense bi-encoder</text>
+    </g>
+    <g id="patch_19">
+     <path d="M 260.2656 295.1424 
+L 382.1328 295.1424 
+L 382.1328 254.370816 
+L 260.2656 254.370816 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_18">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="321.1992" y="279.171608" transform="rotate(-0 321.1992 279.171608)">Dense</text>
+    </g>
+    <g id="patch_20">
+     <path d="M 382.1328 295.1424 
+L 616.4928 295.1424 
+L 616.4928 254.370816 
+L 382.1328 254.370816 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_19">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="499.3128" y="279.171608" transform="rotate(-0 499.3128 279.171608)">Learnt mapping</text>
+    </g>
+    <g id="patch_21">
+     <path d="M 616.4928 295.1424 
+L 972.72 295.1424 
+L 972.72 254.370816 
+L 616.4928 254.370816 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_20">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="794.6064" y="279.171608" transform="rotate(-0 794.6064 279.171608)">Distributed latent features</text>
+    </g>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="504" y="28.32" transform="rotate(-0 504 28.32)">Independent questions about representations</text>
+   </g>
+  </g>
+  <g id="text_22">
+   <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6e6b63" x="55.44" y="385.056" transform="rotate(-0 55.44 385.056)">Density alone establishes no semantic capability. Learned sparse expansions and latent features depend on training.</text>
+  </g>
+ </g>
+</svg>

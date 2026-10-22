@@ -1,0 +1,319 @@
+1
+00:00:00,700 --> 00:00:03,438
+Several papers satisfy the same Boolean
+
+2
+00:00:03,458 --> 00:00:05,977
+conditions. They are all eligible.
+
+3
+00:00:06,126 --> 00:00:08,361
+Does that make them equally good matches?
+
+4
+00:00:08,536 --> 00:00:11,222
+And if not, what evidence should put one
+
+5
+00:00:11,242 --> 00:00:12,574
+paper above another?
+
+6
+00:00:12,724 --> 00:00:13,734
+Make a prediction.
+
+7
+00:00:16,152 --> 00:00:18,980
+Ranked retrieval assigns graded scores and
+
+8
+00:00:19,000 --> 00:00:20,435
+orders the candidates.
+
+9
+00:00:20,623 --> 00:00:22,575
+That describes an operation, not a
+
+10
+00:00:22,595 --> 00:00:24,843
+formula. Scores might use lexical
+
+11
+00:00:24,863 --> 00:00:28,116
+evidence, vectors or several signals.
+
+12
+00:00:28,278 --> 00:00:31,247
+Chapter Three examines one lexical method:
+
+13
+00:00:31,397 --> 00:00:33,103
+BM twenty-five.
+
+14
+00:00:34,013 --> 00:00:37,155
+BM twenty-five adds weighted evidence from
+
+15
+00:00:37,175 --> 00:00:39,655
+analysed terms shared by the query and
+
+16
+00:00:39,675 --> 00:00:43,237
+document. For delulu plus job, the text
+
+17
+00:00:43,257 --> 00:00:45,505
+unrealistic job expectations has a job
+
+18
+00:00:45,525 --> 00:00:48,663
+match. It has no delulu match, so that
+
+19
+00:00:48,683 --> 00:00:50,505
+term contributes nothing.
+
+20
+00:00:51,088 --> 00:00:53,029
+Matching another query term can add
+
+21
+00:00:53,049 --> 00:00:54,394
+another contribution.
+
+22
+00:00:54,582 --> 00:00:56,997
+But matches are not equally informative.
+
+23
+00:00:57,160 --> 00:00:58,815
+The next question is how much a term
+
+24
+00:00:58,835 --> 00:01:01,186
+discriminates among records in the
+
+25
+00:01:01,206 --> 00:01:04,356
+collection. No query expansion is assumed
+
+26
+00:01:04,376 --> 00:01:05,489
+in this example.
+
+27
+00:01:06,397 --> 00:01:08,809
+Use the chapter's illustrative collection
+
+28
+00:01:08,829 --> 00:01:10,200
+of ten records.
+
+29
+00:01:10,362 --> 00:01:12,043
+Delulu occurs in two.
+
+30
+00:01:12,231 --> 00:01:13,538
+Job occurs in nine.
+
+31
+00:01:13,700 --> 00:01:16,386
+All else equal, which matching term
+
+32
+00:01:16,432 --> 00:01:18,357
+narrows the possibilities more?
+
+33
+00:01:20,061 --> 00:01:22,506
+The rarer term usually receives more
+
+34
+00:01:22,526 --> 00:01:25,237
+weight through inverse document frequency,
+
+35
+00:01:25,490 --> 00:01:28,421
+or IDF. Informative here means
+
+36
+00:01:28,441 --> 00:01:30,894
+discriminating among documents.
+
+37
+00:01:31,070 --> 00:01:32,738
+It does not guarantee that a paper is
+
+38
+00:01:32,758 --> 00:01:35,366
+useful for the reader's actual task.
+
+39
+00:01:36,280 --> 00:01:38,609
+Document frequency counts how many
+
+40
+00:01:38,629 --> 00:01:40,258
+documents contain the term.
+
+41
+00:01:40,433 --> 00:01:43,003
+Repeating a word twenty times in one paper
+
+42
+00:01:43,023 --> 00:01:45,516
+still adds just one document to that
+
+43
+00:01:45,536 --> 00:01:48,944
+count. Term frequency counts occurrences
+
+44
+00:01:48,964 --> 00:01:51,740
+inside the individual document.
+
+45
+00:01:52,288 --> 00:01:53,683
+Those are different signals.
+
+46
+00:01:53,845 --> 00:01:56,196
+Collection rarity supplies a weight.
+
+47
+00:01:56,358 --> 00:01:58,800
+Within-document repetition supplies
+
+48
+00:01:58,820 --> 00:02:01,840
+evidence whose contribution will saturate.
+
+49
+00:02:02,003 --> 00:02:04,483
+Confusing the two counts makes the score
+
+50
+00:02:04,503 --> 00:02:06,054
+harder to interpret.
+
+51
+00:02:06,971 --> 00:02:09,825
+For a labeled positive-IDF variant, the
+
+52
+00:02:09,845 --> 00:02:12,454
+two-of-ten term gets a weight of about one
+
+53
+00:02:12,474 --> 00:02:13,549
+point four eight.
+
+54
+00:02:13,724 --> 00:02:16,127
+The nine-of-ten term gets about zero point
+
+55
+00:02:16,147 --> 00:02:19,129
+one five. Production variants can differ;
+
+56
+00:02:19,317 --> 00:02:21,526
+these are calculated teaching values.
+
+57
+00:02:22,062 --> 00:02:24,129
+At average document length, with one
+
+58
+00:02:24,149 --> 00:02:26,332
+occurrence of each term, the frequency
+
+59
+00:02:26,352 --> 00:02:29,798
+factor is one. Add the two contributions:
+
+60
+00:02:29,844 --> 00:02:31,783
+about one point six three.
+
+61
+00:02:31,958 --> 00:02:34,283
+Different repetition and length change
+
+62
+00:02:34,303 --> 00:02:35,700
+those contributions.
+
+63
+00:02:35,875 --> 00:02:38,562
+The total is a score, not a probability of
+
+64
+00:02:38,582 --> 00:02:39,476
+relevance.
+
+65
+00:02:40,365 --> 00:02:42,674
+Now consider the text unrealistic
+
+66
+00:02:42,694 --> 00:02:45,716
+expectations. It shares neither analysed
+
+67
+00:02:45,736 --> 00:02:48,408
+query term, delulu nor job.
+
+68
+00:02:48,558 --> 00:02:51,926
+In our plain, unexpanded lexical example,
+
+69
+00:02:52,140 --> 00:02:54,877
+neither term contributes evidence.
+
+70
+00:02:55,053 --> 00:02:58,305
+Query expansion could change what matches;
+
+71
+00:02:58,467 --> 00:03:01,051
+the scoring formula alone does not bridge
+
+72
+00:03:01,071 --> 00:03:02,635
+every vocabulary gap.
+
+73
+00:03:03,195 --> 00:03:05,414
+A high score is also not a verdict about
+
+74
+00:03:05,434 --> 00:03:08,146
+usefulness. A well-matching paper can
+
+75
+00:03:08,166 --> 00:03:11,097
+concern the wrong population or fail to
+
+76
+00:03:11,117 --> 00:03:12,295
+answer the task.
+
+77
+00:03:12,457 --> 00:03:15,581
+Ask about match, rarity, repetition and
+
+78
+00:03:15,601 --> 00:03:18,133
+length. The next film tests why twenty
+
+79
+00:03:18,153 --> 00:03:20,723
+repetitions do not earn twenty times the
+
+80
+00:03:20,743 --> 00:03:21,444
+credit.

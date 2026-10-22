@@ -1,0 +1,36 @@
+Same vectors, different winner
+
+[00:00:00.700]: A query and three candidate passages already have vectors. We compare them, and A comes first. Compare the very same vectors another way, and B comes first. No passage changed. No new relevance judgment arrived. What changed? Make a prediction.
+
+[00:00:21.776]: The numerical comparison rule changed. A dense encoder supplies representations, but the search system still needs a rule for comparing them. Cosine similarity and unnormalised dot product can give different leaders.
+
+[00:00:36.651]: A conventional bi-encoder represents each passage independently of the incoming query. Its passage vector can be calculated in advance and stored. When a query arrives, the system encodes that query and compares its vector with the stored ones.
+
+[00:00:54.034]: Query and passage encoders can share weights or use distinct parameters, normally trained together for retrieval. Our drawable space has just two anonymous coordinates. Real embeddings can have hundreds or thousands; these numbers are a declared toy, not model measurements.
+
+[00:01:13.658]: Think of each vector as an arrow from the same origin. Cosine compares the angle between arrows and divides out both lengths. A smaller angle means better alignment. Stretching an arrow in the same direction leaves its cosine unchanged.
+
+[00:01:29.874]: Same direction gives one. A right angle gives zero. Beyond ninety degrees the value becomes negative, reaching minus one for opposite directions. These are mathematical landmarks, not percentages of relevance or truth.
+
+[00:01:46.690]: Dot product multiplies matching coordinates and adds the products. Our query is one, zero. A is zero point nine, zero point three. B is one, one. A is better aligned, but B is longer.
+
+[00:02:01.992]: Their cosine scores are approximately zero point nine four nine and zero point seven zero seven, so A leads. Their unnormalised dot products are zero point nine and one, so B leads. C has a negative score under both rules.
+
+[00:02:17.844]: Now normalise the query and every candidate to length one. Dot product and cosine become numerically identical, and A leads under both rules. Removing magnitude removed the source of disagreement.
+
+[00:02:32.127]: This is a mathematical comparison, not a recommendation to change a production model's settings casually. An encoder may have learnt to use magnitude. The comparison rule and normalisation should match its training setup.
+
+[00:02:47.536]: Add a third coordinate: x, y, z. Add hundreds more. Dot product still multiplies matching coordinate pairs and adds them. Cosine still divides by both vector lengths. Higher dimensionality does not require a new comparison idea.
+
+[00:03:04.135]: Our axes are anonymous toy coordinates, not named concepts. A flat diagram cannot show a high-dimensional representation directly. A vector score also depends on the model and the comparison rule that produced it.
+
+[00:03:18.794]: The two orderings tell us which candidates scored highest under each rule. Neither establishes whether a passage serves a reader's task, context or inclusion criteria. Scores from different models or searches need not be comparable.
+
+[00:03:34.054]: Ask which model, preprocessing, normalisation and similarity rule are used together. Then evaluate the results against your information need. The next film keeps a rule fixed and asks a different question: which stored vectors did the search actually examine?
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 7.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#dense-at-scale
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8821/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8821/01-three-doors-one-index/01-three-doors-one-index.mp4",
+      "duration": 220.733333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 89,
+      "seek_seconds": 110.366666,
+      "byte_range": "bytes 0-1023/16766980",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8821/02-one-bad-word-two-failures/02-one-bad-word-two-failures.mp4",
+      "duration": 226,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 89,
+      "seek_seconds": 113,
+      "byte_range": "bytes 0-1023/19225521",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8821/03-four-lives-of-a-missing-word/03-four-lives-of-a-missing-word.mp4",
+      "duration": 277.166667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 109,
+      "seek_seconds": 138.583333,
+      "byte_range": "bytes 0-1023/23596085",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

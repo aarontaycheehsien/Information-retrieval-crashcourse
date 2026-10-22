@@ -1,0 +1,201 @@
+{
+  "series": "Agentic search",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#agentic-search",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#agentic-search",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-who-chooses-the-next-search",
+  "title": "Who chooses the next search?",
+  "subtitle": "The control arrangement is different from the retrieval machinery.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "control_hook",
+      "title": "The query changed. Who chose the next action?",
+      "source_anchor": "fixed-adaptive-and-agentic-are-not-the-same-thing",
+      "visual": "control_hook",
+      "narration": [
+        "A system searches, reads its top results, builds a different query, and searches again. A model may help choose the words. Is this agentic search? Pause and ask a more precise question: who decided that another search would happen?",
+        "Two pass pseudo relevance feedback can follow exactly that prescribed sequence every time. Its query contents adapt to the first ranking while its next action stays fixed. Result dependent content does not, by itself, establish agentic control."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "three_controls",
+      "title": "Fixed, adaptive and agentic name different controls",
+      "source_anchor": "tbl-12-1",
+      "visual": "three_controls",
+      "narration": [
+        "A fixed workflow follows a prescribed sequence. An adaptive workflow selects among branches explicitly enumerated by its designer. A rule, classifier or model may choose that branch. Using a model for the choice does not settle the category.",
+        "Agentic search lets a model plan at least part of a multi action retrieval trajectory from the task and its observations. Its tools are predefined too. The distinction is whether it assembles a sequence, rather than only selecting enumerated branches."
+      ]
+    },
+    {
+      "id": "harness_and_brief",
+      "title": "The brief specifies the task; the harness bounds the actions",
+      "source_anchor": "agentic-search",
+      "visual": "harness_and_brief",
+      "narration": [
+        "The task brief supplies scope, criteria, sources, coverage, stopping conditions and the required record. The harness defines available operations, reachable sources, budgets and limits. A tool means a callable operation, such as searching or fetching references, rather than an entire licensed product.",
+        "The model works within those permissions. Further reasoning cannot supply an unavailable operation or inaccessible source."
+      ]
+    },
+    {
+      "id": "output_separate",
+      "title": "A long report does not establish agency",
+      "source_anchor": "deep-search-can-still-be-agentic-search",
+      "visual": "output_separate",
+      "narration": [
+        "Output format is a separate property. A scripted deep search can return records after repeated retrieval. An agentic search can also return records. Either fixed or model planned retrieval can precede a generated report or answer.",
+        "Length, fluency and citations show generation, not who controlled the search. Basic RAG retrieves then generates. Agentic RAG lets a model choose retrieval actions towards a generated response; agentic search is broader and need not generate prose."
+      ]
+    },
+    {
+      "id": "retrieval_axes",
+      "title": "Control does not replace the retriever\u2019s scoring rule",
+      "source_anchor": "agency-changes-the-sequence-not-the-retrieval",
+      "visual": "retrieval_axes",
+      "narration": [
+        "Hybrid describes contributing retrieval routes. Multi stage describes how operations follow earlier outputs. Agentic describes who chose the sequence. These properties can combine, but none automatically establishes the others.",
+        "Model planned repeated BM twenty five searches can be agentic without being hybrid. Fixed lexical and dense retrieval followed by fusion can be hybrid and multi stage without being agentic. The controller changes which operations run; it does not change BM twenty five\u2019s scoring formula."
+      ]
+    },
+    {
+      "id": "mode_evidence",
+      "title": "Assess the mode, not the brand",
+      "source_anchor": "where-current-academic-tools-actually-sit",
+      "visual": "mode_evidence",
+      "narration": [
+        "The chapter\u2019s April twenty twenty six account places Asta Find Paper in a semi rigid, predefined flow shaped by model decisions. It contrasts Undermind\u2019s original deep search with Projects, which the account describes as dynamically selecting and chaining tools.",
+        "These are dated reference points along a continuum, not new product tests. One vendor can offer different control arrangements in different modes. Iteration or a model inside a pipeline is insufficient evidence of an independently planned trajectory."
+      ]
+    },
+    {
+      "id": "documentation_gate",
+      "title": "A marketing label and a documented mechanism can differ",
+      "source_anchor": "placing-a-tool-from-its-documentation",
+      "visual": "documentation_gate",
+      "narration": [
+        "An April twenty twenty six Web of Science Research Assistant post used fully agentic while describing automatic choice among task routes. That description is compatible with adaptive control; the post does not settle whether novel sequences can be composed.",
+        "It also documents user review and approval of a proposed strategy before retrieval, followed by an Advanced Search expression. That approval gate is a concrete control property. It is different from deciding when an ongoing search has enough evidence to stop."
+      ]
+    },
+    {
+      "id": "choose_for_task",
+      "title": "Choose control for the procedure the task requires",
+      "source_anchor": "what-agency-costs-and-what-it-buys",
+      "visual": "choose_for_task",
+      "narration": [
+        "For a known task with a sound established procedure, fixed or adaptive control may be the better bargain. Agentic control can attempt an unanticipated sequence using available actions, with added cost, latency and variation between runs.",
+        "Inspect the required sequence, available actions and evidence of who chose the next move. The next film examines why more iterations can preserve a blind spot just as easily as repair one."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "control_hook_0",
+      "scene": "control_hook",
+      "text": "A system searches, reads its top results, builds a different query, and searches again. A model may help choose the words. Is this agentic search? Pause and ask a more precise question: who decided that another search would happen?",
+      "gap": 1.0
+    },
+    {
+      "id": "control_hook_1",
+      "scene": "control_hook",
+      "text": "Two pass pseudo relevance feedback can follow exactly that prescribed sequence every time. Its query contents adapt to the first ranking while its next action stays fixed. Result dependent content does not, by itself, establish agentic control.",
+      "gap": 2.5
+    },
+    {
+      "id": "three_controls_0",
+      "scene": "three_controls",
+      "text": "A fixed workflow follows a prescribed sequence. An adaptive workflow selects among branches explicitly enumerated by its designer. A rule, classifier or model may choose that branch. Using a model for the choice does not settle the category.",
+      "gap": 1.0
+    },
+    {
+      "id": "three_controls_1",
+      "scene": "three_controls",
+      "text": "Agentic search lets a model plan at least part of a multi action retrieval trajectory from the task and its observations. Its tools are predefined too. The distinction is whether it assembles a sequence, rather than only selecting enumerated branches.",
+      "gap": 0.65
+    },
+    {
+      "id": "harness_and_brief_0",
+      "scene": "harness_and_brief",
+      "text": "The task brief supplies scope, criteria, sources, coverage, stopping conditions and the required record. The harness defines available operations, reachable sources, budgets and limits. A tool means a callable operation, such as searching or fetching references, rather than an entire licensed product.",
+      "gap": 1.0
+    },
+    {
+      "id": "harness_and_brief_1",
+      "scene": "harness_and_brief",
+      "text": "The model works within those permissions. Further reasoning cannot supply an unavailable operation or inaccessible source.",
+      "gap": 0.65
+    },
+    {
+      "id": "output_separate_0",
+      "scene": "output_separate",
+      "text": "Output format is a separate property. A scripted deep search can return records after repeated retrieval. An agentic search can also return records. Either fixed or model planned retrieval can precede a generated report or answer.",
+      "gap": 1.0
+    },
+    {
+      "id": "output_separate_1",
+      "scene": "output_separate",
+      "text": "Length, fluency and citations show generation, not who controlled the search. Basic RAG retrieves then generates. Agentic RAG lets a model choose retrieval actions towards a generated response; agentic search is broader and need not generate prose.",
+      "gap": 0.65
+    },
+    {
+      "id": "retrieval_axes_0",
+      "scene": "retrieval_axes",
+      "text": "Hybrid describes contributing retrieval routes. Multi stage describes how operations follow earlier outputs. Agentic describes who chose the sequence. These properties can combine, but none automatically establishes the others.",
+      "gap": 1.0
+    },
+    {
+      "id": "retrieval_axes_1",
+      "scene": "retrieval_axes",
+      "text": "Model planned repeated BM twenty five searches can be agentic without being hybrid. Fixed lexical and dense retrieval followed by fusion can be hybrid and multi stage without being agentic. The controller changes which operations run; it does not change BM twenty five\u2019s scoring formula.",
+      "gap": 0.65
+    },
+    {
+      "id": "mode_evidence_0",
+      "scene": "mode_evidence",
+      "text": "The chapter\u2019s April twenty twenty six account places Asta Find Paper in a semi rigid, predefined flow shaped by model decisions. It contrasts Undermind\u2019s original deep search with Projects, which the account describes as dynamically selecting and chaining tools.",
+      "gap": 1.0
+    },
+    {
+      "id": "mode_evidence_1",
+      "scene": "mode_evidence",
+      "text": "These are dated reference points along a continuum, not new product tests. One vendor can offer different control arrangements in different modes. Iteration or a model inside a pipeline is insufficient evidence of an independently planned trajectory.",
+      "gap": 0.65
+    },
+    {
+      "id": "documentation_gate_0",
+      "scene": "documentation_gate",
+      "text": "An April twenty twenty six Web of Science Research Assistant post used fully agentic while describing automatic choice among task routes. That description is compatible with adaptive control; the post does not settle whether novel sequences can be composed.",
+      "gap": 1.0
+    },
+    {
+      "id": "documentation_gate_1",
+      "scene": "documentation_gate",
+      "text": "It also documents user review and approval of a proposed strategy before retrieval, followed by an Advanced Search expression. That approval gate is a concrete control property. It is different from deciding when an ongoing search has enough evidence to stop.",
+      "gap": 0.65
+    },
+    {
+      "id": "choose_for_task_0",
+      "scene": "choose_for_task",
+      "text": "For a known task with a sound established procedure, fixed or adaptive control may be the better bargain. Agentic control can attempt an unanticipated sequence using available actions, with added cost, latency and variation between runs.",
+      "gap": 1.0
+    },
+    {
+      "id": "choose_for_task_1",
+      "scene": "choose_for_task",
+      "text": "Inspect the required sequence, available actions and evidence of who chose the next move. The next film examines why more iterations can preserve a blind spot just as easily as repair one.",
+      "gap": 0.65
+    }
+  ]
+}

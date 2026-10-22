@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:30.036
+Two models. But how many retrieval routes?
+
+00:00:30.036 --> 00:01:07.619
+Different representations can preserve different clues
+
+00:01:07.619 --> 00:01:37.362
+Two lists supply overlapping candidate sets
+
+00:01:37.362 --> 00:02:03.000
+One route can support several later stages
+
+00:02:03.000 --> 00:02:37.544
+Multiple routes can feed one scoring stage
+
+00:02:37.544 --> 00:03:12.022
+Parallel retrieval can feed a later reranker
+
+00:03:12.022 --> 00:03:39.203
+Choosing routes is a separate decision
+
+00:03:39.203 --> 00:04:13.800
+Ask what the hybrid label leaves unanswered

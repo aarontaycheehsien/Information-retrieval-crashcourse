@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "evaluation",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "4ff57a1b4ba4c467ccc5118ce605b63f3a4308952311009ffa23bfd4e967a868",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 14: Measuring whether retrieval worked; judgement criteria, precision/recall, fixed-pool reranking arithmetic, ranking metric goals, pooling limits and illustrative local regression rows"
+}

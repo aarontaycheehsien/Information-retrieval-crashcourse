@@ -1,0 +1,507 @@
+1
+00:00:00,700 --> 00:00:03,243
+Twenty candidate papers contain all ten
+
+2
+00:00:03,263 --> 00:00:05,163
+papers judged relevant.
+
+3
+00:00:05,325 --> 00:00:07,947
+On the first page, only two of ten are
+
+4
+00:00:07,967 --> 00:00:10,987
+relevant. Reranking adds no paper.
+
+5
+00:00:11,163 --> 00:00:14,119
+Can precision and recall both improve?
+
+6
+00:00:14,294 --> 00:00:16,980
+Pause and decide which set, and which
+
+7
+00:00:17,000 --> 00:00:19,570
+denominator, each number describes.
+
+8
+00:00:21,974 --> 00:00:24,385
+In the chapter’s controlled example, six
+
+9
+00:00:24,405 --> 00:00:26,988
+relevant papers reach the first ten after
+
+10
+00:00:27,008 --> 00:00:29,913
+reranking. Precision at ten and recall at
+
+11
+00:00:29,933 --> 00:00:33,701
+ten both rise from point two to point six.
+
+12
+00:00:33,864 --> 00:00:36,189
+Recall over the entire candidate pool
+
+13
+00:00:36,209 --> 00:00:38,573
+stays at one. The boundary makes the
+
+14
+00:00:38,593 --> 00:00:39,513
+difference.
+
+15
+00:00:40,433 --> 00:00:42,569
+Before counting, decide what relevant
+
+16
+00:00:42,589 --> 00:00:45,081
+means. The same paper may help a
+
+17
+00:00:45,101 --> 00:00:47,955
+researcher trace a method, fail to inform
+
+18
+00:00:47,975 --> 00:00:50,533
+an undergraduate seeking an overview, and
+
+19
+00:00:50,553 --> 00:00:53,212
+fail a reviewer’s inclusion criteria.
+
+20
+00:00:53,375 --> 00:00:55,636
+Those verdicts concern different needs and
+
+21
+00:00:55,656 --> 00:00:58,779
+tasks, without the paper itself changing.
+
+22
+00:00:59,343 --> 00:01:01,069
+The chapter separates algorithmic
+
+23
+00:01:01,089 --> 00:01:04,007
+estimates, topical aboutness, usefulness
+
+24
+00:01:04,027 --> 00:01:05,695
+given the reader’s knowledge, and
+
+25
+00:01:05,715 --> 00:01:08,001
+usefulness for a task in context.
+
+26
+00:01:08,164 --> 00:01:10,554
+This is a teaching simplification, not a
+
+27
+00:01:10,574 --> 00:01:12,138
+complete taxonomy.
+
+28
+00:01:12,313 --> 00:01:14,806
+A high model score is evidence the system
+
+29
+00:01:14,826 --> 00:01:17,976
+uses, not the human judgement itself.
+
+30
+00:01:18,881 --> 00:01:20,639
+A reference interview establishes what
+
+31
+00:01:20,659 --> 00:01:22,777
+would count as a useful answer.
+
+32
+00:01:22,952 --> 00:01:25,484
+Evaluation writes those criteria and
+
+33
+00:01:25,504 --> 00:01:28,654
+judgements down so systems can be compared
+
+34
+00:01:28,674 --> 00:01:30,084
+against the same ones.
+
+35
+00:01:30,246 --> 00:01:32,610
+Some test collections use mainly topical
+
+36
+00:01:32,630 --> 00:01:36,115
+criteria; others encode detailed task or
+
+37
+00:01:36,135 --> 00:01:37,481
+inclusion rules.
+
+38
+00:01:38,018 --> 00:01:40,258
+The formula cannot tell which conception
+
+39
+00:01:40,278 --> 00:01:42,861
+was used. A topically relevant paper can
+
+40
+00:01:42,881 --> 00:01:46,133
+have the wrong population, date or method,
+
+41
+00:01:46,334 --> 00:01:47,538
+or be superseded.
+
+42
+00:01:47,700 --> 00:01:50,786
+Report who judged, for which purpose, and
+
+43
+00:01:50,806 --> 00:01:53,569
+whether relevance was binary or graded.
+
+44
+00:01:53,731 --> 00:01:55,683
+The number measures agreement with those
+
+45
+00:01:55,703 --> 00:01:57,396
+operational judgements.
+
+46
+00:01:58,295 --> 00:02:00,307
+Precision divides retrieved relevant
+
+47
+00:02:00,327 --> 00:02:02,729
+papers by retrieved papers.
+
+48
+00:02:02,892 --> 00:02:06,029
+Recall divides retrieved relevant papers
+
+49
+00:02:06,049 --> 00:02:08,026
+by all relevant papers under the
+
+50
+00:02:08,046 --> 00:02:09,662
+evaluation protocol.
+
+51
+00:02:09,812 --> 00:02:12,472
+In this example the first page holds ten
+
+52
+00:02:12,492 --> 00:02:14,714
+records, and the complete relevance set
+
+53
+00:02:14,734 --> 00:02:17,884
+also has ten. The denominators happen to
+
+54
+00:02:17,904 --> 00:02:19,301
+agree numerically.
+
+55
+00:02:19,848 --> 00:02:21,622
+They still count different things.
+
+56
+00:02:21,798 --> 00:02:24,381
+Before reranking, both fractions are two
+
+57
+00:02:24,401 --> 00:02:27,126
+over ten. Afterward, both are six over
+
+58
+00:02:27,146 --> 00:02:29,703
+ten. The complete relevant set is
+
+59
+00:02:29,723 --> 00:02:30,952
+stipulated here.
+
+60
+00:02:31,166 --> 00:02:34,226
+Finding ten known seeds in a live database
+
+61
+00:02:34,246 --> 00:02:36,894
+would not establish that those are every
+
+62
+00:02:36,914 --> 00:02:38,143
+relevant paper.
+
+63
+00:02:39,029 --> 00:02:41,199
+All twenty records remain candidates
+
+64
+00:02:41,219 --> 00:02:42,500
+before and after.
+
+65
+00:02:42,662 --> 00:02:45,142
+Reranking moves relevant ones across the
+
+66
+00:02:45,162 --> 00:02:47,707
+display cutoff without increasing the
+
+67
+00:02:47,727 --> 00:02:50,426
+pool’s recall. For any later stage that
+
+68
+00:02:50,446 --> 00:02:53,699
+only processes this fixed output, excluded
+
+69
+00:02:53,719 --> 00:02:55,786
+records remain unavailable.
+
+70
+00:02:56,322 --> 00:02:58,110
+This is compatible with a better first
+
+71
+00:02:58,130 --> 00:03:01,061
+page. Extending a fixed ranking cannot
+
+72
+00:03:01,081 --> 00:03:03,935
+lower recall, but precision can rise or
+
+73
+00:03:03,955 --> 00:03:06,319
+fall as the added record changes the
+
+74
+00:03:06,339 --> 00:03:08,548
+fraction. A better ranking or
+
+75
+00:03:08,568 --> 00:03:11,345
+representation can improve both measures
+
+76
+00:03:11,365 --> 00:03:12,594
+at a chosen depth.
+
+77
+00:03:12,769 --> 00:03:14,966
+The trade is not an unavoidable law
+
+78
+00:03:14,986 --> 00:03:16,254
+between systems.
+
+79
+00:03:17,152 --> 00:03:19,640
+Hybrid routes and another retrieval round
+
+80
+00:03:19,660 --> 00:03:21,792
+can expand the cumulative pool.
+
+81
+00:03:21,967 --> 00:03:23,944
+Their recall gain comes from newly
+
+82
+00:03:23,964 --> 00:03:26,264
+contributed relevant records, before that
+
+83
+00:03:26,284 --> 00:03:27,964
+new candidate boundary.
+
+84
+00:03:28,140 --> 00:03:30,839
+Merely rearranging one existing list
+
+85
+00:03:30,859 --> 00:03:32,836
+cannot add evidence that it never
+
+86
+00:03:32,856 --> 00:03:33,725
+contained.
+
+87
+00:03:34,271 --> 00:03:37,201
+Duplicates and irrelevant additions do not
+
+88
+00:03:37,221 --> 00:03:40,152
+raise recall. They can enlarge the pool or
+
+89
+00:03:40,172 --> 00:03:42,227
+push useful records below a displayed
+
+90
+00:03:42,247 --> 00:03:45,281
+cutoff. Ask where candidate generation
+
+91
+00:03:45,301 --> 00:03:48,116
+ends, and distinguish its ceiling from
+
+92
+00:03:48,136 --> 00:03:50,345
+recall at the depth the reader actually
+
+93
+00:03:50,365 --> 00:03:53,670
+sees. A generated answer cannot recover an
+
+94
+00:03:53,690 --> 00:03:56,646
+excluded source by summarising harder.
+
+95
+00:03:57,552 --> 00:04:00,287
+Precision requires judging what came back.
+
+96
+00:04:00,423 --> 00:04:03,135
+Absolute recall also requires knowing how
+
+97
+00:04:03,155 --> 00:04:04,991
+many relevant records the collection
+
+98
+00:04:05,011 --> 00:04:08,547
+holds. In a live database, that total is
+
+99
+00:04:08,567 --> 00:04:09,900
+usually unknown.
+
+100
+00:04:10,062 --> 00:04:12,040
+A large result count does not answer the
+
+101
+00:04:12,060 --> 00:04:12,851
+question.
+
+102
+00:04:13,428 --> 00:04:15,705
+Practitioners compare the relevant union
+
+103
+00:04:15,725 --> 00:04:18,618
+found by several strategies, or test
+
+104
+00:04:18,638 --> 00:04:21,104
+recovery of known relevant seeds.
+
+105
+00:04:21,267 --> 00:04:23,837
+These are useful relative comparisons and
+
+106
+00:04:23,857 --> 00:04:25,989
+regression checks, not the true
+
+107
+00:04:26,009 --> 00:04:28,243
+denominator of an entire collection.
+
+108
+00:04:28,393 --> 00:04:30,705
+Report the scope rather than turning known
+
+109
+00:04:30,725 --> 00:04:33,450
+seed recovery into an absolute recall
+
+110
+00:04:33,470 --> 00:04:34,107
+claim.
+
+111
+00:04:35,027 --> 00:04:37,855
+Ready reference often values precision;
+
+112
+00:04:38,120 --> 00:04:41,527
+evidence reviews lean heavily on recall.
+
+113
+00:04:41,703 --> 00:04:43,719
+The chapter’s August twenty twenty six
+
+114
+00:04:43,739 --> 00:04:46,090
+methodological note keeps structured
+
+115
+00:04:46,110 --> 00:04:48,822
+database searching as the formal review
+
+116
+00:04:48,842 --> 00:04:51,515
+core, supplemented by other routes.
+
+117
+00:04:51,690 --> 00:04:54,170
+That describes practice, not an inherent
+
+118
+00:04:54,190 --> 00:04:55,870
+Boolean recall advantage.
+
+119
+00:04:56,423 --> 00:04:58,813
+Boolean strategies can miss synonyms or
+
+120
+00:04:58,833 --> 00:05:00,823
+depend on incomplete coverage.
+
+121
+00:05:00,985 --> 00:05:03,658
+Ranked boundaries can constrain BM twenty
+
+122
+00:05:03,678 --> 00:05:06,312
+five as well as dense retrieval.
+
+123
+00:05:06,475 --> 00:05:08,942
+Test the complete workflow for the task,
+
+124
+00:05:08,962 --> 00:05:11,313
+with inspectable conditions and stated
+
+125
+00:05:11,333 --> 00:05:14,393
+judgements. Next, we examine the different
+
+126
+00:05:14,413 --> 00:05:17,447
+definitions of better hidden inside
+
+127
+00:05:17,467 --> 00:05:18,683
+ranking metrics.

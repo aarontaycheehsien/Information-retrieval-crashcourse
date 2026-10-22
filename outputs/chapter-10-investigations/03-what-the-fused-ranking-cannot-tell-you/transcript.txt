@@ -1,0 +1,40 @@
+What the fused ranking cannot tell you
+
+[00:00:00.700]: Imagine one score list where first place barely beats second, and another where first place wins by a huge margin. Both order the records A, B, C. Would reciprocal rank fusion notice how different those gaps were? Pause and predict.
+
+[00:00:18.998]: It would not. Once the scores become ranks, those gaps disappear from the fusion input. Our score sets are invented illustrations. RRF preserves position and record identity, not the strength of the original numerical separation.
+
+[00:00:35.533]: The constant changes how much a high position is worth. With constant zero, first place contributes one and third contributes one third. With constant sixty, the contributions are one over sixty one and one over sixty three: much closer.
+
+[00:00:52.931]: This changes the balance between very high positions and agreement across lists. That baseline constant can be tuned for a different task. It does not set the number of retrieved or displayed records.
+
+[00:01:06.226]: Cut each supplied list from three records to two. The lexical list becomes A, B; the dense list becomes C, A. C loses its lexical third place contribution, while D disappears from the supplied candidate pool altogether.
+
+[00:01:23.300]: That is different from fusing the original four identities and displaying just A and C. In the latter case, B and D had fused scores but fell below the output boundary. Input cutoffs change what fusion receives.
+
+[00:01:38.864]: The baseline gives every supplied list equal weight. An implementation can instead multiply each list’s contributions by an explicit weight. In a declared extension of the same example, give dense contributions twice the weight of lexical contributions.
+
+[00:01:56.787]: C then narrowly overtakes A. The arithmetic is reproducible, but the weighting choice is not a quality recommendation. The hybrid label leaves those weighting choices unspecified.
+
+[00:02:10.029]: The chapter describes Web of Science Smart Search document search combining a Boolean keyword path and a semantic vector path. A parser first structures the query; combining the retrieval paths makes it hybrid.
+
+[00:02:24.089]: Scopus AI can choose lexical retrieval, vector retrieval, or both per question. A one path run combines nothing under the book’s definition. When both paths run, their results still need a fusion rule. These are pinned documentation accounts, not new service tests.
+
+[00:02:43.773]: With a blend, the prescribed evidence sources give the explanation a fixed shape. With routing, the answer to was this lexical or vector search can change from query to query. Expose the routing choice before explaining a result.
+
+[00:02:59.222]: A rule, classifier or model can choose routes. Routing alone does not establish agency. Nor does naming RRF identify the candidate architecture: the same fusion formula can combine lists produced by other arrangements.
+
+[00:03:15.774]: Elsevier’s twenty twenty four Scopus AI RAG Fusion account describes generated query variants. Vector retrieval runs for each variant, and reciprocal rank fusion merges their result lists before top results support a summary with references for claims.
+
+[00:03:35.198]: This account concerns multiple variant lists, rather than lexical and dense lists for one query. Its presence establishes neither different retrieval methods nor a later version’s route choices.
+
+[00:03:48.577]: Use RRF as a baseline and compare it with the individual retrievers on representative queries. Document the routes, candidate depths, duplicate identity handling, constant, weights, output cutoff and any later reranker. Evaluate the actual task, rather than the hybrid label.
+
+[00:04:09.088]: The result depends on which evidence survives each choice. Rank fusion avoids incompatible score scales by discarding score gaps; routing decides which lists can contribute at all. Chapter Eleven follows query interpretation, transformation and routing in more detail.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 10.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#hybrid-and-fusion
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

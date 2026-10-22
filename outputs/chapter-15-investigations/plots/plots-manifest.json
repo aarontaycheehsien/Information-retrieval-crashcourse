@@ -1,0 +1,72 @@
+{
+  "recipe_sha256": "7d15e0dd1266bd01babfcd001ccc221abc6a36ef84ef5eaa3b626467636c16c0",
+  "kind": "source reporting categories, hypothetical trace and unanswered vendor questions",
+  "new_product_tests": false,
+  "checks": {
+    "source_pipeline_areas": [
+      "Query interpretation",
+      "Candidate retrieval",
+      "Ranking and fusion",
+      "Retrieval control"
+    ],
+    "source_reporting_methods": [
+      "LLM or NLP query interpretation",
+      "Agentic orchestration",
+      "Strict Boolean",
+      "Ranked lexical retrieval, such as BM25",
+      "Single-vector dense retrieval",
+      "Learnt sparse retrieval",
+      "Late-interaction retrieval"
+    ],
+    "source_inspection_stages": [
+      "Query parsing, rewriting, expansion and routing",
+      "Boolean eligibility and filters",
+      "BM25 and other lexical scoring",
+      "Dense retrieval",
+      "Learnt sparse and late interaction",
+      "Fusion, reranking and presentation",
+      "Agentic orchestration"
+    ],
+    "source_vendor_group_sizes": [
+      2,
+      5,
+      4,
+      3,
+      2,
+      3
+    ],
+    "source_vendor_question_count": 19,
+    "hypothetical_source_trace": {
+      "original_input": "Does open access increase citations?",
+      "transformed_query": "\u201copen access\u201d AND citation*",
+      "candidate_rank": 18,
+      "candidate_count": 100,
+      "final_rank": 3,
+      "display_k": 10,
+      "internal_reranker_details": "not disclosed",
+      "actual_search_run": false
+    },
+    "backward_inspection_is_not_execution_order": true,
+    "generated_rationale_not_causal_evidence": true,
+    "vendor_answers_invented": false,
+    "new_product_tests": false,
+    "passed": true
+  },
+  "files": {
+    "component-records.png": "feeb0a490fb8c61b172ce11e83d17ecfd1ef33783bad96b0ce0f9ac4f9341256",
+    "component-records.svg": "2a4087a7cbdbd8f595e7007fc6b3c2435c6387c748e74498ba4c2b04b62b7bc9",
+    "evidence-status.png": "db59a6668ec25913560d2af2cbc9c4574da1ad24b175ce8c6f888fbe779bf92c",
+    "evidence-status.svg": "f0559f88658bfdba2c8a265303a91591bbb31837d3b9f005cea01ee8d157484c",
+    "hypothetical-trace.csv": "3d28391e4ea838bdde83edd8b9c6df0756616466f02a8d8d8959f251bc6eb8f9",
+    "inspection-limits.png": "98c0bebf58cabf812051c2b9641865691d07c758304f4e11a67e65a7eb06c957",
+    "inspection-limits.svg": "c5ae0c258c5614c59ef421836297a9530a7e656223becac1b00253b87e1f6f4e",
+    "mock-record-trace.png": "79df2a8e21ff1fed2a33e367a0c81842e8df3a08804084d53dd117354b9598b0",
+    "mock-record-trace.svg": "752e3fe41b641023ded4a65a0427293c6eb1f570d51aee1b0be10c2690dcdd25",
+    "recording-layers.png": "950dde50151aaecd4577de69e66666aca943e3146646ce76753600ce3156c99f",
+    "recording-layers.svg": "6fb3c6fa1c3a1230868a7e09409fff085c04c079c139479ca341c2559e4167e6",
+    "six-vendor-groups.png": "3ce303c87cac8d04a52feabf0406c119c967f81bd2d7e6bd255eb8e5384e2450",
+    "six-vendor-groups.svg": "bc2d0c9d7ae085372f2d0c2d5f5a49e0eea2654bff9a792d39f64f2b12523e5e",
+    "vendor-questions.csv": "62f0cc37633fa339677caff96435b96dbebe3d53cfba78d007a2823e06d053fa"
+  },
+  "passed": true
+}

@@ -1,0 +1,40 @@
+Two models do not make a hybrid
+
+[00:00:00.700]: A system retrieves candidates with BM twenty five, then scores that shortlist with a neural model. Two kinds of machinery appear in the diagram. Does that make this hybrid retrieval? Pause and count the routes that actually supplied candidates.
+
+[00:00:19.140]: Under this chapter’s definition, it is multi stage with one candidate generation route. Hybrid combines candidates or scores from multiple retrieval routes.
+
+[00:00:30.586]: Why combine retrieval routes? Their blind spots can be partly complementary. A lexical route may preserve an analysed rare identifier that a dense representation blurs. A dense route may bridge a paraphrase without a useful shared indexed term.
+
+[00:00:47.804]: Our identifier and wording examples are illustrations, not model runs. Neither route is guaranteed to recover the intended evidence. Boolean conditions can add explicit control, and all routes remain sensitive to their indexed text, analysis, representations and settings.
+
+[00:01:08.169]: The chapter gives a lexical list containing A, B, C, and a dense list containing C, A, D. A and C occur in both. B arrives only through the lexical list; D only through the dense list.
+
+[00:01:23.016]: Merging those supplied identities gives four distinct records. List only means outside the other supplied list, not irrelevant. The system still needs a rule for turning the routes’ evidence into one order.
+
+[00:01:37.912]: Follow the first arrangement: BM twenty five retrieves a shortlist, a cross encoder reranks it, and the leading records are displayed. Candidate generation still came from one route.
+
+[00:01:51.453]: This is a multi stage cascade. It is not hybrid under the book’s operational definition. Vendor terminology varies; inspect which stages actually supplied records.
+
+[00:02:03.550]: Now consider one scoring stage that blends lexical and dense candidate generation evidence into a ranking. It combines multiple retrieval routes without requiring a separate reranking cascade. That is the chapter’s example of hybrid without a multi stage arrangement.
+
+[00:02:21.566]: The distinction is about two different design questions: where candidate evidence comes from, and whether later operations process an earlier stage’s output. A merged score still needs an explicit combination rule and appropriate treatment of its inputs.
+
+[00:02:38.094]: A common combined arrangement runs lexical and dense retrieval, fuses their lists, then sends a shortlist to a richer reranker. This has multiple candidate routes and later processing stages. It is both hybrid and multi stage.
+
+[00:02:54.364]: The additional route may admit useful material missed by the other route. But the later reranker still inherits the merged candidate boundary. Neither it nor an answer writer can inspect a record omitted by every earlier route without another retrieval operation.
+
+[00:03:12.572]: A blend runs prescribed paths and combines what they return. Routing chooses which path or paths to run for this query: lexical, dense, or both. If both supply lists, those lists still need to be combined.
+
+[00:03:27.767]: A one route run combines nothing under this definition, even if the product has several available retrievers. Routing may be controlled by a rule, classifier or model.
+
+[00:03:39.753]: For a concrete explanation, ask which candidate routes ran, what text each searched, how deep each supplied list was, how duplicate identities were reconciled, and what rule combined the evidence.
+
+[00:03:53.374]: Hybrid retrieval is not a quality guarantee. It depends on the evidence preserved, the allowed candidate depths and the combination rule. The next film follows four records through reciprocal rank fusion, a simple baseline that uses positions instead of unlike raw scores.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 10.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#hybrid-and-fusion
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

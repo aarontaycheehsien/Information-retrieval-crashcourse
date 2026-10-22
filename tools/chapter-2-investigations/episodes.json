@@ -1,0 +1,114 @@
+{
+  "series": "Boolean admission and the inverted index",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#boolean-admission",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#boolean-admission",
+  "voice": {"name": "en-US-AndrewMultilingualNeural", "rate": "-3%", "pitch": "+0Hz"},
+  "episodes": [
+    {
+      "id": "01-the-word-that-opened-the-gate", "title": "The word that opened the gate", "subtitle": "One small edit can change who gets in.", "accent": "blue",
+      "scenes": [
+        {"id": "prediction", "title": "An AI suggests one more alternative", "source_anchor": "strict-boolean-search-words-as-admission-rules", "visual": "prediction", "narration": [
+          "You have a carefully built Boolean search. An AI suggests one more alternative word. Is this just a small change to how results are scored? Or could it change which records are allowed into the results at all? Make a prediction.",
+          "In a formal Boolean strategy, an OR alternative can open another route into the eligible set. The new word does not merely receive a low weight. It changes an admission rule."
+        ], "pause_before_second": 2.5},
+        {"id": "and", "title": "AND: a record must satisfy both", "source_anchor": "strict-boolean-search-words-as-admission-rules", "visual": "and_gate", "narration": [
+          "Use the chapter's four tiny records. D one and D four contain delulu. All four contain job after lowercasing. For delulu AND job, a record must satisfy both conditions. D one and D four pass.",
+          "This is an intersection: keep identifiers shared by the sets. D two and D three satisfy job but fail the delulu condition. Strict Boolean retrieval has membership, not almost-membership."
+        ]},
+        {"id": "or", "title": "OR: alternatives, including both", "source_anchor": "strict-boolean-search-words-as-admission-rules", "visual": "or_gate", "narration": [
+          "Now ask for delulu OR unrealistic. Delulu reaches D one and D four. Unrealistic reaches D three. OR combines the sets, so D one, D three and D four are eligible.",
+          "OR includes records satisfying either condition, including both. Adding an alternative can widen eligibility. It does not, by itself, establish whether the extra records help with your information need."
+        ]},
+        {"id": "not", "title": "NOT: remove the excluded set", "source_anchor": "boolean-treats-postings-as-sets", "visual": "not_gate", "narration": [
+          "Try delulu NOT interview. Start with D one and D four. Interview occurs in D one and D two, so subtract the overlap. D four remains.",
+          "The rule follows the expressed condition, not your intention. If an otherwise useful record contains the excluded term, it can disappear too. Boolean matching still needs to be judged against the purpose of the search."
+        ]},
+        {"id": "expansion", "title": "A weak alternative changes admission", "source_anchor": "poor-synonym-expansion-title", "visual": "expansion", "narration": [
+          "The chapter expands delulu into delulu OR unrealistic OR irrational OR foolish. Suppose foolish is a poor alternative for your particular need. Adding it can admit records that contain foolish but none of the better expressions.",
+          "Our extra record E is invented to illustrate that possibility. Ranking may push a weak match down, but Boolean has already admitted it. Inspect an LLM's proposed alternatives before adding them to a formal strategy."
+        ]},
+        {"id": "compulsory", "title": "A compulsory term can close the gate", "source_anchor": "strict-boolean-search-words-as-admission-rules", "visual": "compulsory", "narration": [
+          "The reverse error is harder for ranking to repair. Change delulu into delulu AND interview. D one passes. D four does not, because it has no indexed interview term in this example.",
+          "If D four is useful for your purpose, ranking this eligible set cannot bring it back. A new search could change the conditions. Reordering the admitted records cannot change who was admitted."
+        ]},
+        {"id": "order", "title": "Admission and order are separate decisions", "source_anchor": "boolean-matching-in-practice-title", "visual": "order", "narration": [
+          "Boolean logic alone supplies no graded relevance score and no rule for which eligible record should come first. A separate ranking method can order the admitted set. Eligibility and usefulness remain different questions.",
+          "And satisfying a condition is not always literal string identity. Analysis, fields, phrases and other database rules shape matching first. Chapter Two's next question is what happens to your words before the gate ever sees them."
+        ]}
+      ]
+    },
+    {
+      "id": "02-the-word-you-never-searched", "title": "The word you never searched", "subtitle": "The text you see and the term looked up can differ.", "accent": "teal",
+      "scenes": [
+        {"id": "prediction", "title": "You type job. The record says jobs.", "source_anchor": "compatible-analysis-title", "visual": "prediction", "narration": [
+          "You type job. The record on screen contains jobs. Can an ordinary lexical search match them? If it can, does that mean the system used semantic search? Take a moment.",
+          "It can match when text analysis brings the forms to a compatible indexed term. That does not require dense retrieval. The important comparison is between the processed terms, not just the visible spellings."
+        ], "pause_before_second": 2.5},
+        {"id": "tokens", "title": "First choose the boundaries", "source_anchor": "before-the-index-text-becomes-tokens", "visual": "tokens", "narration": [
+          "Follow the chapter's sample: Delulu about jobs, followed by an exclamation mark. Its illustrative tokenizer makes four units: Delulu, about, jobs, and the punctuation. Each unit is a token.",
+          "Tokens are not always whole words. They can be punctuation, parts of words, characters or other units. Names, hyphens, identifiers and languages with different boundary conventions require choices. Tokenisation divides the string; it is only one step in text analysis."
+        ]},
+        {"id": "analysis", "title": "Then decide which terms survive", "source_anchor": "tbl-2-1", "visual": "analysis", "narration": [
+          "In this example, case normalisation lowercases Delulu. Optional removal drops about and the exclamation mark. Optional stemming changes jobs to job. The final indexed terms are delulu and job.",
+          "These are separate operations, not a universal recipe. Another analyser might retain about, preserve jobs or keep an entire value in a keyword field. Never assume every displayed word becomes a searchable term."
+        ]},
+        {"id": "morphology", "title": "A matching key or a dictionary form?", "source_anchor": "after-tokenisation-stemming-and-lemmatisation", "visual": "morphology", "narration": [
+          "Stemming uses rules or heuristics to reduce forms. Studies, studying and studied might become studi. That matching key need not be a dictionary word. Lemmatisation uses vocabulary and morphology to choose a dictionary form, such as study.",
+          "Grammar still matters: adjectival better may become good. These outputs are illustrative, not guaranteed. Different algorithms, languages, dictionaries and fields can behave differently, or apply neither process."
+        ]},
+        {"id": "risks", "title": "Convergence helps—and can go wrong", "source_anchor": "after-tokenisation-stemming-and-lemmatisation", "visual": "risks", "narration": [
+          "When related grammatical forms meet at one term, useful matches can become possible. Over-stemming can also collapse unrelated words and lose precision. Under-stemming leaves related forms separate and can miss a useful match.",
+          "An incorrect grammatical interpretation can also harm lemmatisation. Neither method is synonym expansion, controlled-vocabulary mapping or a guarantee of meaning. Test the analysis on the collection and fields you actually search."
+        ]},
+        {"id": "compatibility", "title": "Two analysers must meet at lookup", "source_anchor": "compatible-analysis-title", "visual": "compatibility", "narration": [
+          "On the document side, jobs may be stored as indexed job. On the query side, job may remain job. Both sides consult the same dictionary entry, so the document can match despite the different surface form.",
+          "Now let the index store only jobs while the query looks up only job. Without another mapping, that document is missed. No error message is required. Query and document analysis need to be compatible, even when their operations are not identical."
+        ]},
+        {"id": "truncation", "title": "Truncation is another operation", "source_anchor": "after-tokenisation-stemming-and-lemmatisation", "visual": "truncation", "narration": [
+          "User-entered truncation, such as librar star, is separate from stemming and lemmatisation. Its expansion depends on platform syntax and indexed forms. If related words unexpectedly fail to match, inspect that analysis and expansion before blaming AND or OR.",
+          "Fields can differ too. A title-and-abstract field might reduce grammatical forms, while a code, exact name or identifier deliberately preserves the original value. Ask what was indexed, how it was analysed, and what the query actually looked up."
+        ]}
+      ]
+    },
+    {
+      "id": "03-search-without-rereading", "title": "Search without rereading the papers", "subtitle": "Reverse the map: start with a term, follow its records.", "accent": "red",
+      "scenes": [
+        {"id": "prediction", "title": "Must the engine read every record again?", "source_anchor": "how-boolean-search-uses-an-inverted-index", "visual": "prediction", "narration": [
+          "A collection may contain hundreds of millions of records. Must a Boolean search reread all of them whenever you type a query? Imagine doing that for every new search.",
+          "An inverted index provides a different route. Start from an analysed term and follow its pointers to records containing it. Our four-record illustration shows the mechanism; it is not a speed benchmark."
+        ], "pause_before_second": 2.0},
+        {"id": "records", "title": "One collection, two directions", "source_anchor": "from-analysed-tokens-to-a-term-first-map", "visual": "records", "narration": [
+          "The chapter starts with D one: Delulu job interview expectations. D two: Job interview preparation guide. D three: Unrealistic job expectations. D four: Delulu about my dream job.",
+          "Document first means opening a record and reading its words. Term first reverses the direction: begin with a dictionary term, then look up its posting list. A posting identifies a document containing that analysed term."
+        ]},
+        {"id": "postings", "title": "The identifiers do the work", "source_anchor": "records-to-postings-title", "visual": "postings", "narration": [
+          "In the selected dictionary, delulu points to D one and D four. Interview points to D one and D two. Job points to all four. These are selected lists, not every term in the collection.",
+          "For delulu AND interview, intersect the two lists. D one is the shared identifier, so D one passes. The engine does not need to reread all four texts to make this Boolean decision."
+        ]},
+        {"id": "sets", "title": "Change the operator, keep the index", "source_anchor": "boolean-treats-postings-as-sets", "visual": "sets", "narration": [
+          "Use OR instead, and combine the identifiers: D one, D two and D four. Use delulu NOT interview, and remove the overlap: only D four remains.",
+          "The same posting lists support different admission rules. The dictionary tells you which lists to consult. The Boolean operator tells you how to combine them. Neither step, by itself, decides the best order for the resulting records."
+        ]},
+        {"id": "speed", "title": "Go directly. Move forwards.", "source_anchor": "why-inverted-indexes-can-be-so-fast", "visual": "speed", "narration": [
+          "Two properties make this efficient. Selective access goes directly to the query terms' lists instead of scanning every document. Rare terms tend to have shorter lists. Ordered access keeps identifiers sorted, so intersection can move forwards through the lists.",
+          "Our moving pointers compare identifiers, advance the smaller one, and retain an equal identifier. Appendix C develops the fuller mechanism. This is an algorithm illustration, not a universal response-time promise."
+        ]},
+        {"id": "rich", "title": "A posting can carry more than an identifier", "source_anchor": "from-analysed-tokens-to-a-term-first-map", "visual": "rich", "narration": [
+          "Real postings may also record term frequency, the field containing a term and its positions. These additions support scoring, field weighting, phrase searching, proximity and highlighting. A list of identifiers is the simplest teaching view.",
+          "The analysis that created the dictionary also affects these entries and the collection statistics used by later lexical ranking methods. Text analysis has shaped the evidence before a ranking formula ever runs."
+        ]},
+        {"id": "fts", "title": "Full-text search does not promise full-article coverage", "source_anchor": "what-full-text-search-means-in-ir", "visual": "fts", "narration": [
+          "In search engineering, full-text search names a capability for searching natural-language text fields. Those fields might contain titles and abstracts, selected passages or OCR text. They need not contain a complete publication.",
+          "Conversely, possessing a complete article does not guarantee every part is indexed. The label also specifies no single admission rule or ranking method. Ask which text and units are searchable, how analysis treats them, and how matches are admitted and ranked."
+        ]},
+        {"id": "closing", "title": "We have a set. Who should come first?", "source_anchor": "why-inverted-indexes-can-be-so-fast", "visual": "closing", "narration": [
+          "We can now follow the whole chain: text, tokens, analysed terms, a dictionary with posting lists, and Boolean set operations. Compatible analysis matters on both document and query sides.",
+          "The result is an eligible set. To order it by estimated relevance, the system still needs a scoring rule. That is Chapter Three's question: how does a lexical system rank the records that got through?"
+        ]}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "retrieval-encoder",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "f09640e736a40ea845a25bf2d9fbd63c1d0bd3af11de102a29f2316226720aba",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 6: From language model to retrieval encoder; declared toy token IDs, pooling and cosine comparison"
+}

@@ -1,0 +1,36 @@
+The evidence you never see
+
+[00:00:00.700]: Imagine an AI search answer with three citations. You check every reference. All three papers exist. Can you now trust the answer? Hold that thought. What exactly did your check establish?
+
+[00:00:16.401]: It established that the references are real. That is useful. But it did not establish that the answer represents them faithfully, or that the system found the evidence needed to answer your question.
+
+[00:00:28.798]: A fabricated citation is one kind of failure. A reference that does not exist can be exposed by checking it. But passing that check answers only the existence question.
+
+[00:00:40.412]: Our imaginary answer passes. The three references are real within the illustration. We still have two more questions to investigate.
+
+[00:00:49.672]: A real source can still be misrepresented. In this invented example, a paper reports an uncertain result, while the answer describes it as a settled conclusion. The reference exists; the description is wrong.
+
+[00:01:04.189]: Checking the writing against the source tackles that problem. Now suppose we correct the wording and every sentence fairly represents the papers it cites. Is our investigation finished?
+
+[00:01:17.234]: Here is the harder failure to see. Another relevant paper never reaches the answer-writing step. The answer cannot show you evidence it never received. It can be fluent, carefully worded and neatly cited, yet still rest on an inadequate selection.
+
+[00:01:34.044]: The preface asks us to examine this retrieval half of the system. Faithful writing and adequate retrieval are separate questions. A citation list alone settles neither.
+
+[00:01:46.603]: Try a thought experiment. Give two writers different envelopes of papers about the same question. Both writers describe every supplied paper perfectly. One envelope omits an important piece of evidence.
+
+[00:02:00.909]: Excellent writing cannot put that missing paper back into the envelope. The illustration does not prove how any real product behaves. It shows why inspecting the final prose and inspecting evidence selection do different jobs.
+
+[00:02:16.842]: If a paper is missing from an answer, start asking questions. Was it in the searchable collection? Did it enter a candidate set? How was it ranked? What evidence was passed onward? What did the writer use?
+
+[00:02:29.789]: Those are diagnostic possibilities, not a verdict about where a real failure occurred. The goal is to locate the decision, using what the system documents and what you can actually inspect.
+
+[00:02:41.805]: Libraries license, configure, evaluate and pay for the retrieval side of these tools. Tay argues that someone in the library needs enough understanding to compare systems and ask which layer a problem belongs to.
+
+[00:02:56.328]: You do not need to become a retrieval engineer. You need to keep three questions separate: is the source real, is it represented faithfully, and was the evidence selection adequate? The papers you never see deserve a question too.
+
+Adapted from Aaron Tay, How Search Decides What You See, Preface.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#preface
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

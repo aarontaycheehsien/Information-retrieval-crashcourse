@@ -1,0 +1,67 @@
+{
+  "file": "02-the-result-that-almost-answers.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 249.76666666666668,
+  "decoded_frames": 7493,
+  "integrated_lufs": -16.1,
+  "true_peak_dbfs": -2.2,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 552 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 178 kb/s (default)",
+  "faststart": true,
+  "sha256": "138fe2c113f4e083ce8c27f88a2af6ed794ef740ce6d2faf86da89e85d5e8349",
+  "bytes": 23054510,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "19158bbaab4dc352938ba2204d5270f3ff0db626251d3953baaf40c4db2cfacf",
+  "passed": true,
+  "chapter_sha256": "f09640e736a40ea845a25bf2d9fbd63c1d0bd3af11de102a29f2316226720aba",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "2ae91f5055c846d9c0506f798ae7135735799cf73315d3725d793d7a0bde3129",
+  "embedded_captions_verified": true,
+  "caption_cues": 105,
+  "reviewed_animation_times": 79,
+  "worked_examples": {
+    "declared_toy_examples": true,
+    "measured_model_outputs": false,
+    "token_ids": [
+      3,
+      8,
+      11,
+      21,
+      11,
+      21
+    ],
+    "mean_pool": [
+      1.0,
+      1.0,
+      2.0
+    ],
+    "scores": {
+      "before": {
+        "positive": 0.17364817766693041,
+        "hard": 0.8660254037844387,
+        "easy": -0.7660444431189779
+      },
+      "after": {
+        "positive": 0.9396926207859084,
+        "hard": 0.3420201433256688,
+        "easy": -0.8660254037844387
+      }
+    },
+    "rankings": {
+      "before": [
+        "hard",
+        "positive",
+        "easy"
+      ],
+      "after": [
+        "positive",
+        "hard",
+        "easy"
+      ]
+    },
+    "scores_are_relevance_probabilities": false,
+    "passed": true
+  }
+}

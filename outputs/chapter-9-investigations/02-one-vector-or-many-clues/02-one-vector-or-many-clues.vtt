@@ -1,0 +1,334 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.255
+A passage has a crucial phrase that one
+
+00:00:03.275 --> 00:00:04.852
+pooled vector may blur.
+
+00:00:05.001 --> 00:00:07.559
+Must we jointly encode it with every new
+
+00:00:07.579 --> 00:00:09.826
+query to preserve more detail?
+
+00:00:10.014 --> 00:00:11.914
+Predict what happens if we keep a set of
+
+00:00:11.934 --> 00:00:13.538
+token vectors instead.
+
+00:00:15.953 --> 00:00:18.392
+ColBERT style late interaction takes that
+
+00:00:18.412 --> 00:00:21.098
+route. Query and document are encoded
+
+00:00:21.118 --> 00:00:23.508
+independently, but comparison happens
+
+00:00:23.528 --> 00:00:25.209
+between their token vectors.
+
+00:00:25.371 --> 00:00:27.722
+We can prepare document representations in
+
+00:00:27.742 --> 00:00:30.055
+advance while preserving more local
+
+00:00:30.075 --> 00:00:31.407
+matching evidence.
+
+00:00:32.317 --> 00:00:34.820
+A conventional bi encoder produces one
+
+00:00:34.840 --> 00:00:37.087
+pooled vector per indexed unit.
+
+00:00:37.211 --> 00:00:40.258
+ColBERT retains vectors for tokens, then
+
+00:00:40.278 --> 00:00:42.268
+compares the query’s token vectors with
+
+00:00:42.288 --> 00:00:44.292
+the document’s token vectors after
+
+00:00:44.312 --> 00:00:46.457
+encoding. The tokens are contextual
+
+00:00:46.477 --> 00:00:49.587
+representations, not simple word counts.
+
+00:00:50.141 --> 00:00:52.777
+Late interaction can retrieve candidates
+
+00:00:52.797 --> 00:00:55.921
+or rerank an existing shortlist, depending
+
+00:00:55.941 --> 00:00:58.073
+on the implementation and scale.
+
+00:00:58.248 --> 00:01:00.290
+It generally needs more storage and
+
+00:01:00.310 --> 00:01:02.957
+computation than single vector retrieval,
+
+00:01:03.080 --> 00:01:05.096
+with less query time work than a full
+
+00:01:05.116 --> 00:01:07.738
+cross encoder over the same candidates.
+
+00:01:08.626 --> 00:01:11.244
+The chapter invents a tiny similarity
+
+00:01:11.264 --> 00:01:14.195
+table. Query tokens are citation and
+
+00:01:14.215 --> 00:01:18.202
+benefit. Document tokens are open, access,
+
+00:01:18.326 --> 00:01:20.328
+citation and advantage.
+
+00:01:20.504 --> 00:01:23.757
+Citation’s row is zero point one, zero
+
+00:01:23.777 --> 00:01:26.708
+point two, zero point nine, zero point
+
+00:01:26.728 --> 00:01:27.390
+four.
+
+00:01:27.931 --> 00:01:30.952
+Benefit’s row is zero point two, zero
+
+00:01:30.972 --> 00:01:34.225
+point three, zero point five, zero point
+
+00:01:34.245 --> 00:01:37.575
+eight. Keep the maximum in each query row:
+
+00:01:37.725 --> 00:01:40.410
+zero point nine and zero point eight.
+
+00:01:40.572 --> 00:01:42.794
+Add them to get one point seven.
+
+00:01:42.969 --> 00:01:45.166
+Those invented similarities illustrate
+
+00:01:45.186 --> 00:01:47.923
+MaxSim, not model measurements.
+
+00:01:48.832 --> 00:01:51.579
+The strongest alignment for citation is
+
+00:01:51.599 --> 00:01:53.795
+the document token citation.
+
+00:01:53.958 --> 00:01:56.476
+Benefit aligns most strongly with
+
+00:01:56.496 --> 00:01:58.383
+advantage in this table.
+
+00:01:58.571 --> 00:02:00.587
+The same document token could supply
+
+00:02:00.607 --> 00:02:04.427
+maxima for several query tokens; MaxSim
+
+00:02:04.447 --> 00:02:06.836
+does not enforce one to one matching.
+
+00:02:07.405 --> 00:02:10.513
+This decomposition shows which comparisons
+
+00:02:10.533 --> 00:02:12.149
+contributed to the score.
+
+00:02:12.312 --> 00:02:13.890
+It does not explain why the learnt
+
+00:02:13.910 --> 00:02:16.622
+contextual vectors considered those tokens
+
+00:02:16.642 --> 00:02:19.482
+similar. Inspectable scoring is not
+
+00:02:19.502 --> 00:02:21.711
+complete model transparency.
+
+00:02:22.620 --> 00:02:25.039
+Keeping one vector per token instead of
+
+00:02:25.059 --> 00:02:28.815
+one per passage multiplies storage roughly
+
+00:02:28.835 --> 00:02:31.199
+by the number of retained tokens, before
+
+00:02:31.219 --> 00:02:33.763
+compression. A toy hundred token passage
+
+00:02:33.783 --> 00:02:36.302
+would require a hundred vectors under that
+
+00:02:36.322 --> 00:02:37.745
+simplified accounting.
+
+00:02:38.299 --> 00:02:40.686
+The chapter reports ColBERT version two
+
+00:02:40.706 --> 00:02:42.387
+cutting earlier late interaction
+
+00:02:42.407 --> 00:02:45.325
+footprints six to tenfold with residual
+
+00:02:45.345 --> 00:02:48.186
+compression. This attributed comparison is
+
+00:02:48.206 --> 00:02:50.698
+not a promise for every index.
+
+00:02:51.655 --> 00:02:53.877
+Three arrangements are now visible.
+
+00:02:54.039 --> 00:02:56.661
+Independent pooled encoding compares one
+
+00:02:56.681 --> 00:02:59.071
+query vector with one stored passage
+
+00:02:59.091 --> 00:03:02.589
+vector. Joint encoding processes query and
+
+00:03:02.609 --> 00:03:04.096
+candidate together.
+
+00:03:04.271 --> 00:03:07.138
+Late interaction independently encodes
+
+00:03:07.158 --> 00:03:09.457
+sets of token vectors and compares them
+
+00:03:09.477 --> 00:03:10.410
+afterwards.
+
+00:03:10.960 --> 00:03:13.243
+A pretrained encoder can be adapted for
+
+00:03:13.263 --> 00:03:14.634
+different arrangements.
+
+00:03:14.809 --> 00:03:17.083
+Its name alone does not identify the
+
+00:03:17.103 --> 00:03:18.320
+retrieval system.
+
+00:03:18.495 --> 00:03:21.542
+Ask when query and document interact, what
+
+00:03:21.562 --> 00:03:23.836
+can be precomputed, what evidence the
+
+00:03:23.856 --> 00:03:26.709
+comparison retains, and which ranking task
+
+00:03:26.729 --> 00:03:27.727
+shaped training.
+
+00:03:28.632 --> 00:03:31.392
+Neural information retrieval also includes
+
+00:03:31.412 --> 00:03:32.951
+learnt sparse models.
+
+00:03:33.126 --> 00:03:35.013
+Their active vocabulary dimensions can
+
+00:03:35.033 --> 00:03:37.410
+contain both typed terms and learnt
+
+00:03:37.430 --> 00:03:40.168
+expansions, so an inverted index can serve
+
+00:03:40.188 --> 00:03:43.776
+them. A nonzero term matching score still
+
+00:03:43.796 --> 00:03:46.404
+requires overlap in active dimensions;
+
+00:03:46.554 --> 00:03:48.234
+expansion can create it.
+
+00:03:48.795 --> 00:03:51.313
+The chapter cites Elicit’s June twenty
+
+00:03:51.333 --> 00:03:54.123
+twenty four development work using SPLADE
+
+00:03:54.143 --> 00:03:57.164
+suggested terms with regular full text
+
+00:03:57.184 --> 00:03:59.883
+retrieval. That account does not confirm
+
+00:03:59.903 --> 00:04:01.171
+production deployment.
+
+00:04:01.333 --> 00:04:03.659
+Extra query terms can increase posting
+
+00:04:03.679 --> 00:04:06.326
+work and latency, even when the index
+
+00:04:06.346 --> 00:04:08.452
+technology is familiar.
+
+00:04:09.341 --> 00:04:11.436
+SPLADE can expose weighted vocabulary
+
+00:04:11.456 --> 00:04:14.013
+terms. ColBERT can expose token
+
+00:04:14.033 --> 00:04:16.681
+alignments. Both offer more scoring
+
+00:04:16.701 --> 00:04:19.142
+evidence than a single pooled score, while
+
+00:04:19.162 --> 00:04:20.933
+remaining dependent on training,
+
+00:04:20.953 --> 00:04:23.665
+vocabulary and transfer to the task.
+
+00:04:23.814 --> 00:04:26.448
+Neither is transparent from end to end.
+
+00:04:27.015 --> 00:04:29.244
+Neural is an umbrella label covering
+
+00:04:29.264 --> 00:04:31.667
+several representations and pipeline
+
+00:04:31.687 --> 00:04:34.025
+positions. Limited public deployment
+
+00:04:34.045 --> 00:04:36.834
+documentation for late interaction does
+
+00:04:36.854 --> 00:04:38.973
+not establish its absence.
+
+00:04:39.135 --> 00:04:41.525
+Identify the actual arrangement and
+
+00:04:41.545 --> 00:04:44.643
+evaluate the complete retrieval pipeline.

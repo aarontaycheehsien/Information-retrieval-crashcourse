@@ -1,0 +1,40 @@
+One paper, fifty searchable objects
+
+[00:00:00.700]: A search retrieves four matches: passage two from paper A, passage seven from paper A, passage three from paper B, and passage nine from paper A. How many papers did it find? Four matches, two papers. Would the interface show four results, or two? Make a prediction.
+
+[00:00:22.200]: Either display is possible. Matching passages may appear separately or be grouped by source identity. The visible result list hides earlier decisions about what was indexed and represented. Those decisions determine which evidence can reach the list in the first place.
+
+[00:00:40.912]: Take the chapter’s illustrative twenty page article. A system might index one abstract, ten sections, or fifty overlapping passages. These are alternative choices, not measurements of a named service. They produce different searchable objects from the same source document.
+
+[00:01:00.000]: An abstract is a compact account. A section can preserve more local context. A short overlapping window may expose a narrow passage. The right unit depends on the question and pipeline.
+
+[00:01:13.854]: In a conventional dense bi encoder, each indexed passage receives one pooled vector. Fifty passages therefore become fifty independently searchable vectors. No single one automatically represents the complete paper.
+
+[00:01:30.026]: Nothing automatically combines evidence spread across those fifty chunks. A passage might describe the study population while another reports the outcome. Finding one passage does not prove that both facts were compared jointly when the retrieval score was calculated.
+
+[00:01:49.020]: Here is a declared illustration. One chunk says the participants were adults. Another contains a numerical outcome, while a neighbouring paragraph explains a limitation. A question that needs all three facts can outgrow any one retrieved unit.
+
+[00:02:06.342]: Overlapping windows may retain some shared context, but an overlap is no guarantee that every decisive relationship fits. A later stage might gather neighbours, fetch the parent section, or combine evidence.
+
+[00:02:23.213]: Now hide a claim in the results section and leave it out of the abstract. An abstract only index cannot directly match that claim as indexed text. It might retrieve the paper for other evidence, but the missing section was not available to that retrieval stage.
+
+[00:02:40.063]: The chapter contrasts Wiley AI Gateway’s documented full text chunks with discovery records described by metadata and abstracts.
+
+[00:02:50.812]: Retrieval is not always the final evidence boundary. After selecting an abstract or passage, a system might fetch full text, expand to a parent section, or add neighbouring passages.
+
+[00:03:04.818]: Ask three separate questions: what text was indexed, what unit was retrieved, and what evidence was supplied as context? A later fetch can supply previously absent text. Whether that evidence reaches an answer correctly remains another question to check.
+
+[00:03:22.805]: Return to passages A two, A seven, B three and A nine. Grouping by source produces paper A with three matching passages, and paper B with one. It does not, by itself, specify how passage scores become a paper score.
+
+[00:03:40.683]: It also does not merge their claims into a supported answer. A system needs explicit choices for aggregation and any later reasoning. Four returned chunks are not necessarily four distinct papers, and two displayed papers do not reveal how many chunks competed.
+
+[00:03:58.486]: Write down four choices: the source document, the indexed unit, the representation of each unit, and the way matches become displayed results. Then record any later context expansion.
+
+[00:04:11.502]: Ask what text was embedded, how large the units were, and how matching passages were combined at article level. The next chapter asks what a system can afford after a fast first stage has produced a shortlist: more careful comparison, with a new candidate boundary.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 8.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#representations-and-units
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

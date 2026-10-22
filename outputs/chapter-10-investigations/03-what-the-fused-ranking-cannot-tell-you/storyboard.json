@@ -1,0 +1,201 @@
+{
+  "series": "Hybrid retrieval and rank fusion",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#hybrid-and-fusion",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#hybrid-and-fusion",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-what-the-fused-ranking-cannot-tell-you",
+  "title": "What the fused ranking cannot tell you",
+  "subtitle": "Rank fusion trades score detail for a simple shared rule.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "score_gap_hook",
+      "title": "Same ranks. Very different score gaps.",
+      "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+      "visual": "score_gap_hook",
+      "narration": [
+        "Imagine one score list where first place barely beats second, and another where first place wins by a huge margin. Both order the records A, B, C. Would reciprocal rank fusion notice how different those gaps were? Pause and predict.",
+        "It would not. Once the scores become ranks, those gaps disappear from the fusion input. Our score sets are invented illustrations. RRF preserves position and record identity, not the strength of the original numerical separation."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "constant_effect",
+      "title": "The constant softens the advantage of first place",
+      "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+      "visual": "constant_effect",
+      "narration": [
+        "The constant changes how much a high position is worth. With constant zero, first place contributes one and third contributes one third. With constant sixty, the contributions are one over sixty one and one over sixty three: much closer.",
+        "This changes the balance between very high positions and agreement across lists. That baseline constant can be tuned for a different task. It does not set the number of retrieved or displayed records."
+      ]
+    },
+    {
+      "id": "input_cutoff",
+      "title": "A shallower input changes the evidence available",
+      "source_anchor": "rrf-record-journey-title",
+      "visual": "input_cutoff",
+      "narration": [
+        "Cut each supplied list from three records to two. The lexical list becomes A, B; the dense list becomes C, A. C loses its lexical third place contribution, while D disappears from the supplied candidate pool altogether.",
+        "That is different from fusing the original four identities and displaying just A and C. In the latter case, B and D had fused scores but fell below the output boundary. Input cutoffs change what fusion receives."
+      ]
+    },
+    {
+      "id": "route_weights",
+      "title": "Equal list contributions are a choice",
+      "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+      "visual": "route_weights",
+      "narration": [
+        "The baseline gives every supplied list equal weight. An implementation can instead multiply each list\u2019s contributions by an explicit weight. In a declared extension of the same example, give dense contributions twice the weight of lexical contributions.",
+        "C then narrowly overtakes A. The arithmetic is reproducible, but the weighting choice is not a quality recommendation. The hybrid label leaves those weighting choices unspecified."
+      ]
+    },
+    {
+      "id": "blend_and_route",
+      "title": "Web of Science blends; Scopus AI can route",
+      "source_anchor": "two-hybrids-that-combine-differently",
+      "visual": "blend_and_route",
+      "narration": [
+        "The chapter describes Web of Science Smart Search document search combining a Boolean keyword path and a semantic vector path. A parser first structures the query; combining the retrieval paths makes it hybrid.",
+        "Scopus AI can choose lexical retrieval, vector retrieval, or both per question. A one path run combines nothing under the book\u2019s definition. When both paths run, their results still need a fusion rule. These are pinned documentation accounts, not new service tests."
+      ]
+    },
+    {
+      "id": "routing_explanation",
+      "title": "Expose the path chosen for this question",
+      "source_anchor": "two-hybrids-that-combine-differently",
+      "visual": "routing_explanation",
+      "narration": [
+        "With a blend, the prescribed evidence sources give the explanation a fixed shape. With routing, the answer to was this lexical or vector search can change from query to query. Expose the routing choice before explaining a result.",
+        "A rule, classifier or model can choose routes. Routing alone does not establish agency. Nor does naming RRF identify the candidate architecture: the same fusion formula can combine lists produced by other arrangements."
+      ]
+    },
+    {
+      "id": "query_variant_fusion",
+      "title": "RRF can combine several versions of one question",
+      "source_anchor": "how-reciprocal-rank-fusion-combines-ranked-lists",
+      "visual": "query_variant_fusion",
+      "narration": [
+        "Elsevier\u2019s twenty twenty four Scopus AI RAG Fusion account describes generated query variants. Vector retrieval runs for each variant, and reciprocal rank fusion merges their result lists before top results support a summary with references for claims.",
+        "This account concerns multiple variant lists, rather than lexical and dense lists for one query. Its presence establishes neither different retrieval methods nor a later version\u2019s route choices."
+      ]
+    },
+    {
+      "id": "fusion_evaluation",
+      "title": "Compare the full design with its individual routes",
+      "source_anchor": "hybrid-and-fusion",
+      "visual": "fusion_evaluation",
+      "narration": [
+        "Use RRF as a baseline and compare it with the individual retrievers on representative queries. Document the routes, candidate depths, duplicate identity handling, constant, weights, output cutoff and any later reranker. Evaluate the actual task, rather than the hybrid label.",
+        "The result depends on which evidence survives each choice. Rank fusion avoids incompatible score scales by discarding score gaps; routing decides which lists can contribute at all. Chapter Eleven follows query interpretation, transformation and routing in more detail."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "score_gap_hook_0",
+      "scene": "score_gap_hook",
+      "text": "Imagine one score list where first place barely beats second, and another where first place wins by a huge margin. Both order the records A, B, C. Would reciprocal rank fusion notice how different those gaps were? Pause and predict.",
+      "gap": 1.0
+    },
+    {
+      "id": "score_gap_hook_1",
+      "scene": "score_gap_hook",
+      "text": "It would not. Once the scores become ranks, those gaps disappear from the fusion input. Our score sets are invented illustrations. RRF preserves position and record identity, not the strength of the original numerical separation.",
+      "gap": 2.5
+    },
+    {
+      "id": "constant_effect_0",
+      "scene": "constant_effect",
+      "text": "The constant changes how much a high position is worth. With constant zero, first place contributes one and third contributes one third. With constant sixty, the contributions are one over sixty one and one over sixty three: much closer.",
+      "gap": 1.0
+    },
+    {
+      "id": "constant_effect_1",
+      "scene": "constant_effect",
+      "text": "This changes the balance between very high positions and agreement across lists. That baseline constant can be tuned for a different task. It does not set the number of retrieved or displayed records.",
+      "gap": 0.65
+    },
+    {
+      "id": "input_cutoff_0",
+      "scene": "input_cutoff",
+      "text": "Cut each supplied list from three records to two. The lexical list becomes A, B; the dense list becomes C, A. C loses its lexical third place contribution, while D disappears from the supplied candidate pool altogether.",
+      "gap": 1.0
+    },
+    {
+      "id": "input_cutoff_1",
+      "scene": "input_cutoff",
+      "text": "That is different from fusing the original four identities and displaying just A and C. In the latter case, B and D had fused scores but fell below the output boundary. Input cutoffs change what fusion receives.",
+      "gap": 0.65
+    },
+    {
+      "id": "route_weights_0",
+      "scene": "route_weights",
+      "text": "The baseline gives every supplied list equal weight. An implementation can instead multiply each list\u2019s contributions by an explicit weight. In a declared extension of the same example, give dense contributions twice the weight of lexical contributions.",
+      "gap": 1.0
+    },
+    {
+      "id": "route_weights_1",
+      "scene": "route_weights",
+      "text": "C then narrowly overtakes A. The arithmetic is reproducible, but the weighting choice is not a quality recommendation. The hybrid label leaves those weighting choices unspecified.",
+      "gap": 0.65
+    },
+    {
+      "id": "blend_and_route_0",
+      "scene": "blend_and_route",
+      "text": "The chapter describes Web of Science Smart Search document search combining a Boolean keyword path and a semantic vector path. A parser first structures the query; combining the retrieval paths makes it hybrid.",
+      "gap": 1.0
+    },
+    {
+      "id": "blend_and_route_1",
+      "scene": "blend_and_route",
+      "text": "Scopus AI can choose lexical retrieval, vector retrieval, or both per question. A one path run combines nothing under the book\u2019s definition. When both paths run, their results still need a fusion rule. These are pinned documentation accounts, not new service tests.",
+      "gap": 0.65
+    },
+    {
+      "id": "routing_explanation_0",
+      "scene": "routing_explanation",
+      "text": "With a blend, the prescribed evidence sources give the explanation a fixed shape. With routing, the answer to was this lexical or vector search can change from query to query. Expose the routing choice before explaining a result.",
+      "gap": 1.0
+    },
+    {
+      "id": "routing_explanation_1",
+      "scene": "routing_explanation",
+      "text": "A rule, classifier or model can choose routes. Routing alone does not establish agency. Nor does naming RRF identify the candidate architecture: the same fusion formula can combine lists produced by other arrangements.",
+      "gap": 0.65
+    },
+    {
+      "id": "query_variant_fusion_0",
+      "scene": "query_variant_fusion",
+      "text": "Elsevier\u2019s twenty twenty four Scopus AI RAG Fusion account describes generated query variants. Vector retrieval runs for each variant, and reciprocal rank fusion merges their result lists before top results support a summary with references for claims.",
+      "gap": 1.0
+    },
+    {
+      "id": "query_variant_fusion_1",
+      "scene": "query_variant_fusion",
+      "text": "This account concerns multiple variant lists, rather than lexical and dense lists for one query. Its presence establishes neither different retrieval methods nor a later version\u2019s route choices.",
+      "gap": 0.65
+    },
+    {
+      "id": "fusion_evaluation_0",
+      "scene": "fusion_evaluation",
+      "text": "Use RRF as a baseline and compare it with the individual retrievers on representative queries. Document the routes, candidate depths, duplicate identity handling, constant, weights, output cutoff and any later reranker. Evaluate the actual task, rather than the hybrid label.",
+      "gap": 1.0
+    },
+    {
+      "id": "fusion_evaluation_1",
+      "scene": "fusion_evaluation",
+      "text": "The result depends on which evidence survives each choice. Rank fusion avoids incompatible score scales by discarding score gaps; routing decides which lists can contribute at all. Chapter Eleven follows query interpretation, transformation and routing in more detail.",
+      "gap": 0.65
+    }
+  ]
+}

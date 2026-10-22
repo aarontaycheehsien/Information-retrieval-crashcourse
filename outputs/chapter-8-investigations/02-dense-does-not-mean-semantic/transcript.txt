@@ -1,0 +1,40 @@
+Dense does not mean semantic
+
+[00:00:00.700]: Here is an article vector: twenty twenty six, fourteen, thirty two, eighty seven. Every coordinate is active, so it is dense. Would you trust it to match heart attack with myocardial infarction?
+
+[00:00:17.271]: They are publication year, pages, references and citations. The vector records bibliographic facts. Being dense tells us how many coordinates are active; it does not establish semantic matching.
+
+[00:00:32.318]: First, is it a vector: an ordered list of numbers? Second, is it sparse or dense: relatively few active coordinates, or mostly active coordinates? Third, was the rule specified explicitly or learnt through training? Fourth, what evidence do the dimensions preserve?
+
+[00:00:53.037]: These questions describe different properties. BM twenty five is sparse with a specified weighting formula. A conventional dense bi encoder uses a learnt mapping into latent features. A learnt sparse model provides a third combination.
+
+[00:01:09.810]: In a lexical representation, we can name a coordinate: heart, treatment, or a term from the index vocabulary. In a dense text embedding, coordinates are latent. Their contribution to meaning is distributed across the representation and shaped by training.
+
+[00:01:27.175]: A value of zero point eight one in latent coordinate three does not label that coordinate citation. Even a trained dense text embedding still needs evaluation on the intended retrieval task.
+
+[00:01:41.517]: SPLADE offers another route. It predicts weights over the output vocabulary of a transformer language model. In the standard implementation those coordinates are WordPiece subword units.
+
+[00:01:54.237]: Having read the text, the model can assign weight to terms absent from the input. A training penalty encourages almost all the remaining weights to be zero. The result is learnt and sparse, while its active coordinates still carry vocabulary labels.
+
+[00:02:12.199]: Use the chapter’s schematic heart attack example. Imagine a learnt sparse representation activates heart and attack, but also myocardial and infarction. The extra words need not occur in the original text. Our displayed weights are invented teaching values, not measured outputs from SPLADE.
+
+[00:02:31.816]: A query activating myocardial and infarction can now share coordinates with that representation. The mechanism can bridge vocabulary, conditional on training. Whole words make the drawing readable; a real model activates its own subword entries.
+
+[00:02:48.997]: If nearly every vocabulary term received weight, posting lists would grow and more work could be needed at search time. Sparsity constraints limit the active representation. The exact cost depends on which terms activate, their posting lists and the implementation.
+
+[00:03:06.853]: A single inverted index can carry exact term evidence and learnt expansions. Learnt sparse retrieval can therefore be an alternative to separate lexical and dense retrievers. It can also supply one route within a hybrid system.
+
+[00:03:23.092]: Dot product can combine sparse vocabulary weights or dense latent features. Cosine can also compare different numerical representations. Choosing either arithmetic operation does not make the underlying representation dense, learnt or semantic. Representation and comparison remain separate decisions.
+
+[00:03:44.664]: And neither operation tells us which scored items are returned. Admission rules, filters, result limits and later stages still matter.
+
+[00:03:54.438]: Our bibliographic vector was dense and described explicit facts. BM twenty five was sparse and used a specified formula. SPLADE was sparse and used a learnt mapping that could expand vocabulary. The dense bi encoder used a learnt mapping with distributed latent coordinates.
+
+[00:04:13.908]: For each, ask what evidence survives, and test whether that evidence serves the user’s need. Density is a shape, training describes where the rule came from, and semantic matching is a capability to investigate. Next we ask what piece of a paper those representations actually describe.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 8.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#representations-and-units
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

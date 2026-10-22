@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="403.2pt" viewBox="0 0 1008 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Original retrieval-diagnosis teaching illustration; not a model measurement</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 403.2 
+L 1008 403.2 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #eee9e0"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 25.2 143.86176 
+L 264.6 143.86176 
+L 264.6 96.12288 
+L 25.2 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="144.9" y="124.072789" transform="rotate(-0 144.9 124.072789)">First-stage pattern</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 264.6 143.86176 
+L 571.032 143.86176 
+L 571.032 96.12288 
+L 264.6 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="417.816" y="124.131383" transform="rotate(-0 417.816 124.131383)">What it preserves best</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 571.032 143.86176 
+L 982.8 143.86176 
+L 982.8 96.12288 
+L 571.032 96.12288 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="776.916" y="124.131383" transform="rotate(-0 776.916 124.131383)">Characteristic blind spot</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 25.2 191.60064 
+L 264.6 191.60064 
+L 264.6 143.86176 
+L 25.2 143.86176 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="144.9" y="171.870262" transform="rotate(-0 144.9 171.870262)">Strict Boolean</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 264.6 191.60064 
+L 571.032 191.60064 
+L 571.032 143.86176 
+L 264.6 143.86176 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="417.816" y="171.870262" transform="rotate(-0 417.816 171.870262)">Explicit logic over analysed terms</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 571.032 191.60064 
+L 982.8 191.60064 
+L 982.8 143.86176 
+L 571.032 143.86176 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="776.916" y="171.870262" transform="rotate(-0 776.916 171.870262)">A weak operator can change eligibility</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 25.2 239.33952 
+L 264.6 239.33952 
+L 264.6 191.60064 
+L 25.2 191.60064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="144.9" y="219.609142" transform="rotate(-0 144.9 219.609142)">BM25</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 264.6 239.33952 
+L 571.032 239.33952 
+L 571.032 191.60064 
+L 264.6 191.60064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="417.816" y="219.609142" transform="rotate(-0 417.816 219.609142)">Analysed lexical evidence</text>
+    </g>
+    <g id="patch_10">
+     <path d="M 571.032 239.33952 
+L 982.8 239.33952 
+L 982.8 191.60064 
+L 571.032 191.60064 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; fill: #252728" transform="translate(676.580062 211.210783)">Weak vocabulary bridging;</text>
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; fill: #252728" transform="translate(670.412484 228.007502)">no inherent phrase meaning</text>
+    </g>
+    <g id="patch_11">
+     <path d="M 25.2 287.0784 
+L 264.6 287.0784 
+L 264.6 239.33952 
+L 25.2 239.33952 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="144.9" y="267.348022" transform="rotate(-0 144.9 267.348022)">Single-vector dense</text>
+    </g>
+    <g id="patch_12">
+     <path d="M 264.6 287.0784 
+L 571.032 287.0784 
+L 571.032 239.33952 
+L 264.6 239.33952 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_11">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="417.816" y="267.348022" transform="rotate(-0 417.816 267.348022)">Overall learnt similarity</text>
+    </g>
+    <g id="patch_13">
+     <path d="M 571.032 287.0784 
+L 982.8 287.0784 
+L 982.8 239.33952 
+L 571.032 239.33952 
+z
+" style="fill: #faf8f3; stroke: #ccc4b6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_12">
+     <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="776.916" y="267.348022" transform="rotate(-0 776.916 267.348022)">Pooling may blur identity or local detail</text>
+    </g>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #252728" x="504" y="36.384" transform="rotate(-0 504 36.384)">Different methods preserve different retrieval evidence</text>
+   </g>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 379.89125)">Three reference patterns, not an exhaustive list. Learnt sparse and late interaction can also retrieve candidates; real</text>
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; fill: #6e6b63" transform="translate(55.44 394.448406)">pipelines can combine methods.</text>
+  </g>
+ </g>
+</svg>

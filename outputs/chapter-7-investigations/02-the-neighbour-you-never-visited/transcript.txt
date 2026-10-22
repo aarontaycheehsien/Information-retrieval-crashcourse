@@ -1,0 +1,36 @@
+The neighbour you never visited
+
+[00:00:00.700]: Two searches each return three results. One examined every stored vector. The other took a shortcut and missed a closer candidate. Could you tell which search ran just by counting the results on screen? Make a prediction.
+
+[00:00:16.757]: The output count does not reveal the work or the guarantee behind it. We need to separate the comparison rule, the search procedure, and the number of leaders requested.
+
+[00:00:27.471]: An inverted index can jump from an analysed term to documents containing it. A dense vector has no equivalent posting list for all passages expressing a meaning. Its dimensions do not directly correspond to recognisable words, and a useful passage need not share query terms.
+
+[00:00:46.312]: The exact baseline is flat vector search: compare the query with every stored vector. Its work grows with collection size and dimensionality. It can construct a complete ranking or retain only the leaders.
+
+[00:01:01.447]: Use the chapter's six points and put the query at zero, zero. This example uses Euclidean distance, not the cosine rule from the first film. Smaller distance wins. Exhaustive search examines A through F and returns A, B and C.
+
+[00:01:19.075]: A is one unit away, B two, and C about two point eight three. D is about three point one six away. Exact here means exact under the chosen comparison rule. It does not guarantee that those nearest points represent relevant passages.
+
+[00:01:36.508]: Now stipulate a run that examines only A, B, D and F. It returns A, B and D. C was closer than D, but was never examined. Both runs still requested the same top three.
+
+[00:01:51.838]: Approximate nearest-neighbour structures reduce search work by exploring selected regions or neighbours. They may miss a true nearest neighbour. This small example illustrates one possible miss, not a measured system, an H N S W simulation, or a claim that approximate search always misses.
+
+[00:02:13.047]: H N S W is one widely used approximate approach. It organises vectors as a navigable graph with multiple layers. Connections help a search explore promising neighbours instead of comparing every vector.
+
+[00:02:28.347]: Our graph is schematic. It does not show the algorithm's real links or a measured path. Other index designs partition the space, compress vectors, or combine strategies. Indexing changes how the search runs; the requested k still describes its output size.
+
+[00:02:46.989]: Keep four controls apart: who may compete, what rule scores them, how the engine searches, and how many leaders it retains. Our exact and approximate runs requested k equals three while examining six and four points respectively.
+
+[00:03:04.237]: Top k does not mean only k candidates were examined. Exact lexical pruning can safely skip candidates that cannot enter the leaders; approximate vector search offers a different guarantee. Lexical, dense and hybrid systems can all return top-k results.
+
+[00:03:22.849]: Dense retrieval has no comparable term-match floor. Unless filters narrow the collection, every stored vector can receive a similarity score. An unrelated passage can still be nearest when every alternative is farther away.
+
+[00:03:38.504]: Metadata filters, lexical evidence and vectors can coexist in one product. The candidate boundary and output size remain separate questions. To assess a search, inspect its filters, scoring rule, exact or approximate execution, and result boundary—then judge whether the returned material is useful.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 7.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#dense-at-scale
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

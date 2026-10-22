@@ -1,0 +1,36 @@
+One bad word, two failures
+
+[00:00:00.700]: Start with delulu, job, interview, expectations. Someone adds foolish as a supposed alternative for delulu. Does adding this word make the search safer because the original terms are still there? Try to predict what happens under two different admission rules.
+
+[00:00:21.341]: The same weak term can cause two different kinds of damage. A compulsory term can exclude a record. An optional scoring term can shift the competition. Neither result requires the engine to malfunction.
+
+[00:00:35.008]: Meet two records from the chapter's BM twenty-five Evidence Lab. Record A is Delulu expectations during a job interview. It contains all four original query terms and no foolish. Record F is Why foolish job applicants misread the interview.
+
+[00:00:52.567]: F contains foolish, job and interview, but lacks delulu and expectations. These are teaching records from a six-record collection. Their usefulness still depends on the searcher's need; term matches alone do not settle that judgment.
+
+[00:01:09.413]: Under implied AND, all five terms are compulsory. A passed the original four conditions. Adding foolish now excludes it before ranking begins. F fails too, because it lacks delulu and expectations.
+
+[00:01:24.973]: Imagine A is exactly what you needed. A better ranker cannot recover it from this candidate set: A never arrived. You would need to change the retrieval conditions or run another retrieval pass.
+
+[00:01:38.102]: Switch to any-match BM twenty-five. A remains eligible through its original matches. F also remains eligible through its matches. Adding foolish gives F an additional matching term that contributes to its score.
+
+[00:01:53.935]: A has not been excluded, but its competition can change. We are not asserting a numerical order for A and F here. Admission and scoring influence are enough to explain the two different risks.
+
+[00:02:08.194]: In the lab's six-record collection, only F contains foolish. A rare term can receive high inverse document frequency, giving its matches extra weight. But rarity answers a collection question: how widely does this term occur?
+
+[00:02:24.698]: It does not answer the searcher's question: is this a good way to express my need? A statistical weight cannot turn a weak substitute into a good concept. More weight can amplify a poor choice.
+
+[00:02:37.341]: Could term-frequency saturation fix it? Saturation limits the extra benefit of repeating the same term inside a document. That is useful when twenty mentions should not get twenty times the credit. It is a different problem.
+
+[00:02:53.489]: Saturation does not inspect whether foolish represents the intended concept. A weak query term can still contribute lexical evidence. Neither a smooth score nor a sophisticated ranking formula guarantees a well-formed query.
+
+[00:03:10.397]: Compare the search with and without the weak term. Inspect which records enter, which disappear, and which gain scoring evidence. Keep the collection and other settings fixed so the comparison has a clear interpretation.
+
+[00:03:25.283]: Then ask what job the extra term is doing. Is it compulsory, one alternative in a group, or optional scoring evidence? The engine can execute your instructions correctly while those instructions express the wrong need. Inspect the proposed expansion before trusting it.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 4.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#beyond-boolean
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

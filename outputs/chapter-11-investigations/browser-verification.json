@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8828/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8828/01-what-if-your-query-is-a-paper/01-what-if-your-query-is-a-paper.mp4",
+      "duration": 288,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 112,
+      "seek_seconds": 144,
+      "byte_range": "bytes 0-1023/31213782",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8828/02-who-changed-your-question/02-who-changed-your-question.mp4",
+      "duration": 278.666667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 113,
+      "seek_seconds": 139.333333,
+      "byte_range": "bytes 0-1023/30226148",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8828/03-the-paper-that-never-existed/03-the-paper-that-never-existed.mp4",
+      "duration": 288.4,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 110,
+      "seek_seconds": 144.2,
+      "byte_range": "bytes 0-1023/31407978",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

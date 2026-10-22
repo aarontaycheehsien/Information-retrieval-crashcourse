@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "representations-and-units",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "b2ae6821e27996a65ada870091ffb58a79f4944e1909eef9aaea0143a3912171",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 8: Representations and indexed units; source-exact lexical vectors and passage grouping, declared illustrative weights"
+}

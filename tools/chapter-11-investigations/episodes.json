@@ -1,0 +1,282 @@
+{
+  "series": "Understanding, transforming and routing queries",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#query-transformation",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#query-transformation",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "episodes": [
+    {
+      "id": "01-what-if-your-query-is-a-paper",
+      "title": "What if your query is a paper?",
+      "subtitle": "One information need can address several different mechanisms.",
+      "accent": "blue",
+      "scenes": [
+        {
+          "id": "object_hook",
+          "title": "Before wording, identify what stands for the need",
+          "source_anchor": "before-phrasing-identify-the-query-object",
+          "visual": "object_hook",
+          "narration": [
+            "You want to investigate the open access citation advantage. You could type a question, choose a known paper, follow a citation, or give a controller a research brief. Are these four ways of phrasing the same query? Pause and predict.",
+            "They address different mechanisms. A query represents the need in a form a system can act on. Changing from words to a seed paper or citation changes more than the wording."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "text_and_structure",
+          "title": "Words and structured conditions address different evidence",
+          "source_anchor": "tbl-11-1",
+          "visual": "text_and_structure",
+          "narration": [
+            "A free text string might go to lexical, dense or hybrid retrieval. The visible box does not reveal whether words will be analysed, encoded, rewritten or routed. A controlled term or structured expression addresses annotations, fields, filters or Boolean conditions.",
+            "A MeSH heading, field tag or tested search hedge is not simply a formal keyword. It depends on the target database’s structure and supported syntax."
+          ]
+        },
+        {
+          "id": "records_and_links",
+          "title": "A seed and a relationship offer different paths",
+          "source_anchor": "one-need-eight-objects-title",
+          "visual": "records_and_links",
+          "narration": [
+            "A seed document makes a known paper stand for the need. The system might compare its text, follow citation relationships, or combine both. PubMed Similar Articles, for example, uses a word weighted approach over title, abstract and MeSH words; a seed does not automatically imply embeddings.",
+            "Citation methods differ too. Direct traversal follows explicit citation edges. Bibliographic coupling finds papers sharing references. Co citation finds papers cited together. Their reach depends on the graph’s coverage and timing, rather than only on the searcher’s vocabulary."
+          ]
+        },
+        {
+          "id": "feedback_and_monitoring",
+          "title": "Judgements and monitoring can guide the next search",
+          "source_anchor": "tbl-11-1",
+          "visual": "feedback_and_monitoring",
+          "narration": [
+            "A relevance judgement can help construct a later retrieval input from accepted or rejected records. Pseudo relevance feedback instead assumes highly ranked records are useful without asking the searcher.",
+            "A browse or monitoring target addresses a journal, author, subject, collection or continuing alert. It can surface a paper you recognise as useful even when you could not have named it in advance. These are different ways into the literature."
+          ]
+        },
+        {
+          "id": "predicates_and_briefs",
+          "title": "An API predicate is different from a task brief",
+          "source_anchor": "tbl-11-1",
+          "visual": "predicates_and_briefs",
+          "narration": [
+            "A programmatic predicate can specify identifiers, ranges, filtering, sorting and pagination. OpenAlex documents composable attribute filters. A task brief instead gives a controller scope, inclusion criteria, sources, stopping conditions and output requirements. Those instructions are not all terms that an underlying retriever can obey.",
+            "Even a filter needs the right meaning. Filtering results to papers that are themselves open access could exclude a paywalled study about the open access citation advantage. The chapter’s example therefore filters by publication year instead."
+          ]
+        },
+        {
+          "id": "objects_cooperate",
+          "title": "A good text query can still cover only one route",
+          "source_anchor": "using-several-query-objects-together",
+          "visual": "objects_cooperate",
+          "narration": [
+            "These objects cooperate. Text and controlled vocabulary can find seeds; citation traversal can expose missing terminology; accepted records can guide feedback; an API can make a procedure repeatable. Bates called developing a search through such discoveries berrypicking.",
+            "In one audit of a single complex evidence review, researchers traced four hundred ninety five included sources. Thirty percent came from protocol defined database and hand searches, and fifty one percent from snowballing. That is a scoped example, not a universal estimate for reviews."
+          ]
+        },
+        {
+          "id": "phrase_for_receiver",
+          "title": "Choose wording for the component that receives it",
+          "source_anchor": "phrase-for-the-mechanism-not-the-box",
+          "visual": "phrase_for_receiver",
+          "narration": [
+            "When the query really is text, useful wording depends on its receiver. A lexical engine needs observable concepts and supported operators. A dense retriever needs a description suited to what its model was trained to match. Longer prose is not automatically better.",
+            "A query translator needs enough context to produce inspectable retrieval inputs. Detailed relevance instructions do not automatically become instructions followed by every retrieval model; that capability depends on training."
+          ]
+        },
+        {
+          "id": "known_record_tests",
+          "title": "Test the receiver against known relevant records",
+          "source_anchor": "tbl-11-2",
+          "visual": "known_record_tests",
+          "narration": [
+            "If the architecture is undisclosed, vary inputs systematically against known relevant records: short terms, a question, fielded syntax and a known item title. Inspect generated expressions for valid fields, controlled terms and logical relationships in the target database.",
+            "Generated Boolean strategies can contain invalid MeSH terms. A polished paragraph is no quality guarantee. Start with the query object and receiving mechanism, then test what the system actually does."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-who-changed-your-question",
+      "title": "Who changed your question?",
+      "subtitle": "Separate interpretation, changed inputs, and decisions about retrieval.",
+      "accent": "teal",
+      "scenes": [
+        {
+          "id": "understanding_hook",
+          "title": "The system understood a date. Did the query change?",
+          "source_anchor": "common-query-understanding-techniques",
+          "visual": "understanding_hook",
+          "narration": [
+            "A system recognises a date in your request. Has it changed what retrieval receives? Has it selected a different search route? Those are three different questions. Pause and decide what recognising the date alone establishes.",
+            "Understanding interprets the request and may leave retrieval input unchanged. Transformation creates changed or additional retrieval inputs. Retrieval control chooses where they go, which paths run, and whether another search happens."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "visible_boolean",
+          "title": "Make the generated expression visible",
+          "source_anchor": "web-of-science-smart-search-caption",
+          "visual": "visible_boolean",
+          "narration": [
+            "The chapter’s Web of Science Smart Search example asks for apple, oranges and bananas, from twenty twenty to twenty twenty four, with affiliation from the University of California. The displayed interpretation separates a year range, an organisation and topic conditions.",
+            "The structured query joins those conditions with AND, including a separate topic condition for each fruit. Inspect the visible, editable interpretation. An omitted concept or a misread relationship changes the eligible candidate set before ranking."
+          ]
+        },
+        {
+          "id": "primo_distinction",
+          "title": "Two Primo features are different workflows",
+          "source_anchor": "when-a-system-writes-the-boolean-query",
+          "visual": "primo_distinction",
+          "narration": [
+            "Primo VE NDE Natural Language Search documents GPT four point one Mini identifying fields, generating a basic Boolean query, and adding six related OR connected permutations. Advanced Search receives an inspectable, editable structured expression.",
+            "That is distinct from Primo Research Assistant’s documented question to Boolean variations, CDI retrieval and embedding reranking pipeline. Do not transfer one feature’s architecture to the other. Natural language input can still lead to Boolean conditions and lexical retrieval."
+          ]
+        },
+        {
+          "id": "retrieval_feedback",
+          "title": "A later query can depend on earlier results",
+          "source_anchor": "what-changed-and-when",
+          "visual": "retrieval_feedback",
+          "narration": [
+            "Explicit retrieval feedback uses the searcher’s judgements about accepted or rejected records to help construct another retrieval input. Pseudo relevance feedback asks the searcher for nothing: it assumes highly ranked records from an initial search are relevant.",
+            "It selects useful looking terms from those results and constructs a second query. If the first ranking is off topic, the added terms can reinforce that mistake. The second pass may add candidates, but the relevance assumption was unverified."
+          ]
+        },
+        {
+          "id": "screening_boundary",
+          "title": "Reordering a screening pool is a different operation",
+          "source_anchor": "before-phrasing-identify-the-query-object",
+          "visual": "screening_boundary",
+          "narration": [
+            "Active learning screening in systematic reviews also uses inclusion and exclusion judgements. But it repeatedly reprioritises the records already in an existing candidate pool. Those judgements do not inherently construct another retrieval pass or add records.",
+            "Ask whether feedback changed the search sent to a collection, or changed the order of records awaiting screening. They address different candidate boundaries."
+          ]
+        },
+        {
+          "id": "fixed_feedback_loop",
+          "title": "The query can adapt while the sequence stays fixed",
+          "source_anchor": "query-understanding-flow-title",
+          "visual": "fixed_feedback_loop",
+          "narration": [
+            "Pseudo relevance feedback needs an initial ranking before it can build a later query. It is therefore a retrieval to transformation loop, not a step that happens entirely before searching. Yet a designer can prescribe exactly those two passes every time.",
+            "The second query’s contents adapt to the results, while the control sequence remains fixed. That dependence alone does not make the workflow agentic. Chapter Twelve asks the separate question of who chooses the next action while a search runs."
+          ]
+        },
+        {
+          "id": "representation_boundary",
+          "title": "An added term can be a weight or rewritten text",
+          "source_anchor": "what-changed-and-when",
+          "visual": "representation_boundary",
+          "narration": [
+            "An LLM rewrite produces alternative retrieval text or a structured expression. SPLADE can instead assign weights to vocabulary dimensions, including terms absent from the original input. That weighted representation is a different form of retrieval input.",
+            "Both can be inspected, and either can be passed between components. Handoff between components is not what distinguishes them. Record whether you received rewritten language, a Boolean expression or active vocabulary weights, rather than calling all three the same expansion."
+          ]
+        },
+        {
+          "id": "transformation_record",
+          "title": "Record what changed, when, and where it went",
+          "source_anchor": "query-transformation",
+          "visual": "transformation_record",
+          "narration": [
+            "Keep the original request, the interpreted constraints, every transformed retrieval input, and the routes selected. If earlier results helped construct a later query, retain that intermediate ranking and the feedback decision too.",
+            "Correction, mapping, expansion, decomposition, routing and coordination can coexist in one prescribed workflow. The interface label natural language search reveals none of those choices. Inspect the generated inputs and test the candidate boundaries they create."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-the-paper-that-never-existed",
+      "title": "The paper that never existed",
+      "subtitle": "Generated text can guide retrieval without becoming evidence.",
+      "accent": "red",
+      "scenes": [
+        {
+          "id": "imagined_hook",
+          "title": "Can an imagined paper help find a real one?",
+          "source_anchor": "query2doc-and-hyde",
+          "visual": "imagined_hook",
+          "narration": [
+            "You ask whether open access increases citations. An LLM writes a plausible paragraph about a study comparing open and subscription articles while accounting for discipline and publication year. No identified study supports that paragraph. Could the invented text still help a search? Pause and predict.",
+            "It can serve as a retrieval aid. Query2doc and HyDE use generated language in different ways to find real indexed sources. Neither method turns the imagined paragraph into evidence, or establishes that the described study exists."
+          ],
+          "pause_before_second": 2.5
+        },
+        {
+          "id": "query2doc_path",
+          "title": "Query2doc adds generated language to the query",
+          "source_anchor": "query2doc-hyde-paths-title",
+          "visual": "query2doc_path",
+          "narration": [
+            "Query2doc generates a pseudo document and uses its language to expand the original query. The additional vocabulary may resemble wording found in relevant documents. The expanded input can go to a sparse retriever such as BM twenty five.",
+            "Dense retrieval is also possible; the diagram follows the lexical route. Its effect depends on what the next retriever does with those words."
+          ]
+        },
+        {
+          "id": "hyde_path",
+          "title": "HyDE searches from the generated document’s vector",
+          "source_anchor": "query2doc-and-hyde",
+          "visual": "hyde_path",
+          "narration": [
+            "HyDE means Hypothetical Document Embeddings. An LLM generates a hypothetical relevant document, then a dense encoder embeds that document. Retrieval compares the resulting vector with stored vectors for real indexed documents.",
+            "The generated document is a pivot into the vector space. It is not the final answer or a verified source. Unlike Query2doc’s language expansion, this path uses the generated document’s embedding to conduct the search."
+          ]
+        },
+        {
+          "id": "unsupported_assumptions",
+          "title": "Real retrieval does not validate invented details",
+          "source_anchor": "query2doc-hyde-paths-title",
+          "visual": "unsupported_assumptions",
+          "narration": [
+            "The chapter’s illustrative paragraph mentions comparisons and adjustment for discipline and year. Those details may steer retrieval towards particular vocabulary or study designs. They are not findings about an identified paper, and may import assumptions the searcher did not intend.",
+            "Retrieving real sources does not retroactively make every generated detail true. Read and assess the actual sources, and retain the generated text in the search record. It is part of the retrieval strategy, not supporting evidence."
+          ]
+        },
+        {
+          "id": "product_arrangements",
+          "title": "AI-assisted input does not name one architecture",
+          "source_anchor": "query-understanding-in-current-discovery-products",
+          "visual": "product_arrangements",
+          "narration": [
+            "The chapter’s product accounts describe different receivers. EBSCOhost and EDS AI Assisted Search parse keyword and noun phrases for the established engine; the cited public page does not identify the parsing model as an LLM.",
+            "Web of Science Smart Search combines structured parsing with keyword and vector document paths. Primo NDE documents generative Boolean construction for Advanced Search. These pinned documentation accounts are not fresh service tests; the shared interface language does not identify a common architecture."
+          ]
+        },
+        {
+          "id": "partial_constraints",
+          "title": "Supported natural-language limits are a defined subset",
+          "source_anchor": "tbl-11-5",
+          "visual": "partial_constraints",
+          "narration": [
+            "Natural language filter extraction is useful but partial. Primo NDE recognises a defined list of fields and facets, with documented author detection failures and unintended OR relationships. Web of Science Research Assistant supports some institution, geography and date constraints.",
+            "That Research Assistant’s guidance also lists complex field tagged Boolean queries as unsupported. Supported natural language patterns do not replace the database’s complete advanced search language. Keep product features distinct and inspect the actual generated conditions."
+          ]
+        },
+        {
+          "id": "inferred_or_manual",
+          "title": "An inferred filter and a selected filter need separate checks",
+          "source_anchor": "natural-language-filter-extraction-is-useful-but-limited",
+          "visual": "inferred_or_manual",
+          "narration": [
+            "A filter inferred from the question is different from one the user selects explicitly. Primo Research Assistant documents limited automatic refinements; manually changing a refinement switches that field to manual handling, so it is no longer inferred automatically.",
+            "Test which supported phrasings activate each constraint, whether the generated filter is visible, and what happens with unsupported or ambiguous limits. Compare variants against known relevant records rather than assuming a fluent request was fully obeyed."
+          ]
+        },
+        {
+          "id": "search_record",
+          "title": "Preserve the strategy that actually reached retrieval",
+          "source_anchor": "query-transformation",
+          "visual": "search_record",
+          "narration": [
+            "Keep the original input, generated text, structured expressions, inferred and manual filters, chosen routes, and intermediate results used for feedback. A compulsory clause or hidden route can exclude evidence before ranking; an early mistaken ranking can steer the next query.",
+            "Understanding interprets, transformation changes inputs, and control decides where they go. All can occur in a prescribed workflow. The next chapter moves to the separate question of who chooses what happens next while the search is running."
+          ]
+        }
+      ]
+    }
+  ]
+}

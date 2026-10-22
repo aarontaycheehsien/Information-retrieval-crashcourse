@@ -1,0 +1,74 @@
+{
+  "file": "03-what-are-you-actually-licensing.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 358.6,
+  "decoded_frames": 10758,
+  "integrated_lufs": -16.1,
+  "true_peak_dbfs": -2.4,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 707 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 181 kb/s (default)",
+  "faststart": true,
+  "sha256": "6bb8b13534fa2d43e345d9a05ff01f9b558d7d8ae611cb63f0190825ac202007",
+  "bytes": 40138315,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "9edaaf91ac9436043a9ac29d03a828784cacfc517feee139b5634921f436f6df",
+  "passed": true,
+  "chapter_sha256": "f22dc579940d4c0500a7bf6b931e4890075f311f2121502448cc1585fc2a161c",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "022cd6852e46f1350b3a935e3482dc407ad83d42add67f4edf70c734220d1f0c",
+  "embedded_captions_verified": true,
+  "caption_cues": 135,
+  "reviewed_animation_times": 90,
+  "worked_examples": {
+    "source_pipeline_areas": [
+      "Query interpretation",
+      "Candidate retrieval",
+      "Ranking and fusion",
+      "Retrieval control"
+    ],
+    "source_reporting_methods": [
+      "LLM or NLP query interpretation",
+      "Agentic orchestration",
+      "Strict Boolean",
+      "Ranked lexical retrieval, such as BM25",
+      "Single-vector dense retrieval",
+      "Learnt sparse retrieval",
+      "Late-interaction retrieval"
+    ],
+    "source_inspection_stages": [
+      "Query parsing, rewriting, expansion and routing",
+      "Boolean eligibility and filters",
+      "BM25 and other lexical scoring",
+      "Dense retrieval",
+      "Learnt sparse and late interaction",
+      "Fusion, reranking and presentation",
+      "Agentic orchestration"
+    ],
+    "source_vendor_group_sizes": [
+      2,
+      5,
+      4,
+      3,
+      2,
+      3
+    ],
+    "source_vendor_question_count": 19,
+    "hypothetical_source_trace": {
+      "original_input": "Does open access increase citations?",
+      "transformed_query": "\u201copen access\u201d AND citation*",
+      "candidate_rank": 18,
+      "candidate_count": 100,
+      "final_rank": 3,
+      "display_k": 10,
+      "internal_reranker_details": "not disclosed",
+      "actual_search_run": false
+    },
+    "backward_inspection_is_not_execution_order": true,
+    "generated_rationale_not_causal_evidence": true,
+    "vendor_answers_invented": false,
+    "new_product_tests": false,
+    "passed": true
+  }
+}

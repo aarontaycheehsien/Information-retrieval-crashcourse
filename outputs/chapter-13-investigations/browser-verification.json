@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8830/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8830/01-where-did-the-paper-go/01-where-did-the-paper-go.mp4",
+      "duration": 307.566667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 123,
+      "seek_seconds": 153.783333,
+      "byte_range": "bytes 0-1023/34169156",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8830/02-it-can-spell-it-can-it-find-it/02-it-can-spell-it-can-it-find-it.mp4",
+      "duration": 315.166667,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 122,
+      "seek_seconds": 157.583333,
+      "byte_range": "bytes 0-1023/32547648",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8830/03-every-word-was-there/03-every-word-was-there.mp4",
+      "duration": 333.6,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 128,
+      "seek_seconds": 166.8,
+      "byte_range": "bytes 0-1023/36693097",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "beyond-boolean",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "e9a757ecb284b9828c66e213f02b144d7e21d4dd01fe880f04b99aad504f69ce",
+  "lab_path": "bm25-evidence-lab.html",
+  "lab_sha256": "7b217f4e58a032e8607219d0a9ad44a710a0fd4eea2d3a762ef80f07d7667652",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 4: Lexical search beyond strict Boolean; supporting six-record BM25 Evidence Lab"
+}

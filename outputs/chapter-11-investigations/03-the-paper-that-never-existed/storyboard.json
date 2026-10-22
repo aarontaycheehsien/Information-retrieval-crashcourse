@@ -1,0 +1,201 @@
+{
+  "series": "Understanding, transforming and routing queries",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#query-transformation",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#query-transformation",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-the-paper-that-never-existed",
+  "title": "The paper that never existed",
+  "subtitle": "Generated text can guide retrieval without becoming evidence.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "imagined_hook",
+      "title": "Can an imagined paper help find a real one?",
+      "source_anchor": "query2doc-and-hyde",
+      "visual": "imagined_hook",
+      "narration": [
+        "You ask whether open access increases citations. An LLM writes a plausible paragraph about a study comparing open and subscription articles while accounting for discipline and publication year. No identified study supports that paragraph. Could the invented text still help a search? Pause and predict.",
+        "It can serve as a retrieval aid. Query2doc and HyDE use generated language in different ways to find real indexed sources. Neither method turns the imagined paragraph into evidence, or establishes that the described study exists."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "query2doc_path",
+      "title": "Query2doc adds generated language to the query",
+      "source_anchor": "query2doc-hyde-paths-title",
+      "visual": "query2doc_path",
+      "narration": [
+        "Query2doc generates a pseudo document and uses its language to expand the original query. The additional vocabulary may resemble wording found in relevant documents. The expanded input can go to a sparse retriever such as BM twenty five.",
+        "Dense retrieval is also possible; the diagram follows the lexical route. Its effect depends on what the next retriever does with those words."
+      ]
+    },
+    {
+      "id": "hyde_path",
+      "title": "HyDE searches from the generated document\u2019s vector",
+      "source_anchor": "query2doc-and-hyde",
+      "visual": "hyde_path",
+      "narration": [
+        "HyDE means Hypothetical Document Embeddings. An LLM generates a hypothetical relevant document, then a dense encoder embeds that document. Retrieval compares the resulting vector with stored vectors for real indexed documents.",
+        "The generated document is a pivot into the vector space. It is not the final answer or a verified source. Unlike Query2doc\u2019s language expansion, this path uses the generated document\u2019s embedding to conduct the search."
+      ]
+    },
+    {
+      "id": "unsupported_assumptions",
+      "title": "Real retrieval does not validate invented details",
+      "source_anchor": "query2doc-hyde-paths-title",
+      "visual": "unsupported_assumptions",
+      "narration": [
+        "The chapter\u2019s illustrative paragraph mentions comparisons and adjustment for discipline and year. Those details may steer retrieval towards particular vocabulary or study designs. They are not findings about an identified paper, and may import assumptions the searcher did not intend.",
+        "Retrieving real sources does not retroactively make every generated detail true. Read and assess the actual sources, and retain the generated text in the search record. It is part of the retrieval strategy, not supporting evidence."
+      ]
+    },
+    {
+      "id": "product_arrangements",
+      "title": "AI-assisted input does not name one architecture",
+      "source_anchor": "query-understanding-in-current-discovery-products",
+      "visual": "product_arrangements",
+      "narration": [
+        "The chapter\u2019s product accounts describe different receivers. EBSCOhost and EDS AI Assisted Search parse keyword and noun phrases for the established engine; the cited public page does not identify the parsing model as an LLM.",
+        "Web of Science Smart Search combines structured parsing with keyword and vector document paths. Primo NDE documents generative Boolean construction for Advanced Search. These pinned documentation accounts are not fresh service tests; the shared interface language does not identify a common architecture."
+      ]
+    },
+    {
+      "id": "partial_constraints",
+      "title": "Supported natural-language limits are a defined subset",
+      "source_anchor": "tbl-11-5",
+      "visual": "partial_constraints",
+      "narration": [
+        "Natural language filter extraction is useful but partial. Primo NDE recognises a defined list of fields and facets, with documented author detection failures and unintended OR relationships. Web of Science Research Assistant supports some institution, geography and date constraints.",
+        "That Research Assistant\u2019s guidance also lists complex field tagged Boolean queries as unsupported. Supported natural language patterns do not replace the database\u2019s complete advanced search language. Keep product features distinct and inspect the actual generated conditions."
+      ]
+    },
+    {
+      "id": "inferred_or_manual",
+      "title": "An inferred filter and a selected filter need separate checks",
+      "source_anchor": "natural-language-filter-extraction-is-useful-but-limited",
+      "visual": "inferred_or_manual",
+      "narration": [
+        "A filter inferred from the question is different from one the user selects explicitly. Primo Research Assistant documents limited automatic refinements; manually changing a refinement switches that field to manual handling, so it is no longer inferred automatically.",
+        "Test which supported phrasings activate each constraint, whether the generated filter is visible, and what happens with unsupported or ambiguous limits. Compare variants against known relevant records rather than assuming a fluent request was fully obeyed."
+      ]
+    },
+    {
+      "id": "search_record",
+      "title": "Preserve the strategy that actually reached retrieval",
+      "source_anchor": "query-transformation",
+      "visual": "search_record",
+      "narration": [
+        "Keep the original input, generated text, structured expressions, inferred and manual filters, chosen routes, and intermediate results used for feedback. A compulsory clause or hidden route can exclude evidence before ranking; an early mistaken ranking can steer the next query.",
+        "Understanding interprets, transformation changes inputs, and control decides where they go. All can occur in a prescribed workflow. The next chapter moves to the separate question of who chooses what happens next while the search is running."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "imagined_hook_0",
+      "scene": "imagined_hook",
+      "text": "You ask whether open access increases citations. An LLM writes a plausible paragraph about a study comparing open and subscription articles while accounting for discipline and publication year. No identified study supports that paragraph. Could the invented text still help a search? Pause and predict.",
+      "gap": 1.0
+    },
+    {
+      "id": "imagined_hook_1",
+      "scene": "imagined_hook",
+      "text": "It can serve as a retrieval aid. Query2doc and HyDE use generated language in different ways to find real indexed sources. Neither method turns the imagined paragraph into evidence, or establishes that the described study exists.",
+      "gap": 2.5
+    },
+    {
+      "id": "query2doc_path_0",
+      "scene": "query2doc_path",
+      "text": "Query2doc generates a pseudo document and uses its language to expand the original query. The additional vocabulary may resemble wording found in relevant documents. The expanded input can go to a sparse retriever such as BM twenty five.",
+      "gap": 1.0
+    },
+    {
+      "id": "query2doc_path_1",
+      "scene": "query2doc_path",
+      "text": "Dense retrieval is also possible; the diagram follows the lexical route. Its effect depends on what the next retriever does with those words.",
+      "gap": 0.65
+    },
+    {
+      "id": "hyde_path_0",
+      "scene": "hyde_path",
+      "text": "HyDE means Hypothetical Document Embeddings. An LLM generates a hypothetical relevant document, then a dense encoder embeds that document. Retrieval compares the resulting vector with stored vectors for real indexed documents.",
+      "gap": 1.0
+    },
+    {
+      "id": "hyde_path_1",
+      "scene": "hyde_path",
+      "text": "The generated document is a pivot into the vector space. It is not the final answer or a verified source. Unlike Query2doc\u2019s language expansion, this path uses the generated document\u2019s embedding to conduct the search.",
+      "gap": 0.65
+    },
+    {
+      "id": "unsupported_assumptions_0",
+      "scene": "unsupported_assumptions",
+      "text": "The chapter\u2019s illustrative paragraph mentions comparisons and adjustment for discipline and year. Those details may steer retrieval towards particular vocabulary or study designs. They are not findings about an identified paper, and may import assumptions the searcher did not intend.",
+      "gap": 1.0
+    },
+    {
+      "id": "unsupported_assumptions_1",
+      "scene": "unsupported_assumptions",
+      "text": "Retrieving real sources does not retroactively make every generated detail true. Read and assess the actual sources, and retain the generated text in the search record. It is part of the retrieval strategy, not supporting evidence.",
+      "gap": 0.65
+    },
+    {
+      "id": "product_arrangements_0",
+      "scene": "product_arrangements",
+      "text": "The chapter\u2019s product accounts describe different receivers. EBSCOhost and EDS AI Assisted Search parse keyword and noun phrases for the established engine; the cited public page does not identify the parsing model as an LLM.",
+      "gap": 1.0
+    },
+    {
+      "id": "product_arrangements_1",
+      "scene": "product_arrangements",
+      "text": "Web of Science Smart Search combines structured parsing with keyword and vector document paths. Primo NDE documents generative Boolean construction for Advanced Search. These pinned documentation accounts are not fresh service tests; the shared interface language does not identify a common architecture.",
+      "gap": 0.65
+    },
+    {
+      "id": "partial_constraints_0",
+      "scene": "partial_constraints",
+      "text": "Natural language filter extraction is useful but partial. Primo NDE recognises a defined list of fields and facets, with documented author detection failures and unintended OR relationships. Web of Science Research Assistant supports some institution, geography and date constraints.",
+      "gap": 1.0
+    },
+    {
+      "id": "partial_constraints_1",
+      "scene": "partial_constraints",
+      "text": "That Research Assistant\u2019s guidance also lists complex field tagged Boolean queries as unsupported. Supported natural language patterns do not replace the database\u2019s complete advanced search language. Keep product features distinct and inspect the actual generated conditions.",
+      "gap": 0.65
+    },
+    {
+      "id": "inferred_or_manual_0",
+      "scene": "inferred_or_manual",
+      "text": "A filter inferred from the question is different from one the user selects explicitly. Primo Research Assistant documents limited automatic refinements; manually changing a refinement switches that field to manual handling, so it is no longer inferred automatically.",
+      "gap": 1.0
+    },
+    {
+      "id": "inferred_or_manual_1",
+      "scene": "inferred_or_manual",
+      "text": "Test which supported phrasings activate each constraint, whether the generated filter is visible, and what happens with unsupported or ambiguous limits. Compare variants against known relevant records rather than assuming a fluent request was fully obeyed.",
+      "gap": 0.65
+    },
+    {
+      "id": "search_record_0",
+      "scene": "search_record",
+      "text": "Keep the original input, generated text, structured expressions, inferred and manual filters, chosen routes, and intermediate results used for feedback. A compulsory clause or hidden route can exclude evidence before ranking; an early mistaken ranking can steer the next query.",
+      "gap": 1.0
+    },
+    {
+      "id": "search_record_1",
+      "scene": "search_record",
+      "text": "Understanding interprets, transformation changes inputs, and control decides where they go. All can occur in a prescribed workflow. The next chapter moves to the separate question of who chooses what happens next while the search is running.",
+      "gap": 0.65
+    }
+  ]
+}

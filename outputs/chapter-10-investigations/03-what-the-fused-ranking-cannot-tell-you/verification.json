@@ -1,0 +1,79 @@
+{
+  "file": "03-what-the-fused-ranking-cannot-tell-you.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 271.0,
+  "decoded_frames": 8130,
+  "integrated_lufs": -16.0,
+  "true_peak_dbfs": -2.5,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 706 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 178 kb/s (default)",
+  "faststart": true,
+  "sha256": "d483fffea90907b25b9c5b0c35d7c1edf80d0aa11fabf72dfd098aff61135c3c",
+  "bytes": 30223431,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "b0a65af60c806ae173011a21299f20884c2651823ff1d96760ce1af2e7b26c4d",
+  "passed": true,
+  "chapter_sha256": "3d98323e1c89450a004389723467410caa1bed34df62abab4d7683cd193b313e",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "f243f704339e70637a405e4599006b8b855211d689de35795b40c8b46e3260cc",
+  "embedded_captions_verified": true,
+  "caption_cues": 105,
+  "reviewed_animation_times": 90,
+  "worked_examples": {
+    "source_lists": [
+      [
+        "A",
+        "B",
+        "C"
+      ],
+      [
+        "C",
+        "A",
+        "D"
+      ]
+    ],
+    "constant": 60,
+    "exact_fraction_scores": {
+      "A": "123/3782",
+      "C": "124/3843",
+      "B": "1/62",
+      "D": "1/63"
+    },
+    "rounded_source_scores": {
+      "A": "0.03252",
+      "C": "0.03227",
+      "B": "0.01613",
+      "D": "0.01587"
+    },
+    "baseline_order": [
+      "A",
+      "C",
+      "B",
+      "D"
+    ],
+    "input_occurrences": 6,
+    "distinct_candidates": 4,
+    "shallower_order": [
+      "A",
+      "C",
+      "B"
+    ],
+    "shallower_candidates": [
+      "A",
+      "B",
+      "C"
+    ],
+    "dense_double_weight_order": [
+      "C",
+      "A",
+      "D",
+      "B"
+    ],
+    "score_gap_examples_are_invented": true,
+    "measured_retrieval_results": false,
+    "fused_scores_are_relevance_probabilities": false,
+    "passed": true
+  }
+}

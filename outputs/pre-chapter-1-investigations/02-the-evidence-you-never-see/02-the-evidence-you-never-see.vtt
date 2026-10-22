@@ -1,0 +1,253 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.990
+Imagine an AI search answer with three
+
+00:00:03.010 --> 00:00:06.133
+citations. You check every reference.
+
+00:00:06.309 --> 00:00:08.208
+All three papers exist.
+
+00:00:08.370 --> 00:00:09.948
+Can you now trust the answer?
+
+00:00:10.110 --> 00:00:11.030
+Hold that thought.
+
+00:00:11.193 --> 00:00:13.479
+What exactly did your check establish?
+
+00:00:16.401 --> 00:00:18.018
+It established that the references are
+
+00:00:18.038 --> 00:00:19.911
+real. That is useful.
+
+00:00:20.087 --> 00:00:22.012
+But it did not establish that the answer
+
+00:00:22.032 --> 00:00:24.474
+represents them faithfully, or that the
+
+00:00:24.494 --> 00:00:27.025
+system found the evidence needed to answer
+
+00:00:27.045 --> 00:00:27.875
+your question.
+
+00:00:28.798 --> 00:00:31.242
+A fabricated citation is one kind of
+
+00:00:31.262 --> 00:00:34.167
+failure. A reference that does not exist
+
+00:00:34.187 --> 00:00:36.177
+can be exposed by checking it.
+
+00:00:36.352 --> 00:00:38.523
+But passing that check answers only the
+
+00:00:38.543 --> 00:00:39.850
+existence question.
+
+00:00:40.412 --> 00:00:42.417
+Our imaginary answer passes.
+
+00:00:42.580 --> 00:00:44.905
+The three references are real within the
+
+00:00:44.925 --> 00:00:47.031
+illustration. We still have two more
+
+00:00:47.051 --> 00:00:48.770
+questions to investigate.
+
+00:00:49.672 --> 00:00:52.349
+A real source can still be misrepresented.
+
+00:00:52.498 --> 00:00:55.661
+In this invented example, a paper reports
+
+00:00:55.681 --> 00:00:58.213
+an uncertain result, while the answer
+
+00:00:58.233 --> 00:01:00.532
+describes it as a settled conclusion.
+
+00:01:00.694 --> 00:01:02.929
+The reference exists; the description is
+
+00:01:02.949 --> 00:01:03.612
+wrong.
+
+00:01:04.189 --> 00:01:06.206
+Checking the writing against the source
+
+00:01:06.226 --> 00:01:07.636
+tackles that problem.
+
+00:01:07.785 --> 00:01:10.562
+Now suppose we correct the wording and
+
+00:01:10.582 --> 00:01:12.778
+every sentence fairly represents the
+
+00:01:12.798 --> 00:01:14.169
+papers it cites.
+
+00:01:14.332 --> 00:01:16.334
+Is our investigation finished?
+
+00:01:17.234 --> 00:01:19.670
+Here is the harder failure to see.
+
+00:01:19.833 --> 00:01:22.506
+Another relevant paper never reaches the
+
+00:01:22.526 --> 00:01:23.845
+answer-writing step.
+
+00:01:24.021 --> 00:01:25.856
+The answer cannot show you evidence it
+
+00:01:25.876 --> 00:01:27.054
+never received.
+
+00:01:27.229 --> 00:01:29.671
+It can be fluent, carefully worded and
+
+00:01:29.691 --> 00:01:32.094
+neatly cited, yet still rest on an
+
+00:01:32.114 --> 00:01:33.485
+inadequate selection.
+
+00:01:34.044 --> 00:01:36.506
+The preface asks us to examine this
+
+00:01:36.526 --> 00:01:38.503
+retrieval half of the system.
+
+00:01:38.755 --> 00:01:41.235
+Faithful writing and adequate retrieval
+
+00:01:41.255 --> 00:01:42.781
+are separate questions.
+
+00:01:42.931 --> 00:01:45.706
+A citation list alone settles neither.
+
+00:01:46.603 --> 00:01:48.000
+Try a thought experiment.
+
+00:01:48.150 --> 00:01:50.320
+Give two writers different envelopes of
+
+00:01:50.340 --> 00:01:52.304
+papers about the same question.
+
+00:01:52.480 --> 00:01:55.436
+Both writers describe every supplied paper
+
+00:01:55.456 --> 00:01:59.045
+perfectly. One envelope omits an important
+
+00:01:59.065 --> 00:02:00.345
+piece of evidence.
+
+00:02:00.909 --> 00:02:03.450
+Excellent writing cannot put that missing
+
+00:02:03.470 --> 00:02:05.124
+paper back into the envelope.
+
+00:02:05.287 --> 00:02:08.050
+The illustration does not prove how any
+
+00:02:08.070 --> 00:02:09.867
+real product behaves.
+
+00:02:10.029 --> 00:02:12.535
+It shows why inspecting the final prose
+
+00:02:12.555 --> 00:02:14.738
+and inspecting evidence selection do
+
+00:02:14.758 --> 00:02:15.949
+different jobs.
+
+00:02:16.842 --> 00:02:19.172
+If a paper is missing from an answer,
+
+00:02:19.206 --> 00:02:20.770
+start asking questions.
+
+00:02:20.932 --> 00:02:22.600
+Was it in the searchable collection?
+
+00:02:22.749 --> 00:02:24.726
+Did it enter a candidate set?
+
+00:02:24.889 --> 00:02:25.809
+How was it ranked?
+
+00:02:25.971 --> 00:02:27.690
+What evidence was passed onward?
+
+00:02:27.865 --> 00:02:29.211
+What did the writer use?
+
+00:02:29.789 --> 00:02:32.270
+Those are diagnostic possibilities, not a
+
+00:02:32.290 --> 00:02:34.216
+verdict about where a real failure
+
+00:02:34.236 --> 00:02:36.549
+occurred. The goal is to locate the
+
+00:02:36.569 --> 00:02:39.294
+decision, using what the system documents
+
+00:02:39.314 --> 00:02:40.904
+and what you can actually inspect.
+
+00:02:41.805 --> 00:02:45.194
+Libraries license, configure, evaluate and
+
+00:02:45.214 --> 00:02:47.823
+pay for the retrieval side of these tools.
+
+00:02:47.972 --> 00:02:49.898
+Tay argues that someone in the library
+
+00:02:49.918 --> 00:02:52.140
+needs enough understanding to compare
+
+00:02:52.160 --> 00:02:54.731
+systems and ask which layer a problem
+
+00:02:54.751 --> 00:02:55.761
+belongs to.
+
+00:02:56.328 --> 00:02:57.831
+You do not need to become a retrieval
+
+00:02:57.851 --> 00:03:00.473
+engineer. You need to keep three questions
+
+00:03:00.493 --> 00:03:03.308
+separate: is the source real, is it
+
+00:03:03.328 --> 00:03:05.460
+represented faithfully, and was the
+
+00:03:05.480 --> 00:03:06.993
+evidence selection adequate?
+
+00:03:07.168 --> 00:03:08.797
+The papers you never see deserve a
+
+00:03:08.817 --> 00:03:09.828
+question too.

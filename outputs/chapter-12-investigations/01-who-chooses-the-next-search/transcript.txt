@@ -1,0 +1,40 @@
+Who chooses the next search?
+
+[00:00:00.700]: A system searches, reads its top results, builds a different query, and searches again. A model may help choose the words. Is this agentic search? Pause and ask a more precise question: who decided that another search would happen?
+
+[00:00:18.839]: Two pass pseudo relevance feedback can follow exactly that prescribed sequence every time. Its query contents adapt to the first ranking while its next action stays fixed. Result dependent content does not, by itself, establish agentic control.
+
+[00:00:36.890]: A fixed workflow follows a prescribed sequence. An adaptive workflow selects among branches explicitly enumerated by its designer. A rule, classifier or model may choose that branch. Using a model for the choice does not settle the category.
+
+[00:00:54.090]: Agentic search lets a model plan at least part of a multi action retrieval trajectory from the task and its observations. Its tools are predefined too. The distinction is whether it assembles a sequence, rather than only selecting enumerated branches.
+
+[00:01:12.021]: The task brief supplies scope, criteria, sources, coverage, stopping conditions and the required record. The harness defines available operations, reachable sources, budgets and limits. A tool means a callable operation, such as searching or fetching references, rather than an entire licensed product.
+
+[00:01:33.613]: The model works within those permissions. Further reasoning cannot supply an unavailable operation or inaccessible source.
+
+[00:01:43.110]: Output format is a separate property. A scripted deep search can return records after repeated retrieval. An agentic search can also return records. Either fixed or model planned retrieval can precede a generated report or answer.
+
+[00:02:00.262]: Length, fluency and citations show generation, not who controlled the search. Basic RAG retrieves then generates. Agentic RAG lets a model choose retrieval actions towards a generated response; agentic search is broader and need not generate prose.
+
+[00:02:19.555]: Hybrid describes contributing retrieval routes. Multi stage describes how operations follow earlier outputs. Agentic describes who chose the sequence. These properties can combine, but none automatically establishes the others.
+
+[00:02:36.171]: Model planned repeated BM twenty five searches can be agentic without being hybrid. Fixed lexical and dense retrieval followed by fusion can be hybrid and multi stage without being agentic. The controller changes which operations run; it does not change BM twenty five’s scoring formula.
+
+[00:02:58.055]: The chapter’s April twenty twenty six account places Asta Find Paper in a semi rigid, predefined flow shaped by model decisions. It contrasts Undermind’s original deep search with Projects, which the account describes as dynamically selecting and chaining tools.
+
+[00:03:17.218]: These are dated reference points along a continuum, not new product tests. One vendor can offer different control arrangements in different modes. Iteration or a model inside a pipeline is insufficient evidence of an independently planned trajectory.
+
+[00:03:34.378]: An April twenty twenty six Web of Science Research Assistant post used fully agentic while describing automatic choice among task routes. That description is compatible with adaptive control; the post does not settle whether novel sequences can be composed.
+
+[00:03:50.983]: It also documents user review and approval of a proposed strategy before retrieval, followed by an Advanced Search expression. That approval gate is a concrete control property. It is different from deciding when an ongoing search has enough evidence to stop.
+
+[00:04:08.142]: For a known task with a sound established procedure, fixed or adaptive control may be the better bargain. Agentic control can attempt an unanticipated sequence using available actions, with added cost, latency and variation between runs.
+
+[00:04:25.159]: Inspect the required sequence, available actions and evidence of who chose the next move. The next film examines why more iterations can preserve a blind spot just as easily as repair one.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 12.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#agentic-search
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

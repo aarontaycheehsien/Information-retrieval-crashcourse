@@ -1,0 +1,9 @@
+source_mock_field,source_mock_value,hypothetical,actual_product_trace
+Original input:,Does open access increase citations?,True,False
+Transformed query:,“open access” AND citation*,True,False
+Retrieval route:,lexical retrieval over indexed abstracts.,True,False
+Indexed evidence:,P’s abstract contains “open access” and “citations”.,True,False
+Candidate rank:,18 of 100 supplied candidates.,True,False
+Reranking:,moved P to rank 3.,True,False
+Display cut-off:,first 10 records.,True,False
+Reranker’s internal scoring details:,not disclosed.,True,False

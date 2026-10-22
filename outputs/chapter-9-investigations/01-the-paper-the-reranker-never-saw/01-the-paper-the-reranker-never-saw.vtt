@@ -1,0 +1,334 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.965
+Imagine a paper that would be useful for
+
+00:00:02.985 --> 00:00:04.227
+your particular question.
+
+00:00:04.389 --> 00:00:06.650
+The first retrieval stage misses it.
+
+00:00:06.799 --> 00:00:09.150
+Now a much stronger model reranks the
+
+00:00:09.170 --> 00:00:11.895
+shortlist. Can that model put the missing
+
+00:00:11.915 --> 00:00:14.743
+paper first? Pause and predict what
+
+00:00:14.763 --> 00:00:16.778
+information it actually receives.
+
+00:00:19.174 --> 00:00:21.894
+It receives the shortlisted candidates.
+
+00:00:22.044 --> 00:00:24.575
+Reranking can change their order, but the
+
+00:00:24.595 --> 00:00:26.971
+absent paper is unavailable.
+
+00:00:27.134 --> 00:00:29.936
+Our invented cards illustrate a boundary
+
+00:00:29.956 --> 00:00:32.023
+inherited by later stages.
+
+00:00:32.922 --> 00:00:34.745
+Imagine millions of records.
+
+00:00:34.908 --> 00:00:37.762
+Applying an expensive query and document
+
+00:00:37.782 --> 00:00:40.481
+comparison to every record for every
+
+00:00:40.501 --> 00:00:42.903
+search would usually cost too much.
+
+00:00:43.129 --> 00:00:45.764
+Fast first stages retrieve a manageable
+
+00:00:45.784 --> 00:00:49.179
+set; later stages spend more computation
+
+00:00:49.199 --> 00:00:50.570
+on each survivor.
+
+00:00:51.118 --> 00:00:53.410
+The first stage balances speed and
+
+00:00:53.430 --> 00:00:55.755
+retaining potentially relevant records.
+
+00:00:55.917 --> 00:00:58.307
+Reranking aims to improve the ordering
+
+00:00:58.327 --> 00:00:59.479
+within its pool.
+
+00:00:59.628 --> 00:01:02.224
+A later answer generator inherits that
+
+00:01:02.244 --> 00:01:04.995
+candidate boundary too, unless another
+
+00:01:05.015 --> 00:01:07.804
+operation explicitly brings in additional
+
+00:01:07.824 --> 00:01:08.667
+evidence.
+
+00:01:09.568 --> 00:01:11.735
+A conventional bi encoder represents the
+
+00:01:11.755 --> 00:01:14.762
+query and passage independently.
+
+00:01:14.938 --> 00:01:17.276
+Passage vectors can be stored before any
+
+00:01:17.296 --> 00:01:20.523
+query arrives. Their interaction happens
+
+00:01:20.543 --> 00:01:22.971
+after each text has been compressed.
+
+00:01:23.134 --> 00:01:25.446
+A cross encoder instead processes the
+
+00:01:25.466 --> 00:01:28.190
+query and one candidate together.
+
+00:01:28.742 --> 00:01:31.113
+Attention can run across their tokens
+
+00:01:31.134 --> 00:01:33.716
+before producing a ranking score.
+
+00:01:33.879 --> 00:01:35.972
+That creates an opportunity to examine a
+
+00:01:35.992 --> 00:01:39.954
+qualifier, negation, entity or intent more
+
+00:01:39.974 --> 00:01:42.660
+closely. Cross encoder names an
+
+00:01:42.680 --> 00:01:44.980
+arrangement; the score still reflects
+
+00:01:45.000 --> 00:01:47.711
+training and the chosen relevance task.
+
+00:01:48.619 --> 00:01:51.297
+The chapter’s query asks: am I being
+
+00:01:51.317 --> 00:01:53.229
+delulu about getting this job?
+
+00:01:53.405 --> 00:01:56.065
+One candidate explains how to recognise
+
+00:01:56.085 --> 00:01:58.501
+unrealistic expectations during a job
+
+00:01:58.521 --> 00:02:01.555
+search. Another lists ten signs that you
+
+00:02:01.575 --> 00:02:03.784
+performed well in your job interview.
+
+00:02:04.348 --> 00:02:06.960
+Both concern job seeking and advice.
+
+00:02:07.161 --> 00:02:09.165
+For the stated need about unrealistic
+
+00:02:09.185 --> 00:02:12.167
+expectations, the first is the intended
+
+00:02:12.187 --> 00:02:15.144
+match; interview performance is the hard
+
+00:02:15.164 --> 00:02:17.889
+negative. Joint query and candidate
+
+00:02:17.909 --> 00:02:20.930
+processing exposes details that a pooled
+
+00:02:20.950 --> 00:02:22.824
+representation may blur.
+
+00:02:23.724 --> 00:02:25.287
+The cross encoder’s candidate
+
+00:02:25.307 --> 00:02:27.348
+representation depends on the incoming
+
+00:02:27.368 --> 00:02:29.874
+query, so it cannot be precomputed and
+
+00:02:29.894 --> 00:02:31.755
+reused in the same way.
+
+00:02:31.905 --> 00:02:34.423
+Reranking a hundred candidates requires
+
+00:02:34.443 --> 00:02:37.207
+roughly a hundred query and candidate
+
+00:02:37.227 --> 00:02:40.080
+evaluations, even when implementation
+
+00:02:40.100 --> 00:02:41.317
+batches the work.
+
+00:02:41.856 --> 00:02:43.819
+That count is not a measured latency
+
+00:02:43.839 --> 00:02:46.461
+estimate. Truncation can also hide
+
+00:02:46.481 --> 00:02:48.897
+decisive text. A richer scoring
+
+00:02:48.917 --> 00:02:50.765
+arrangement makes more evidence
+
+00:02:50.785 --> 00:02:52.969
+accessible; it does not establish
+
+00:02:52.989 --> 00:02:55.455
+objective or infallible relevance.
+
+00:02:56.364 --> 00:02:59.459
+An LLM can receive the query, candidate
+
+00:02:59.479 --> 00:03:02.036
+text and explicit criteria such as
+
+00:03:02.056 --> 00:03:04.678
+population, study design or whether a
+
+00:03:04.698 --> 00:03:06.391
+passage answers the question.
+
+00:03:06.580 --> 00:03:09.201
+Pointwise prompting judges each candidate
+
+00:03:09.221 --> 00:03:12.333
+separately. Pairwise prompting asks which
+
+00:03:12.353 --> 00:03:14.793
+of two candidates is more relevant.
+
+00:03:15.342 --> 00:03:17.555
+Listwise prompting presents several
+
+00:03:17.575 --> 00:03:19.874
+candidates together and requests an
+
+00:03:19.894 --> 00:03:23.057
+ordering. Larger lists may require windows
+
+00:03:23.077 --> 00:03:25.131
+or repeated partial rankings.
+
+00:03:25.320 --> 00:03:27.915
+Here these names describe prompting,
+
+00:03:28.039 --> 00:03:30.132
+rather than classical learning to rank
+
+00:03:30.152 --> 00:03:31.639
+training objectives.
+
+00:03:32.539 --> 00:03:34.742
+Each arrangement has failure modes.
+
+00:03:34.904 --> 00:03:37.705
+Separate scores may need calibration.
+
+00:03:37.868 --> 00:03:40.515
+Pairwise preferences can be inconsistent.
+
+00:03:40.677 --> 00:03:42.642
+Listwise outputs may depend on input
+
+00:03:42.662 --> 00:03:46.044
+order. Prompt wording, context limits,
+
+00:03:46.064 --> 00:03:48.750
+model updates and sampling settings can
+
+00:03:48.770 --> 00:03:51.288
+all affect an LLM reranker.
+
+00:03:51.828 --> 00:03:53.662
+A fluent explanation can help someone
+
+00:03:53.682 --> 00:03:56.369
+inspect a decision, but it is not evidence
+
+00:03:56.389 --> 00:03:58.262
+that the decision was correct.
+
+00:03:58.412 --> 00:04:01.240
+Evaluate the complete pipeline against the
+
+00:04:01.260 --> 00:04:03.611
+actual information need, including
+
+00:04:03.631 --> 00:04:06.098
+candidates that an earlier stage failed to
+
+00:04:06.118 --> 00:04:07.012
+supply.
+
+00:04:07.949 --> 00:04:10.104
+The chapter’s documented Semantic Scholar
+
+00:04:10.124 --> 00:04:12.089
+account from twenty twenty five uses
+
+00:04:12.109 --> 00:04:14.576
+Elasticsearch keyword retrieval over
+
+00:04:14.596 --> 00:04:18.016
+titles, abstracts and author names.
+
+00:04:18.166 --> 00:04:20.620
+Up to a thousand candidates then reach a
+
+00:04:20.640 --> 00:04:24.396
+LightGBM reranker using signals including
+
+00:04:24.416 --> 00:04:27.823
+title matches, citations and recency.
+
+00:04:28.378 --> 00:04:30.697
+That is machine learnt ranking after
+
+00:04:30.717 --> 00:04:32.062
+lexical retrieval.
+
+00:04:32.225 --> 00:04:34.885
+It establishes neither dense first stage
+
+00:04:34.905 --> 00:04:38.261
+retrieval nor an LLM reranker, and does
+
+00:04:38.281 --> 00:04:40.439
+not explain the precise later interface
+
+00:04:40.459 --> 00:04:42.849
+behaviour. Ask what produced the pool,
+
+00:04:42.869 --> 00:04:45.246
+what text the ranker saw, and how many
+
+00:04:45.266 --> 00:04:46.663
+candidates reached it.

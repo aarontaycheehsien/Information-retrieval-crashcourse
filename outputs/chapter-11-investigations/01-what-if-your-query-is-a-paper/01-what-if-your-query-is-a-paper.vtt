@@ -1,0 +1,337 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.942
+You want to investigate the open access
+
+00:00:02.962 --> 00:00:04.462
+citation advantage.
+
+00:00:04.611 --> 00:00:06.756
+You could type a question, choose a known
+
+00:00:06.776 --> 00:00:09.527
+paper, follow a citation, or give a
+
+00:00:09.547 --> 00:00:11.433
+controller a research brief.
+
+00:00:11.583 --> 00:00:13.728
+Are these four ways of phrasing the same
+
+00:00:13.748 --> 00:00:15.738
+query? Pause and predict.
+
+00:00:18.146 --> 00:00:20.547
+They address different mechanisms.
+
+00:00:20.722 --> 00:00:22.983
+A query represents the need in a form a
+
+00:00:23.003 --> 00:00:24.503
+system can act on.
+
+00:00:24.679 --> 00:00:27.120
+Changing from words to a seed paper or
+
+00:00:27.140 --> 00:00:29.941
+citation changes more than the wording.
+
+00:00:30.872 --> 00:00:33.469
+A free text string might go to lexical,
+
+00:00:33.503 --> 00:00:35.570
+dense or hybrid retrieval.
+
+00:00:35.719 --> 00:00:37.890
+The visible box does not reveal whether
+
+00:00:37.910 --> 00:00:41.202
+words will be analysed, encoded, rewritten
+
+00:00:41.222 --> 00:00:44.114
+or routed. A controlled term or structured
+
+00:00:44.134 --> 00:00:47.323
+expression addresses annotations, fields,
+
+00:00:47.343 --> 00:00:49.758
+filters or Boolean conditions.
+
+00:00:50.298 --> 00:00:53.381
+A MeSH heading, field tag or tested search
+
+00:00:53.401 --> 00:00:56.035
+hedge is not simply a formal keyword.
+
+00:00:56.210 --> 00:00:57.879
+It depends on the target database’s
+
+00:00:57.899 --> 00:01:00.442
+structure and supported syntax.
+
+00:01:01.342 --> 00:01:03.808
+A seed document makes a known paper stand
+
+00:01:03.828 --> 00:01:05.934
+for the need. The system might compare its
+
+00:01:05.954 --> 00:01:08.975
+text, follow citation relationships, or
+
+00:01:08.995 --> 00:01:11.836
+combine both. PubMed Similar Articles, for
+
+00:01:11.856 --> 00:01:14.517
+example, uses a word weighted approach
+
+00:01:14.537 --> 00:01:17.867
+over title, abstract and MeSH words; a
+
+00:01:17.887 --> 00:01:19.839
+seed does not automatically imply
+
+00:01:19.859 --> 00:01:20.805
+embeddings.
+
+00:01:21.347 --> 00:01:23.244
+Citation methods differ too.
+
+00:01:23.419 --> 00:01:26.891
+Direct traversal follows explicit citation
+
+00:01:26.911 --> 00:01:30.422
+edges. Bibliographic coupling finds papers
+
+00:01:30.442 --> 00:01:31.852
+sharing references.
+
+00:01:32.014 --> 00:01:34.996
+Co citation finds papers cited together.
+
+00:01:35.159 --> 00:01:36.659
+Their reach depends on the graph’s
+
+00:01:36.679 --> 00:01:38.902
+coverage and timing, rather than only on
+
+00:01:38.922 --> 00:01:40.486
+the searcher’s vocabulary.
+
+00:01:41.409 --> 00:01:43.690
+A relevance judgement can help construct a
+
+00:01:43.710 --> 00:01:46.319
+later retrieval input from accepted or
+
+00:01:46.339 --> 00:01:47.633
+rejected records.
+
+00:01:47.808 --> 00:01:50.417
+Pseudo relevance feedback instead assumes
+
+00:01:50.437 --> 00:01:53.381
+highly ranked records are useful without
+
+00:01:53.401 --> 00:01:54.734
+asking the searcher.
+
+00:01:55.284 --> 00:01:58.211
+A browse or monitoring target addresses a
+
+00:01:58.230 --> 00:02:01.600
+journal, author, subject, collection or
+
+00:02:01.620 --> 00:02:02.746
+continuing alert.
+
+00:02:02.908 --> 00:02:05.272
+It can surface a paper you recognise as
+
+00:02:05.292 --> 00:02:08.288
+useful even when you could not have named
+
+00:02:08.308 --> 00:02:11.020
+it in advance. These are different ways
+
+00:02:11.040 --> 00:02:12.295
+into the literature.
+
+00:02:13.199 --> 00:02:15.202
+A programmatic predicate can specify
+
+00:02:15.222 --> 00:02:19.120
+identifiers, ranges, filtering, sorting
+
+00:02:19.140 --> 00:02:20.305
+and pagination.
+
+00:02:20.454 --> 00:02:23.231
+OpenAlex documents composable attribute
+
+00:02:23.251 --> 00:02:26.440
+filters. A task brief instead gives a
+
+00:02:26.460 --> 00:02:29.287
+controller scope, inclusion criteria,
+
+00:02:29.333 --> 00:02:31.981
+sources, stopping conditions and output
+
+00:02:32.001 --> 00:02:34.648
+requirements. Those instructions are not
+
+00:02:34.668 --> 00:02:37.251
+all terms that an underlying retriever can
+
+00:02:37.271 --> 00:02:38.037
+obey.
+
+00:02:38.609 --> 00:02:41.009
+Even a filter needs the right meaning.
+
+00:02:41.210 --> 00:02:43.020
+Filtering results to papers that are
+
+00:02:43.040 --> 00:02:45.958
+themselves open access could exclude a
+
+00:02:45.978 --> 00:02:48.561
+paywalled study about the open access
+
+00:02:48.581 --> 00:02:50.004
+citation advantage.
+
+00:02:50.192 --> 00:02:52.711
+The chapter’s example therefore filters by
+
+00:02:52.731 --> 00:02:54.450
+publication year instead.
+
+00:02:55.368 --> 00:02:56.943
+These objects cooperate.
+
+00:02:57.119 --> 00:02:59.895
+Text and controlled vocabulary can find
+
+00:02:59.915 --> 00:03:02.936
+seeds; citation traversal can expose
+
+00:03:02.956 --> 00:03:05.617
+missing terminology; accepted records can
+
+00:03:05.637 --> 00:03:08.542
+guide feedback; an API can make a
+
+00:03:08.562 --> 00:03:09.998
+procedure repeatable.
+
+00:03:10.173 --> 00:03:12.485
+Bates called developing a search through
+
+00:03:12.505 --> 00:03:14.624
+such discoveries berrypicking.
+
+00:03:15.180 --> 00:03:17.990
+In one audit of a single complex evidence
+
+00:03:18.010 --> 00:03:20.645
+review, researchers traced four hundred
+
+00:03:20.665 --> 00:03:23.260
+ninety five included sources.
+
+00:03:23.461 --> 00:03:26.392
+Thirty percent came from protocol defined
+
+00:03:26.412 --> 00:03:29.111
+database and hand searches, and fifty one
+
+00:03:29.131 --> 00:03:30.734
+percent from snowballing.
+
+00:03:30.909 --> 00:03:33.364
+That is a scoped example, not a universal
+
+00:03:33.384 --> 00:03:34.858
+estimate for reviews.
+
+00:03:35.744 --> 00:03:38.214
+When the query really is text, useful
+
+00:03:38.234 --> 00:03:40.159
+wording depends on its receiver.
+
+00:03:40.322 --> 00:03:43.562
+A lexical engine needs observable concepts
+
+00:03:43.582 --> 00:03:45.211
+and supported operators.
+
+00:03:45.373 --> 00:03:47.866
+A dense retriever needs a description
+
+00:03:47.886 --> 00:03:49.747
+suited to what its model was trained to
+
+00:03:49.767 --> 00:03:53.046
+match. Longer prose is not automatically
+
+00:03:53.066 --> 00:03:53.716
+better.
+
+00:03:54.261 --> 00:03:57.189
+A query translator needs enough context to
+
+00:03:57.209 --> 00:04:00.087
+produce inspectable retrieval inputs.
+
+00:04:00.276 --> 00:04:02.846
+Detailed relevance instructions do not
+
+00:04:02.866 --> 00:04:05.075
+automatically become instructions followed
+
+00:04:05.095 --> 00:04:08.516
+by every retrieval model; that capability
+
+00:04:08.536 --> 00:04:09.868
+depends on training.
+
+00:04:10.770 --> 00:04:13.712
+If the architecture is undisclosed, vary
+
+00:04:13.732 --> 00:04:15.955
+inputs systematically against known
+
+00:04:15.975 --> 00:04:19.356
+relevant records: short terms, a question,
+
+00:04:19.390 --> 00:04:22.217
+fielded syntax and a known item title.
+
+00:04:22.353 --> 00:04:25.220
+Inspect generated expressions for valid
+
+00:04:25.240 --> 00:04:28.029
+fields, controlled terms and logical
+
+00:04:28.049 --> 00:04:30.567
+relationships in the target database.
+
+00:04:31.123 --> 00:04:33.722
+Generated Boolean strategies can contain
+
+00:04:33.742 --> 00:04:35.848
+invalid MeSH terms.
+
+00:04:36.010 --> 00:04:38.039
+A polished paragraph is no quality
+
+00:04:38.059 --> 00:04:41.067
+guarantee. Start with the query object and
+
+00:04:41.087 --> 00:04:43.310
+receiving mechanism, then test what the
+
+00:04:43.330 --> 00:04:45.100
+system actually does.

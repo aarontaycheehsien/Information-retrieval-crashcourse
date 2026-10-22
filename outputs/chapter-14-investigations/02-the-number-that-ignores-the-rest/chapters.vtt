@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:38.624
+Two relevant hits or six: can the score stay the same?
+
+00:00:38.624 --> 00:01:13.568
+Evaluation depth is not automatically a retrieval budget
+
+00:01:13.568 --> 00:01:51.516
+MRR rewards the first answer arriving early
+
+00:01:51.516 --> 00:02:32.148
+MAP rewards many relevant records placed high
+
+00:02:32.148 --> 00:03:13.391
+nDCG can reward decisive records more than marginal ones
+
+00:03:13.391 --> 00:03:49.513
+Each measure defines a different kind of better
+
+00:03:49.513 --> 00:04:27.909
+A fair offline comparison holds the evaluation inputs still
+
+00:04:27.909 --> 00:05:13.567
+Unjudged is not the same as irrelevant

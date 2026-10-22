@@ -1,0 +1,32 @@
+Twenty mentions. Twice the credit?
+
+[00:00:00.700]: Two documents have the same length and match the same query term. One mentions it once. The other mentions it twenty times. Should the second get twenty times as much credit? Hold rarity and length fixed while you decide.
+
+[00:00:17.462]: BM twenty-five applies diminishing returns. Repetition contributes evidence, but each additional occurrence adds less. This term-frequency saturation prevents the contribution from growing linearly forever.
+
+[00:00:33.815]: At average document length, with k one set to one point two, one occurrence gives a term-frequency factor of one. Two give one point three seven five. Twenty give about two point zero eight.
+
+[00:00:47.668]: The curve approaches two point two. Both axes are linear. We are plotting a frequency factor, not a final score or a probability. Multiply this factor by the term's IDF to obtain its contribution.
+
+[00:01:01.997]: The parameter k one changes the saturation curve. These curves use the same linear scales and average document length. Different settings change how repeated occurrences add evidence and the limiting value they approach.
+
+[00:01:17.780]: With k one at zero, every positive occurrence count has factor one. Presence matters; further repetition does not. A missing term still contributes zero. These settings are mathematical comparisons, not recommendations for every collection.
+
+[00:01:36.465]: Now fix the query term, its collection rarity and one occurrence. Compare a document of forty analysed terms with one of four hundred. The collection average is one hundred. With length normalisation enabled, the shorter example has the larger contribution.
+
+[00:01:54.673]: Length provides context for the frequency. This does not say that short papers are always better. Other matching terms contribute too, and usefulness still depends on the reader's information need.
+
+[00:02:07.276]: The parameter b controls the strength of length normalisation. In this calculation, k one is one point two and b is zero point seven five. The two documents receive different frequency factors.
+
+[00:02:21.690]: Set b to zero and, with frequency held fixed, the two factors are equal. We have turned off the length effect, not the whole score. The figures are computed from an explicitly labeled single-field BM twenty-five variant.
+
+[00:02:38.470]: Keep the roles separate. IDF weights collection rarity. k one shapes repetition's contribution. b controls length normalisation. One point two and zero point seven five are typical defaults used in the book's worked example; products and configurations can differ.
+
+[00:02:57.317]: BM twenty-five combines measured lexical evidence. Its score does not tell you that the source answers your question. The final film follows those calculations through the same inverted index we built in Chapter Two.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 3.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#bm25-ranking
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

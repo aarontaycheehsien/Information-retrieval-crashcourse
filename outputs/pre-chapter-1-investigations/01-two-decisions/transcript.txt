@@ -1,0 +1,36 @@
+Two decisions hiding in every search
+
+[00:00:00.700]: Here are eight imaginary papers. A search returns three of them. You move the third result to the top. Have you improved the search? Take a moment. What would you need to know?
+
+[00:00:14.702]: You have changed the order. But you have learned nothing about the five papers that never made it into the results. One of those could have been the paper you needed most.
+
+[00:00:24.921]: Aaron Tay opens this book with two questions that are easily blurred together. First: why did this record get into the candidate set at all? Think of a gate deciding which papers are allowed through.
+
+[00:00:37.978]: This is a schematic example, not a model of a particular product. The important thing is the boundary. A paper outside the set cannot be moved to the top just by reordering the papers inside it.
+
+[00:00:51.273]: The second question is: why did a record rank where it did? Now we are comparing papers that are already in the set. Admission asks who participates. Ranking asks how the participants are ordered.
+
+[00:01:03.824]: Both matter. A good order can make useful evidence easier to see. But a beautiful ranking is not evidence that the right papers were available in the first place.
+
+[00:01:15.204]: Tay describes learning search syntax thoroughly, while retrieval mechanics received little attention in his library education. For years, he says, that was enough for his work. Around twenty twenty-two, understanding the engine became much more important to him.
+
+[00:01:32.815]: The explanations he needed were scattered across courses, engineering blogs, conference talks, documentation and research papers. His questions were practical: how does this differ from Boolean search, how should I phrase a query, and which papers will my researchers find?
+
+[00:01:51.032]: Now put a label on the box: semantic search. Or vector search. Or neural, embedding, agentic, AI-powered. Which of our two decisions does that label explain?
+
+[00:02:05.240]: Usually, the label alone cannot answer that. These terms can refer to different representations, matching methods, pipeline stages or advertised capabilities. In particular, semantic search is not simply another name for dense retrieval.
+
+[00:02:22.996]: No single neural architecture has simply replaced lexical retrieval. So the useful move is to ask what happens at each layer. What has the vendor documented? What is your own observation? And what remains unknown?
+
+[00:02:37.094]: A true statement about one part of a system can sound like a stronger claim about the whole system. Keeping the mechanism and the evidence together helps you hear the difference.
+
+[00:02:48.799]: Return to our three results. Moving a paper changes its position. Finding a previously excluded paper changes what is available. Those are different interventions, and they answer different questions.
+
+[00:03:02.024]: Before trusting a ranked list, keep both questions in view: why did these papers get in, and why are they in this order? That distinction is the starting point of How Search Decides What You See.
+
+Adapted from Aaron Tay, How Search Decides What You See, Preface.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#preface
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

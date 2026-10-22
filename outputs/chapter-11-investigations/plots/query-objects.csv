@@ -1,0 +1,9 @@
+source_query_object,mechanism_summary
+Free-text string,"Lexical, dense or hybrid retrieval"
+Controlled term or structured expression,"Annotations, fields, filters, Boolean logic"
+Citation edge,"Direct links, coupling or co-citation"
+Seed document,"Text similarity, citation relations, or both"
+Relevance judgement,Construct a later retrieval input
+Browse or monitoring target,Collection browsing or continuing alerts
+Programmatic predicate,"API filters, identifiers, sorting, pagination"
+Task brief,"Controller scope, criteria and stopping"

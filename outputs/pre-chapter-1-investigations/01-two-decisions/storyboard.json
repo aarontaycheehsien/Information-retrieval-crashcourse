@@ -1,0 +1,180 @@
+{
+  "series": "Before the search begins",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#preface",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#preface",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-two-decisions",
+  "title": "Two decisions hiding in every search",
+  "subtitle": "Getting in is only the beginning.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "prediction",
+      "title": "Make a prediction",
+      "source_anchor": "preface",
+      "visual": "prediction",
+      "narration": [
+        "Here are eight imaginary papers. A search returns three of them. You move the third result to the top. Have you improved the search? Take a moment. What would you need to know?",
+        "You have changed the order. But you have learned nothing about the five papers that never made it into the results. One of those could have been the paper you needed most."
+      ],
+      "pause_before_second": 3.0
+    },
+    {
+      "id": "admission",
+      "title": "The first decision: who gets in?",
+      "source_anchor": "preface",
+      "visual": "admission",
+      "narration": [
+        "Aaron Tay opens this book with two questions that are easily blurred together. First: why did this record get into the candidate set at all? Think of a gate deciding which papers are allowed through.",
+        "This is a schematic example, not a model of a particular product. The important thing is the boundary. A paper outside the set cannot be moved to the top just by reordering the papers inside it."
+      ]
+    },
+    {
+      "id": "ranking",
+      "title": "The second decision: who comes first?",
+      "source_anchor": "preface",
+      "visual": "ranking",
+      "narration": [
+        "The second question is: why did a record rank where it did? Now we are comparing papers that are already in the set. Admission asks who participates. Ranking asks how the participants are ordered.",
+        "Both matter. A good order can make useful evidence easier to see. But a beautiful ranking is not evidence that the right papers were available in the first place."
+      ]
+    },
+    {
+      "id": "history",
+      "title": "Why learn the machinery now?",
+      "source_anchor": "preface",
+      "visual": "history",
+      "narration": [
+        "Tay describes learning search syntax thoroughly, while retrieval mechanics received little attention in his library education. For years, he says, that was enough for his work. Around twenty twenty-two, understanding the engine became much more important to him.",
+        "The explanations he needed were scattered across courses, engineering blogs, conference talks, documentation and research papers. His questions were practical: how does this differ from Boolean search, how should I phrase a query, and which papers will my researchers find?"
+      ]
+    },
+    {
+      "id": "labels",
+      "title": "What does the label actually tell you?",
+      "source_anchor": "the-words-on-the-box",
+      "visual": "labels",
+      "narration": [
+        "Now put a label on the box: semantic search. Or vector search. Or neural, embedding, agentic, AI-powered. Which of our two decisions does that label explain?",
+        "Usually, the label alone cannot answer that. These terms can refer to different representations, matching methods, pipeline stages or advertised capabilities. In particular, semantic search is not simply another name for dense retrieval."
+      ],
+      "pause_before_second": 1.8
+    },
+    {
+      "id": "mechanisms",
+      "title": "Open the box with better questions",
+      "source_anchor": "the-words-on-the-box",
+      "visual": "mechanisms",
+      "narration": [
+        "No single neural architecture has simply replaced lexical retrieval. So the useful move is to ask what happens at each layer. What has the vendor documented? What is your own observation? And what remains unknown?",
+        "A true statement about one part of a system can sound like a stronger claim about the whole system. Keeping the mechanism and the evidence together helps you hear the difference."
+      ]
+    },
+    {
+      "id": "payoff",
+      "title": "Carry two questions into Chapter 1",
+      "source_anchor": "preface",
+      "visual": "twoquestions",
+      "narration": [
+        "Return to our three results. Moving a paper changes its position. Finding a previously excluded paper changes what is available. Those are different interventions, and they answer different questions.",
+        "Before trusting a ranked list, keep both questions in view: why did these papers get in, and why are they in this order? That distinction is the starting point of How Search Decides What You See."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "prediction_0",
+      "scene": "prediction",
+      "text": "Here are eight imaginary papers. A search returns three of them. You move the third result to the top. Have you improved the search? Take a moment. What would you need to know?",
+      "gap": 1.0
+    },
+    {
+      "id": "prediction_1",
+      "scene": "prediction",
+      "text": "You have changed the order. But you have learned nothing about the five papers that never made it into the results. One of those could have been the paper you needed most.",
+      "gap": 3.0
+    },
+    {
+      "id": "admission_0",
+      "scene": "admission",
+      "text": "Aaron Tay opens this book with two questions that are easily blurred together. First: why did this record get into the candidate set at all? Think of a gate deciding which papers are allowed through.",
+      "gap": 1.0
+    },
+    {
+      "id": "admission_1",
+      "scene": "admission",
+      "text": "This is a schematic example, not a model of a particular product. The important thing is the boundary. A paper outside the set cannot be moved to the top just by reordering the papers inside it.",
+      "gap": 0.65
+    },
+    {
+      "id": "ranking_0",
+      "scene": "ranking",
+      "text": "The second question is: why did a record rank where it did? Now we are comparing papers that are already in the set. Admission asks who participates. Ranking asks how the participants are ordered.",
+      "gap": 1.0
+    },
+    {
+      "id": "ranking_1",
+      "scene": "ranking",
+      "text": "Both matter. A good order can make useful evidence easier to see. But a beautiful ranking is not evidence that the right papers were available in the first place.",
+      "gap": 0.65
+    },
+    {
+      "id": "history_0",
+      "scene": "history",
+      "text": "Tay describes learning search syntax thoroughly, while retrieval mechanics received little attention in his library education. For years, he says, that was enough for his work. Around twenty twenty-two, understanding the engine became much more important to him.",
+      "gap": 1.0
+    },
+    {
+      "id": "history_1",
+      "scene": "history",
+      "text": "The explanations he needed were scattered across courses, engineering blogs, conference talks, documentation and research papers. His questions were practical: how does this differ from Boolean search, how should I phrase a query, and which papers will my researchers find?",
+      "gap": 0.65
+    },
+    {
+      "id": "labels_0",
+      "scene": "labels",
+      "text": "Now put a label on the box: semantic search. Or vector search. Or neural, embedding, agentic, AI-powered. Which of our two decisions does that label explain?",
+      "gap": 1.0
+    },
+    {
+      "id": "labels_1",
+      "scene": "labels",
+      "text": "Usually, the label alone cannot answer that. These terms can refer to different representations, matching methods, pipeline stages or advertised capabilities. In particular, semantic search is not simply another name for dense retrieval.",
+      "gap": 1.8
+    },
+    {
+      "id": "mechanisms_0",
+      "scene": "mechanisms",
+      "text": "No single neural architecture has simply replaced lexical retrieval. So the useful move is to ask what happens at each layer. What has the vendor documented? What is your own observation? And what remains unknown?",
+      "gap": 1.0
+    },
+    {
+      "id": "mechanisms_1",
+      "scene": "mechanisms",
+      "text": "A true statement about one part of a system can sound like a stronger claim about the whole system. Keeping the mechanism and the evidence together helps you hear the difference.",
+      "gap": 0.65
+    },
+    {
+      "id": "payoff_0",
+      "scene": "payoff",
+      "text": "Return to our three results. Moving a paper changes its position. Finding a previously excluded paper changes what is available. Those are different interventions, and they answer different questions.",
+      "gap": 1.0
+    },
+    {
+      "id": "payoff_1",
+      "scene": "payoff",
+      "text": "Before trusting a ranked list, keep both questions in view: why did these papers get in, and why are they in this order? That distinction is the starting point of How Search Decides What You See.",
+      "gap": 0.65
+    }
+  ]
+}

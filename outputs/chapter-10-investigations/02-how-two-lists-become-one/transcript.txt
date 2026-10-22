@@ -1,0 +1,40 @@
+How two lists become one
+
+[00:00:00.700]: Two retrievers return different score scales. A large lexical score and a small vector similarity are not automatically comparable measurements. Could we combine the lists using a different piece of information? Make a prediction.
+
+[00:00:17.428]: Reciprocal rank fusion uses each record’s position in each supplied list. It ignores the raw scores. It avoids a shared score scale, while discarding information examined in the next film.
+
+[00:00:31.516]: Keep the chapter’s exact lists in view. The lexical order is A, B, C. The dense order is C, A, D. Positions begin at one. Matching letters identify the same record across both routes.
+
+[00:00:47.219]: Each occurrence contributes according to its position. A record absent from a supplied list contributes zero from that list. This is absence from the supplied input, not a judgement that the record is irrelevant or absent from the collection.
+
+[00:01:03.930]: For every supplied ranking, take one divided by the constant plus the record’s rank. Then add those contributions. The chapter uses the constant sixty, following the original paper’s baseline choice. This unsupervised rule does not learn a relevance model.
+
+[00:01:21.957]: Here the three possible contributions are one over sixty one, one over sixty two, and one over sixty three. The constant softens the advantage of the first positions. It can be tuned; sixty is not a universal optimum.
+
+[00:01:37.501]: A appears first in the lexical list and second in the dense list. Its two contributions are one over sixty one and one over sixty two. Add them to obtain approximately zero point zero three two five two.
+
+[00:01:53.246]: Both occurrences refer to one A record. They are evidence about the same identity. A receives credit from both supplied lists, without adding their original retrieval scores.
+
+[00:02:05.175]: C appears third lexically and first in the dense list. One over sixty three plus one over sixty one is approximately zero point zero three two two seven. C therefore follows A in this particular example.
+
+[00:02:20.799]: Both records received two contributions. A’s advantage comes from its second place versus C’s third place in the other list. Fused scores are not probabilities of usefulness.
+
+[00:02:33.520]: B appears second in the lexical list and outside the supplied dense list. Its score is one over sixty two, approximately zero point zero one six one three. D appears third only in the dense list.
+
+[00:02:49.666]: D receives one over sixty three, approximately zero point zero one five eight seven. B and D remain candidates. Receiving one contribution does not mean a record is unimportant; it describes which lists supplied it.
+
+[00:03:06.516]: Sort the fused scores from largest to smallest. The result is A, C, B, D. A and C benefit from agreement near the top. The two routes have supplied six occurrences representing four distinct records.
+
+[00:03:22.072]: RRF is a fusion rule. It does not jointly read query and passage text, supply a new trained relevance estimate, or search the rest of the collection.
+
+[00:03:33.350]: Three numbers describe different choices here: input depth three per route, fusion constant sixty, and four distinct supplied identities. A final display could show just the top two, but that would be another boundary after fusion.
+
+[00:03:49.611]: Records below an input cutoff contribute nothing from that list. Reducing output depth instead hides already fused records below the display boundary. Keep those decisions separate when documenting or evaluating a hybrid search.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 10.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#hybrid-and-fusion
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

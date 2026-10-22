@@ -1,0 +1,325 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.398
+A search product says it uses vectors.
+
+00:00:03.561 --> 00:00:04.597
+What does that tell you?
+
+00:00:04.785 --> 00:00:07.265
+Before answering, look at three ordinary
+
+00:00:07.285 --> 00:00:08.592
+keyword records.
+
+00:00:08.767 --> 00:00:10.241
+Heart attack treatment.
+
+00:00:10.416 --> 00:00:11.684
+Job interview tips.
+
+00:00:11.847 --> 00:00:12.986
+Cancer treatment.
+
+00:00:13.161 --> 00:00:15.551
+We can turn every one into a vector
+
+00:00:15.571 --> 00:00:17.909
+without training a neural network.
+
+00:00:18.071 --> 00:00:19.662
+Make a prediction: what will the
+
+00:00:19.682 --> 00:00:20.911
+coordinates mean?
+
+00:00:23.348 --> 00:00:25.413
+They will mean vocabulary terms.
+
+00:00:25.589 --> 00:00:28.069
+Vector names a numerical object: an
+
+00:00:28.089 --> 00:00:29.756
+ordered list of numbers.
+
+00:00:29.931 --> 00:00:32.360
+Chapter Eight makes those hidden choices
+
+00:00:32.380 --> 00:00:33.197
+visible.
+
+00:00:34.127 --> 00:00:37.638
+Fix this vocabulary order: attack, cancer,
+
+00:00:37.671 --> 00:00:41.065
+heart, interview, job, tips, treatment.
+
+00:00:41.202 --> 00:00:44.571
+Every document now lives in the same seven
+
+00:00:44.591 --> 00:00:45.949
+dimensional space.
+
+00:00:46.125 --> 00:00:48.733
+Coordinate three always means heart.
+
+00:00:49.297 --> 00:00:52.447
+Put one where a term occurs and zero where
+
+00:00:52.467 --> 00:00:54.779
+it does not. The first document activates
+
+00:00:54.799 --> 00:00:56.918
+attack, heart and treatment.
+
+00:00:57.080 --> 00:00:59.547
+The second activates interview, job and
+
+00:00:59.567 --> 00:01:02.563
+tips. The third activates cancer and
+
+00:01:02.583 --> 00:01:05.385
+treatment. These are sparse, vocabulary
+
+00:01:05.405 --> 00:01:06.660
+aligned vectors.
+
+00:01:07.569 --> 00:01:09.147
+Now search for heart treatment.
+
+00:01:09.322 --> 00:01:11.738
+Its two active coordinates overlap the
+
+00:01:11.758 --> 00:01:15.011
+first document twice, the third once, and
+
+00:01:15.031 --> 00:01:16.376
+the second not at all.
+
+00:01:16.526 --> 00:01:19.160
+Counting shared ones gives a graded score.
+
+00:01:19.708 --> 00:01:22.464
+Heart AND treatment admits only the first
+
+00:01:22.484 --> 00:01:25.415
+document. Heart OR treatment admits the
+
+00:01:25.435 --> 00:01:26.896
+first and third.
+
+00:01:27.084 --> 00:01:29.822
+The binary vector did not contain either
+
+00:01:29.842 --> 00:01:32.618
+operator. The retrieval rule decides
+
+00:01:32.638 --> 00:01:34.822
+whether term evidence becomes a hard
+
+00:01:34.842 --> 00:01:36.742
+requirement or a contribution to a
+
+00:01:36.762 --> 00:01:37.489
+ranking.
+
+00:01:38.417 --> 00:01:41.102
+Change the first document to heart attack
+
+00:01:41.122 --> 00:01:42.712
+treatment treatment treatment.
+
+00:01:42.888 --> 00:01:46.115
+Binary presence barely notices: the same
+
+00:01:46.135 --> 00:01:48.344
+three coordinates are active.
+
+00:01:48.519 --> 00:01:51.747
+Raw term frequency instead puts three in
+
+00:01:51.767 --> 00:01:53.202
+the treatment coordinate.
+
+00:01:53.377 --> 00:01:55.741
+The vocabulary has stayed fixed; the
+
+00:01:55.761 --> 00:01:57.145
+values have changed.
+
+00:01:57.705 --> 00:01:59.607
+Repetition can be useful evidence of
+
+00:01:59.627 --> 00:02:02.841
+topic. But raw counts keep growing, and
+
+00:02:02.861 --> 00:02:04.916
+long documents get more chances to
+
+00:02:04.936 --> 00:02:05.998
+accumulate them.
+
+00:02:06.173 --> 00:02:08.267
+We need a rule for how much another
+
+00:02:08.287 --> 00:02:09.658
+occurrence contributes.
+
+00:02:10.569 --> 00:02:13.846
+Term frequency looks inside a document.
+
+00:02:14.021 --> 00:02:17.094
+Inverse document frequency looks across
+
+00:02:17.114 --> 00:02:18.008
+the collection.
+
+00:02:18.170 --> 00:02:20.380
+Treatment occurs in two of our three
+
+00:02:20.400 --> 00:02:23.253
+documents. Heart occurs in only one.
+
+00:02:23.415 --> 00:02:25.702
+Heart therefore distinguishes a smaller
+
+00:02:25.722 --> 00:02:28.498
+group and receives more rarity weight
+
+00:02:28.518 --> 00:02:29.928
+under the illustrated rule.
+
+00:02:30.489 --> 00:02:32.939
+The figure uses raw counts times the
+
+00:02:32.959 --> 00:02:35.800
+natural logarithm of collection size
+
+00:02:35.820 --> 00:02:37.835
+divided by document frequency.
+
+00:02:38.011 --> 00:02:40.078
+The coordinates still mean words.
+
+00:02:40.240 --> 00:02:42.746
+Adding collection statistics has not
+
+00:02:42.766 --> 00:02:44.563
+turned them into latent semantic
+
+00:02:44.583 --> 00:02:45.529
+dimensions.
+
+00:02:46.428 --> 00:02:49.575
+BM twenty five adds diminishing returns
+
+00:02:49.595 --> 00:02:52.140
+from repetition and adjusts term frequency
+
+00:02:52.160 --> 00:02:54.279
+evidence for document length, while
+
+00:02:54.299 --> 00:02:56.765
+retaining inverse document frequency.
+
+00:02:56.928 --> 00:02:59.459
+Our figure declares one standard parameter
+
+00:02:59.479 --> 00:03:01.985
+setting and computes the resulting term
+
+00:03:02.005 --> 00:03:03.157
+contributions.
+
+00:03:03.698 --> 00:03:06.193
+This is a comparison of representations,
+
+00:03:06.343 --> 00:03:08.732
+not a historical claim that one method was
+
+00:03:08.752 --> 00:03:10.227
+derived from another.
+
+00:03:10.402 --> 00:03:15.343
+Binary presence, raw counts, TF IDF and BM
+
+00:03:15.363 --> 00:03:17.753
+twenty five can all use vocabulary
+
+00:03:17.773 --> 00:03:18.719
+coordinates.
+
+00:03:19.626 --> 00:03:22.633
+A real vocabulary might contain millions
+
+00:03:22.653 --> 00:03:25.636
+of terms, but a short document activates
+
+00:03:25.656 --> 00:03:27.104
+only a few hundred.
+
+00:03:27.279 --> 00:03:29.759
+The implementation can store term and
+
+00:03:29.779 --> 00:03:32.233
+weight pairs for active coordinates.
+
+00:03:32.786 --> 00:03:35.600
+An inverted index lets a query jump to the
+
+00:03:35.620 --> 00:03:38.048
+posting lists for its active terms and
+
+00:03:38.068 --> 00:03:39.800
+accumulate contributions.
+
+00:03:39.963 --> 00:03:42.146
+A dot product style mathematical
+
+00:03:42.166 --> 00:03:45.149
+description of BM twenty five does not
+
+00:03:45.169 --> 00:03:48.242
+imply that the engine scans dense vectors
+
+00:03:48.262 --> 00:03:50.329
+or runs nearest neighbour search.
+
+00:03:51.237 --> 00:03:53.294
+Return to the product claim: we use
+
+00:03:53.314 --> 00:03:55.640
+vectors. Ask what each coordinate
+
+00:03:55.660 --> 00:03:58.591
+represents, which values are active, how
+
+00:03:58.611 --> 00:04:00.820
+the weighting rule was obtained, and how
+
+00:04:00.840 --> 00:04:03.359
+matching evidence becomes an eligible set
+
+00:04:03.379 --> 00:04:04.299
+or a score.
+
+00:04:04.833 --> 00:04:07.024
+The same numerical object can hold term
+
+00:04:07.044 --> 00:04:09.858
+presence, calculated lexical weights,
+
+00:04:09.879 --> 00:04:12.797
+recorded facts or learnt latent features.
+
+00:04:12.959 --> 00:04:15.387
+Calling it a vector settles none of those
+
+00:04:15.407 --> 00:04:18.454
+choices. In the next film, a dense vector
+
+00:04:18.474 --> 00:04:21.161
+fails a semantic test while a sparse one
+
+00:04:21.181 --> 00:04:23.119
+bridges a wording gap.

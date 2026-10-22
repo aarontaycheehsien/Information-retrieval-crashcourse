@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "embeddings",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "71f6d3624f55d2296ae38c0c5b530c1b94a1aeeb4e3a50acf23391026d5f8232",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 5: Embeddings: what the learnt geometry encodes; original declared toy examples for arithmetic, projection, tokenisation and pooling"
+}

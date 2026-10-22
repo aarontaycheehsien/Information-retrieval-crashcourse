@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:8829/index.html",
+  "films": [
+    {
+      "src": "http://127.0.0.1:8829/01-who-chooses-the-next-search/01-who-chooses-the-next-search.mp4",
+      "duration": 281.433333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 105,
+      "seek_seconds": 140.716666,
+      "byte_range": "bytes 0-1023/31671913",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8829/02-the-blind-spot-that-survives-the-loop/02-the-blind-spot-that-survives-the-loop.mp4",
+      "duration": 279.533333,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 107,
+      "seek_seconds": 139.766666,
+      "byte_range": "bytes 0-1023/30071437",
+      "playback": true
+    },
+    {
+      "src": "http://127.0.0.1:8829/03-when-zero-results-become-a-clue/03-when-zero-results-become-a-clue.mp4",
+      "duration": 280,
+      "width": 1920,
+      "height": 1080,
+      "caption_cues": 105,
+      "seek_seconds": 140,
+      "byte_range": "bytes 0-1023/28607832",
+      "playback": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

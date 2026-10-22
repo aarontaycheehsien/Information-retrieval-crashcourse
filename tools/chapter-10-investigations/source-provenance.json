@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "hybrid-and-fusion",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "3d98323e1c89450a004389723467410caa1bed34df62abab4d7683cd193b313e",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 10: Hybrid retrieval and rank fusion; source-exact lexical/dense lists and RRF arithmetic, declared cutoff/weight/score-gap illustrations"
+}

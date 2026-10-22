@@ -1,0 +1,8 @@
+position,character,toy_token_id,coordinate_1,coordinate_2,coordinate_3,measured_model_output
+1,d,3,2,0,1,False
+2,e,8,0,2,1,False
+3,l,11,1,1,4,False
+4,u,21,3,0,2,False
+5,l,11,0,3,1,False
+6,u,21,0,0,3,False
+mean,,,1.0,1.0,2.0,False

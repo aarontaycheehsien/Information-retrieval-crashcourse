@@ -1,0 +1,157 @@
+{
+  "series": "BM25 and ranked lexical retrieval",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#bm25-ranking",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#bm25-ranking",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-twenty-mentions-twice-the-credit",
+  "title": "Twenty mentions. Twice the credit?",
+  "subtitle": "Repetition adds evidence with diminishing returns.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "prediction",
+      "title": "Once or twenty times?",
+      "source_anchor": "bm25-four-questions-title",
+      "visual": "prediction",
+      "narration": [
+        "Two documents have the same length and match the same query term. One mentions it once. The other mentions it twenty times. Should the second get twenty times as much credit? Hold rarity and length fixed while you decide.",
+        "BM twenty-five applies diminishing returns. Repetition contributes evidence, but each additional occurrence adds less. This term-frequency saturation prevents the contribution from growing linearly forever."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "curve",
+      "title": "The curve levels off",
+      "source_anchor": "bm25-curve-title",
+      "visual": "curve",
+      "narration": [
+        "At average document length, with k one set to one point two, one occurrence gives a term-frequency factor of one. Two give one point three seven five. Twenty give about two point zero eight.",
+        "The curve approaches two point two. Both axes are linear. We are plotting a frequency factor, not a final score or a probability. Multiply this factor by the term's IDF to obtain its contribution."
+      ]
+    },
+    {
+      "id": "kone",
+      "title": "k\u2081 changes the contribution from repetition",
+      "source_anchor": "an-introduction-to-bm25",
+      "visual": "kone",
+      "narration": [
+        "The parameter k one changes the saturation curve. These curves use the same linear scales and average document length. Different settings change how repeated occurrences add evidence and the limiting value they approach.",
+        "With k one at zero, every positive occurrence count has factor one. Presence matters; further repetition does not. A missing term still contributes zero. These settings are mathematical comparisons, not recommendations for every collection."
+      ]
+    },
+    {
+      "id": "length",
+      "title": "The same frequency in forty or four hundred terms",
+      "source_anchor": "bm25-four-questions-title",
+      "visual": "length",
+      "narration": [
+        "Now fix the query term, its collection rarity and one occurrence. Compare a document of forty analysed terms with one of four hundred. The collection average is one hundred. With length normalisation enabled, the shorter example has the larger contribution.",
+        "Length provides context for the frequency. This does not say that short papers are always better. Other matching terms contribute too, and usefulness still depends on the reader's information need."
+      ]
+    },
+    {
+      "id": "bee",
+      "title": "b controls the length effect",
+      "source_anchor": "an-introduction-to-bm25",
+      "visual": "bee",
+      "narration": [
+        "The parameter b controls the strength of length normalisation. In this calculation, k one is one point two and b is zero point seven five. The two documents receive different frequency factors.",
+        "Set b to zero and, with frequency held fixed, the two factors are equal. We have turned off the length effect, not the whole score. The figures are computed from an explicitly labeled single-field BM twenty-five variant."
+      ]
+    },
+    {
+      "id": "recap",
+      "title": "Two controls\u2014not a quality certificate",
+      "source_anchor": "an-introduction-to-bm25",
+      "visual": "recap",
+      "narration": [
+        "Keep the roles separate. IDF weights collection rarity. k one shapes repetition's contribution. b controls length normalisation. One point two and zero point seven five are typical defaults used in the book's worked example; products and configurations can differ.",
+        "BM twenty-five combines measured lexical evidence. Its score does not tell you that the source answers your question. The final film follows those calculations through the same inverted index we built in Chapter Two."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "prediction_0",
+      "scene": "prediction",
+      "text": "Two documents have the same length and match the same query term. One mentions it once. The other mentions it twenty times. Should the second get twenty times as much credit? Hold rarity and length fixed while you decide.",
+      "gap": 1.0
+    },
+    {
+      "id": "prediction_1",
+      "scene": "prediction",
+      "text": "BM twenty-five applies diminishing returns. Repetition contributes evidence, but each additional occurrence adds less. This term-frequency saturation prevents the contribution from growing linearly forever.",
+      "gap": 2.5
+    },
+    {
+      "id": "curve_0",
+      "scene": "curve",
+      "text": "At average document length, with k one set to one point two, one occurrence gives a term-frequency factor of one. Two give one point three seven five. Twenty give about two point zero eight.",
+      "gap": 1.0
+    },
+    {
+      "id": "curve_1",
+      "scene": "curve",
+      "text": "The curve approaches two point two. Both axes are linear. We are plotting a frequency factor, not a final score or a probability. Multiply this factor by the term's IDF to obtain its contribution.",
+      "gap": 0.65
+    },
+    {
+      "id": "kone_0",
+      "scene": "kone",
+      "text": "The parameter k one changes the saturation curve. These curves use the same linear scales and average document length. Different settings change how repeated occurrences add evidence and the limiting value they approach.",
+      "gap": 1.0
+    },
+    {
+      "id": "kone_1",
+      "scene": "kone",
+      "text": "With k one at zero, every positive occurrence count has factor one. Presence matters; further repetition does not. A missing term still contributes zero. These settings are mathematical comparisons, not recommendations for every collection.",
+      "gap": 0.65
+    },
+    {
+      "id": "length_0",
+      "scene": "length",
+      "text": "Now fix the query term, its collection rarity and one occurrence. Compare a document of forty analysed terms with one of four hundred. The collection average is one hundred. With length normalisation enabled, the shorter example has the larger contribution.",
+      "gap": 1.0
+    },
+    {
+      "id": "length_1",
+      "scene": "length",
+      "text": "Length provides context for the frequency. This does not say that short papers are always better. Other matching terms contribute too, and usefulness still depends on the reader's information need.",
+      "gap": 0.65
+    },
+    {
+      "id": "bee_0",
+      "scene": "bee",
+      "text": "The parameter b controls the strength of length normalisation. In this calculation, k one is one point two and b is zero point seven five. The two documents receive different frequency factors.",
+      "gap": 1.0
+    },
+    {
+      "id": "bee_1",
+      "scene": "bee",
+      "text": "Set b to zero and, with frequency held fixed, the two factors are equal. We have turned off the length effect, not the whole score. The figures are computed from an explicitly labeled single-field BM twenty-five variant.",
+      "gap": 0.65
+    },
+    {
+      "id": "recap_0",
+      "scene": "recap",
+      "text": "Keep the roles separate. IDF weights collection rarity. k one shapes repetition's contribution. b controls length normalisation. One point two and zero point seven five are typical defaults used in the book's worked example; products and configurations can differ.",
+      "gap": 1.0
+    },
+    {
+      "id": "recap_1",
+      "scene": "recap",
+      "text": "BM twenty-five combines measured lexical evidence. Its score does not tell you that the source answers your question. The final film follows those calculations through the same inverted index we built in Chapter Two.",
+      "gap": 0.65
+    }
+  ]
+}

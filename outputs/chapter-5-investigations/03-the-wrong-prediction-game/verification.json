@@ -1,0 +1,46 @@
+{
+  "file": "03-the-wrong-prediction-game.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 289.1333333333333,
+  "decoded_frames": 8674,
+  "integrated_lufs": -16.1,
+  "true_peak_dbfs": -2.4,
+  "video": "h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 545 kb/s, 30 fps, 30 tbr, 15360 tbn (default)",
+  "audio": "aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 178 kb/s (default)",
+  "faststart": true,
+  "sha256": "1a9e2cd3f920c682c298eaed256eb70e7a2ed1ba70061fb086f0e6d8e077b442",
+  "bytes": 26429289,
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "script_sha256": "b99aad87ae1cc400cc1f101f5103f4effe29c9c72947ffd85e76c3426fd8ea07",
+  "passed": true,
+  "chapter_sha256": "71f6d3624f55d2296ae38c0c5b530c1b94a1aeeb4e3a50acf23391026d5f8232",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "production_sha256": "6dd5e6e7385cfc886b311c9f632ee520e16b87b310df8d8a6cc6440a35d942aa",
+  "embedded_captions_verified": true,
+  "caption_cues": 118,
+  "reviewed_animation_times": 90,
+  "worked_examples": {
+    "declared_toy_examples": true,
+    "trained_model_outputs": false,
+    "analogy_result": [
+      5.0,
+      5.0
+    ],
+    "nearest_after_input_exclusion": "queen",
+    "distance_before_projection": 10,
+    "distance_after_projection": 0,
+    "mean_pool": [
+      2.0,
+      2.0
+    ],
+    "training_targets": {
+      "cbow": "heart",
+      "masked": "treatment",
+      "next_token": "after"
+    },
+    "hidden_targets_absent_from_input": true,
+    "passed": true
+  }
+}

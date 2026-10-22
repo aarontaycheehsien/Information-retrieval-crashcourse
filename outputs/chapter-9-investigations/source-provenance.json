@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/aarontaycheehsien/Information-retrieval-crashcourse",
+  "branch": "more-readable",
+  "commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "path": "search-textbook.html",
+  "anchor": "reranking-and-hybrid",
+  "source_sha256": "8b20cbe302775104fbfd321b73c31d20231941028bad223f7b770b043663b77e",
+  "chapter_sha256": "af608a3d003bd1ad21fec375775f67af5c55ba4b97c1f6c78c2a9ae76ebd2d55",
+  "license": "CC BY 4.0",
+  "scope": "Chapter 9: Reranking and multi-stage retrieval; source-exact invented MaxSim similarities and schematic diversification, dated product budgets"
+}

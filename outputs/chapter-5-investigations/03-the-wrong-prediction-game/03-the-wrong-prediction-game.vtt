@@ -1,0 +1,355 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.592
+Suppose a model is excellent at recovering
+
+00:00:03.612 --> 00:00:05.937
+hidden words in medical papers.
+
+00:00:06.112 --> 00:00:08.089
+Would you expect it to be an excellent
+
+00:00:08.109 --> 00:00:10.305
+search engine for medical questions?
+
+00:00:10.468 --> 00:00:12.535
+It sounds plausible: it has learnt the
+
+00:00:12.555 --> 00:00:15.370
+vocabulary and can use the surrounding
+
+00:00:15.390 --> 00:00:16.349
+context.
+
+00:00:18.762 --> 00:00:21.364
+But a prediction task rewards a particular
+
+00:00:21.384 --> 00:00:24.109
+relationship. Filling a gap in a sentence
+
+00:00:24.129 --> 00:00:26.944
+is not the same task as placing a
+
+00:00:26.964 --> 00:00:29.650
+separately encoded question near a useful
+
+00:00:29.670 --> 00:00:30.964
+answering passage.
+
+00:00:31.126 --> 00:00:33.014
+Start by examining what the model was
+
+00:00:33.034 --> 00:00:34.405
+trained to predict.
+
+00:00:35.316 --> 00:00:37.503
+Use the chapter's sentence: The patient
+
+00:00:37.523 --> 00:00:40.119
+received heart treatment after the attack.
+
+00:00:40.268 --> 00:00:44.255
+In our C B O W illustration, hide heart.
+
+00:00:44.405 --> 00:00:47.039
+A local window gives the model patient,
+
+00:00:47.176 --> 00:00:49.616
+received, treatment and after.
+
+00:00:49.792 --> 00:00:51.589
+The target, taken from the original
+
+00:00:51.609 --> 00:00:53.431
+sentence, is heart.
+
+00:00:53.990 --> 00:00:55.973
+The neighbouring words supply evidence on
+
+00:00:55.993 --> 00:00:58.666
+both sides. This row illustrates
+
+00:00:58.686 --> 00:01:00.714
+continuous bag of words.
+
+00:01:00.890 --> 00:01:03.807
+Skip-gram uses the opposite direction,
+
+00:01:03.944 --> 00:01:05.547
+predicting neighbouring words from the
+
+00:01:05.567 --> 00:01:08.151
+target word. Neither arrangement requires
+
+00:01:08.171 --> 00:01:10.856
+a person to label the sentence's meaning.
+
+00:01:11.766 --> 00:01:12.925
+Now hide treatment.
+
+00:01:13.035 --> 00:01:15.399
+A masked-language objective can use the
+
+00:01:15.419 --> 00:01:17.706
+words before and after that position to
+
+00:01:17.726 --> 00:01:19.265
+recover the missing token.
+
+00:01:19.427 --> 00:01:22.268
+BERT's pretraining chiefly uses this kind
+
+00:01:22.288 --> 00:01:24.704
+of bidirectional prediction to learn broad
+
+00:01:24.724 --> 00:01:25.914
+language patterns.
+
+00:01:26.449 --> 00:01:28.980
+Our word boxes simplify a task that
+
+00:01:29.000 --> 00:01:30.861
+operates on model tokens.
+
+00:01:31.036 --> 00:01:33.206
+The answer comes from the text itself,
+
+00:01:33.252 --> 00:01:35.783
+which makes this self-supervised learning.
+
+00:01:35.959 --> 00:01:38.091
+The available context and the target
+
+00:01:38.111 --> 00:01:40.371
+define the prediction problem;
+
+00:01:40.559 --> 00:01:42.717
+self-attention is the mechanism that
+
+00:01:42.737 --> 00:01:44.301
+combines information.
+
+00:01:45.261 --> 00:01:47.534
+For next-token prediction, show only The
+
+00:01:47.554 --> 00:01:49.660
+patient received heart treatment.
+
+00:01:49.822 --> 00:01:51.490
+The next target is after.
+
+00:01:51.639 --> 00:01:54.158
+Everything to the right is unavailable to
+
+00:01:54.178 --> 00:01:56.310
+the model at that prediction step.
+
+00:01:56.446 --> 00:01:58.475
+Revealing the next token in the input
+
+00:01:58.495 --> 00:02:00.021
+would give away the answer.
+
+00:02:00.569 --> 00:02:04.648
+GPT-style training uses preceding context
+
+00:02:04.668 --> 00:02:07.200
+this way. Historically, bidirectional
+
+00:02:07.220 --> 00:02:10.099
+encoders often started retrieval models
+
+00:02:10.119 --> 00:02:13.075
+and decoders often powered generation.
+
+00:02:13.251 --> 00:02:14.751
+That division has blurred.
+
+00:02:14.913 --> 00:02:17.084
+An architecture family alone does not
+
+00:02:17.104 --> 00:02:19.919
+establish a present-day model's task or
+
+00:02:19.939 --> 00:02:20.614
+role.
+
+00:02:21.512 --> 00:02:23.467
+Pretraining learns broad language
+
+00:02:23.487 --> 00:02:26.894
+patterns. Domain pretraining changes the
+
+00:02:26.914 --> 00:02:28.956
+material behind those patterns.
+
+00:02:29.105 --> 00:02:31.134
+Retrieval-oriented training rewards
+
+00:02:31.154 --> 00:02:33.878
+relationships useful for the search task,
+
+00:02:34.015 --> 00:02:36.739
+such as a question and a relevant passage.
+
+00:02:37.289 --> 00:02:40.312
+That retrieval signal need not be a human
+
+00:02:40.332 --> 00:02:41.433
+relevance label.
+
+00:02:41.595 --> 00:02:43.186
+It can come from human judgments,
+
+00:02:43.206 --> 00:02:46.743
+behavior, weak labels, synthetic labels or
+
+00:02:46.763 --> 00:02:48.559
+self-supervised pairs.
+
+00:02:48.722 --> 00:02:51.421
+Ask what those examples and targets teach
+
+00:02:51.441 --> 00:02:54.475
+the model to preserve, and how well that
+
+00:02:54.495 --> 00:02:56.742
+transfers to the searches you care about.
+
+00:02:57.648 --> 00:02:59.815
+The chapter distinguishes three domain
+
+00:02:59.835 --> 00:03:03.849
+examples. BioBERT continues pretraining on
+
+00:03:03.869 --> 00:03:05.459
+biomedical literature.
+
+00:03:05.634 --> 00:03:08.694
+BiomedBERT starts with biomedical text and
+
+00:03:08.714 --> 00:03:11.826
+vocabulary. SciBERT learns from scientific
+
+00:03:11.846 --> 00:03:14.300
+literature. These choices change the
+
+00:03:14.320 --> 00:03:15.949
+language experience behind the
+
+00:03:15.969 --> 00:03:17.315
+representations.
+
+00:03:17.859 --> 00:03:20.280
+They do not by themselves specify which
+
+00:03:20.300 --> 00:03:23.539
+query should rank near which passage.
+
+00:03:23.689 --> 00:03:26.040
+Generic BERT has no direct requirement
+
+00:03:26.060 --> 00:03:28.359
+from masked-word prediction to make those
+
+00:03:28.379 --> 00:03:30.808
+independent embeddings useful for
+
+00:03:30.828 --> 00:03:33.024
+retrieval. Sentence-BERT changes
+
+00:03:33.044 --> 00:03:35.370
+architecture and training to make
+
+00:03:35.390 --> 00:03:38.063
+complete-text representations useful for
+
+00:03:38.083 --> 00:03:38.977
+comparison.
+
+00:03:39.900 --> 00:03:42.203
+A product can use a BERT-family model to
+
+00:03:42.223 --> 00:03:44.664
+interpret a query, to produce vectors for
+
+00:03:44.684 --> 00:03:47.048
+first-stage retrieval, or to compare
+
+00:03:47.068 --> 00:03:49.638
+records in an existing shortlist as a
+
+00:03:49.658 --> 00:03:52.860
+reranker. These positions expose the model
+
+00:03:52.880 --> 00:03:55.180
+to different inputs and give it different
+
+00:03:55.200 --> 00:03:56.545
+responsibilities.
+
+00:03:57.088 --> 00:03:59.017
+A family name therefore leaves the
+
+00:03:59.037 --> 00:04:01.684
+pipeline open. Knowing that BERT appears
+
+00:04:01.704 --> 00:04:03.914
+somewhere does not tell you how the whole
+
+00:04:03.934 --> 00:04:06.298
+collection was searched, what candidates
+
+00:04:06.318 --> 00:04:08.527
+reached a later stage, or whether the
+
+00:04:08.547 --> 00:04:10.383
+model was trained for that particular
+
+00:04:10.403 --> 00:04:11.568
+retrieval task.
+
+00:04:12.475 --> 00:04:15.131
+Carry two questions out of Chapter Five.
+
+00:04:15.293 --> 00:04:18.328
+Was this model trained for retrieval, and
+
+00:04:18.348 --> 00:04:20.840
+what relationship did its targets reward?
+
+00:04:21.015 --> 00:04:22.940
+Where does it sit in the search pipeline?
+
+00:04:23.116 --> 00:04:25.686
+Contextualisation, domain knowledge and
+
+00:04:25.706 --> 00:04:28.005
+useful retrieval are related, but
+
+00:04:28.025 --> 00:04:28.933
+distinct.
+
+00:04:29.481 --> 00:04:31.077
+The vectors are calculated.
+
+00:04:31.240 --> 00:04:33.783
+Their geometry is shaped by training.
+
+00:04:33.933 --> 00:04:36.516
+Whether that geometry helps a searcher
+
+00:04:36.536 --> 00:04:37.598
+must be tested.
+
+00:04:37.773 --> 00:04:40.627
+Chapter Six asks what one vector should
+
+00:04:40.647 --> 00:04:43.101
+represent and how training can make
+
+00:04:43.121 --> 00:04:45.511
+comparisons between queries and documents
+
+00:04:45.531 --> 00:04:46.232
+useful.

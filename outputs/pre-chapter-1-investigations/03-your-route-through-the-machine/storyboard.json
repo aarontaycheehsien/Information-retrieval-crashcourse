@@ -1,0 +1,223 @@
+{
+  "series": "Before the search begins",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#preface",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#preface",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "03-your-route-through-the-machine",
+  "title": "Your route through the machine",
+  "subtitle": "Start with the question your work needs answered.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "expertise",
+      "title": "Do you need to become an engineer?",
+      "source_anchor": "who-this-is-for",
+      "visual": "expertise",
+      "narration": [
+        "You know how to search. Now a discovery tool says it understands meaning. Do you need to learn to build the system before you can judge that claim?",
+        "The preface offers a different starting point: your existing expertise, connected to the machinery beneath the interface. This book assumes professional search knowledge and explains enough retrieval to help you ask better questions."
+      ],
+      "pause_before_second": 1.8
+    },
+    {
+      "id": "audiences",
+      "title": "Three kinds of search expertise",
+      "source_anchor": "who-this-is-for",
+      "visual": "audiences",
+      "narration": [
+        "Information literacy librarians help people turn questions into workable searches. Evidence synthesis librarians build and document high-recall strategies. Systems and discovery librarians work with configuration, indexes, integrations and vendors.",
+        "Those are different forms of expertise. The first two are the book's primary audiences; the third will find procurement and evaluation especially relevant. None needs to start by pretending to be a software engineer."
+      ]
+    },
+    {
+      "id": "principles",
+      "title": "Three promises about the explanation",
+      "source_anchor": "what-this-book-is",
+      "visual": "principles",
+      "narration": [
+        "The book follows three principles. Understanding comes before detailed mechanism. Examples come from library and academic search. Formulas appear where they carry an argument, with explanations in words.",
+        "You should understand what a method responds to, what it misses and which trade-offs it makes. You do not need to calculate every score by hand. Fuller machinery belongs in the appendices."
+      ]
+    },
+    {
+      "id": "dates",
+      "title": "A product example has a date",
+      "source_anchor": "what-this-book-is",
+      "visual": "dates",
+      "narration": [
+        "There is an important discipline behind those examples: named products are tied to documentation and the date it was checked. When documentation runs out, the explanation should stop short of guessing.",
+        "Products can change faster than the mechanisms underneath them. Read an example as a dated illustration, then check the current documentation before relying on it. A product name in the book is not a recommendation."
+      ]
+    },
+    {
+      "id": "scope",
+      "title": "Follow the evidence up to the answer",
+      "source_anchor": "what-this-book-is",
+      "visual": "scope",
+      "narration": [
+        "The main focus is how evidence becomes available before an answer is written. The book is an orientation to retrieval, rather than an implementation manual, a product review or a replacement for a graduate course.",
+        "No prior information retrieval knowledge or mathematics is required to follow the main argument. The destination is practical: follow a technical conversation, interrogate a vendor claim, and recognise a retrieval problem in your own work."
+      ]
+    },
+    {
+      "id": "routes1",
+      "title": "Choose the route your work needs",
+      "source_anchor": "orientation-title",
+      "visual": "routes1",
+      "narration": [
+        "Reading straight through is the default. There are also five shorter routes. For a short orientation, use the forty-five-minute reading-and-reflection route. For instruction, protect Part One, then read Chapter Eleven and Chapters Thirteen to Fifteen.",
+        "For evidence synthesis, focus on Chapters Two and Eleven, Chapters Thirteen to Fifteen, and Appendix F. On this route, Appendix F is core reading: it connects candidate retrieval, high recall, screening and stopping."
+      ]
+    },
+    {
+      "id": "routes2",
+      "title": "Two more ways into the same machinery",
+      "source_anchor": "orientation-title",
+      "visual": "routes2",
+      "narration": [
+        "For procurement, follow the category errors, failure diagnosis and implications for library practice. Keep Appendix D open as a terminology map. Use Chapter Ten and Appendix E when a system combines or reranks candidate lists.",
+        "For curiosity, if you already understand Boolean retrieval and BM twenty-five, begin at learnt representations. The earlier material establishes why lexical retrieval is broader than Boolean retrieval. Choose a route; return to the fuller explanations as questions arise."
+      ]
+    },
+    {
+      "id": "practice",
+      "title": "Your own tools are part of the lesson",
+      "source_anchor": "orientation-title",
+      "visual": "practice",
+      "narration": [
+        "The book divides into three sittings and gives each chapter a reading-time estimate. Each part ends with an application exercise: run real searches in a system available to you and write down what you find.",
+        "The teaching notes include a public-access route. Exercises can be skipped without breaking the main argument, but trying one may tell you something the prose cannot: how your own tool behaves."
+      ]
+    },
+    {
+      "id": "payoff",
+      "title": "Now open the search box",
+      "source_anchor": "preface",
+      "visual": "finale",
+      "narration": [
+        "Before Chapter One, carry three habits with you. Separate admission from ranking. Separate reference existence, faithful writing and adequate retrieval. And separate what is documented from what you merely suspect.",
+        "You already bring expertise in searching. This book connects that expertise to the decisions underneath the interface. Now, to the machine itself."
+      ]
+    }
+  ],
+  "episode_number": 3,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "expertise_0",
+      "scene": "expertise",
+      "text": "You know how to search. Now a discovery tool says it understands meaning. Do you need to learn to build the system before you can judge that claim?",
+      "gap": 1.0
+    },
+    {
+      "id": "expertise_1",
+      "scene": "expertise",
+      "text": "The preface offers a different starting point: your existing expertise, connected to the machinery beneath the interface. This book assumes professional search knowledge and explains enough retrieval to help you ask better questions.",
+      "gap": 1.8
+    },
+    {
+      "id": "audiences_0",
+      "scene": "audiences",
+      "text": "Information literacy librarians help people turn questions into workable searches. Evidence synthesis librarians build and document high-recall strategies. Systems and discovery librarians work with configuration, indexes, integrations and vendors.",
+      "gap": 1.0
+    },
+    {
+      "id": "audiences_1",
+      "scene": "audiences",
+      "text": "Those are different forms of expertise. The first two are the book's primary audiences; the third will find procurement and evaluation especially relevant. None needs to start by pretending to be a software engineer.",
+      "gap": 0.65
+    },
+    {
+      "id": "principles_0",
+      "scene": "principles",
+      "text": "The book follows three principles. Understanding comes before detailed mechanism. Examples come from library and academic search. Formulas appear where they carry an argument, with explanations in words.",
+      "gap": 1.0
+    },
+    {
+      "id": "principles_1",
+      "scene": "principles",
+      "text": "You should understand what a method responds to, what it misses and which trade-offs it makes. You do not need to calculate every score by hand. Fuller machinery belongs in the appendices.",
+      "gap": 0.65
+    },
+    {
+      "id": "dates_0",
+      "scene": "dates",
+      "text": "There is an important discipline behind those examples: named products are tied to documentation and the date it was checked. When documentation runs out, the explanation should stop short of guessing.",
+      "gap": 1.0
+    },
+    {
+      "id": "dates_1",
+      "scene": "dates",
+      "text": "Products can change faster than the mechanisms underneath them. Read an example as a dated illustration, then check the current documentation before relying on it. A product name in the book is not a recommendation.",
+      "gap": 0.65
+    },
+    {
+      "id": "scope_0",
+      "scene": "scope",
+      "text": "The main focus is how evidence becomes available before an answer is written. The book is an orientation to retrieval, rather than an implementation manual, a product review or a replacement for a graduate course.",
+      "gap": 1.0
+    },
+    {
+      "id": "scope_1",
+      "scene": "scope",
+      "text": "No prior information retrieval knowledge or mathematics is required to follow the main argument. The destination is practical: follow a technical conversation, interrogate a vendor claim, and recognise a retrieval problem in your own work.",
+      "gap": 0.65
+    },
+    {
+      "id": "routes1_0",
+      "scene": "routes1",
+      "text": "Reading straight through is the default. There are also five shorter routes. For a short orientation, use the forty-five-minute reading-and-reflection route. For instruction, protect Part One, then read Chapter Eleven and Chapters Thirteen to Fifteen.",
+      "gap": 1.0
+    },
+    {
+      "id": "routes1_1",
+      "scene": "routes1",
+      "text": "For evidence synthesis, focus on Chapters Two and Eleven, Chapters Thirteen to Fifteen, and Appendix F. On this route, Appendix F is core reading: it connects candidate retrieval, high recall, screening and stopping.",
+      "gap": 0.65
+    },
+    {
+      "id": "routes2_0",
+      "scene": "routes2",
+      "text": "For procurement, follow the category errors, failure diagnosis and implications for library practice. Keep Appendix D open as a terminology map. Use Chapter Ten and Appendix E when a system combines or reranks candidate lists.",
+      "gap": 1.0
+    },
+    {
+      "id": "routes2_1",
+      "scene": "routes2",
+      "text": "For curiosity, if you already understand Boolean retrieval and BM twenty-five, begin at learnt representations. The earlier material establishes why lexical retrieval is broader than Boolean retrieval. Choose a route; return to the fuller explanations as questions arise.",
+      "gap": 0.65
+    },
+    {
+      "id": "practice_0",
+      "scene": "practice",
+      "text": "The book divides into three sittings and gives each chapter a reading-time estimate. Each part ends with an application exercise: run real searches in a system available to you and write down what you find.",
+      "gap": 1.0
+    },
+    {
+      "id": "practice_1",
+      "scene": "practice",
+      "text": "The teaching notes include a public-access route. Exercises can be skipped without breaking the main argument, but trying one may tell you something the prose cannot: how your own tool behaves.",
+      "gap": 0.65
+    },
+    {
+      "id": "payoff_0",
+      "scene": "payoff",
+      "text": "Before Chapter One, carry three habits with you. Separate admission from ranking. Separate reference existence, faithful writing and adequate retrieval. And separate what is documented from what you merely suspect.",
+      "gap": 1.0
+    },
+    {
+      "id": "payoff_1",
+      "scene": "payoff",
+      "text": "You already bring expertise in searching. This book connects that expertise to the decisions underneath the interface. Now, to the machine itself.",
+      "gap": 0.65
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+schematic_paper,aspect,individual_selection,diversified_selection,calculated_algorithm_output
+A,Overall citation advantage,True,True,False
+B,Overall citation advantage,True,False,False
+C,Overall citation advantage,True,False,False
+D,Disciplinary differences,False,True,False
+E,Selection-bias methods,False,True,False
+F,A weakly related topic,False,False,False

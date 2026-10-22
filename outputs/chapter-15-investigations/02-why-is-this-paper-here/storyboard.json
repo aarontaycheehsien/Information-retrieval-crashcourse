@@ -1,0 +1,201 @@
+{
+  "series": "Implications for library practice and tool evaluation",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#library-practice",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#library-practice",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-why-is-this-paper-here",
+  "title": "Why is this paper here?",
+  "subtitle": "A convincing rationale and a recorded result path are different evidence.",
+  "accent": "teal",
+  "scenes": [
+    {
+      "id": "rationale_hook",
+      "title": "A fluent explanation is not automatically a trace",
+      "source_anchor": "rationale-versus-trace-title",
+      "visual": "rationale_hook",
+      "narration": [
+        "A paper appears at rank three. Its explanation says: This paper closely addresses your question about open access and citations. Has that established why this result appeared, or why it occupies rank three? Pause and identify the missing evidence.",
+        "The chapter\u2019s mock result P has a hypothetical recorded path: lexical retrieval supplied it at rank eighteen among a hundred candidates; reranking moved it to three; the display showed ten. Internal reranker details remain undisclosed. All record details and ranks here are illustrative, not a search run for this film."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "three_qualities",
+      "title": "Transparency, interpretability and understandability differ",
+      "source_anchor": "interpretability-requires-an-inspectable-pipeline",
+      "visual": "three_qualities",
+      "narration": [
+        "Transparency exposes information about a system. Interpretability lets a librarian trace why a record was included, excluded, scored or reranked. Understandability provides an accurate, usable mental model without demanding that every equation or weight be inspected.",
+        "A broad ranking description can be transparent while explaining little about one record. A detailed score display can still be hard to understand. A documentable, rerunnable search can leave individual results opaque. These qualities overlap, but one does not establish the others."
+      ]
+    },
+    {
+      "id": "mock_inputs",
+      "title": "Trace the input actually sent to retrieval",
+      "source_anchor": "rationale-versus-trace-title",
+      "visual": "mock_inputs",
+      "narration": [
+        "In the source\u2019s mock trace, the original input asks whether open access increases citations. The transformed query joins the phrase open access with a truncated citation term using AND. The recorded route is lexical retrieval over indexed abstracts.",
+        "The mock paper\u2019s abstract contains open access and citations. That links the candidate to recorded input and indexed evidence. It does not establish that the transformation preserved every part of the searcher\u2019s intended need, or that omitted alternatives would leave the results unchanged. The exact expression is shown on screen."
+      ]
+    },
+    {
+      "id": "mock_rank_path",
+      "title": "The trace can show a boundary without revealing internal scoring",
+      "source_anchor": "rationale-versus-trace-title",
+      "visual": "mock_rank_path",
+      "narration": [
+        "The supplied candidate rank is eighteen of one hundred. Reranking moves P to rank three, above the display cutoff of ten. This explains which recorded stages connected the candidate to the visible page. It does not identify the reranker\u2019s undisclosed internal scoring factors.",
+        "A generated description of topical fit cannot fill that gap as though it were an execution fact. In a real product, call this a trace only when the details come from the executed search. The mock example demonstrates the distinction without claiming that any vendor supplied these disclosures."
+      ]
+    },
+    {
+      "id": "backward_inspection",
+      "title": "Walk backwards from the displayed record",
+      "source_anchor": "inspection-trail-title",
+      "visual": "backward_inspection",
+      "narration": [
+        "Start at the record someone wants explained. Inspect fusion and display rules, then scoring and reranking, then matched evidence. Continue to the candidate source, transformed query and original input. Each step answers a different question about how the record arrived.",
+        "This is inspection order, not the system\u2019s execution order. A snippet, label, deduplication rule or diversification step may alter what is seen. A product that exposes a matched word but hides the transformed query has supplied only one part of the trail. Keep going until the evidence stops, and mark that boundary."
+      ]
+    },
+    {
+      "id": "stage_limits",
+      "title": "A useful explanation includes what it cannot establish",
+      "source_anchor": "tbl-15-3",
+      "visual": "stage_limits",
+      "narration": [
+        "Boolean conditions can show eligibility without proving relevance. Lexical evidence can show analysed terms and scoring contributions without making the score a probability of relevance. A later production reranker may also have changed the final order.",
+        "Dense inspection can expose the indexed unit, encoder, similarity, candidate rank and approximate search settings. It does not automatically supply a simple human readable causal story about a latent feature. A highlighted word, citation count or attractive snippet is not proof that it caused the final position."
+      ]
+    },
+    {
+      "id": "alignment_and_agency",
+      "title": "Inspectable layers are not the whole model decision",
+      "source_anchor": "tbl-15-3",
+      "visual": "alignment_and_agency",
+      "narration": [
+        "Sparse expansion terms and weights, or late interaction token alignments, expose useful layers. They do not establish that those visible pieces describe the whole model decision. Inspect candidate lists, fusion rules, reranking, cutoffs and presentation as well.",
+        "For agentic control, inspect each chosen tool, query, source, observation, next action and stopping point. The model\u2019s account of its reasoning does not establish what caused those choices. A helpful narrative should be labelled as interpretation when it is not derived from recorded execution evidence."
+      ]
+    },
+    {
+      "id": "evidence_status",
+      "title": "Preserve observations, documentation and unknowns separately",
+      "source_anchor": "interpretability-requires-an-inspectable-pipeline",
+      "visual": "evidence_status",
+      "narration": [
+        "The goal is an actionable audit trail and an accurate mental model, not disclosure of every engineering detail. Distinguish what you observed, what the vendor documents and what remains unknown. Do not replace missing evidence with an explanation that merely sounds plausible.",
+        "A reproducible search can remain poorly understood, and a clear explanation can remain impossible to rerun without saved inputs, versions and outputs. Documentation and inspection need separate questions. The final film turns those distinctions into requirements a library can ask for before licensing a tool."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "rationale_hook_0",
+      "scene": "rationale_hook",
+      "text": "A paper appears at rank three. Its explanation says: This paper closely addresses your question about open access and citations. Has that established why this result appeared, or why it occupies rank three? Pause and identify the missing evidence.",
+      "gap": 1.0
+    },
+    {
+      "id": "rationale_hook_1",
+      "scene": "rationale_hook",
+      "text": "The chapter\u2019s mock result P has a hypothetical recorded path: lexical retrieval supplied it at rank eighteen among a hundred candidates; reranking moved it to three; the display showed ten. Internal reranker details remain undisclosed. All record details and ranks here are illustrative, not a search run for this film.",
+      "gap": 2.5
+    },
+    {
+      "id": "three_qualities_0",
+      "scene": "three_qualities",
+      "text": "Transparency exposes information about a system. Interpretability lets a librarian trace why a record was included, excluded, scored or reranked. Understandability provides an accurate, usable mental model without demanding that every equation or weight be inspected.",
+      "gap": 1.0
+    },
+    {
+      "id": "three_qualities_1",
+      "scene": "three_qualities",
+      "text": "A broad ranking description can be transparent while explaining little about one record. A detailed score display can still be hard to understand. A documentable, rerunnable search can leave individual results opaque. These qualities overlap, but one does not establish the others.",
+      "gap": 0.65
+    },
+    {
+      "id": "mock_inputs_0",
+      "scene": "mock_inputs",
+      "text": "In the source\u2019s mock trace, the original input asks whether open access increases citations. The transformed query joins the phrase open access with a truncated citation term using AND. The recorded route is lexical retrieval over indexed abstracts.",
+      "gap": 1.0
+    },
+    {
+      "id": "mock_inputs_1",
+      "scene": "mock_inputs",
+      "text": "The mock paper\u2019s abstract contains open access and citations. That links the candidate to recorded input and indexed evidence. It does not establish that the transformation preserved every part of the searcher\u2019s intended need, or that omitted alternatives would leave the results unchanged. The exact expression is shown on screen.",
+      "gap": 0.65
+    },
+    {
+      "id": "mock_rank_path_0",
+      "scene": "mock_rank_path",
+      "text": "The supplied candidate rank is eighteen of one hundred. Reranking moves P to rank three, above the display cutoff of ten. This explains which recorded stages connected the candidate to the visible page. It does not identify the reranker\u2019s undisclosed internal scoring factors.",
+      "gap": 1.0
+    },
+    {
+      "id": "mock_rank_path_1",
+      "scene": "mock_rank_path",
+      "text": "A generated description of topical fit cannot fill that gap as though it were an execution fact. In a real product, call this a trace only when the details come from the executed search. The mock example demonstrates the distinction without claiming that any vendor supplied these disclosures.",
+      "gap": 0.65
+    },
+    {
+      "id": "backward_inspection_0",
+      "scene": "backward_inspection",
+      "text": "Start at the record someone wants explained. Inspect fusion and display rules, then scoring and reranking, then matched evidence. Continue to the candidate source, transformed query and original input. Each step answers a different question about how the record arrived.",
+      "gap": 1.0
+    },
+    {
+      "id": "backward_inspection_1",
+      "scene": "backward_inspection",
+      "text": "This is inspection order, not the system\u2019s execution order. A snippet, label, deduplication rule or diversification step may alter what is seen. A product that exposes a matched word but hides the transformed query has supplied only one part of the trail. Keep going until the evidence stops, and mark that boundary.",
+      "gap": 0.65
+    },
+    {
+      "id": "stage_limits_0",
+      "scene": "stage_limits",
+      "text": "Boolean conditions can show eligibility without proving relevance. Lexical evidence can show analysed terms and scoring contributions without making the score a probability of relevance. A later production reranker may also have changed the final order.",
+      "gap": 1.0
+    },
+    {
+      "id": "stage_limits_1",
+      "scene": "stage_limits",
+      "text": "Dense inspection can expose the indexed unit, encoder, similarity, candidate rank and approximate search settings. It does not automatically supply a simple human readable causal story about a latent feature. A highlighted word, citation count or attractive snippet is not proof that it caused the final position.",
+      "gap": 0.65
+    },
+    {
+      "id": "alignment_and_agency_0",
+      "scene": "alignment_and_agency",
+      "text": "Sparse expansion terms and weights, or late interaction token alignments, expose useful layers. They do not establish that those visible pieces describe the whole model decision. Inspect candidate lists, fusion rules, reranking, cutoffs and presentation as well.",
+      "gap": 1.0
+    },
+    {
+      "id": "alignment_and_agency_1",
+      "scene": "alignment_and_agency",
+      "text": "For agentic control, inspect each chosen tool, query, source, observation, next action and stopping point. The model\u2019s account of its reasoning does not establish what caused those choices. A helpful narrative should be labelled as interpretation when it is not derived from recorded execution evidence.",
+      "gap": 0.65
+    },
+    {
+      "id": "evidence_status_0",
+      "scene": "evidence_status",
+      "text": "The goal is an actionable audit trail and an accurate mental model, not disclosure of every engineering detail. Distinguish what you observed, what the vendor documents and what remains unknown. Do not replace missing evidence with an explanation that merely sounds plausible.",
+      "gap": 1.0
+    },
+    {
+      "id": "evidence_status_1",
+      "scene": "evidence_status",
+      "text": "A reproducible search can remain poorly understood, and a clear explanation can remain impossible to rerun without saved inputs, versions and outputs. Documentation and inspection need separate questions. The final film turns those distinctions into requirements a library can ask for before licensing a tool.",
+      "gap": 0.65
+    }
+  ]
+}

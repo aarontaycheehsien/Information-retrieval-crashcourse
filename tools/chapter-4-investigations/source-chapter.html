@@ -1,0 +1,266 @@
+<section class="chapter" id="sec-beyond-boolean"><span id="ch3" class="legacy-anchor"></span><header class="chapter-head"><p class="chapter-eyebrow">Chapter 4</p>
+<p class="chapter-meta">About 16 min</p>
+<h2 id="beyond-boolean">Lexical search beyond strict Boolean</h2>
+<p class="chapter-question"><span>Central question</span>How can a search remain lexical without behaving like strict Boolean?</p>
+<div class="stage-map" role="group" aria-label="Pipeline map: the stage this chapter covers is highlighted">
+<div class="stage-controller off">Controller — chooses and sequences the stages below</div>
+<div class="stage-row">
+<a class="stage on" href="#query-transformation" title="Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them.">Query<br>transformation</a><a class="stage on" href="#boolean-admission" title="Chapter 2 — text becomes index terms, and the rules decide which records are eligible at all.">Analysis &amp;<br>execution rules</a><a class="stage on" href="#bm25-ranking" title="Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set.">First-stage<br>retrieval</a><a class="stage off" href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one.">Fusion</a><a class="stage off" href="#reranking-and-hybrid" title="Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed.">Reranking</a><a class="stage off" href="#library-practice" title="Chapter 15 — what the reader is finally shown, and what can be recorded about it.">Presentation</a>
+</div>
+</div>
+<div class="chapter-orient">
+<p>Librarians routinely treat <em>lexical</em> and <em>Boolean</em> as synonyms. The reasoning feels natural: if a system returns records that lack one of my words, it can’t be matching words—so it must be doing something semantic.</p>
+<p>Yet a lexical system can return a record that lacks one of the query terms. It may require every term, some terms, or any one matching term, while using term matches to calculate scores. This chapter separates four things that the word “search” usually blurs together: query analysis, execution rules, understanding and transformation. It then uses them to show exactly how far the first two opening puzzles can be taken, and where the interface stops answering. The Semantic Scholar example also requires evidence about the retrieval pipeline, which is examined in Chapter 7.</p>
+</div></header><p class="key-distinction-label" id="distinction-lexical-boolean">Key distinction</p>
+<h3 id="lexical-search-does-not-have-to-mean-boolean-search">Lexical search does not have to mean Boolean search<a aria-label="Link to Lexical search does not have to mean Boolean search" class="heading-anchor" href="#lexical-search-does-not-have-to-mean-boolean-search">#</a>
+</h3>
+<p><strong>Lexical retrieval is any retrieval that draws its evidence from words: from how the analysed query terms relate to the indexed document terms.</strong> Boolean retrieval lives in this family. So does BM25. Both draw their evidence only from words, but use it differently: Boolean treats words as admission rules, BM25 as weighted evidence.</p>
+<p>The arrangement librarians know best combines the two: a Boolean expression decides who is eligible, then a ranker orders the survivors. BM25 can also gather and rank candidates directly from records matching any analysed query term.</p>
+<p>Suppose the analysed query is:</p>
+<blockquote><p>apple orange banana</p></blockquote>
+<p>A familiar academic-search interpretation is:</p>
+<blockquote><p>apple <code>AND</code> orange <code>AND</code> banana</p></blockquote>
+<p>Under that model, the implied <code>AND</code> admits only records containing every term, and a ranker orders the survivors. <em>A relevance-ranked result list can look similar under different admission rules.</em> The same vocabulary, the same analysis pipeline and the same inverted index support at least three different rules:</p>
+<ol>
+<li>
+<strong>All terms required</strong> (implied <code>AND</code>, then ranking). A record missing <code>banana</code> is out before the ranker ever sees it.</li>
+<li>
+<strong>Some terms required</strong> (minimum match). The system sets a threshold—say, two of three terms—and a record clearing it becomes a candidate.</li>
+<li>
+<strong>Any term suffices</strong> (any-match ranked retrieval—what Chapter 3 called <a href="#how-bm25-uses-the-same-inverted-index">direct BM25 retrieval</a>). One matching term makes a record a candidate; every further match adds weighted evidence. BM25 commonly runs this way, gathering candidates from the <em>union</em> of the posting lists rather than waiting at an <code>AND</code> gate.<sup id="fnref:bm25-one-term-floor"><a class="footnote-ref" href="#fn:bm25-one-term-floor">11</a></sup>
+</li>
+</ol>
+<p>All three are lexical. Not one of them needs embeddings, neural networks or “semantics”. A record lacking a typed word therefore does not establish semantic matching; <a href="#what-might-have-happened-to-a-missing-query-word">What might have happened to a missing query word</a> sets out what to check first.</p>
+
+<figure class="ir-figure worked-figure" aria-labelledby="admission-worked-title">
+<p class="figure-title" id="admission-worked-title">Keep the records fixed; change the admission rule</p>
+<p class="worked-kicker">Analysed query: apple orange banana</p>
+<div class="worked-grid">
+<div class="worked-card">
+<p class="worked-record"><b>A</b> <span class="worked-term">apple</span> <span class="worked-term">orange</span> <span class="worked-term">banana</span></p>
+<p class="worked-record"><b>B</b> <span class="worked-term">apple</span> <span class="worked-term">orange</span></p>
+</div>
+<div class="worked-card">
+<p class="worked-record"><b>C</b> <span class="worked-term">apple</span></p>
+<p class="worked-record"><b>D</b> pear grape <span class="worked-note">(no query terms)</span></p>
+</div>
+</div>
+<p class="worked-note">These cards show which query terms occur, not their frequencies or the full document lengths.</p>
+<div class="worked-grid three">
+<div class="worked-card">
+<strong>All three required</strong><span class="worked-rule">A admitted</span><p>B, C and D excluded.</p>
+<p class="worked-note">An AND condition for every term.</p>
+</div>
+<div class="worked-card">
+<strong>At least two required</strong><span class="worked-rule">A, B admitted</span><p>C and D excluded.</p>
+<p class="worked-note">Minimum match: two of three.</p>
+</div>
+<div class="worked-card">
+<strong>Any one sufficient</strong><span class="worked-rule">A, B, C admitted</span><p>D excluded.</p>
+<p class="worked-note">Eligibility is the union of the posting lists, expressible as OR.</p>
+</div>
+</div>
+<div class="worked-result">
+<p class="worked-kicker">Now keep the any-match rule fixed</p>
+<p><strong>Admission:</strong> A, B and C may compete.</p>
+<p><strong>Ranking:</strong> suppose a scoring rule orders them B, A, C.</p>
+<p><strong>Top-2 output:</strong> retain B and A.</p>
+<p class="worked-cutoff">C qualified, but fell below the output boundary. D never qualified.</p>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-4-1">Figure 4.1</span> All three admission arrangements remain lexical. The ranking B, A, C is stipulated to illustrate the separate output step, not calculated from these cards. Matching more distinct terms does not guarantee a higher BM25 score: rarity, term frequency and document length also matter.</figcaption>
+</figure>
+<p>An <strong>admission rule</strong>, a <strong>ranking function</strong> and a <strong>top-<em>k</em> output boundary</strong> therefore solve different problems: who may compete, how candidates are ordered, and how many leaders are retained. A production system can control all three independently.</p>
+<aside class="common-confusion" aria-labelledby="early-google-non-boolean-did-not-mean-non-lexical">
+<p class="common-confusion-label">Historical example</p>
+<h4 id="early-google-non-boolean-did-not-mean-non-lexical">Early Google: a useful counterexample</h4>
+<p>Google once described multiword searches as <code>AND</code> queries, but later began silently omitting some terms and was described as behaving like a “soft AND.” Ranked lexical retrieval could still order the remaining matches.<sup id="fnref:google-apparent-nonlexical"><a class="footnote-ref" href="#fn:google-apparent-nonlexical">12</a></sup> Google introduced BERT into query understanding and ranking only in 2019, though machine-learning ranking components predate it.<sup id="fnref:according-to-some-reports-google-s-rankbrain-int"><a class="footnote-ref" href="#fn:according-to-some-reports-google-s-rankbrain-int">13</a></sup></p>
+</aside>
+
+<span id="what-bm25-can-and-cannot-do" class="legacy-anchor"></span><h3 id="impact-of-bm25-compared-to-boolean-on-poor-query-terms">A bad term: exclusion under AND, distortion under BM25<a aria-label="Link to A bad term: exclusion under AND, distortion under BM25" class="heading-anchor" href="#impact-of-bm25-compared-to-boolean-on-poor-query-terms">#</a>
+</h3>
+<p>Consider this query, where <code>foolish</code> is someone’s weak attempt at a synonym for <code>delulu</code>:</p>
+<blockquote>
+<p>delulu job interview expectations foolish</p>
+</blockquote>
+<p>The same bad term does different damage under different rules.</p>
+<p>Under implied <code>AND</code>, <code>foolish</code> is compulsory. Relevant records that never use the word are excluded before ranking begins—and nothing downstream can recover them, because no ranker can rank what it never received.</p>
+<p>Under any-match BM25, a record can remain eligible through its other matching terms. The added term <code>foolish</code> can still change the ranking: if it is rare in the collection, its high IDF can increase the scores of records containing it, even though it poorly represents the searcher’s need. The <a href="bm25-evidence-lab.html">Evidence Lab</a> demonstrates the effect.</p>
+<p>Term-frequency saturation cannot identify a weak query term; it only limits the benefit of repeating that term inside a document. BM25 is lexical evidence made less binary, not semantic understanding.</p>
+<figure class="ir-figure worked-figure" aria-labelledby="poor-term-two-rules-title">
+<p class="figure-title" id="poor-term-two-rules-title">One weak query term, two different consequences</p>
+<p class="worked-kicker">Query: delulu job interview expectations foolish</p>
+<p>Two records from the <a href="bm25-evidence-lab.html">BM25 Evidence Lab</a>:</p>
+<div class="worked-grid">
+<div class="worked-card">
+<strong>Record A</strong><p>Delulu expectations during a job interview</p>
+<p class="worked-note">Contains the four original query terms; no <code>foolish</code>.</p>
+</div>
+<div class="worked-card">
+<strong>Record F</strong><p>Why <span class="worked-term second">foolish</span> job applicants misread the interview</p>
+<p class="worked-note">Contains <code>foolish</code>, <code>job</code> and <code>interview</code>; no <code>delulu</code> or <code>expectations</code>.</p>
+</div>
+</div>
+<div class="worked-grid">
+<div class="worked-card">
+<strong>Every term required · AND</strong><p><b>A is excluded:</b> adding compulsory <code>foolish</code> shuts out a record that met the original four conditions.</p>
+<p><b>F is also excluded:</b> it lacks other required terms.</p>
+<p class="worked-result caution">The extra term changes who can enter.</p>
+</div>
+<div class="worked-card">
+<strong>Any term sufficient · BM25 ranking</strong><p><b>A remains eligible:</b> its existing matches still contribute evidence.</p>
+<p><b>F gains scoring evidence:</b> the added term matches, and its rarity gives it extra weight.</p>
+<p class="worked-result">The extra term can change the ordering.</p>
+</div>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-4-2">Figure 4.2</span> In the lab collection, only F contains <code>foolish</code>; its rarity does not make it a good synonym or F a better answer. No numerical ranking is asserted here.</figcaption>
+</figure>
+<p>Both systems can handle the query as designed and still return poor results because <code>foolish</code> poorly represents the searcher’s need.</p>
+
+<span id="what-happened-to-the-missing-word" class="legacy-anchor"></span><h3 id="what-might-have-happened-to-a-missing-query-word">What might have happened to a missing query word<a aria-label="Link to What might have happened to a missing query word" class="heading-anchor" href="#what-might-have-happened-to-a-missing-query-word">#</a>
+</h3>
+<p>So a result comes back without one of the words you typed. What happened to the word? Four explanations are consistent with what you can see:</p>
+<ul>
+<li>
+<strong>It was removed during analysis</strong>—discarded as a stop word or punctuation before retrieval began.</li>
+<li>
+<strong>It was removed or changed during rewriting</strong>—an upstream component shortened, expanded or reformulated the query. Unlike routine analysis, this is explicit rewriting, which <a href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">a later section</a> takes up.</li>
+<li>
+<strong>It survived, but was optional</strong>—nothing required it. Matching it could have improved a score, or it may have matched nothing at all, finding no posting list. Either way, other results survive; under strict <code>AND</code>, a required unmatched term would have emptied the result set.</li>
+<li>
+<strong>It matched evidence outside the visible excerpt</strong>—another indexed field, an expanded term, an older indexed version or off-page evidence. Inspect the searchable fields before concluding that no lexical match occurred.</li>
+</ul>
+<figure class="ir-figure worked-figure" aria-labelledby="missing-word-paths-title">
+<p class="figure-title" id="missing-word-paths-title">A missing word can have four different histories</p>
+<p class="worked-note">Each panel is a possible mechanism, not a diagnosis of a named product.</p>
+<div class="worked-grid">
+<div class="worked-card">
+<strong>1 · Removed during analysis</strong><p>You type: <code>the job interview</code></p>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<p>Stop-word handling removes <code>the</code>.</p>
+<p class="worked-result">Retrieval receives: <code>job interview</code></p>
+</div>
+<div class="worked-card">
+<strong>2 · Changed during rewriting</strong><p>You type: <code>delulu job expectations</code></p>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<p>A rewrite replaces <code>delulu</code> with <code>unrealistic</code>.</p>
+<p class="worked-result">Retrieval receives: <code>unrealistic job expectations</code></p>
+</div>
+<div class="worked-card">
+<strong>3 · Retained but optional</strong><p>Retrieval receives: <code>delulu job interview</code></p>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<p>An any-match rule admits a record matching <code>job interview</code>.</p>
+<p class="worked-result">No <code>delulu</code> match is required.</p>
+<p class="worked-note">An optional term may also have no posting list anywhere in the index.</p>
+</div>
+<div class="worked-card">
+<strong>4 · Matched outside the excerpt</strong><p>Visible title: <code>Job interview expectations</code></p>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<p>Indexed abstract: “We examine <span class="worked-term">delulu</span> expectations.”</p>
+<p class="worked-result">The term matched; the snippet did not show it.</p>
+</div>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-4-3">Figure 4.3</span> A result snippet cannot distinguish these explanations. Several may operate in one query. Inspect the processed query, admission rules and indexed fields before inferring a retrieval architecture.</figcaption>
+</figure>
+<p>The visible result is consistent with all four explanations, and several may operate in the same search: a system may discard some terms, require only a subset of the survivors, and rank by weighted matches. This is the scite puzzle in miniature. <em>The scite screenshot alone does not show which explanation applies.</em></p>
+
+
+<h3 id="words-sent-to-retrieval-may-not-be-the-words-you-typed">The words sent to retrieval may not be the words you typed<a aria-label="Link to The words sent to retrieval may not be the words you typed" class="heading-anchor" href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">#</a>
+</h3>
+<!-- BEGIN PRODUCT CLAIMS LINKS words-sent-to-retrieval-may-not-be-the-words-you-typed -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-primo-query-conversion"><strong>Primo · Research Assistant.</strong> An LLM converts a question to Boolean variations connected with OR.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS words-sent-to-retrieval-may-not-be-the-words-you-typed -->
+
+<p>Drop the assumption that the words reaching the index are the words you typed. Many systems first <em>interpret</em> what you typed, then build a different internal query—one better suited to the index behind it. Like analysis, this explicit rewriting changes what reaches retrieval, but it does so by reformulating the request. The book has met it twice already: as one of the four explanations above, and as the first step of Primo Research Assistant’s pipeline in <a href="#anatomy-of-a-cited-answer">Chapter 1</a>.</p>
+<p>That puts four distinct jobs between your keyboard and the posting lists. Each has now appeared in this book; here they are side by side.</p>
+<ul>
+<li>
+<strong>Query analysis</strong>—the routine plumbing of Chapter 2: <a href="#before-the-index-text-becomes-tokens">tokenisation</a>, normalisation, <a href="#after-tokenisation-stemming-and-lemmatisation">stemming and lemmatisation</a>, stop-words. It prepares strings for matching. It implies no AI and no understanding of meaning.</li>
+<li>
+<strong>Query execution rules</strong>—this chapter’s dial: are the resulting clauses required, optional, or subject to a <a href="#lexical-search-does-not-have-to-mean-boolean-search">minimum match</a>?</li>
+<li>
+<strong>Query understanding</strong>—interpreting the request: spotting a phrase, an entity, a date, an intent. Understanding can inform a decision without altering a single word of the query.</li>
+<li>
+<strong>Query transformation</strong> (query rewriting)—actually changing what retrieval receives: correcting, mapping, expanding, restructuring or splitting what you entered.</li>
+</ul>
+<p>Query understanding interprets the request and can leave the query unchanged. Query transformation changes what is sent to retrieval. For example, an LLM can rewrite a question as a Boolean expression that a lexical engine then processes, with BM25 used to rank the matching records.</p>
+<figure class="query-flow" aria-labelledby="lexical-query-flow-title">
+<p class="figure-title" id="lexical-query-flow-title">Interpretation may lead to transformation before lexical retrieval</p>
+<div class="query-flow-track five-step">
+<div class="query-flow-step">
+<strong>User input</strong><span>keywords, a question or a longer description</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Query understanding</strong><span>recognise phrases, entities, dates, intent or constraints</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Query transformation</strong><span>correct, map, expand, restructure or add fields and filters</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Analysis and execution rules</strong><span>tokenise and stem; apply required, optional or minimum-match rules</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Lexical retrieval</strong><span>Boolean admission, BM25 ranking or both</span>
+</div>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-4-4">Figure 4.4</span> Understanding interprets the request; transformation changes what is sent to a retrieval pass. The retrieval method still determines how documents become candidates and receive scores. <a href="#beyond-one-query-expansion-decomposition-and-routing">A later chapter</a> adds route selection and feedback from an earlier pass.</figcaption>
+</figure>
+<p>A contemporary interface may accept a natural-language question, identify its dates or proposed filters, and use a parser or language model to construct a Boolean expression. Natural-language input therefore does not imply a non-lexical engine: the transformed query may still go to Boolean admission and BM25 ranking.</p>
+<p>Rewriting is the second of <a href="#what-might-have-happened-to-a-missing-query-word">the four explanations for a missing word</a>. Understanding alone does not remove a typed word; it matters only when its interpretation causes one of those changes. Chapter 11 returns to these operations with multi-query, routed and feedback-based retrieval available.</p>
+
+<p>The overview below brings the separate controls together, now that each has been explained.</p>
+<figure class="ir-figure" aria-labelledby="three-lexical-admission-rules-title">
+<p class="figure-title" id="three-lexical-admission-rules-title">Overview: from query processing to ranked lexical results</p>
+<img src="images/lexicalsearchisbroaderthanboolean.png" alt="Diagram showing strict Boolean, minimum-match and ranked any-match retrieval as different forms of lexical retrieval">
+<figcaption><span class="asset-label-inline" id="fig-4-5">Figure 4.5</span> A recap of possible arrangements, not a mandatory sequence. Admission, scoring and presentation are separate controls. Field weights are illustrative; citation and recency signals can supplement lexical evidence but are not themselves lexical matches. Direct BM25 retrieval can gather and score candidates together.</figcaption>
+</figure>
+
+<h3 id="returning-to-the-opening-puzzles">Returning to the first two opening puzzles<a aria-label="Link to Returning to the first two opening puzzles" class="heading-anchor" href="#returning-to-the-opening-puzzles">#</a>
+</h3>
+<!-- BEGIN PRODUCT CLAIMS LINKS returning-to-the-opening-puzzles -->
+<details class="claim-links"><summary>Evidence register · 4 claims</summary><p><a href="#claim-scite-nonsense-query"><strong>scite · Search interface in the opening puzzle.</strong> Adding an invented string left useful-looking results and a reported total in the millions.</a></p>
+<p><a href="#claim-scholar-reported-total"><strong>Google Scholar · Search interface in the opening puzzle.</strong> The open access query reported about 9.4 million matches in the supplied example.</a></p>
+<p><a href="#claim-scholar-display-limit"><strong>Google Scholar · Search results.</strong> Help documentation limits display to 1,000 results for a single query.</a></p>
+<p><a href="#claim-semantic-scholar-question-counts"><strong>Semantic Scholar · Main search, observed August 2026.</strong> The question returned 13 results; the unquoted keyword query returned about 35,300.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS returning-to-the-opening-puzzles -->
+
+<p><span id="returning-to-scite"><strong>Scite:</strong></span> the invented string in the <a href="#scite-opening-caption">opening screenshot</a> was not compulsory. It may have been removed during analysis, removed or changed by an upstream rewrite of the query, retained as optional evidence, or retained without matching a posting. The screen cannot distinguish those explanations or identify BM25, dense retrieval or any other architecture.<sup id="fnref:scite-lexical-suggestive"><a class="footnote-ref" href="#fn:scite-lexical-suggestive">14</a></sup></p>
+<p><span id="returning-to-google-scholar"><strong>Google Scholar:</strong></span> the <a href="#scholar-opening-caption">reported hit count</a>, relevance ordering and viewable set are different properties. Google Scholar reports millions of matches but documents a display limit of <a href="https://scholar.google.com/intl/us/scholar/help.html">1,000 results</a>. That is an observable output boundary, but it does not reveal the scoring signals, whether every match received a final score, or whether the displayed records are a global top-<em>k</em>.</p>
+<p><span id="returning-to-semantic-scholar"><strong>Semantic Scholar remains unresolved:</strong></span> the <a href="#semantic-scholar-opening-caption">August 2026 result counts</a> tell us what happened, not where meaning entered the pipeline. <a href="#third-temptation">The end of this chapter</a> explains why it waits for Part II.</p>
+<blockquote class="pull-quote"><p>A search system can therefore be non-Boolean without being non-lexical or semantic.</p></blockquote>
+<span id="two-category-errors-to-avoid" class="legacy-anchor"></span><h3 id="one-category-error-resolved-and-one-still-ahead">What Part I settles, and what it hands on<a aria-label="Link to What Part I settles, and what it hands on" class="heading-anchor" href="#one-category-error-resolved-and-one-still-ahead">#</a>
+</h3>
+<p><a href="#a-map-of-the-arguments-ahead">The first two puzzles from Chapter 1</a>, scite and Google Scholar, can be explained using the distinctions introduced in Part I.</p>
+<aside class="distinction-map" aria-labelledby="distinction-map-interface">
+<h4 id="distinction-map-interface">What a result screen can settle</h4>
+<p>This is the one collapse of this kind you can catch from a result screen, which is why it is settled here rather than held over to Part II. It needs nothing a vendor had to write down—only the recognition that a result can lack a typed term for several reasons, including an admission rule other than strict all-term conjunction.</p>
+<dl class="distinction-map-list">
+<div>
+<dt>lexical search = Boolean search</dt>
+<dd>A record can come back missing one of your words while the system is scoring on nothing but words. Boolean retrieval is one form of lexical retrieval; minimum-match rules and BM25 ranking can remain lexical too, and only the all-term conjunction requires every processed term. Any-match eligibility can also be expressed as Boolean OR; the separate ranking function supplies graded scores. See <a href="#distinction-lexical-boolean"><em>Lexical search does not have to mean Boolean search</em></a>.</dd>
+</div>
+</dl>
+<p>The Google Scholar example separates the reported match count from the number of results a user can view. A reported count is an estimate of matches, and a display limit is a display boundary rather than a scoring decision. <a href="#returning-to-the-opening-puzzles">The verdict above</a> sets out the general form: admission decides who competes, the ranking function orders them, and the output boundary decides how many are kept—three separate controls, of which an interface reports only the last.</p>
+<p>These observations do not establish the products’ retrieval architectures.</p>
+</aside>
+<p id="third-temptation">The Semantic Scholar puzzle is not of this kind. A product named <em>Semantic Scholar</em> tempts you to read a label as an architecture, and nothing visible on its interface can confirm or refute the reading. We do not yet have the distinctions needed to ask whether retrieval itself was lexical, retrieval itself used dense representations, semantic processing occurred only after retrieval, or several stages were combined—which is precisely why the remaining five of the six distinctions <a href="#core-distinction-checklist">listed at the start of Part I</a> wait for <a href="#distinction-map-vocabulary">the opening of Part II</a> instead. Two of its instances already matter for what follows. <strong>Semantic search does not mean dense retrieval</strong>: semantic names a goal, and dense retrieval names one technical route towards it. <strong>Vector does not automatically mean dense, learnt or semantic</strong>: BM25 scores can be held in sparse, vocabulary-aligned vectors, while contemporary bi-encoders usually produce learnt dense ones.</p>
+<p>The remaining problem is vocabulary mismatch: a paper about <code>unrealistic expectations</code> may stay out of reach of a search for <code>delulu</code>. A system can bridge that gap in two places:</p>
+<ul>
+<li>
+<strong>Change the query, keep the index.</strong> Correct, expand or map the query, then match terms as before.</li>
+<li>
+<strong>Change the representation.</strong> Encode queries and documents so that texts expressing the same idea are placed near one another whether or not they share any words, and retrieve by proximity rather than by matching.</li>
+</ul>
+<p>The next chapters examine the second route while keeping the first in view.</p>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Lexical retrieval draws its evidence from analysed terms—what a token becomes after tokenisation, case folding and stemming—reached through posting lists, the records containing each term. Boolean-then-ranking is a common academic-search pattern, but minimum-match and any-match ranking are lexical too.</li>
+<li>Analysis, execution rules, query transformation — or a term that simply matched no posting list — can explain a missing typed word without implying dense or semantic retrieval. Understanding matters when its interpretation triggers one of those changes.</li>
+<li>Admission, ranking and the top-<em>k</em> output boundary are separate controls: admission forms the candidate set of records that may compete, ranking orders it, and the boundary decides how many are kept.</li>
+<li>Part I explains the scite and Google Scholar behaviours — and shows why the interface alone cannot identify the mechanism behind either. The Semantic Scholar observation remains open until semantic capability, dense representation and pipeline stage can be separated.</li>
+</ol>
+<p class="chapter-transition">Non-Boolean does not mean non-lexical. Part II next asks how a learnt representation can connect texts that share no analysed terms, then whether that mechanism is the same thing as semantic search.</p></aside><section class="self-check" aria-label="Questions on this chapter"><p class="self-check-label">Check yourself</p>
+<details class="self-check-q"><summary>A result lacks one of the words you typed. Name the four lexical explanations to exhaust before reaching for a semantic one.</summary><p>Analysis may have removed it, transformation may have rewritten it, or it may be optional (including when it has no posting list). Alternatively, it may match an indexed field or version not visible in the excerpt. Query understanding alone is not a fifth explanation unless its interpretation triggered one of those changes. None of these observations identifies the complete retrieval architecture.</p></details><details class="self-check-q"><summary>What are the three independent controls in a ranked lexical search?</summary><p>The admission rule decides who may compete, the ranking function orders the candidates, and the top-<em>k</em> output boundary decides how many leaders are retained.</p></details><details class="self-check-q"><summary>An interface accepts a natural-language question and produces an editable Boolean query. What changed?</summary><p>Query understanding may have recognised concepts or constraints; query transformation produced the changed Boolean retrieval input. The retriever may still use Boolean admission and lexical ranking over an inverted index.</p></details></section><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#bm25-ranking"><span>Previous</span>BM25 and ranked lexical retrieval</a><a class="cnav next" href="#exercise1"><span>Next</span>Application exercise I</a></nav></section>

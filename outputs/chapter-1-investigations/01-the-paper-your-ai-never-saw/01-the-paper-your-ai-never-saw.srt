@@ -1,0 +1,383 @@
+1
+00:00:00,700 --> 00:00:03,225
+Here are five imaginary papers.
+
+2
+00:00:03,400 --> 00:00:06,061
+Every citation is real within our
+
+3
+00:00:06,081 --> 00:00:09,217
+illustration. Every summary is accurate.
+
+4
+00:00:09,380 --> 00:00:10,571
+Would you trust the answer?
+
+5
+00:00:10,746 --> 00:00:13,445
+Now add a sixth paper: the landmark study
+
+6
+00:00:13,465 --> 00:00:15,416
+that the answer never mentioned.
+
+7
+00:00:15,591 --> 00:00:17,323
+Which part of the system failed?
+
+8
+00:00:19,738 --> 00:00:22,649
+A missing citation alone cannot tell us.
+
+9
+00:00:22,825 --> 00:00:25,549
+Chapter One asks us to follow the evidence
+
+10
+00:00:25,569 --> 00:00:27,366
+before the writing begins.
+
+11
+00:00:28,263 --> 00:00:30,649
+Primo Research Assistant provides a
+
+12
+00:00:30,669 --> 00:00:32,130
+documented example.
+
+13
+00:00:32,292 --> 00:00:34,309
+In the account checked by September twenty
+
+14
+00:00:34,329 --> 00:00:36,847
+twenty-six, a language model converts a
+
+15
+00:00:36,867 --> 00:00:39,811
+question into Boolean variations connected
+
+16
+00:00:39,831 --> 00:00:42,440
+by OR. The query searches the Central
+
+17
+00:00:42,460 --> 00:00:45,069
+Discovery Index and returns up to thirty
+
+18
+00:00:45,089 --> 00:00:45,996
+results.
+
+19
+00:00:46,554 --> 00:00:49,042
+Embeddings rerank those candidates to
+
+20
+00:00:49,062 --> 00:00:51,503
+identify five sources.
+
+21
+00:00:51,665 --> 00:00:53,694
+Those five become the working set.
+
+22
+00:00:53,869 --> 00:00:57,019
+Only then does GPT four point one Mini
+
+23
+00:00:57,039 --> 00:00:59,183
+write an overview from their abstracts.
+
+24
+00:00:59,359 --> 00:01:01,697
+This is the chapter's dated documentation
+
+25
+00:01:01,717 --> 00:01:04,712
+account, not a fresh test of the service.
+
+26
+00:01:05,608 --> 00:01:07,073
+Coverage comes first.
+
+27
+00:01:07,248 --> 00:01:09,341
+The chapter's October twenty twenty-six
+
+28
+00:01:09,361 --> 00:01:11,867
+documentation check says the assistant
+
+29
+00:01:11,887 --> 00:01:15,384
+searches CDI metadata and abstracts,
+
+30
+00:01:15,560 --> 00:01:17,756
+subject to exclusions including
+
+31
+00:01:17,776 --> 00:01:20,862
+insufficient metadata or abstracts and
+
+32
+00:01:20,882 --> 00:01:22,446
+some provider collections.
+
+33
+00:01:22,981 --> 00:01:25,170
+A record in the library's wider discovery
+
+34
+00:01:25,190 --> 00:01:27,851
+system may still fall outside the
+
+35
+00:01:27,871 --> 00:01:29,899
+assistant's searchable scope.
+
+36
+00:01:30,048 --> 00:01:33,340
+A better query or reranker cannot recover
+
+37
+00:01:33,360 --> 00:01:35,621
+a record from a collection the assistant
+
+38
+00:01:35,641 --> 00:01:38,353
+cannot search. These nested sets are
+
+39
+00:01:38,373 --> 00:01:40,673
+schematic, not measured coverage
+
+40
+00:01:40,693 --> 00:01:41,767
+proportions.
+
+41
+00:01:42,658 --> 00:01:44,478
+Try the paper-card experiment.
+
+42
+00:01:44,756 --> 00:01:47,171
+Thirty cards enter the candidate set.
+
+43
+00:01:47,321 --> 00:01:49,414
+Reranking can change their order, and
+
+44
+00:01:49,434 --> 00:01:51,244
+selection can keep five.
+
+45
+00:01:51,419 --> 00:01:54,092
+Our gold landmark paper never entered
+
+46
+00:01:54,112 --> 00:01:56,566
+those thirty. Can a better reranker bring
+
+47
+00:01:56,586 --> 00:01:57,352
+it back?
+
+48
+00:01:59,766 --> 00:02:02,208
+Reordering a fixed set cannot add another
+
+49
+00:02:02,228 --> 00:02:05,120
+member. A new retrieval round could add
+
+50
+00:02:05,140 --> 00:02:08,535
+evidence. Fluent writing cannot establish
+
+51
+00:02:08,555 --> 00:02:10,751
+source-supported coverage of a paper
+
+52
+00:02:10,771 --> 00:02:12,761
+absent from the supplied evidence.
+
+53
+00:02:12,911 --> 00:02:15,352
+Retrieval does not delete the original
+
+54
+00:02:15,372 --> 00:02:16,846
+records from the index.
+
+55
+00:02:17,748 --> 00:02:20,612
+Compare three imaginary cases.
+
+56
+00:02:20,762 --> 00:02:23,151
+Paper A is outside the assistant's
+
+57
+00:02:23,171 --> 00:02:24,285
+searchable scope.
+
+58
+00:02:24,447 --> 00:02:27,043
+Paper B reaches the thirty candidates but
+
+59
+00:02:27,063 --> 00:02:29,633
+misses the five-source working set.
+
+60
+00:02:29,795 --> 00:02:32,056
+Paper C reaches the writer but is not
+
+61
+00:02:32,076 --> 00:02:32,854
+cited.
+
+62
+00:02:33,418 --> 00:02:35,151
+A needs coverage evidence.
+
+63
+00:02:35,314 --> 00:02:37,871
+B needs candidate and selection traces.
+
+64
+00:02:38,046 --> 00:02:39,972
+C needs a comparison between the supplied
+
+65
+00:02:39,992 --> 00:02:41,891
+sources and the answer.
+
+66
+00:02:42,053 --> 00:02:45,165
+If intermediate evidence is hidden, record
+
+67
+00:02:45,185 --> 00:02:46,582
+the uncertainty.
+
+68
+00:02:46,783 --> 00:02:49,121
+Finding a paper in a new direct search
+
+69
+00:02:49,141 --> 00:02:52,162
+does not reconstruct its earlier path.
+
+70
+00:02:53,065 --> 00:02:55,911
+The chapter maps six possible stages:
+
+71
+00:02:55,931 --> 00:02:58,681
+query transformation; analysis and
+
+72
+00:02:58,701 --> 00:03:01,735
+execution rules; first-stage retrieval;
+
+73
+00:03:01,897 --> 00:03:05,098
+fusion; reranking; and presentation.
+
+74
+00:03:05,338 --> 00:03:07,804
+Fusion combines candidate lists.
+
+75
+00:03:07,954 --> 00:03:10,292
+A controller chooses and sequences the
+
+76
+00:03:10,312 --> 00:03:13,604
+actions. Not every product uses every
+
+77
+00:03:13,624 --> 00:03:14,531
+stage.
+
+78
+00:03:15,100 --> 00:03:18,014
+No separate fusion stage is documented in
+
+79
+00:03:18,034 --> 00:03:19,263
+the Primo account.
+
+80
+00:03:19,426 --> 00:03:21,777
+Elsevier's twenty twenty-four Scopus AI
+
+81
+00:03:21,797 --> 00:03:24,663
+account describes query variants, vector
+
+82
+00:03:24,683 --> 00:03:26,956
+retrieval and rank fusion.
+
+83
+00:03:27,119 --> 00:03:29,895
+That historical example does not establish
+
+84
+00:03:29,915 --> 00:03:32,562
+the architecture of every later mode.
+
+85
+00:03:33,459 --> 00:03:35,565
+Retrieval-augmented generation means
+
+86
+00:03:35,585 --> 00:03:38,374
+retrieval selects evidence and a language
+
+87
+00:03:38,394 --> 00:03:40,720
+model generates an answer conditioned on
+
+88
+00:03:40,740 --> 00:03:43,310
+it. Retrieval limits the supplied
+
+89
+00:03:43,330 --> 00:03:46,390
+evidence. It does not guarantee that every
+
+90
+00:03:46,410 --> 00:03:48,168
+generated statement comes from that
+
+91
+00:03:48,188 --> 00:03:49,005
+evidence.
+
+92
+00:03:49,553 --> 00:03:52,162
+A model can draw on its parameters, invent
+
+93
+00:03:52,182 --> 00:03:55,357
+a citation or omit a supplied source.
+
+94
+00:03:55,532 --> 00:03:58,540
+Before blaming retrieval or generation for
+
+95
+00:03:58,560 --> 00:04:00,860
+our missing landmark paper, ask what the
+
+96
+00:04:00,880 --> 00:04:02,702
+writer actually received.

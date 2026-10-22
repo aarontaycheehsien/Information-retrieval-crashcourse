@@ -1,0 +1,32 @@
+Which word deserves more weight?
+
+[00:00:00.700]: Several papers satisfy the same Boolean conditions. They are all eligible. Does that make them equally good matches? And if not, what evidence should put one paper above another? Make a prediction.
+
+[00:00:16.152]: Ranked retrieval assigns graded scores and orders the candidates. That describes an operation, not a formula. Scores might use lexical evidence, vectors or several signals. Chapter Three examines one lexical method: BM twenty-five.
+
+[00:00:34.013]: BM twenty-five adds weighted evidence from analysed terms shared by the query and document. For delulu plus job, the text unrealistic job expectations has a job match. It has no delulu match, so that term contributes nothing.
+
+[00:00:51.088]: Matching another query term can add another contribution. But matches are not equally informative. The next question is how much a term discriminates among records in the collection. No query expansion is assumed in this example.
+
+[00:01:06.397]: Use the chapter's illustrative collection of ten records. Delulu occurs in two. Job occurs in nine. All else equal, which matching term narrows the possibilities more?
+
+[00:01:20.061]: The rarer term usually receives more weight through inverse document frequency, or IDF. Informative here means discriminating among documents. It does not guarantee that a paper is useful for the reader's actual task.
+
+[00:01:36.280]: Document frequency counts how many documents contain the term. Repeating a word twenty times in one paper still adds just one document to that count. Term frequency counts occurrences inside the individual document.
+
+[00:01:52.288]: Those are different signals. Collection rarity supplies a weight. Within-document repetition supplies evidence whose contribution will saturate. Confusing the two counts makes the score harder to interpret.
+
+[00:02:06.964]: For a labeled positive-IDF variant, the two-of-ten term gets a weight of about one point four eight. The nine-of-ten term gets about zero point one five. Production variants can differ; these are calculated teaching values.
+
+[00:02:22.062]: At average document length, with one occurrence of each term, the frequency factor is one. Add the two contributions: about one point six three. Different repetition and length change those contributions. The total is a score, not a probability of relevance.
+
+[00:02:40.365]: Now consider the text unrealistic expectations. It shares neither analysed query term, delulu nor job. In our plain, unexpanded lexical example, neither term contributes evidence. Query expansion could change what matches; the scoring formula alone does not bridge every vocabulary gap.
+
+[00:03:03.195]: A high score is also not a verdict about usefulness. A well-matching paper can concern the wrong population or fail to answer the task. Ask about match, rarity, repetition and length. The next film tests why twenty repetitions do not earn twenty times the credit.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 3.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#bm25-ranking
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

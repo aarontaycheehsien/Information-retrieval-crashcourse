@@ -1,0 +1,44 @@
+Your route through the machine
+
+[00:00:00.700]: You know how to search. Now a discovery tool says it understands meaning. Do you need to learn to build the system before you can judge that claim?
+
+[00:00:10.767]: The preface offers a different starting point: your existing expertise, connected to the machinery beneath the interface. This book assumes professional search knowledge and explains enough retrieval to help you ask better questions.
+
+[00:00:26.258]: Information literacy librarians help people turn questions into workable searches. Evidence synthesis librarians build and document high-recall strategies. Systems and discovery librarians work with configuration, indexes, integrations and vendors.
+
+[00:00:44.661]: Those are different forms of expertise. The first two are the book's primary audiences; the third will find procurement and evaluation especially relevant. None needs to start by pretending to be a software engineer.
+
+[00:00:58.787]: The book follows three principles. Understanding comes before detailed mechanism. Examples come from library and academic search. Formulas appear where they carry an argument, with explanations in words.
+
+[00:01:14.246]: You should understand what a method responds to, what it misses and which trade-offs it makes. You do not need to calculate every score by hand. Fuller machinery belongs in the appendices.
+
+[00:01:26.576]: There is an important discipline behind those examples: named products are tied to documentation and the date it was checked. When documentation runs out, the explanation should stop short of guessing.
+
+[00:01:39.359]: Products can change faster than the mechanisms underneath them. Read an example as a dated illustration, then check the current documentation before relying on it. A product name in the book is not a recommendation.
+
+[00:01:53.240]: The main focus is how evidence becomes available before an answer is written. The book is an orientation to retrieval, rather than an implementation manual, a product review or a replacement for a graduate course.
+
+[00:02:06.853]: No prior information retrieval knowledge or mathematics is required to follow the main argument. The destination is practical: follow a technical conversation, interrogate a vendor claim, and recognise a retrieval problem in your own work.
+
+[00:02:23.464]: Reading straight through is the default. There are also five shorter routes. For a short orientation, use the forty-five-minute reading-and-reflection route. For instruction, protect Part One, then read Chapter Eleven and Chapters Thirteen to Fifteen.
+
+[00:02:40.281]: For evidence synthesis, focus on Chapters Two and Eleven, Chapters Thirteen to Fifteen, and Appendix F. On this route, Appendix F is core reading: it connects candidate retrieval, high recall, screening and stopping.
+
+[00:02:57.451]: For procurement, follow the category errors, failure diagnosis and implications for library practice. Keep Appendix D open as a terminology map. Use Chapter Ten and Appendix E when a system combines or reranks candidate lists.
+
+[00:03:14.460]: For curiosity, if you already understand Boolean retrieval and BM twenty-five, begin at learnt representations. The earlier material establishes why lexical retrieval is broader than Boolean retrieval. Choose a route; return to the fuller explanations as questions arise.
+
+[00:03:34.445]: The book divides into three sittings and gives each chapter a reading-time estimate. Each part ends with an application exercise: run real searches in a system available to you and write down what you find.
+
+[00:03:47.786]: The teaching notes include a public-access route. Exercises can be skipped without breaking the main argument, but trying one may tell you something the prose cannot: how your own tool behaves.
+
+[00:04:01.207]: Before Chapter One, carry three habits with you. Separate admission from ranking. Separate reference existence, faithful writing and adequate retrieval. And separate what is documented from what you merely suspect.
+
+[00:04:15.731]: You already bring expertise in searching. This book connects that expertise to the decisions underneath the interface. Now, to the machine itself.
+
+Adapted from Aaron Tay, How Search Decides What You See, Preface.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#preface
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

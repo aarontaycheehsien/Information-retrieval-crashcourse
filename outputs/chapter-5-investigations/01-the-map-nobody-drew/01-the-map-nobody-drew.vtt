@@ -1,0 +1,337 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:03.026
+Imagine a map where words occupy
+
+00:00:03.046 --> 00:00:06.093
+locations, and related words often sit
+
+00:00:06.113 --> 00:00:07.175
+near one another.
+
+00:00:07.350 --> 00:00:08.245
+Who drew the map?
+
+00:00:08.407 --> 00:00:11.390
+Did someone label an axis meaning, another
+
+00:00:11.410 --> 00:00:14.147
+axis emotion, and tell the computer where
+
+00:00:14.167 --> 00:00:15.616
+every word belongs?
+
+00:00:15.778 --> 00:00:16.788
+Make a prediction.
+
+00:00:19.210 --> 00:00:21.435
+The chapter gives a more surprising route.
+
+00:00:21.598 --> 00:00:24.090
+Train a model to predict patterns in text.
+
+00:00:24.240 --> 00:00:26.462
+Adjust its parameters when predictions
+
+00:00:26.482 --> 00:00:27.892
+miss their targets.
+
+00:00:28.067 --> 00:00:30.457
+Useful relationships can emerge in the
+
+00:00:30.477 --> 00:00:33.124
+resulting vectors without anyone drawing
+
+00:00:33.144 --> 00:00:35.753
+those relationships explicitly.
+
+00:00:36.649 --> 00:00:39.507
+A representation is any form used to stand
+
+00:00:39.527 --> 00:00:42.973
+for an item. A vector is one form: an
+
+00:00:42.993 --> 00:00:44.558
+ordered list of numbers.
+
+00:00:44.733 --> 00:00:47.071
+Two numbers can specify a location on
+
+00:00:47.091 --> 00:00:50.061
+paper. Real language-model vectors often
+
+00:00:50.081 --> 00:00:53.346
+have hundreds or thousands of dimensions.
+
+00:00:53.903 --> 00:00:56.236
+An embedding is a mapping into a vector
+
+00:00:56.256 --> 00:00:59.265
+space, usually learnt during training in
+
+00:00:59.285 --> 00:01:00.836
+modern language processing.
+
+00:01:01.012 --> 00:01:02.989
+We also call the output vector an
+
+00:01:03.009 --> 00:01:05.270
+embedding. A vector need not come from a
+
+00:01:05.290 --> 00:01:07.551
+learnt mapping; these words do different
+
+00:01:07.571 --> 00:01:08.452
+jobs.
+
+00:01:09.353 --> 00:01:12.600
+BM twenty-five also calculates numbers.
+
+00:01:12.762 --> 00:01:14.830
+Its weights come from term counts,
+
+00:01:14.850 --> 00:01:17.536
+document lengths and collection statistics
+
+00:01:17.556 --> 00:01:19.314
+through a specified formula.
+
+00:01:19.450 --> 00:01:21.943
+A neural encoder calculates an output from
+
+00:01:21.963 --> 00:01:25.255
+text, tokenisation and learnt parameters.
+
+00:01:25.807 --> 00:01:27.698
+The distinction is how the mapping was
+
+00:01:27.718 --> 00:01:30.224
+obtained. Training fits the encoder's
+
+00:01:30.244 --> 00:01:32.685
+parameters; inference uses the fitted
+
+00:01:32.705 --> 00:01:34.656
+mapping on new input.
+
+00:01:34.793 --> 00:01:36.616
+A learnt calculation is still a
+
+00:01:36.636 --> 00:01:39.257
+calculation. Being able to reproduce its
+
+00:01:39.277 --> 00:01:42.312
+output does not make every dimension easy
+
+00:01:42.332 --> 00:01:43.342
+to interpret.
+
+00:01:44.254 --> 00:01:45.480
+Training needs a target.
+
+00:01:45.642 --> 00:01:48.263
+Where can one come from without a person
+
+00:01:48.284 --> 00:01:50.970
+labelling the meaning of every word?
+
+00:01:51.158 --> 00:01:52.567
+Hide part of a sentence.
+
+00:01:52.717 --> 00:01:54.874
+Ask the model to recover it.
+
+00:01:55.049 --> 00:01:57.245
+The original text supplies the answer.
+
+00:01:57.806 --> 00:02:00.228
+The distributional hypothesis suggests
+
+00:02:00.248 --> 00:02:02.625
+that words used in similar contexts tend
+
+00:02:02.645 --> 00:02:04.519
+to be used in similar ways.
+
+00:02:04.707 --> 00:02:06.568
+Predicting those contexts turns an
+
+00:02:06.588 --> 00:02:09.236
+observation about language into a training
+
+00:02:09.256 --> 00:02:11.800
+task. It does not supply a universal
+
+00:02:11.820 --> 00:02:13.076
+definition of meaning.
+
+00:02:13.994 --> 00:02:16.104
+Word two vec has two familiar
+
+00:02:16.124 --> 00:02:19.571
+arrangements. Continuous bag of words, or
+
+00:02:19.591 --> 00:02:22.690
+C B O W, predicts a target word from its
+
+00:02:22.710 --> 00:02:25.112
+neighbours. Skip-gram reverses that
+
+00:02:25.132 --> 00:02:28.102
+direction: use a target word to predict
+
+00:02:28.122 --> 00:02:29.364
+neighbouring words.
+
+00:02:29.915 --> 00:02:32.183
+Across many examples, predictions are
+
+00:02:32.203 --> 00:02:34.580
+compared with targets and parameters are
+
+00:02:34.600 --> 00:02:37.737
+adjusted. After training, the word vectors
+
+00:02:37.757 --> 00:02:40.121
+can be reused without running the original
+
+00:02:40.141 --> 00:02:41.345
+prediction task.
+
+00:02:41.520 --> 00:02:43.935
+Their dimensions are usually anonymous,
+
+00:02:44.085 --> 00:02:46.088
+and useful patterns are distributed across
+
+00:02:46.108 --> 00:02:46.603
+them.
+
+00:02:47.524 --> 00:02:49.777
+The famous demonstration takes king,
+
+00:02:49.797 --> 00:02:52.522
+subtracts man, and adds woman.
+
+00:02:52.671 --> 00:02:54.777
+In some trained spaces, queen is the
+
+00:02:54.797 --> 00:02:56.942
+nearest candidate after excluding the
+
+00:02:56.962 --> 00:02:58.617
+three input words.
+
+00:02:58.779 --> 00:03:00.731
+The step from man to woman resembles the
+
+00:03:00.751 --> 00:03:02.586
+step from king to queen.
+
+00:03:03.155 --> 00:03:05.641
+Our coordinates are deliberately invented
+
+00:03:05.661 --> 00:03:08.669
+to show that arithmetic exactly.
+
+00:03:08.844 --> 00:03:10.473
+They are not measurements from a trained
+
+00:03:10.493 --> 00:03:13.050
+model. Real analogies can fail.
+
+00:03:13.225 --> 00:03:15.435
+A successful example demonstrates a
+
+00:03:15.455 --> 00:03:18.257
+geometric regularity, not a universal
+
+00:03:18.277 --> 00:03:19.919
+equation about meaning.
+
+00:03:20.832 --> 00:03:22.790
+The chapter also shows selected
+
+00:03:22.810 --> 00:03:24.788
+country-to-capital directions in a
+
+00:03:24.808 --> 00:03:26.528
+two-dimensional projection of
+
+00:03:26.548 --> 00:03:28.279
+thousand-dimensional vectors.
+
+00:03:28.455 --> 00:03:30.587
+That picture is a shadow of a larger
+
+00:03:30.607 --> 00:03:33.667
+space. Projection can discard differences
+
+00:03:33.687 --> 00:03:34.607
+that matter.
+
+00:03:35.159 --> 00:03:37.771
+Our separate toy example makes the loss
+
+00:03:37.791 --> 00:03:39.987
+visible. Two three-dimensional points
+
+00:03:40.007 --> 00:03:42.333
+differ by ten units in their third
+
+00:03:42.353 --> 00:03:45.116
+coordinate. Drop that coordinate and both
+
+00:03:45.136 --> 00:03:46.778
+appear at the same location.
+
+00:03:46.953 --> 00:03:49.458
+This is a simple coordinate projection,
+
+00:03:49.711 --> 00:03:52.500
+not the chapter's P C A experiment.
+
+00:03:53.411 --> 00:03:55.860
+The geometry reflects patterns rewarded by
+
+00:03:55.880 --> 00:03:58.386
+training. Predicting word contexts can
+
+00:03:58.406 --> 00:04:01.105
+produce useful relationships, but the task
+
+00:04:01.125 --> 00:04:04.455
+never directly asked which passage answers
+
+00:04:04.475 --> 00:04:05.447
+which question.
+
+00:04:05.609 --> 00:04:07.819
+Nearby does not automatically mean
+
+00:04:07.839 --> 00:04:10.112
+relevant to a particular search.
+
+00:04:10.684 --> 00:04:13.329
+Classic word vectors are a stepping stone.
+
+00:04:13.479 --> 00:04:16.783
+Modern encoders can read a whole sequence,
+
+00:04:16.803 --> 00:04:19.334
+produce context-dependent representations,
+
+00:04:19.471 --> 00:04:21.731
+and be trained for a retrieval task.
+
+00:04:21.855 --> 00:04:24.374
+To judge the resulting map, ask what it
+
+00:04:24.394 --> 00:04:26.551
+learnt to preserve, then test it on the
+
+00:04:26.571 --> 00:04:28.523
+queries and relevance judgments that
+
+00:04:28.543 --> 00:04:29.218
+matter.

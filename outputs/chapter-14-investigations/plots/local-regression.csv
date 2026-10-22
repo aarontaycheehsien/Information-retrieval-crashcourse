@@ -1,0 +1,4 @@
+source_query_row,known_relevant_seed_count,before_p10,after_p10,row_averages_two_queries,hypothetical_update
+SLC6A4 promoter polymorphism,3,0.3,0.1,False,True
+barriers to adopting learning analytics in further education,5,0.2,0.5,False,True
+peer support reduces readmission / peer support increases readmission,4,0.4,0.4,True,True

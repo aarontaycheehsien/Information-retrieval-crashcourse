@@ -1,0 +1,36 @@
+The word that opened the gate
+
+[00:00:00.700]: You have a carefully built Boolean search. An AI suggests one more alternative word. Is this just a small change to how results are scored? Or could it change which records are allowed into the results at all? Make a prediction.
+
+[00:00:16.654]: In a formal Boolean strategy, an OR alternative can open another route into the eligible set. The new word does not merely receive a low weight. It changes an admission rule.
+
+[00:00:29.476]: Use the chapter's four tiny records. D one and D four contain delulu. All four contain job after lowercasing. For delulu AND job, a record must satisfy both conditions. D one and D four pass.
+
+[00:00:45.577]: This is an intersection: keep identifiers shared by the sets. D two and D three satisfy job but fail the delulu condition. Strict Boolean retrieval has membership, not almost-membership.
+
+[00:01:00.479]: Now ask for delulu OR unrealistic. Delulu reaches D one and D four. Unrealistic reaches D three. OR combines the sets, so D one, D three and D four are eligible.
+
+[00:01:14.526]: OR includes records satisfying either condition, including both. Adding an alternative can widen eligibility. It does not, by itself, establish whether the extra records help with your information need.
+
+[00:01:28.364]: Try delulu NOT interview. Start with D one and D four. Interview occurs in D one and D two, so subtract the overlap. D four remains.
+
+[00:01:39.215]: The rule follows the expressed condition, not your intention. If an otherwise useful record contains the excluded term, it can disappear too. Boolean matching still needs to be judged against the purpose of the search.
+
+[00:01:53.169]: The chapter expands delulu into delulu OR unrealistic OR irrational OR foolish. Suppose foolish is a poor alternative for your particular need. Adding it can admit records that contain foolish but none of the better expressions.
+
+[00:02:09.223]: Our extra record E is invented to illustrate that possibility. Ranking may push a weak match down, but Boolean has already admitted it. Inspect an LLM's proposed alternatives before adding them to a formal strategy.
+
+[00:02:26.113]: The reverse error is harder for ranking to repair. Change delulu into delulu AND interview. D one passes. D four does not, because it has no indexed interview term in this example.
+
+[00:02:39.640]: If D four is useful for your purpose, ranking this eligible set cannot bring it back. A new search could change the conditions. Reordering the admitted records cannot change who was admitted.
+
+[00:02:53.005]: Boolean logic alone supplies no graded relevance score and no rule for which eligible record should come first. A separate ranking method can order the admitted set. Eligibility and usefulness remain different questions.
+
+[00:03:08.405]: And satisfying a condition is not always literal string identity. Analysis, fields, phrases and other database rules shape matching first. Chapter Two's next question is what happens to your words before the gate ever sees them.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 2.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#boolean-admission
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

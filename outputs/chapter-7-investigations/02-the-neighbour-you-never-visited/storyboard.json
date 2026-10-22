@@ -1,0 +1,179 @@
+{
+  "series": "Dense retrieval at collection scale",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#dense-at-scale",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#dense-at-scale",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "02-the-neighbour-you-never-visited",
+  "title": "The neighbour you never visited",
+  "subtitle": "Search effort, exactness, and the requested result count are separate controls.",
+  "accent": "red",
+  "scenes": [
+    {
+      "id": "visited_hook",
+      "title": "Both searches return three. Did both search the same way?",
+      "source_anchor": "how-nearest-neighbour-indexing-makes-dense-retrieval-practical",
+      "visual": "visited_hook",
+      "narration": [
+        "Two searches each return three results. One examined every stored vector. The other took a shortcut and missed a closer candidate. Could you tell which search ran just by counting the results on screen? Make a prediction.",
+        "The output count does not reveal the work or the guarantee behind it. We need to separate the comparison rule, the search procedure, and the number of leaders requested."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "two_indexes",
+      "title": "A term pointer and a vector search are different routes",
+      "source_anchor": "how-nearest-neighbour-indexing-makes-dense-retrieval-practical",
+      "visual": "two_indexes",
+      "narration": [
+        "An inverted index can jump from an analysed term to documents containing it. A dense vector has no equivalent posting list for all passages expressing a meaning. Its dimensions do not directly correspond to recognisable words, and a useful passage need not share query terms.",
+        "The exact baseline is flat vector search: compare the query with every stored vector. Its work grows with collection size and dimensionality. It can construct a complete ranking or retain only the leaders."
+      ]
+    },
+    {
+      "id": "exact_search",
+      "title": "Examine all six; keep the nearest three",
+      "source_anchor": "ann-worked-title",
+      "visual": "exact_search",
+      "narration": [
+        "Use the chapter's six points and put the query at zero, zero. This example uses Euclidean distance, not the cosine rule from the first film. Smaller distance wins. Exhaustive search examines A through F and returns A, B and C.",
+        "A is one unit away, B two, and C about two point eight three. D is about three point one six away. Exact here means exact under the chosen comparison rule. It does not guarantee that those nearest points represent relevant passages."
+      ]
+    },
+    {
+      "id": "approx_search",
+      "title": "C was closer, but this run never saw it",
+      "source_anchor": "ann-worked-title",
+      "visual": "approx_search",
+      "narration": [
+        "Now stipulate a run that examines only A, B, D and F. It returns A, B and D. C was closer than D, but was never examined. Both runs still requested the same top three.",
+        "Approximate nearest-neighbour structures reduce search work by exploring selected regions or neighbours. They may miss a true nearest neighbour. This small example illustrates one possible miss, not a measured system, an H N S W simulation, or a claim that approximate search always misses."
+      ]
+    },
+    {
+      "id": "graph_navigation",
+      "title": "Navigate promising neighbours",
+      "source_anchor": "how-nearest-neighbour-indexing-makes-dense-retrieval-practical",
+      "visual": "graph_navigation",
+      "narration": [
+        "H N S W is one widely used approximate approach. It organises vectors as a navigable graph with multiple layers. Connections help a search explore promising neighbours instead of comparing every vector.",
+        "Our graph is schematic. It does not show the algorithm's real links or a measured path. Other index designs partition the space, compress vectors, or combine strategies. Indexing changes how the search runs; the requested k still describes its output size."
+      ]
+    },
+    {
+      "id": "four_controls",
+      "title": "Four decisions behind the same top-k output",
+      "source_anchor": "top-k-is-a-result-boundary-not-a-dense-retrieval-method",
+      "visual": "four_controls",
+      "narration": [
+        "Keep four controls apart: who may compete, what rule scores them, how the engine searches, and how many leaders it retains. Our exact and approximate runs requested k equals three while examining six and four points respectively.",
+        "Top k does not mean only k candidates were examined. Exact lexical pruning can safely skip candidates that cannot enter the leaders; approximate vector search offers a different guarantee. Lexical, dense and hybrid systems can all return top-k results."
+      ]
+    },
+    {
+      "id": "best_available",
+      "title": "Nearest means best available under the rule",
+      "source_anchor": "candidate-boundaries-in-lexical-and-dense-retrieval",
+      "visual": "best_available",
+      "narration": [
+        "Dense retrieval has no comparable term-match floor. Unless filters narrow the collection, every stored vector can receive a similarity score. An unrelated passage can still be nearest when every alternative is farther away.",
+        "Metadata filters, lexical evidence and vectors can coexist in one product. The candidate boundary and output size remain separate questions. To assess a search, inspect its filters, scoring rule, exact or approximate execution, and result boundary\u2014then judge whether the returned material is useful."
+      ]
+    }
+  ],
+  "episode_number": 2,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "visited_hook_0",
+      "scene": "visited_hook",
+      "text": "Two searches each return three results. One examined every stored vector. The other took a shortcut and missed a closer candidate. Could you tell which search ran just by counting the results on screen? Make a prediction.",
+      "gap": 1.0
+    },
+    {
+      "id": "visited_hook_1",
+      "scene": "visited_hook",
+      "text": "The output count does not reveal the work or the guarantee behind it. We need to separate the comparison rule, the search procedure, and the number of leaders requested.",
+      "gap": 2.5
+    },
+    {
+      "id": "two_indexes_0",
+      "scene": "two_indexes",
+      "text": "An inverted index can jump from an analysed term to documents containing it. A dense vector has no equivalent posting list for all passages expressing a meaning. Its dimensions do not directly correspond to recognisable words, and a useful passage need not share query terms.",
+      "gap": 1.0
+    },
+    {
+      "id": "two_indexes_1",
+      "scene": "two_indexes",
+      "text": "The exact baseline is flat vector search: compare the query with every stored vector. Its work grows with collection size and dimensionality. It can construct a complete ranking or retain only the leaders.",
+      "gap": 0.65
+    },
+    {
+      "id": "exact_search_0",
+      "scene": "exact_search",
+      "text": "Use the chapter's six points and put the query at zero, zero. This example uses Euclidean distance, not the cosine rule from the first film. Smaller distance wins. Exhaustive search examines A through F and returns A, B and C.",
+      "gap": 1.0
+    },
+    {
+      "id": "exact_search_1",
+      "scene": "exact_search",
+      "text": "A is one unit away, B two, and C about two point eight three. D is about three point one six away. Exact here means exact under the chosen comparison rule. It does not guarantee that those nearest points represent relevant passages.",
+      "gap": 0.65
+    },
+    {
+      "id": "approx_search_0",
+      "scene": "approx_search",
+      "text": "Now stipulate a run that examines only A, B, D and F. It returns A, B and D. C was closer than D, but was never examined. Both runs still requested the same top three.",
+      "gap": 1.0
+    },
+    {
+      "id": "approx_search_1",
+      "scene": "approx_search",
+      "text": "Approximate nearest-neighbour structures reduce search work by exploring selected regions or neighbours. They may miss a true nearest neighbour. This small example illustrates one possible miss, not a measured system, an H N S W simulation, or a claim that approximate search always misses.",
+      "gap": 0.65
+    },
+    {
+      "id": "graph_navigation_0",
+      "scene": "graph_navigation",
+      "text": "H N S W is one widely used approximate approach. It organises vectors as a navigable graph with multiple layers. Connections help a search explore promising neighbours instead of comparing every vector.",
+      "gap": 1.0
+    },
+    {
+      "id": "graph_navigation_1",
+      "scene": "graph_navigation",
+      "text": "Our graph is schematic. It does not show the algorithm's real links or a measured path. Other index designs partition the space, compress vectors, or combine strategies. Indexing changes how the search runs; the requested k still describes its output size.",
+      "gap": 0.65
+    },
+    {
+      "id": "four_controls_0",
+      "scene": "four_controls",
+      "text": "Keep four controls apart: who may compete, what rule scores them, how the engine searches, and how many leaders it retains. Our exact and approximate runs requested k equals three while examining six and four points respectively.",
+      "gap": 1.0
+    },
+    {
+      "id": "four_controls_1",
+      "scene": "four_controls",
+      "text": "Top k does not mean only k candidates were examined. Exact lexical pruning can safely skip candidates that cannot enter the leaders; approximate vector search offers a different guarantee. Lexical, dense and hybrid systems can all return top-k results.",
+      "gap": 0.65
+    },
+    {
+      "id": "best_available_0",
+      "scene": "best_available",
+      "text": "Dense retrieval has no comparable term-match floor. Unless filters narrow the collection, every stored vector can receive a similarity score. An unrelated passage can still be nearest when every alternative is farther away.",
+      "gap": 1.0
+    },
+    {
+      "id": "best_available_1",
+      "scene": "best_available",
+      "text": "Metadata filters, lexical evidence and vectors can coexist in one product. The candidate boundary and output size remain separate questions. To assess a search, inspect its filters, scoring rule, exact or approximate execution, and result boundary\u2014then judge whether the returned material is useful.",
+      "gap": 0.65
+    }
+  ]
+}

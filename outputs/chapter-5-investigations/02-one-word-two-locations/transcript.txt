@@ -1,0 +1,36 @@
+One word, two locations
+
+[00:00:00.700]: Read these two phrases: the river bank; the bank refused the loan. The letters in bank are identical. Should its vector be identical too? If the vector is just a stored address for a word, how could the surrounding sentence change it?
+
+[00:00:17.503]: That is the difference between a classic static word vector and a contextual token representation. One reuses a stored vector for the string. The other computes a representation for this occurrence from its sequence.
+
+[00:00:31.387]: Classic word two vec gives bank essentially the same stored vector in both sentences. A contextual encoder starts with token embeddings and transforms them using the surrounding sequence. River supplies different evidence from refused and loan.
+
+[00:00:48.470]: Our two moving markers illustrate that distinction; their coordinates are invented. They do not measure a model's ability to disambiguate bank, and different vectors alone would not establish that a model interpreted the two sentences correctly.
+
+[00:01:04.322]: A Transformer's self-attention lets a token's representation draw on information from other tokens in the sequence. It is a mechanism for combining information. What the model learns to do with that mechanism depends on its training.
+
+[00:01:19.640]: Contextual representations did not begin with Transformers. ELMo used bidirectional recurrent networks. Transformer encoders later became dominant as self-attention helped make large-scale sequence processing more parallelisable. Architecture and training objective remain separate choices.
+
+[00:01:40.707]: There is another trap: the units a model receives are not necessarily the terms an inverted index stores. For this illustration only, define a toy tokenizer that makes one character per token. Jobs becomes four units: j, o, b, s.
+
+[00:01:58.288]: A separate illustrative lexical analyser lowercases jobs and stems it to job. Those are different representations made for different jobs. Real neural tokenizers may use subwords, characters or bytes. Our character split does not claim how any named model tokenizes this word.
+
+[00:02:19.833]: Contextual token representations are still several vectors, one for each token occurrence. A model producing a single embedding for a complete query or passage needs another step. Pooling can combine token representations, or the model can use a selected representation.
+
+[00:02:39.763]: Our declared toy averages three two-number vectors: one, three; three, one; and two, two. The result is two, two. This demonstrates mean pooling only. It is not a claim about BERT's default retrieval behavior or the best pooling method.
+
+[00:02:57.944]: An encoder computes an output using a fitted mapping. With the same model, preprocessing and inference settings, its output can be reproduced. Training is the stage that changes the mapping; applying it need not train the model again.
+
+[00:03:13.564]: Reproducibility is different from interpretability. Individual dimensions usually do not arrive with labels such as occupation or emotion. Our two-number diagrams make operations visible; real representations distribute patterns across many dimensions and cannot be inspected as a simple map.
+
+[00:03:35.416]: Now return to the two uses of bank. Context can change the representation. Pooling can make one vector for the complete text. Neither step, by itself, establishes that independently encoded questions will rank close to the passages a searcher needs.
+
+[00:03:52.124]: That relationship depends on architecture and training, and its usefulness needs evaluation. Before accepting a claim about contextual embeddings, ask what text unit the vector represents, how that vector was obtained, and what task taught the model which relationships to reward.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 5.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#embeddings
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

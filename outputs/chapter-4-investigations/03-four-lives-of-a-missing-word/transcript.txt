@@ -1,0 +1,40 @@
+Four lives of a missing word
+
+[00:00:00.700]: You type delulu, job, interview. A result title says only Job interview expectations. Where did delulu go? It is tempting to tell a story about a clever semantic engine. But the same screen can fit several very different histories.
+
+[00:00:19.287]: Follow four possible routes. Each is a mechanism the chapter asks us to check, not a diagnosis of a named product. Several routes could operate in the same search.
+
+[00:00:30.804]: First, a word can disappear during routine analysis. In the chapter's illustration, you type the job interview. An optional stop-word rule removes the. Retrieval receives job interview. The discarded word was never a condition at lookup.
+
+[00:00:47.767]: This example depends on the analyser. It does not say every system removes the same words. Tokenisation, normalisation, stemming and stop-word handling prepare strings for matching; none by itself establishes understanding of meaning.
+
+[00:01:04.125]: Second, an upstream rewrite can change what retrieval receives. You type delulu job expectations. A transformation replaces delulu with unrealistic. Retrieval then looks for unrealistic job expectations. The original word need not appear in a matching record.
+
+[00:01:23.746]: Unlike routine analysis, this is an explicit reformulation. The illustration is not evidence that a particular product made this rewrite. To establish that, inspect the processed query or obtain documentation about that stage.
+
+[00:01:40.835]: Third, delulu can remain in the retrieval input without being required. An any-match rule admits a record containing job and interview. A delulu match could add scoring evidence, but its absence need not exclude the record.
+
+[00:01:56.954]: An optional term might even have no posting list anywhere in the index. Other terms can still admit records. Make that unmatched term compulsory under strict AND, and the eligible set is empty. The difference is the execution rule.
+
+[00:02:14.129]: Fourth, the term may have matched evidence you cannot see in the excerpt. The visible title says Job interview expectations. The indexed abstract says, We examine delulu expectations. A lexical match occurred, but the title did not display it.
+
+[00:02:32.494]: Other indexed fields, expanded terms, older indexed versions or off-page evidence may also matter. Inspect the searchable fields and the indexed representation before concluding that no lexical match happened. A snippet is only a small window.
+
+[00:02:50.687]: Keep four jobs distinct. Analysis prepares strings. Execution rules decide which clauses are required, optional or subject to a minimum match. Query understanding interprets things such as entities, dates, phrases or intent. Transformation changes what retrieval receives.
+
+[00:03:11.410]: Understanding can inform a decision while leaving every word unchanged. It becomes relevant to a missing word when its interpretation causes a change. Understanding alone is not a fifth history that magically removes a term.
+
+[00:03:27.519]: A question in natural language can pass through a parser or language model that constructs a Boolean expression. The lexical engine can then apply Boolean admission and BM twenty-five ranking over an inverted index.
+
+[00:03:41.837]: The form of the input does not identify the retrieval method. To bridge a vocabulary gap, one route changes the query and keeps lexical matching. Another changes the representation so related texts can be retrieved without shared analysed terms.
+
+[00:03:59.444]: Return to the title without delulu. Was the word removed in analysis, changed in a rewrite, retained as optional, or matched outside the excerpt? The title alone cannot choose among them. A product name and a result count cannot settle it either.
+
+[00:04:16.890]: Ask for the processed query, the admission rules, the indexed fields and evidence about the retrieval pipeline. Part One separates lexical search from strict all-term Boolean search. The next chapters investigate representations, while keeping the rest of the pipeline in view.
+
+Adapted from Aaron Tay, How Search Decides What You See, Chapter 4.
+Source: more-readable, commit 37b16f7ffa64e858adc454fc4c40ce528ef433b4
+https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#beyond-boolean
+CC BY 4.0. Original narration adaptation and animated teaching illustrations.
+Synthetic voice: Microsoft Andrew Multilingual; no voice cloning.
+Independently produced; no affiliation with Veritasium.

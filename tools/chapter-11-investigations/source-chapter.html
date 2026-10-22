@@ -1,0 +1,423 @@
+<section class="chapter" id="sec-query-transformation"><span id="ch6" class="legacy-anchor"></span><header class="chapter-head"><p class="chapter-eyebrow">Chapter 11</p>
+<p class="chapter-meta">About 20 min</p>
+<h2 id="query-transformation">Understanding, transforming and routing queries</h2>
+<p class="chapter-question"><span>Central question</span>What are you giving the system, what mechanism receives it, and what can happen before the next retrieval pass?</p>
+<div class="stage-map" role="group" aria-label="Pipeline map: the stages this chapter covers are highlighted">
+<div class="stage-controller on">Controller — chooses and sequences the stages below</div>
+<div class="stage-row">
+<a class="stage on" href="#query-transformation" title="Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them.">Query<br>transformation</a><a class="stage off" href="#boolean-admission" title="Chapter 2 — text becomes index terms, and the rules decide which records are eligible at all.">Analysis &amp;<br>execution rules</a><a class="stage off" href="#bm25-ranking" title="Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set.">First-stage<br>retrieval</a><a class="stage off" href="#hybrid-and-fusion" title="Chapter 10 — several candidate lists are combined into one.">Fusion</a><a class="stage off" href="#reranking-and-hybrid" title="Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed.">Reranking</a><a class="stage off" href="#library-practice" title="Chapter 15 — what the reader is finally shown, and what can be recorded about it.">Presentation</a>
+</div>
+</div>
+<div class="chapter-orient">
+<p>Chapter 4 separated interpreting a request from changing its retrieval input. Chapters 9 and 10 then added several retrievers, fusion and route selection. Together they allow a system to do more than rewrite one lexical query into another.</p>
+<p>Search can start from a seed paper, citation relationship, relevance judgement or structured condition as well as free text. This chapter examines which component receives each input, how the input may be transformed, and how earlier results can inform a later search.</p>
+</div></header><span id="beyond-one-query-expansion-decomposition-and-routing" class="legacy-anchor"></span><span id="query-understanding-changing-the-query-before-retrieval" class="legacy-anchor"></span>
+<p><a href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">Chapter 4’s</a> distinction now has three parts. <strong>Query understanding</strong> interprets the request and may leave the retrieval input unchanged. <strong>Query transformation</strong> changes or creates retrieval inputs. <strong>Retrieval control</strong> chooses where those inputs go, whether several paths run, and whether another search happens.</p>
+<p>These operations are often grouped loosely under <em>query understanding</em>, but they do not occupy one pipeline stage. Interpretation may trigger transformation, a routing decision or both. Most transformations occur before a retrieval pass, while feedback methods construct a later query from the results of an earlier one.</p>
+<p class="key-distinction-label" id="distinction-query-object">Key distinction</p>
+<h3 id="before-phrasing-identify-the-query-object">Before phrasing: identify the query object<a aria-label="Link to Before phrasing: identify the query object" class="heading-anchor" href="#before-phrasing-identify-the-query-object">#</a>
+</h3>
+<p>Keywords, questions and prompts are text inputs. Where the system’s design is known, choose wording for the component that will receive it. Also consider whether a seed paper or another query object would suit the task. Where the design is undisclosed, compare input forms against known relevant records.</p>
+<blockquote><p>A query represents some aspect of the need in <a href="#distinction-match-relevance">a form a retrieval system can act on</a>. Depending on the system, that representation might be keywords, a natural-language question, a seed document, a citation, an embedding, retrieval feedback or another object.</p></blockquote>
+<p>Read the query objects in three groups: text and structured conditions; known records and relationships; and feedback, monitoring or delegated tasks. The table keeps the exact distinctions available for reference.</p>
+<p class="asset-label" id="tbl-11-1">Table 11.1 — The query object determines which retrieval mechanism the search addresses.</p>
+<!-- BEGIN PRODUCT CLAIMS LINKS tbl-11-1 -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-openalex-filters"><strong>OpenAlex · API.</strong> Filters support attribute-value predicates, intersections, negation, ranges and identifier lists.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS tbl-11-1 -->
+<div class="table-wrap"><table>
+<thead><tr>
+<th scope="col">What stands for the need</th>
+<th scope="col">Mechanism addressed</th>
+<th scope="col">What changes in practice</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Free-text string</strong></td>
+<td>Lexical, dense or hybrid retrieval</td>
+<td>Terms, phrases or prose become the retriever’s input. The visible box does not reveal whether the system will analyse words, encode a vector, rewrite the text or run several routes.</td>
+</tr>
+<tr>
+<td><strong>Controlled term or structured expression</strong></td>
+<td>Subject headings, named fields, proximity, filters or Boolean logic</td>
+<td>The query addresses the record’s annotation and database structure. A MeSH heading, field tag or tested search hedge is not merely a more formal keyword.</td>
+</tr>
+<tr>
+<td><strong>Citation edge</strong></td>
+<td>Backward and forward citation traversal, co-citation or bibliographic coupling</td>
+<td>Citation searching follows relationships between papers. It can reach work whose vocabulary the searcher did not anticipate, but it inherits gaps and delays in the citation graph.</td>
+</tr>
+<tr>
+<td><strong>Seed document</strong></td>
+<td>Query by example using text similarity, citation relations or both</td>
+<td>The known paper stands for the need. For example, <a href="https://pubmed.ncbi.nlm.nih.gov/help/#similar-articles">PubMed Similar Articles</a> compares title, abstract and MeSH words with a word-weighted algorithm; another system could instead use embeddings or a citation graph.</td>
+</tr>
+<tr>
+<td><strong>Relevance judgement</strong></td>
+<td>Explicit retrieval feedback or pseudo-relevance feedback</td>
+<td>A later retrieval input is constructed from records accepted or rejected after an initial search, so the next pass may add candidates. The two sources differ: explicit feedback uses the searcher’s own judgements, whereas pseudo-relevance feedback asks the searcher for nothing and instead assumes that its own highly ranked records are relevant—an unverified assumption that can strengthen either a useful signal or an early mistake.</td>
+</tr>
+<tr>
+<td><strong>Browse or monitoring target</strong></td>
+<td>Journal, author, subject or collection browsing; saved-search alerts</td>
+<td>The search follows collection structure or a continuing relationship. It can surface a record the searcher could recognise but could not yet name.</td>
+</tr>
+<tr>
+<td><strong>Programmatic predicate</strong></td>
+<td>API filters, identifiers, sorting and pagination</td>
+<td>The request becomes reproducible and composable. The <a href="https://help.openalex.org/api/filtering/">OpenAlex API</a>, for example, documents attribute–value filters, intersections, negation, ranges and identifier lists.</td>
+</tr>
+<tr>
+<td><strong>Task brief</strong></td>
+<td>An agentic controller that generates and sequences later queries and tool calls</td>
+<td>Scope, inclusion and exclusion criteria, sources, coverage, stopping conditions and output requirements belong here. They instruct the controller; they are not all terms that each underlying retriever knows how to obey.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Take the question behind Puzzle 3—<em>is there an open access citation advantage?</em>—and approach it through each of the eight query objects below.</p>
+<figure class="ir-figure" aria-labelledby="one-need-eight-objects-title">
+<p class="figure-title" id="one-need-eight-objects-title">One information need, eight ways in</p>
+<!-- BEGIN PRODUCT CLAIMS LINKS one-need-eight-objects-title -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-pubmed-similar"><strong>PubMed · Similar Articles.</strong> A seed paper can be used as the input to related-article retrieval.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS one-need-eight-objects-title -->
+
+<div class="object-grid">
+<div class="query-flow-step">
+<strong>Free-text string</strong><span>Type <code dir="ltr">open access citation advantage</code> and let the retriever—lexical, dense or hybrid—do what it does.</span>
+</div>
+<div class="query-flow-step">
+<strong>Controlled term or structured expression</strong><span>Use the database’s own subject heading for open-access publishing, and tag the phrase to title and abstract fields.</span>
+</div>
+<div class="query-flow-step">
+<strong>Citation edge</strong><span>Start from one key study and follow what cites it, and what it cited. Reaches work whose wording you could not have guessed.</span>
+</div>
+<div class="query-flow-step">
+<strong>Seed document</strong><span>Hand a known review to a query-by-example route such as PubMed’s Similar Articles, and let the paper stand for the question.</span>
+</div>
+<div class="query-flow-step">
+<strong>Relevance judgement</strong><span>Mark the five most useful records from a first pass, and let feedback build the next query out of them.</span>
+</div>
+<div class="query-flow-step">
+<strong>Browse or monitoring target</strong><span>Set an alert on the topic, or work the journals where this literature actually appears.</span>
+</div>
+<div class="query-flow-step">
+<strong>Programmatic predicate</strong><span>Ask the OpenAlex API for works matching the concept, filtered by the year range in the information need, so the request can be rerun and cited.</span>
+</div>
+<div class="query-flow-step">
+<strong>Task brief</strong><span>State the scope, the inclusion and exclusion criteria, which sources to cover, when to stop and what to record—then let a controller generate the queries.</span>
+</div>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-11-1">Figure 11.1</span> The eight rows of the table above, worked against the question behind <a href="#three-familiar-search-results-and-three-puzzles">Puzzle 3</a>: <em>is there an open access citation advantage?</em> Every box represents the same need, and none of them is a rephrasing of another—each addresses a different mechanism, reaches a different part of the literature, and fails in a different way. Only the first is what most advice about “how to phrase a search” is actually about. The eight are overlapping distinctions rather than mutually exclusive input types: an API request can carry a free-text query, and a seed document can initiate citation traversal.</figcaption>
+</figure>
+<p>For the API example, a filter on the retrieved paper’s open-access status would change this search, since a relevant study of the open-access citation advantage may itself be paywalled—which is why the example filters by year instead.</p>
+<p>Active-learning screening in systematic reviews uses relevance judgements too, but it is <strong>screening feedback</strong> rather than the retrieval feedback shown in Table 11.1. Inclusion and exclusion judgements repeatedly reprioritise the remaining records inside an existing candidate pool; they do not construct a later retrieval pass or inherently add candidates. See <a href="#appendix-evidence-synthesis-high-recall-retrieval">Appendix F</a>.</p>
+<h4 id="using-several-query-objects-together">Using several query objects together</h4>
+<p>These objects cooperate. Free-text and controlled-vocabulary searches can find seeds; citation traversal can expose missing terminology; accepted records can drive a feedback pass; an API can make the resulting procedure repeatable. This is especially important when recall matters.</p>
+<p>In one audit of a single review of complex evidence, Greenhalgh and Peacock traced 495 included sources: only 30% came from the protocol-defined database and hand searches, while 51% were found by snowballing. That result is not a universal estimate for every review. It is a concrete demonstration that one well-phrased database query may still cover only one route to the literature.</p>
+<p>Seed-based methods also differ from one another. Direct citations follow an explicit edge. Bibliographic coupling finds papers that share references; co-citation finds papers cited together; text similarity compares their language or representations. Sjögårde and Ahlgren’s 2024 evaluation found that combined citation approaches generally retrieved more relevant publications than any one citation relation, and that adding PubMed’s text-based related-article score improved the combination on some measures.</p>
+<p>This wider view also explains why real searching is iterative. Bates called the pattern <em>berrypicking</em>: the need and the useful query develop as the searcher encounters documents, authors, citations and terminology. What changes between steps may therefore be the words, the seed, the graph edge, the judged examples or the source being browsed. Describing these steps only as changes to query wording leaves out the papers, citation links and relevance judgements used to guide the search.</p>
+<h3 id="phrase-for-the-mechanism-not-the-box">Choosing wording for each receiving component<a aria-label="Link to Choosing wording for each receiving component" class="heading-anchor" href="#phrase-for-the-mechanism-not-the-box">#</a>
+</h3>
+<p>When a string really is the query, its useful form depends on what will read it. A polished paragraph is not intrinsically more semantic than a short term list, and a keyword string is not intrinsically more reproducible than a visible structured expression.</p>
+<p class="asset-label" id="tbl-11-2">Table 11.2 — The useful form of a text input depends on its receiver.</p>
+<div class="table-wrap"><table>
+<thead><tr>
+<th scope="col">Receiver</th>
+<th scope="col">Useful input</th>
+<th scope="col">Do not assume</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Lexical or Boolean retriever</strong></td>
+<td>Observable concepts, variants, phrases, controlled terms, fields and tested operators</td>
+<td>Extra explanation becomes background understanding. It may simply add optional or required words.</td>
+</tr>
+<tr>
+<td><strong>Dense retriever</strong></td>
+<td>A concise description resembling the information need the model was trained to match</td>
+<td>Longer prose is always better. Verbose queries can dilute the central signal, and effectiveness depends on training and domain (Gupta and Bendersky, 2015).</td>
+</tr>
+<tr>
+<td><strong>LLM query translator</strong></td>
+<td>Concepts, constraints and enough context to produce inspectable retrieval inputs</td>
+<td>The generated syntax is valid or complete. Validate fields, controlled terms, logic and recall in the target database.</td>
+</tr>
+<tr>
+<td><strong>Agentic controller</strong></td>
+<td>A brief specifying goal, scope, criteria, sources, coverage, limits, stopping and required record</td>
+<td>Every retriever receives or follows the whole brief. Ask for the generated queries, chosen routes and stopping trace.</td>
+</tr>
+<tr>
+<td><strong>Undisclosed pipeline</strong></td>
+<td>Queries varied systematically against known relevant records</td>
+<td>The shape of the input box identifies the mechanism. Test short terms, a question, fielded syntax and a known-item title separately.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Research on automated query construction reinforces the distinction. In systematic-review screening, Wang and colleagues found that converting Boolean strategies into natural-language queries could improve a neural ranker, while fusion with the original Boolean results helped in some settings and not in others. In a separate evaluation of LLM-generated Boolean strategies, outputs varied and could contain invalid MeSH terms. Meanwhile, the FollowIR benchmark found that existing retrieval models often treated detailed relevance instructions as basic keywords and struggled with the long-form information; instruction-following improved after targeted training.</p>
+<p>The findings do not support a general rule that longer or more natural-language queries work better. Use <a href="#tbl-11-2">Table 11.2</a> to choose an input format for the component receiving it. Inspect any generated query, then test input variants against known relevant records.</p>
+<blockquote><p>The input box does not tell you what object the system will construct from your input, which mechanism will receive it, or which other search method should run alongside it.</p></blockquote>
+<h3 id="common-query-understanding-techniques">What a system can do with your query<a aria-label="Link to What a system can do with your query" class="heading-anchor" href="#common-query-understanding-techniques">#</a>
+</h3>
+<p>Figure 11.2 sets out what can happen to a text input before, and between, retrieval passes; the subsections below take the steps in turn.</p>
+<figure class="query-flow" aria-labelledby="query-understanding-flow-title">
+<p class="figure-title" id="query-understanding-flow-title">For a text input, interpretation can change retrieval inputs or retrieval decisions</p>
+<div class="query-flow-track">
+<div class="query-flow-step">
+<strong>Text input</strong><span>keywords, a question or a longer description</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Interpret the request</strong><span>recognise phrases, entities, intent, dates or constraints</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Transform or route</strong><span>change the input, choose a path or run several paths</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Retrieval</strong><span>Boolean, BM25, dense or another first-stage method</span>
+</div>
+</div>
+<div class="query-flow-track">
+<div class="query-flow-step">
+<strong>Initial results</strong><span>a first retrieval pass supplies ranked records</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Optional feedback</strong><span>select terms or evidence from those results</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>New retrieval input</strong><span>construct a second query from the feedback</span>
+</div>
+<span class="query-flow-arrow" aria-hidden="true">→</span>
+<div class="query-flow-step">
+<strong>Later results</strong><span>run another retrieval pass</span>
+</div>
+</div>
+<figcaption><span class="asset-label-inline" id="fig-11-2">Figure 11.2</span> This figure follows the text-input path only. The first row separates interpretation, changed retrieval inputs and route selection. The optional second row shows why pseudo-relevance feedback is not purely upstream: an initial ranking helps construct a later query. Neither arrangement identifies the retriever or makes the workflow agentic.</figcaption>
+</figure>
+<h4 id="when-a-system-writes-the-boolean-query">When a system writes the Boolean query</h4>
+<!-- BEGIN PRODUCT CLAIMS LINKS when-a-system-writes-the-boolean-query -->
+<details class="claim-links"><summary>Evidence register · 3 claims</summary><p><a href="#claim-primo-query-conversion"><strong>Primo · Research Assistant.</strong> An LLM converts a question to Boolean variations connected with OR.</a></p>
+<p><a href="#claim-primo-embedding-rerank"><strong>Primo · Research Assistant.</strong> The documented reranking step uses embeddings.</a></p>
+<p><a href="#claim-wos-smart-parser"><strong>Web of Science · Smart Search.</strong> An NLP parser constructs a structured Boolean query; the interpretation is visible and editable.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS when-a-system-writes-the-boolean-query -->
+
+<p>A search interface can use an NLP parser<sup id="fnref:nlp-parser"><a class="footnote-ref" href="#fn:nlp-parser">42</a></sup> or a language model to turn a natural-language request into fields, filters and Boolean clauses before retrieval. For example, Web of Science Smart Search makes its interpretation visible:</p>
+<figure class="ir-figure" aria-labelledby="web-of-science-smart-search-caption">
+<p class="figure-title" id="web-of-science-smart-search-title">Web of Science Smart Search makes the transformation visible</p>
+<img src="images/11%20Query%20understanding%20-%20changing%20the%20query%20before%20retrieval/web-of-science-smart-search-structured-query.png" alt="Web of Science Smart Search translating a natural-language request about dates, affiliation, apples, oranges and bananas into a structured fielded query">
+<figcaption id="web-of-science-smart-search-caption"><span class="asset-label-inline" id="fig-11-3">Figure 11.3</span> The interface translates “apple oranges bananas from 2020 to 2024, affiliation is from university of california” into <code>PY=(2020-2024) AND OG_SMART=(university of california) AND TS=(apple) AND TS=(oranges) AND TS=(bananas)</code>. Dates and organisation become filters; the topics become separate conditions.</figcaption><!-- BEGIN PRODUCT CLAIMS LINKS web-of-science-smart-search-caption -->
+<details class="claim-links"><summary>Evidence register · 3 claims</summary><p><a href="#claim-wos-smart-parser"><strong>Web of Science · Smart Search.</strong> An NLP parser constructs a structured Boolean query; the interpretation is visible and editable.</a></p>
+<p><a href="#claim-nde-query-model"><strong>Primo VE · NDE Natural Language Search.</strong> GPT-4.1 Mini identifies fields and generates a basic Boolean query plus six OR-connected permutations.</a></p>
+<p><a href="#claim-nde-visible-query"><strong>Primo VE · NDE Natural Language Search.</strong> The resulting Advanced Search query is inspectable and editable.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS web-of-science-smart-search-caption -->
+
+</figure>
+<p><a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/040Search_Configurations/Natural_Language_Search_in_the_NDE_UI">Primo NDE Natural Language Search</a> likewise documents classifying the input, generating a Boolean query and expanding it into <code>OR</code>-connected permutations. In both products, the generated query remains visible and editable.</p>
+<p>Primo VE NDE Natural Language Search is distinct from the <a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/015_Getting_Started_with_Primo_Research_Assistant">Primo Research Assistant</a> discussed earlier, which documents an LLM converting a question into Boolean variations before CDI retrieval and <a href="#why-search-systems-use-multiple-stages">embedding reranking in a multi-stage pipeline</a>.</p>
+<p>The transformation changes what is sent to retrieval, not necessarily the retriever. Natural-language input may still lead to Boolean admission and lexical ranking; visibility matters because an omitted concept or misread constraint changes the candidate set before ranking.</p>
+<h4 id="what-changed-and-when">What changed, and when</h4>
+<p>The useful questions are what the system changed and when. The operations below can be combined, and they are not mutually exclusive.</p>
+<p class="asset-label" id="tbl-11-3">Table 11.3 — What a system can do with a query, when it happens and the main risk it introduces.</p>
+<!-- BEGIN PRODUCT CLAIMS LINKS tbl-11-3 -->
+<details class="claim-links"><summary>Evidence register · 1 claim</summary><p><a href="#claim-elicit-splade-development"><strong>Elicit · Engineering work described June 2024.</strong> SPLADE-expanded terms were being developed for regular full-text retrieval; the post does not confirm a production rollout.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS tbl-11-3 -->
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Typical effect or examples</th>
+<th>When it happens</th>
+<th>Main risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>Interpret the request</strong> <em>(<a href="#when-a-system-writes-the-boolean-query">example above</a>)</em>
+</td>
+<td>Recognises phrases, entities, dates, languages, document types, intent or proposed constraints. The interpretation may inform a later step without changing the retrieval input.</td>
+<td>Before retrieval</td>
+<td>A misclassification can trigger the wrong transformation or retrieval decision.</td>
+</tr>
+<tr>
+<td>
+<strong>Correct, map or expand</strong> <em>(<a href="#words-sent-to-retrieval-may-not-be-the-words-you-typed">met earlier</a>)</em>
+</td>
+<td>Correction may replace <code>autsim</code> with <code>autism</code>; mapping translates a term into controlled vocabulary or another representation; expansion adds variants, synonyms or related concepts.</td>
+<td>Before retrieval</td>
+<td>A wrong replacement changes the request; weak additions cause topic drift.</td>
+</tr>
+<tr>
+<td><strong>Create alternative retrieval inputs</strong></td>
+<td>Decomposes a request, generates several reformulations, or creates pseudo-document text through Query2doc or HyDE.</td>
+<td>Before retrieval</td>
+<td>Relationships may be lost, one formulation may dominate, or generated details may steer retrieval.</td>
+</tr>
+<tr>
+<td><strong>Use retrieval feedback</strong></td>
+<td>Pseudo-relevance feedback runs an initial search, selects terms from highly ranked records and uses them to construct a second search.</td>
+<td>After an initial retrieval</td>
+<td>Off-topic initial results can reinforce the mistake.</td>
+</tr>
+<tr>
+<td><strong>Route retrieval</strong></td>
+<td>Chooses one keyword, Boolean, dense or hybrid path for the request.</td>
+<td>Around retrieval</td>
+<td>A hidden choice can make a relevant route—and its records—unreachable.</td>
+</tr>
+<tr>
+<td><strong>Coordinate retrieval</strong></td>
+<td>Runs several queries or retrievers, then combines their lists through the <a href="#why-hybrid-retrieval-remains-attractive">fusion machinery of Chapter 10</a>.</td>
+<td>Around retrieval</td>
+<td>One path may be overrepresented, while hidden fusion rules obscure why a record moved.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pseudo-relevance feedback constructs a later query from the results of an earlier retrieval pass. Yet a workflow that always performs those two passes can still be fixed and non-agentic: the query contents adapt to the results, while the sequence was prescribed in advance.</p>
+<p>A system might identify a date filter, generate three reformulations, send each to lexical and dense retrievers, fuse their candidate lists and rerank the result. Calling the interface “natural-language search” reveals none of those internal decisions.</p>
+<aside class="common-confusion"><p class="common-confusion-label">Representation boundary</p>
+<p><strong>Not every apparent expansion is query transformation.</strong> <a href="#learnt-sparse-representations">SPLADE</a> can assign weight to terms the searcher never typed, but what it produces is a weighted vocabulary representation, whereas an LLM rewrite produces text or a structured expression. Both outputs can be inspected, and either can be passed between components—<a href="#neural-ir-broader-than-dense-retrieval">Elicit’s described SPLADE approach</a> feeds expanded terms to a full-text engine—so a component boundary is not what separates them. They are different forms of retrieval input. Product descriptions may call either query enrichment or expansion.</p></aside>
+<h3 id="query2doc-and-hyde">Query2doc and HyDE: generating text to retrieve text<a aria-label="Link to Query2doc and HyDE: generating text to retrieve text" class="heading-anchor" href="#query2doc-and-hyde">#</a>
+</h3>
+<p><a href="https://aclanthology.org/2023.emnlp-main.585/"><strong>Query2doc</strong></a> prompts an LLM to generate a pseudo-document and uses its language to expand the original query. The expanded text can help a sparse retriever such as BM25 by supplying vocabulary likely to appear in relevant documents, and it can also be used with dense retrieval.</p>
+<p><a href="https://aclanthology.org/2023.acl-long.99/"><strong>HyDE</strong>, short for Hypothetical Document Embeddings</a>, uses a related idea differently. An LLM writes a hypothetical document that might answer the query. A dense encoder embeds that generated document, and the system retrieves real documents whose vectors are nearby.</p>
+<blockquote>
+<p><strong>HyDE searches from the vector of an imagined relevant document. The imagined document is a retrieval aid, not evidence.</strong></p>
+</blockquote>
+<p>Query2doc uses generated language to enrich a query; HyDE uses a generated document as a pivot into a dense vector space. Generated text can help retrieve relevant documents, but invented details can also steer the search towards unsuitable material. Retrieval grounds the search in real indexed documents, but it does not retroactively make every detail in the generated text true. Multi-query generation is also the front half of the RAG Fusion pipeline examined in <a href="#appendix-rag-scopus">Appendix G</a>: there the generated variants are all retrieved against, and their ranked lists fused, rather than one being chosen.</p>
+
+<figure class="ir-figure worked-figure" aria-labelledby="query2doc-hyde-paths-title">
+<p class="figure-title" id="query2doc-hyde-paths-title">Generated text takes two different routes to real sources</p>
+<div class="worked-card">
+<strong>Shared information need</strong><p>Does open access increase citations to scholarly articles?</p>
+</div>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<div class="worked-result caution">
+<strong>LLM-generated retrieval aid · hypothetical, not a source</strong><p>“A study of the open-access citation advantage compares citation counts for open and subscription articles, accounting for discipline and publication year.”</p>
+<p class="worked-note">Illustrative generated wording. It does not describe an identified study or establish a finding.</p>
+</div>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<div class="worked-grid">
+<div class="worked-card">
+<strong>Query2doc · expand the query</strong><p>Original query <b>+</b> generated language</p>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<p>Expanded query goes to a retriever, such as BM25.</p>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<div class="worked-paper">
+<b>Real indexed records</b><small>Retrieved using the expanded query</small>
+</div>
+<p class="worked-note">Dense retrieval is also possible; the lexical route is shown here.</p>
+</div>
+<div class="worked-card">
+<strong>HyDE · encode the passage</strong><p>Generated document goes to a dense encoder.</p>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<p>Search using the resulting vector.</p>
+<p class="worked-arrow" aria-hidden="true">↓</p>
+<div class="worked-paper">
+<b>Real indexed records</b><small>Retrieved by vector similarity</small>
+</div>
+</div>
+</div>
+<p class="worked-result"><strong>Read and assess the real sources.</strong> Generated text guides the search; it is not evidence.</p>
+<figcaption><span class="asset-label-inline" id="fig-11-4">Figure 11.4</span> Both methods generate a retrieval aid. Query2doc adds its language to the query; HyDE searches from its embedding. Either can import unsupported assumptions, so retain the generated text in the search record.</figcaption>
+</figure>
+<h3 id="query-understanding-in-current-discovery-products">Query interpretation and transformation in current discovery products<a aria-label="Link to Query interpretation and transformation in current discovery products" class="heading-anchor" href="#query-understanding-in-current-discovery-products">#</a>
+</h3>
+<p>Current research products illustrate different combinations of interpretation, transformation and retrieval. In each case the useful question is what the system inferred, what retrieval input it produced and what machinery received that input.</p>
+<p class="asset-label" id="tbl-11-4">Table 11.4 — Query interpretation and transformation in current discovery products, and what each case illustrates. <span class="as-of">Vendor documentation checked August 2026.</span></p>
+<!-- BEGIN PRODUCT CLAIMS LINKS tbl-11-4 -->
+<details class="claim-links"><summary>Evidence register · 6 claims</summary><p><a href="#claim-wos-smart-blend"><strong>Web of Science · Smart Search.</strong> Document search can combine Boolean keyword and semantic-vector results.</a></p>
+<p><a href="#claim-wos-smart-parser"><strong>Web of Science · Smart Search.</strong> An NLP parser constructs a structured Boolean query; the interpretation is visible and editable.</a></p>
+<p><a href="#claim-ebsco-ai-parsing"><strong>EBSCOhost and EDS · AI-Assisted Search.</strong> AI parses input into keyword and noun phrases for the established search engine.</a></p>
+<p><a href="#claim-ebsco-model-undisclosed"><strong>EBSCOhost and EDS · AI-Assisted Search.</strong> The cited public product page does not identify the parsing model as an LLM.</a></p>
+<p><a href="#claim-nde-query-model"><strong>Primo VE · NDE Natural Language Search.</strong> GPT-4.1 Mini identifies fields and generates a basic Boolean query plus six OR-connected permutations.</a></p>
+<p><a href="#claim-nde-visible-query"><strong>Primo VE · NDE Natural Language Search.</strong> The resulting Advanced Search query is inspectable and editable.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS tbl-11-4 -->
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Product</th>
+<th>How it interprets or transforms the input</th>
+<th>Retrieval arrangement</th>
+<th>What it illustrates</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><a href="https://webofscience.zendesk.com/hc/en-us/articles/32587676013713-Smart-Search"><strong>Web of Science Smart Search</strong></a></td>
+<td>An NLP parser identifies entities and constructs a structured Web of Science Boolean query.</td>
+<td>Document search can run a Boolean keyword path and a semantic-vector path, then blend their results.</td>
+<td>One interface can combine conventional query parsing, Boolean retrieval and vector retrieval.</td>
+</tr>
+<tr>
+<td>
+<a href="https://about.ebsco.com/artificial-intelligence/products/ai-assisted-search"><strong>EBSCOhost and EDS AI-Assisted Search</strong></a> <em>(formerly Natural Language Search)</em>
+</td>
+<td>AI parses the input into keyword and noun phrases.</td>
+<td>The parsed query is sent to EBSCO’s established search engine, which applies its usual relevance ranking and specialist search functions.</td>
+<td>AI query parsing can be added upstream of an existing retrieval engine; EBSCO’s public product page does not identify the model as an LLM.</td>
+</tr>
+<tr>
+<td><a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/040Search_Configurations/Natural_Language_Search_in_the_NDE_UI"><strong>Primo VE NDE Natural Language Search</strong></a></td>
+<td>GPT-4.1 Mini identifies fields and filters, generates a basic Boolean query, then creates six related OR-connected permutations.</td>
+<td>Primo’s Advanced Search receives the resulting structured Boolean query; users can inspect and edit the generated query.</td>
+<td>Generative AI can produce an auditable Boolean search rather than directly replacing lexical retrieval.</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="natural-language-filter-extraction-is-useful-but-limited">Natural-language filter extraction is useful but limited</h5>
+<p>Some academic search tools can also recognise a limited set of constraints in a natural-language request, then turn them into fields, filters or refinements. Recognition is query understanding; constructing the fielded or filtered input is transformation. Neither operation is equivalent to supporting every filter, field tag or complex Boolean relationship available in the underlying database. A comparative review in <a href="https://katinamagazine.org/content/article/reviews/2025/deep-dive-into-three-ai-academic-search-tools">Katina Magazine</a> illustrates these differences, while the product documentation defines the currently supported controls:</p>
+<p class="asset-label" id="tbl-11-5">Table 11.5 — Natural-language filter extraction across products, with the documented boundary in each case. <span class="as-of">Vendor documentation checked August 2026.</span></p>
+<!-- BEGIN PRODUCT CLAIMS LINKS tbl-11-5 -->
+<details class="claim-links"><summary>Evidence register · 6 claims</summary><p><a href="#claim-nde-filter-list"><strong>Primo VE · NDE Natural Language Search.</strong> Recognition covers a defined list of identifiers, author/title fields, type, availability, peer review, open access, holdings, date and language.</a></p>
+<p><a href="#claim-nde-filter-failures"><strong>Primo VE · NDE Natural Language Search.</strong> Documentation reports author-detection failures and cases of OR joining instead of the intended relationship.</a></p>
+<p><a href="#claim-wos-ra-filters"><strong>Web of Science · Research Assistant.</strong> Document requests can express institution, geography, date/recency and highly cited or seminal-paper constraints.</a></p>
+<p><a href="#claim-wos-ra-boolean-limit"><strong>Web of Science · Research Assistant.</strong> Guidance lists complex field-tagged Boolean queries as unsupported.</a></p>
+<p><a href="#claim-primo-ra-refinement"><strong>Primo · Research Assistant.</strong> Auto-refinement recognises availability, books, articles, peer-reviewed material and supported date ranges.</a></p>
+<p><a href="#claim-primo-ra-manual-refinement"><strong>Primo · Research Assistant.</strong> Manually changing a refinement switches that field out of automatic inference.</a></p></details>
+<!-- END PRODUCT CLAIMS LINKS tbl-11-5 -->
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Product</th>
+<th>Constraints it can infer from natural language</th>
+<th>Documented boundary</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><a href="https://webofscience.zendesk.com/hc/en-us/articles/31437630410129-Web-of-Science-Research-Assistant"><strong>Web of Science Research Assistant</strong></a></td>
+<td>Document requests can include constraints such as an institution, country or region, publication year or recency, and requests for highly cited or seminal papers.</td>
+<td>Its guidance treats these as supported query patterns, but lists complex field-tagged Boolean queries as unsupported. Natural-language filter handling is therefore useful without being a replacement for the complete advanced-search language.</td>
+</tr>
+<tr>
+<td><a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/040Search_Configurations/Natural_Language_Search_in_the_NDE_UI"><strong>Primo VE NDE Natural Language Search</strong></a></td>
+<td>It can recognise identifiers, author and title-related fields, resource type, online availability, peer-reviewed or open-access status, holdings, creation date and requested language.</td>
+<td>The recognised fields and facets come from a defined list. Ex Libris also documents known failures in author detection and cases where fields may be joined with <code>OR</code> instead of the intended relationship.</td>
+</tr>
+<tr>
+<td><a href="https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_%28English%29/015_Getting_Started_with_Primo_Research_Assistant"><strong>Primo Research Assistant</strong></a></td>
+<td>A question can request online availability, books, journal articles or peer-reviewed material, and a preset or custom date range.</td>
+<td>Auto-refinement is confined to these supported categories. If a user manually changes a refinement, that field switches to manual mode and is no longer inferred automatically for the query.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The practical lesson is to distinguish <strong>query-derived filters</strong> from filters the user selects explicitly after retrieval. Evaluators should test which natural-language formulations activate each supported constraint, whether the generated filter is visible, and what happens when the request contains an unsupported or ambiguous limit.</p>
+<p>These examples are not one natural-language architecture. A product may interpret with a conventional parser or generative model, transform the input into a structured query, and then use Boolean, lexical, vector or hybrid retrieval. The interface label alone does not reveal which operations occurred.</p>
+<blockquote class="pull-quote">
+<p>Understanding interprets the request. Transformation changes what a retrieval pass receives.</p>
+</blockquote>
+<p>This is especially important for evidence searches. A rewrite, compulsory clause, filter or route can <a href="#why-search-systems-use-multiple-stages">exclude a relevant document before ranking</a>; feedback can also reinforce an unrepresentative first ranking. Evaluation and reporting should therefore distinguish the original input, every transformed input, the selected routes and any intermediate results used to construct a later query.</p>
+<p>All of these operations can appear in a non-agentic workflow. A designer can prescribe five reformulations, two retrievers, one fusion rule and one reranker in advance—even the two-pass feedback workflow above. <a href="#fixed-adaptive-and-agentic-are-not-the-same-thing">Chapter 12</a> asks the separate question: who chooses what happens next?</p>
+
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>The useful question comes before phrasing: what object stands for the information need, and what mechanism will receive it?</li>
+<li>Free-text strings, controlled expressions, citation edges, seed documents, relevance judgements, browse targets, API predicates and task briefs address different mechanisms.</li>
+<li>Query understanding interprets a request and may or may not change what retrieval receives.</li>
+<li>Transformation creates changed or additional retrieval inputs; routing and coordination control which retrieval paths use them.</li>
+<li>Pseudo-relevance feedback constructs a later query from an initial ranking. It is retrieval-dependent, but a prescribed two-pass workflow need not be agentic.</li>
+<li>Query2doc and HyDE use generated text differently, which makes that text part of the search strategy and part of what must be recorded.</li>
+<li>Natural-language filter extraction is useful and reliably partial.</li>
+</ol>
+<p class="chapter-transition">Interpretation, transformation, routing and feedback can all be arranged in advance. Part III asks who chooses the next action while a search is running.</p></aside><section class="self-check" aria-label="Questions on this chapter"><p class="self-check-label">Check yourself</p>
+<details class="self-check-q"><summary>A researcher types a polished question, follows a citation from one relevant paper, and asks an agent to search until three named databases have been covered. Which three different kinds of input are involved?</summary><p>The question is a text query, the citation is a graph edge used for traversal, and the coverage instruction is part of a task brief to the controller. Treating all three as phrasing styles would hide the different mechanisms they address.</p></details><details class="self-check-q"><summary>Why can pseudo-relevance feedback not be described as an entirely upstream stage? Does using feedback make the workflow agentic?</summary><p>PRF needs an initial ranking before it can select terms and construct a second query, so it includes a retrieval-to-transformation feedback loop. No: a system can be programmed to run those same two passes every time. The second query adapts to the first results, while the control sequence remains fixed.</p></details><details class="self-check-q"><summary>Is SPLADE’s expansion the same kind of operation as an LLM generating three reformulations of a query?</summary><p>No—though not because one is inspectable and the other is not. The LLM produces alternative retrieval inputs as text. SPLADE produces a weighted vocabulary representation, whose activated terms can also be listed. Either can be handed to another component, so what separates them is the form of the retrieval input, not where a component boundary falls.</p></details><details class="self-check-q"><summary>Query2doc and HyDE both generate text. How do they differ, and what risk do they share?</summary><p>Query2doc uses the generated language to expand a query for a lexical or dense retriever; HyDE embeds the generated document and retrieves real documents near that vector. Both can import invented details that steer retrieval, so the generated text—not only the user’s question—belongs in the search record.</p></details></section><nav class="chapter-nav" aria-label="Chapter navigation"><a class="cnav prev" href="#hybrid-and-fusion"><span>Previous</span>Hybrid retrieval and rank fusion</a><a class="cnav next" href="#exercise2"><span>Next</span>Application exercise II</a></nav></section>

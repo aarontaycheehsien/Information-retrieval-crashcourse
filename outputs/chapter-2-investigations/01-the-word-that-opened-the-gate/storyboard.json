@@ -1,0 +1,179 @@
+{
+  "series": "Boolean admission and the inverted index",
+  "author": "Aaron Tay",
+  "source_branch": "more-readable",
+  "source_commit": "37b16f7ffa64e858adc454fc4c40ce528ef433b4",
+  "source": "search-textbook.html#boolean-admission",
+  "book_url": "https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html#boolean-admission",
+  "voice": {
+    "name": "en-US-AndrewMultilingualNeural",
+    "rate": "-3%",
+    "pitch": "+0Hz"
+  },
+  "id": "01-the-word-that-opened-the-gate",
+  "title": "The word that opened the gate",
+  "subtitle": "One small edit can change who gets in.",
+  "accent": "blue",
+  "scenes": [
+    {
+      "id": "prediction",
+      "title": "An AI suggests one more alternative",
+      "source_anchor": "strict-boolean-search-words-as-admission-rules",
+      "visual": "prediction",
+      "narration": [
+        "You have a carefully built Boolean search. An AI suggests one more alternative word. Is this just a small change to how results are scored? Or could it change which records are allowed into the results at all? Make a prediction.",
+        "In a formal Boolean strategy, an OR alternative can open another route into the eligible set. The new word does not merely receive a low weight. It changes an admission rule."
+      ],
+      "pause_before_second": 2.5
+    },
+    {
+      "id": "and",
+      "title": "AND: a record must satisfy both",
+      "source_anchor": "strict-boolean-search-words-as-admission-rules",
+      "visual": "and_gate",
+      "narration": [
+        "Use the chapter's four tiny records. D one and D four contain delulu. All four contain job after lowercasing. For delulu AND job, a record must satisfy both conditions. D one and D four pass.",
+        "This is an intersection: keep identifiers shared by the sets. D two and D three satisfy job but fail the delulu condition. Strict Boolean retrieval has membership, not almost-membership."
+      ]
+    },
+    {
+      "id": "or",
+      "title": "OR: alternatives, including both",
+      "source_anchor": "strict-boolean-search-words-as-admission-rules",
+      "visual": "or_gate",
+      "narration": [
+        "Now ask for delulu OR unrealistic. Delulu reaches D one and D four. Unrealistic reaches D three. OR combines the sets, so D one, D three and D four are eligible.",
+        "OR includes records satisfying either condition, including both. Adding an alternative can widen eligibility. It does not, by itself, establish whether the extra records help with your information need."
+      ]
+    },
+    {
+      "id": "not",
+      "title": "NOT: remove the excluded set",
+      "source_anchor": "boolean-treats-postings-as-sets",
+      "visual": "not_gate",
+      "narration": [
+        "Try delulu NOT interview. Start with D one and D four. Interview occurs in D one and D two, so subtract the overlap. D four remains.",
+        "The rule follows the expressed condition, not your intention. If an otherwise useful record contains the excluded term, it can disappear too. Boolean matching still needs to be judged against the purpose of the search."
+      ]
+    },
+    {
+      "id": "expansion",
+      "title": "A weak alternative changes admission",
+      "source_anchor": "poor-synonym-expansion-title",
+      "visual": "expansion",
+      "narration": [
+        "The chapter expands delulu into delulu OR unrealistic OR irrational OR foolish. Suppose foolish is a poor alternative for your particular need. Adding it can admit records that contain foolish but none of the better expressions.",
+        "Our extra record E is invented to illustrate that possibility. Ranking may push a weak match down, but Boolean has already admitted it. Inspect an LLM's proposed alternatives before adding them to a formal strategy."
+      ]
+    },
+    {
+      "id": "compulsory",
+      "title": "A compulsory term can close the gate",
+      "source_anchor": "strict-boolean-search-words-as-admission-rules",
+      "visual": "compulsory",
+      "narration": [
+        "The reverse error is harder for ranking to repair. Change delulu into delulu AND interview. D one passes. D four does not, because it has no indexed interview term in this example.",
+        "If D four is useful for your purpose, ranking this eligible set cannot bring it back. A new search could change the conditions. Reordering the admitted records cannot change who was admitted."
+      ]
+    },
+    {
+      "id": "order",
+      "title": "Admission and order are separate decisions",
+      "source_anchor": "boolean-matching-in-practice-title",
+      "visual": "order",
+      "narration": [
+        "Boolean logic alone supplies no graded relevance score and no rule for which eligible record should come first. A separate ranking method can order the admitted set. Eligibility and usefulness remain different questions.",
+        "And satisfying a condition is not always literal string identity. Analysis, fields, phrases and other database rules shape matching first. Chapter Two's next question is what happens to your words before the gate ever sees them."
+      ]
+    }
+  ],
+  "episode_number": 1,
+  "lead_in": 0.7,
+  "tail": 3.0,
+  "lines": [
+    {
+      "id": "prediction_0",
+      "scene": "prediction",
+      "text": "You have a carefully built Boolean search. An AI suggests one more alternative word. Is this just a small change to how results are scored? Or could it change which records are allowed into the results at all? Make a prediction.",
+      "gap": 1.0
+    },
+    {
+      "id": "prediction_1",
+      "scene": "prediction",
+      "text": "In a formal Boolean strategy, an OR alternative can open another route into the eligible set. The new word does not merely receive a low weight. It changes an admission rule.",
+      "gap": 2.5
+    },
+    {
+      "id": "and_0",
+      "scene": "and",
+      "text": "Use the chapter's four tiny records. D one and D four contain delulu. All four contain job after lowercasing. For delulu AND job, a record must satisfy both conditions. D one and D four pass.",
+      "gap": 1.0
+    },
+    {
+      "id": "and_1",
+      "scene": "and",
+      "text": "This is an intersection: keep identifiers shared by the sets. D two and D three satisfy job but fail the delulu condition. Strict Boolean retrieval has membership, not almost-membership.",
+      "gap": 0.65
+    },
+    {
+      "id": "or_0",
+      "scene": "or",
+      "text": "Now ask for delulu OR unrealistic. Delulu reaches D one and D four. Unrealistic reaches D three. OR combines the sets, so D one, D three and D four are eligible.",
+      "gap": 1.0
+    },
+    {
+      "id": "or_1",
+      "scene": "or",
+      "text": "OR includes records satisfying either condition, including both. Adding an alternative can widen eligibility. It does not, by itself, establish whether the extra records help with your information need.",
+      "gap": 0.65
+    },
+    {
+      "id": "not_0",
+      "scene": "not",
+      "text": "Try delulu NOT interview. Start with D one and D four. Interview occurs in D one and D two, so subtract the overlap. D four remains.",
+      "gap": 1.0
+    },
+    {
+      "id": "not_1",
+      "scene": "not",
+      "text": "The rule follows the expressed condition, not your intention. If an otherwise useful record contains the excluded term, it can disappear too. Boolean matching still needs to be judged against the purpose of the search.",
+      "gap": 0.65
+    },
+    {
+      "id": "expansion_0",
+      "scene": "expansion",
+      "text": "The chapter expands delulu into delulu OR unrealistic OR irrational OR foolish. Suppose foolish is a poor alternative for your particular need. Adding it can admit records that contain foolish but none of the better expressions.",
+      "gap": 1.0
+    },
+    {
+      "id": "expansion_1",
+      "scene": "expansion",
+      "text": "Our extra record E is invented to illustrate that possibility. Ranking may push a weak match down, but Boolean has already admitted it. Inspect an LLM's proposed alternatives before adding them to a formal strategy.",
+      "gap": 0.65
+    },
+    {
+      "id": "compulsory_0",
+      "scene": "compulsory",
+      "text": "The reverse error is harder for ranking to repair. Change delulu into delulu AND interview. D one passes. D four does not, because it has no indexed interview term in this example.",
+      "gap": 1.0
+    },
+    {
+      "id": "compulsory_1",
+      "scene": "compulsory",
+      "text": "If D four is useful for your purpose, ranking this eligible set cannot bring it back. A new search could change the conditions. Reordering the admitted records cannot change who was admitted.",
+      "gap": 0.65
+    },
+    {
+      "id": "order_0",
+      "scene": "order",
+      "text": "Boolean logic alone supplies no graded relevance score and no rule for which eligible record should come first. A separate ranking method can order the admitted set. Eligibility and usefulness remain different questions.",
+      "gap": 1.0
+    },
+    {
+      "id": "order_1",
+      "scene": "order",
+      "text": "And satisfying a condition is not always literal string identity. Analysis, fields, phrases and other database rules shape matching first. Chapter Two's next question is what happens to your words before the gate ever sees them.",
+      "gap": 0.65
+    }
+  ]
+}
