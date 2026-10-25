@@ -30,9 +30,9 @@ try {
   await page.addStyleTag({content:'html { scroll-behavior: auto !important; }'});
   const input=page.locator('#book-lookup-input');
   assert.ok(await input.isVisible());
-  assert.equal(await page.locator('#glossary dt').count(),84);
+  assert.equal(await page.locator('#glossary dt').count(),87);
   const first=page.locator('#book-lookup-results a').first();
-  for(const [query,target] of [['OOV','oov'],['ann','ann'],['RAG Fusion','rag-fusion'],['Agentic RAG','agentic-rag'],['TF-IDF','tf-idf'],['bi encoder','bi-encoder'],['precision@k','precision-at-k'],['precision at k','precision-at-k'],['normalization','vector-normalisation']]){
+  for(const [query,target] of [['OOV','oov'],['ann','ann'],['RAG Fusion','rag-fusion'],['Agentic RAG','agentic-rag'],['TF-IDF','tf-idf'],['bi encoder','bi-encoder'],['precision@k','precision-at-k'],['precision at k','precision-at-k'],['normalization','vector-normalisation'],['grep','grep-ripgrep'],['ripgrep','grep-ripgrep'],['regex','regular-expression'],['long context','context-window']]){
     await input.fill(query);assert.equal(await first.getAttribute('href'),'#term-'+target,query);
   }
   await input.fill('pooling');
@@ -48,6 +48,8 @@ try {
   // Repeated current-fragment link opens a manually collapsed glossary too.
   await page.locator('#glossary').evaluate(e=>e.open=false);
   await page.locator('.term-mark[href="#term-bi-encoder"]').first().focus();await page.keyboard.press('Enter');
+  // Wait for fragment navigation to finish moving focus before testing another mark.
+  await page.waitForFunction(() => document.activeElement.id === 'term-bi-encoder');
   assert.ok(await page.locator('#glossary').evaluate(e=>e.open));
   assert.equal(new URL(page.url()).hash,'#term-bi-encoder');
   const mark=page.locator('.term-mark[href="#term-idf"]').first();

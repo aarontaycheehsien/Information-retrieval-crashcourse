@@ -106,7 +106,7 @@
         "semantic-scholar-scale",
         "ex-libris-cdi-scale"
       ],
-      "exclusions": "General mechanisms, research-paper findings, definitions, recommendations, questions and fictional exercises are outside the product-claim register. Bibliography and reading-list entries are evidence pointers, not additional assertions. Companion links and disclosure are not product evaluations."
+      "exclusions": "General mechanisms, research-paper findings, definitions, recommendations, questions and fictional exercises are outside the product-claim register. Bibliography and reading-list entries are evidence pointers, not additional assertions. Companion links and disclosure are not product evaluations. The grep command and scanning/indexing distinction are generic mechanism examples; no comparative performance is claimed."
     },
     {
       "anchor": "bm25-ranking",
@@ -264,14 +264,17 @@
         "scite-interface-equivalence",
         "primo-agent-recovery",
         "nde-autism-probe",
-        "primo-agent-controls"
+        "primo-agent-controls",
+        "claude-code-file-exploration"
       ],
       "exclusions": "General mechanisms, research-paper findings, definitions, recommendations, questions and fictional exercises are outside the product-claim register. Bibliography and reading-list entries are evidence pointers, not additional assertions. Companion links and disclosure are not product evaluations."
     },
     {
       "anchor": "diagnosing-failure",
       "title": "Diagnosing retrieval failure",
-      "claim_ids": [],
+      "claim_ids": [
+        "ripgrep-default-file-filtering"
+      ],
       "exclusions": "General mechanisms, research-paper findings, definitions, recommendations, questions and fictional exercises are outside the product-claim register. Bibliography and reading-list entries are evidence pointers, not additional assertions. Companion links and disclosure are not product evaluations."
     },
     {
@@ -363,9 +366,10 @@
         "scopus-rag-variants",
         "scopus-rag-vector",
         "scopus-rag-rrf",
-        "scopus-rag-generation"
+        "scopus-rag-generation",
+        "cursor-instant-grep-local-index"
       ],
-      "exclusions": "General mechanisms, research-paper findings, definitions, recommendations, questions and fictional exercises are outside the product-claim register. Bibliography and reading-list entries are evidence pointers, not additional assertions. Companion links and disclosure are not product evaluations."
+      "exclusions": "General mechanisms, research-paper findings, definitions, recommendations, questions and fictional exercises are outside the product-claim register. Bibliography and reading-list entries are evidence pointers, not additional assertions. Companion links and disclosure are not product evaluations. The grep preprint and long-context benchmarks are research findings, with task and date limits stated separately from product documentation."
     },
     {
       "anchor": "figures-and-tables",
@@ -4795,7 +4799,115 @@
       ],
       "teaching_groups": [],
       "review_trigger": "Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating."
+    },
+    {
+      "id": "claude-code-file-exploration",
+      "product": "Claude Code",
+      "mode": "September 2025 context-engineering account",
+      "claim": "Anthropic describes upfront instruction files combined with on-demand exploration using glob and grep.",
+      "temporal_scope": "historical",
+      "evidence_date": "2025-09-29",
+      "limitations": "Vendor engineering account of the September 2025 design, not a current architecture audit or an academic retrieval benchmark.",
+      "evidence_basis": "documentation",
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+          "title": "Effective context engineering for AI agents",
+          "locator": "Context retrieval and agentic search: hybrid strategy paragraph naming CLAUDE.md, glob and grep; preceding runtime-exploration trade-offs."
+        }
+      ],
+      "evidence_gap": null,
+      "reviews": [
+        {
+          "checked_on": "2026-10-25",
+          "finding": "supported",
+          "evidence_indices": [
+            0
+          ],
+          "notes": "Inspected the linked documentation and the named passage. Support is limited to the documented design or defaults, with no product performance test."
+        }
+      ],
+      "locations": [
+        {
+          "anchor": "agent-grep-search",
+          "excerpt": "Anthropic’s September 2025 account describes Claude Code combining upfront instruction files with on-demand exploration using tools such as glob and grep."
+        }
+      ],
+      "teaching_groups": [],
+      "review_trigger": "Changed documentation, implementation, tool defaults or product mode; inspect the cited occurrence before updating."
+    },
+    {
+      "id": "cursor-instant-grep-local-index",
+      "product": "Cursor",
+      "mode": "Instant Grep search documentation",
+      "claim": "Instant Grep builds and queries a local index; Cursor says it stores no codebase embeddings for search.",
+      "temporal_scope": "current-facing",
+      "evidence_date": "2026-10-25",
+      "limitations": "Documentation inspected on 25 October 2026. No independent implementation audit, speed test or comparison with scholarly retrieval was performed.",
+      "evidence_basis": "documentation",
+      "evidence": [
+        {
+          "url": "https://cursor.com/docs/agent/tools/search",
+          "title": "Search — Cursor Docs",
+          "locator": "Instant Grep, Privacy and security: local index and no stored codebase embeddings for search."
+        }
+      ],
+      "evidence_gap": null,
+      "reviews": [
+        {
+          "checked_on": "2026-10-25",
+          "finding": "supported",
+          "evidence_indices": [
+            0
+          ],
+          "notes": "Inspected the linked documentation and the named passage. Support is limited to the documented design or defaults, with no product performance test."
+        }
+      ],
+      "locations": [
+        {
+          "anchor": "appendix-rag-without-embeddings",
+          "excerpt": "Cursor’s search documentation, checked on 25 October 2026, describes Instant Grep as building and querying a local index while storing no codebase embeddings for search."
+        }
+      ],
+      "teaching_groups": [],
+      "review_trigger": "Changed documentation, implementation, tool defaults or product mode; inspect the cited occurrence before updating."
+    },
+    {
+      "id": "ripgrep-default-file-filtering",
+      "product": "ripgrep",
+      "mode": "Default file filtering",
+      "claim": "Ripgrep normally skips ignored and hidden files; filtering can be changed through its options.",
+      "temporal_scope": "current-facing",
+      "evidence_date": "2026-10-25",
+      "limitations": "Project documentation checked on 25 October 2026. Options and configuration can change the defaults; this is not a statement that every agent exposes the same file scope.",
+      "evidence_basis": "documentation",
+      "evidence": [
+        {
+          "url": "https://github.com/BurntSushi/ripgrep",
+          "title": "ripgrep project README",
+          "locator": "Why should I use ripgrep?: recursive search, automatic filtering, ignore files, hidden files and rg -uuu."
+        }
+      ],
+      "evidence_gap": null,
+      "reviews": [
+        {
+          "checked_on": "2026-10-25",
+          "finding": "supported",
+          "evidence_indices": [
+            0
+          ],
+          "notes": "Inspected the linked documentation and the named passage. Support is limited to the documented design or defaults, with no product performance test."
+        }
+      ],
+      "locations": [
+        {
+          "anchor": "could-the-record-have-been-returned",
+          "excerpt": "Ripgrep normally skips ignored and hidden files;"
+        }
+      ],
+      "teaching_groups": [],
+      "review_trigger": "Changed documentation, implementation, tool defaults or product mode; inspect the cited occurrence before updating."
     }
   ],
-  "currency_as_of": "2026-10-09"
+  "currency_as_of": "2026-10-25"
 }

@@ -9,6 +9,16 @@ entry here.
 
 ## Unreleased
 
+- **Grep, agentic file search and the RAG debate.** Add a direct-search example
+  using Chapter 2’s four records, a hypothetical search sequence in Chapter 12,
+  and an Appendix G comparison of vector pipelines, agentic search and long
+  context. Separate the need for embeddings, evidence selection and external
+  sources, with dated primary evidence and limits on benchmark transfer. Broaden
+  lexical definitions, qualify source-support claims, and connect file coverage,
+  extraction, truncation and stopping to diagnosis and evaluation. Add two
+  self-checks, a comparison prompt and three glossary terms; refresh the glossary,
+  digest, vendor questionnaire and dated product-evidence register.
+
 - **Plainer prose in Chapters 2–12.** Apply the whole-text review in
   `reviews/chapters-2-12-plain-prose-recommendations.md`: remove announcements,
   slogans and repeated chapter hand-offs, replace metaphors with the mechanisms
