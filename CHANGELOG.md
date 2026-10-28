@@ -9,6 +9,14 @@ entry here.
 
 ## Unreleased
 
+- **Consistency review after adding grep and the RAG debate.** Qualify the
+  indexed lexical comparison in Chapters 5 and 7, and include direct file
+  matching among Chapter 13’s other retrieval methods. Align the retrieval,
+  generation and indexed-unit glossary definitions with unranked search and
+  supplied-context generation. Limit Chapter 1’s retrieve-then-generate account
+  to the search modes being described. Update the first and third sitting totals
+  to match the longer Chapters 2 and 12, and regenerate dependent reader views.
+
 - **Grep, agentic file search and the RAG debate.** Add a direct-search example
   using Chapter 2’s four records, a hypothetical search sequence in Chapter 12,
   and an Appendix G comparison of vector pipelines, agentic search and long
