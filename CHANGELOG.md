@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Exact-match and best-match retrieval terminology.** Introduce the traditional
+  distinction in Chapters 2–3, separating Boolean query satisfaction from
+  literal text matching and graded ranking from PubMed’s Best Match label.
+  Connect it to Chapter 4’s existing admission example and distinguish exact
+  nearest-neighbour execution in Chapter 7. Add two self-checks, two glossary
+  entries and lookup aliases, historical references and Appendix D mappings.
+  Refresh the digest and glossary, and allow another minute for Chapter 3 and
+  the first sitting.
+
 - **Consistency review after adding grep and the RAG debate.** Qualify the
   indexed lexical comparison in Chapters 5 and 7, and include direct file
   matching among Chapter 13’s other retrieval methods. Align the retrieval,

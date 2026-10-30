@@ -30,9 +30,9 @@ try {
   await page.addStyleTag({content:'html { scroll-behavior: auto !important; }'});
   const input=page.locator('#book-lookup-input');
   assert.ok(await input.isVisible());
-  assert.equal(await page.locator('#glossary dt').count(),87);
+  assert.equal(await page.locator('#glossary dt').count(),89);
   const first=page.locator('#book-lookup-results a').first();
-  for(const [query,target] of [['OOV','oov'],['ann','ann'],['RAG Fusion','rag-fusion'],['Agentic RAG','agentic-rag'],['TF-IDF','tf-idf'],['bi encoder','bi-encoder'],['precision@k','precision-at-k'],['precision at k','precision-at-k'],['normalization','vector-normalisation'],['grep','grep-ripgrep'],['ripgrep','grep-ripgrep'],['regex','regular-expression'],['long context','context-window']]){
+  for(const [query,target] of [['OOV','oov'],['ann','ann'],['RAG Fusion','rag-fusion'],['Agentic RAG','agentic-rag'],['TF-IDF','tf-idf'],['bi encoder','bi-encoder'],['precision@k','precision-at-k'],['precision at k','precision-at-k'],['normalization','vector-normalisation'],['grep','grep-ripgrep'],['ripgrep','grep-ripgrep'],['regex','regular-expression'],['long context','context-window'],['exact match','exact-match-retrieval'],['exact-match retrieval','exact-match-retrieval'],['Best Match','best-match-retrieval'],['best-match retrieval','best-match-retrieval'],['partial match','best-match-retrieval'],['partial-match retrieval','best-match-retrieval']]){
     await input.fill(query);assert.equal(await first.getAttribute('href'),'#term-'+target,query);
   }
   await input.fill('pooling');

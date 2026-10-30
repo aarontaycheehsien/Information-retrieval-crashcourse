@@ -22,7 +22,7 @@
 <li><a href="#pipelines">Pipelines</a> <span>· 9 minutes including reflection</span></li>
 <li><a href="#practice">Professional practice</a> <span>· 8 minutes including reflection</span></li>
 <li><a href="#next-action">Next action</a> <span>· 5 minutes including reflection</span></li></ol></nav>
-  <p class="note">3,644 words, about 19 minutes at 200 words per minute; the stage budgets add time to reflect. They are provisional suggestions, not tested completion times.</p>
+  <p class="note">3,681 words, about 19 minutes at 200 words per minute; the stage budgets add time to reflect. They are provisional suggestions, not tested completion times.</p>
 </header>
 <main id="main" tabindex="-1">
   <aside class="orientation" aria-label="How to read these excerpts">
@@ -49,12 +49,12 @@
 </article>
 <article class="excerpt" id="chapter-2" aria-labelledby="chapter-2-title">
 <h3 id="chapter-2-title">Chapter 2 · Boolean admission and the inverted index</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>In this lexical index, matching uses the terms produced by text analysis. Tokenisation, case folding, stop-word handling and stemming all happen before anything is indexed.</li><li>Query and document must be analysed compatibly. A mismatch between the two is a silent and common source of retrieval failure.</li><li>An inverted index maps terms to posting lists, which is why Boolean evaluation is set intersection and union rather than a scan of documents.</li><li>Boolean retrieval produces an eligible set, not an ordering.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>In this lexical index, matching uses the terms produced by text analysis. Tokenisation, case folding, stop-word handling and stemming all happen before anything is indexed.</li><li>Query and document must be analysed compatibly. A mismatch between the two is a silent and common source of retrieval failure.</li><li>An inverted index maps terms to posting lists, which is why Boolean evaluation is set intersection and union rather than a scan of documents.</li><li>Boolean retrieval is traditionally called exact-match retrieval: records satisfy the processed query specification or do not. It produces an eligible set, not an ordering; “exact” need not mean a literal string match.</li></ol></aside>
 <p class="source-link"><a href="search-textbook.html#boolean-admission">Read Chapter 2 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-3" aria-labelledby="chapter-3-title">
 <h3 id="chapter-3-title">Chapter 3 · BM25 and ranked lexical retrieval</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Ranked retrieval assigns graded scores and orders candidates; it does not specify where the scores come from. BM25 is one lexical answer.</li><li>Rarer terms carry more weight, repeated terms saturate, and document length is normalised against the collection average, to a degree set by <em>b</em>.</li><li>The index does not change. The same posting lists that answered a Boolean query support a ranked one.</li><li>PubMed documents BM25 as the first stage of Best Match, and other academic systems document lexical evidence in their live ranking.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Best-match retrieval uses graded scores to rank candidates; it need not require every query term. BM25 is a lexical example. Exact term matches can contribute to a best-match ranking, and Boolean conditions can still restrict eligibility.</li><li>Rarer terms carry more weight, repeated terms saturate, and document length is normalised against the collection average, to a degree set by <em>b</em>.</li><li>The index does not change. The same posting lists that answered a Boolean query support a ranked one.</li><li>PubMed documents BM25 as the first stage of Best Match, and other academic systems document lexical evidence in their live ranking.</li></ol></aside>
 <p class="source-link"><a href="search-textbook.html#bm25-ranking">Read Chapter 3 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-4" aria-labelledby="chapter-4-title">
