@@ -3,8 +3,8 @@
 Reviewed 9 November 2026 against commit `1268e25` on `more-readable` (version
 1.2.1, with the unreleased grep and exact-match/best-match additions). Findings
 1–10 below **have been applied** to `search-textbook.html`: 3–10 first, then 1 and
-2 in a follow-up commit. Finding 11, the content gap and the accessibility note
-are **recorded only** and remain open.
+2, then the content gap and the alt text, in follow-up commits. Finding 11 is
+**recorded only** and remains open.
 
 The September pass (`part-i-readability-review.md`) fixed placement and
 duplication. This pass found three things it could not have: figures that have
@@ -63,20 +63,45 @@ The September review declined to change this. At minimum, align its order and
 wording with the Part II panel, which lists the same ideas as five equated errors
 in a different order.
 
+## Applied in the second follow-up: content gap and alt text
+
 ### Content gap: the reader's own operators
 
-Chapter 2 never explains how truncation, phrase or proximity operators execute
-over the index, yet its first self-check tests truncation. Two short paragraphs
-would close this: wildcard expansion against the term dictionary, and positional
-postings (Manning, Raghavan and Schütze, 2008, *Introduction to Information
-Retrieval*, sections 3.2 and 2.4).
+Chapter 2 never explained how truncation, phrase or proximity operators execute
+over the index, yet its first self-check tests truncation.
+
+**Applied:** new section *Truncation, phrases and proximity use the same map*
+(`#truncation-phrases-and-proximity-over-the-index`), placed before *Why inverted
+indexes can be so fast*. It explains that truncation expands a pattern against
+the dictionary and then combines posting lists as for `OR`, and that phrase and
+proximity operators test stored positions. Both mechanisms follow Manning,
+Raghavan and Schütze (2008), *Introduction to Information Retrieval*, sections
+3.2 ("Wildcard queries") and 2.4.2 ("Positional indexes"), which the section
+links; both pages were read on 9 November 2026. The chapter summary gains one
+point, the section signpost says "five sections" again, and the stemming section
+links to the new one. Chapter 2 moves from about 16 to about 17 minutes and the
+first sitting from 70 to 71.
+
+Three statements in the new section are generic and carry no citation: that some
+databases require a minimum number of characters before a truncation symbol or
+cap the number of variants; that systems differ in how truncation interacts
+with stemming; and that stop-word removal or stemming can loosen a phrase search. No product is named, so no register entry was added. Naming one
+(PubMed's truncation rules, for example) would need a source and a register
+entry.
 
 ### Accessibility
 
-Figures 2.1, 3.2 and 3.5 are raster infographics whose alt text only repeats
-the title (3.3 and 4.5 were too, before the follow-up). Their embedded text cannot be read by a screen reader,
-searched or translated. They render at about 40 per cent of native size with no
-way to enlarge them.
+Figures 2.1, 3.2 and 3.5 are raster infographics whose alt text only repeated
+the title.
+
+**Applied:** each now has descriptive alt text stating the queries, counts and
+conclusion shown. The images themselves are unchanged, so their embedded text is
+still not searchable or translatable, and they still render at about 40 per cent
+of native size with no way to enlarge them. In Figure 3.5 the artwork shows four
+scores in the ranking engine but five ordered results; the alt text gives the
+score range and does not repeat the mismatch.
+
+## Also open
 
 ### Noticed in passing
 

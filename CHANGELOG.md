@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Truncation, phrase and proximity searching in Chapter 2.** Add a short
+  section, *Truncation, phrases and proximity use the same map*, explaining that
+  truncation expands a pattern against the dictionary and that phrase and
+  proximity operators test stored positions, with links to the corresponding
+  sections of Manning, Raghavan and Schütze. Add one summary point and allow
+  another minute for Chapter 2 and the first sitting. Give Figures 2.1, 3.2 and
+  3.5 descriptive alt text in place of repeated titles. Refresh the digest and
+  glossary lookup.
+
 - **Figures 3.3 and 4.5 redrawn in HTML.** Replace two raster infographics that
   had drifted from the text. Figure 3.3 now shows only the three products the
   chapter and evidence register document (PubMed, Scopus, Primo CDI); its
