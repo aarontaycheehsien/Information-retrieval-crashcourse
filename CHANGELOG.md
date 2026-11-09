@@ -9,6 +9,20 @@ entry here.
 
 ## Unreleased
 
+- **Part I sequencing and repetition.** Apply findings 3–10 of
+  `reviews/part-i-readability-review-2.md`. Chapter 1 gives the two-by-two its
+  own section, *Two axes: output format and retrieval iteration*, explains the
+  axes once and states that the six-stage strip covers retrieval only; Table
+  1.2's Google Scholar question now matches what Chapter 4 answers. Chapter 2
+  moves the grep panel to *How Boolean search uses an inverted index*, folds
+  *Boolean treats postings as sets* into the term-first-map section (anchor
+  kept), glosses *delulu* and removes two forward references. Chapter 3 moves
+  the best-match panel after the four BM25 questions. Chapter 4 lists the four
+  query jobs in the order they run, removes repeated caveats and repairs
+  dangling references in its closing section. Footnotes 2 and 3 swap numbers.
+  No table or figure is renumbered and no reading time changes. Refresh the
+  digest, glossary lookup and three product-claim excerpts.
+
 - **Exact-match and best-match retrieval terminology.** Introduce the traditional
   distinction in Chapters 2–3, separating Boolean query satisfaction from
   literal text matching and graded ranking from PubMed’s Best Match label.

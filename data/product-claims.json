@@ -1097,7 +1097,7 @@
       "locations": [
         {
           "anchor": "how-boolean-search-uses-an-inverted-index",
-          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives."
+          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar and Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives."
         }
       ],
       "teaching_groups": [],
@@ -1118,7 +1118,7 @@
       "locations": [
         {
           "anchor": "how-boolean-search-uses-an-inverted-index",
-          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives."
+          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar and Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives."
         }
       ],
       "teaching_groups": [],
@@ -1139,7 +1139,7 @@
       "locations": [
         {
           "anchor": "how-boolean-search-uses-an-inverted-index",
-          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar, Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives."
+          "excerpt": "Large academic indexes like OpenAlex, Semantic Scholar and Ex Libris CDI span hundreds of millions of records. To answer queries as quickly as possible, Boolean search does not normally reread every record whenever a query arrives."
         }
       ],
       "teaching_groups": [],
