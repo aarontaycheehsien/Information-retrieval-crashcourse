@@ -461,6 +461,7 @@
     .worked-card { min-width: 0; padding: .9rem; border: 1px solid var(--line); border-radius: 9px; background: var(--paper-2); }
     .worked-card > strong:first-child { display: block; color: var(--teal); margin-bottom: .55rem; }
     .worked-figure .worked-kicker { font: 800 .73rem/1.3 var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--teal); }
+    .worked-figure .worked-kicker.worked-band { margin-top: 1.15rem; }
     .worked-figure .worked-record { padding: .5rem 0; margin: 0; border-bottom: 1px solid var(--line); }
     .worked-record:last-child { border-bottom: 0; }
     .worked-record b { margin-right: .35rem; }
@@ -1594,13 +1595,20 @@ D4 Delulu about my dream job</code></pre>
 </aside>
 <h3 id="bm25-and-lexical-ranking-in-academic-search">BM25 and lexical ranking in academic search<a aria-label="Link to BM25 and lexical ranking in academic search" class="heading-anchor" href="#bm25-and-lexical-ranking-in-academic-search">#</a></h3>
 <p>Academic search products document lexical evidence in their live ranking today, and one of them names BM25 directly.</p>
-<figure class="ir-figure" aria-labelledby="bm25-academic-search-title">
+<figure class="ir-figure worked-figure" aria-labelledby="bm25-academic-search-title">
 <p class="figure-title" id="bm25-academic-search-title">BM25 and lexical ranking in academic search</p><!-- BEGIN PRODUCT CLAIMS LINKS bm25-academic-search-title -->
 <details class="claim-links"><summary>Evidence register · 4 claims</summary><p><a href="#claim-scopus-ranking-signals"><strong>Scopus · Relevance sort.</strong> Ranking documentation describes term frequency and IDF with field, position and proximity signals.</a></p><p><a href="#claim-cdi-ranking-signals"><strong>Ex Libris CDI · Relevance ranking.</strong> Ranking combines lexical, phrase and proximity evidence with static signals including type, recency, peer review and citations.</a></p><p><a href="#claim-pubmed-bm25"><strong>PubMed · Best Match.</strong> The published Best Match architecture begins with BM25.</a></p><p><a href="#claim-pubmed-rerank-budget"><strong>PubMed · Best Match.</strong> LambdaMART reranks the top 500 first-stage candidates.</a></p></details>
 <!-- END PRODUCT CLAIMS LINKS bm25-academic-search-title -->
 
-<img alt="BM25 and lexical ranking in academic search" src="images/03%20BM25%20-%20words%20as%20weighted%20clues/BM25%20and%20lexical%20ranking%20in%20academic%20search.png">
-<figcaption><span class="asset-label-inline" id="fig-3-3">Figure 3.3</span> Scholarly products describe live ranking pipelines built on term frequency and inverse document frequency, supplemented by field, position and proximity signals.</figcaption>
+<p class="worked-kicker">What three products document about their relevance ranking</p>
+<div class="worked-grid three">
+<div class="worked-card"><strong>PubMed · Best Match</strong><span class="worked-rule">Names BM25</span><p><b>Stage 1.</b> BM25 retrieves and orders the matching records.</p><p><b>Stage 2.</b> LambdaMART reranks the top 500.</p><p class="worked-note">From the published architecture. Current help still describes a weighted term-frequency stage followed by machine-learning reranking.</p></div>
+<div class="worked-card"><strong>Scopus · Relevance sort</strong><span class="worked-rule">Lexical signals; no formula named</span><p>Term frequency and inverse document frequency.</p><p>Field, position and proximity signals.</p></div>
+<div class="worked-card"><strong>Primo CDI · Relevance ranking</strong><span class="worked-rule">Lexical signals plus static signals</span><p>Field and rare-term weighting, term frequency, field length, phrase and proximity boosts.</p><p>Static signals such as resource type, recency, peer-review status and citations.</p></div>
+</div>
+<p class="worked-result"><strong>Established:</strong> lexical evidence is active in all three rankings.</p>
+<p class="worked-result caution"><strong>Not established:</strong> that the Scopus or Primo ranking is plain BM25. Only PubMed’s documentation names it.</p>
+<figcaption><span class="asset-label-inline" id="fig-3-3">Figure 3.3</span> Three scholarly products describe ranking built on lexical evidence. Each card summarises the product’s own documentation, cited in the text below; a production ranking pipeline should not be reduced to one formula.</figcaption>
 </figure>
 <p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6112631/">PubMed offers an unusually clear documented BM25 example</a>. Its published <a href="#why-search-systems-use-multiple-stages">multi-stage architecture</a> for Best Match first retrieves and orders matching records with BM25, then uses LambdaMART<sup id="fnref:lambdamart"><a class="footnote-ref" href="#fn:lambdamart">9</a></sup> to rerank the top 500. PubMed’s current help still describes a weighted term-frequency stage followed by machine-learning reranking. It therefore shows both BM25’s continuing role and why a production ranking pipeline should not be reduced to one formula.</p>
 <p>Two product descriptions show how lexical evidence is usually embedded in richer ranking. <a href="https://service.elsevier.com/app/answers/detail/a_id/14182/supporthub/scopus/">Scopus describes term frequency and inverse document frequency</a> alongside field, position and proximity signals. <a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI">Primo’s Central Discovery Index</a> combines field and rare-term weighting, term frequency, field length, phrase and proximity boosts with static signals such as resource type, recency, peer-review status and citations.</p><figure class="ir-figure" aria-labelledby="primo-cdi-ranking-signals-title">
@@ -1753,10 +1761,29 @@ D4 Delulu about my dream job</code></pre>
 <p>Rewriting is the second of <a href="#what-might-have-happened-to-a-missing-query-word">the four explanations for a missing word</a>. Understanding alone does not remove a typed word; it matters only when its interpretation causes one of those changes. Chapter 11 returns to these operations with multi-query, routed and feedback-based retrieval available.</p>
 
 <p>The overview below brings the separate controls together, now that each has been explained.</p>
-<figure class="ir-figure" aria-labelledby="three-lexical-admission-rules-title">
+<figure class="ir-figure worked-figure" aria-labelledby="three-lexical-admission-rules-title">
 <p class="figure-title" id="three-lexical-admission-rules-title">Overview: from query processing to ranked lexical results</p>
-<img src="images/lexicalsearchisbroaderthanboolean.png" alt="Diagram showing strict Boolean, minimum-match and ranked any-match retrieval as different forms of lexical retrieval">
-<figcaption><span class="asset-label-inline" id="fig-4-5">Figure 4.5</span> A recap of possible arrangements, not a mandatory sequence. Admission, scoring and presentation are separate controls. Field weights are illustrative; citation and recency signals can supplement lexical evidence but are not themselves lexical matches. Direct BM25 retrieval can gather and score candidates together.</figcaption>
+<p class="worked-kicker">1 · What retrieval receives</p>
+<div class="worked-grid">
+<div class="worked-card"><strong>Understanding and transformation</strong><p>A system may interpret the request, then correct, map, expand or restructure it.</p><p class="worked-note">Optional. This changes the words sent on.</p></div>
+<div class="worked-card"><strong>Analysis</strong><p>Tokenise and normalise; perhaps stem and remove stop-words.</p><p class="worked-note">Routine. The output is the analysed query terms.</p></div>
+</div>
+<p class="worked-kicker worked-band">2 · Admission: which records may compete</p>
+<div class="worked-grid three">
+<div class="worked-card"><strong>All terms required</strong><p>A Boolean <code>AND</code> over every term.</p></div>
+<div class="worked-card"><strong>Some terms required</strong><p>Minimum match, such as two of three.</p></div>
+<div class="worked-card"><strong>Any term suffices</strong><p>The union of the posting lists. BM25 commonly runs this way.</p></div>
+</div>
+<p class="worked-kicker worked-band">3 · Ranking: how candidates are ordered</p>
+<div class="worked-grid three">
+<div class="worked-card"><strong>BM25’s lexical evidence</strong><p>Term rarity, term frequency with diminishing returns, and document length.</p></div>
+<div class="worked-card"><strong>Further lexical evidence</strong><p>Field weights, and phrase and proximity boosts.</p></div>
+<div class="worked-card"><strong>Signals that are not lexical matches</strong><p>Citations, recency, resource type or peer-review status can supplement the score.</p></div>
+</div>
+<p class="worked-kicker worked-band">4 · Output boundary: how many are kept</p>
+<div class="worked-card"><p>The engine may completely order the scored candidates or retain only a top-<em>k</em>. A later stage may rerank that shortlist.</p></div>
+<p class="worked-result"><strong>Every admission rule here is lexical.</strong> Boolean <code>AND</code> is one way to control admission; minimum-match and any-match rules are others, and graded scoring orders whatever is admitted.</p>
+<figcaption><span class="asset-label-inline" id="fig-4-5">Figure 4.5</span> A recap of possible arrangements, not a mandatory sequence. Admission, ranking and the output boundary are separate controls, and direct BM25 retrieval gathers and scores candidates together. Citation and recency signals can supplement lexical evidence but are not themselves lexical matches.</figcaption>
 </figure>
 
 <h3 id="returning-to-the-opening-puzzles">Returning to the first two opening puzzles<a aria-label="Link to Returning to the first two opening puzzles" class="heading-anchor" href="#returning-to-the-opening-puzzles">#</a></h3><!-- BEGIN PRODUCT CLAIMS LINKS returning-to-the-opening-puzzles -->

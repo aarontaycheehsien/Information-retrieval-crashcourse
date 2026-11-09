@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Figures 3.3 and 4.5 redrawn in HTML.** Replace two raster infographics that
+  had drifted from the text. Figure 3.3 now shows only the three products the
+  chapter and evidence register document (PubMed, Scopus, Primo CDI); its
+  unsourced Europe PMC and Web of Science panels are gone. Figure 4.5 now uses
+  Chapter 4's own terms and order, and no longer groups query expansion with
+  tokenisation or places BM25 after candidate generation. Titles, numbers and
+  anchors are unchanged. See findings 1 and 2 of
+  `reviews/part-i-readability-review-2.md`.
+
 - **Part I sequencing and repetition.** Apply findings 3–10 of
   `reviews/part-i-readability-review-2.md`. Chapter 1 gives the two-by-two its
   own section, *Two axes: output format and retrieval iteration*, explains the

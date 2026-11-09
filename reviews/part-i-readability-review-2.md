@@ -2,8 +2,9 @@
 
 Reviewed 9 November 2026 against commit `1268e25` on `more-readable` (version
 1.2.1, with the unreleased grep and exact-match/best-match additions). Findings
-3–10 below **have been applied** to `search-textbook.html`. Findings 1, 2 and 11,
-the content gap and the accessibility note are **recorded only** and remain open.
+1–10 below **have been applied** to `search-textbook.html`: 3–10 first, then 1 and
+2 in a follow-up commit. Finding 11, the content gap and the accessibility note
+are **recorded only** and remain open.
 
 The September pass (`part-i-readability-review.md`) fixed placement and
 duplication. This pass found three things it could not have: figures that have
@@ -11,7 +12,7 @@ drifted from the edited text, sequencing damage from the October additions, and
 an overloaded Chapter 1. Product claims were not checked against external
 sources.
 
-## Open: not applied
+## Applied in the follow-up: the two figures
 
 ### 1. Figure 3.3 carries product claims found nowhere else
 
@@ -20,6 +21,13 @@ ranking is described in the prose or the evidence register ("Europe PMC" occurs
 nowhere in the book's text). Its PubMed panel repeats the paragraph beneath it
 almost word for word. Either source and register the two extra panels, or redraw
 the figure with PubMed, Scopus and CDI only.
+
+**Applied:** redrawn as an HTML figure from the book's existing `worked-figure`
+components, with PubMed, Scopus and Primo CDI only. Each card restates what the
+section's prose and evidence register already say; two lines separate what is
+established from what is not. The Europe PMC and Web of Science panels were
+dropped, not sourced: restoring either needs a cited source and a register entry.
+The figure title, its anchor and its evidence-register block are unchanged.
 
 ### 2. Figure 4.5 contradicts Chapter 4
 
@@ -34,6 +42,19 @@ the figure with PubMed, Scopus and CDI only.
 
 The caption carries three disclaimers to compensate. Redraw it in HTML like
 Figures 4.1–4.4, or cut it.
+
+**Applied:** redrawn as an HTML figure in four bands using the chapter's own
+terms: what retrieval receives (understanding and transformation, then
+analysis), admission (all, some or any terms), ranking (BM25's evidence, further
+lexical evidence, and signals that are not lexical matches) and the output
+boundary. The caption drops the disclaimer about illustrative field weights,
+which the figure no longer shows. Title and anchor are unchanged.
+
+Both figures are now readable by screen readers, searchable and translatable.
+The two PNG files remain in `images/` but nothing in the book references them.
+One CSS rule was added (`.worked-kicker.worked-band`) for spacing between bands.
+
+## Open: not applied
 
 ### 11. The Part I checklist
 
@@ -52,8 +73,8 @@ Retrieval*, sections 3.2 and 2.4).
 
 ### Accessibility
 
-Figures 2.1, 3.2, 3.3, 3.5 and 4.5 are raster infographics whose alt text only
-repeats the title. Their embedded text cannot be read by a screen reader,
+Figures 2.1, 3.2 and 3.5 are raster infographics whose alt text only repeats
+the title (3.3 and 4.5 were too, before the follow-up). Their embedded text cannot be read by a screen reader,
 searched or translated. They render at about 40 per cent of native size with no
 way to enlarge them.
 
