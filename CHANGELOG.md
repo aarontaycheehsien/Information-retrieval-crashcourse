@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Appendix F review.** Apply `reviews/appendix-f-review.md`. The opening now
+  names the same three boundaries as Figure F.3 (coverage, retrieval and
+  stopping) and says prioritisation alone cannot lose a record. Move the
+  TAR-comparison note into the comparison section and the deduplication aside
+  after the paragraph it interrupted. Rename "Known-item or key-study rules"
+  to "Known-study or key-study rules", anchor the four stopping subsections,
+  link the WSS definition by DOI, split one long paragraph, and state that
+  screening by large language models is outside the appendix's scope.
+
 - **Appendix E review.** Apply `reviews/appendix-e-review.md`. Diversification
   now follows the opening section instead of splitting the learning-to-rank
   argument; its tables become E.1 and E.2 and the learning-to-rank tables E.3
