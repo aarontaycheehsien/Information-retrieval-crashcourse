@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Appendix E review.** Apply `reviews/appendix-e-review.md`. Diversification
+  now follows the opening section instead of splitting the learning-to-rank
+  argument; its tables become E.1 and E.2 and the learning-to-rank tables E.3
+  and E.4, while Table E.5 is unchanged. The fusion prompt, now "Before
+  fusion", also asks whether ranks or scores were combined and how scores were
+  normalised; the reranking prompt asks about diversification. Cite Joachims et
+  al. (2005) on position bias and link Chapter 10's score-fusion section.
+  Regenerate the vendor questionnaire.
+
 - **Appendix D review.** Apply `reviews/appendix-d-review.md`. Three rows no
   longer contradict the chapters they cite: deep search and deep research move
   from agent terminology to a new *Iteration and output* row, single-vector
