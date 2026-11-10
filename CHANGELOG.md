@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Appendix G review.** Apply `reviews/appendix-g-review.md`. The worked
+  example now reports the weakness its own source found in RAG Fusion and says
+  what that evaluation covered. The evaluation section cites Liu, Zhang and
+  Liang (2023) on how often generated sentences and citations were supported in
+  four generative search engines, with a new reference entry. The MCP section
+  links Appendix D's entry instead of repeating it; the conclusion of the
+  long-context section has its own heading; five history links now match the
+  reference list. The appendix moves from about 12 to about 13 minutes.
+
 - **Appendix F review.** Apply `reviews/appendix-f-review.md`. The opening now
   names the same three boundaries as Figure F.3 (coverage, retrieval and
   stopping) and says prioritisation alone cannot lose a record. Move the
