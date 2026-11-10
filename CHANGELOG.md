@@ -9,6 +9,13 @@ entry here.
 
 ## Unreleased
 
+- **Appendix B review.** Apply `reviews/appendix-b-review.md`. The WordPiece
+  example now says that the uncased tokeniser strips accents, how the split is
+  chosen and when a word becomes the unknown token. Table B.1 shows the byte
+  values and an accented letter. Cite WordPiece, CANINE, byte-pair encoding
+  and SentencePiece, with two new reference entries; link Appendix A and
+  Chapter 13. The appendix moves from about 3 to about 4 minutes.
+
 - **Appendix A review.** Apply `reviews/appendix-a-review.md`. Say that the
   original decoder also reads the encoder's output; replace an unverified
   quotation attributed to the BERT paper with a paraphrase; cite T5, BART and
