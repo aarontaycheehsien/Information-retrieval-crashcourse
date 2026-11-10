@@ -49,7 +49,7 @@ another. The author then asked for all to be applied.
   arXiv while the reference list gave publishers' pages. The text now uses the
   reference list's links.
 
-Visible words rise to about 2,860. The reading-time label moves from about 12
+Visible words rise to about 2,810. The reading-time label moves from about 12
 to about 13 minutes. One `id` was added; none was removed.
 
 ## Correction to the review as first reported
