@@ -9,6 +9,11 @@ entry here.
 
 ## Unreleased
 
+- **Reference list.** Cite Joachims et al. (2005) in Chapter 6 and remove four
+  entries that nothing in the book cited: Clarivate (2025a), Lens (2026),
+  OpenAlex (n.d.) and Semantic Scholar (n.d.). The remaining Clarivate 2025
+  entry loses its suffix.
+
 - **Appendix B review.** Apply `reviews/appendix-b-review.md`. The WordPiece
   example now says that the uncased tokeniser strips accents, how the split is
   chosen and when a word becomes the unknown token. Table B.1 shows the byte

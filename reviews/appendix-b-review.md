@@ -58,12 +58,30 @@ It was reported that the unknown token is never mentioned. The appendix does say
 a byte-level model works "without needing an unknown token at the byte level".
 What was missing was that BERT's own tokeniser still falls back to one.
 
-## Open, beyond this appendix
+## Reference-list check (follow-up, 10 November 2026)
 
-Of 127 reference entries with a link, 21 have a link that is used nowhere in the
-main text. The match was on the link only, so some may be cited by name alone;
-only Sennrich and Kudo were checked properly, and both are now cited. The rest
-need a separate pass.
+The count of 21 uncited entries reported above was wrong. It searched only the
+text before the reference list and missed the footnotes and evidence register
+that follow it. A second pass searched everything outside the reference list,
+and the product-claims data, for each entry's link, author and year, and title.
+
+- The list had 167 entries. Five were cited nowhere.
+- **Joachims et al. (2005)** is now cited in Chapter 6, where the text says
+  clicks can reward ranking position. The paper was not read for this check.
+- **Removed** at the author's instruction: Clarivate (2025a), "Smart Search:
+  Designing search for today's scholars"; Lens (2026), "Search syntax";
+  OpenAlex (n.d.), "Open source code repositories"; and Semantic Scholar
+  (n.d.), "How are documents ranked?". The remaining Clarivate 2025 entry lost
+  its "b" suffix. The list now has 163 entries.
+- Six entries were reported as cited by name but not linked (Chen et al., 2017;
+  Lee et al., 2019; Guu et al., 2020; Izacard and Grave, 2021; Borgeaud et al.,
+  2022; Sen et al., 2026). That was also wrong: Appendix G links each of them,
+  to its arXiv page, while the reference list gives the publisher's page.
+  Nothing was changed. Aligning the two sets of links is open.
+
+The check finds entries with no citation. It does not confirm that each
+citation supports its sentence, and it does not find works named in the text
+that have no reference entry.
 
 ## What was checked
 
