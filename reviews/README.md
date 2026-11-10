@@ -13,7 +13,7 @@ instruction. The maintained edition is [search-textbook.html](../search-textbook
   and [third](part-ii-readability-review-3.md) passes, [Part III](part-iii-readability-review.md),
   and the [repetition ledger](repetition-ledger.md).
 - **Content and consistency:** [Chapters 5–11](chapter-5-11-review.md),
-  [Part III review](part-iii-review.md), [second Part III review](part-iii-review-2.md),
+  [Part III review](part-iii-review.md), [second](part-iii-review-2.md) and [third](part-iii-review-3.md) Part III reviews,
   [appendices, labs and Part III](appendices-labs-part-iii-review.md),
   [teaching and labs](teaching-and-labs-review.md), and
   [whole-book consistency](whole-book-consistency-review.md).

@@ -9,6 +9,22 @@ entry here.
 
 ## Unreleased
 
+- **Third Part III review.** Apply `reviews/part-iii-review-3.md`. The closing
+  panel's verdicts on the scite and Google Scholar puzzles now agree with
+  Chapter 4 and Table 1.2 ("explained in kind"), and the Google Scholar entry
+  answers the question Table 1.2 now asks. Chapter 12 separates the April 2026
+  sorting of tools from the December 2025 probe, gains a subheading for
+  retrievers offered as tools, and has eight summary points in place of ten.
+  Chapter 13 maps Figure 13.1 to the eligibility questions and moves the
+  file-search paragraph below it. Chapter 14 says assessors disagree, citing
+  Voorhees (2000); tells readers to keep some poorly formed queries in a local
+  set; uses "known-seed recovery" throughout; moves the dated
+  evidence-synthesis note to the end of the chapter; and adds sources to four
+  passages and footnotes. Table 15.2 gains rows for fusion and reranking and
+  for direct file search. Chapters 14 and 15 each take one more minute; Part
+  III moves from about 84 to about 86 minutes. Refresh the digest and three
+  product-claim excerpts.
+
 - **Third Part II review.** Apply `reviews/part-ii-readability-review-3.md`.
   Figures 6.2, 7.5, 7.6 and 9.5 are redrawn in HTML: the first two carried
   artwork for a different subject than their captions, the third named latent
