@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Appendix D review.** Apply `reviews/appendix-d-review.md`. Three rows no
+  longer contradict the chapters they cite: deep search and deep research move
+  from agent terminology to a new *Iteration and output* row, single-vector
+  retrieval moves to dense retrieval, and sparse retrieval is no longer given
+  as another name for lexical retrieval. Add rows for indexed units and query
+  transformation. Move best-match ranking beside exact-match in Table D.1.
+  Give the eight overlaps anchors, link score fusion, and cross-link
+  Appendices A and D.
+
 - **Appendix C review.** Apply `reviews/appendix-c-review.md`. Rewrite the
   account of Lassance and Clinchant (2022) from the paper itself: its four
   actual changes, the measured latencies, and the loss of effectiveness outside

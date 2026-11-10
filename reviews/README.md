@@ -16,7 +16,7 @@ instruction. The maintained edition is [search-textbook.html](../search-textbook
   [Part III review](part-iii-review.md), [second](part-iii-review-2.md) and [third](part-iii-review-3.md) Part III reviews,
   [appendices, labs and Part III](appendices-labs-part-iii-review.md),
   [Appendix A](appendix-a-review.md), [Appendix B](appendix-b-review.md),
-  [Appendix C](appendix-c-review.md), [teaching and labs](teaching-and-labs-review.md), and
+  [Appendix C](appendix-c-review.md), [Appendix D](appendix-d-review.md), [teaching and labs](teaching-and-labs-review.md), and
   [whole-book consistency](whole-book-consistency-review.md).
 - **Completed restructuring:** [phase records, snapshots and historical scripts](restructuring/README.md).
 
