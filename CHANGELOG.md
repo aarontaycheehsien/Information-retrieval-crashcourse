@@ -9,6 +9,14 @@ entry here.
 
 ## Unreleased
 
+- **Appendix A review.** Apply `reviews/appendix-a-review.md`. Say that the
+  original decoder also reads the encoder's output; replace an unverified
+  quotation attributed to the BERT paper with a paraphrase; cite T5, BART and
+  two papers on embedding models derived from decoder-style models, with four
+  new reference entries; mention the fixed maximum input length as a reason
+  for chunking; add two questions for reading model documentation; and shorten
+  a paragraph that repeated Chapter 5.
+
 - **Third Part III review.** Apply `reviews/part-iii-review-3.md`. The closing
   panel's verdicts on the scite and Google Scholar puzzles now agree with
   Chapter 4 and Table 1.2 ("explained in kind"), and the Google Scholar entry
