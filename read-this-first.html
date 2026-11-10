@@ -22,7 +22,7 @@
 <li><a href="#pipelines">Pipelines</a> <span>· 9 minutes including reflection</span></li>
 <li><a href="#practice">Professional practice</a> <span>· 8 minutes including reflection</span></li>
 <li><a href="#next-action">Next action</a> <span>· 5 minutes including reflection</span></li></ol></nav>
-  <p class="note">3,702 words, about 19 minutes at 200 words per minute; the stage budgets add time to reflect. They are provisional suggestions, not tested completion times.</p>
+  <p class="note">3,831 words, about 20 minutes at 200 words per minute; the stage budgets add time to reflect. They are provisional suggestions, not tested completion times.</p>
 </header>
 <main id="main" tabindex="-1">
   <aside class="orientation" aria-label="How to read these excerpts">
@@ -92,20 +92,20 @@
 <div><dt>top-<em>k</em> belongs to dense retrieval</dt><dd>Top-<em>k</em> is an output boundary for ranked results, regardless of how their scores were produced. <a href="search-textbook.html#distinction-top-k">Read the distinction in Chapter 7</a>.</dd></div>
 <div><dt>neural information retrieval = dense retrieval</dt><dd>Neural IR also includes learnt sparse retrieval, late interaction and neural reranking. <a href="search-textbook.html#distinction-neural-dense">Read the distinction in Chapter 9</a>.</dd></div>
 </dl>
-<p>Most of these will still mean nothing to you. Read the panel now to know what Part II is arguing about, and again <a href="search-textbook.html#what-you-can-now-ask">at the end</a> to see whether you can state each one in your own words. <a href="search-textbook.html#appendix-search-terminology">Appendix D</a> maps the wider terminology overlaps.</p>
+<p>Most of these will still mean nothing to you. Read the panel now to know what Part II is arguing about, and again <a href="search-textbook.html#exercise2">at the end of Part II</a> to see whether you can state each one in your own words. <a href="search-textbook.html#appendix-search-terminology">Appendix D</a> maps the wider terminology overlaps.</p>
 </aside>
 <p class="source-link"><a href="search-textbook.html#distinction-map-vocabulary">Read this in the book</a></p>
 </article>
 <article class="excerpt" id="chapter-5" aria-labelledby="chapter-5-title">
 <h3 id="chapter-5-title">Chapter 5 · Embeddings: what the learnt geometry encodes</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>A dense retriever compares learnt representations rather than strings, which is what allows it to bridge paraphrase.</li><li>Context changes a token’s representation, but contextualisation alone does not decide what evidence retrieval should reward.</li><li>Pretraining supplies broad language patterns; domain pretraining changes the text and vocabulary behind those patterns; neither by itself creates a retriever.</li><li>A model name such as BERT therefore leaves both its task training and its place in the search pipeline unknown.</li></ol>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>An embedding is a learnt mapping into a vector space and, by shorthand, the vector it produces. Not every vector is an embedding: BM25 weights can be written as a vector without being learnt.</li><li>BM25 and an encoder both calculate their numbers. One applies a specified formula; the other applies a mapping fitted during training, and what that training rewarded shapes what ends up near what.</li><li>Context changes a token’s representation, but contextualisation alone does not decide what evidence retrieval should reward.</li><li>Pretraining supplies broad language patterns; domain pretraining changes the text and vocabulary behind those patterns; neither by itself creates a retriever.</li><li>A model name such as BERT therefore leaves both its task training and its place in the search pipeline unknown.</li></ol>
 
 </aside>
 <p class="source-link"><a href="search-textbook.html#embeddings">Read Chapter 5 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-6" aria-labelledby="chapter-6-title">
 <h3 id="chapter-6-title">Chapter 6 · From language model to retrieval encoder</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Contextual encoding and retrieval are separate things. A pretrained encoder supplies representations; retrieval training gives the model an operational model of relevance, influencing which query–document relationships receive high similarity scores.</li><li>Model tokenisation and index analysis are different processes producing different units. A model token is not an indexed term.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Contextual encoding and retrieval are separate things. A pretrained encoder supplies representations; retrieval training gives the model an operational model of relevance, influencing which query–document relationships receive high similarity scores.</li><li>Model tokenisation and index analysis are different processes producing different units. A model token is not an indexed term.</li><li>Pooling combines token representations into one vector, but pooling a pretrained model is not enough. Retrieval training is what makes nearby vectors useful for search.</li><li>Clicks, question–answer pairs, citations and titles paired with abstracts are proxies that teach different ideas of relevance, so the same architecture can rank the same collection differently.</li></ol></aside>
 <p class="source-link"><a href="search-textbook.html#retrieval-encoder">Read Chapter 6 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-7" aria-labelledby="chapter-7-title">
@@ -131,8 +131,8 @@
 </article>
 <article class="excerpt" id="chapter-10" aria-labelledby="chapter-10-title">
 <h3 id="chapter-10-title">Chapter 10 · Hybrid retrieval and rank fusion</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Hybrid retrieval is a claim about how results are combined, not merely about containing two retrievers.</li><li>Blending and routing are different designs: one merges on every query, the other chooses per query.</li></ol>
-<p class="chapter-transition">Hybrid retrieval is not a quality guarantee. Its result depends on the evidence each route preserves, the candidate depth allowed to each, and the rule used to combine them. RRF combines ranks without requiring the input scores to be on the same scale, but it discards score gaps and depends on the supplied lists and their cut-offs. Routing determines which retrievers contribute candidates for a particular query. Chapter 11 asks how a query is interpreted, transformed and routed.</p></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Hybrid retrieval is a claim about how results are combined, not merely about containing two retrievers.</li><li>Blending and routing are different designs: one merges on every query, the other chooses per query. Routing determines which retrievers contribute candidates for a particular query.</li><li>RRF combines ranks without requiring the input scores to be on the same scale, but it discards score gaps and depends on the supplied lists and their cut-offs.</li><li>Score fusion keeps those gaps but depends on how scores are normalised and weighted. Which rule works better has to be tested on the collection.</li><li>Hybrid retrieval is not a quality guarantee. Its result depends on the evidence each route preserves, the candidate depth allowed to each, and the rule used to combine them.</li></ol>
+<p class="chapter-transition">Chapter 11 asks how a query is interpreted, transformed and routed.</p></aside>
 <p class="source-link"><a href="search-textbook.html#hybrid-and-fusion">Read Chapter 10 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-11" aria-labelledby="chapter-11-title">
