@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Appendix C review.** Apply `reviews/appendix-c-review.md`. Rewrite the
+  account of Lassance and Clinchant (2022) from the paper itself: its four
+  actual changes, the measured latencies, and the loss of effectiveness outside
+  the training domain that the authors offset by combining scores with BM25.
+  The previous text named a change the paper does not make. Show the BM25
+  term-frequency factor with two worked values, reprint the four records, and
+  link positional postings both ways with Chapter 2. The appendix moves from
+  about 11 to about 12 minutes.
+
 - **Reference list.** Cite Joachims et al. (2005) in Chapter 6 and remove four
   entries that nothing in the book cited: Clarivate (2025a), Lens (2026),
   OpenAlex (n.d.) and Semantic Scholar (n.d.). The remaining Clarivate 2025
