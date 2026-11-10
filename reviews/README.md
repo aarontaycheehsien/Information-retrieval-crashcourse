@@ -9,7 +9,8 @@ instruction. The maintained edition is [search-textbook.html](../search-textbook
 
 - **Readability:** [plan](readability-plan.md), [Part I](part-i-readability-review.md) and its
   [second pass](part-i-readability-review-2.md),
-  [Part II](part-ii-readability-review.md), [Part III](part-iii-readability-review.md),
+  [Part II](part-ii-readability-review.md), its [second](part-ii-readability-review-2.md)
+  and [third](part-ii-readability-review-3.md) passes, [Part III](part-iii-readability-review.md),
   and the [repetition ledger](repetition-ledger.md).
 - **Content and consistency:** [Chapters 5–11](chapter-5-11-review.md),
   [Part III review](part-iii-review.md), [second Part III review](part-iii-review-2.md),

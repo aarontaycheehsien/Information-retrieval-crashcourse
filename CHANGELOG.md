@@ -9,6 +9,24 @@ entry here.
 
 ## Unreleased
 
+- **Third Part II review.** Apply `reviews/part-ii-readability-review-3.md`.
+  Figures 6.2, 7.5, 7.6 and 9.5 are redrawn in HTML: the first two carried
+  artwork for a different subject than their captions, the third named latent
+  axes, and the fourth listed a cross-encoder inside an LLM reranker. Figure
+  8.7 is redrawn and absorbs Figure 8.8. Five further figures get descriptive
+  alt text. Chapter 9 now closes on the two documented pipelines, with the
+  neural IR distinction and learnt sparse retrieval moved ahead of
+  diversification. Chapter 10 gains *Combining scores instead of ranks*, citing
+  Bruch, Gai and Ingber (2023), and a self-check on reciprocal rank fusion.
+  Chapters 5, 6 and 10 have fuller summaries; Chapter 5 has two more
+  self-checks. Application exercise II opens by returning to the five
+  confusions. Correct a self-check in Chapter 7, an inverted sentence in
+  Chapter 10 and the scope of one citation in Table 11.2; remove several
+  forward references; link seven works where the text names them. Footnotes
+  24 to 28 are renumbered. Chapters 5, 6, 7 and 8 each take one more minute and
+  Chapter 10 two; Part II moves from about 107 to about 113 minutes. Refresh
+  the digest.
+
 - **Truncation, phrase and proximity searching in Chapter 2.** Add a short
   section, *Truncation, phrases and proximity use the same map*, explaining that
   truncation expands a pattern against the dictionary and that phrase and
