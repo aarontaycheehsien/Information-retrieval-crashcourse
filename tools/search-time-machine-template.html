@@ -1,0 +1,360 @@
+<title>Search Time Machine</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="One query, seven decades: the same book searched by a 1960s batch run, a 1970s Boolean terminal, a 1980s catalogue, 1990s and 2000s web engines, 2010s word vectors and a 2020s answer pipeline.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=VT323&display=swap">
+<style>
+/* Layout: a gallery wall. One lit display case holds the period screen; a museum placard hangs beside it;
+   the decade dial above doubles as the chart of where one section ranks in each era. */
+:root{
+  --wall:#eceef2; --panel:#ffffff; --ink:#161a21; --ink2:#535c6a; --rule:#cdd3dc;
+  --stamp:#5a3ea6; --stamp-bg:#ece7f8; --found:#17603f; --lost:#9a4a12; --felt:#1d2129;
+  --display:"IBM Plex Sans Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --crt:"VT323","IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --wall:#101318; --panel:#191d25; --ink:#e8ebf0; --ink2:#9da7b6; --rule:#2e3542;
+    --stamp:#b9a5f3; --stamp-bg:#272042; --found:#6fd3a4; --lost:#f0a868; --felt:#07090c; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --wall:#101318; --panel:#191d25; --ink:#e8ebf0; --ink2:#9da7b6; --rule:#2e3542;
+  --stamp:#b9a5f3; --stamp-bg:#272042; --found:#6fd3a4; --lost:#f0a868; --felt:#07090c; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--wall);color:var(--ink);font:16px/1.55 var(--body);-webkit-text-size-adjust:100%}
+.wrap{max-width:1240px;margin:0 auto;padding-block:22px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:16px}
+a{color:var(--stamp)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+
+.mast{display:flex;flex-direction:column;gap:6px}
+.eyebrow{margin:0;font:600 12px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink2)}
+.eyebrow a{color:inherit}
+h1{margin:0;font:700 clamp(30px,4.6vw,52px)/.98 var(--display);letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance}
+.dek{margin:4px 0 0;max-width:92ch;color:var(--ink2);font-size:16px}
+
+.ask{display:flex;flex-direction:column;gap:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ask-row{display:flex;gap:8px;flex-wrap:wrap}
+.ask input{flex:1 1 260px;min-width:0;font:500 17px/1.2 var(--body);padding:10px 13px;border:2px solid var(--ink);border-radius:3px;background:var(--panel);color:var(--ink)}
+.ask-row button{font:700 15px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:0 18px;min-height:44px;border:2px solid var(--ink);border-radius:3px;background:var(--ink);color:var(--wall);cursor:pointer}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chips span{font-size:13px;color:var(--ink2)}
+.chip{font:500 13px/1.2 var(--body);padding:6px 10px;border:1px solid var(--rule);border-radius:999px;background:var(--panel);cursor:pointer;text-align:left}
+.chip b{font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--stamp);margin-right:6px}
+.chip[aria-pressed="true"]{border-color:var(--stamp);background:var(--stamp-bg)}
+
+/* decade dial: a date-due slip. Each stamp also reports where the followed section ranked. */
+.dial{display:flex;flex-direction:column;gap:10px}
+.dial-top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.follow{margin:0;font-size:14px;color:var(--ink2);min-width:0;flex:1 1 320px}
+.follow b{color:var(--ink);font-weight:600}
+#play{font:600 13px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:10px 14px;border:1px solid var(--ink);border-radius:3px;background:transparent;cursor:pointer;white-space:nowrap}
+.eras{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.era{width:100%;height:100%;display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;padding:8px 10px 8px;border:1px solid var(--rule);border-radius:3px;background:var(--panel);cursor:pointer;min-width:0}
+.era .yr{font:700 22px/1 var(--display);letter-spacing:.01em}
+.era .nm{font:500 12px/1.25 var(--body);color:var(--ink2)}
+.era .rk{margin-top:4px;font:600 12px/1 var(--mono);padding:4px 6px;border-radius:2px;border:1px dashed var(--rule);color:var(--ink2);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.era .rk.hit{border:1px solid var(--found);color:var(--found)}
+.era .rk.top{background:var(--found);color:var(--panel);border-color:var(--found)}
+.era .rk.miss{color:var(--lost);border-color:var(--lost)}
+.era[aria-pressed="true"]{border:2px solid var(--stamp);background:var(--stamp-bg);padding:7px 9px 7px}
+.era[aria-pressed="true"] .yr{color:var(--stamp)}
+
+.stage{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(280px,1fr);gap:18px;align-items:start}
+.case{background:var(--felt);border-radius:6px;padding:16px;min-width:0}
+.screen{min-height:560px;max-height:680px;overflow:auto;border-radius:3px}
+.screen:focus-visible{outline-offset:4px}
+.booting{color:#aeb6c4;font:500 15px/1.5 var(--mono);padding:24px}
+.placard{background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:22px 22px 20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.placard .decade{margin:0;font:700 54px/.9 var(--display);color:var(--stamp)}
+.placard h2{margin:0;font:600 22px/1.15 var(--display);text-transform:uppercase;letter-spacing:.02em;text-wrap:balance}
+.who{margin:0;padding:12px 0;border-block:1px solid var(--rule);display:flex;flex-direction:column;gap:2px}
+.who span,.rules dt,.now span,.gl b{font:600 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.who strong{font:600 24px/1.1 var(--display)}
+.rules{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:14px}
+.rules dd{margin:0}
+.now{margin:0;padding:11px 12px;background:var(--stamp-bg);border-radius:3px;font-size:14px;display:flex;flex-direction:column;gap:3px}
+.story{margin:0;font-size:15px}
+.gl{margin:0;font-size:14px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px}
+.gl b{padding-top:3px}
+.src{margin:0;font-size:13px;color:var(--ink2)}
+
+.colophon{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:22px 36px;border-top:2px solid var(--ink);padding-top:22px}
+.colophon h2{margin:0 0 8px;font:600 18px/1.2 var(--display);text-transform:uppercase;letter-spacing:.04em}
+.colophon p,.colophon li{font-size:14px;color:var(--ink2)}
+.colophon p{margin:0 0 10px;max-width:68ch}
+.colophon ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.refs{grid-column:1/-1}
+.refs ol{margin:0;padding-left:22px;columns:2 380px;column-gap:36px}
+.refs li{break-inside:avoid;margin-bottom:8px;overflow-wrap:anywhere}
+
+/* ---------- shared result behaviour inside every period screen ---------- */
+.hit{cursor:pointer}
+.ln,.tl{opacity:0;animation:stm-in .01s linear both;animation-delay:calc(var(--i,0) * var(--step,45ms))}
+@keyframes stm-in{to{opacity:1}}
+@keyframes stm-type{from{max-width:0}to{max-width:calc(var(--n) * 1ch)}}
+@keyframes stm-blink{50%{opacity:0}}
+@keyframes stm-on{0%{opacity:0;filter:brightness(2.2)}60%{opacity:1;filter:brightness(1.4)}100%{opacity:1;filter:none}}
+.screen>*{animation:stm-on .32s ease-out both}
+
+/* ---------- 1960s: punched card and line-printer paper ---------- */
+.s60{display:flex;flex-direction:column;gap:14px;padding:6px}
+.s60 figure{margin:0;display:flex;flex-direction:column;gap:6px}
+.s60 svg{display:block;width:100%;height:auto;max-width:640px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
+.s60 figcaption{font:400 12px/1.4 var(--mono);color:#aeb6c4}
+.paper{position:relative;background:repeating-linear-gradient(#f6f7f0 0 3.3em,#e2efdf 3.3em 6.6em);color:#252a33;font:500 13.5px/1.65 var(--mono);text-transform:uppercase;letter-spacing:.02em;padding:16px 38px 22px;box-shadow:0 3px 8px rgba(0,0,0,.45);--step:55ms}
+.paper::before,.paper::after{content:"";position:absolute;top:0;bottom:0;width:22px;background:radial-gradient(circle at 11px 11px,#1d2129 0 4.2px,transparent 4.8px) 0 0/22px 22px repeat-y;border-inline:1px dashed #c3ccc0}
+.paper::before{left:0}.paper::after{right:0}
+.paper .ln{white-space:pre-wrap;overflow-wrap:anywhere}
+.paper .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-weight:600}
+.paper .rule{border-top:1px dashed #6b7280;margin:6px 0;height:0}
+.paper .cit{display:grid;grid-template-columns:5ch 7ch minmax(0,1fr);column-gap:1ch;padding:1px 0}
+.paper .cit .ix{grid-column:3;color:#5a6270;font-weight:400}
+.paper .cit.tracked{background:#fff3a8}
+.paper .cit:hover{background:#fdf6c9}
+.paper .sug{color:#252a33;text-decoration:underline;cursor:pointer;background:none;border:0;padding:0;font:inherit;text-transform:inherit;letter-spacing:inherit}
+.paper .dim{color:#5a6270}
+
+/* ---------- 1970s: phosphor terminal ---------- */
+.crt{background:linear-gradient(#d3ccbc,#b6ae9c);border-radius:14px;padding:16px 16px 10px;box-shadow:inset 0 2px 0 rgba(255,255,255,.5),inset 0 -3px 0 rgba(0,0,0,.2)}
+.crt .tube{position:relative;border-radius:16px/20px;overflow:hidden;background:#06120a;box-shadow:inset 0 0 0 3px #1a1c1c,inset 0 0 60px rgba(0,0,0,.9)}
+.crt .tube::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(rgba(0,0,0,0) 0 2px,rgba(0,0,0,.22) 2px 3px),radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%)}
+.crt .plate{display:flex;justify-content:space-between;align-items:center;padding:8px 6px 0;font:600 10px/1 var(--mono);letter-spacing:.14em;color:#5f5848;text-transform:uppercase}
+.crt .plate i{width:9px;height:9px;border-radius:50%;background:#e2542f;box-shadow:0 0 6px #e2542f}
+.s70 .text{padding:20px 22px 22px;color:#63f093;text-shadow:0 0 7px rgba(99,240,147,.55);font:400 21px/1.22 var(--crt);text-transform:uppercase;min-height:500px;--step:120ms}
+.s70 .tl{white-space:pre-wrap;overflow-wrap:anywhere}
+.s70 .dimt{color:#3faa67}
+.s70 .cmd{display:flex;gap:1ch;flex-wrap:wrap}
+.s70 .ty{display:inline-block;overflow:hidden;white-space:nowrap;max-width:calc(var(--n) * 1ch);vertical-align:bottom;animation:stm-type calc(var(--n) * 22ms) steps(var(--n)) both;animation-delay:calc(var(--i,0) * var(--step))}
+.s70 .row,.s70 .set{display:grid;grid-template-columns:5ch 6ch minmax(0,1fr);column-gap:1ch}
+.s70 .row .num,.s70 .set .num{text-align:right}
+.s70 .set{color:#b9ffd0}
+.s70 .rec{display:grid;grid-template-columns:6ch minmax(0,1fr);column-gap:1ch;padding:2px 0}
+.s70 .rec.tracked{background:#63f093;color:#06120a;text-shadow:none}
+.s70 .rec:hover{outline:1px dashed #63f093}
+.s70 .cur{display:inline-block;width:1ch;height:1em;background:#63f093;vertical-align:text-bottom;animation:stm-blink 1s steps(1) infinite}
+
+/* ---------- 1980s: the online catalogue ---------- */
+.crt.pc{background:linear-gradient(#4a4d53,#34363b)}
+.crt.pc .plate{color:#b9bcc4}
+.crt.pc .plate i{background:#49d16b;box-shadow:0 0 6px #49d16b}
+.crt.pc .tube{background:#0a1c94}
+.s80 .text{color:#eef1ff;font:400 21px/1.24 var(--crt);text-transform:uppercase;min-height:500px;display:flex;flex-direction:column}
+.s80 .ohead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#6ef0ff;color:#06125e;padding:4px 16px}
+.s80 .obody{flex:1;padding:14px 18px 16px;display:flex;flex-direction:column;gap:10px;border:4px double #6ef0ff;margin:10px}
+.s80 p{margin:0}
+.s80 .hl{color:#ffe36e}
+.s80 .dimt{color:#a9b6ff}
+.s80 .ocount{display:grid;grid-template-columns:auto auto;justify-content:start;column-gap:3ch}
+.s80 .ocount span:nth-child(even){text-align:right}
+.s80 ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.s80 .orow{display:grid;grid-template-columns:3ch minmax(0,1fr) auto;column-gap:1.5ch}
+.s80 .orow .os{grid-column:2/4;color:#a9b6ff}
+.s80 .orow.tracked{background:#ffe36e;color:#06125e}
+.s80 .orow.tracked .os{color:#06125e}
+.s80 .orow.hit:hover{outline:1px dashed #6ef0ff}
+.s80 .here{color:#ffe36e;padding-left:4.5ch}
+.s80 .okeys{display:flex;flex-wrap:wrap;gap:4px 18px;background:#6ef0ff;color:#06125e;padding:4px 16px}
+.s80 .okeys b{background:#06125e;color:#6ef0ff;padding:0 4px;font-weight:400}
+
+/* ---------- 1990s: the first web engines ---------- */
+.win{background:#c0c0c0;border:2px solid;border-color:#fff #404040 #404040 #fff;padding:3px;color:#000;font:13px/1.3 "MS Sans Serif",Tahoma,Geneva,Verdana,sans-serif}
+.win .wtitle{display:flex;justify-content:space-between;gap:8px;background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font-weight:700;padding:4px 6px}
+.win .wtitle span:last-child{letter-spacing:.35em;font-weight:400}
+.win .wmenu{display:flex;flex-wrap:wrap;gap:2px 14px;padding:4px 6px}
+.win .wbar{display:flex;flex-wrap:wrap;gap:4px;padding:2px 4px 5px}
+.win .wbar span{border:2px solid;border-color:#fff #404040 #404040 #fff;padding:3px 9px;background:#c0c0c0}
+.win .wloc{display:flex;gap:6px;align-items:center;padding:0 4px 5px}
+.win .wurl{flex:1;min-width:0;background:#fff;border:2px solid;border-color:#404040 #fff #fff #404040;padding:2px 5px;font:12px/1.3 var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s90 .wpage{background:#c0c0c0;border:2px solid;border-color:#404040 #fff #fff #404040;padding:14px 18px 18px;font:16px/1.35 "Times New Roman",Times,serif;color:#000;min-height:420px}
+.s90 .ilogo{margin:0;font:italic 700 38px/1 "Times New Roman",Times,serif;letter-spacing:-.01em;text-shadow:2px 2px 0 #808080}
+.s90 .ilogo span:nth-child(1){color:#c00000}.s90 .ilogo span:nth-child(2){color:#0000c0}.s90 .ilogo span:nth-child(3){color:#007a00}
+.s90 .itag{margin:2px 0 8px;font-style:italic}
+.s90 hr{border:0;border-top:2px solid #808080;border-bottom:2px solid #fff;margin:10px 0}
+.s90 p{margin:0 0 8px}
+.s90 tt{font:14px/1.2 "Courier New",Courier,monospace}
+.s90 ol{margin:0;padding-left:30px;display:flex;flex-direction:column;gap:10px}
+.s90 .it{color:#0000ee;text-decoration:underline;font-weight:700;background:none;border:0;padding:0;font-family:inherit;font-size:inherit;cursor:pointer;text-align:left}
+.s90 li.tracked .it{color:#551a8b;background:#ffff00}
+.s90 .isc{font:14px/1 "Courier New",Courier,monospace}
+.s90 .iurl{font-size:13px;color:#303030}
+.s90 .ifoot{text-align:center;font-size:13px;margin:0}
+.s90 .cnt{display:inline-block;background:#000;color:#3f3;font:700 14px/1 "Courier New",Courier,monospace;padding:3px 6px;letter-spacing:.2em}
+.s90 .blink{color:#c00000;font-weight:700;animation:stm-blink 1.1s steps(1) infinite}
+
+/* ---------- 2000s: links and snippets ---------- */
+.s00{background:#fff;color:#000;font:13px/1.45 Arial,Helvetica,sans-serif;padding:16px 18px 20px;min-height:540px}
+.s00 .gtop{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:12px}
+.s00 .glogo{font:700 27px/1 Georgia,"Times New Roman",serif;color:#1c3f94;letter-spacing:-.02em}
+.s00 .glogo sup{font:700 10px/1 Arial,sans-serif;color:#c0392b;margin-left:2px}
+.s00 .gbox{flex:1 1 220px;min-width:0;border:1px solid #7f9db9;padding:4px 6px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s00 .gbtn{border:1px solid #707070;background:#eceae1;padding:3px 10px;border-radius:2px}
+.s00 .gstat{background:#f1efe2;border-top:1px solid #b5ad8a;padding:4px 8px;margin-bottom:12px;text-align:right}
+.s00 .gdym{margin:0 0 12px;font-size:15px;color:#c00}
+.s00 .redo{color:#00c;text-decoration:underline;background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.s00 .gcols{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:26px}
+.s00 ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:15px}
+.s00 .gt{color:#00c;text-decoration:underline;font-size:16px;background:none;border:0;padding:0;font-family:inherit;cursor:pointer;text-align:left}
+.s00 li.tracked .gt{color:#551a8b;background:#fff7a8}
+.s00 .gs{margin:1px 0}
+.s00 .gu{margin:0;color:#0a7a2f}
+.s00 .gu span{color:#666}
+.s00 .gads{border-left:1px solid #c9d7f1;padding-left:12px;color:#444;font-size:12px}
+.s00 .gads h4{margin:0 0 6px;font:400 12px/1 Arial,sans-serif;color:#666;text-align:center}
+.s00 .gads p{margin:0}
+
+/* ---------- 2010s: meaning as geometry ---------- */
+.s10{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:18px;align-items:start;padding:4px;font-family:Roboto,"Segoe UI",system-ui,-apple-system,sans-serif}
+.phone{background:#eef0f3;border:10px solid #17181b;border-radius:34px;overflow:hidden;color:#202124;font-size:14px;line-height:1.4;display:flex;flex-direction:column;max-height:640px}
+.phone .pstat{display:flex;justify-content:space-between;padding:7px 18px 2px;font-size:12px;font-weight:600;color:#3c4043}
+.phone .pbar{margin:8px 12px;background:#fff;border-radius:24px;padding:10px 16px;box-shadow:0 1px 4px rgba(32,33,36,.28);display:flex;gap:10px;align-items:center}
+.phone .pbar span:first-child{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}
+.phone .pbar i{width:9px;height:14px;border-radius:5px;background:#4a6cf7;flex:none}
+.phone .ptabs{display:flex;gap:18px;padding:4px 18px 0;font-size:12px;font-weight:600;color:#5f6368;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #dadce0}
+.phone .ptabs span{padding-bottom:7px}
+.phone .ptabs span:first-child{color:#2a56d6;border-bottom:3px solid #2a56d6}
+.phone .pscroll{padding:10px 10px 14px;display:flex;flex-direction:column;gap:10px;overflow:auto;min-height:0}
+.phone ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pcard{background:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 1px 2px rgba(60,64,67,.25);display:flex;flex-direction:column;gap:5px}
+.pcard.tracked{box-shadow:0 0 0 3px #2a56d6}
+.pcard .pk{margin:0;font-size:12px;color:#5f6368}
+.pcard h4{margin:0;font-size:16px;line-height:1.25;font-weight:500;color:#1a3fb0}
+.pcard .px{margin:0;font-size:13px;color:#3c4043}
+.pcard mark{background:#d7e3ff;color:inherit;border-radius:2px;padding:0 1px}
+.pcard .pm{margin:2px 0 0;display:flex;flex-wrap:wrap;gap:5px}
+.pm span{font-size:12px;padding:3px 8px;border-radius:999px;background:#e8eefc;color:#1a3fb0;white-space:nowrap}
+.pm span.same{background:#eceff1;color:#3c4043}
+.pm span.none{background:#fde9e7;color:#a5281b}
+.kpanel{border-top:4px solid #2a56d6}
+.kpanel h4{color:#202124}
+.kpanel .pk{text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.hear{background:#f7f8fa;color:#202124;border-radius:6px;padding:16px 18px;font-size:14px;line-height:1.45}
+.hear h4{margin:0 0 6px;font:600 15px/1.2 var(--display);text-transform:uppercase;letter-spacing:.04em}
+.hear p{margin:0 0 10px;color:#4b5260}
+.hear ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.hear li{display:grid;grid-template-columns:minmax(0,9ch) minmax(0,1fr);gap:10px;align-items:baseline}
+.hear li b{font:600 14px/1.3 var(--mono);overflow-wrap:anywhere}
+.hear li span{color:#3c4043}
+.hear li.oov span{color:#a5281b}
+.hear em{font-style:normal;color:#7a8291;font-size:12px}
+
+/* ---------- 2020s: the answer engine ---------- */
+.s20{background:#16181d;color:#e8eaee;border-radius:14px;padding:18px 20px 22px;font:15px/1.55 var(--body);min-height:540px;display:flex;flex-direction:column;gap:14px}
+.s20 .chead{display:flex;align-items:center;gap:8px;font:600 13px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#aab2c2}
+.s20 .chead i{width:8px;height:8px;border-radius:50%;background:#8fb8ff}
+.s20 .cu{align-self:flex-end;max-width:85%;background:#2a2f3d;border-radius:16px 16px 4px 16px;padding:10px 14px}
+.s20 p{margin:0}
+.s20 .csteps{list-style:none;margin:0;padding:0 0 0 2px;display:flex;flex-direction:column;gap:4px;font-size:13px;color:#aab2c2;--step:260ms}
+.s20 .csteps li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:6px}
+.s20 .csteps li::before{content:"\2713";color:#8fb8ff}
+.s20 .cans{font-size:17px;line-height:1.6;max-width:66ch}
+.s20 .cref{display:inline-block;margin:0 2px 0 3px;min-width:20px;padding:0 5px;border-radius:5px;background:#2a2f3d;border:1px solid #414a5e;color:#cfd8ea;font:600 11px/18px var(--mono);text-align:center;vertical-align:2px;cursor:pointer}
+.s20 .cnote{font-size:12.5px;color:#98a1b2;max-width:70ch}
+.s20 .live{align-self:flex-start;font:600 13px/1 var(--body);padding:9px 14px;border-radius:8px;border:1px solid #8fb8ff;background:transparent;color:#cfe0ff;cursor:pointer}
+.s20 .live[disabled]{opacity:.55;cursor:default}
+.s20 .liveout{border-left:3px solid #8fb8ff;padding:2px 0 2px 14px;white-space:pre-wrap;max-width:68ch}
+.s20 h4{margin:4px 0 0;font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#aab2c2}
+.s20 .clist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:8px}
+.s20 .csrc{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;background:#1e2129;border:1px solid #2c313c;border-radius:10px;padding:10px 12px}
+.s20 .csrc.tracked{border-color:#8fb8ff;box-shadow:0 0 0 1px #8fb8ff}
+.s20 .csrc .cn{font:600 12px/20px var(--mono);width:22px;height:22px;text-align:center;border-radius:5px;background:#2a2f3d;color:#cfd8ea}
+.s20 .csrc b{display:block;font-weight:600;font-size:14px;line-height:1.3}
+.s20 .csrc span{display:block;font-size:12px;color:#98a1b2;margin-top:2px}
+
+@media (max-width:980px){
+  .stage{grid-template-columns:minmax(0,1fr)}
+  .s10{grid-template-columns:minmax(0,1fr)}
+  .phone{max-width:400px}
+}
+@media (max-width:640px){
+  .eras{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .era{padding:7px 7px}
+  .era .yr{font-size:19px}
+  .era .nm{font-size:11px}
+  .era .rk{font-size:10.5px;padding:3px 4px}
+  .phone{max-height:none}
+  .case{padding:8px}
+  .screen{min-height:0;max-height:none}
+  .s70 .text,.s80 .text{font-size:17px;min-height:0}
+  .s70 .text{padding:14px}
+  .paper{padding-inline:30px;font-size:12px}
+  .s00 .gcols{grid-template-columns:minmax(0,1fr)}
+  .s00 .gads{border-left:0;border-top:1px solid #c9d7f1;padding:10px 0 0}
+  .placard .decade{font-size:44px}
+  .s90 .ilogo{font-size:30px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ln,.tl,.screen>*,.s70 .ty,.s70 .cur,.s90 .blink{animation:none!important;opacity:1}
+}
+</style>
+<!--BODY-->
+<div class="wrap">
+  <header class="mast">
+    <p class="eyebrow">An exhibit built on <a href="https://aarontaycheehsien.github.io/Information-retrieval-crashcourse/search-textbook.html">How Search Decides What You See</a>, version __BOOK_VERSION__</p>
+    <h1>How search decided what you saw</h1>
+    <p class="dek">One query, seven decades. Each stop searches the same __DOC_COUNT__ sections of one book with the method of its time. The screens are pastiche. The retrieval is real and runs in your browser.</p>
+  </header>
+
+  <form class="ask" id="qform" autocomplete="off">
+    <label for="q" class="sr">Ask the book anything about search</label>
+    <div class="ask-row">
+      <input id="q" name="q" type="search" spellcheck="false" autocapitalize="off" value="why did my search miss a relevant paper">
+      <button type="submit" id="go">Search all seven decades</button>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Example queries"><span>Try</span></div>
+  </form>
+
+  <nav class="dial" aria-label="Decade">
+    <div class="dial-top">
+      <p class="follow" id="follow">Loading the collection.</p>
+      <button type="button" id="play">Play the seven decades</button>
+    </div>
+    <ol class="eras" id="eras"></ol>
+  </nav>
+
+  <main class="stage">
+    <section class="case" aria-label="Period search screen">
+      <div class="screen" id="screen" tabindex="0" aria-live="polite"><p class="booting">Indexing __DOC_COUNT__ sections seven different ways.</p></div>
+    </section>
+    <aside class="placard" id="placard" aria-label="About this decade"></aside>
+  </main>
+
+  <section class="colophon" id="colophon">
+    <div>
+      <h2>What is real here</h2>
+      <p>The collection is the prose of the book: __DOC_COUNT__ sections, their paragraphs, their cross-references and the __TERM_COUNT__ glossary terms. Each decade's list is computed live by a working implementation of that decade's method. Nothing is scripted, so your own queries work.</p>
+      <ul>
+        <li><b>1960s.</b> The glossary serves as the thesaurus. An indexing pass assigns up to ten terms per section, and a request is answered only through those terms.</li>
+        <li><b>1970s.</b> Exact-word Boolean over an inverted file. Type AND, OR, NOT, "quoted phrases", parentheses or truncation (librar*) and it obeys.</li>
+        <li><b>1980s.</b> Keyword search over catalogue fields only: section title, chapter title and subject headings.</li>
+        <li><b>1990s.</b> Porter-stemmed tf-idf with cosine normalisation.</li>
+        <li><b>2000s.</b> BM25 with a title weight, a PageRank prior from the book's own cross-references, query-biased snippets and edit-distance spelling suggestions.</li>
+        <li><b>2010s.</b> Each paragraph is the weighted mean of its word vectors. Sections are ranked by cosine similarity to the query vector.</li>
+        <li><b>2020s.</b> BM25 and vector lists fused by reciprocal rank fusion, reranked by a soft word-matching score, then answered with quoted sentences.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>What is not</h2>
+      <p>The screens imitate the feel of each period. They are not replicas of any product, and their brand names are invented.</p>
+      <p>The rank chips above are one tracked section, not an evaluation. By default the tracked section is whatever the 2020s pipeline put first, which flatters the 2020s. Click any result in any decade to follow that section instead, and try the Boolean example: the oldest online method is the only one that honours NOT.</p>
+      <p>The vectors are 2014-era static word vectors, one per word, with book-specific terms placed by their context in the book. Trained dense retrievers and neural rerankers are far stronger and far too large to run in a page. The 2020s answer is stitched from quoted sentences, so it cannot invent anything and it cannot synthesise anything either.</p>
+      <p id="buildnote"></p>
+      <p>Generative AI use: this exhibit, including its retrieval code, design and historical notes, was produced by Claude, an AI model made by Anthropic, working from the book’s text. No search library is used. Each source below was matched to an OpenAlex record on 11 November 2026.</p>
+    </div>
+    <div class="refs">
+      <h2>Sources</h2>
+      <ol id="reflist"></ol>
+    </div>
+  </section>
+</div>
+
+<script type="application/json" id="stm-corpus">__CORPUS_JSON__</script>
+<script type="application/json" id="stm-vmeta">__VECTOR_META_JSON__</script>
+<script type="text/plain" id="stm-vectors">__VECTOR_DATA__</script>
+<script>
+/*__ENGINE__*/
+</script>
+<script>
+/*__APP__*/
+</script>

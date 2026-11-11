@@ -28,6 +28,46 @@ the top-k boundary. It reuses the Chapter 2 media engine and adds calculated
 BM25 examples, animated plots and a separate player. Generated files belong in
 the Git-ignored `outputs/chapter-3-videos/`.
 
+## Search Time Machine
+
+`search-time-machine.html` is generated. It searches the book's own sections
+with seven generations of retrieval method, so it must be rebuilt whenever the
+book's prose, headings, cross-references or glossary change. Run:
+
+```powershell
+python -X utf8 tools/build-search-time-machine.py
+python -X utf8 tools/build-search-time-machine.py --check
+node tools/check-search-time-machine.mjs
+node tools/check-search-time-machine.mjs --browser
+```
+
+The builder uses only Python's standard library. It extracts sections,
+paragraphs, cross-references and glossary terms from `search-textbook.html`,
+then inlines them with `assets/search-time-machine-engine.js` (retrieval),
+`assets/search-time-machine-app.js` (interface and period screens) and the
+cached word vectors into `tools/search-time-machine-template.html`. Edit those
+sources, never the generated page. `--fragment OUT.html` also writes the
+body-only form used when publishing the page as a Claude artifact.
+
+The engine check reads the corpus out of the built page and asserts each
+decade's behaviour on fixed queries; `--browser` additionally loads the page in
+Chromium through Playwright at desktop and phone widths.
+
+`data/search-time-machine-vectors.json` is a cached subset of GloVe 100d word
+vectors (Pennington, Socher and Manning 2014; Public Domain Dedication and
+License), taken from the npm package `wink-embeddings-sg-100d` 1.1.0 (MIT) and
+reduced to 64 dimensions. Words the book uses that GloVe lacks are placed from
+their context in the book. Rebuild it only when the book gains substantial new
+vocabulary; this step needs numpy and the unpacked package:
+
+```powershell
+python -X utf8 tools/build-search-time-machine.py --vectors PATH/wink-embeddings-sg-100d.json --general 30000 --dims 64
+```
+
+The period screens are pastiche with invented product names. The historical
+notes cite their sources in the page; check any change to them against those
+sources.
+
 ## Read-this-first digest
 
 `read-this-first.html` is generated, not a separately authored edition. Run:
