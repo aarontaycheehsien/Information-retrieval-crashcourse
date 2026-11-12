@@ -18,7 +18,8 @@ instruction. The maintained edition is [search-textbook.html](../search-textbook
   [Appendix A](appendix-a-review.md), [Appendix B](appendix-b-review.md),
   [Appendix C](appendix-c-review.md), [Appendix D](appendix-d-review.md),
   [Appendix E](appendix-e-review.md), [Appendix F](appendix-f-review.md),
-  [Appendix G](appendix-g-review.md), [teaching and labs](teaching-and-labs-review.md), and
+  [Appendix G](appendix-g-review.md), [teaching and labs](teaching-and-labs-review.md),
+  the [BM25 Evidence Lab](bm25-lab-review.md), and
   [whole-book consistency](whole-book-consistency-review.md).
 - **Completed restructuring:** [phase records, snapshots and historical scripts](restructuring/README.md).
 

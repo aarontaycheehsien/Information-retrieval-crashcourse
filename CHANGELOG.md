@@ -9,6 +9,16 @@ entry here.
 
 ## Unreleased
 
+- **BM25 Evidence Lab.** Apply `reviews/bm25-lab-review.md`. Fix the guided
+  tour's last step, whose synonym buttons were hidden so the step could not be
+  completed. Cap the appendix slider at 5 in step 4 so it no longer reveals
+  step 5's answer. Add buttons to jump between each step's question and its
+  control. Note that Lucene dropped the (k₁ + 1) numerator in version 8.0, in
+  the lab and in Appendix C. Fix sideways overflow on narrow screens, keep k
+  and the selected record in shared sandbox links, and say that accented and
+  hyphenated words are split. Extend `tools/test-labs.cjs` to check each
+  step's controls.
+
 - **Appendix G review.** Apply `reviews/appendix-g-review.md`. The worked
   example now reports the weakness its own source found in RAG Fusion and says
   what that evaluation covered. The evaluation section cites Liu, Zhang and

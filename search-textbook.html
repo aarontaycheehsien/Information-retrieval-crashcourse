@@ -3822,7 +3822,7 @@ $$</p>
 $$
 \frac{tf\,(k_1+1)}{tf+k_1\left(1-b+b\,\dfrac{dl}{avgdl}\right)}
 $$
-<p>Here <em>tf</em> is the term’s count in the document, <em>dl</em> the document’s length and <em>avgdl</em> the average length. For D1, with one occurrence and average length, the factor is exactly 1, so each term contributes its IDF. For D4, with one occurrence and a length of five, it is 2.2 ÷ 2.425 ≈ 0.907, so <code>delulu</code> contributes 0.693 × 0.907 ≈ 0.629.</p>
+<p>Here <em>tf</em> is the term’s count in the document, <em>dl</em> the document’s length and <em>avgdl</em> the average length. For D1, with one occurrence and average length, the factor is exactly 1, so each term contributes its IDF. For D4, with one occurrence and a length of five, it is 2.2 ÷ 2.425 ≈ 0.907, so <code>delulu</code> contributes 0.693 × 0.907 ≈ 0.629. The (<em>k</em><sub>1</sub> + 1) in the numerator is the classic form. <a href="https://issues.apache.org/jira/browse/LUCENE-8563">Lucene removed it in version 8.0</a> because it is the same for every term and does not change the order, so scores reported by Lucene or Elasticsearch are smaller than these by a factor of 2.2 at the default setting, with the same ranking.</p>
 <figure class="ir-figure" aria-labelledby="bm25-top-k-title">
 <p class="figure-title" id="bm25-top-k-title">How BM25 turns postings into a top-two ranking</p>
 <div class="score-grid">

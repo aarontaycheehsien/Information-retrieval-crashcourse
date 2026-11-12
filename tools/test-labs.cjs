@@ -16,7 +16,7 @@ const bcode = bm.slice(bm.indexOf('const RECORDS'),bm.indexOf('const SERIES'))
   + bm.slice(bm.indexOf('function tok'),bm.indexOf('/* ============================== helpers'))
   + bm.slice(bm.indexOf('const STEPS'),bm.indexOf('let tourStep'))
   + bm.slice(bm.indexOf('function renderSaturation'),bm.indexOf('function chart'))
-  + '\nglobalThis.api={state,DEFAULTS,STEPS,analyse,renderSaturation,setAnalysis:value=>A=value};';
+  + '\nglobalThis.api={state,DEFAULTS,STEPS,stepControls,analyse,renderSaturation,setAnalysis:value=>A=value};';
 const charts=[];
 const bctx=vm.createContext({A:null,$:()=>({style:{display:''},innerHTML:''}),chart:(caption,xs,ys)=>{charts.push({caption,xs,ys});return '';}});
 vm.runInContext(bcode,bctx);
@@ -48,6 +48,19 @@ assert.ok(doc(a,'A').total>0,'Record A is scored, just not passed on');
 for(const st of b.STEPS){reset();st.apply();
   assert.ok(st.title==='The boundary that scoring cannot cross'?b.state.topk===1:b.state.topk===6,
     'topk not reset by step: '+st.title);}
+// Each step must show and unlock the controls its own instructions name.
+const tourControls=title=>b.stepControls(b.STEPS.indexOf(step(title)),false);
+assert.ok(tourControls('What BM25 cannot understand').syn,'synonym buttons hidden at the step that uses them');
+assert.ok(tourControls('What BM25 cannot understand').strictOn,'admission toggle locked at the last step');
+assert.equal(b.STEPS.filter((s,i)=>b.stepControls(i,false).syn).length,1,'synonym buttons shown at another step');
+assert.ok(tourControls('Repetition helps, then stops helping').repeatOn);
+assert.ok(tourControls('The boundary that scoring cannot cross').topkOn);
+assert.ok(tourControls('BM25 adds the clues together').padOn);
+// Step 4 must not reveal step 5's answer: A still leads at the slider's limit there.
+{const c=tourControls('The same matches mean more in a short document');assert.ok(c.padOn);
+ reset();b.state.pad=c.padMax;assert.equal(b.analyse().ranked[0].id,'A','step 4 slider reaches the point where D overtakes A');
+ reset();b.state.pad=tourControls('BM25 adds the clues together').padMax;assert.equal(b.analyse().ranked[0].id,'D');}
+for(const s of b.STEPS){assert.ok(s.use&&s.use.target,'no control target for step: '+s.title);}
 reset();b.state.query='unrealistic foolish';a=b.analyse();assert.equal(a.stats.unrealistic.idf,a.stats.foolish.idf);
 reset();b.state.b=0;const score=doc(b.analyse(),'A').total;b.state.pad=8;assert.equal(doc(b.analyse(),'A').total,score);
 const vector=read('vector-similarity-lab.html');
