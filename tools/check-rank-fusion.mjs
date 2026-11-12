@@ -33,7 +33,7 @@ try{
   await page.keyboard.press('Enter');assert.equal(new URL(page.url()).hash,'#main');
   await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(out,'desktop-top.png')});
   const fields={a:'list-a',b:'list-b',c:'constant',depthA:'depth-a',depthB:'depth-b',output:'output-depth'};
-  for(let i=0;i<4;i++){
+  for(let i=0;i<api.STEPS.length;i++){
     await page.locator('#list-a').fill('Changed');await page.locator('#constant').fill('99');
     await page.locator('#steps button').nth(i).click();
     for(const [key,id] of Object.entries(fields))assert.equal(await page.locator('#'+id).inputValue(),String(api.STEPS[i].state[key]));

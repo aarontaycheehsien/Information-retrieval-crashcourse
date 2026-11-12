@@ -21,7 +21,14 @@
     {title:'4. Scores are not relevance', state:BOOK,
       prompt:'A has the highest fused score. Does keeping only A establish that it is relevant, or that fusion improved the search?',
       change:{output:1}, action:'Keep one output and explain',
-      explanation:'No. Output depth only hides lower-ranked fused records; it leaves all scores unchanged. These schematic identifiers have no relevance judgements. Evaluate against a written information need and human judgements before claiming an improvement.'}
+      explanation:'No. Output depth only hides lower-ranked fused records; it leaves all scores unchanged. These schematic identifiers have no relevance judgements. Evaluate against a written information need and human judgements before claiming an improvement.'},
+    {title:'5. Agreement against one high rank',
+      state:{a:['X',...Array.from({length:18},(_,i)=>'A'+String(i+2).padStart(2,'0')),'Y'].join('\n'),
+             b:[...Array.from({length:19},(_,i)=>'B'+String(i+1).padStart(2,'0')),'Y'].join('\n'),
+             c:60,depthA:20,depthB:19,output:3},
+      prompt:'X is first in list A and absent from list B. Y is last, 20th, in list A; it is also the 20th record of list B, which at present supplies only 19. Predict what happens to Y when list B supplies its 20th record.',
+      change:{depthB:20}, action:'Raise list B depth to 20',
+      explanation:'Y moves from far behind to first. With one contribution it scored 1/80 = 0.01250; with two it scores 2/80 = 0.02500, above X’s 1/61 = 0.01639. At c = 60, a record supplied by both lists outranks one supplied by a single list even when it is last in both and the other is first. X ties with B01, which is first in list B only. This is what RRF’s reward for agreement amounts to; it is not evidence that Y is the more relevant record. Chapter 10’s self-check makes the same point with lists of 50.'}
   ];
   function integer(value, min, max, label) {
     if (String(value).trim() === '') throw new Error(`${label}: enter a whole number from ${min} to ${max}.`);

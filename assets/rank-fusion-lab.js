@@ -4,7 +4,7 @@
   const api=globalThis.RankFusion;if(!api)return;
   const $=id=>document.getElementById(id);
   const fields={a:$('list-a'),b:$('list-b'),c:$('constant'),depthA:$('depth-a'),depthB:$('depth-b'),output:$('output-depth')};
-  let step=0;
+  let step=0,concealed=false;
   const read=()=>Object.fromEntries(Object.entries(fields).map(([key,el])=>[key,el.value]));
   const write=value=>Object.entries(fields).forEach(([key,el])=>el.value=value[key]);
   function cell(tag,text){const el=document.createElement(tag);el.textContent=text;return el;}
@@ -49,11 +49,25 @@
     $('tie-note').hidden=!tied;
     $('tie-note').textContent='Equal scores share a rank. Identifiers are sorted by JavaScript string order only to make display deterministic.'+
       (result.splitTie?' The output cut-off splits a tied group: the displayed identifier order decides which tied records remain visible, not greater relevance.':'');
-    $('results').hidden=!result.rows.length;
+    // An experiment that changes nothing would otherwise show its answer before the prediction.
+    $('results').hidden=!result.rows.length||concealed;
+    $('concealed-note').hidden=!concealed;
     document.querySelectorAll('#presets button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.c)===result.c)));
+  }
+  function orderText(result){
+    return result.visible.length?result.visible.map(row=>`${row.rank}${row.tied?' (tie)':''} ${row.id}`).join(', '):'no records';
+  }
+  function writeHash(){history.replaceState(null,'','#'+new URLSearchParams(read()).toString());}
+  function clearHash(){if(location.hash&&location.hash!=='#main')history.replaceState(null,'',location.pathname+location.search);}
+  function readHash(){
+    if(location.hash.length>6000)return null;
+    const p=new URLSearchParams(location.hash.slice(1)),value={};
+    for(const key of Object.keys(fields)){if(!p.has(key))return null;value[key]=p.get(key);}
+    return value;
   }
   function loadStep(index){
     step=index;const chosen=api.STEPS[step];write(chosen.state);
+    concealed=Object.keys(chosen.change).length===0;$('tour-order').hidden=true;clearHash();
     $('step-title').textContent=chosen.title;$('prediction').textContent=chosen.prompt;
     $('try-change').textContent=chosen.action;$('explanation').hidden=true;
     $('tour-state').textContent='The experiment is at its starting state. Make a prediction before revealing the explanation.';
@@ -61,6 +75,7 @@
     render();
   }
   function edited(){
+    concealed=false;$('tour-order').hidden=true;writeHash();
     $('explanation').hidden=true;
     $('tour-state').textContent='You are exploring custom settings. The experiment action restores its starting lists and controls before applying its prescribed change.';
     render();
@@ -75,10 +90,18 @@
   }
   Object.values(fields).forEach(el=>el.addEventListener('input',edited));
   $('try-change').addEventListener('click',()=>{
-    const s=api.STEPS[step];write({...s.state,...s.change});render();
+    const s=api.STEPS[step],changed=Object.keys(s.change).length>0;
+    const before=api.calculate(s.state);
+    write({...s.state,...s.change});concealed=false;render();
+    const after=api.calculate({...s.state,...s.change});
+    $('tour-order').textContent=changed?`Fused order before: ${orderText(before)}. After: ${orderText(after)}.`:`Fused order: ${orderText(after)}.`;
+    $('tour-order').hidden=false;
     $('explanation').textContent=s.explanation;$('explanation').hidden=false;
     $('tour-state').textContent='Prescribed experiment shown. Choose its step button again to restore the starting state.';
   });
   $('reset').addEventListener('click',()=>loadStep(0));
-  loadStep(0);$('static-example').hidden=true;$('interactive').hidden=false;
+  const shared=readHash();
+  loadStep(0);
+  if(shared){write(shared);concealed=false;writeHash();$('tour-state').textContent='Settings loaded from a shared link. Choose an experiment to return to the guided states.';render();}
+  $('static-example').hidden=true;$('interactive').hidden=false;
 })();

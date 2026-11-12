@@ -9,6 +9,14 @@ entry here.
 
 ## Unreleased
 
+- **Rank Fusion Lab.** Apply `reviews/rank-fusion-lab-review.md`. Each
+  experiment now shows its fused order beside the explanation, and the first
+  experiment hides its result until revealed. Add a fifth experiment in which a
+  record last in both lists outranks one first in a single list, matching
+  Chapter 10's self-check. Link Chapter 10's score-fusion section and keep
+  sandbox settings in shareable links. Update the teaching notes to five
+  experiments.
+
 - **Vector Similarity Lab.** Apply `reviews/vector-lab-review.md`. The guided
   tour is no longer watch-only: steps 3, 4, 6 and 7 each unlock one control
   after the prediction, and the filters are ticked by the learner. Answers are

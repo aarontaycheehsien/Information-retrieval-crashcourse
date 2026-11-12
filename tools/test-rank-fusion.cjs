@@ -51,6 +51,16 @@ for(const step of api.STEPS){
   assert.doesNotThrow(()=>api.calculate(step.state));
   assert.doesNotThrow(()=>api.calculate({...step.state,...step.change}));
 }
+// Experiment 5: a record last in both lists outranks one that is first in a single list.
+{const s=api.STEPS.find(x=>x.title.startsWith('5.'));assert.ok(s,'no fifth experiment');
+ const before=api.calculate(s.state),after=api.calculate({...s.state,...s.change});
+ assert.equal(before.a.length,20);assert.equal(before.b.length,20);
+ assert.deepEqual(before.rows.slice(0,2).map(x=>x.id),['B01','X']);assert.equal(before.rows[0].rank,before.rows[1].rank);
+ assert.equal(before.rows.find(x=>x.id==='Y').score,1/80);
+ assert.equal(after.rows[0].id,'Y');assert.equal(after.rows[0].score.toFixed(5),'0.02500');
+ assert.equal(after.rows.find(x=>x.id==='X').score.toFixed(5),'0.01639');}
+// Only an experiment that changes nothing needs its answer concealed; there is exactly one.
+assert.deepEqual(api.STEPS.filter(x=>Object.keys(x.change).length===0).map(x=>x.title),['1. Agreement']);
 // Identifiers are data even when they resemble markup.
 assert.equal(run({a:'<img onerror=alert(1)>',b:''}).rows[0].id,'<img onerror=alert(1)>');
 console.log('PASS: book/static fixtures, exact ties, constant change, cutoffs, empty lists, duplicates, validation and all guided states.');
