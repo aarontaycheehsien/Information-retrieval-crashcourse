@@ -9,6 +9,15 @@ entry here.
 
 ## Unreleased
 
+- **Vector Similarity Lab.** Apply `reviews/vector-lab-review.md`. The guided
+  tour is no longer watch-only: steps 3, 4, 6 and 7 each unlock one control
+  after the prediction, and the filters are ticked by the learner. Answers are
+  remembered and steps can be skipped. A link ending in `#cutoff-experiment`
+  opens the sandbox's cut-off experiment, and Chapter 13 now links there. Each
+  step declares its own controls; `tools/test-labs.cjs` checks them. Shorten
+  the header, add buttons to jump between question and control on narrow
+  screens, and fix the oversized arrowhead on the selected vector.
+
 - **BM25 Evidence Lab.** Apply `reviews/bm25-lab-review.md`. Fix the guided
   tour's last step, whose synonym buttons were hidden so the step could not be
   completed. Cap the appendix slider at 5 in step 4 so it no longer reveals

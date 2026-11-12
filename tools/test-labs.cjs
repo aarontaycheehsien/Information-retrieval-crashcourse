@@ -84,8 +84,9 @@ assert.ok(Number(controls.magnitude.min)>0);
 const vctx=vm.createContext({document:{getElementById:id=>controls[id]||{},querySelectorAll:()=>[]}});
 const vcode=vector.slice(vector.indexOf('const COLOURS'),vector.indexOf('function setMetric'))
   +vector.slice(vector.indexOf('function barStyle'),vector.indexOf('function renderRanking'))
+  +vector.slice(vector.indexOf('const TOURS'),vector.indexOf('function applyTour'))
   + '\nglobalThis.api={values,ranked,excluded,excludedBy,barStyle,set:(m,n)=>{metric=m;normalised=n;},'
-  + 'setFilters:f=>{filters=Object.assign({recent:false,empirical:false},f);},candidates};';
+  + 'setFilters:f=>{filters=Object.assign({recent:false,empirical:false},f);},candidates,TOURS,stepControls};';
 vm.runInContext(vcode,vctx);const v=vctx.api;
 assert.equal(v.ranked()[0],'A');v.set('dot',false);assert.equal(v.ranked()[0],'B');
 v.set('dot',true);for(const id of ['A','B','C'])assert.equal(v.values(id).dot,v.values(id).cosine);
@@ -109,4 +110,34 @@ assert.equal(v.ranked().join(','),'C','both criteria leave only C');
 assert.equal(v.excluded().join(','),'A,B');
 assert.ok(v.values('C').cosine<0,'C wins on eligibility, not on score');
 v.setFilters({});
-console.log('PASS: script syntax, BM25 admission/ranking and all tour examples, the candidate boundary and its reset across steps, chart/slider agreement, cosine/dot ranking, normalisation, unclipped bars and the vector lab\'s metadata filters.');
+// Each tour step must show and unlock the controls its own text names.
+{const at=title=>{const i=v.TOURS.findIndex(s=>s.title===title);assert.ok(i>=0,'no vector tour step titled '+title);return i;};
+ const unlocked=name=>v.TOURS.map((s,i)=>v.stepControls(i,false,true).on[name]?s.title:null).filter(Boolean).join('|');
+ assert.equal(unlocked('magnitude'),'Dot product also sees magnitude');
+ assert.equal(unlocked('normalise'),'Normalisation makes the rules agree');
+ assert.equal(unlocked('recent'),'Apply the date criterion');
+ assert.equal(unlocked('empirical'),'Apply the study-type criterion');
+ assert.equal(unlocked('angle'),'');assert.equal(unlocked('metric'),'');
+ // Nothing is unlocked before the prediction, and the sandbox unlocks everything.
+ v.TOURS.forEach((s,i)=>{const on=v.stepControls(i,false,false).on;assert.ok(Object.values(on).every(x=>!x),'control unlocked before prediction: '+s.title);
+   assert.ok(s.target,'no control target for vector step: '+s.title);});
+ assert.ok(Object.values(v.stepControls(0,true,false).on).every(Boolean));
+ // A control stays visible from the step that introduces it.
+ const shownFrom=name=>v.TOURS.findIndex((s,i)=>v.stepControls(i,false,false).show[name]);
+ assert.equal(shownFrom('metric'),at('Cosine turns direction into a score'));
+ assert.equal(shownFrom('magnitude'),at('Dot product also sees magnitude'));
+ assert.equal(shownFrom('normalise'),at('Normalisation makes the rules agree'));
+ assert.equal(shownFrom('filters'),at('Apply the date criterion'));
+ for(const name of ['metric','magnitude','normalise','filters'])
+   for(let i=shownFrom(name);i<v.TOURS.length;i++)assert.ok(v.stepControls(i,false,false).show[name],name+' hidden again at step '+(i+1));
+ // The eligibility warning appears only after a prediction, on the steps that flag it.
+ assert.ok(!v.stepControls(at('Apply the date criterion'),false,false).note);
+ assert.ok(v.stepControls(at('Apply the date criterion'),false,true).note);
+ assert.ok(!v.stepControls(at('Cosine turns direction into a score'),false,true).note);
+ // The steps where the learner acts start from the state their text describes.
+ assert.equal(v.TOURS[at('Normalisation makes the rules agree')].normalised,false);
+ assert.deepEqual({...v.TOURS[at('Apply the study-type criterion')].filters},{recent:true,empirical:false});
+ // Step 3's claim: A overtakes B under dot product once B is shorter than about 1.6.
+ v.set('dot',false);v.candidates.B.magnitude=1.55;assert.equal(v.ranked()[0],'A');
+ v.candidates.B.magnitude=1.65;assert.equal(v.ranked()[0],'B');v.candidates.B.magnitude=1.9;v.set('cosine',false);}
+console.log('PASS: script syntax, BM25 admission/ranking and all tour examples, the candidate boundary and its reset across steps, chart/slider agreement, cosine/dot ranking, normalisation, unclipped bars, the vector lab\'s metadata filters and each tour step\'s controls in both labs.');

@@ -32,11 +32,11 @@ button,input,select{font:inherit}
 .change-note{font:.84rem/1.5 var(--sans);background:var(--teal-soft);padding:.8rem;border-radius:8px}
 .prediction-note{font:.85rem/1.5 var(--sans);color:var(--muted)}
 
-.hero{border-bottom:1px solid rgba(23,32,31,.15);padding:3.4rem clamp(1.1rem,4vw,3.5rem) 2.4rem}
+.hero{border-bottom:1px solid rgba(23,32,31,.15);padding:2.2rem clamp(1.1rem,4vw,3.5rem) 1.5rem}
 .hero-inner{max-width:1240px;margin:0 auto}
 .kicker{margin:0 0 .8rem;font:700 .74rem/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
 h1{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.06;letter-spacing:-.035em;margin:0 0 .9rem}
-.subtitle{font-size:clamp(1rem,1.9vw,1.2rem);color:var(--muted);max-width:65ch;margin:0 0 1.4rem}
+.subtitle{font-size:clamp(1rem,1.9vw,1.2rem);color:var(--muted);max-width:65ch;margin:0 0 .9rem}
 .backlink{font:600 .84rem/1 var(--sans)}
 .wrap{max-width:1240px;margin:0 auto;padding:2rem clamp(1.1rem,4vw,3.5rem) 5rem}
 
@@ -166,6 +166,7 @@ input[type=range]:disabled{opacity:.42}
 
 .wrap.in-tour>.tour{margin-bottom:0}
 @media(min-width:1180px){
+  #tour-jump,#tour-back-wrap{display:none}
   .wrap.in-tour{display:grid;grid-template-columns:minmax(310px,370px) 1fr;gap:1.1rem;align-items:start}
   .wrap.in-tour>.modebar{grid-column:1/-1}
   .wrap.in-tour>.tour{grid-column:1;position:sticky;top:1rem}
@@ -177,7 +178,7 @@ input[type=range]:disabled{opacity:.42}
   .wrap.in-tour>.adv,.wrap.in-tour>.lab-appendix{grid-column:1/-1}
 }
 @media(max-width:980px){.lab{grid-template-columns:minmax(235px,280px) 1fr}.rank-panel{grid-column:1/-1}.rank-list{display:grid;grid-template-columns:repeat(3,1fr)}.score-table{max-width:620px;margin-left:auto;margin-right:auto}}
-@media(max-width:680px){body{font-size:16px}.hero{padding-top:2.4rem}.wrap{padding-left:1rem;padding-right:1rem}.lab{grid-template-columns:1fr}.rank-panel{grid-column:auto}.rank-list{grid-template-columns:1fr}.plot-wrap{min-height:235px}.formula-grid,.appendix-grid{grid-template-columns:1fr}.tour-nav .hint{width:100%}.spacer{display:none}.modebar{justify-content:space-between}}
+@media(max-width:680px){body{font-size:16px}.hero{padding-top:1.4rem;padding-bottom:1rem}.wrap{padding-left:1rem;padding-right:1rem}.lab{grid-template-columns:1fr}.rank-panel{grid-column:auto}.rank-list{grid-template-columns:1fr}.plot-wrap{min-height:235px}.formula-grid,.appendix-grid{grid-template-columns:1fr}.tour-nav .hint{width:100%}.spacer{display:none}.modebar{justify-content:space-between}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.vector-line,.endpoint{transition:none}}
 @media print{body{background:#fff}.hero{padding-top:1.5rem}.modebar,.tour-nav,.choices{display:none!important}.panel,.tour,.adv{box-shadow:none;break-inside:avoid}.lab{display:block}.panel{margin-bottom:1rem}.adv-body{display:block!important}}
 </style>
@@ -189,7 +190,6 @@ input[type=range]:disabled{opacity:.42}
   <p class="subtitle">Vector search needs a rule for comparing the query with stored vectors. Follow the seven-step prediction tour, then move the vectors yourself in the sandbox to compare cosine, dot product and relevance.</p>
   <p class="backlink"><a href="search-textbook.html#single-vector-dense-retrieval-compress-first-compare-later">← Back to “Single-vector dense retrieval”</a> · <a href="search-textbook.html#representations-and-units">On to “Representations and indexed units”</a> · <a href="teaching-notes.html#labs">Teaching notes</a></p>
 </div></header>
-<p class="hint" style="max-width:70rem;margin:1rem auto;padding:0 1rem">The document descriptions and coordinates are assigned teaching examples; no embedding model generated them. In a real system, the comparison rule should match the one the model was trained with.</p>
 
 <main class="wrap">
   <div class="modebar">
@@ -220,7 +220,8 @@ input[type=range]:disabled{opacity:.42}
     <div class="tour-nav">
       <button type="button" class="btn" id="tour-prev">← Previous</button>
       <button type="button" class="btn primary" id="tour-next">Next step →</button>
-      <span class="hint">Make a prediction first, then inspect the scores below.</span>
+      <button type="button" class="btn" id="tour-jump">Go to this step’s control ↓</button>
+      <span class="hint">You can skip a prediction, but guessing first is what builds the intuition. Each step unlocks one control after you answer; the others stay fixed until you switch to the sandbox.</span>
     </div>
   </section>
 
@@ -297,15 +298,16 @@ input[type=range]:disabled{opacity:.42}
     <section class="panel" aria-labelledby="plot-title">
       <h2 id="plot-title">Toy vector space</h2>
       <div class="query-box"><strong>Query vector Q</strong>Empirical studies since 2024 on whether open access increases citations<span class="query-meta" id="query-meta">Toy display: 22° from the horizontal axis; length 1.90.</span></div>
+      <p class="hint">The document descriptions and coordinates are assigned teaching examples; no embedding model generated them. In a real system, the comparison rule should match the one the model was trained with.</p>
       <div class="plot-wrap">
         <svg id="plot" viewBox="0 0 620 420" role="img" aria-labelledby="svg-title svg-desc">
           <title id="svg-title">Query and candidate vectors</title>
           <desc id="svg-desc">The longer query vector points diagonally upwards rather than along an axis. Candidate A is selected. Rankings update as the controls change.</desc>
           <defs>
-            <marker id="arrow-q" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1d5b59"/></marker>
-            <marker id="arrow-a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2a78d6"/></marker>
-            <marker id="arrow-b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#d65d2a"/></marker>
-            <marker id="arrow-c" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#7451a6"/></marker>
+            <marker id="arrow-q" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" viewBox="0 0 9 9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1d5b59"/></marker>
+            <marker id="arrow-a" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" viewBox="0 0 9 9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2a78d6"/></marker>
+            <marker id="arrow-b" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" viewBox="0 0 9 9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#d65d2a"/></marker>
+            <marker id="arrow-c" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" viewBox="0 0 9 9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#7451a6"/></marker>
           </defs>
           <g aria-hidden="true">
             <line class="grid-line" x1="72" y1="115" x2="548" y2="115"/><line class="grid-line" x1="72" y1="305" x2="548" y2="305"/>
@@ -344,6 +346,7 @@ input[type=range]:disabled{opacity:.42}
     <section class="panel rank-panel" aria-labelledby="ranking-title">
       <h2 id="ranking-title">Ranked candidates</h2>
       <p id="prediction-note" class="prediction-note">Predict first; then the scores and order will appear here.</p>
+      <p id="tour-back-wrap" hidden><button type="button" class="btn" id="tour-back">↑ Back to the question</button></p>
       <div id="ranking-results"><ol class="rank-list" id="rank-list"></ol>
       <table class="score-table">
         <caption class="sr-only">Exact cosine and dot-product scores for every candidate</caption>
@@ -416,7 +419,7 @@ const COPIES={
 const META={A:{year:2012,empirical:true},B:{year:2025,empirical:false},C:{year:2025,empirical:true}};
 const DEFAULTS={A:{angle:24,magnitude:1},B:{angle:55,magnitude:1.9},C:{angle:122,magnitude:1.35}};
 let filters={recent:false,empirical:false};
-let topK=3,filterOrder='before',answered=false,challenge=null;
+let topK=3,filterOrder='before',answered=false,answers=[],challenge=null;
 function eligible(id){
   if(filters.recent&&META[id].year<2024)return false;
   if(filters.empirical&&!META[id].empirical)return false;
@@ -489,30 +492,32 @@ function renderControls(){
   normalise.checked=normalised;
   $('filter-recent').checked=filters.recent;
   $('filter-empirical').checked=filters.empirical;
-  $('filter-recent').disabled=inTour;
-  $('filter-empirical').disabled=inTour;
+  const c=stepControls(tourIndex,!inTour,answered);
+  $('filter-recent').disabled=!c.on.recent;
+  $('filter-empirical').disabled=!c.on.empirical;
   candidateButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.id===selected)));
   angle.value=candidates[selected].angle;
   magnitude.value=candidates[selected].magnitude;
-  magnitude.disabled=normalised || inTour;
-  angle.disabled=inTour;
-  metricCos.disabled=inTour; metricDot.disabled=inTour; normalise.disabled=inTour;
+  magnitude.disabled=normalised || !c.on.magnitude;
+  angle.disabled=!c.on.angle;
+  metricCos.disabled=!c.on.metric; metricDot.disabled=!c.on.metric; normalise.disabled=!c.on.normalise;
   $('angle-val').textContent=displayAngle(candidates[selected].angle);
   $('magnitude-val').textContent=normalised?'1.00 (normalised)':candidates[selected].magnitude.toFixed(2);
   $('candidate-copy').textContent=COPIES[selected];
   // The tour introduces one mechanism at a time; sandbox exposes all controls.
-  metricCos.closest('.control-block').hidden=inTour&&tourIndex<1;
-  normalise.closest('.control-block').hidden=inTour&&tourIndex<3;
-  $('filter-recent').closest('.control-block').hidden=inTour&&tourIndex<5;
-  magnitude.closest('.ctrl').hidden=inTour&&tourIndex<2;
+  metricCos.closest('.control-block').hidden=!c.show.metric;
+  normalise.closest('.control-block').hidden=!c.show.normalise;
+  $('filter-recent').closest('.control-block').hidden=!c.show.filters;
+  magnitude.closest('.ctrl').hidden=!c.show.magnitude;
+  $('tour-jump').hidden=!inTour||!c.target;
+  $('tour-back-wrap').hidden=!inTour;
   $('top-k').value=String(topK);$('filter-order').value=filterOrder;
   $('sandbox-tools').hidden=inTour;
   $('ranking-results').hidden=inTour&&!answered;
   $('prediction-note').hidden=!inTour||answered;
   $('selected-detail').hidden=inTour&&!answered;
-  $('eligibility-note').hidden=inTour&&(!answered||tourIndex<4);
+  $('eligibility-note').hidden=!c.note;
   $('formulas').hidden=inTour&&!answered;
-  $('tour-next').disabled=inTour&&!answered;
   $('query-meta').textContent=normalised?`Toy display: ${displayAngle(QUERY.angle)} from the horizontal axis; length 1.00 after normalisation.`:`Toy display: ${displayAngle(QUERY.angle)} from the horizontal axis; length ${QUERY.magnitude.toFixed(2)}.`;
 }
 
@@ -620,15 +625,17 @@ const TOURS=[
     choices:[['Candidate A','a'],['Candidate B','b'],['Candidate C','c']],correct:'a',
     answer:'Candidate A. Its direction is closest to the query. That visual judgement is the relationship cosine similarity will turn into a number.',
     takeaway:'Two coordinates are enough to draw the idea: one query arrow, several candidate arrows, and a rule that compares them.',
+    target:'plot',
     metric:'cosine',normalised:false,selected:'A',vectors:{A:{angle:24,magnitude:1},B:{angle:55,magnitude:1.65},C:{angle:82,magnitude:1.35}}
   },
   {
     title:'Cosine turns direction into a score',
-    intro:'A is shorter than B, but it points more nearly in the query direction. Cosine looks at that angle and divides away both vector lengths.',
+    intro:'From this step on the arrows have moved: B is longer, and C now points well away from the query. A is shorter than B, but it points more nearly in the query direction. Cosine looks at that angle and divides away both vector lengths.',
     question:'Which candidate receives the higher cosine similarity?',
     choices:[['A, because its direction is closer','a'],['B, because it is longer','b'],['They tie','tie']],correct:'a',
     answer:'A ranks higher. Its 24° relative angle gives cosine 0.914; B is longer, but its 55° angle gives cosine 0.574.',
     takeaway:'For cosine similarity, a smaller angle means greater alignment. Making an arrow longer or shorter does not change its cosine score.',
+    introduces:['metric'],target:'plot',
     metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
   },
   {
@@ -636,18 +643,20 @@ const TOURS=[
     intro:'Keep the same separated arrows. A is better aligned, but B is long enough for magnitude to outweigh that angular disadvantage under dot product.',
     question:'Which candidate now ranks first?',
     choices:[['A, because its direction is closer','a'],['B, because its length outweighs the angle','b'],['They tie','tie']],correct:'b',
-    answer:'B ranks first. Its direction is less closely aligned, but its greater magnitude produces the larger dot product.',
+    answer:'B ranks first. Its direction is less closely aligned, but its greater magnitude produces the larger dot product. The length slider is now unlocked for B: shorten it and watch A take first place once B falls below about 1.6.',
     takeaway:'Without normalisation, a dot-product ranking reflects direction and magnitude. A model can learn to use magnitude, so it is not merely an accidental nuisance.',
+    introduces:['magnitude'],use:{magnitude:true},target:'magnitude',
     metric:'dot',normalised:false,selected:'B',vectors:DEFAULTS
   },
   {
     title:'Normalisation makes the rules agree',
-    intro:'Normalisation gives every vector length one. The directions stay the same, but magnitude can no longer affect the dot product.',
-    question:'What happens to cosine similarity and dot product now?',
+    intro:'Normalisation gives every vector length one. The directions stay the same, but magnitude can no longer affect the dot product. Dot product is still the scoring rule, and B still leads.',
+    question:'What will happen to cosine similarity and dot product once every vector is normalised?',
     choices:[['They become numerically identical','same'],['Cosine becomes larger','cos'],['Dot product becomes larger','dot']],correct:'same',
-    answer:'They become identical for every candidate. With both lengths equal to one, cosine’s denominator is one, leaving the dot product.',
+    answer:'They become identical for every candidate. Tick the normalisation switch, now unlocked, and compare the Cosine and Dot columns: with both lengths equal to one, cosine’s denominator is one, leaving the dot product. A returns to first place.',
     takeaway:'For unit-normalised vectors, cosine similarity and dot product are two names for the same calculation and produce the same ranking.',
-    metric:'dot',normalised:true,selected:'A',vectors:DEFAULTS
+    metric:'dot',normalised:false,selected:'A',vectors:DEFAULTS,
+    introduces:['normalise'],use:{normalise:true},target:'normalise'
   },
   {
     title:'A similarity score is not relevance',
@@ -656,33 +665,51 @@ const TOURS=[
     choices:[['No — it is a comparison score','no'],['Yes — cosine is a probability','yes']],correct:'no',
     answer:'No. The score describes alignment in this toy space. It does not observe the complete information need, and it is not calibrated as a probability.',
     takeaway:'Nearest means best available under the chosen representation and rule. A person still judges whether the result satisfies the need.',
-    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS
+    metric:'cosine',normalised:false,selected:'A',vectors:DEFAULTS,
+    note:true,target:'ranking-title'
   },
   {
     title:'Apply the date criterion',
-    intro:'A leads under cosine. Predict what will happen when we apply Published 2024 or later. Your answer applies the filter and reveals the result.',
+    intro:'A leads under cosine. Predict what will happen when we apply Published 2024 or later. After you answer, tick the filter yourself.',
     question:'After the date filter removes A, which record will rank first?',
     choices:[['C, because it meets both criteria','c'],['B, which is still a commentary','b'],['No records','none']],correct:'b',
-    answer:'B now leads. The date filter removed A; it did not change any similarity score. B still fails the empirical-study criterion.',
+    answer:'B leads once the filter is on. Tick <b>Published 2024 or later</b>, now unlocked, to see it: the date filter removes A; it does not change any similarity score. B still fails the empirical-study criterion.',
     takeaway:'One metadata filter enforces one criterion. It does not supply the other.',
     metric:'cosine',normalised:false,selected:'B',vectors:DEFAULTS,
-    filters:{recent:false,empirical:false},revealFilters:{recent:true,empirical:false}
+    filters:{recent:false,empirical:false},
+    introduces:['filters'],use:{recent:true},note:true,target:'filter-recent'
   },
   {
     title:'Apply the study-type criterion',
-    intro:'The date filter is already active. Predict the effect of also requiring empirical studies. Your answer applies the second filter.',
+    intro:'The date filter is already active. Predict the effect of also requiring empirical studies. After you answer, tick the second filter yourself.',
     question:'Which record remains after both metadata filters?',
     choices:[['A','a'],['B','b'],['C','c']],correct:'c',
-    answer:'C is the only record left. Its cosine is still −0.530, the lowest of the three: the one record meeting both criteria is the least similar (the appendix below explains negative scores). Meeting the metadata criteria does not by itself establish its quality or whether its findings answer the question.',
+    answer:'C is the only record left once both filters are on. Tick <b>Empirical studies only</b>, now unlocked, to see it. Its cosine is still −0.530, the lowest of the three: the one record meeting both criteria is the least similar (the appendix below explains negative scores). Meeting the metadata criteria does not by itself establish its quality or whether its findings answer the question.',
     takeaway:'Admission rules change which records survive, not their similarity scores. These rules assume accurate, complete metadata.',
     metric:'cosine',normalised:false,selected:'C',vectors:DEFAULTS,
-    filters:{recent:true,empirical:false},revealFilters:{recent:true,empirical:true}
+    filters:{recent:true,empirical:false},
+    use:{empirical:true},note:true,target:'filter-empirical'
   }
 ];
 
+/* Which controls a tour step shows and unlocks. A control appears from the step
+   that introduces it, and a step unlocks its own control once the prediction has
+   been made. Steps declare this themselves, so inserting or reordering steps
+   cannot leave a rule pointing at the wrong one. The sandbox unlocks everything. */
+function stepControls(index,sandbox,isAnswered){
+  const all={metric:true,magnitude:true,normalise:true,filters:true};
+  if(sandbox)return {show:all,on:{angle:true,magnitude:true,metric:true,normalise:true,recent:true,empirical:true},note:true,target:null};
+  const seen=new Set();
+  for(let i=0;i<=index;i++)(TOURS[i].introduces||[]).forEach(name=>seen.add(name));
+  const step=TOURS[index],use=isAnswered?(step.use||{}):{};
+  return {show:{metric:seen.has('metric'),magnitude:seen.has('magnitude'),normalise:seen.has('normalise'),filters:seen.has('filters')},
+    on:{angle:false,magnitude:!!use.magnitude,metric:false,normalise:!!use.normalise,recent:!!use.recent,empirical:!!use.empirical},
+    note:isAnswered&&!!step.note,target:step.target||null};
+}
+
 function applyTour(index){
   const step=TOURS[index];
-  answered=false;topK=3;filterOrder='before';challenge=null;$('change-note').hidden=true;
+  answered=answers[index]!==undefined;topK=3;filterOrder='before';challenge=null;$('change-note').hidden=true;
   metric=step.metric;normalised=step.normalised;selected=step.selected;candidates=clone(step.vectors);
   filters=Object.assign({recent:false,empirical:false},step.filters||{});
   $('tour-step').textContent=`Step ${index+1} of ${TOURS.length}`;
@@ -693,7 +720,8 @@ function applyTour(index){
   tourFigure.innerHTML=step.image?`<img src="${step.image}" alt="${step.imageAlt}">`:'';
   $('tour-question').textContent=step.question;
   $('tour-choices').innerHTML=step.choices.map(([label,value])=>`<button type="button" class="choice" data-value="${value}">${label}</button>`).join('');
-  $('tour-reveal').hidden=true;
+  $('tour-reveal').hidden=!answered;
+  if(answered)markChoices(step,answers[index]);
   $('tour-answer').innerHTML=`<p>${step.answer}</p>`;
   $('tour-takeaway').innerHTML=`<b>Keep:</b> ${step.takeaway}`;
   $('tour-dots').innerHTML=TOURS.map((_,i)=>`<i class="dot${i===index?' on':''}"></i>`).join('');
@@ -702,14 +730,17 @@ function applyTour(index){
   render();
 }
 
-function chooseAnswer(button){
-  const step=TOURS[tourIndex];
-  answered=true;if(step.revealFilters)filters=clone(step.revealFilters);
+function markChoices(step,value){
   [...$('tour-choices').querySelectorAll('button')].forEach(choice=>{
     choice.disabled=true;
     choice.classList.toggle('right',choice.dataset.value===step.correct);
+    if(choice.dataset.value===value&&value!==step.correct)choice.classList.add('wrong');
   });
-  if(button.dataset.value!==step.correct)button.classList.add('wrong');
+}
+function chooseAnswer(button){
+  const step=TOURS[tourIndex];
+  answered=true;answers[tourIndex]=button.dataset.value;
+  markChoices(step,button.dataset.value);
   $('tour-reveal').hidden=false;
   render();
 }
@@ -720,7 +751,7 @@ function setMode(tourMode){
   $('mode-tour').setAttribute('aria-pressed',String(inTour));
   $('mode-sandbox').setAttribute('aria-pressed',String(!inTour));
   $('tour').hidden=!inTour;
-  if(inTour){tourIndex=0;applyTour(0);}else{resetSandbox();}
+  if(inTour){tourIndex=0;answers=[];applyTour(0);}else{resetSandbox();}
 }
 
 function resetSandbox(){
@@ -758,10 +789,16 @@ $('mode-tour').addEventListener('click',()=>setMode(true));
 $('mode-sandbox').addEventListener('click',()=>setMode(false));
 $('btn-reset').addEventListener('click',()=>{if(inTour)applyTour(tourIndex);else{resetSandbox();}});
 $('tour-choices').addEventListener('click',event=>{const button=event.target.closest('button');if(button)chooseAnswer(button);});
+$('tour-jump').addEventListener('click',()=>{const c=stepControls(tourIndex,false,answered),el=c.target&&$(c.target);if(el)el.scrollIntoView({block:'center'});});
+$('tour-back').addEventListener('click',()=>$('tour').scrollIntoView({block:'start'}));
 $('tour-prev').addEventListener('click',()=>{if(tourIndex>0){tourIndex-=1;applyTour(tourIndex);}});
 $('tour-next').addEventListener('click',()=>{if(tourIndex<TOURS.length-1){tourIndex+=1;applyTour(tourIndex);}else setMode(false);});
 
-if(readHash()){inTour=false;$('tour').hidden=true;$('mode-tour').setAttribute('aria-pressed','false');$('mode-sandbox').setAttribute('aria-pressed','true');render();}else{document.querySelector('.wrap').classList.add('in-tour');applyTour(0);}
+if(location.hash==='#cutoff-experiment'){
+  // A link straight to the optional experiment: open the sandbox, load it and show it.
+  setMode(false);topK=2;filters={recent:true,empirical:true};render();
+  $('cutoff-experiment').open=true;$('cutoff-experiment').scrollIntoView({block:'start'});
+}else if(readHash()){inTour=false;$('tour').hidden=true;$('mode-tour').setAttribute('aria-pressed','false');$('mode-sandbox').setAttribute('aria-pressed','true');render();}else{document.querySelector('.wrap').classList.add('in-tour');applyTour(0);}
 })();
 </script>
 </body></html>
