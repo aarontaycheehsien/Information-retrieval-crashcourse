@@ -1611,10 +1611,7 @@ D4 Delulu about my dream job</code></pre>
 </figure>
 <p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6112631/">PubMed offers an unusually clear documented BM25 example</a>. Its published <a href="#why-search-systems-use-multiple-stages">multi-stage architecture</a> for Best Match first retrieves and orders matching records with BM25, then uses LambdaMART<sup id="fnref:lambdamart"><a class="footnote-ref" href="#fn:lambdamart">9</a></sup> to rerank the top 500. PubMed’s current help still describes a weighted term-frequency stage followed by machine-learning reranking. It therefore shows both BM25’s continuing role and why a production ranking pipeline should not be reduced to one formula.</p>
 <p>Two product descriptions show how lexical evidence is usually embedded in richer ranking. <a href="https://service.elsevier.com/app/answers/detail/a_id/14182/supporthub/scopus/">Scopus describes term frequency and inverse document frequency</a> alongside field, position and proximity signals. <a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI">Primo’s Central Discovery Index</a> combines field and rare-term weighting, term frequency, field length, phrase and proximity boosts with static signals such as resource type, recency, peer-review status and citations.</p><figure class="ir-figure" aria-labelledby="primo-cdi-ranking-signals-title">
-<p class="figure-title" id="primo-cdi-ranking-signals-title">One discovery index documents its ranking signals</p><!-- BEGIN PRODUCT CLAIMS LINKS primo-cdi-ranking-signals-title -->
-<details class="claim-links"><summary>Evidence register · 2 claims</summary><p><a href="#claim-scopus-ranking-signals"><strong>Scopus · Relevance sort.</strong> Ranking documentation describes term frequency and IDF with field, position and proximity signals.</a></p><p><a href="#claim-cdi-ranking-signals"><strong>Ex Libris CDI · Relevance ranking.</strong> Ranking combines lexical, phrase and proximity evidence with static signals including type, recency, peer review and citations.</a></p></details>
-<!-- END PRODUCT CLAIMS LINKS primo-cdi-ranking-signals-title -->
-
+<p class="figure-title" id="primo-cdi-ranking-signals-title">One discovery index documents its ranking signals</p>
 <img src="images/04%20Lexical%20search%20does%20not%20have%20to%20mean%20Boolean%20search/primocdi.png" alt="Primo Central Discovery Index documentation describing its ranking signals">
 <figcaption><span class="asset-label-inline" id="fig-3-4">Figure 3.4</span> Field and rare-term weighting, term frequency, field length, phrase and proximity boosts, combined with static signals such as resource type, recency, peer-review status and citations. Vendor screenshot, reproduced for comment.</figcaption>
 </figure><p>Only the PubMed example identifies BM25 directly. The Scopus and Primo descriptions establish that lexical evidence is active in current academic search, but not that either user-facing ranking is plain BM25.<sup id="fnref:lucene-family-examples"><a class="footnote-ref" href="#fn:lucene-family-examples">10</a></sup></p>
@@ -5459,11 +5456,10 @@ $$</div>
 <p>Basis: documentation. Finding: No recorded verification finding. Last attempt: Unknown / not recorded.</p>
 <p>Imported from the existing book, not independently reverified during register migration. Documentation is not a behavioural test; mode and later deployment may differ.</p>
 <ul>
-<li><a href="https://service.elsevier.com/app/answers/detail/a_id/14182/supporthub/scopus/">Scopus describes term frequency and inverse document frequency</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 <li><a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI">Primo’s Central Discovery Index</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#bm25-academic-search-title">Bm25 academic search title</a> · <a href="#primo-cdi-ranking-signals-title">Primo cdi ranking signals title</a> · <a href="#tbl-9-3">Table 9.3</a></p>
+<p>Book locations: <a href="#bm25-academic-search-title">Bm25 academic search title</a> · <a href="#tbl-9-3">Table 9.3</a></p>
 </details></article>
 <article class="claim-entry" id="claim-cdi-solr">
 <p class="claim-id">cdi-solr · Search infrastructure</p>
@@ -6253,10 +6249,9 @@ $$</div>
 <p>Imported from the existing book, not independently reverified during register migration. Documentation is not a behavioural test; mode and later deployment may differ.</p>
 <ul>
 <li><a href="https://service.elsevier.com/app/answers/detail/a_id/14182/supporthub/scopus/">Scopus describes term frequency and inverse document frequency</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
-<li><a href="https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI">Primo’s Central Discovery Index</a> — Reference linked in the book; exact source passage not transcribed during migration.</li>
 </ul>
 <p>Review trigger: Changed documentation, release, mode, model, interface or observed behaviour; inspect every linked occurrence before updating.</p>
-<p>Book locations: <a href="#bm25-academic-search-title">Bm25 academic search title</a> · <a href="#primo-cdi-ranking-signals-title">Primo cdi ranking signals title</a></p>
+<p>Book locations: <a href="#bm25-academic-search-title">Bm25 academic search title</a></p>
 </details></article>
 <article class="claim-entry" id="claim-placement-scopus-search">
 <p class="claim-id">placement-scopus-search · Search</p>

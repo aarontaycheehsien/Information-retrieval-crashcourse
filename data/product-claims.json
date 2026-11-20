@@ -1593,11 +1593,6 @@
           "url": "https://service.elsevier.com/app/answers/detail/a_id/14182/supporthub/scopus/",
           "title": "Scopus describes term frequency and inverse document frequency",
           "locator": "Reference linked in the book; exact source passage not transcribed during migration."
-        },
-        {
-          "url": "https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI",
-          "title": "Primo’s Central Discovery Index",
-          "locator": "Reference linked in the book; exact source passage not transcribed during migration."
         }
       ],
       "evidence_gap": null,
@@ -1607,10 +1602,6 @@
         {
           "anchor": "bm25-academic-search-title",
           "excerpt": "Two product descriptions show how lexical evidence is usually embedded in richer ranking. Scopus describes term frequency and inverse document frequency alongside field, position and proximity signals. Primo’s Central Discovery Index combines field and rare-term weighting, term frequency, field length, phrase and proximity boosts with static signals such as resource type, recency, peer-review status and citations."
-        },
-        {
-          "anchor": "primo-cdi-ranking-signals-title",
-          "excerpt": "Only the PubMed example identifies BM25 directly. The Scopus and Primo descriptions establish that lexical evidence is active in current academic search, but not that either user-facing ranking is plain BM25."
         }
       ],
       "teaching_groups": [],
@@ -1626,11 +1617,6 @@
       "evidence_date": null,
       "evidence": [
         {
-          "url": "https://service.elsevier.com/app/answers/detail/a_id/14182/supporthub/scopus/",
-          "title": "Scopus describes term frequency and inverse document frequency",
-          "locator": "Reference linked in the book; exact source passage not transcribed during migration."
-        },
-        {
           "url": "https://knowledge.exlibrisgroup.com/Primo/Content_Corner/Central_Discovery_Index/Documentation_and_Training/Documentation_and_Training_(English)/CDI_-_The_Central_Discovery_Index/080Search_and_Ranking_in_CDI",
           "title": "Primo’s Central Discovery Index",
           "locator": "Reference linked in the book; exact source passage not transcribed during migration."
@@ -1643,10 +1629,6 @@
         {
           "anchor": "bm25-academic-search-title",
           "excerpt": "Two product descriptions show how lexical evidence is usually embedded in richer ranking. Scopus describes term frequency and inverse document frequency alongside field, position and proximity signals. Primo’s Central Discovery Index combines field and rare-term weighting, term frequency, field length, phrase and proximity boosts with static signals such as resource type, recency, peer-review status and citations."
-        },
-        {
-          "anchor": "primo-cdi-ranking-signals-title",
-          "excerpt": "Only the PubMed example identifies BM25 directly. The Scopus and Primo descriptions establish that lexical evidence is active in current academic search, but not that either user-facing ranking is plain BM25."
         },
         {
           "anchor": "tbl-9-3",
