@@ -102,6 +102,7 @@
       .table-wrap { overflow: visible; }
       table { min-width: 0; font-size: 8.5pt; overflow-wrap: anywhere; }
       a { color: inherit; }
+      #workshop-answers::details-content,
       .claim-teaching-groups details::details-content { content-visibility: visible; }
       .claim-teaching-groups details > * { display: block; }
     }
@@ -262,13 +263,13 @@
 
     <h3 id="exercise-i">Exercise I — Explain a result list without invoking meaning</h3>
     <p><a href="search-textbook.html#exercise1">Assign the full instructions</a>. Output: a one-page account of four observations, plausible explanations and the next evidence needed.</p>
-    <p><strong>Tests:</strong> whether the student can resist reaching for “semantic” as an explanation. They run a natural-language query, record four observations, and must account for each using only query analysis, the execution rule, query transformation, or a match outside the visible excerpt.</p>
+    <p><strong>Tests:</strong> whether the student can resist reaching for “semantic” as an explanation. They run a natural-language query, record four observations, and must account for each using only query analysis, the execution rule, query transformation, or a match outside the visible excerpt. They then repeat the query with every term quoted and joined by <code>AND</code>, and report what the comparison suggests about the execution rule or analyser.</p>
     <p><strong>A strong answer</strong> identifies plausible layers, gives evidence, considers alternatives and marks what remains uncertain. A fully lexical account can be correct; unexplained residue is not a requirement. Do not require students to rule out alternatives the interface cannot distinguish.</p>
     <p><strong>Common wrong turn:</strong> concluding that a missing query term proves semantic retrieval. That is precisely the inference Chapter 4 dismantles, and it is worth marking as a failure of the exercise rather than a minor error.</p>
 
     <h3 id="exercise-ii">Exercise II — Map a product onto the pipeline</h3>
     <p><a href="search-textbook.html#exercise2">Assign the full instructions</a>. Output: a six-stage map labelled by evidence type, with one question for the vendor.</p>
-    <p><strong>Tests:</strong> whether the student can distinguish what a vendor documents from what they inferred. Every stage must be labelled <em>documented</em>, <em>inferred</em> or <em>unknown</em>.</p>
+    <p><strong>Tests:</strong> whether the student can distinguish what a vendor documents from what they inferred. Every stage must be labelled <em>documented</em>, <em>inferred</em> or <em>unknown</em>. Learners record any routing or feedback decisions and test a hypothesis about the indexed unit by searching for a claim known to appear only in a paper’s full text.</p>
     <p><strong>A strong answer</strong> justifies each label on the six-stage map. Mark the evidence, not the number of <em>unknown</em> entries. Use <em>documented: not used</em> for an explicitly absent stage. Keep documentation-based claims separate from observations and inferences from the behavioural probe.</p>
     <p><strong>Common wrong turn:</strong> treating a named model as an architecture. “It uses BERT” fills no stage on the map.</p>
 
@@ -452,9 +453,9 @@
 
     <h2 id="reference-tools">Reference tools for learners and instructors</h2>
 
-    <p>The <a href="search-textbook.html#glossary">glossary</a> is the most directly assignable thing in the book for an information-literacy cohort: around eighty short definitions, each written to separate a mechanism from the label usually attached to it. It sits in a collapsed panel in the end matter, so students who never open it will not find it. Assigning twenty terms and asking which ones name a representation, which a pipeline stage and which only an interface is a reasonable first seminar. <a href="search-textbook.html#appendix-search-terminology">Appendix D</a> is the same move at greater length, and reads well alongside it.</p>
+    <p>For a first information-literacy seminar, assign twenty terms from the <a href="search-textbook.html#glossary">glossary</a> and ask which ones name a representation, a pipeline stage or an interface. The definitions distinguish mechanisms from the labels usually attached to them. <a href="search-textbook.html#appendix-search-terminology">Appendix D</a> is the same move at greater length, and reads well alongside it.</p>
 
-    <p>The <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/blob/main/CHANGELOG.md">changelog</a> records what changed between versions. If you assigned a chapter last term and it reads differently this term, that is where to look — and it is what makes the version number in the citation below worth recording.</p>
+    <p>The <a href="CHANGELOG.md">changelog</a> records what changed between versions. If you assigned a chapter last term and it reads differently this term, that is where to look — and it is what makes the version number in the citation below worth recording.</p>
 
     <p>Corrections are welcome through <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/issues">the repository</a>. Include the affected passage, product and mode, source URL and date, and what the current documentation establishes.</p>
 

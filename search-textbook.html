@@ -700,9 +700,9 @@
       #app-D .table-wrap tr { break-inside: avoid; }
       .terminology-overlaps { display: block; }
       .terminology-overlap { break-inside: avoid; margin: 0 0 .8rem; }
-      /* Nothing collapsed may be lost on paper. content-visibility overrides the
-         UA rule that hides a closed <details> in Chromium. */
       details > *:not(summary) { display: block !important; content-visibility: visible !important; }
+      /* Print the contents of closed self-checks. */
+      .self-check-q::details-content { content-visibility: visible; }
     }
   
     /* ============ textbook edition ============ */
