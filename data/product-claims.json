@@ -804,10 +804,6 @@
       "limitations": "Capture date is not stated locally. The screen cannot distinguish term removal, rewriting, optional matching or another route.",
       "locations": [
         {
-          "anchor": "three-familiar-search-results-and-three-puzzles",
-          "excerpt": "Puzzle 1. Take a genuine question—is there an open-access citation advantage?—and append a string of invented nonsense, a word that appears in no paper anywhere. Run it in scite. Under Boolean logic, that one impossible term should empty the result list. Instead, nothing breaks: useful papers still appear near the top, and the interface still reports millions of results. Why didn’t the impossible term kill the search?"
-        },
-        {
           "anchor": "scite-opening-caption",
           "excerpt": "Figure 1.5 Observed behaviour: relevant-looking results remain even though the query contains a string that is unlikely to occur in the collection."
         },
@@ -4791,10 +4787,6 @@
         {
           "anchor": "returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more",
           "excerpt": "The inspected results support a judgement of poorer search quality for the natural-language question in this example."
-        },
-        {
-          "anchor": "intro",
-          "excerpt": "a natural-language question that produced fewer papers and poorer leading results than a shorter keyword query"
         }
       ],
       "teaching_groups": [],
