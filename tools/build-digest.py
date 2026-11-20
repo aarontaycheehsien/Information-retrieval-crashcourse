@@ -76,6 +76,24 @@ def plain(value):
     return re.sub(r'\s+', ' ', unescape(re.sub(r'<[^>]+>', ' ', value))).strip()
 
 
+def reading_word_count(main):
+    """Count the reading route in its default view, including disclosure labels."""
+    doc = Document(main)
+    visible = []
+    cursor = 0
+    for disclosure in doc.nodes:
+        if disclosure.tag != 'details' or 'open' in disclosure.attrs or disclosure.start < cursor:
+            continue
+        visible.append(main[cursor:disclosure.start])
+        summary = next((node for node in doc.inside(disclosure)
+                        if node.parent is disclosure and node.tag == 'summary'), None)
+        if summary is not None:
+            visible.append(doc.raw(summary))
+        cursor = disclosure.end
+    visible.append(main[cursor:])
+    return len(plain(' '.join(visible)).split())
+
+
 CLAIM_LINKS = re.compile(r'\n?<!-- BEGIN PRODUCT CLAIMS LINKS [^>]+ -->.*?<!-- END PRODUCT CLAIMS LINKS [^>]+ -->\n?', re.S)
 
 
@@ -190,9 +208,8 @@ def build(book, manifest, template):
                       f'<h2 id="{key}-title">{number}. {title}<span class="stage-budget">{stage["minutes"]} minutes · reading and reflection</span></h2>\n'
                       + '\n'.join(articles) + f'\n<aside class="reflection" aria-label="Reflection prompt"><p><strong>Pause and reflect</strong></p><p>{escape(stage["prompt"])}</p></aside>\n</section>')
     output = template.replace('{{STAGES}}', '\n'.join(blocks)).replace('{{CONTENTS}}', '\n'.join(contents))
-    # Count visible reading prose in main, including prompts; not menus or footer.
     main = re.search(r'<main\b.*?</main>', output, re.S)[0]
-    count = len(plain(main).split())
+    count = reading_word_count(main)
     output = output.replace('{{WORD_COUNT}}', f'{count:,}').replace('{{READING_MINUTES}}', str(math.ceil(count/200)))
     if re.search(r'{{[A-Z_]+}}', output): raise ValueError('Unresolved template placeholder')
     return output

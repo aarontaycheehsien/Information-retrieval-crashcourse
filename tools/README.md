@@ -73,10 +73,11 @@ stages totalling 45 minutes.
 
 Run this builder after other book generators and `maintain.py`, then run
 `--check` to detect stale output without writing. Generation has no current-time
-dependency. The displayed word count includes main reading content and prompts,
-not menus/footer. Reading time uses 200 words/minute, separately from the
-provisional 45-minute reading-and-reflection schedule. No evaluation activity
-is claimed to fit within that schedule.
+dependency. The displayed word count includes the main reading content and
+prompts in the default view with the evidence disclosure closed. Reading time
+uses 200 words/minute, separately from the provisional 45-minute
+reading-and-reflection schedule. No evaluation activity is claimed to fit
+within that schedule.
 
 ## Glossary hub and local lookup
 

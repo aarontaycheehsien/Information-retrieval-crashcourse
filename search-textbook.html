@@ -249,7 +249,6 @@
       font: 800 .68rem/1.35 var(--sans); letter-spacing: .07em;
       text-transform: uppercase; color: var(--muted);
     }
-    .distinction-map-list .verdict.is-resolved { color: var(--teal); }
     @media (max-width: 700px) {
       .distinction-map-list > div { grid-template-columns: 1fr; gap: .25rem; }
     }
@@ -1303,7 +1302,7 @@
 
 <span id="two-familiar-search-results-and-two-puzzles" class="legacy-anchor"></span><h3 id="three-familiar-search-results-and-three-puzzles">Three familiar search results—and three puzzles<a aria-label="Link to Three familiar search results—and three puzzles" class="heading-anchor" href="#three-familiar-search-results-and-three-puzzles">#</a></h3>
 <p>Most librarians understand Boolean searching. That understanding predicts certain behaviour: add a required word, and the result set shrinks; add an impossible word, and it empties. Here are three searches—all real, all screenshotted below—where that prediction fails or falls short.</p>
-<p><strong>Puzzle 1.</strong> Take a genuine question—is there an open-access citation advantage?—and append a string of invented nonsense, a word that appears in no paper anywhere. Run it in scite. Under Boolean logic, that one impossible term should empty the result list. Instead, nothing breaks: useful papers still appear near the top, and the interface still reports millions of results. <em>Why didn’t the impossible term kill the search?</em></p>
+<p><strong>Puzzle 1.</strong> Take a genuine question—is there an open-access citation advantage?—and append an invented string unlikely to occur in the collection. Run it in scite. A strict Boolean <code>AND</code> query would return nothing if it required that string and the string matched no indexed terms. In the observed search, useful-looking papers still appeared near the top, and the interface reported millions of results. <em>Why didn’t the invented string empty the result list?</em></p>
 <div class="evidence-stack" aria-label="Puzzle one screenshot">
 <figure class="ir-figure evidence-card" aria-labelledby="scite-opening-caption">
 <p class="figure-title">Puzzle one: the nonsense term did not empty the result list</p>
@@ -1314,7 +1313,7 @@
 
 </figure>
 </div>
-<p><strong>Puzzle 2.</strong> Search <code>open access</code> in Google Scholar and it reports about 9.4 million results. Now try to see them. The interface stops at page 100—one thousand records—and Google’s own help documentation confirms that no more than 1,000 results will ever be shown for a single query. <em>So what are the other 9,399,000 “results”? Were they ranked? Were they even scored?</em></p>
+<p><strong>Puzzle 2.</strong> In the example, Google Scholar reported about 9.4 million results for <code>open access</code>. The interface stopped at page 100, and Google Scholar’s help documents a limit of 1,000 displayed results per query. <em>What about the remaining reported matches? Were they ranked? Were they even scored?</em></p>
 <div class="evidence-stack" aria-label="Puzzle two screenshot">
 <figure class="ir-figure evidence-card" aria-labelledby="scholar-opening-caption">
 <p class="figure-title">Puzzle two: the reported result set is much larger than the viewable list</p>
@@ -3560,9 +3559,9 @@ $$</p>
 <dl class="distinction-map-list">
 <div><dt>Puzzle 1 · scite<em class="verdict">Unresolved</em></dt><dd>An invented string did not empty a result list reporting millions of matches. Any of <a href="#what-might-have-happened-to-a-missing-query-word">Chapter 4’s four explanations for a missing word</a> could account for it. The screen cannot separate them, and looking harder will not help. <a href="#returning-to-the-opening-puzzles">Chapter 4’s verdict</a>.</dd></div>
 <div><dt>Puzzle 2 · Google Scholar<em class="verdict">Unresolved as to ranking</em></dt><dd>About 9.4 million results reported, with a documented limit of 1,000 shown. A display limit is an output boundary: it establishes what you may page through, and nothing whatever about which signals produced the order. <a href="#returning-to-the-opening-puzzles">Chapter 4’s verdict</a>.</dd></div>
-<div><dt>Puzzle 3 · Semantic Scholar<em class="verdict is-resolved">Resolved as to architecture — from a document</em></dt><dd>A natural-language question returned 13 results where the keywords returned about 35,300. The vendor’s published technical account describes lexical first-stage retrieval and a learnt reranker over a capped candidate set. That settles the dense-retrieval assumption; the exact cause of the August 2026 counts remains unproven. Without that account, this one would have joined the other two. <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Chapter 7’s account</a>.</dd></div>
+<div><dt>Puzzle 3 · Semantic Scholar<em class="verdict">2025 pipeline documented · August 2026 query processing unresolved</em></dt><dd>In August 2026, a natural-language question returned 13 results where the keywords returned about 35,300. The 2025 technical account documents lexical first-stage retrieval and a learnt reranker over a capped candidate set for the main relevance search. Which pipeline handled the August 2026 queries and why the counts differed remain unproven. <a href="#returning-to-puzzle-three-why-did-the-keyword-query-retrieve-more">Chapter 7’s account</a>.</dd></div>
 </dl>
-<p>Two of the three could not be settled from the interface. The third was settled — as far as a 2025 document can settle a 2026 observation — by something a vendor chose to write down.</p>
+<p>The result screens leave the mechanisms behind all three observations open. The Semantic Scholar account adds evidence about one documented pipeline at an earlier date.</p>
 </aside>
 <p>That is the finding, not a failure to reach one. What changed between Chapter 1 and here is not that the screens became legible. It is that you now know which questions a screen was never going to answer, and which document to go looking for instead.</p>
 <p><a href="#the-words-on-the-box">The Preface warned that the words on the box had stopped naming what is inside</a>, and promised six collapses would be named where they could be checked. This is the point to go back and check, against <a href="#distinction-map-interface">the distinction at the end of Part I</a> and <a href="#distinction-map-vocabulary">the five that open Part II</a>. If you can now say why lexical search is broader than strict Boolean retrieval; why not every vector is an embedding and “vector embedding search” adds little precision; why a vector need not be dense or semantic; why <em>semantic</em> names a goal while <em>dense</em> names one route towards it; why top-<em>k</em> is an output boundary rather than a retrieval method; and why neural information retrieval covers several arrangements that behave quite differently—then the vocabulary is doing the work it was meant to do. Every one of those confusions survives because it lets a vendor say something true and have it heard as something stronger.</p>

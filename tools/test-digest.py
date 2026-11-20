@@ -48,14 +48,21 @@ class DigestTests(unittest.TestCase):
         self.assertNotIn('Five confusions are left', self.output)
         self.assertNotIn('>Read the full explanation and evidence<', self.output)
         verdicts = self.output[self.output.index('id="puzzle-verdicts"'):]
-        self.assertLess(verdicts.index('Two of the three could not be settled'), verdicts.index('class="claim-links"'))
+        self.assertLess(verdicts.index('The result screens leave the mechanisms'), verdicts.index('class="claim-links"'))
         self.assertEqual(sum(s['minutes'] for s in self.manifest['stages']), 45)
         self.assertIn('at 200 words per minute', self.output)
-        self.assertIn('not tested completion times', self.output)
+        self.assertIn('with the evidence disclosure closed', self.output)
         self.assertIn('August 2026', self.output)
-        self.assertIn('remains unproven', self.output)
+        self.assertIn('remain unproven', self.output)
         self.assertNotIn('<script', self.output)
         self.assertNotIn('<img', self.output)
+
+    def test_reading_count_excludes_closed_disclosure_content(self):
+        main = ('<main><p>Read this.</p>'
+                '<details><summary>Optional evidence</summary><p>A citation.</p></details>'
+                '<details open><summary>Open evidence</summary><p>A source.</p></details>'
+                '</main>')
+        self.assertEqual(d.reading_word_count(main), 8)
 
     def test_ids_aria_and_links(self):
         doc = d.Document(self.output)

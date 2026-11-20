@@ -840,7 +840,7 @@
       "locations": [
         {
           "anchor": "scholar-opening-caption",
-          "excerpt": "Puzzle 2. Search open access in Google Scholar and it reports about 9.4 million results. Now try to see them. The interface stops at page 100—one thousand records—and Google’s own help documentation confirms that no more than 1,000 results will ever be shown for a single query. So what are the other 9,399,000 “results”? Were they ranked? Were they even scored?"
+          "excerpt": "Puzzle 2. In the example, Google Scholar reported about 9.4 million results for open access . The interface stopped at page 100, and Google Scholar’s help documents a limit of 1,000 displayed results per query. What about the remaining reported matches? Were they ranked? Were they even scored?"
         },
         {
           "anchor": "scholar-opening-caption",
@@ -879,7 +879,7 @@
       "locations": [
         {
           "anchor": "scholar-opening-caption",
-          "excerpt": "Puzzle 2. Search open access in Google Scholar and it reports about 9.4 million results. Now try to see them. The interface stops at page 100—one thousand records—and Google’s own help documentation confirms that no more than 1,000 results will ever be shown for a single query. So what are the other 9,399,000 “results”? Were they ranked? Were they even scored?"
+          "excerpt": "Puzzle 2. In the example, Google Scholar reported about 9.4 million results for open access . The interface stopped at page 100, and Google Scholar’s help documents a limit of 1,000 displayed results per query. What about the remaining reported matches? Were they ranked? Were they even scored?"
         },
         {
           "anchor": "scholar-opening-caption",
@@ -943,7 +943,7 @@
         },
         {
           "anchor": "closing-puzzle-map-title",
-          "excerpt": "Puzzle 3 · Semantic Scholar Resolved as to architecture — from a document A natural-language question returned 13 results where the keywords returned about 35,300. The vendor’s published technical account describes lexical first-stage retrieval and a learnt reranker over a capped candidate set. That settles the dense-retrieval assumption; the exact cause of the August 2026 counts remains unproven. Without that account, this one would have joined the other two. Chapter 7’s account ."
+          "excerpt": "Puzzle 3 · Semantic Scholar 2025 pipeline documented · August 2026 query processing unresolved In August 2026, a natural-language question returned 13 results where the keywords returned about 35,300. The 2025 technical account documents lexical first-stage retrieval and a learnt reranker over a capped candidate set for the main relevance search. Which pipeline handled the August 2026 queries and why the counts differed remain unproven. Chapter 7’s account ."
         }
       ],
       "teaching_groups": [
@@ -1878,7 +1878,7 @@
         },
         {
           "anchor": "closing-puzzle-map-title",
-          "excerpt": "Puzzle 3 · Semantic Scholar Resolved as to architecture — from a document A natural-language question returned 13 results where the keywords returned about 35,300. The vendor’s published technical account describes lexical first-stage retrieval and a learnt reranker over a capped candidate set. That settles the dense-retrieval assumption; the exact cause of the August 2026 counts remains unproven. Without that account, this one would have joined the other two. Chapter 7’s account ."
+          "excerpt": "Puzzle 3 · Semantic Scholar 2025 pipeline documented · August 2026 query processing unresolved In August 2026, a natural-language question returned 13 results where the keywords returned about 35,300. The 2025 technical account documents lexical first-stage retrieval and a learnt reranker over a capped candidate set for the main relevance search. Which pipeline handled the August 2026 queries and why the counts differed remain unproven. Chapter 7’s account ."
         }
       ],
       "teaching_groups": [
@@ -1919,7 +1919,7 @@
         },
         {
           "anchor": "closing-puzzle-map-title",
-          "excerpt": "Puzzle 3 · Semantic Scholar Resolved as to architecture — from a document A natural-language question returned 13 results where the keywords returned about 35,300. The vendor’s published technical account describes lexical first-stage retrieval and a learnt reranker over a capped candidate set. That settles the dense-retrieval assumption; the exact cause of the August 2026 counts remains unproven. Without that account, this one would have joined the other two. Chapter 7’s account ."
+          "excerpt": "Puzzle 3 · Semantic Scholar 2025 pipeline documented · August 2026 query processing unresolved In August 2026, a natural-language question returned 13 results where the keywords returned about 35,300. The 2025 technical account documents lexical first-stage retrieval and a learnt reranker over a capped candidate set for the main relevance search. Which pipeline handled the August 2026 queries and why the counts differed remain unproven. Chapter 7’s account ."
         }
       ],
       "teaching_groups": [
@@ -1964,7 +1964,7 @@
         },
         {
           "anchor": "closing-puzzle-map-title",
-          "excerpt": "Puzzle 3 · Semantic Scholar Resolved as to architecture — from a document A natural-language question returned 13 results where the keywords returned about 35,300. The vendor’s published technical account describes lexical first-stage retrieval and a learnt reranker over a capped candidate set. That settles the dense-retrieval assumption; the exact cause of the August 2026 counts remains unproven. Without that account, this one would have joined the other two. Chapter 7’s account ."
+          "excerpt": "Puzzle 3 · Semantic Scholar 2025 pipeline documented · August 2026 query processing unresolved In August 2026, a natural-language question returned 13 results where the keywords returned about 35,300. The 2025 technical account documents lexical first-stage retrieval and a learnt reranker over a capped candidate set for the main relevance search. Which pipeline handled the August 2026 queries and why the counts differed remain unproven. Chapter 7’s account ."
         }
       ],
       "teaching_groups": [
