@@ -239,7 +239,7 @@
 
     <h3>A thirteen-week course</h3>
     <p>Cover all fifteen chapters in thirteen weeks by pairing Chapters 5–6 in one week and Chapters 9–10 in another. Keep one chapter per week elsewhere. Pair Appendix A (Transformers) with Chapter 6; Appendix B (tokenisation) with Chapters 5–6; Appendix C (index execution) with Chapters 2–3; Appendix D (terminology) with Chapter 15 or keep it open throughout; and Appendix E (learning to rank) with Chapters 9–10. Treat <a href="search-textbook.html#appendix-evidence-synthesis-high-recall-retrieval">Appendix F</a> as required for evidence-synthesis cohorts alongside Chapters 13–15. Appendix G is an optional application of the pipeline to RAG after Chapter 12.</p>
-    <p>Use the three application exercises as summative assessments, one per part, and the chapter <em>Check yourself</em> questions for weekly formative checks. Add the <a href="#currency">product-claim verification task</a> as an assessed piece: assign its nine groups or selected claims across individuals or groups, have them consult current documentation, and ask what changed and how they established it. The resulting record is useful to the next cohort. For evidence-synthesis cohorts, Appendix F’s controlled TAR comparison is a fourth assessable task; check its preparation requirements below before assigning it.</p>
+    <p>Use the three application exercises as summative assessments, one per part, and the chapter <em>Check yourself</em> questions for weekly formative checks. Add the <a href="#currency">product-claim verification task</a> as an assessed piece: assign its nine groups or selected claims across individuals or groups, have them consult current documentation, and ask what changed and how they established it. The resulting record is useful to the next cohort. For evidence-synthesis cohorts, Appendix F’s controlled TAR comparison is an additional assessment. Check its preparation requirements below before assigning it.</p>
     <p>This shape leaves room for the thing the book cannot supply: students running searches in systems your institution actually licenses, and reporting back. Chapters 13, 14 and 15 are considerably more useful to someone who has spent a week failing to make a discovery layer behave.</p>
 
     <h2 id="labs">Using the three labs</h2>
@@ -253,7 +253,7 @@
         <tr><td><a href="rank-fusion-lab.html">Rank Fusion Lab</a> (optional)</td><td><a href="search-textbook.html#how-reciprocal-rank-fusion-combines-ranked-lists">Chapter 10</a></td><td>Four experiments, about 10 minutes</td><td>Agreement, the fusion constant, candidate boundaries, and scores versus relevance. Each experiment restores both lists and every control. The sandbox takes stable identifiers, not relevance judgements or live results.</td></tr>
       </tbody>
     </table></div>
-    <p>In the BM25 lab, editing a record’s length also changes the collection average, so other scores move too. The application exercises are a different shape: each needs a searching session plus written-up findings, so allow a week rather than a class.</p>
+    <p>In the BM25 lab, editing a record’s length changes the collection average. This can affect other records’ scores when length normalisation is enabled (<code>b</code> greater than zero). The application exercises are a different shape: each needs a searching session plus written-up findings, so allow a week rather than a class.</p>
     <h2 id="exercises">The application exercises</h2>
 
     <p>There are three application exercises, one per part. Prefer an institutional system when local evaluation is the goal. For public access, adapt Exercises I and III to PubMed, OpenAlex or another open search system with suitable features. Exercise II can use public technical documentation plus a recorded behavioural probe. All ask for a written deliverable; access to internal vendor settings is not required.</p>
@@ -263,7 +263,7 @@
 
     <h3 id="exercise-i">Exercise I — Explain a result list without invoking meaning</h3>
     <p><a href="search-textbook.html#exercise1">Assign the full instructions</a>. Output: a one-page account of four observations, plausible explanations and the next evidence needed.</p>
-    <p><strong>Tests:</strong> whether the student can resist reaching for “semantic” as an explanation. They run a natural-language query, record four observations, and must account for each using only query analysis, the execution rule, query transformation, or a match outside the visible excerpt. They then repeat the query with every term quoted and joined by <code>AND</code>, and report what the comparison suggests about the execution rule or analyser.</p>
+    <p><strong>Tests:</strong> whether the student can resist reaching for “semantic” as an explanation. They run a natural-language query and record four observations. For each, they consider plausible explanations based on query analysis, the execution rule, query transformation or a match outside the visible excerpt. They then repeat the query with every term quoted and joined by <code>AND</code> and report what the comparison suggests about the execution rule or analyser. They record any observations they cannot explain lexically.</p>
     <p><strong>A strong answer</strong> identifies plausible layers, gives evidence, considers alternatives and marks what remains uncertain. A fully lexical account can be correct; unexplained residue is not a requirement. Do not require students to rule out alternatives the interface cannot distinguish.</p>
     <p><strong>Common wrong turn:</strong> concluding that a missing query term proves semantic retrieval. That is precisely the inference Chapter 4 dismantles, and it is worth marking as a failure of the exercise rather than a minor error.</p>
 
@@ -449,7 +449,7 @@
 
     <p>The numbered figures built as HTML rather than images — the BM25 scoring walkthrough, the pruning panels, the WordPiece pipeline — are in the page itself and are easiest to capture by screenshot at a wide window. Each has a stable anchor, so you can also just link to it.</p>
 
-    <p>Commercial screenshots and reproduced research figures are <strong>not</strong> covered by the book’s licence. They are third-party material reproduced for comment and criticism. If you are redistributing adapted material, take your own or leave them out.</p>
+    <p>Commercial screenshots and reproduced research figures are <strong>not</strong> covered by the book’s licence. They are third-party material reproduced for comment and criticism. If you are redistributing adapted material, assess your own basis for including them or remove them.</p>
 
     <h2 id="reference-tools">Reference tools for learners and instructors</h2>
 
