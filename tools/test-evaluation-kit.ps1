@@ -182,6 +182,21 @@ try {
     Assert-Value $records I6 'OK'
     Assert-Value $comparison I6 0.2
 
+    $queries.Range('A6').Value2 = 'Local  query'
+    $records.Range('A6:A25').Value2 = 'Local  query'
+    $records.Range('B6').Value2 = 'Local  record'
+    Recalculate
+    Assert-Value $records I6 'OK'
+    Assert-Value $comparison C6 'Ready'
+    Assert-Value $comparison I6 0.2
+
+    foreach ($idWithOuterSpace in @(' Local  record', 'Local  record ')) {
+        $records.Range('B6').Value2 = $idWithOuterSpace
+        Recalculate
+        Assert-Value $records I6 'IDs must be text without outer spaces'
+        Assert-Value $comparison I6 ''
+    }
+
     # A second query gets independent labels and seeds for the same record ID.
     Reset-Inputs
     $queries.Range('A6:S6').Copy($queries.Range('A7:S7')) | Out-Null

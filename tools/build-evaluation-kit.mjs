@@ -25,7 +25,7 @@ const col = n => { let s = ''; for (; n; n = Math.floor((n - 1) / 26)) s = Strin
 const exact = ref => `'='&SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(${ref},"~","~~"),"*","~*"),"?","~?")`.replace("'='", '"="');
 const rc = (q, extra = '') => `COUNTIFS(RecordData[Query ID],${exact(q)}${extra})`;
 const sum = (name, q) => `SUMIFS(RecordData[${name}],RecordData[Query ID],${exact(q)})`;
-const cleanId = x => `OR(NOT(ISTEXT(${x})),TRIM(${x})<>${x})`;
+const invalidId = x => `OR(NOT(ISTEXT(${x})),LEFT(${x},1)=" ",RIGHT(${x},1)=" ")`;
 const invalidRank = x => `IF(${x}="",FALSE,IF(ISNUMBER(${x}),OR(${x}<1,${x}<>INT(${x})),TRUE))`;
 const numericCount = x => `IF(ISNUMBER(${x}),OR(${x}<0,${x}<>INT(${x})),TRUE)`;
 const queryHeaders = ['Query ID','Information need','Relevance criteria','Probe','Query A','Filters A','Query B','Filters B','Capture depth A','Captured records A','Complete A','Capture depth B','Captured records B','Complete B','Explanation','Alternatives','Next check','Transformed query A or unknown','Transformed query B or unknown','Capture status','Judgement status'];
@@ -98,7 +98,7 @@ export function buildWorkbook(example = false) {
       [`${a}=""`, 'Missing query ID'],
       [`COUNTIFS(QueryData[Query ID],${exact(a)})=0`, 'Unknown query ID'],
       [`${b}=""`, 'Missing record ID'],
-      [`OR(${cleanId(a)},${cleanId(b)})`, 'IDs must be text without outer spaces'],
+      [`OR(${invalidId(a)},${invalidId(b)})`, 'IDs must be text without outer spaces'],
       [`COUNTIFS(RecordData[Query ID],${exact(a)},RecordData[Record ID],${exact(b)})>1`, 'Duplicate record ID'],
       [`OR(${invalidRank(g)},${invalidRank(h)})`, 'Invalid rank'],
       [`OR(${dupRank(g,'Rank A')},${dupRank(h,'Rank B')})`, 'Duplicate rank'],
@@ -123,7 +123,7 @@ export function buildWorkbook(example = false) {
   for (let row = first; row <= lastQuery; row++) {
     const id=`A${row}`;
     const errors = [
-      [`OR(${cleanId(id)},COUNTIFS(QueryData[Query ID],${exact(id)})<>1)`, 'Fix duplicate or invalid query ID'],
+      [`OR(${invalidId(id)},COUNTIFS(QueryData[Query ID],${exact(id)})<>1)`, 'Fix duplicate or invalid query ID'],
       [`B${row}=""`, 'Write the information need'], [`C${row}=""`, 'Write relevance criteria'],
       [`OR(E${row}="",G${row}="")`, 'Record both exact queries'],
       [`NOT(OR(Comparison!$B$4=10,Comparison!$B$4=20))`, 'Choose cutoff 10 or 20'],

@@ -61,7 +61,7 @@
       <thead><tr><th scope="col">Worksheet</th><th scope="col">What it holds</th></tr></thead>
       <tbody>
         <tr><th scope="row">Comparison</th><td>Choose the shared cutoff in B4. Each query shows counts, precision, seed recovery, differences and any action still needed.</td></tr>
-        <tr><th scope="row">Queries</th><td>Write the need and relevance criteria, record both queries and filters, confirm capture depth and counts, then explain the difference.</td></tr>
+        <tr><th scope="row">Queries</th><td>Write the need and relevance criteria, record both queries and their filters and transformations, confirm capture depth and counts, then explain the difference.</td></tr>
         <tr><th scope="row">Records</th><td>Keep one row per query–record pair, with a single relevance judgement, seed status and a rank for each run that returned it. The columns after Rank B calculate validation and counts.</td></tr>
         <tr><th scope="row">Runs</th><td>Record the product, mode, date, available model/index information, change being tested and locations of saved exports. Write “unknown” for unavailable details.</td></tr>
       </tbody>
@@ -87,9 +87,9 @@
           <li>Record filters as “None” where none were used.</li>
           <li>List seeds that neither run found too; a seed need not appear in either captured list.</li>
         </ul></li>
-      <li><strong>Choose one cutoff and record the conditions.</strong> Enter 10 or 20 in Comparison B4; it applies to both runs and every query. Complete Runs, including each query’s transformed input.
+      <li><strong>Choose one cutoff and record the conditions.</strong> Enter 10 or 20 in Comparison B4. It applies to both runs and every query. Record the product, mode, date and saved exports in Runs.
         <ul>
-          <li>If the transformed input is not visible, write “unknown”.</li>
+          <li>Enter each query’s transformed input in Queries, columns R–S. If it is not visible, write “unknown”.</li>
           <li>Record what changed between the runs: a query intervention, an update or a different product.</li>
         </ul></li>
       <li><strong>Capture each list through that depth.</strong> Save the original output, then record in Queries the depth requested, the number of distinct records retained and whether capture is complete.
@@ -117,7 +117,7 @@
   </section>
   <section aria-labelledby="scores">
     <h2 id="scores">What the scores count</h2>
-    <p><strong>Precision@k = relevant distinct records within k ÷ k.</strong> The denominator stays fixed, even for a short list or duplicate positions. Two relevant records from a complete three-result run at depth ten give 2/10 = 0.20. The separate “Records A/B at k” columns show how many distinct records were actually captured inside the cutoff.</p>
+    <p><strong>Precision@k = relevant distinct records within k ÷ k.</strong> The denominator stays fixed, even for a short list or gaps left after removing duplicate records. Two relevant records from a complete three-result run at depth ten give 2/10 = 0.20. The separate “Records A/B at k” columns show how many distinct records were actually captured inside the cutoff.</p>
     <p><strong>Known-seed recovery@k = listed seeds found within k ÷ all listed seeds for that query.</strong> Include missed seeds in Records with both ranks blank. The numerator and denominator are shown alongside the rate. Without a seed set the workbook says “No seeds specified”; precision can still be calculated. Seed recovery is not an estimate of complete recall.</p>
     <p>The precision comparison stays blank until every pooled record within the cutoff has been judged. Seed recovery can be available before those judgements are complete, because its denominator was fixed in advance. A seed marked Not relevant is an inconsistency to resolve.</p>
     <p>Incomplete captures, missing criteria or exact queries, mismatched counts, duplicate IDs or ranks, and invalid input withhold affected scores. Blank cells are not silently turned into successful zero-result runs. Records with missing or unknown query IDs must be assigned before any query can be reported.</p>
@@ -127,7 +127,8 @@
     <h2 id="reuse">Add records, extend the set and rerun it</h2>
     <p>The template has room for fifty queries and starts with one hundred Records rows. In Excel, add rows <em>inside the Records table</em> or press Tab in its last cell to extend it; copy the calculated columns I–Q from the preceding row if your spreadsheet application does not fill them automatically. Check that Row status and counts respond before continuing. Pasting underneath an unextended table does not add records to the calculation.</p>
     <p>To exceed fifty queries, extend the Queries table and copy its T–U formulas into the new rows. Extend Comparison by the same number of rows and copy all A–Q formulas down. Keep the two tables in corresponding row order when extending them. Use Comparison’s filters to inspect declines; sort Queries or Records as whole tables, never isolated input columns. Record matching uses query IDs, not row order.</p>
-    <p>For a new comparison, save a new workbook copy. Keep the same needs, criteria, seed set and cutoff. Replace ranks, captured counts and run metadata with the new observations and reconfirm completeness. Reuse judgements only where the record identity and criteria remain the same; judge newly retrieved records before interpreting the comparison. Changing the need or criteria starts a new evaluation baseline.</p>
+    <p>For a new comparison, save a new workbook copy. Keep the same needs, criteria, seed set and cutoff. Clear both old rank columns and enter the ranks for the new runs. Remove any non-seed record absent from both new runs. Keep missed seeds with both ranks blank. Update the query details, captured counts and run metadata, then reconfirm completeness.</p>
+    <p>Reuse judgements only where the record identity and criteria remain the same. Judge newly retrieved records before interpreting the comparison. Changing the need or criteria starts a new evaluation baseline.</p>
     <p>Use the kit with <a href="search-textbook.html#exercise3">Application Exercise III</a>. Pair the measured change with <a href="search-textbook.html#library-practice">Chapter 15’s search record</a> and a list of what the product would not let you establish. For maintainers, the <a href="tools/README.md">repository tooling notes</a> describe rebuilding the downloads.</p>
   </section>
 </main>
