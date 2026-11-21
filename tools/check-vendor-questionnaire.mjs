@@ -54,6 +54,19 @@ try {
   await page.locator('#include-e').focus();await page.keyboard.press('Space');
   await page.locator('#include-g').focus();await page.keyboard.press('Space');
   assert.equal(await page.locator('.question:visible').count(),19);
+  const overview=page.locator('.question-overview');
+  await overview.locator('summary').click();
+  assert.match(await overview.locator('a[href="#q01"]').locator('..').innerText(), /Can users inspect and export/);
+  assert.match(await overview.locator('a[href="#e01"]').locator('..').innerText(), /which retrievers supplied lists/);
+  await overview.locator('a[href="#e01"]').click();
+  assert.equal(new URL(page.url()).hash,'#e01');
+  assert.equal(await page.locator('#include-e').isChecked(),true);
+  assert.equal(await page.locator('#e01').isVisible(),true);
+  const direct=await browser.newPage();
+  await direct.goto(url+'#g07');
+  assert.equal(await direct.locator('#include-g').isChecked(),true);
+  assert.equal(await direct.locator('#g07').isVisible(),true);
+  await direct.close();
   await page.setViewportSize({width:390,height:844});
   await page.goto(url);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Mobile page overflows');
@@ -65,7 +78,11 @@ try {
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Optional section overflows');
   await page.screenshot({path:path.join(out,'mobile-rag.png')});
   const noJS=await browser.newPage({javaScriptEnabled:false});await noJS.goto(url);
-  assert.equal(await noJS.locator('.question:visible').count(),19);await noJS.close();
+  assert.equal(await noJS.locator('.question:visible').count(),19);
+  assert.equal(await noJS.locator('#questionnaire-controls').isVisible(),false);
+  await noJS.locator('.question-overview summary').click();
+  assert.equal(await noJS.locator('.question-overview a[href="search-textbook.html#vendor-e01"]').isVisible(),true);
+  await noJS.close();
   assert.deepEqual(errors,[]);
   console.log('PASS: all four section selections, keyboard controls, print button, no-JS core and desktop/mobile layout.');
 } finally {if(browser)await browser.close();await new Promise(resolve=>server.close(resolve));}

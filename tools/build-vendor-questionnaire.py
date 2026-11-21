@@ -113,9 +113,17 @@ def render(book, mapping, template):
             raise ValueError(f"{section['source_section']}: {count} source questions but {mapped_count} mapped")
     fragments, overview = [], []
     for section in mapping["sections"]:
-        entries = ''.join(f'<li><a href="#{q.lower()}">{q}</a> {split_title(source_content(book, questions[q]))[0]}</li>'
-                          for group in section["groups"] for q in group["questions"])
-        overview.append(f'<h3>{escape(section["label"])}</h3><ul class="question-list">{entries}</ul>')
+        entries = []
+        for group in section["groups"]:
+            for ident in group["questions"]:
+                spec = questions[ident]
+                title, body = split_title(source_content(book, spec))
+                target = f'#{ident.lower()}'
+                link = f'href="{target}"'
+                if section["key"] != "core":
+                    link = f'href="search-textbook.html#{spec["source_id"]}" data-local-target="{target}"'
+                entries.append(f'<li><a {link}>{ident}</a> {title}{detail("preview-" + ident, body)}</li>')
+        overview.append(f'<h3>{escape(section["label"])}</h3><ul class="question-list">{"".join(entries)}</ul>')
     for section in mapping["sections"]:
         key = section["key"]
         pages = []

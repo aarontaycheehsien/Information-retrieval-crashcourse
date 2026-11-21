@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A printable vendor questionnaire for library retrieval evaluation, with nineteen core questions and optional ranking-method and RAG sections.">
+  <meta name="description" content="A printable vendor questionnaire for library retrieval evaluation, with nineteen core questions and optional sections on ranking methods and generated answers.">
   <title>Vendor questionnaire — How Search Decides What You See</title>
   <style>
     :root { --paper:#f4f0e8; --ink:#17201f; --muted:#596462; --line:#d5d0c5; --teal:#1d5b59; --rust:#6f291d; }
@@ -114,22 +114,28 @@
   <h1>Vendor questionnaire</h1>
   <p>Take the book’s questions into a demonstration, procurement discussion or renewal review. Record the vendor’s answer and supporting evidence, then record separately what your library could verify.</p>
   <p>Use the nineteen core questions for every review. Add the specialist sections that match the product’s capabilities. Each question says what to listen for in the answer. Sub-questions are lettered, so an answer can cite Q13b; where an earlier answer covers a later prompt, cite its question ID and answer the remaining parts.</p>
-  <details class="question-overview screen-only"><summary>Question list only, for sending to a vendor in advance</summary><h3>Core questionnaire</h3><ul class="question-list"><li><a href="#q01">Q01</a> What does the system infer, change and decide?</li><li><a href="#q02">Q02</a> <a href="search-textbook.html#agentic-search-who-chooses-the-next-retrieval-action">Who controls the retrieval trajectory?</a></li><li><a href="#q03">Q03</a> Which retrieval and ranking components are used?</li><li><a href="#q04">Q04</a> What role does the neural model perform?</li><li><a href="#q05">Q05</a> What is the searchable unit?</li><li><a href="#q06">Q06</a> How are passage results assembled?</li><li><a href="#q07">Q07</a> <a href="search-textbook.html#why-hybrid-retrieval-remains-attractive">How is the hybrid combined?</a></li><li><a href="#q08">Q08</a> Is exact lexical matching retained?</li><li><a href="#q09">Q09</a> How is text tokenised and analysed?</li><li><a href="#q10">Q10</a> How are exactness, negation and exclusions tested?</li><li><a href="#q11">Q11</a> What trained the relevance model?</li><li><a href="#q12">Q12</a> Can users inspect why a result appeared?</li><li><a href="#q13">Q13</a> Can the search be documented and rerun?</li><li><a href="#q14">Q14</a> Are model, index and ranking changes disclosed?</li><li><a href="#q15">Q15</a> What does a search cost, and what limits apply?</li><li><a href="#q16">Q16</a> What happens when a mode is retired?</li><li><a href="#q17">Q17</a> How is performance evaluated, and on whose queries?</li><li><a href="#q18">Q18</a> Are failure cases part of the evaluation?</li><li><a href="#q19">Q19</a> Can the library compare behaviour across an update?</li></ul>
-<h3>Ranking methods</h3><ul class="question-list"><li><a href="#e01">E01</a> Before RRF</li><li><a href="#e02">E02</a> Before LTR</li><li><a href="#e03">E03</a> Before reranking</li><li><a href="#e04">E04</a> For evaluation</li></ul>
-<h3>Generated answers (RAG)</h3><ul class="question-list"><li><a href="#g01">G01</a> Does evidence come from direct file/pattern search, an indexed lexical, dense, learnt-sparse or hybrid retriever, or a supplied collection in full? When retrieval is used, is the choice fixed, <a href="search-textbook.html#two-hybrids-that-combine-differently">blended or routed per query</a>?</li><li><a href="#g02">G02</a> What is indexed or scanned, what extraction and exclusions apply, and what unit reaches the model’s context (<a href="search-textbook.html#one-document-one-chunk-and-one-vector-are-not-the-same-thing">Chapter 8</a>)?</li><li><a href="#g03">G03</a> Is the query transformed before retrieval, and can the transformation be inspected (<a href="search-textbook.html#query-transformation">Chapter 11</a>)?</li><li><a href="#g04">G04</a> How much material reaches the context, and what selection, truncation or compression separates it from the retrieved set or supplied collection (<a href="search-textbook.html#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Chapter 7 on top-<em>k</em> boundaries</a>)?</li><li><a href="#g05">G05</a> Does the model choose retrieval actions, or execute a fixed sequence (<a href="search-textbook.html#agentic-search">Chapter 12</a>)?</li><li><a href="#g06">G06</a> How are answer support, evidence recall, latency and total cost evaluated separately under documented budgets (<a href="search-textbook.html#comparing-evidence-supply">Chapter 14</a>)?</li><li><a href="#g07">G07</a> When the answer is wrong, can retrieval failure be distinguished from generation failure (<a href="search-textbook.html#diagnosing-failure">Chapter 13</a>)?</li></ul></details>
-  <div class="print-controls">
+  <details class="question-overview screen-only">
+    <summary>Questions to send to a vendor in advance</summary>
+    <p>Copy the prompts for the sections you want to discuss.</p>
+    <h3><a href="#supported-inputs">Before Q01</a></h3>
+    <p>Before comparing query boxes, ask what the product accepts as a retrieval starting point. Only text, or also controlled fields, a seed record, citation links, saved judgements and API predicates? For an agentic mode, ask whether both the task brief and the queries generated from it can be exported.</p>
+    <h3>Core questionnaire</h3><ul class="question-list"><li><a href="#q01">Q01</a> What does the system infer, change and decide?<ol class="question-detail sub-prompts" type="a"><li id="preview-q01a">Does it recognise fields, filters or intent without changing the input; correct, map, expand or generate retrieval inputs; choose retrieval routes; or construct a later query from earlier results?</li><li id="preview-q01b">Can users inspect and export the interpretation, every transformed input, each route and any feedback records?</li></ol></li><li><a href="#q02">Q02</a> <a href="search-textbook.html#agentic-search-who-chooses-the-next-retrieval-action">Who controls the retrieval trajectory?</a><ol class="question-detail sub-prompts" type="a"><li id="preview-q02a">Is the sequence fixed in advance, chosen from branches the designer enumerated—whether a rule, a classifier or a model picks the branch—or planned by a model from what it has observed?</li><li id="preview-q02b">If a model chooses, what tools, sources and iteration limits bound it?</li><li id="preview-q02c">Can users see every query it ran, every source it consulted, every route it took and the point at which it decided to stop?</li></ol></li><li><a href="#q03">Q03</a> Which retrieval and ranking components are used?<ol class="question-detail sub-prompts" type="a"><li id="preview-q03a">Is there direct string/pattern search, indexed Boolean retrieval, BM25-like lexical ranking, dense retrieval or reranking?</li><li id="preview-q03b">Do the components operate <a href="search-textbook.html#why-search-systems-use-multiple-stages">in parallel, sequentially or both</a>, how many candidates survive each cut-off, and does the system select components by query or always combine them?</li></ol></li><li><a href="#q04">Q04</a> What role does the neural model perform?<p class="question-detail">Naming a model does not describe an architecture. Is it parsing or rewriting the query, producing the first-stage query and passage vectors, expanding the vocabulary of a sparse index, jointly reranking candidates, or generating the final answer? These are <a href="search-textbook.html#how-a-contextual-encoder-becomes-a-retrieval-encoder">different jobs with different failure modes</a>, and a model can be present without doing the one you assumed.</p></li><li><a href="#q05">Q05</a> What is the searchable unit?<p class="question-detail">Is the system indexing or directly scanning titles, abstracts, passages, sections or complete articles? For file search, which paths, formats and exclusions apply, and how is text extracted? A product whose index holds only abstracts cannot match evidence that occurs only in the full text at that retrieval stage, however sophisticated its vectors are. Ask separately whether it later fetches the full text, and what it passes on as context.</p></li><li><a href="#q06">Q06</a> How are passage results assembled?<p class="question-detail">If five chunks from the same paper match, are their scores combined, is only the best retained, or are five near-duplicate results shown?</p></li><li><a href="#q07">Q07</a> <a href="search-textbook.html#why-hybrid-retrieval-remains-attractive">How is the hybrid combined?</a><p class="question-detail">A product may call itself hybrid because it contains two retrievers even when one signal rarely affects the final ranking. Ask where component lists are fused, whether a later stage reranks the merged candidates, what cut-offs apply, and whether users can inspect, compare or control the component result sets.</p></li><li><a href="#q08">Q08</a> Is exact lexical matching retained?<p class="question-detail">Can users search identifiers, chemical strings, gene names, dataset titles and quoted phrases without semantic expansion quietly changing the task?</p></li><li><a href="#q09">Q09</a> How is text tokenised and analysed?<p class="question-detail">Ask how the lexical path treats case, punctuation, hyphens and identifiers, and whether query and document analysis are compatible. For a dense model, ask whether it uses word, subword, character or byte inputs and how unfamiliar or newly coined strings are tested.</p></li><li><a href="#q10">Q10</a> How are exactness, negation and exclusions tested?<p class="question-detail">Ask for examples involving identifiers, contradictory claims, <code>NOT</code>-like intent and near-duplicate names — not only attractive paraphrase demonstrations.</p></li><li><a href="#q11">Q11</a> What trained the relevance model?<p class="question-detail">Web queries, question–answer pairs, citation links and scholarly relevance judgements teach different behaviours. How was the model adapted to the disciplines and document types being searched?</p></li><li><a href="#q12">Q12</a> Can users inspect why a result appeared?<ol class="question-detail sub-prompts" type="a"><li id="preview-q12a">Can they move from the displayed record backwards through the retrieval route, transformed inputs, inferred constraints, any feedback records, matched evidence, ranking or reranking stages, and final fusion or display rules?</li><li id="preview-q12b">Does the product distinguish a faithful execution trace from a helpful but post-hoc explanation?</li></ol></li><li><a href="#q13">Q13</a> Can the search be documented and rerun?<ol class="question-detail sub-prompts" type="a"><li id="preview-q13a">Can users export the original input; exact generated Boolean query, filters, expansions, subqueries or hypothetical text; retrieval route; ranking mode; model version; index date or file snapshot; <em>k</em> or threshold; retrieved identifiers; and, for file-search agents, executed patterns, searched paths, output limits, passages read and stopping conditions?</li><li id="preview-q13b">When the same search is rerun, does the system reuse the saved transformation or ask an LLM to generate it again?</li></ol></li><li><a href="#q14">Q14</a> Are model, index and ranking changes disclosed?<p class="question-detail">Does the vendor announce when an update may change results a user previously obtained, and is there any way to tell after the fact which version produced a saved search?</p></li><li><a href="#q15">Q15</a> What does a search cost, and what limits apply?<ol class="question-detail sub-prompts" type="a"><li id="preview-q15a">Is pricing per seat, per query or per token?</li><li id="preview-q15b">What are the rate and iteration limits, and what happens when one is reached — a refusal, a truncated result, or a silently shallower search?</li><li id="preview-q15c">Does an agentic mode cost differently from the ordinary one, and can the library see per-query consumption?</li></ol></li><li><a href="#q16">Q16</a> What happens when a mode is retired?<p class="question-detail">Can saved searches, saved sets and stored traces be exported before a mode is withdrawn, and how much notice is given?</p></li><li><a href="#q17">Q17</a> How is performance evaluated, and on whose queries?<p class="question-detail">Average benchmark scores can hide failures on the query types that matter locally. A serious evaluation uses the institution’s own disciplines, vocabulary, languages, document types and known relevant records.</p></li><li><a href="#q18">Q18</a> Are failure cases part of the evaluation?<p class="question-detail">A vendor’s demonstration shows what the system does well. The searches that matter for procurement are the ones a library already knows to be difficult.</p></li><li><a href="#q19">Q19</a> Can the library compare behaviour across an update?<p class="question-detail">If a saved set of local test queries can be rerun after a model, index or ranking change, a library can detect a regression that no release note mentions.</p></li></ul>
+<h3>Ranking methods</h3><ul class="question-list"><li><a href="search-textbook.html#vendor-e01" data-local-target="#e01">E01</a> Before RRF<p class="question-detail">which retrievers supplied lists, how deep was each list, were they weighted equally, and how were duplicates handled?</p></li><li><a href="search-textbook.html#vendor-e02" data-local-target="#e02">E02</a> Before LTR<p class="question-detail">which features and transformations were available, what supplied the labels, how were click and exposure biases handled, which objective and model were used, and when was it last retrained?</p></li><li><a href="search-textbook.html#vendor-e03" data-local-target="#e03">E03</a> Before reranking<p class="question-detail">which retriever produced the candidates, how many reached each later stage, what text and metadata did each stage see, and what was the latency budget?</p></li><li><a href="search-textbook.html#vendor-e04" data-local-target="#e04">E04</a> For evaluation<p class="question-detail">which metric and cut-off were used, did the test candidate distribution match deployment, which queries or groups worsened, and was the complete pipeline tested on this collection and user task?</p></li></ul>
+<h3>Generated answers</h3><ul class="question-list"><li><a href="search-textbook.html#vendor-g01" data-local-target="#g01">G01</a> Does evidence come from direct file/pattern search, an indexed lexical, dense, learnt-sparse or hybrid retriever, or a supplied collection in full? When retrieval is used, is the choice fixed, <a href="search-textbook.html#two-hybrids-that-combine-differently">blended or routed per query</a>?</li><li><a href="search-textbook.html#vendor-g02" data-local-target="#g02">G02</a> What is indexed or scanned, what extraction and exclusions apply, and what unit reaches the model’s context (<a href="search-textbook.html#one-document-one-chunk-and-one-vector-are-not-the-same-thing">Chapter 8</a>)?</li><li><a href="search-textbook.html#vendor-g03" data-local-target="#g03">G03</a> Is the query transformed before retrieval, and can the transformation be inspected (<a href="search-textbook.html#query-transformation">Chapter 11</a>)?</li><li><a href="search-textbook.html#vendor-g04" data-local-target="#g04">G04</a> How much material reaches the context, and what selection, truncation or compression separates it from the retrieved set or supplied collection (<a href="search-textbook.html#top-k-is-a-result-boundary-not-a-dense-retrieval-method">Chapter 7 on top-<em>k</em> boundaries</a>)?</li><li><a href="search-textbook.html#vendor-g05" data-local-target="#g05">G05</a> Does the model choose retrieval actions, or execute a fixed sequence (<a href="search-textbook.html#agentic-search">Chapter 12</a>)?</li><li><a href="search-textbook.html#vendor-g06" data-local-target="#g06">G06</a> How are answer support, evidence recall, latency and total cost evaluated separately under documented budgets (<a href="search-textbook.html#comparing-evidence-supply">Chapter 14</a>)?</li><li><a href="search-textbook.html#vendor-g07" data-local-target="#g07">G07</a> When the answer is wrong, can retrieval failure be distinguished from generation failure (<a href="search-textbook.html#diagnosing-failure">Chapter 13</a>)?</li></ul>
+  </details>
+  <div class="print-controls" id="questionnaire-controls" hidden>
     <fieldset><legend>Include in this questionnaire</legend>
       <p>Core questions Q01–Q19 are always included.</p>
       <label class="option"><input type="checkbox" id="include-e" aria-controls="section-e"><span>Ranking methods · E01–E04<br><small>Rank fusion, learning to rank and reranking</small></span></label>
-      <label class="option"><input type="checkbox" id="include-g" aria-controls="section-g"><span>Generated answers (RAG) · G01–G07<br><small>Retrieval, model context, faithfulness and diagnosis</small></span></label>
+      <label class="option"><input type="checkbox" id="include-g" aria-controls="section-g"><span>Generated answers · G01–G07<br><small>RAG, full-collection modes and faithfulness</small></span></label>
     </fieldset>
     <fieldset><legend>On screen</legend>
-      <label class="option"><input type="checkbox" id="show-fields"><span>Show answer spaces<br><small>Hidden on screen so the questions are easier to scan. They always print.</small></span></label>
+      <label class="option"><input type="checkbox" id="show-fields"><span>Show answer spaces under each question<br><small>Printed questionnaires include these spaces.</small></span></label>
     </fieldset>
     <button type="button" id="print-questionnaire">Print selected sections</button>
     <p class="note">Print on A4 at 100% scale with browser headers and footers off. The questionnaire provides writing space on paper. To type answers, copy the selected content into your document editor. Responses are not entered or saved on this page.</p>
-    <noscript><p>Core questions print without JavaScript. Enable JavaScript to include specialist sections and use the print button; otherwise use your browser’s Print command.</p></noscript>
   </div>
+  <noscript><p class="note">Use your browser’s Print command for the core questionnaire. Print on A4 at 100% scale with browser headers and footers off. Enable JavaScript to select specialist sections.</p></noscript>
 </header>
 <main>
   <section class="intake-page" aria-labelledby="review-details">
@@ -563,8 +569,8 @@
 <div id="section-g" hidden>
 <section class="question-page" data-section="g" aria-labelledby="g-page-1">
   <p class="page-context">Vendor questionnaire · Appendix G</p>
-  <h2 id="g-page-1">Generated answers (RAG)</h2>
-  <p class="section-note">Include when the product generates answers from retrieved material. Record the specific answer-generating mode being reviewed.</p>
+  <h2 id="g-page-1">Generated answers</h2>
+  <p class="section-note">Include when the product generates answers from retrieved material or a collection supplied in full. Record the specific answer-generating mode being reviewed.</p>
   <article class="question" data-question="G01" aria-labelledby="g01">
   <h3 id="g01"><span class="question-id">G01</span> Does evidence come from direct file/pattern search, an indexed lexical, dense, learnt-sparse or hybrid retriever, or a supplied collection in full? When retrieval is used, is the choice fixed, <a href="search-textbook.html#two-hybrids-that-combine-differently">blended or routed per query</a>?</h3>
   
@@ -598,7 +604,7 @@
 </section>
 <section class="question-page" data-section="g" aria-labelledby="g-page-2">
   <p class="page-context">Vendor questionnaire · Appendix G</p>
-  <h2 id="g-page-2">Generated answers (RAG) <span class="continued">(continued)</span></h2>
+  <h2 id="g-page-2">Generated answers <span class="continued">(continued)</span></h2>
   
   <article class="question" data-question="G03" aria-labelledby="g03">
   <h3 id="g03"><span class="question-id">G03</span> Is the query transformed before retrieval, and can the transformation be inspected (<a href="search-textbook.html#query-transformation">Chapter 11</a>)?</h3>
@@ -633,7 +639,7 @@
 </section>
 <section class="question-page" data-section="g" aria-labelledby="g-page-3">
   <p class="page-context">Vendor questionnaire · Appendix G</p>
-  <h2 id="g-page-3">Generated answers (RAG) <span class="continued">(continued)</span></h2>
+  <h2 id="g-page-3">Generated answers <span class="continued">(continued)</span></h2>
   
   <article class="question" data-question="G05" aria-labelledby="g05">
   <h3 id="g05"><span class="question-id">G05</span> Does the model choose retrieval actions, or execute a fixed sequence (<a href="search-textbook.html#agentic-search">Chapter 12</a>)?</h3>
@@ -668,12 +674,12 @@
 </section>
 <section class="question-page" data-section="g" aria-labelledby="g-page-4">
   <p class="page-context">Vendor questionnaire · Appendix G</p>
-  <h2 id="g-page-4">Generated answers (RAG) <span class="continued">(continued)</span></h2>
+  <h2 id="g-page-4">Generated answers <span class="continued">(continued)</span></h2>
   
   <article class="question" data-question="G07" aria-labelledby="g07">
   <h3 id="g07"><span class="question-id">G07</span> When the answer is wrong, can retrieval failure be distinguished from generation failure (<a href="search-textbook.html#diagnosing-failure">Chapter 13</a>)?</h3>
   
-  <p class="listen-for"><strong>Listen for</strong> a trace of what reached the model’s input. Without one, a missing citation cannot be located.</p>
+  <p class="listen-for"><strong>Listen for</strong> the retrieved set where there is a retrieval stage, the exact context supplied to the model and the answer it produced. Compare them to locate an omission.</p>
   <p class="source"><a href="search-textbook.html#vendor-g07">Appendix G source · G07</a></p>
   <p class="related">Already covered? Cite <a href="#q12">Q12</a>, <a href="#q18">Q18</a> and answer any remaining parts here.</p>
   <div class="response-block">
@@ -715,11 +721,37 @@
       }
       document.getElementById('selection-summary').textContent = 'Included: ' + included.join('; ') + '.';
     }
+    function revealQuestion(hash) {
+      const target = document.getElementById(hash.slice(1));
+      const section = target?.closest('#section-e, #section-g');
+      if (!section?.hidden) return;
+      document.getElementById('include-' + section.id.slice(-1)).checked = true;
+      updateSections();
+      return target;
+    }
+    function revealCurrentQuestion() {
+      revealQuestion(location.hash)?.scrollIntoView();
+    }
+    const overview = document.querySelector('.question-overview');
+    for (const link of overview.querySelectorAll('a[data-local-target]')) {
+      link.href = link.dataset.localTarget;
+    }
+    overview.addEventListener('click', event => {
+      const link = event.target.closest('a[data-local-target]');
+      if (link && event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+        revealQuestion(link.hash);
+      }
+    });
+    window.addEventListener('hashchange', revealCurrentQuestion);
     for (const key of choices) document.getElementById('include-' + key).addEventListener('change', updateSections);
     const showFields = document.getElementById('show-fields');
-    showFields.addEventListener('change', () => document.body.classList.toggle('hide-fields', !showFields.checked));
+    const updateFields = () => document.body.classList.toggle('hide-fields', !showFields.checked);
+    showFields.addEventListener('change', updateFields);
     document.getElementById('print-questionnaire').addEventListener('click', () => window.print());
     updateSections();
+    updateFields();
+    document.getElementById('questionnaire-controls').hidden = false;
+    revealCurrentQuestion();
   })();
 </script>
 </body>

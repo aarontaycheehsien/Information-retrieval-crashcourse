@@ -29,11 +29,11 @@
     },
     {
       "key": "g",
-      "label": "Generated answers (RAG)",
+      "label": "Generated answers",
       "source_section": "appendix-rag-questions",
       "source_label": "Appendix G",
-      "applicability": "Include when the product generates answers from retrieved material. Record the specific answer-generating mode being reviewed.",
-      "groups": [{"heading": "Generated answers (RAG)", "questions": ["G01", "G02", "G03", "G04", "G05", "G06", "G07"]}]
+      "applicability": "Include when the product generates answers from retrieved material or a collection supplied in full. Record the specific answer-generating mode being reviewed.",
+      "groups": [{"heading": "Generated answers", "questions": ["G01", "G02", "G03", "G04", "G05", "G06", "G07"]}]
     }
   ],
   "questions": [
@@ -66,6 +66,6 @@
     {"id": "G04", "source_id": "vendor-g04", "related": ["Q03", "Q05"], "listen_for": "the amount of evidence supplied and the selection, truncation or compression between the available material and the model’s context."},
     {"id": "G05", "source_id": "vendor-g05", "related": ["Q02"], "listen_for": "fixed steps or model-chosen actions, with the limits on rounds and tools."},
     {"id": "G06", "source_id": "vendor-g06", "related": ["Q17"], "listen_for": "separate evidence-recall and answer-support results, with latency, total cost and preparation/search/context budgets on a documented local comparison."},
-    {"id": "G07", "source_id": "vendor-g07", "related": ["Q12", "Q18"], "listen_for": "a trace of what reached the model’s input. Without one, a missing citation cannot be located."}
+    {"id": "G07", "source_id": "vendor-g07", "related": ["Q12", "Q18"], "listen_for": "the retrieved set where there is a retrieval stage, the exact context supplied to the model and the answer it produced. Compare them to locate an omission."}
   ]
 }

@@ -19,6 +19,8 @@ ids = [q['id'] for q in mapping['questions']]
 assert ids == [f'Q{i:02}' for i in range(1,20)] + [f'E{i:02}' for i in range(1,5)] + [f'G{i:02}' for i in range(1,8)]
 assert len(mapping['sections'][0]['groups']) == 6
 assert re.findall(r'data-question="([QEG]\d+)"', output) == ids
+overview = re.search(r'<details class="question-overview screen-only">.*?</details>', output, re.S).group()
+assert builder.source_content(book, mapping['intake'], 'p') in overview
 for q in mapping['questions']:
     card = re.search(rf'<article[^>]*data-question="{q["id"]}".*?</article>', output, re.S).group()
     source = builder.source_content(book, q)
@@ -26,6 +28,7 @@ for q in mapping['questions']:
     # lettering a body of questions keeps every word in order.
     title, body = builder.split_title(source)
     assert title in card, q['id']
+    assert f'{title}{builder.detail("preview-" + q["id"], body)}' in overview, q['id']
     detail = re.search(r'class="question-detail[^"]*"[^>]*>(.*?)</(?:p|ol)>', card, re.S)
     assert builder.prose(body) == (builder.prose(detail[1]) if detail else ''), q['id']
     assert q['listen_for'] and 'class="listen-for"' in card, q['id']

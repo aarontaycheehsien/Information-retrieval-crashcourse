@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A printable vendor questionnaire for library retrieval evaluation, with nineteen core questions and optional ranking-method and RAG sections.">
+  <meta name="description" content="A printable vendor questionnaire for library retrieval evaluation, with nineteen core questions and optional sections on ranking methods and generated answers.">
   <title>Vendor questionnaire — How Search Decides What You See</title>
   <style>
     :root { --paper:#f4f0e8; --ink:#17201f; --muted:#596462; --line:#d5d0c5; --teal:#1d5b59; --rust:#6f291d; }
@@ -114,20 +114,26 @@
   <h1>Vendor questionnaire</h1>
   <p>Take the book’s questions into a demonstration, procurement discussion or renewal review. Record the vendor’s answer and supporting evidence, then record separately what your library could verify.</p>
   <p>Use the nineteen core questions for every review. Add the specialist sections that match the product’s capabilities. Each question says what to listen for in the answer. Sub-questions are lettered, so an answer can cite Q13b; where an earlier answer covers a later prompt, cite its question ID and answer the remaining parts.</p>
-  <details class="question-overview screen-only"><summary>Question list only, for sending to a vendor in advance</summary>{{QUESTION_LIST}}</details>
-  <div class="print-controls">
+  <details class="question-overview screen-only">
+    <summary>Questions to send to a vendor in advance</summary>
+    <p>Copy the prompts for the sections you want to discuss.</p>
+    <h3><a href="#supported-inputs">Before Q01</a></h3>
+    <p>{{INPUT_QUESTION}}</p>
+    {{QUESTION_LIST}}
+  </details>
+  <div class="print-controls" id="questionnaire-controls" hidden>
     <fieldset><legend>Include in this questionnaire</legend>
       <p>Core questions Q01–Q19 are always included.</p>
       <label class="option"><input type="checkbox" id="include-e" aria-controls="section-e"><span>Ranking methods · E01–E04<br><small>Rank fusion, learning to rank and reranking</small></span></label>
-      <label class="option"><input type="checkbox" id="include-g" aria-controls="section-g"><span>Generated answers (RAG) · G01–G07<br><small>Retrieval, model context, faithfulness and diagnosis</small></span></label>
+      <label class="option"><input type="checkbox" id="include-g" aria-controls="section-g"><span>Generated answers · G01–G07<br><small>RAG, full-collection modes and faithfulness</small></span></label>
     </fieldset>
     <fieldset><legend>On screen</legend>
-      <label class="option"><input type="checkbox" id="show-fields"><span>Show answer spaces<br><small>Hidden on screen so the questions are easier to scan. They always print.</small></span></label>
+      <label class="option"><input type="checkbox" id="show-fields"><span>Show answer spaces under each question<br><small>Printed questionnaires include these spaces.</small></span></label>
     </fieldset>
     <button type="button" id="print-questionnaire">Print selected sections</button>
     <p class="note">Print on A4 at 100% scale with browser headers and footers off. The questionnaire provides writing space on paper. To type answers, copy the selected content into your document editor. Responses are not entered or saved on this page.</p>
-    <noscript><p>Core questions print without JavaScript. Enable JavaScript to include specialist sections and use the print button; otherwise use your browser’s Print command.</p></noscript>
   </div>
+  <noscript><p class="note">Use your browser’s Print command for the core questionnaire. Print on A4 at 100% scale with browser headers and footers off. Enable JavaScript to select specialist sections.</p></noscript>
 </header>
 <main>
   <section class="intake-page" aria-labelledby="review-details">
@@ -173,11 +179,37 @@
       }
       document.getElementById('selection-summary').textContent = 'Included: ' + included.join('; ') + '.';
     }
+    function revealQuestion(hash) {
+      const target = document.getElementById(hash.slice(1));
+      const section = target?.closest('#section-e, #section-g');
+      if (!section?.hidden) return;
+      document.getElementById('include-' + section.id.slice(-1)).checked = true;
+      updateSections();
+      return target;
+    }
+    function revealCurrentQuestion() {
+      revealQuestion(location.hash)?.scrollIntoView();
+    }
+    const overview = document.querySelector('.question-overview');
+    for (const link of overview.querySelectorAll('a[data-local-target]')) {
+      link.href = link.dataset.localTarget;
+    }
+    overview.addEventListener('click', event => {
+      const link = event.target.closest('a[data-local-target]');
+      if (link && event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+        revealQuestion(link.hash);
+      }
+    });
+    window.addEventListener('hashchange', revealCurrentQuestion);
     for (const key of choices) document.getElementById('include-' + key).addEventListener('change', updateSections);
     const showFields = document.getElementById('show-fields');
-    showFields.addEventListener('change', () => document.body.classList.toggle('hide-fields', !showFields.checked));
+    const updateFields = () => document.body.classList.toggle('hide-fields', !showFields.checked);
+    showFields.addEventListener('change', updateFields);
     document.getElementById('print-questionnaire').addEventListener('click', () => window.print());
     updateSections();
+    updateFields();
+    document.getElementById('questionnaire-controls').hidden = false;
+    revealCurrentQuestion();
   })();
 </script>
 </body>
