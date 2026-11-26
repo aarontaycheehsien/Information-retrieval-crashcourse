@@ -484,7 +484,8 @@ number prefix; everything after the em dash is yours.
 
 Reads the superscript refs in document order and rewrites the numbers, the
 `<li>` order in the footnotes list, and each backref's "Jump back to footnote N"
-title so all three agree. Run it after moving or adding a footnote.
+title so all three agree. `build-book.py` runs it on every build, so footnotes
+are numbered in document order without running it yourself.
 
 ## Conventions the tools rely on
 

@@ -63,13 +63,27 @@ CHECKS = [
 ]
 
 
+def link_or_copy(src, dst):
+    """Hard-link a file, or copy it where a link is impossible.
+
+    A hard link cannot cross filesystems or drives: a temporary directory on
+    another drive (Windows) or on tmpfs (many Linux systems) would otherwise
+    make the scratch copy fail."""
+    try:
+        os.link(src, dst)
+    except OSError:
+        shutil.copy2(src, dst)
+    return dst
+
+
 def make_workspace(work: Path):
     if work.exists():
         shutil.rmtree(work)
     ignore = shutil.ignore_patterns(".git", "outputs", "images", "__pycache__")
     shutil.copytree(ROOT, work, ignore=ignore)
-    # Hard links: the claims validator rejects evidence outside the repository.
-    shutil.copytree(ROOT / "images", work / "images", copy_function=os.link)
+    # Real files, not symlinks: the claims validator rejects evidence outside
+    # the repository. Hard links are cheap; copies are the fallback.
+    shutil.copytree(ROOT / "images", work / "images", copy_function=link_or_copy)
 
 
 def splice(book: str, md_path: Path) -> str:

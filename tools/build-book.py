@@ -50,6 +50,10 @@ def source_of_truth() -> str:
     return json.loads(CONFIG.read_text(encoding="utf-8"))["source_of_truth"]
 
 
+def lf(data: bytes) -> bytes:
+    return data.replace(b"\r\n", b"\n")
+
+
 def pages(repo: Path) -> list[str]:
     return sorted(p.name for p in repo.glob("*.html"))
 
@@ -59,7 +63,9 @@ def compare(built: Path, strict_bytes: bool) -> int:
     for page in pages(ROOT):
         committed, fresh = ROOT / page, built / page
         report = eq.compare(eq.load(committed), eq.load(fresh), f"committed {page}", f"built {page}", max_diffs=5)
-        same_bytes = committed.read_bytes() == fresh.read_bytes()
+        # Compare with line endings normalised: a Windows checkout with
+        # core.autocrlf=true holds CRLF copies of the LF files Git stores.
+        same_bytes = lf(committed.read_bytes()) == lf(fresh.read_bytes())
         if report:
             failed += 1
             print("\n".join(report))

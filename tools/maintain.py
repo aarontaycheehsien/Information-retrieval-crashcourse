@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Maintain search-textbook.html in place. The HTML is the source of truth.
+"""Maintain search-textbook.html in place. The book's source is Markdown in book/;
+tools/build-book.py runs this pass as part of every build.
 
-Edit the book directly, then run this. It rewrites only the machine-owned parts
-and never touches prose:
+It rewrites only the machine-owned parts and never touches prose:
 
   * table and figure numbers, derived from each chapter's own eyebrow label
   * appendix letters, derived from the order the appendices appear in
