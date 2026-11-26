@@ -23,7 +23,7 @@ BOOK = os.path.join(REPO, "search-textbook.html")
 original = io.open(BOOK, encoding="utf-8").read()
 doc = original
 
-ART_START = doc.index('<article id="article">')
+ART_START = doc.index('<article id="article"')
 ART_END = doc.index('<section class="footnotes">')
 
 # --------------------------------------------------------- top-level sections
@@ -156,7 +156,7 @@ for m in re.finditer(r'<p class="asset-label[^"]*">(.*?)</p>', doc, re.S):
 
 # ------------------------------------------------------------ rebuild both TOCs
 # recompute offsets: the doc changed length above
-ART_START = doc.index('<article id="article">')
+ART_START = doc.index('<article id="article"')
 ART_END = doc.index('<section class="footnotes">')
 sections = top_level_sections(doc, ART_START, ART_END)
 
@@ -301,7 +301,7 @@ ASSET_TEXT_RE = re.compile(r'^(Figure|Table)\s+([0-9A-Z]+)\.(\d+)$')
 def chapter_label_map(html):
     """Map every id inside a numbered chapter or appendix to that section's label."""
     out = {}
-    lo = html.index('<article id="article">')
+    lo = html.index('<article id="article"')
     hi = html.index('<section class="footnotes">')
     for start, end, tag in top_level_sections(html, lo, hi):
         cls = attr(tag, 'class')
