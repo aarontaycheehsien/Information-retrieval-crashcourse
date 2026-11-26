@@ -1,7 +1,7 @@
 {
   "purpose": "Reference for the Markdown conversion: the built book must be equivalent to this.",
   "source": "search-textbook.html",
-  "commit": "a740bd2b5c7afb65b52250fd49d863c500c6bd0e",
+  "commit": "6181c3a7eb61f29a9776e158f2d4fa735bed3b41",
   "canonical_sha256": "1689e9c6cf053c8e263b0ec55e0d855ea562d8e8ce223408db2baa2b51e39810",
   "canonical_lines": 40325,
   "elements": 13894,
