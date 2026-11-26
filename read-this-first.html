@@ -44,22 +44,58 @@
 <h2 id="foundations-title">2. Foundations<span class="stage-budget">9 minutes · reading and reflection</span></h2>
 <article class="excerpt" id="chapter-1" aria-labelledby="chapter-1-title">
 <h3 id="chapter-1-title">Chapter 1 · The retrieval problem</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Answer-generating academic search tools combine retrieval of source material with generation of an overview. The Primo walkthrough shows how several decisions constrain the evidence before writing begins.</li><li>Retrieval and generation are separate problems. A fabricated citation is a generation failure; a missing paper may have been lost during retrieval or omitted from the answer. Inspect the working set before diagnosing.</li><li>The shortlist bottleneck: retrieval limits the evidence supplied to generation. Coverage limits which records can enter the search at all; candidate and source-selection limits narrow the working set further. In Primo Research Assistant, five records supply the abstracts for the overview.</li><li>An LLM can sit inside the retrieval half of a pipeline; its presence says nothing about which retrieval method is being used.</li><li>Tools differ along two independent axes: output format and retrieval iteration. Neither records agency.</li><li>The query represents the information need. Matching helps a system estimate relevance; usefulness must be assessed against the reader’s purpose. Those judgements can guide later searches.</li><li>Three familiar results—a nonsense term that did not empty a result list, a reported count far larger than the viewable list, and a natural-language question that produced fewer papers and poorer leading results than a shorter keyword query—leave three questions about admission, ranking and architecture open.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Answer-generating academic search tools combine retrieval of source material with generation of an overview. The Primo walkthrough shows how several decisions constrain the evidence before writing begins.</li>
+<li>Retrieval and generation are separate problems. A fabricated citation is a generation failure; a missing paper may have been lost during retrieval or omitted from the answer. Inspect the working set before diagnosing.</li>
+<li>The shortlist bottleneck: retrieval limits the evidence supplied to generation. Coverage limits which records can enter the search at all; candidate and source-selection limits narrow the working set further. In Primo Research Assistant, five records supply the abstracts for the overview.</li>
+<li>An LLM can sit inside the retrieval half of a pipeline; its presence says nothing about which retrieval method is being used.</li>
+<li>Tools differ along two independent axes: output format and retrieval iteration. Neither records agency.</li>
+<li>The query represents the information need. Matching helps a system estimate relevance; usefulness must be assessed against the reader’s purpose. Those judgements can guide later searches.</li>
+<li>Three familiar results—a nonsense term that did not empty a result list, a reported count far larger than the viewable list, and a natural-language question that produced fewer papers and poorer leading results than a shorter keyword query—leave three questions about admission, ranking and architecture open.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#intro">Read Chapter 1 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-2" aria-labelledby="chapter-2-title">
 <h3 id="chapter-2-title">Chapter 2 · Boolean admission and the inverted index</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>In this lexical index, matching uses the terms produced by text analysis. Tokenisation, case folding, stop-word handling and stemming all happen before anything is indexed.</li><li>Query and document must be analysed compatibly. A mismatch between the two is a silent and common source of retrieval failure.</li><li>An inverted index maps terms to posting lists, which is why Boolean evaluation is set intersection and union rather than a scan of documents.</li><li>Truncation expands a pattern against the dictionary, and phrase and proximity operators test stored positions. All three act on analysed terms.</li><li>Boolean retrieval is traditionally called exact-match retrieval: records satisfy the processed query specification or do not. It produces an eligible set, not an ordering; “exact” need not mean a literal string match.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>In this lexical index, matching uses the terms produced by text analysis. Tokenisation, case folding, stop-word handling and stemming all happen before anything is indexed.</li>
+<li>Query and document must be analysed compatibly. A mismatch between the two is a silent and common source of retrieval failure.</li>
+<li>An inverted index maps terms to posting lists, which is why Boolean evaluation is set intersection and union rather than a scan of documents.</li>
+<li>Truncation expands a pattern against the dictionary, and phrase and proximity operators test stored positions. All three act on analysed terms.</li>
+<li>Boolean retrieval is traditionally called exact-match retrieval: records satisfy the processed query specification or do not. It produces an eligible set, not an ordering; “exact” need not mean a literal string match.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#boolean-admission">Read Chapter 2 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-3" aria-labelledby="chapter-3-title">
 <h3 id="chapter-3-title">Chapter 3 · BM25 and ranked lexical retrieval</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Best-match retrieval uses graded scores to rank candidates; it need not require every query term. BM25 is a lexical example. Exact term matches can contribute to a best-match ranking, and Boolean conditions can still restrict eligibility.</li><li>Rarer terms carry more weight, repeated terms saturate, and document length is normalised against the collection average, to a degree set by <em>b</em>.</li><li>The index does not change. The same posting lists that answered a Boolean query support a ranked one.</li><li>PubMed documents BM25 as the first stage of Best Match, and other academic systems document lexical evidence in their live ranking.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Best-match retrieval uses graded scores to rank candidates; it need not require every query term. BM25 is a lexical example. Exact term matches can contribute to a best-match ranking, and Boolean conditions can still restrict eligibility.</li>
+<li>Rarer terms carry more weight, repeated terms saturate, and document length is normalised against the collection average, to a degree set by <em>b</em>.</li>
+<li>The index does not change. The same posting lists that answered a Boolean query support a ranked one.</li>
+<li>PubMed documents BM25 as the first stage of Best Match, and other academic systems document lexical evidence in their live ranking.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#bm25-ranking">Read Chapter 3 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-4" aria-labelledby="chapter-4-title">
 <h3 id="chapter-4-title">Chapter 4 · Lexical search beyond strict Boolean</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Lexical retrieval includes direct string or pattern matching and matching analysed terms through an index. In the indexed systems developed here, posting lists identify the records containing each term. Boolean-then-ranking is a common academic-search pattern, but minimum-match and any-match ranking are lexical too.</li><li>Analysis, execution rules, query transformation — or a term that simply matched no posting list — can explain a missing typed word without implying dense or semantic retrieval. Understanding matters when its interpretation triggers one of those changes.</li><li>Admission, ranking and the top-<em>k</em> output boundary are separate controls: admission forms the candidate set of records that may compete, ranking orders it, and the boundary decides how many are kept.</li><li>Part I explains the scite and Google Scholar behaviours — and shows why the interface alone cannot identify the mechanism behind either. The Semantic Scholar observation remains open until semantic capability, dense representation and pipeline stage can be separated.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Lexical retrieval includes direct string or pattern matching and matching analysed terms through an index. In the indexed systems developed here, posting lists identify the records containing each term. Boolean-then-ranking is a common academic-search pattern, but minimum-match and any-match ranking are lexical too.</li>
+<li>Analysis, execution rules, query transformation — or a term that simply matched no posting list — can explain a missing typed word without implying dense or semantic retrieval. Understanding matters when its interpretation triggers one of those changes.</li>
+<li>Admission, ranking and the top-<em>k</em> output boundary are separate controls: admission forms the candidate set of records that may compete, ranking orders it, and the boundary decides how many are kept.</li>
+<li>Part I explains the scite and Google Scholar behaviours — and shows why the interface alone cannot identify the mechanism behind either. The Semantic Scholar observation remains open until semantic capability, dense representation and pipeline stage can be separated.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#beyond-boolean">Read Chapter 4 in full</a></p>
 </article>
 <article class="excerpt" id="interface-panel" aria-labelledby="interface-panel-title">
@@ -98,24 +134,54 @@
 </article>
 <article class="excerpt" id="chapter-5" aria-labelledby="chapter-5-title">
 <h3 id="chapter-5-title">Chapter 5 · Embeddings: what the learnt geometry encodes</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>A dense retriever compares learnt representations rather than strings, which is what allows it to bridge paraphrase.</li><li>Context changes a token’s representation, but contextualisation alone does not decide what evidence retrieval should reward.</li><li>Pretraining supplies broad language patterns; domain pretraining changes the text and vocabulary behind those patterns; neither by itself creates a retriever.</li><li>A model name such as BERT therefore leaves both its task training and its place in the search pipeline unknown.</li></ol>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>A dense retriever compares learnt representations rather than strings, which is what allows it to bridge paraphrase.</li>
+<li>Context changes a token’s representation, but contextualisation alone does not decide what evidence retrieval should reward.</li>
+<li>Pretraining supplies broad language patterns; domain pretraining changes the text and vocabulary behind those patterns; neither by itself creates a retriever.</li>
+<li>A model name such as BERT therefore leaves both its task training and its place in the search pipeline unknown.</li>
+</ol>
 
 </aside>
 <p class="source-link"><a href="search-textbook.html#embeddings">Read Chapter 5 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-6" aria-labelledby="chapter-6-title">
 <h3 id="chapter-6-title">Chapter 6 · From language model to retrieval encoder</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Contextual encoding and retrieval are separate things. A pretrained encoder supplies representations; retrieval training gives the model an operational model of relevance, influencing which query–document relationships receive high similarity scores.</li><li>Model tokenisation and index analysis are different processes producing different units. A model token is not an indexed term.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Contextual encoding and retrieval are separate things. A pretrained encoder supplies representations; retrieval training gives the model an operational model of relevance, influencing which query–document relationships receive high similarity scores.</li>
+<li>Model tokenisation and index analysis are different processes producing different units. A model token is not an indexed term.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#retrieval-encoder">Read Chapter 6 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-7" aria-labelledby="chapter-7-title">
 <h3 id="chapter-7-title">Chapter 7 · Dense retrieval at collection scale</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Cosine similarity and dot product assign scores to pairs of vectors; those scores do not establish whether a record meets the reader’s need. Cosine similarity divides out both vector lengths and ranks on direction alone; an unnormalised dot product also responds to length, so the two rules can order the same candidates differently.</li><li>A single-vector bi-encoder has to compress a passage before it knows what will be asked of it, which is why broad similarity can dominate a small but decisive detail.</li><li>Approximate nearest-neighbour search often makes dense retrieval practical at large scale, and it introduces its own effects at the candidate boundary.</li><li><em>Semantic search</em> describes a goal rather than an architecture. BM25, ontology expansion, dense retrieval and neural reranking name mechanisms a system may combine in pursuit of it.</li><li>Dense retrieval assigns similarity scores and orders candidates; top-<em>k</em> sets a result boundary rather than defining a retrieval method.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Cosine similarity and dot product assign scores to pairs of vectors; those scores do not establish whether a record meets the reader’s need. Cosine similarity divides out both vector lengths and ranks on direction alone; an unnormalised dot product also responds to length, so the two rules can order the same candidates differently.</li>
+<li>A single-vector bi-encoder has to compress a passage before it knows what will be asked of it, which is why broad similarity can dominate a small but decisive detail.</li>
+<li>Approximate nearest-neighbour search often makes dense retrieval practical at large scale, and it introduces its own effects at the candidate boundary.</li>
+<li><em>Semantic search</em> describes a goal rather than an architecture. BM25, ontology expansion, dense retrieval and neural reranking name mechanisms a system may combine in pursuit of it.</li>
+<li>Dense retrieval assigns similarity scores and orders candidates; top-<em>k</em> sets a result boundary rather than defining a retrieval method.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#dense-at-scale">Read Chapter 7 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-8" aria-labelledby="chapter-8-title">
 <h3 id="chapter-8-title">Chapter 8 · Representations and indexed units</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>A <em>vector</em> is an ordered list of numbers. Binary presence, term frequency, TF–IDF and BM25 weights can all be written as vectors, so the word names the numerical object rather than any property of it.</li><li><em>Sparse</em> and <em>dense</em> describe the shape of a representation; <em>specified</em> and <em>learnt</em> describe how the rule that produced its numbers was obtained. The two axes vary independently—BM25 is sparse with a specified rule, SPLADE is sparse with a learnt one.</li><li>Density alone does not establish whether a representation supports semantic matching. A fully active vector of bibliographic facts is dense and not semantic; a learnt sparse representation can be meaning-aware with almost every dimension left at zero.</li><li>Source document, indexed unit, representation and result aggregation are four separate choices, and only the last of them is visible in a result list.</li><li>An indexed retrieval stage can match only its indexed evidence; direct file search is limited by the text it can access and scan. A later fetch may supply more text, so searchable units and generator context must be documented separately.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>A <em>vector</em> is an ordered list of numbers. Binary presence, term frequency, TF–IDF and BM25 weights can all be written as vectors, so the word names the numerical object rather than any property of it.</li>
+<li><em>Sparse</em> and <em>dense</em> describe the shape of a representation; <em>specified</em> and <em>learnt</em> describe how the rule that produced its numbers was obtained. The two axes vary independently—BM25 is sparse with a specified rule, SPLADE is sparse with a learnt one.</li>
+<li>Density alone does not establish whether a representation supports semantic matching. A fully active vector of bibliographic facts is dense and not semantic; a learnt sparse representation can be meaning-aware with almost every dimension left at zero.</li>
+<li>Source document, indexed unit, representation and result aggregation are four separate choices, and only the last of them is visible in a result list.</li>
+<li>An indexed retrieval stage can match only its indexed evidence; direct file search is limited by the text it can access and scan. A later fetch may supply more text, so searchable units and generator context must be documented separately.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#representations-and-units">Read Chapter 8 in full</a></p>
 </article>
 <aside class="reflection" aria-label="Reflection prompt"><p><strong>Pause and reflect</strong></p><p>Pick a product that calls itself semantic. What would you need to know to tell whether it uses dense vectors, learnt sparse vectors or lexical matching with query expansion?</p></aside>
@@ -124,25 +190,61 @@
 <h2 id="pipelines-title">4. Pipelines<span class="stage-budget">9 minutes · reading and reflection</span></h2>
 <article class="excerpt" id="chapter-9" aria-labelledby="chapter-9-title">
 <h3 id="chapter-9-title">Chapter 9 · Reranking and multi-stage retrieval</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Multi-stage retrieval exists because accuracy and scale trade against each other.</li><li>A reranker can only reorder what the first stage returned. It cannot recover a document that was never retrieved.</li><li>Neural information retrieval is an umbrella category, not a synonym for dense retrieval. It includes dense bi-encoders, learnt sparse retrieval, late interaction and neural reranking.</li><li>Joint encoding, late interaction and learnt sparse retrieval preserve different amounts of query–document evidence and can occupy different pipeline stages.</li></ol>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Multi-stage retrieval exists because accuracy and scale trade against each other.</li>
+<li>A reranker can only reorder what the first stage returned. It cannot recover a document that was never retrieved.</li>
+<li>Neural information retrieval is an umbrella category, not a synonym for dense retrieval. It includes dense bi-encoders, learnt sparse retrieval, late interaction and neural reranking.</li>
+<li>Joint encoding, late interaction and learnt sparse retrieval preserve different amounts of query–document evidence and can occupy different pipeline stages.</li>
+</ol>
 
 </aside>
 <p class="source-link"><a href="search-textbook.html#reranking-and-hybrid">Read Chapter 9 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-10" aria-labelledby="chapter-10-title">
 <h3 id="chapter-10-title">Chapter 10 · Hybrid retrieval and rank fusion</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Hybrid retrieval is a claim about how results are combined, not merely about containing two retrievers.</li><li>Blending and routing are different designs: one merges on every query, the other chooses per query.</li></ol>
-<p class="chapter-transition">Hybrid retrieval is not a quality guarantee. Its result depends on the evidence each route preserves, the candidate depth allowed to each, and the rule used to combine them. RRF combines ranks without requiring the input scores to be on the same scale, but it discards score gaps and depends on the supplied lists and their cut-offs. Routing determines which retrievers contribute candidates for a particular query. Chapter 11 asks how a query is interpreted, transformed and routed.</p></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Hybrid retrieval is a claim about how results are combined, not merely about containing two retrievers.</li>
+<li>Blending and routing are different designs: one merges on every query, the other chooses per query.</li>
+</ol>
+<p class="chapter-transition">Hybrid retrieval is not a quality guarantee. Its result depends on the evidence each route preserves, the candidate depth allowed to each, and the rule used to combine them. RRF combines ranks without requiring the input scores to be on the same scale, but it discards score gaps and depends on the supplied lists and their cut-offs. Routing determines which retrievers contribute candidates for a particular query. Chapter 11 asks how a query is interpreted, transformed and routed.</p>
+</aside>
 <p class="source-link"><a href="search-textbook.html#hybrid-and-fusion">Read Chapter 10 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-11" aria-labelledby="chapter-11-title">
 <h3 id="chapter-11-title">Chapter 11 · Understanding, transforming and routing queries</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>The useful question comes before phrasing: what object stands for the information need, and what mechanism will receive it?</li><li>Free-text strings, controlled expressions, citation edges, seed documents, relevance judgements, browse targets, API predicates and task briefs address different mechanisms.</li><li>Query understanding interprets a request and may or may not change what retrieval receives.</li><li>Transformation creates changed or additional retrieval inputs; routing and coordination control which retrieval paths use them.</li><li>Pseudo-relevance feedback constructs a later query from an initial ranking. It is retrieval-dependent, but a prescribed two-pass workflow need not be agentic.</li><li>Query2doc and HyDE use generated text differently, which makes that text part of the search strategy and part of what must be recorded.</li><li>Natural-language filter extraction is useful and reliably partial.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>The useful question comes before phrasing: what object stands for the information need, and what mechanism will receive it?</li>
+<li>Free-text strings, controlled expressions, citation edges, seed documents, relevance judgements, browse targets, API predicates and task briefs address different mechanisms.</li>
+<li>Query understanding interprets a request and may or may not change what retrieval receives.</li>
+<li>Transformation creates changed or additional retrieval inputs; routing and coordination control which retrieval paths use them.</li>
+<li>Pseudo-relevance feedback constructs a later query from an initial ranking. It is retrieval-dependent, but a prescribed two-pass workflow need not be agentic.</li>
+<li>Query2doc and HyDE use generated text differently, which makes that text part of the search strategy and part of what must be recorded.</li>
+<li>Natural-language filter extraction is useful and reliably partial.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#query-transformation">Read Chapter 11 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-12" aria-labelledby="chapter-12-title">
 <h3 id="chapter-12-title">Chapter 12 · Agentic search</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Fixed, adaptive and agentic describe who decides the next action, not how documents are scored — and they are reference points along a continuum.</li><li>Result-dependent query content does not by itself make control adaptive or agentic: two-pass PRF can sit inside a fixed sequence.</li><li>An adaptive workflow may have a model choosing its branches. What makes it adaptive is constrained selection among explicitly enumerated branches; agentic control plans a trajectory from reusable actions, even though its tools are predefined too.</li><li>Agency does not change the underlying retriever’s scoring function, but a loop can improve the overall search process by observing failure and choosing another action.</li><li>An agent can only choose among the tools it has. It may combine available operations in new ways, but further reasoning or iteration cannot supply a tool or source it cannot reach.</li><li>A trace shows what a system did. It does not reveal what the system could have done, which is a separate and largely invisible limit.</li><li>Recall failures can compound across rounds when later actions depend too narrowly on earlier results; additional routes or reformulations can also recover candidates and increase cumulative recall.</li><li>Agentic RAG is a narrower case of agentic search, not a synonym for it.</li><li>What the loop buys is recovery. A query that returns nothing stops being the end of the interaction and becomes the input to the next attempt. In the selected examples, a keyword search inside a loop recovered results that a one-shot rewrite over the same index did not.</li><li>That recovery runs on what the open web knows. Coverage, entitlements and local quirks are what it cannot supply, and what a library can.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Fixed, adaptive and agentic describe who decides the next action, not how documents are scored — and they are reference points along a continuum.</li>
+<li>Result-dependent query content does not by itself make control adaptive or agentic: two-pass PRF can sit inside a fixed sequence.</li>
+<li>An adaptive workflow may have a model choosing its branches. What makes it adaptive is constrained selection among explicitly enumerated branches; agentic control plans a trajectory from reusable actions, even though its tools are predefined too.</li>
+<li>Agency does not change the underlying retriever’s scoring function, but a loop can improve the overall search process by observing failure and choosing another action.</li>
+<li>An agent can only choose among the tools it has. It may combine available operations in new ways, but further reasoning or iteration cannot supply a tool or source it cannot reach.</li>
+<li>A trace shows what a system did. It does not reveal what the system could have done, which is a separate and largely invisible limit.</li>
+<li>Recall failures can compound across rounds when later actions depend too narrowly on earlier results; additional routes or reformulations can also recover candidates and increase cumulative recall.</li>
+<li>Agentic RAG is a narrower case of agentic search, not a synonym for it.</li>
+<li>What the loop buys is recovery. A query that returns nothing stops being the end of the interaction and becomes the input to the next attempt. In the selected examples, a keyword search inside a loop recovered results that a one-shot rewrite over the same index did not.</li>
+<li>That recovery runs on what the open web knows. Coverage, entitlements and local quirks are what it cannot supply, and what a library can.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#agentic-search">Read Chapter 12 in full</a></p>
 </article>
 <aside class="reflection" aria-label="Reflection prompt"><p><strong>Pause and reflect</strong></p><p>Choose a familiar product. Which retrieval stages can you document, and which are still assumptions? A label such as semantic or AI is not an answer.</p></aside>
@@ -151,17 +253,46 @@
 <h2 id="practice-title">5. Professional practice<span class="stage-budget">8 minutes · reading and reflection</span></h2>
 <article class="excerpt" id="chapter-13" aria-labelledby="chapter-13-title">
 <h3 id="chapter-13-title">Chapter 13 · Diagnosing retrieval failure</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Vocabulary mismatch is the familiar problem of a query and relevant document expressing related concepts in different lexical forms.</li><li>OOV is always relative to a specified vocabulary. A tokeniser’s ability to encode a string does not establish that the retriever has learnt a useful representation for it.</li><li>OOD concerns transfer from training to deployment. In neural IR it can cover shifts in queries or corpora and, in some work, retrieval task or relevance pattern.</li><li>Negation, relations and composition can fail even when vocabulary is familiar and lexical overlap is complete.</li><li>These are different diagnostic lenses rather than parallel categories. They can overlap, and remedies must be tested against the suspected origin of the failure.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Vocabulary mismatch is the familiar problem of a query and relevant document expressing related concepts in different lexical forms.</li>
+<li>OOV is always relative to a specified vocabulary. A tokeniser’s ability to encode a string does not establish that the retriever has learnt a useful representation for it.</li>
+<li>OOD concerns transfer from training to deployment. In neural IR it can cover shifts in queries or corpora and, in some work, retrieval task or relevance pattern.</li>
+<li>Negation, relations and composition can fail even when vocabulary is familiar and lexical overlap is complete.</li>
+<li>These are different diagnostic lenses rather than parallel categories. They can overlap, and remedies must be tested against the suspected origin of the failure.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#diagnosing-failure">Read Chapter 13 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-14" aria-labelledby="chapter-14-title">
 <h3 id="chapter-14-title">Chapter 14 · Measuring whether retrieval worked</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Relevance is a relationship among information, a represented need, a person and a situation—not an intrinsic document property.</li><li>Retrieval metrics measure performance against an operational definition of relevance encoded in human judgements, not objective correctness.</li><li>Extending a fixed ranking cannot decrease recall, but precision can rise or fall; depth often trades screening burden against recall, and library tasks sit at opposite ends of that trade; a better system can improve both at the same depth.</li><li>Within a fixed candidate set, later stages can improve ordering but cannot recover exclusions; additional retrieval routes or rounds can expand the cumulative set and increase recall.</li><li>MRR, MAP and nDCG encode different definitions of a good ranking, so quoting one is choosing one.</li><li>A benchmark measures performance on someone else’s topics, judged by someone else’s assessors, which is why a leaderboard position does not transfer.</li><li>A local evaluation set is the one measurement whose definition of relevance the library chose, and its value lies in being rerun.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Relevance is a relationship among information, a represented need, a person and a situation—not an intrinsic document property.</li>
+<li>Retrieval metrics measure performance against an operational definition of relevance encoded in human judgements, not objective correctness.</li>
+<li>Extending a fixed ranking cannot decrease recall, but precision can rise or fall; depth often trades screening burden against recall, and library tasks sit at opposite ends of that trade; a better system can improve both at the same depth.</li>
+<li>Within a fixed candidate set, later stages can improve ordering but cannot recover exclusions; additional retrieval routes or rounds can expand the cumulative set and increase recall.</li>
+<li>MRR, MAP and nDCG encode different definitions of a good ranking, so quoting one is choosing one.</li>
+<li>A benchmark measures performance on someone else’s topics, judged by someone else’s assessors, which is why a leaderboard position does not transfer.</li>
+<li>A local evaluation set is the one measurement whose definition of relevance the library chose, and its value lies in being rerun.</li>
+</ol>
+
+</aside>
 <p class="source-link"><a href="search-textbook.html#evaluation">Read Chapter 14 in full</a></p>
 </article>
 <article class="excerpt" id="chapter-15" aria-labelledby="chapter-15-title">
 <h3 id="chapter-15-title">Chapter 15 · Implications for library practice and tool evaluation</h3>
-<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p><ol><li>Reproducibility is conditional on a fixed system, and it is also a documentation practice rather than a property of a method.</li><li>Saving the natural-language question is insufficient whenever the system rewrote it.</li><li>A faithful explanation is an execution trace. A plausible narrative is not evidence of what drove a result.</li><li>Documentation and inspection cannot be assumed to arrive later. A vendor may add them, but a product that was not built to expose what it searched will not do so on a library’s timetable, which is why these are procurement questions rather than support tickets.</li><li>The questions that separate a retrieval design from a marketing label need no mathematics — only the distinctions this book has drawn, and the willingness to ask which one a vendor’s word names.</li><li>Libraries do not need model weights. They need enough visibility to establish what was searched, enough documentation to compare it later, and enough control to test it locally.</li></ol></aside>
+<aside class="chapter-close" aria-label="Chapter summary"><p class="chapter-close-label">What this chapter established</p>
+<ol>
+<li>Reproducibility is conditional on a fixed system, and it is also a documentation practice rather than a property of a method.</li>
+<li>Saving the natural-language question is insufficient whenever the system rewrote it.</li>
+<li>A faithful explanation is an execution trace. A plausible narrative is not evidence of what drove a result.</li>
+<li>Documentation and inspection cannot be assumed to arrive later. A vendor may add them, but a product that was not built to expose what it searched will not do so on a library’s timetable, which is why these are procurement questions rather than support tickets.</li>
+<li>The questions that separate a retrieval design from a marketing label need no mathematics — only the distinctions this book has drawn, and the willingness to ask which one a vendor’s word names.</li>
+<li>Libraries do not need model weights. They need enough visibility to establish what was searched, enough documentation to compare it later, and enough control to test it locally.</li>
+</ol>
+</aside>
 <p class="source-link"><a href="search-textbook.html#library-practice">Read Chapter 15 in full</a></p>
 </article>
 <aside class="reflection" aria-label="Reflection prompt"><p><strong>Pause and reflect</strong></p><p>Name a missed record and a possible explanation. Record an alternative explanation and the next check before choosing an intervention.</p></aside>

@@ -256,3 +256,43 @@ none of them needs rewriting at the start.
   `"markdown"`, commit a fresh in-place build, update `README.md`,
   `tools/README.md` and `AGENTS.md`, decide on the annotation editor, and
   re-record the baseline.
+
+## Phase 6 status: cut-over on the branch (2026-11-26)
+
+- **Backup and bookmark.**
+  - `markdown-conversation` was pushed to GitHub before the cut-over.
+  - An annotated tag `pre-markdown` was made on `main` at `536afac`. Pushing it
+    was refused (HTTP 403: this session may push branches but not tags), so the
+    tag exists only locally. The commit itself is the bookmark.
+- **Switched the source of truth.** `book/book.json` now says `"markdown"`, and
+  a fresh in-place build replaced `search-textbook.html` and
+  `read-this-first.html`. No other published page changed.
+- **Guards:**
+  - `html_to_md.py --book book` now refuses, because it would overwrite
+    authored Markdown;
+  - `build-book.py --check` now requires byte-identical pages;
+  - converting the built page back reproduces `book/` exactly, which the
+    tests check.
+- **Verification:**
+  - **Equivalence:** the built book is equivalent to the phase 1 baseline, and
+    the digest to its previous version.
+  - **Screenshots:** 2,009 slices of the old and new book and digest were
+    compared in Chromium (desktop, iPhone 13, print media and no JavaScript,
+    with external requests blocked). Page heights were identical in all eight
+    cases. The only pixel differences were 66 desktop slices in the top 4 px,
+    where the reading-progress bar sits; the old page shot twice differs from
+    itself in 76 such slices, so this is capture timing, not content.
+  - **Generators and tests:** all generator checks pass in place, all Python
+    suites pass, and the 11 Node and browser checks pass (in Chromium, not
+    Edge).
+  - **Fault found in the existing repository:** `test-evaluation-kit.py` still
+    fails, expecting three links to `evaluation-kit.html` where `37dc2e3` made
+    four.
+- **Documents:** `README.md`, `tools/README.md`, `AGENTS.md`, `book/README.md`
+  and `CHANGELOG.md` now say to edit `book/` and run `tools/build-book.py`.
+- **Annotation editor:** still undecided. `tools/README.md` warns that its
+  edits to the built page are lost at the next build unless they are made in
+  `book/`.
+- **Not merged.** `main`, and so the published site, still serve the
+  HTML-sourced book. Before merging, run `python tools/build-book.py --check` on
+  a machine with Pandoc 3.1, and decide on the annotation editor.

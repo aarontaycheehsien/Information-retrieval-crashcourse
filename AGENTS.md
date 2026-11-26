@@ -42,7 +42,18 @@ An explicit user instruction such as “do not commit” overrides this default.
 
 
 
-\## Parallel development
+\## Editing the book
+
+- The book's source is the Markdown in `book/`. Edit those files, never
+  `search-textbook.html` or `read-this-first.html`, which are built and are
+  replaced by the next build.
+- After editing, run `python tools/build-book.py`, then
+  `python tools/build-book.py --check`, and commit the sources together with the
+  rebuilt pages. Conventions are in `reviews/markdown-mapping-spec.md`.
+- Do not run `tools/markdown/html_to_md.py --book book`: it would overwrite
+  authored Markdown, and it refuses while `book/book.json` says `"markdown"`.
+
+## Parallel development
 
 
 

@@ -1,5 +1,12 @@
 # Tooling
 
+> **The book's source is Markdown in [`book/`](../book/README.md).** Edit it,
+> then run `python tools/build-book.py`, which rebuilds `search-textbook.html`
+> and the digest and runs every maintenance pass below. Commit the sources and
+> the built pages together. Hand edits to `search-textbook.html` are replaced by
+> the next build. Sections below that say to edit the HTML describe the
+> generators' inputs, which the build now produces from `book/`.
+
 This directory contains the **current** maintenance and verification tools.
 The root-level `audit.py`, `restructure.py` and `verify.py` from the completed
 restructuring have been archived unchanged under
@@ -80,11 +87,10 @@ python tools/build-book.py             # build in place (refused until cut-over)
 python tools/test-build-book.py        # check, refusal and determinism (about 20 s)
 ```
 
-`book/book.json` records the source of truth. While it says `"html"`, the
-in-place build is refused so that hand edits to `search-textbook.html` are never
-overwritten; regenerate `book/` with `html_to_md.py --book book` instead. After
-cut-over it says `"markdown"`, and `--check` then also requires byte-identical
-pages, so a stale committed build fails. Builds are deterministic: two builds
+`book/book.json` records the source of truth. It says `"markdown"` since the
+cut-over, so `--check` requires byte-identical pages and a stale committed build
+fails, and `html_to_md.py --book book` refuses to overwrite the sources. (Before
+the cut-over it said `"html"`, and the in-place build was refused instead.) Builds are deterministic: two builds
 give identical bytes.
 
 ### Markdown build and round trip (phases 3 and 4)
@@ -130,7 +136,7 @@ The builder uses only Python's standard library. The browser check uses
 Playwright and installed Microsoft Edge, following the other companion checks.
 Screenshots go to ignored `outputs/digest/`.
 
-Edit excerpt prose only in `search-textbook.html`. The manifest
+Edit excerpt prose only in the book's sources in `book/`. The manifest
 `data/digest-selections.json` defines source anchors, ordering, stage budgets
 and reflection prompts; `tools/digest-template.html` owns the introduction and
 next-step guidance. `assets/digest.css` owns presentation. Each chapter summary
@@ -222,7 +228,7 @@ definitions and explanation references, hiding search controls and tooltips.
 
 ## Product evidence and currency
 
-`data/product-claims.json` maintains the claim register. The HTML remains the
+`data/product-claims.json` maintains the claim register. `book/` is the
 source of truth for chapter prose; only `BEGIN/END PRODUCT CLAIMS` blocks are
 generated. `product_claims.py` shares validation, date rules and renderers between:
 
@@ -400,20 +406,29 @@ Annotations are stored as `<document-name>.annotations.json` beside the document
 
 The helper keeps jobs in memory, gives Claude no tools or filesystem access, and requests a strict proposal schema. Stop it with `Ctrl+C`. Automated checks use `node --test tools/annotation-agent-server.test.mjs` and a mock process, so they do not consume a Claude run.
 
-`search-textbook.html` is the **source of truth for authored prose**. Edit it
-directly. The product register additionally generates marked evidence blocks;
-neither that builder nor the maintenance passes overwrite your prose.
+**Annotation editor and the Markdown source.** The editor opens and changes
+`search-textbook.html`, which is now a built page: an accepted proposal there is
+lost at the next build unless the same change is made in `book/`. Use it for
+reading and commenting, and apply changes to the Markdown. Whether to retarget
+or retire it is still undecided.
+
+The **source of truth for authored prose** is the Markdown in `book/`. The
+product register additionally generates marked evidence blocks; neither that
+builder nor the maintenance passes overwrite your prose.
 
 Two maintenance passes keep the machine-owned parts consistent. Both are
 idempotent — safe to run any time, and they report "no changes needed" when
-there is nothing to do.
+there is nothing to do. `build-book.py` runs them for you until they settle.
 
 ## After editing
 
 ```bash
-python tools/maintain.py
-python tools/renumber_footnotes.py
+python tools/build-book.py           # rebuild the book, its passes and companions
+python tools/build-book.py --check   # confirm the committed pages match a fresh build
 ```
+
+Running `maintain.py` or `renumber_footnotes.py` on its own is still safe, but
+it is no longer needed and its result is replaced by the next build.
 
 ### `maintain.py`
 
@@ -472,7 +487,9 @@ title so all three agree. Run it after moving or adding a footnote.
 
 ## Conventions the tools rely on
 
-Keep these shapes when hand-editing, or the passes will not find the pieces:
+The book filter (`tools/markdown/book.lua`) writes these shapes. Keep them when
+changing the filter or a raw-HTML block in `book/`, or the passes will not find
+the pieces:
 
 | Thing | Markup |
 |---|---|

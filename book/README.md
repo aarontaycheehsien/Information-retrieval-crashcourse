@@ -1,29 +1,31 @@
-# Markdown sources (converted, not yet the source of truth)
+# The book's Markdown source
 
-These files are the whole book converted to Markdown by phase 4 of
-[the conversion plan](../reviews/markdown-conversion-plan.md). Until cut-over,
-`search-textbook.html` remains the source of truth and **these files are
-regenerated from it, not edited**:
+These files are the **source of truth** for *How search decides what you see*
+since the cut-over in phase 6 of
+[the conversion plan](../reviews/markdown-conversion-plan.md).
+`search-textbook.html` and `read-this-first.html` are built from them and must
+not be edited by hand.
 
 ```bash
-python tools/markdown/html_to_md.py --book book     # regenerate after editing the HTML
-python tools/markdown/html_to_md.py --check book    # is book/ stale?
-python tools/build-book.py --check                  # build from book/ and compare (about 10 s)
-python tools/markdown/pilot.py --book book          # same, plus every generator, check and test (about a minute)
+python tools/build-book.py           # rebuild after editing (Python 3 and Pandoc 3.1)
+python tools/build-book.py --check   # do the committed pages match a fresh build?
+python tools/test-build-book.py      # build checks, including determinism
 ```
 
-`book.json` records that the HTML is still the source of truth, so
-`tools/build-book.py` refuses to build in place until cut-over.
-
-- `NN-*.md`: one file per top-level part of the article, in book order. The
-  front matter says what kind it is (chapter, appendix, exercise, part,
-  backsection, glossary, fragment).
+- `NN-*.md`: one file per top-level part of the book, in reading order. The
+  two-digit prefix sets the order; the front matter says what kind each is
+  (chapter, appendix, exercise, part, backsection, glossary, fragment).
 - `39-product-claims-register.html`: empty markers that the claims builder
   fills.
 - `template.html`: the page shell, with head, styles, scripts, hero and empty
-  TOC lists.
+  TOC lists. Edit it for changes outside the book's body.
 - `figures/`: raw-HTML bodies of bespoke worked diagrams, included from the
   chapter files.
+- `book.json`: records that Markdown is the source of truth.
 
-The conventions are in
+The writing conventions (headings, figures, tables, asides, self-checks,
+footnotes, maths) are in
 [`reviews/markdown-mapping-spec.md`](../reviews/markdown-mapping-spec.md).
+Navigation, numbering, tables of contents, footnote numbers, the glossary
+lookup and the product-evidence blocks are generated, so never write them by
+hand.

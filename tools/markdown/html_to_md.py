@@ -837,8 +837,20 @@ def make_template(source, article):
     return template
 
 
+class AuthoredSources(Exception):
+    """book/ is the source of truth and must not be regenerated from HTML."""
+
+
+def markdown_is_source() -> bool:
+    config = ROOT / "book" / "book.json"
+    return config.exists() and json.loads(config.read_text(encoding="utf-8"))["source_of_truth"] == "markdown"
+
+
 def convert_book(out_dir: Path, source=None):
     """Write every part of the article to out_dir as ordered source files."""
+    if markdown_is_source() and Path(out_dir).resolve() == (ROOT / "book").resolve():
+        raise AuthoredSources("book/ is now the source of truth (book/book.json); converting into it would "
+                              "overwrite authored Markdown. Convert into another directory instead.")
     source = source if source is not None else BOOK.read_text(encoding="utf-8")
     parser = Parser(source)
     parser.feed(source)
@@ -926,7 +938,11 @@ def main(argv=None):
         print(f"{argv[1]} matches a fresh conversion of search-textbook.html.")
         return 0
     if len(argv) == 2 and argv[0] == "--book":
-        conv, files = convert_book(Path(argv[1]))
+        try:
+            conv, files = convert_book(Path(argv[1]))
+        except AuthoredSources as exc:
+            print(f"refused: {exc}", file=sys.stderr)
+            return 2
         print(f"Wrote {len(files)} source files, template.html and {len(conv.islands)} raw-HTML island(s).")
         for w in conv.warnings:
             print("warning:", w)

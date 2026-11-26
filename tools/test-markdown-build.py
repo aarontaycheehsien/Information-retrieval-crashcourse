@@ -205,7 +205,11 @@ class AssemblyTests(unittest.TestCase):
 
     def test_committed_sources_are_current(self):
         stale = html_to_md.check_book(ROOT / "book")
-        self.assertEqual(stale, [], "book/ is stale; run python tools/markdown/html_to_md.py --book book")
+        # Before cut-over: book/ must match a conversion of the live HTML.
+        # After it: converting the built page back must reproduce book/ exactly,
+        # so the conversion stays a faithful round trip.
+        self.assertEqual(stale, [], "book/ and a conversion of search-textbook.html differ; "
+                                    "after cut-over, run python tools/build-book.py")
 
 
 class ConverterTests(unittest.TestCase):
