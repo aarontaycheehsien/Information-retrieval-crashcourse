@@ -122,7 +122,7 @@ none of them needs rewriting at the start.
 ## Phase 2 status (2026-11-26)
 
 - Mapping in `data/markdown-mapping.json` (30 constructs covering all 191
-  classes and 76 element types) and explained in
+  classes and 71 element types) and explained in
   [`markdown-mapping-spec.md`](markdown-mapping-spec.md).
 - `tools/markdown_mapping.py` checks the mapping is complete and not stale,
   and measures the raw-HTML share: 3.7% of authored words, 14.1% of authored

@@ -5,7 +5,7 @@ commit `0e3d4f8`. Phase 2 of the [conversion plan](markdown-conversion-plan.md).
 
 The machine-readable version is [`data/markdown-mapping.json`](../data/markdown-mapping.json).
 `python tools/markdown_mapping.py` checks that every one of the book's 191
-classes and 76 element types has exactly one mapping. This document explains
+classes and 71 element types has exactly one mapping. This document explains
 the choices. Where the two disagree, the JSON is what the tests check.
 
 ## Reader settings
