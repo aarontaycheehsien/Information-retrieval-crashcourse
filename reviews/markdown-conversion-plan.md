@@ -156,10 +156,12 @@ none of them needs rewriting at the start.
   - `maintain.py` could not run on the live book after `37dc2e3` added
     `tabindex` to the article tag. Fixed in its own commit; on the current
     book it then makes no changes.
-  - `maintain.py` still exits 1 on the live book for an existing content
-    problem: "From language model to retrieval encoder: 0 table(s) but 1
-    'Table n.n' label(s)". This is not fixed here, because it is a book
-    content decision.
+  - `maintain.py` also reported "From language model to retrieval encoder:
+    0 table(s) but 1 'Table n.n' label(s)". This was a false positive: Table
+    6.1 gained `class="token-comparison"` in `49256c0`, and `maintain.py`
+    matched only a bare `<table>`. Fixed in `536afac` on `main`, brought here
+    as `6125013`. `maintain.py` now reports no problems, and the pilot passes
+    with it exiting 0 in both copies.
 - **Phase 4 readiness.** The converter runs on all 23 chapter and appendix
   sections without errors and leaves 54 blocks as raw HTML with warnings:
   - 9 query-flow figures;
