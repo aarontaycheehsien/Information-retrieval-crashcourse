@@ -109,7 +109,7 @@ edited without Pandoc installed, including in GitHub's web editor.
   Make that change in `book/`.
 
 It installs Pandoc 3.1.3 from its GitHub release and checks the file's SHA-256.
-`test-evaluation-kit.py` is left out because of its known stale assertion.
+The browser checks are not run there, because they need Microsoft Edge.
 
 ### Markdown build and round trip (phases 3 and 4)
 

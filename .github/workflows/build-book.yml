@@ -52,11 +52,10 @@ jobs:
       - name: Tests
         run: |
           for t in test-markdown-build test-build-book test-html-equivalence test-markdown-mapping \
-                   test-product-claims test-glossary-hub test-digest test-vendor-questionnaire; do
+                   test-product-claims test-glossary-hub test-digest test-vendor-questionnaire \
+                   test-evaluation-kit; do
             echo "::group::$t"; python "tools/$t.py"; echo "::endgroup::"
           done
-          # test-evaluation-kit.py is not run: it expects three links to
-          # evaluation-kit.html in the book, which has had four since 37dc2e3.
 
   build:
     if: github.event_name != 'pull_request'
@@ -83,11 +82,10 @@ jobs:
         if: steps.build.outputs.changed == 'true'
         run: |
           for t in test-markdown-build test-build-book test-html-equivalence test-markdown-mapping \
-                   test-product-claims test-glossary-hub test-digest test-vendor-questionnaire; do
+                   test-product-claims test-glossary-hub test-digest test-vendor-questionnaire \
+                   test-evaluation-kit; do
             echo "::group::$t"; python "tools/$t.py"; echo "::endgroup::"
           done
-          # test-evaluation-kit.py is not run: it expects three links to
-          # evaluation-kit.html in the book, which has had four since 37dc2e3.
 
       - name: Commit the rebuilt pages
         if: steps.build.outputs.changed == 'true'

@@ -296,3 +296,7 @@ none of them needs rewriting at the start.
 - **Not merged.** `main`, and so the published site, still serve the
   HTML-sourced book. Before merging, run `python tools/build-book.py --check` on
   a machine with Pandoc 3.1, and decide on the annotation editor.
+- **Follow-up (2026-11-26).** `test-evaluation-kit.py` now expects four links
+  to `evaluation-kit.html`: three in the chapters and the header's "Evaluate a
+  search system" reading route added in `37dc2e3`. It passes, and the
+  GitHub Actions workflow now runs it.
