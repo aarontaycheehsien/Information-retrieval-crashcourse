@@ -28,6 +28,29 @@ the top-k boundary. It reuses the Chapter 2 media engine and adds calculated
 BM25 examples, animated plots and a separate player. Generated files belong in
 the Git-ignored `outputs/chapter-3-videos/`.
 
+## Markdown conversion equivalence check
+
+Phase 1 of the [Markdown conversion plan](../reviews/markdown-conversion-plan.md).
+`html_equivalence.py` decides whether two HTML files render the same content:
+it parses both strictly and compares a canonical serialisation. Attribute
+order, class-token order, character references, `<br>`/`<br/>` and ASCII
+whitespace that cannot affect layout are ignored. Text, NBSP, inline spacing,
+ids, classes, other attribute values, comments (the generators' BEGIN/END
+markers) and `script`/`style`/`pre` content are significant. Malformed input is
+an error, not repaired.
+
+```bash
+python tools/html_equivalence.py A.html B.html [--section ID]
+python tools/html_equivalence.py --check-baseline [FILE]
+python tools/html_equivalence.py --record-baseline [--commit REV]
+python tools/test-html-equivalence.py
+```
+
+`data/markdown-baseline.json` pins the reference commit and canonical hash;
+the readable snapshot goes to ignored `outputs/markdown-conversion/`. Exit
+status is 0 equivalent, 1 different, 2 error. Re-record the baseline only
+deliberately, at the phase 4 freeze. Standard library only.
+
 ## Read-this-first digest
 
 `read-this-first.html` is generated, not a separately authored edition. Run:

@@ -84,3 +84,37 @@ none of them needs rewriting at the start.
   to cut-over, or every fix is made twice.
 - Too much raw HTML. If more than about a quarter of the source is raw HTML,
   most of the benefit is lost. Phase 3 is the honest test.
+
+## Phase 0 decision (2026-11-26)
+
+- **Goals:** all four. Easier editing, cleaner diffs and review, and safer
+  AI-assisted editing, plus EPUB/PDF output from the same source.
+- **Consequence:** the built HTML must stay equivalent to the baseline through
+  phases 1 to 6. EPUB/PDF stays in phase 7. Because other formats are a goal,
+  the phase 2 mapping should prefer semantic fenced divs over raw HTML wherever
+  a construct has meaning beyond styling, so that the same source can drive an
+  EPUB/PDF writer later.
+- **Annotation editor:** decision deferred to phase 6. Until then it keeps
+  working on the HTML as now.
+
+## Phase 1 status (2026-11-26)
+
+- `tools/html_equivalence.py` compares two HTML files through a canonical,
+  normalised serialisation. It ignores only rendering-irrelevant differences
+  (attribute and class-token order, character references, void-element syntax,
+  ASCII whitespace collapse and whitespace at block boundaries). It keeps
+  NBSP, inline spacing, comments and `script`/`style`/`pre` content
+  significant. It rejects malformed input rather than repairing it.
+- Baseline recorded in `data/markdown-baseline.json` (commit `a740bd2`, whose
+  book is unchanged from `0e3d4f8`). The canonical snapshot is written to the
+  ignored `outputs/markdown-conversion/`.
+- `tools/test-html-equivalence.py` (11 tests) covers: the book equals itself;
+  the book rewritten by a different serialiser (newlines around blocks,
+  reversed attributes, self-closing voids, numeric references for all
+  non-ASCII) is equivalent; one-word, anchor, class, marker and inline-markup
+  edits fail; `--section` scoping; the manifest matching its commit; rule
+  cases; and malformed input.
+- Exit criterion met: self-comparison passes; deliberate edits fail.
+- The baseline must be re-recorded at the phase 4 freeze, because prose edits
+  will continue until then. Re-record only on purpose:
+  `python tools/html_equivalence.py --record-baseline`.
