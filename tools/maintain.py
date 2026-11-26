@@ -103,7 +103,7 @@ TABLE_LBL_RE = re.compile(
     r'<p class="(asset-label[^"]*)"(?:\s+id="[^"]*")?>Table\s+[0-9A-Za-z]+\.\d+')
 FIG_LBL_RE = re.compile(
     r'<span class="(asset-label-inline[^"]*)"(?:\s+id="[^"]*")?>Figure\s+[0-9A-Za-z]+\.\d+')
-TABLE_RE = re.compile(r'<div class="table-wrap"><table>')
+TABLE_RE = re.compile(r'<div class="table-wrap"><table\b[^>]*>')
 FIGCAP_RE = re.compile(r'<figcaption')
 EYEBROW_SUB = re.compile(r'(<p class="chapter-eyebrow">)Appendix\s+[A-Z](</p>)')
 
