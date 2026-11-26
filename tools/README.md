@@ -93,6 +93,24 @@ fails, and `html_to_md.py --book book` refuses to overwrite the sources. (Before
 the cut-over it said `"html"`, and the in-place build was refused instead.) Builds are deterministic: two builds
 give identical bytes.
 
+### Automatic builds on GitHub
+
+`.github/workflows/build-book.yml` builds the book on GitHub, so `book/` can be
+edited without Pandoc installed, including in GitHub's web editor.
+
+- **Pull requests:** it runs `build-book.py --check` and the build and
+  generator tests, and writes nothing.
+- **Pushes to `main` that change `book/`, `data/` or `tools/`:**
+  `tools/markdown/ci-build.sh` rebuilds the pages and the workflow commits them
+  back to `main` as `github-actions[bot]`. A push whose built pages already
+  match a fresh build is left alone.
+- **A push that edits `search-textbook.html`, `read-this-first.html` or
+  `vendor-questionnaire.html` directly fails instead of being overwritten.**
+  Make that change in `book/`.
+
+It installs Pandoc 3.1.3 from its GitHub release and checks the file's SHA-256.
+`test-evaluation-kit.py` is left out because of its known stale assertion.
+
 ### Markdown build and round trip (phases 3 and 4)
 
 `tools/markdown/` holds the conversion tooling:

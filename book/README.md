@@ -12,6 +12,10 @@ python tools/build-book.py --check   # do the committed pages match a fresh buil
 python tools/test-build-book.py      # build checks, including determinism
 ```
 
+Once merged into `main`, a GitHub Actions workflow
+(`.github/workflows/build-book.yml`) rebuilds and commits the pages whenever
+`book/` changes, so you can edit these files without Pandoc installed.
+
 - `NN-*.md`: one file per top-level part of the book, in reading order. The
   two-digit prefix sets the order; the front matter says what kind each is
   (chapter, appendix, exercise, part, backsection, glossary, fragment).

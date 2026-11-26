@@ -1,0 +1,104 @@
+# Build the published book from its Markdown source in book/.
+#
+# On a pull request: check that the committed pages match a fresh build and run
+# the build and generator tests. Nothing is written.
+#
+# On a push to main (or a manual run): if book/ changed and the committed pages
+# are stale, rebuild them and commit the result to main. A push that edits a
+# built page directly, instead of book/, fails rather than being overwritten.
+# See tools/markdown/ci-build.sh for the rules.
+
+name: Build book
+
+on:
+  push:
+    branches: [main]
+    paths: ["book/**", "data/**", "tools/**", "*.html", ".github/workflows/build-book.yml"]
+  pull_request:
+    paths: ["book/**", "data/**", "tools/**", "*.html", ".github/workflows/build-book.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One build of main at a time; a newer push waits rather than racing.
+concurrency:
+  group: build-book-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  # The version the build was verified with. Another version may format the
+  # page differently, which build-book.py --check would report.
+  PANDOC_VERSION: "3.1.3"
+  PANDOC_SHA256: "caa7e0410f9e2cb1da2eb8db13cc97b5548fe455985e2c944e3929d22f99bcdc"
+
+jobs:
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Pandoc
+        run: |
+          curl -fsSL -o pandoc.deb "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          echo "${PANDOC_SHA256}  pandoc.deb" | sha256sum --check -
+          sudo dpkg -i pandoc.deb && rm pandoc.deb
+          pandoc --version | head -1
+      - name: Committed pages match a fresh build
+        run: python tools/build-book.py --check
+      - name: Tests
+        run: |
+          for t in test-markdown-build test-build-book test-html-equivalence test-markdown-mapping \
+                   test-product-claims test-glossary-hub test-digest test-vendor-questionnaire; do
+            echo "::group::$t"; python "tools/$t.py"; echo "::endgroup::"
+          done
+          # test-evaluation-kit.py is not run: it expects three links to
+          # evaluation-kit.html in the book, which has had four since 37dc2e3.
+
+  build:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # to compare with the commit before the push
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Pandoc
+        run: |
+          curl -fsSL -o pandoc.deb "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          echo "${PANDOC_SHA256}  pandoc.deb" | sha256sum --check -
+          sudo dpkg -i pandoc.deb && rm pandoc.deb
+          pandoc --version | head -1
+      - name: Rebuild if book/ changed
+        id: build
+        run: bash tools/markdown/ci-build.sh "${{ github.event.before }}"
+      - name: Tests
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          for t in test-markdown-build test-build-book test-html-equivalence test-markdown-mapping \
+                   test-product-claims test-glossary-hub test-digest test-vendor-questionnaire; do
+            echo "::group::$t"; python "tools/$t.py"; echo "::endgroup::"
+          done
+          # test-evaluation-kit.py is not run: it expects three links to
+          # evaluation-kit.html in the book, which has had four since 37dc2e3.
+
+      - name: Commit the rebuilt pages
+        if: steps.build.outputs.changed == 'true'
+        run: |
+          git fetch --quiet origin main
+          if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then
+            echo "::notice::main moved on during the build; the newer push's run will rebuild."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add search-textbook.html read-this-first.html vendor-questionnaire.html teaching-notes.html
+          git commit -m "Rebuild the book from book/" -m "Automated by .github/workflows/build-book.yml for ${GITHUB_SHA::7}."
+          git push origin HEAD:main
