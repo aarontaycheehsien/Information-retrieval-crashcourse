@@ -274,7 +274,7 @@ Nor is it a rival to RAG. [Appendix D](#appendix-misleading-overlaps) separates 
 More agency is not simply better.
 It is a trade, and for a known task with an established procedure it may be a poor one.
 
-|  | Fixed or adaptive workflow | Agentic search |
+| Consideration | Fixed or adaptive workflow | Agentic search |
 |---|---|---|
 | **Cost and speed** | Cheaper and faster. Most of the sequence is decided in advance; at most a branch is selected at query time, so little has to be reasoned out per question. | Slower and dearer. A model is invoked to choose, and often to justify, each successive action—and every round adds latency and tokens. |
 | **[Reproducibility](#reproducibility-implication-title)** | The workflow and its rules can be documented. A fixed sequence follows the prescribed stages; adaptive control follows prewritten branches whose outcomes depend on inputs and intermediate results. Record the branch taken as well as the rules. | Comparatively weak. The path is chosen per question and two runs of the same question may legitimately differ, so only a trace of the actual run describes what happened. |
