@@ -9,6 +9,12 @@ entry here.
 
 ## Unreleased
 
+- **Annotation editor retired.** The local authoring prototype
+  `lightweight-wysiwyg-html-editor-v4-footnotes.html`, its launcher, local
+  server and tests are removed. It edited the built page, which the Markdown
+  source now replaces at every build. It was not a reader companion; Git history
+  keeps it.
+
 - **Book source moved to Markdown.** The book is now written in Markdown under
   `book/` and built into `search-textbook.html` with `tools/build-book.py`. The
   text, links, anchors and layout are unchanged: the rebuilt page is equivalent

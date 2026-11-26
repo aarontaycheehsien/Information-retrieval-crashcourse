@@ -32,7 +32,6 @@ The book is written in Markdown under [`book/`](book/README.md), one file per ch
 | [`tools/`](tools/README.md) | Current builders, maintenance passes, fixtures and regression checks. |
 | [`reviews/`](reviews/README.md) | Historical editorial records; findings are not automatically current tasks. |
 | [`reviews/restructuring/`](reviews/restructuring/README.md) | Completed restructuring records, snapshot reports and archived migration scripts. Not the live build pipeline. |
-| `lightweight-wysiwyg-html-editor-v4-footnotes.html` | Local authoring prototype, not a reader companion. Retained at the root because the annotation launcher and tests use this path. |
 | `outputs/` | Local generated verification artifacts; task output directories are ignored by Git. |
 
 For contributors: use the [tooling guide](tools/README.md), put new review

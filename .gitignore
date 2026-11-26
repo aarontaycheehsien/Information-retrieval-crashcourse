@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
+# Sidecars from the retired annotation editor; kept so stray local copies are never committed.
 *.annotations.json
 outputs/evaluation-kit/
 outputs/vendor-questionnaire/

@@ -300,3 +300,8 @@ none of them needs rewriting at the start.
   to `evaluation-kit.html`: three in the chapters and the header's "Evaluate a
   search system" reading route added in `37dc2e3`. It passes, and the
   GitHub Actions workflow now runs it.
+- **Annotation editor retired (2026-11-26).** The editor page, its launcher,
+  local server and tests were removed after the cut-over, because it edited the
+  built page. The `.gitignore` rule for its `*.annotations.json` sidecars stays,
+  so stray local copies are never committed. The last commit containing it is
+  `752709b`.

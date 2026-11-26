@@ -14,11 +14,6 @@ restructuring have been archived unchanged under
 their snapshots. Their historical commands and gate approvals are not current
 maintenance instructions.
 
-The local annotation editor remains at
-`lightweight-wysiwyg-html-editor-v4-footnotes.html` in the repository root:
-`start-annotation-editor.cmd`, the annotation server and editor tests depend on
-that path. It is an authoring prototype rather than a published reader companion.
-
 ## Animated chapter explainers
 
 [`chapter-2-videos/`](chapter-2-videos/README.md) contains the scripts and original
@@ -410,25 +405,13 @@ records at the recorded capture depth, not raw duplicate positions. Blank
 judgements stay unjudged, and changing the cutoff cannot silently relabel an
 incomplete capture as complete. The guide explains extension and rerun steps.
 
-## Canvas-style annotation helper
+## Retired: annotation editor
 
-Run `tools\start-annotation-editor.cmd` from Windows Explorer, Command Prompt, or PowerShell. It starts a server bound only to `127.0.0.1`, prints a tokenized editor URL, and serves this repository. Keep that terminal open and use the printed URL for Claude proposal controls. Opening the HTML file directly still supports comments, browser storage, sidecar import/export, and Codex copy/import, but not the Claude button.
-
-The full-featured flow is:
-
-1. Open the repository with **Open Folder**, select text in one supported block, and choose **Comment** (or press `Ctrl+Alt+M`).
-2. Use **Run Claude**, or **Copy for Codex** and paste returned JSON through **Import proposal**. When Codex discovers the page's WebMCP tools, it can list annotations, read bounded context, and submit a proposal directly.
-3. Review each proposal. Only **Accept** changes document text; dismissing, retrying, resolving, or deleting does not apply proposal text.
-
-Annotations are stored as `<document-name>.annotations.json` beside the document when a writable folder handle is available. Otherwise they remain in browser storage until exported. Sidecars are ignored by Git by default.
-
-The helper keeps jobs in memory, gives Claude no tools or filesystem access, and requests a strict proposal schema. Stop it with `Ctrl+C`. Automated checks use `node --test tools/annotation-agent-server.test.mjs` and a mock process, so they do not consume a Claude run.
-
-**Annotation editor and the Markdown source.** The editor opens and changes
-`search-textbook.html`, which is now a built page: an accepted proposal there is
-lost at the next build unless the same change is made in `book/`. Use it for
-reading and commenting, and apply changes to the Markdown. Whether to retarget
-or retire it is still undecided.
+The local annotation editor (`lightweight-wysiwyg-html-editor-v4-footnotes.html`,
+`start-annotation-editor.cmd`, `annotation-agent-server.mjs` and their tests)
+was retired on 2026-11-26. It edited `search-textbook.html`, which is now built
+from `book/`, so its changes would have been lost at the next build. The last
+commit containing it is `752709b`. Edit the Markdown in `book/` instead.
 
 The **source of truth for authored prose** is the Markdown in `book/`. The
 product register additionally generates marked evidence blocks; neither that
