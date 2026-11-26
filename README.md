@@ -17,13 +17,14 @@ New to the subject? Start with [**Read this first**](https://aarontaycheehsien.g
 
 ## Maintaining the book
 
-`search-textbook.html` is the sole maintained edition and the source of truth for authored prose, including glossary definitions. Marked product-evidence blocks, glossary navigation, the lookup index, the digest and the questionnaire are generated from maintained mappings. The retired single-flow edition is in Git history, and its former URL redirects to the textbook. See [`tools/README.md`](tools/README.md) for the maintenance passes and [`CHANGELOG.md`](CHANGELOG.md) for what changed between versions.
+The book is written in Markdown under [`book/`](book/README.md), one file per chapter, appendix and back section, and is the source of truth for authored prose, including glossary definitions. `python tools/build-book.py` (Python 3 and [Pandoc](https://pandoc.org/) 3.1) builds the published `search-textbook.html` from it; do not edit that page by hand, because the next build replaces it. Navigation, numbering, footnotes, marked product-evidence blocks, glossary navigation, the lookup index, the digest and the questionnaire are generated from the sources and maintained mappings. The retired single-flow edition is in Git history, and its former URL redirects to the textbook. See [`tools/README.md`](tools/README.md) for the maintenance passes and [`CHANGELOG.md`](CHANGELOG.md) for what changed between versions.
 
 ## Repository map
 
 | Location | Status and purpose |
 |---|---|
-| `search-textbook.html` | Sole maintained book; authored prose is edited here. |
+| [`book/`](book/README.md) | The book's Markdown source: edit here, then run `python tools/build-book.py`. |
+| `search-textbook.html` | The published book, built from `book/`. Do not edit by hand. |
 | Root companion HTML files | Published labs, evaluation kit, questionnaire, digest and teaching materials. Keep these paths stable. |
 | `index.html`, `how-search-decides-what-you-see.html` | Entry-point and retired-edition redirects. These are retained for existing URLs, not alternate editions. |
 | `assets/`, `images/`, `downloads/` | Published styles/scripts, figures and downloadable workbooks. |

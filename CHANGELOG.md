@@ -9,6 +9,12 @@ entry here.
 
 ## Unreleased
 
+- **Book source moved to Markdown.** The book is now written in Markdown under
+  `book/` and built into `search-textbook.html` with `tools/build-book.py`. The
+  text, links, anchors and layout are unchanged: the rebuilt page is equivalent
+  to the previous one and rendered identically in desktop, mobile, print and
+  no-JavaScript screenshots. Only the page's HTML formatting differs.
+
 - **Truncation, phrase and proximity searching in Chapter 2.** Add a short
   section, *Truncation, phrases and proximity use the same map*, explaining that
   truncation expands a pattern against the dictionary and that phrase and

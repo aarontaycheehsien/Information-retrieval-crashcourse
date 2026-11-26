@@ -1,5 +1,12 @@
 # Tooling
 
+> **The book's source is Markdown in [`book/`](../book/README.md).** Edit it,
+> then run `python tools/build-book.py`, which rebuilds `search-textbook.html`
+> and the digest and runs every maintenance pass below. Commit the sources and
+> the built pages together. Hand edits to `search-textbook.html` are replaced by
+> the next build. Sections below that say to edit the HTML describe the
+> generators' inputs, which the build now produces from `book/`.
+
 This directory contains the **current** maintenance and verification tools.
 The root-level `audit.py`, `restructure.py` and `verify.py` from the completed
 restructuring have been archived unchanged under
@@ -28,6 +35,109 @@ the top-k boundary. It reuses the Chapter 2 media engine and adds calculated
 BM25 examples, animated plots and a separate player. Generated files belong in
 the Git-ignored `outputs/chapter-3-videos/`.
 
+## Markdown conversion equivalence check
+
+Phase 1 of the [Markdown conversion plan](../reviews/markdown-conversion-plan.md).
+`html_equivalence.py` decides whether two HTML files render the same content:
+it parses both strictly and compares a canonical serialisation. Attribute
+order, class-token order, character references, `<br>`/`<br/>` and ASCII
+whitespace that cannot affect layout are ignored. Text, NBSP, inline spacing,
+ids, classes, other attribute values, comments (the generators' BEGIN/END
+markers) and `script`/`style`/`pre` content are significant. Malformed input is
+an error, not repaired.
+
+```bash
+python tools/html_equivalence.py A.html B.html [--section ID]
+python tools/html_equivalence.py --check-baseline [FILE]
+python tools/html_equivalence.py --record-baseline [--commit REV]
+python tools/test-html-equivalence.py
+```
+
+`data/markdown-baseline.json` pins the reference commit and canonical hash;
+the readable snapshot goes to ignored `outputs/markdown-conversion/`. Exit
+status is 0 equivalent, 1 different, 2 error. Re-record the baseline only
+deliberately, at the phase 4 freeze. Standard library only.
+
+### Markdown mapping
+
+Phase 2. `data/markdown-mapping.json` maps every class and element in the book
+to its Markdown construct and status (native, filter, derived, generated,
+template, raw); [`reviews/markdown-mapping-spec.md`](../reviews/markdown-mapping-spec.md)
+explains it. `markdown_mapping.py` fails on unmapped, duplicated or stale
+entries and reports the raw-HTML share against the plan's 25% threshold. Add a
+mapping whenever a new class enters the book.
+
+```bash
+python tools/markdown_mapping.py [--json]
+python tools/test-markdown-mapping.py
+```
+
+### Building the book from Markdown (phase 5)
+
+`build-book.py` is the one command that produces the published page from
+`book/`. It builds each file with Pandoc and the book filter, assembles the
+template, derives navigation and footnotes, runs `maintain.py`,
+`renumber_footnotes.py` and the claims and glossary builders until a whole round
+changes nothing, then rebuilds the digest and the vendor questionnaire.
+
+```bash
+python tools/build-book.py --check     # build in a scratch copy, compare every root page
+python tools/build-book.py --out DIR   # build into a copy of the repository
+python tools/build-book.py             # build in place (refused until cut-over)
+python tools/test-build-book.py        # check, refusal and determinism (about 20 s)
+```
+
+`book/book.json` records the source of truth. It says `"markdown"` since the
+cut-over, so `--check` requires byte-identical pages and a stale committed build
+fails, and `html_to_md.py --book book` refuses to overwrite the sources. (Before
+the cut-over it said `"html"`, and the in-place build was refused instead.) Builds are deterministic: two builds
+give identical bytes.
+
+### Automatic builds on GitHub
+
+`.github/workflows/build-book.yml` builds the book on GitHub, so `book/` can be
+edited without Pandoc installed, including in GitHub's web editor.
+
+- **Pull requests:** it runs `build-book.py --check` and the build and
+  generator tests, and writes nothing.
+- **Pushes to `main` that change `book/`, `data/` or `tools/`:**
+  `tools/markdown/ci-build.sh` rebuilds the pages and the workflow commits them
+  back to `main` as `github-actions[bot]`. A push whose built pages already
+  match a fresh build is left alone.
+- **A push that edits `search-textbook.html`, `read-this-first.html` or
+  `vendor-questionnaire.html` directly fails instead of being overwritten.**
+  Make that change in `book/`.
+
+It installs Pandoc 3.1.3 from its GitHub release and checks the file's SHA-256.
+The browser checks are not run there, because they need Microsoft Edge.
+
+### Markdown build and round trip (phases 3 and 4)
+
+`tools/markdown/` holds the conversion tooling:
+
+- `html_to_md.py --book book` converts the whole book into `book/`: one file
+  per top-level part, the page template, and the bodies of bespoke diagrams in
+  `book/figures/`. It warns about anything kept as raw HTML. `--check book`
+  reports whether `book/` is stale against the live HTML.
+- `build_md.py` and `book.lua` build Markdown back into book HTML with
+  Pandoc 3.1, derive navigation and footnotes, and run the generators until
+  they settle.
+- `pilot.py --book book` builds the whole page from `book/` into an ignored
+  copy of the repository under `outputs/markdown-conversion/`. It runs every
+  generator, check and test there and in an unchanged control copy, and
+  requires the book and all root pages to be equivalent to the live files. A
+  run takes about a minute. Passing chapter files instead of `--book` splices
+  just those chapters.
+
+```bash
+python tools/markdown/html_to_md.py --check book
+python tools/markdown/pilot.py --book book
+python tools/test-markdown-build.py
+```
+
+`data/stage-map.json` holds the chapter-header pipeline map that the build
+renders. The live HTML is still the source; see `book/README.md`.
+
 ## Read-this-first digest
 
 `read-this-first.html` is generated, not a separately authored edition. Run:
@@ -44,7 +154,7 @@ The builder uses only Python's standard library. The browser check uses
 Playwright and installed Microsoft Edge, following the other companion checks.
 Screenshots go to ignored `outputs/digest/`.
 
-Edit excerpt prose only in `search-textbook.html`. The manifest
+Edit excerpt prose only in the book's sources in `book/`. The manifest
 `data/digest-selections.json` defines source anchors, ordering, stage budgets
 and reflection prompts; `tools/digest-template.html` owns the introduction and
 next-step guidance. `assets/digest.css` owns presentation. Each chapter summary
@@ -136,7 +246,7 @@ definitions and explanation references, hiding search controls and tooltips.
 
 ## Product evidence and currency
 
-`data/product-claims.json` maintains the claim register. The HTML remains the
+`data/product-claims.json` maintains the claim register. `book/` is the
 source of truth for chapter prose; only `BEGIN/END PRODUCT CLAIMS` blocks are
 generated. `product_claims.py` shares validation, date rules and renderers between:
 
@@ -314,20 +424,29 @@ Annotations are stored as `<document-name>.annotations.json` beside the document
 
 The helper keeps jobs in memory, gives Claude no tools or filesystem access, and requests a strict proposal schema. Stop it with `Ctrl+C`. Automated checks use `node --test tools/annotation-agent-server.test.mjs` and a mock process, so they do not consume a Claude run.
 
-`search-textbook.html` is the **source of truth for authored prose**. Edit it
-directly. The product register additionally generates marked evidence blocks;
-neither that builder nor the maintenance passes overwrite your prose.
+**Annotation editor and the Markdown source.** The editor opens and changes
+`search-textbook.html`, which is now a built page: an accepted proposal there is
+lost at the next build unless the same change is made in `book/`. Use it for
+reading and commenting, and apply changes to the Markdown. Whether to retarget
+or retire it is still undecided.
+
+The **source of truth for authored prose** is the Markdown in `book/`. The
+product register additionally generates marked evidence blocks; neither that
+builder nor the maintenance passes overwrite your prose.
 
 Two maintenance passes keep the machine-owned parts consistent. Both are
 idempotent — safe to run any time, and they report "no changes needed" when
-there is nothing to do.
+there is nothing to do. `build-book.py` runs them for you until they settle.
 
 ## After editing
 
 ```bash
-python tools/maintain.py
-python tools/renumber_footnotes.py
+python tools/build-book.py           # rebuild the book, its passes and companions
+python tools/build-book.py --check   # confirm the committed pages match a fresh build
 ```
+
+Running `maintain.py` or `renumber_footnotes.py` on its own is still safe, but
+it is no longer needed and its result is replaced by the next build.
 
 ### `maintain.py`
 
@@ -386,7 +505,9 @@ title so all three agree. Run it after moving or adding a footnote.
 
 ## Conventions the tools rely on
 
-Keep these shapes when hand-editing, or the passes will not find the pieces:
+The book filter (`tools/markdown/book.lua`) writes these shapes. Keep them when
+changing the filter or a raw-HTML block in `book/`, or the passes will not find
+the pieces:
 
 | Thing | Markup |
 |---|---|

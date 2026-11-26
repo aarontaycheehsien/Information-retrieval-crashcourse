@@ -1,0 +1,24 @@
+<p><strong>Starting state:</strong> D1 and D2 fill the heap, so θ=.799. Safe term upper bounds are <code>job≤.117</code>, <code>delulu≤.693</code> and <code>interview≤.693</code>.</p>
+<div class="prune-grid">
+<section class="prune-panel" aria-label="MaxScore example">
+<h5>MaxScore</h5>
+<div class="cursor-line nonessential"><strong>job</strong> · non-essential · ≤.117</div>
+<div class="cursor-line essential"><strong>delulu</strong> · essential · ≤.693</div>
+<div class="cursor-line essential"><strong>interview</strong> · essential · ≤.693</div>
+<div class="cursor-line skipped">D3 has only job: .117 cannot beat .799</div>
+</section>
+<section class="prune-panel" aria-label="WAND example">
+<h5>WAND</h5>
+<div class="cursor-line">D3 · job · cumulative bound .117</div>
+<div class="cursor-line essential">D4 · delulu · cumulative bound .810</div>
+<span class="bound">pivot = D4</span>
+<div class="cursor-line skipped">Advance job past D3; do not fully score D3</div>
+</section>
+<section class="prune-panel" aria-label="Block-Max WAND example">
+<h5>Block-Max WAND</h5>
+<div class="cursor-line">Later index block · documents D80–D95</div>
+<div class="cursor-line">best possible combined score ≤.550</div>
+<span class="bound">.550 &lt; θ=.799</span>
+<div class="cursor-line skipped">Skip all 16 documents in the block</div>
+</section>
+</div>

@@ -1,0 +1,241 @@
+{
+  "purpose": "Phase 2 of reviews/markdown-conversion-plan.md: every class and element in search-textbook.html mapped to its Markdown source construct. Checked by tools/test-markdown-mapping.py.",
+  "pandoc_reader": "markdown-smart-auto_identifiers-implicit_figures",
+  "statuses": {
+    "native": "Pandoc's own reader and HTML writer produce it unchanged.",
+    "filter": "A Markdown convention rendered by the book's Lua filter (tools/markdown/book.lua) into the exact book markup.",
+    "derived": "Built from chapter front matter, file order or a data file by the Markdown build. Not written in the Markdown body. New in this conversion: currently hand-maintained in the HTML.",
+    "generated": "Produced by an existing generator (maintain.py, build-product-claims.py, build-glossary-hub.py). Never authored in Markdown.",
+    "template": "Page shell in book/template.html: head, hero, navigation, scripts, footer.",
+    "raw": "Inside a raw-HTML island: a bespoke diagram kept as HTML, in book/figures/<key>.html or a ```{=html} block."
+  },
+  "constructs": [
+    {
+      "id": "page-shell",
+      "status": "template",
+      "classes": ["skip-reading", "progress", "hero", "hero-inner", "kicker", "subtitle", "reading-routes", "toc", "mobile-toc", "toc-pinned", "lookup-trigger", "page-footer"],
+      "markdown": "None. Lives in book/template.html with $body$ and generated-region placeholders.",
+      "notes": "Includes the inline CSS, MathJax configuration and the progress/TOC script. Moving CSS to assets/ is phase 7."
+    },
+    {
+      "id": "page-wrapper",
+      "status": "template",
+      "propagates": false,
+      "classes": ["layout"],
+      "markdown": "None. book/template.html wraps the navigation and the built body in div.layout.",
+      "notes": "Does not pass template status to its contents, which are the book itself."
+    },
+    {
+      "id": "tables-of-contents",
+      "status": "generated",
+      "classes": ["toc-ch", "toc-sec", "toc-subs", "toc-part", "toc-ex"],
+      "markdown": "None. maintain.py rebuilds both tables of contents from headings.",
+      "notes": "Template keeps the empty containers maintain.py fills. Phase 4 must confirm maintain.py fills an empty container, not only refreshes an existing one."
+    },
+    {
+      "id": "chapter-section",
+      "status": "derived",
+      "classes": ["chapter", "appendix", "backsection", "chapter-head", "chapter-eyebrow", "chapter-meta", "chapter-question"],
+      "markdown": "One file per chapter. YAML front matter: key, kind (chapter|appendix|backsection), eyebrow, meta, question, legacy_anchors (those before the header). Body starts with `## Title {#KEY}`; a stage-map marker and ::: chapter-orient may follow and are placed inside the header.",
+      "html": "<section class=\"chapter\" id=\"sec-KEY\"><header class=\"chapter-head\"><p class=\"chapter-eyebrow\">…</p><p class=\"chapter-meta\">…</p><h2 id=\"KEY\">…</h2><p class=\"chapter-question\"><span>Central question</span>…</p>…</header>",
+      "notes": "Appendix letters and chapter numbers in the eyebrow stay owned by maintain.py; the front matter value is a starting value it may rewrite."
+    },
+    {
+      "id": "chapter-orientation",
+      "status": "filter",
+      "classes": ["chapter-orient"],
+      "markdown": "::: chapter-orient … ::: as the first block after the title; the filter moves it inside the chapter header.",
+      "html": "<div class=\"chapter-orient\"> inside <header class=\"chapter-head\">"
+    },
+    {
+      "id": "part-divider",
+      "status": "derived",
+      "classes": ["part-divider", "part-tag", "part-title", "part-blurb", "part-time", "backmatter-divider"],
+      "markdown": "A part file (kind: part) with front matter id, tag, blurb, time and class (for the back-matter divider); the body starts with ## Title and holds what follows the divider inside its section.",
+      "html": "<section class=\"part-divider\" id=\"part1\"><p class=\"part-tag\">…</p><h2 class=\"part-title\">…</h2><p class=\"part-blurb\">…</p><p class=\"part-time\">…</p></section>"
+    },
+    {
+      "id": "exercise",
+      "status": "filter",
+      "classes": ["exercise", "exercise-label", "exercise-deliverable"],
+      "markdown": "kind: exercise with front matter id and label; the body starts with ## Title (no id) and the rest is ordinary Markdown.",
+      "html": "<section class=\"exercise\" id=\"exercise1\"><p class=\"exercise-label\">…</p><h2>…</h2>…</section>"
+    },
+    {
+      "id": "stage-map",
+      "status": "derived",
+      "classes": ["stage-map", "stage-controller", "stage-row", "stage", "on", "off", "stage-ch"],
+      "markdown": "A one-line block marker, ::: {.stage-map on=\"analysis\" controller=\"on\" label=\"…\"} then :::, after the title (it moves into the header) or wherever the map sits in the body. Labels, links and tooltips come from data/stage-map.json.",
+      "notes": "15 maps. 14 render byte-for-byte from the template (verified in tools/test-markdown-build.py). The Part II map is bespoke and stays raw."
+    },
+    {
+      "id": "chapter-nav",
+      "status": "derived",
+      "classes": ["chapter-nav", "cnav", "prev", "next"],
+      "markdown": "Nothing. Built from file order: front matter nav is \"both\" (has a bar, is linked to; default for chapters, appendices and exercises), \"target\" (linked to only as the next item: the back-matter divider and the glossary) or \"none\". Titles: the h2 for chapters and back sections, the h2 before \" — \" for exercises, \"Appendix X · \" plus the h2 for appendices, the summary for the glossary; nav_title overrides.",
+      "notes": "Verified on all 27 bars by the phase 4 whole-book round trip. Appendix bars are labelled \"Appendix navigation\" and say \"Previous/Next appendix\" between appendices; a previous link never points at a target-only entry."
+    },
+    {
+      "id": "heading",
+      "status": "filter",
+      "classes": ["heading-anchor"],
+      "markdown": "`### Title {#id}`. h3 always gets the link; h2 only in back-matter sections; h4 and h5 never.",
+      "html": "<h3 id=\"id\">Title<a aria-label=\"Link to Title\" class=\"heading-anchor\" href=\"#id\">#</a></h3>",
+      "notes": "auto_identifiers is off, so headings without an explicit id stay without one, as now."
+    },
+    {
+      "id": "legacy-anchor",
+      "status": "native",
+      "classes": ["legacy-anchor"],
+      "markdown": "Inline: []{#old-id .legacy-anchor}. Between blocks: an empty div, ::: {#old-id .legacy-anchor} then :::. Before the chapter header: front matter legacy_anchors.",
+      "html": "<span id=\"old-id\" class=\"legacy-anchor\"></span>"
+    },
+    {
+      "id": "footnote",
+      "status": "filter",
+      "classes": ["footnote-ref", "footnote-backref", "footnotes"],
+      "markdown": "[^name] in text and [^name]: … in the same file. A build pre-pass keeps the name, because Pandoc's AST drops footnote labels.",
+      "html": "<sup id=\"fnref:name\"><a class=\"footnote-ref\" href=\"#fn:name\">N</a></sup>; one <section class=\"footnotes\"> list for the whole book, in document order.",
+      "notes": "The filter writes the reference, the definition and the backlink with number 0; renumber_footnotes.py sets the numbers. The backlink follows a no-break space; the one note with an ordinary space ends with []{.backref-space}. Verified on all 56 notes."
+    },
+    {
+      "id": "figure",
+      "status": "filter",
+      "classes": ["ir-figure", "figure-title", "asset-label-inline", "worked-figure", "evidence-card", "evidence-stack"],
+      "markdown": ":::: {.figure key=SLUG} — first paragraph is the title; then body blocks (an image paragraph, or a raw island); then ::: caption … ::: for the figcaption. Variant classes (.worked-figure, .evidence-card) and overrides (tag=div role=group, title-id, caption-id) are attributes on the figure div. ::: evidence-stack wraps figure divs natively.",
+      "html": "<figure class=\"ir-figure\" aria-labelledby=\"SLUG-title\"><p class=\"figure-title\" id=\"SLUG-title\">…</p>…<figcaption><span class=\"asset-label-inline\">Figure ?</span> …</figcaption></figure>",
+      "notes": "maintain.py assigns the figure number and fig-N-M id. Image srcset and sizes are derived from src when a .960.webp sibling exists; an image that does not follow the rule carries explicit attributes."
+    },
+    {
+      "id": "table",
+      "status": "filter",
+      "classes": ["asset-label", "table-wrap", "token-comparison"],
+      "markdown": "Pipe table with a caption line `: caption sentence`. Options go on a wrapper, ::: {.table scope=\"row\" table-class=\"token-comparison\"}, because Pandoc 3.1 reads no caption attributes. scope=\"row\" makes each body row's first cell <th scope=\"row\">, \"col\" gives header cells scope=\"col\", \"both\" does both.",
+      "html": "<p class=\"asset-label\">Table ? — caption sentence.</p><div class=\"table-wrap\"><table><thead><tr><th>…",
+      "notes": "Pandoc's own table output (caption element, header/odd row classes) is not used. maintain.py assigns the number and tbl-N-M id."
+    },
+    {
+      "id": "query-flow",
+      "status": "filter",
+      "classes": ["query-flow", "query-flow-track", "query-flow-step", "query-flow-arrow", "five-step"],
+      "markdown": ":::: {.figure .query-flow key=SLUG}: title paragraph, one ::: {.track} (optionally .five-step) per track holding a bullet list of `**Step name** description` items, then ::: caption. Arrows are added between steps.",
+      "notes": "query-flow-step also appears inside the raw object-grid island; there it is part of the raw HTML."
+    },
+    {
+      "id": "aside",
+      "status": "filter",
+      "classes": ["common-confusion", "common-confusion-label", "practice-callout", "practice-callout-label", "callout-label", "question-callout", "question-callout-label", "orientation", "orientation-label", "part-recap", "part-recap-label", "distinction-map", "distinction-map-list", "ai-disclosure-notice", "chapter-close", "chapter-close-label", "chapter-transition", "key-distinction-label"],
+      "markdown": "::: {.common-confusion label=\"IR terminology\"} with an optional `#### Heading {#id}`. The filter emits <aside>, the label paragraph and aria-labelledby (heading id) or aria-label (label attribute). A div form (`tag=div`) covers div.orientation. ::: chapter-close has a fixed label, an ordered list and an optional ::: chapter-transition paragraph. Definition lists inside .distinction-map render each pair in a <div>. key-distinction-label is a paragraph class (see paragraph-class).",
+      "notes": "Attributes: label, label-class (callout-label, key-distinction-label), label-id, aria-labelledby or aria-label overrides, tag=\"div\" for div.orientation. A paragraph whose class also names an aside type (p.practice-callout) is written with tag=\"p\". distinction-map-list is a definition list in ::: distinction-map-list; each pair is wrapped in a <div>."
+    },
+    {
+      "id": "self-check",
+      "status": "filter",
+      "classes": ["self-check", "self-check-label", "self-check-q"],
+      "markdown": "::: self-check containing a definition list: each term is a question, each definition is the answer blocks.",
+      "html": "<section class=\"self-check\" aria-label=\"Questions on this chapter\"><p class=\"self-check-label\">Check yourself</p><details class=\"self-check-q\"><summary>Q</summary>A</details>…</section>"
+    },
+    {
+      "id": "details",
+      "status": "filter",
+      "classes": ["detail-drawer", "technical-note"],
+      "markdown": "::: {.details} — the first paragraph is the summary, the rest is the body. Extra classes pass to <details>: ::: {.details .technical-note}.",
+      "html": "<details class=\"…\"><summary>…</summary>…</details>"
+    },
+    {
+      "id": "paragraph-class",
+      "status": "filter",
+      "classes": ["worked-note", "ir-figure-note", "equation-scroll", "pull-quote", "stage-key"],
+      "markdown": "A div with one class around exactly one block gives that class (and id and attributes) to the block: ::: {.worked-note} paragraph :::; ::: pull-quote around a > blockquote; ::: stage-key around a definition list. Paragraph ids use the same form: ::: {#id} paragraph :::.",
+      "notes": "Also used by key-distinction-label, chapter-transition and exercise-deliverable, which are listed under their own constructs. worked-note outside raw islands only. p.practice-callout (one instance) uses this form with class practice-callout."
+    },
+    {
+      "id": "math",
+      "status": "filter",
+      "classes": ["math"],
+      "markdown": "$…$ inline and $$…$$ display, as Pandoc Math; the filter writes MathJax delimiters back with the line breaks as given. A display-maths div is ::: {.math tag=\"div\"} or ::: {.equation-scroll tag=\"div\" …}; the paragraph form of equation-scroll has no tag.",
+      "notes": "The book has no literal single dollar signs in prose, so tex_math_dollars is safe."
+    },
+    {
+      "id": "inline-element-span",
+      "status": "filter",
+      "classes": ["verdict", "term-mark"],
+      "markdown": "[d]{.var} renders <var>; likewise .small, .b, .output. [*text*]{.verdict} renders <em class=\"verdict\">. term-mark is a link with attributes: [text](#term-x){.term-mark aria-describedby=… data-term=… data-def=…}.",
+      "notes": "term-mark is native link-attribute syntax; it is listed here with the inline rules for convenience."
+    },
+    {
+      "id": "as-of",
+      "status": "native",
+      "classes": ["as-of"],
+      "markdown": "[Screenshot checked September 2026.]{.as-of}",
+      "html": "<span class=\"as-of\">…</span>"
+    },
+    {
+      "id": "plain-div",
+      "status": "native",
+      "classes": ["terminology-overlaps", "terminology-overlap", "svg-scroll", "semantic-scholar-comparison", "semantic-scholar-shot"],
+      "markdown": "::: {.terminology-overlap} … ::: — Pandoc emits <div class=…> unchanged.",
+      "notes": "The filter writes every remaining div itself, with its attributes: Pandoc's HTML5 writer turns a div that starts with a heading into <section>."
+    },
+    {
+      "id": "product-claims",
+      "status": "generated",
+      "classes": ["claim-entry", "claim-id", "claim-status", "claim-links", "claim-coverage", "product-claims-register"],
+      "markdown": "Nothing. build-product-claims.py removes every LINKS block and re-inserts it after the anchor recorded in data/product-claims.json, so the Markdown needs no placeholder. The register block (BEGIN/END PRODUCT CLAIMS REGISTER) is a template placeholder."
+    },
+    {
+      "id": "glossary",
+      "status": "generated",
+      "classes": ["glossary", "glossary-definition", "glossary-entry-nav", "term-permalink", "hub-sr-only", "book-lookup", "lookup-controls"],
+      "markdown": "kind: glossary. The first paragraph is the summary; the glossary is a plain definition list (term, then : definition). Term ids, definition wrappers, entry navigation and the lookup are generated by build-glossary-hub.py."
+    },
+    {
+      "id": "worked-diagrams",
+      "status": "raw",
+      "classes": ["worked-grid", "worked-card", "worked-path", "worked-term", "second", "worked-arrow", "worked-result", "caution", "worked-record", "worked-paper", "worked-kicker", "worked-rule", "worked-plot", "worked-cutoff", "worked-band", "long", "recall-tiles", "recall-tile", "relevant", "other", "three", "object-grid"],
+      "markdown": "Body of a figure div: ::: {.include src=figures/SLUG.html} or a ```{=html} block. Title and caption stay Markdown."
+    },
+    {
+      "id": "score-diagrams",
+      "status": "raw",
+      "classes": ["score-grid", "score-card", "is-top", "score-head", "score-line", "score-track", "score-bar", "score-attention", "score-job", "score-delulu", "score-interview"],
+      "markdown": "Raw island, as worked-diagrams."
+    },
+    {
+      "id": "index-diagrams",
+      "status": "raw",
+      "classes": ["ir-grid", "ir-panel", "ir-panel-title", "dictionary-row", "term-chip", "term-delulu", "term-job", "term-interview", "posting-row", "posting-label", "posting-track", "posting-node", "posting-arrow", "metadata-list", "storage-strip", "storage-step", "token-pipeline", "token-stage", "token-arrow"],
+      "markdown": "Raw island, as worked-diagrams."
+    },
+    {
+      "id": "pruning-diagrams",
+      "status": "raw",
+      "classes": ["heap-box", "heap-slots", "heap-slot", "prune-grid", "prune-panel", "essential", "nonessential", "skipped", "bound", "cursor-line"],
+      "markdown": "Raw island, as worked-diagrams."
+    },
+    {
+      "id": "evidence-diagrams",
+      "status": "raw",
+      "classes": ["evidence-streams", "evidence-stream", "evidence-stream-label", "formal", "supplementary", "evidence-merge", "evidence-node", "arrow", "tar-loop", "tar-loop-step", "tar-loop-return", "boundary-stack", "boundary-node", "boundary-marker"],
+      "markdown": "Raw island, as worked-diagrams."
+    }
+  ],
+  "elements": {
+    "native": ["p", "a", "strong", "em", "code", "ul", "ol", "li", "blockquote", "h4", "h5", "dl", "dt", "dd", "img", "sub", "br", "hr", "pre", "i", "div", "span"],
+    "filter": ["h2", "h3", "table", "thead", "tbody", "tr", "th", "td", "figure", "figcaption", "details", "summary", "aside", "section", "header", "nav", "sup", "var", "small", "b", "output"],
+    "template": ["html", "head", "body", "meta", "link", "title", "style", "script", "main", "article", "h1", "footer", "noscript"],
+    "generated": ["form", "label", "input", "button"],
+    "raw": ["svg", "g", "rect", "path", "circle", "line", "polygon", "polyline", "text", "tspan", "desc"]
+  },
+  "element_notes": {
+    "ol": "Write `#.` items or let the filter clear the list style; Pandoc otherwise adds type=\"1\".",
+    "li": "An item that must carry an id (the 30 vendor questions) starts with []{#vendor-q01 .li-id}; the filter writes such a list itself, keeping the ids and any start number.",
+    "hr": "--- between blank lines.",
+    "br": "A hard line break (backslash at line end); the filter writes <br> with no following newline, which would otherwise add a space.",
+    "dd": "Pandoc emits definitions without <p> for tight lists, matching the book.",
+    "title": "Also the SVG <title> element, which is raw.",
+    "sup": "Only footnote references use <sup> in the current book.",
+    "pre": "A fenced code block renders Pandoc's native <pre><code>, which is the book's markup.",
+    "img": "srcset and sizes are derived by the filter when a .960.webp sibling exists; an image whose srcset does not follow the rule carries it explicitly, and srcset=\"none\" suppresses derivation."
+  }
+}

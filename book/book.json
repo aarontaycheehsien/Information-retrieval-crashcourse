@@ -1,0 +1,4 @@
+{
+  "source_of_truth": "markdown",
+  "note": "Markdown in book/ is the source of truth since the cut-over (phase 6). Edit book/, then run python tools/build-book.py. Before the cut-over this said \"html\"."
+}

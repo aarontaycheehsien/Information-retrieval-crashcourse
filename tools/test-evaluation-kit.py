@@ -92,6 +92,8 @@ for name, page in pages.items():
         if url.fragment and target.suffix == ".html":
             destination = pages.get(target.name) or Links(target.read_text(encoding="utf-8"))
             assert unquote(url.fragment) in destination.ids, (name, href, "missing anchor")
-assert pages["search-textbook.html"].hrefs.count("evaluation-kit.html") == 3
+# Chapter 14, Exercise III, "What you can now ask" and the header's
+# "Evaluate a search system" reading route (added in 37dc2e3).
+assert pages["search-textbook.html"].hrefs.count("evaluation-kit.html") == 4
 assert "evaluation-kit.html" in pages["teaching-notes.html"].hrefs
 print("PASS: both XLSX packages, cached results, 50-query capacity, blank template, Figure 14.1 fixture, tables, filters and local links.")

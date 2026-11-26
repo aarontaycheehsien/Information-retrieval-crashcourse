@@ -1,0 +1,1407 @@
+<!doctype html>
+<html lang="en-GB"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A librarian's guide to how search systems decide what you see. Moves from Boolean admission rules and inverted indexes to BM25 ranking, embeddings and dense retrieval, rerankers, query transformation, and the hybrid and agentic pipelines behind current AI search tools. Focused on retrieval rather than answer generation.">
+  <meta name="theme-color" content="#f4f0e8">
+  <title>How Search Decides What You See — Textbook Edition</title>
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+  <style>
+    :root {
+      --paper: #f4f0e8;
+      --paper-2: #fbf9f4;
+      --ink: #17201f;
+      --muted: #596462;
+      --line: #d5d0c5;
+      --accent: #9d3f2b;
+      --accent-dark: #6f291d;
+      --teal: #1d5b59;
+      --teal-soft: #dce9e5;
+      --gold-soft: #eee3c8;
+      --code: #efeae0;
+      --shadow: 0 18px 55px rgba(40, 35, 28, .10);
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(157,63,43,.08), transparent 26rem),
+        linear-gradient(180deg, #eee9df 0, var(--paper) 22rem, var(--paper) 100%);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.72;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--accent-dark); text-decoration-thickness: .08em; text-underline-offset: .17em; }
+    a:hover { color: var(--accent); }
+    :focus-visible { outline: 3px solid rgba(157,63,43,.38); outline-offset: 3px; border-radius: 3px; }
+
+    .progress {
+      position: fixed; inset: 0 auto auto 0; height: 4px; width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--teal));
+      z-index: 100; transition: width .08s linear;
+    }
+
+    .hero {
+      border-bottom: 1px solid rgba(23,32,31,.15);
+      padding: 4.8rem clamp(1.25rem, 5vw, 5rem) 4rem;
+    }
+    .hero-inner { max-width: 1120px; margin: 0 auto; }
+    .kicker {
+      margin: 0 0 1rem; font: 700 .78rem/1.2 var(--sans); letter-spacing: .16em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    h1 {
+      max-width: 970px; margin: 0; font-size: clamp(2.75rem, 7vw, 6.6rem);
+      line-height: .98; letter-spacing: -.052em; font-weight: 700;
+    }
+    .subtitle {
+      max-width: 790px; margin: 1.65rem 0 0; color: var(--muted);
+      font-size: clamp(1.2rem, 2vw, 1.55rem); line-height: 1.45;
+    }
+    .reading-routes { display: flex; flex-wrap: wrap; gap: .65rem 1.5rem; margin-top: 2rem; font: 600 1rem/1.5 var(--sans); }
+    .skip-reading { position: absolute; top: .5rem; left: .5rem; z-index: 101; background: white; padding: .5rem 1rem; }
+    .skip-reading:not(:focus) { clip-path: inset(50%); }
+    .equation-scroll { overflow-x: auto; }
+    .equation-scroll mjx-container[display="true"] { width: max-content; min-width: 100%; }
+
+    .layout {
+      display: grid; grid-template-columns: minmax(0, 230px) minmax(0, 760px);
+      gap: clamp(2rem, 5vw, 5rem); max-width: 1120px; margin: 0 auto;
+      padding: 3.5rem clamp(1.25rem, 5vw, 5rem) 6rem;
+      align-items: start;
+    }
+    .toc {
+      position: sticky; top: 2rem; font-family: var(--sans); font-size: .82rem;
+      line-height: 1.35; max-height: calc(100vh - 4rem); overflow: auto;
+      padding: .35rem .5rem 1rem 0;
+    }
+    .toc strong { display: block; color: var(--ink); margin-bottom: .8rem; letter-spacing: .04em; text-transform: uppercase; font-size: .72rem; }
+    .toc ol { list-style: none; padding: 0; margin: 0; border-left: 1px solid var(--line); }
+    .toc li { margin: 0; }
+    .toc a {
+      display: block; color: var(--muted); text-decoration: none; padding: .34rem 0 .34rem .85rem;
+      border-left: 2px solid transparent; margin-left: -1px;
+    }
+    .toc a:hover, .toc a.active { color: var(--accent-dark); border-left-color: var(--accent); }
+    .toc .level-3 a { padding-left: 1.55rem; font-size: .76rem; }
+
+    main { min-width: 0; }
+    article {
+      background: var(--paper-2); border: 1px solid rgba(23,32,31,.10); border-radius: 18px;
+      box-shadow: var(--shadow); padding: clamp(1.4rem, 4vw, 4.2rem);
+    }
+    article > p.lede {
+      font-size: 1.25rem; line-height: 1.62; color: #2d3836;
+    }
+
+    .orientation {
+      margin: 2rem 0; padding: 1.25rem 1.4rem;
+      border: 1px solid var(--line); border-left: 8px solid var(--teal);
+      border-radius: 12px; background: linear-gradient(135deg, var(--paper-2), #f1ece2);
+    }
+    .orientation-label {
+      display: inline-block; margin: 0 0 .7rem; padding: .3rem .55rem;
+      border-radius: 999px; background: var(--teal); color: white;
+      font: 800 .7rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase;
+    }
+    .orientation h4 { margin: 0 0 .9rem; color: var(--teal); font: 800 1.15rem/1.3 var(--sans); }
+    .orientation p { margin: .8rem 0; }
+    .orientation dl {
+      display: grid; grid-template-columns: minmax(7rem, 10rem) minmax(0, 1fr);
+      gap: .45rem .9rem; margin: 1rem 0; font: .9rem/1.5 var(--sans);
+    }
+    .orientation dt { font-weight: 800; color: var(--teal); }
+    .orientation dd { margin: 0; color: #45504e; }
+    @media (max-width: 560px) {
+      .orientation dl { grid-template-columns: 1fr; gap: .1rem; }
+      .orientation dd { margin-bottom: .5rem; }
+    }
+
+    .glossary {
+      margin: 2rem 0; padding: 1rem 1.25rem; border: 1px solid var(--line);
+      border-radius: 12px; background: #f7f3eb;
+    }
+    .glossary > summary {
+      cursor: pointer; font: 800 .95rem/1.3 var(--sans); color: var(--accent-dark);
+      letter-spacing: .01em;
+    }
+    .glossary dl {
+      display: grid; grid-template-columns: minmax(8rem, 15rem) minmax(0, 1fr);
+      gap: .5rem .9rem; margin: 1.1rem 0 .25rem; font: .86rem/1.5 var(--sans);
+    }
+    .glossary dt { font-weight: 800; color: var(--teal); }
+    .glossary dd { margin: 0; color: #45504e; }
+    @media (max-width: 560px) {
+      .glossary dl { grid-template-columns: 1fr; gap: .15rem; }
+      .glossary dd { margin-bottom: .55rem; }
+    }
+    h2, h3 { scroll-margin-top: 1.5rem; position: relative; }
+    /* Preserves pre-rename section links; carries the same scroll offset as the heading. */
+    .legacy-anchor { display: block; height: 0; scroll-margin-top: 1.5rem; }
+    h2 {
+      font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.12; letter-spacing: -.035em;
+      margin: 4rem 0 1.2rem; padding-top: .7rem;
+    }
+    h2::before {
+      content: ''; display: block; width: 3.5rem; height: 4px; border-radius: 4px;
+      background: var(--accent); margin-bottom: 1.1rem;
+    }
+    h3 {
+      font-size: 1.45rem; line-height: 1.25; letter-spacing: -.018em;
+      margin: 2.8rem 0 1rem; color: var(--teal);
+    }
+    .heading-anchor {
+      opacity: 0; margin-left: .4em; text-decoration: none; font: 500 .7em/1 var(--sans); color: var(--line);
+    }
+    h2:hover .heading-anchor, h3:hover .heading-anchor, .heading-anchor:focus { opacity: 1; }
+
+    p { margin: 1.15rem 0; }
+    strong { color: #111817; }
+    article img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1.8rem auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    code {
+      font-family: var(--mono); font-size: .88em; background: var(--code);
+      border: 1px solid #e2dacf; border-radius: .32em; padding: .09em .3em;
+    }
+    pre { overflow: auto; background: #17201f; color: #f7f4ed; border-radius: 10px; padding: 1rem; }
+    pre code { background: none; border: 0; padding: 0; }
+
+    blockquote {
+      margin: 1.8rem 0; padding: .85rem 1.25rem; border-left: 4px solid var(--teal);
+      background: var(--teal-soft); color: #173b39;
+    }
+    blockquote p { margin: .4rem 0; }
+    blockquote.pull-quote {
+      margin: 2.2rem -.75rem; padding: 1.2rem 1.5rem; border-left-width: 6px;
+      font-size: 1.2rem; line-height: 1.52; font-weight: 700;
+    }
+
+    .common-confusion {
+      margin: 2.2rem 0; padding: 1.25rem 1.4rem;
+      border: 2px solid var(--accent); border-left-width: 8px; border-radius: 12px;
+      background: linear-gradient(135deg, #fff9ee, var(--gold-soft));
+      box-shadow: 0 8px 24px rgba(111, 41, 29, .08);
+    }
+    .common-confusion-label {
+      display: inline-block; margin: 0 0 .7rem; padding: .3rem .55rem;
+      border-radius: 999px; background: var(--accent); color: white;
+      font: 800 .7rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase;
+    }
+    .common-confusion h4 {
+      margin: 0 0 .9rem; color: var(--accent-dark);
+      font: 800 1.15rem/1.3 var(--sans);
+    }
+    .common-confusion p { margin: .8rem 0; }
+
+    .key-distinction-label {
+      display: inline-block; margin: 1.6rem 0 .45rem; padding: .28rem .55rem;
+      border: 1px solid var(--teal); border-radius: 999px;
+      background: var(--teal-soft); color: var(--teal);
+      font: 800 .7rem/1 var(--sans); letter-spacing: .1em; text-transform: uppercase;
+      break-after: avoid; scroll-margin-top: 1rem;
+    }
+    .common-confusion .key-distinction-label { margin-top: 0; }
+
+    /* Part II opens with a distinction map inside the part divider, whose
+       gradient sets color:#fff. The panel is a light card like .part-recap, so
+       it has to reclaim the ink colour and the divider's text measure. */
+    .part-divider .distinction-map { color: var(--ink); max-width: 46rem; }
+    .distinction-map {
+      margin: 2rem 0; padding: 1.25rem 1.4rem;
+      border: 1px solid var(--line); border-top: 5px solid var(--teal);
+      border-radius: 12px; background: var(--paper-2);
+    }
+    .distinction-map h4 {
+      margin: 0 0 .45rem; color: var(--teal);
+      font: 800 1.2rem/1.3 var(--sans);
+    }
+    .distinction-map > p { margin: 0 0 1rem; color: #45504e; }
+    .distinction-map-list { display: grid; gap: .65rem; margin: 0; }
+    .distinction-map-list > div {
+      display: grid; grid-template-columns: minmax(12rem, .8fr) minmax(0, 1.7fr);
+      gap: .9rem; padding: .75rem .85rem; border-radius: 8px; background: white;
+      break-inside: avoid;
+    }
+    .distinction-map-list dt { font-weight: 800; color: var(--ink); }
+    .distinction-map-list dd { margin: 0; color: #45504e; }
+    /* The closing puzzle map turns on its three verdicts, so they are set to be
+       read before the prose beside them. Scoped to the list, and the Preface's
+       own distinction map carries no .verdict, so it is untouched. */
+    .distinction-map-list .verdict {
+      display: block; margin-top: .35rem; font-style: normal;
+      font: 800 .68rem/1.35 var(--sans); letter-spacing: .07em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    @media (max-width: 700px) {
+      .distinction-map-list > div { grid-template-columns: 1fr; gap: .25rem; }
+    }
+
+    .question-callout, .practice-callout {
+      margin: 2.2rem 0; padding: 1.25rem 1.4rem;
+      border: 2px solid var(--teal); border-left-width: 8px; border-radius: 12px;
+      background: linear-gradient(135deg, #f4fbf9, var(--teal-soft));
+      box-shadow: 0 8px 24px rgba(29, 91, 89, .09);
+    }
+    .question-callout-label, .practice-callout-label {
+      display: inline-block; margin: 0 0 .7rem; padding: .3rem .55rem;
+      border-radius: 999px; background: var(--teal); color: white;
+      font: 800 .7rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase;
+    }
+    .question-callout h4, .practice-callout h4 {
+      margin: 0 0 .9rem; color: var(--teal);
+      font: 800 1.15rem/1.3 var(--sans);
+    }
+    .question-callout p, .practice-callout p { margin: .8rem 0; }
+
+    /* Collapsed reference tables: the argument stays in the main flow, the
+       method-by-method detail stays available for readers who need it. */
+    /* End-of-chapter questions. Answers sit in <details> so the reader has to
+       commit before seeing one; the print rule below deliberately reveals them. */
+    /* Date-stamp on any claim about how a product currently works. These age
+       faster than anything else in the book, so they say when they were checked. */
+    .as-of {
+      display: block; margin-top: .35rem; color: var(--muted);
+      font: 600 .74rem/1.4 var(--sans); font-style: normal;
+    }
+
+    .self-check {
+      margin: 2rem 0 1.2rem; padding: 1.2rem 1.4rem;
+      border: 1px solid var(--line); border-left: 4px solid var(--teal);
+      border-radius: 10px; background: var(--teal-soft);
+    }
+    .self-check-label {
+      margin: 0 0 .9rem; color: var(--teal);
+      font: 800 .72rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+    }
+    .self-check-q { margin: .55rem 0; }
+    .self-check-q > summary {
+      cursor: pointer; font: 700 .95rem/1.5 var(--sans); color: var(--ink);
+    }
+    .self-check-q > summary::marker { color: var(--teal); }
+    .self-check-q > p {
+      margin: .7rem 0 .3rem .4rem; padding-left: .9rem;
+      border-left: 2px solid var(--teal);
+      font: 400 .92rem/1.55 var(--sans); color: #45504e;
+    }
+    .detail-drawer {
+      margin: 1.8rem 0; padding: .9rem 1.2rem; border: 1px solid var(--line);
+      border-left: 4px solid var(--accent); border-radius: 10px; background: #f7f3eb;
+    }
+    .detail-drawer > summary {
+      cursor: pointer; font: 800 .9rem/1.35 var(--sans); color: var(--accent-dark);
+    }
+    .detail-drawer > summary::marker { color: var(--accent); }
+    .detail-drawer > p { margin: 1rem 0 .25rem; font-size: .92rem; color: #45504e; }
+    .detail-drawer .table-wrap { margin: 1.1rem 0 .25rem; background: white; }
+
+    ul, ol { padding-left: 1.45rem; }
+    li { margin: .55rem 0; padding-left: .15rem; }
+    hr { border: 0; height: 1px; background: var(--line); margin: 4rem 0 2.5rem; }
+
+    .table-wrap {
+      overflow-x: auto; margin: 2rem 0; border: 1px solid var(--line); border-radius: 10px;
+    }
+    table { border-collapse: collapse; width: 100%; font: .88rem/1.45 var(--sans); }
+    /* Tables fit the text column; only phones get a scrolling minimum width. */
+    @media (max-width: 620px) {
+      table { min-width: 620px; }
+      .token-comparison { min-width: 0; table-layout: fixed; overflow-wrap: anywhere; }
+      .token-comparison :is(th, td) { padding: .65rem .45rem; }
+    }
+    th, td { padding: .85rem .9rem; vertical-align: top; text-align: left; border-bottom: 1px solid var(--line); }
+    th { background: #e8e1d3; color: #283230; font-size: .78rem; letter-spacing: .025em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: rgba(238,227,200,.25); }
+
+    #app-D .table-wrap table { min-width: 760px; }
+    #app-D .table-wrap th:first-child { width: 18%; }
+    #app-D .table-wrap th:nth-child(2) { width: 29%; }
+    #app-D .table-wrap th:last-child { width: 20%; }
+    #app-D .table-wrap tbody th {
+      background: transparent; color: var(--teal); font-size: .88rem;
+      letter-spacing: 0; text-transform: none;
+    }
+    #app-D .table-wrap tr:last-child > * { border-bottom: 0; }
+    .terminology-overlaps {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem; margin: 2rem 0;
+    }
+    .terminology-overlap {
+      padding: 1.1rem 1.2rem; border: 1px solid var(--line);
+      border-top: 5px solid var(--accent); border-radius: 10px;
+      background: linear-gradient(135deg, #fff9ee, var(--gold-soft));
+    }
+    .terminology-overlap h4 {
+      margin: 0 0 .55rem; color: var(--accent-dark);
+      font: 800 1rem/1.3 var(--sans);
+    }
+    .terminology-overlap p { margin: 0; font-size: .92rem; }
+    @media (max-width: 700px) {
+      .terminology-overlaps { grid-template-columns: 1fr; }
+    }
+
+    .query-flow {
+      margin: 2rem 0; padding: 1.15rem; border: 1px solid var(--line);
+      border-radius: 12px; background: #f7f3eb; font: .82rem/1.4 var(--sans);
+    }
+    .query-flow .figure-title { margin: 0 0 1rem; color: var(--ink);
+      font: 800 1rem/1.25 var(--sans); }
+    .query-flow-track {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.25fr) auto minmax(0, 1.25fr) auto minmax(0, 1fr);
+      gap: .45rem; align-items: stretch;
+    }
+    .query-flow-track.five-step {
+      grid-template-columns: minmax(0, .9fr) auto minmax(0, 1fr) auto minmax(0, 1.05fr) auto minmax(0, 1.25fr) auto minmax(0, 1fr);
+    }
+    .query-flow-step {
+      display: flex; flex-direction: column; justify-content: center; min-width: 0;
+      padding: .8rem; border: 1px solid #d8d1c4; border-radius: 9px; background: var(--paper-2);
+      overflow-wrap: break-word;
+    }
+    .query-flow-step strong { color: var(--teal); }
+    .query-flow-step span { margin-top: .3rem; color: var(--muted); font-size: .74rem; }
+    /* Eight query objects worked against one need. Not a flow, so it takes a
+       plain grid rather than a .query-flow-track, but the cards themselves are
+       the same .query-flow-step boxes used elsewhere. */
+    .object-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem; }
+    .query-flow-arrow { align-self: center; color: var(--accent); font-weight: 900; }
+    .query-flow-track + .query-flow-track { margin-top: .55rem; }
+    .query-flow figcaption { margin-top: .9rem; color: var(--muted); font-size: .76rem; }
+
+    .evidence-streams {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem; align-items: stretch;
+    }
+    .evidence-stream {
+      display: flex; flex-direction: column; gap: .55rem; min-width: 0;
+      padding: 1rem; border: 1px solid #d8d1c4; border-radius: 10px; background: var(--paper-2);
+    }
+    .evidence-stream.supplementary { border-top: 5px solid var(--accent); }
+    .evidence-stream.formal { border-top: 5px solid var(--teal); }
+    .evidence-stream-label {
+      color: var(--teal); font: 800 .72rem/1.2 var(--sans);
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .evidence-stream p { margin: 0; }
+    .evidence-merge {
+      display: grid; place-items: center; gap: .35rem; margin-top: .7rem;
+      color: var(--accent-dark); font-weight: 800; text-align: center;
+    }
+    .evidence-merge .arrow { font-size: 1.5rem; line-height: 1; }
+    .evidence-node {
+      width: min(28rem, 90%); padding: .8rem 1rem; border: 2px solid var(--teal);
+      border-radius: 10px; background: var(--teal-soft); color: var(--ink);
+    }
+    .tar-loop {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .55rem; align-items: stretch;
+    }
+    .tar-loop-step {
+      display: flex; flex-direction: column; justify-content: center; min-width: 0;
+      padding: .85rem; border: 1px solid #d8d1c4; border-radius: 9px; background: var(--paper-2);
+    }
+    .tar-loop-step strong { color: var(--teal); }
+    .tar-loop-step span { margin-top: .3rem; color: var(--muted); font-size: .74rem; }
+    .tar-loop-return {
+      grid-column: 2 / -1; padding: .45rem .7rem; border-top: 2px dashed var(--accent);
+      color: var(--accent-dark); font-weight: 800; text-align: center;
+    }
+    .boundary-stack { display: grid; justify-items: center; gap: .35rem; }
+    .boundary-node {
+      width: min(31rem, 92%); padding: .85rem 1rem; border: 1px solid #d8d1c4;
+      border-radius: 9px; background: var(--paper-2); color: var(--ink); text-align: center;
+      font-weight: 800;
+    }
+    .boundary-marker {
+      width: min(26rem, 82%); padding: .35rem .6rem; border-top: 2px dashed var(--accent);
+      color: var(--accent-dark); text-align: center; font-size: .75rem; font-weight: 800;
+    }
+
+    article > h4 {
+      margin: 2rem 0 .8rem; color: var(--ink); font: 800 1.08rem/1.3 var(--sans);
+    }
+    .ir-figure {
+      margin: 2rem 0; padding: 1.1rem; border: 1px solid var(--line);
+      border-radius: 12px; background: #f7f3eb; font: .82rem/1.45 var(--sans);
+    }
+    .ir-figure .figure-title {
+      margin: 0 0 .85rem; color: var(--ink);
+      font: 800 1rem/1.25 var(--sans);
+    }
+    /* images sit inside a bordered figure box, so the standalone margin is too big */
+    .ir-figure img { margin: .9rem auto; }
+    .svg-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .svg-scroll svg { min-width: 650px; }
+    .svg-scroll img { min-width: 620px; margin-top: 0; margin-bottom: 0; }
+    .ir-figure figcaption {
+      margin-top: 1rem; color: var(--muted); font-size: .76rem;
+    }
+    /* Caption-style note for a grouped table that is not itself a numbered figure. */
+    .ir-figure .ir-figure-note { margin: 1rem 0 0; color: var(--muted); font-size: .76rem; }
+    /* Worked figures: terms and record identities stay readable on phones. */
+    .worked-figure { font-size: .88rem; line-height: 1.5; }
+    .worked-figure p { margin: .45rem 0; }
+    .worked-figure .figure-title { margin: 0 0 1rem; }
+    .worked-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+    .worked-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .worked-card { min-width: 0; padding: .9rem; border: 1px solid var(--line); border-radius: 9px; background: var(--paper-2); }
+    .worked-card > strong:first-child { display: block; color: var(--teal); margin-bottom: .55rem; }
+    .worked-figure .worked-kicker { font: 800 .73rem/1.3 var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--teal); }
+    .worked-figure .worked-kicker.worked-band { margin-top: 1.15rem; }
+    .worked-figure .worked-record { padding: .5rem 0; margin: 0; border-bottom: 1px solid var(--line); }
+    .worked-record:last-child { border-bottom: 0; }
+    .worked-record b { margin-right: .35rem; }
+    .worked-term { display: inline-block; padding: .06rem .28rem; margin: .08rem 0; border-radius: 4px; background: var(--teal-soft); color: #174b49; font-family: var(--mono); }
+    .worked-term.second { background: var(--gold-soft); color: #604912; }
+    .worked-figure .worked-result { margin: .8rem 0 0; padding: .8rem; border-left: 4px solid var(--teal); background: var(--teal-soft); }
+    .worked-figure .worked-result.caution { border-color: var(--accent); background: #f5e8e0; }
+    .worked-figure .worked-note { font-size: .81rem; color: var(--muted); }
+    .worked-figure .worked-rule { display: block; margin: .35rem 0; font-weight: 800; }
+    .worked-figure .worked-cutoff { border-top: 2px dashed var(--accent); padding-top: .5rem; color: var(--accent-dark); }
+    .worked-figure ol { padding-left: 1.4rem; margin: .5rem 0; }
+    .worked-figure li { margin: .3rem 0; }
+    .worked-path { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: .4rem; align-items: center; }
+    .worked-path > span { min-width: 0; }
+    .worked-path small { display: block; color: var(--muted); }
+    .worked-arrow { color: var(--accent); font-weight: 900; text-align: center; }
+    .worked-plot { width: 100%; height: auto; display: block; margin: .6rem 0; }
+    .worked-plot text { font-family: var(--sans); fill: var(--ink); stroke: none; }
+    .worked-paper { border: 1px solid var(--line); border-radius: 5px; padding: .5rem; margin: .45rem 0; background: white; }
+    .worked-paper.long { padding-bottom: 2.4rem; }
+    .worked-paper small { display: block; color: var(--muted); }
+    @media (max-width: 700px) {
+      .worked-grid, .worked-grid.three { grid-template-columns: 1fr; }
+      .worked-figure { padding: .8rem; }
+    }
+    @media print {
+      .worked-figure, .worked-grid { break-inside: auto; }
+      .worked-card, .worked-result { break-inside: avoid; }
+    }
+
+    figure[aria-labelledby="maxsim-worked-title"] table { min-width: 0; width: 100%; table-layout: fixed; }
+    figure[aria-labelledby="maxsim-worked-title"] th, figure[aria-labelledby="maxsim-worked-title"] td { padding: .45rem .15rem; font-size: .68rem; overflow-wrap: anywhere; text-transform: none; letter-spacing: 0; }
+    figure[aria-labelledby="maxsim-worked-title"] td strong { display: block; background: var(--teal-soft); color: #174b49; }
+    .recall-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .25rem; margin: .5rem 0; }
+    .recall-tile { padding: .3rem .1rem; text-align: center; border: 1px solid var(--line); border-radius: 4px; font-weight: 800; }
+    .recall-tile small { display: block; font-size: .65rem; font-weight: 400; }
+    .recall-tile.relevant { background: var(--teal-soft); color: #174b49; }
+    .recall-tile.other { background: var(--paper-2); color: var(--muted); }
+    /* Grouped evidence screenshots used by the Chapter 1 comparison figures. */
+    .evidence-stack {
+      display: grid; gap: 1.25rem; margin: 2rem 0;
+    }
+    .evidence-stack .evidence-card { margin: 0; }
+    .evidence-stack .evidence-card img { margin: 1rem auto; background: #fff; }
+    .semantic-scholar-comparison {
+      display: grid; gap: .85rem; margin: 1rem 0;
+    }
+    .semantic-scholar-shot {
+      padding: .8rem; border: 1px solid var(--line);
+      border-radius: 8px; background: #fff;
+    }
+    .semantic-scholar-shot p {
+      margin: 0; color: var(--accent-dark);
+      font: 800 .78rem/1.35 var(--sans);
+      letter-spacing: .02em; text-transform: uppercase;
+    }
+    .evidence-stack .semantic-scholar-shot img { margin: .55rem auto 0; }
+    .evidence-stack .evidence-card figcaption { font-size: .82rem; }
+    @media print {
+      .evidence-stack .evidence-card { break-inside: avoid; }
+    }
+    .ir-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
+    .ir-panel {
+      min-width: 0; padding: .85rem; border: 1px solid #d8d1c4;
+      border-radius: 9px; background: var(--paper-2);
+    }
+    .ir-panel-title {
+      display: block; margin-bottom: .65rem; color: var(--muted);
+      font-size: .69rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .term-chip {
+      display: inline-block; margin: .12rem .12rem .12rem 0; padding: .2rem .45rem;
+      border: 1px solid currentColor; border-radius: 999px; font: 750 .72rem/1.2 var(--mono);
+    }
+    .term-delulu { color: #6d3d88; background: #eee2f4; }
+    .term-job { color: #6c5200; background: #f4e8b9; }
+    .term-interview { color: #125e5a; background: #d9ece8; }
+    .dictionary-row {
+      display: grid; grid-template-columns: minmax(5rem, auto) 1fr;
+      gap: .5rem; align-items: center; margin: .35rem 0;
+    }
+    .dictionary-row output { color: var(--muted); font-family: var(--mono); text-align: right; }
+    .posting-row { margin: .5rem 0 .75rem; }
+    .posting-label { display: block; margin-bottom: .3rem; font-weight: 700; }
+    .posting-track { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+    .posting-node {
+      padding: .35rem .45rem; border: 1px solid #bdb5a7; border-radius: 6px;
+      background: white; color: #27312f; font: .72rem/1.25 var(--mono);
+    }
+    .posting-arrow { color: #8b8478; font-weight: 800; }
+    .metadata-list { display: grid; grid-template-columns: auto 1fr; gap: .35rem .55rem; margin: 0; }
+    .metadata-list dt { font-weight: 800; }
+    .metadata-list dd { margin: 0; color: var(--muted); }
+    .storage-strip {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .7rem; margin-top: .8rem;
+    }
+    .storage-step {
+      position: relative; padding: .7rem; border: 1px dashed #afa696;
+      border-radius: 8px; background: rgba(255,255,255,.62);
+    }
+    .storage-step strong { display: block; margin-bottom: .25rem; font-size: .76rem; }
+    .storage-step code { white-space: nowrap; }
+    .token-pipeline {
+      display: grid; gap: .55rem; margin-top: .9rem;
+    }
+    .token-stage {
+      display: grid; grid-template-columns: minmax(9.5rem, 12rem) minmax(0, 1fr);
+      gap: .8rem; align-items: start; padding: .78rem .85rem;
+      border: 1px solid #d8d1c4; border-radius: 9px; background: var(--paper-2);
+    }
+    .token-stage strong {
+      color: var(--teal); font: 800 .72rem/1.35 var(--sans);
+      letter-spacing: .045em; text-transform: uppercase;
+    }
+    .token-stage p { margin: 0; min-width: 0; }
+    .token-stage code { white-space: normal; overflow-wrap: anywhere; }
+    .token-arrow {
+      text-align: center; color: var(--muted); font: 800 1rem/1 var(--sans);
+    }
+    .score-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+    .score-card {
+      padding: .8rem; border: 1px solid #d8d1c4; border-radius: 9px; background: white;
+    }
+    .score-card.is-top { border-color: var(--teal); box-shadow: inset 0 0 0 1px var(--teal); }
+    .score-head {
+      display: flex; justify-content: space-between; gap: .7rem; margin-bottom: .55rem;
+      font-weight: 800;
+    }
+    .score-head output { font-family: var(--mono); }
+    .score-line {
+      display: grid; grid-template-columns: 4.8rem minmax(0, 1fr) 3.2rem;
+      gap: .4rem; align-items: center; margin: .32rem 0; font-size: .72rem;
+    }
+    .score-track { height: .55rem; overflow: hidden; border-radius: 999px; background: #e8e2d7; }
+    .score-bar { display: block; height: 100%; border-radius: inherit; }
+    .score-delulu { background: #8c5aa4; }
+    .score-job { background: #b7951d; }
+    .score-interview { background: #2b7772; }
+    .score-attention { background: #2b7772; }
+    .heap-box {
+      margin-top: .8rem; padding: .8rem; border: 2px solid var(--teal);
+      border-radius: 9px; background: var(--teal-soft);
+    }
+    .heap-box strong { color: #173b39; }
+    .heap-slots { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .45rem; }
+    .heap-slot {
+      padding: .35rem .55rem; border: 1px solid rgba(29,91,89,.4);
+      border-radius: 6px; background: white; font-family: var(--mono);
+    }
+    .prune-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    .prune-panel {
+      padding: .8rem; border: 1px solid #d8d1c4; border-radius: 9px; background: white;
+    }
+    .prune-panel h5 { margin: 0 0 .55rem; color: var(--teal); font-size: .86rem; }
+    .cursor-line { margin: .4rem 0; padding: .4rem; border-left: 4px solid #b9b1a4; background: #f4f0e8; }
+    .cursor-line.essential { border-left-color: var(--teal); }
+    .cursor-line.nonessential { border-left-color: #b7951d; }
+    .cursor-line.skipped { border-left-color: var(--accent); color: var(--muted); text-decoration: line-through; }
+    .bound {
+      display: inline-block; margin-top: .35rem; padding: .2rem .38rem;
+      border-radius: 4px; background: #ece7dd; font-family: var(--mono);
+    }
+
+    .math {
+      overflow-x: auto; margin: 1.5rem 0; padding: .75rem 1rem;
+      background: #f0ece4; border-radius: 8px; text-align: center;
+    }
+    a.footnote-ref, .footnote-ref a {
+      text-decoration: none; font: 700 .72rem/1 var(--sans); background: var(--gold-soft);
+      border-radius: 999px; min-width: 1.35rem; height: 1.35rem; display: inline-flex;
+      align-items: center; justify-content: center; margin-left: .12rem;
+    }
+    .footnotes {
+      margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--line);
+      color: #45504e; font-size: .9rem;
+    }
+    .footnotes h2 { color: var(--ink); }
+    .footnotes ol { padding-left: 1.4rem; }
+    .footnotes li { margin: 1rem 0; }
+    .footnotes a.footnote-backref,
+    .footnotes .footnote { margin-left: .3rem; text-decoration: none; }
+
+    .mobile-toc { display: none; margin-bottom: 1.2rem; font-family: var(--sans); }
+    .mobile-toc summary { cursor: pointer; font-weight: 700; color: var(--accent-dark); }
+    .mobile-toc ol { margin: .8rem 0 0; }
+    .mobile-toc a { text-decoration: none; }
+
+    .ai-disclosure-notice {
+      margin: 0 0 2rem; padding: 1rem 1.15rem;
+      border: 1px solid #d8c7aa; border-left: 4px solid var(--accent);
+      border-radius: 10px; background: #fbf3e4; font: .84rem/1.55 var(--sans);
+    }
+    .ai-disclosure-notice p { margin: 0; }
+    .ai-disclosure-notice strong { color: var(--accent-dark); }
+
+    .page-footer {
+      max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 5rem) 3rem;
+      color: var(--muted); font: .78rem/1.5 var(--sans); text-align: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero { padding-top: 3.2rem; }
+      .layout { display: block; padding-top: 1.5rem; }
+      .toc { display: none; }
+      .mobile-toc { display: block; }
+      article { border-radius: 12px; }
+    }
+    @media (max-width: 700px) {
+      .query-flow-track, .query-flow-track.five-step { grid-template-columns: 1fr; }
+      .object-grid { grid-template-columns: 1fr; }
+      .query-flow-arrow { transform: rotate(90deg); }
+      .evidence-streams, .tar-loop { grid-template-columns: 1fr; }
+      .tar-loop-return { grid-column: 1; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 17px; }
+      h1 { font-size: clamp(2.65rem, 15vw, 4.3rem); }
+      article { padding: 1.3rem; }
+      blockquote.pull-quote { margin-left: 0; margin-right: 0; }
+      .ir-grid, .storage-strip, .score-grid, .prune-grid { grid-template-columns: 1fr; }
+      .token-stage { grid-template-columns: 1fr; gap: .35rem; }
+      .score-line { grid-template-columns: 4.5rem minmax(0, 1fr) 3rem; }
+    }
+    @media print {
+      body { background: white; font-size: 11pt; }
+      .progress, .toc, .mobile-toc, .reading-routes, .skip-reading { display: none !important; }
+      .hero { padding: 0 0 1.2rem; }
+      .layout { display: block; max-width: none; padding: 0; }
+      article { border: 0; box-shadow: none; padding: 0; }
+      a { color: inherit; }
+      h2, h3 { break-after: avoid; }
+      table, blockquote, .common-confusion, .question-callout, .practice-callout, .detail-drawer, .query-flow, .ir-figure, .orientation, .glossary, .distinction-map-list > div { break-inside: avoid; }
+      #app-D .table-wrap table { min-width: 0; font-size: 8.5pt; break-inside: auto; }
+      #app-D .table-wrap th, #app-D .table-wrap td { padding: .5rem .55rem; }
+      #app-D .table-wrap thead { display: table-header-group; }
+      #app-D .table-wrap tr { break-inside: avoid; }
+      .terminology-overlaps { display: block; }
+      .terminology-overlap { break-inside: avoid; margin: 0 0 .8rem; }
+      details > *:not(summary) { display: block !important; content-visibility: visible !important; }
+      /* Print the contents of closed self-checks. */
+      .self-check-q::details-content { content-visibility: visible; }
+    }
+  
+    /* ============ textbook edition ============ */
+    .part-divider {
+      margin: 5rem 0 3rem; padding: 2.4rem 2rem; border-radius: 16px;
+      background: linear-gradient(135deg, var(--teal), var(--accent-dark)); color: #fff;
+    }
+    .part-divider .part-tag {
+      margin: 0 0 .5rem; font: 800 .74rem/1 var(--sans);
+      letter-spacing: .16em; text-transform: uppercase; opacity: .85;
+    }
+    .part-divider .part-title {
+      margin: 0; padding: 0; border: 0; color: #fff;
+      font: 800 1.9rem/1.2 var(--sans);
+      /* "Representations" at this size is wider than a 320px phone's column and
+         has nowhere to break, which pushed the whole document sideways. The
+         smaller size below keeps it on one piece; break-word is the safety net
+         if a longer part title is ever added. */
+      overflow-wrap: break-word;
+    }
+    /* Must follow the rule above: same selector, so source order decides. */
+    @media (max-width: 400px) {
+      .part-divider .part-title { font-size: 1.5rem; }
+    }
+    /* the shared h2 accent bar is a red rule; it has no place on a coloured
+       band, and between an eyebrow and its title it reads as a separator */
+    .part-divider .part-title::before,
+    .chapter-head h2::before,
+    .exercise h2::before { display: none; }
+    .part-divider .part-blurb { margin: .9rem 0 0; max-width: 46rem; opacity: .93; font-size: .98rem; }
+    .part-divider .part-time {
+      margin: .65rem 0 0; color: #fff;
+      font: 650 .78rem/1.35 var(--sans); letter-spacing: .025em; opacity: .88;
+    }
+    /* A part divider may carry the same pipeline map its chapters carry, so a
+       reader can see the shape of the part before starting it. The coloured
+       band would swallow the stage colours, so the map sits on its own light
+       panel and the existing .stage rules then work unchanged. */
+    .part-divider .stage-map {
+      margin: 1.7rem 0 0; padding: 1rem 1.1rem; max-width: 46rem;
+      background: var(--paper-2); border-radius: 12px;
+    }
+    .part-divider .stage-map .stage-ch {
+      display: block; margin-top: .3rem;
+      font: 700 .62rem/1.2 var(--sans); letter-spacing: .04em; opacity: .8;
+    }
+    .part-divider .stage-map p {
+      margin: .9rem 0 0; max-width: none; color: var(--muted);
+      font: .8rem/1.55 var(--sans);
+    }
+    /* A part boundary is where a reader actually stops, so it is also where a
+       reminder of the vocabulary the next part assumes does most good. Same
+       light panel as the map above it, for the same reason. */
+    .part-divider .part-recap {
+      margin: 1.4rem 0 0; padding: 1rem 1.15rem; max-width: 46rem;
+      background: var(--paper-2); border-radius: 12px; color: var(--ink);
+    }
+    .part-divider .part-recap .part-recap-label {
+      display: inline-block; margin: 0 0 .6rem; padding: .28rem .5rem;
+      border-radius: 999px; background: var(--teal); color: #fff;
+      font: 800 .66rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase;
+    }
+    .part-divider .part-recap h4 {
+      margin: 0 0 .85rem; color: var(--teal); font: 800 1.05rem/1.3 var(--sans);
+    }
+    .part-divider .part-recap dl {
+      display: grid; grid-template-columns: minmax(8rem, 12rem) minmax(0, 1fr);
+      gap: .5rem .9rem; margin: 0; font: .84rem/1.5 var(--sans);
+    }
+    .part-divider .part-recap dt { font-weight: 800; color: var(--teal); }
+    .part-divider .part-recap dd { margin: 0; color: var(--muted); }
+    .part-divider .part-recap > p {
+      margin: .9rem 0 0; max-width: none; color: var(--muted);
+      font: .8rem/1.55 var(--sans);
+    }
+    /* Must follow the base rule rather than sit in the earlier breakpoint
+       block: the selectors are identical, so source order decides. */
+    @media (max-width: 700px) {
+      .part-divider .part-recap dl { grid-template-columns: 1fr; gap: .1rem; }
+      .part-divider .part-recap dt { margin-top: .5rem; }
+      .part-divider .part-recap dd { margin-bottom: .3rem; }
+    }
+    /* The panel is narrower than the article column the chapter maps sit in, so
+       the tracks must be allowed to shrink below their longest word, and there
+       is only room for two of them once the 620px rule has taken effect. */
+    @media (max-width: 620px) {
+      .part-divider .stage-map .stage-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .backmatter-divider { background: linear-gradient(135deg, #5b6b68, #3f4b49); }
+
+    .chapter { scroll-margin-top: 1.5rem; }
+    .chapter + .chapter { margin-top: 4.5rem; }
+    .chapter-head { margin: 3rem 0 2rem; }
+    .chapter-eyebrow {
+      margin: 0 0 .4rem; color: var(--accent-dark);
+      font: 800 .76rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase;
+    }
+    .chapter-head h2 { margin-top: 0; }
+    /* Eyebrow and permalink share one line. The row is built by script, so a
+       chapter added by hand needs no extra markup. */
+    .chapter-head-row {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 1rem; margin: 0 0 .4rem;
+    }
+    .chapter-head-row .chapter-eyebrow { margin: 0; }
+    .chapter-meta {
+      margin: 0; color: var(--muted);
+      font: 600 .72rem/1 var(--sans); letter-spacing: .04em;
+    }
+    .chapter-head-row .chapter-meta { margin-right: auto; }
+    .chapter-link {
+      flex: none; padding: .32rem .72rem; border: 1px solid var(--line);
+      border-radius: 999px; background: var(--paper-2); color: var(--muted);
+      cursor: pointer; font: 800 .64rem/1 var(--sans);
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .chapter-link:hover { border-color: var(--accent); color: var(--accent-dark); }
+    .chapter-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .chapter-link.copied {
+      border-color: var(--teal); color: var(--teal); background: var(--teal-soft);
+    }
+    .chapter-question {
+      margin: 1.2rem 0; padding: .9rem 1.15rem; border-left: 5px solid var(--accent);
+      background: var(--paper-2); border-radius: 0 10px 10px 0;
+      font: 700 1.06rem/1.45 var(--sans); color: var(--ink);
+    }
+    .chapter-question span {
+      display: block; margin-bottom: .3rem; color: var(--accent-dark);
+      font: 800 .68rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+    }
+    .chapter-orient p:first-child { font-size: 1.06rem; }
+
+    .stage-map { margin: 1.6rem 0; font-family: var(--sans); }
+    .stage-controller {
+      padding: .45rem .7rem; margin-bottom: .35rem; border-radius: 8px;
+      font: 700 .72rem/1.3 var(--sans); text-align: center;
+    }
+    .stage-controller.on { background: var(--accent); color: #fff; }
+    .stage-controller.off { background: #ece7dd; color: #9a9186; }
+    .stage-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: .3rem; }
+    .stage {
+      padding: .55rem .35rem; border-radius: 8px; text-align: center;
+      font: 700 .68rem/1.25 var(--sans); border: 1px solid var(--line);
+    }
+    .stage.on { background: var(--teal); color: #fff; border-color: var(--teal); }
+    .stage.off { background: #f4efe6; color: var(--muted); }
+    a.stage { text-decoration: none; }
+
+    /* The suggested citation ends in a bare URL, which is one unbreakable token
+       and pushed the whole document sideways on a narrow phone. Long words are
+       allowed to break here; nothing else in a blockquote is long enough to. */
+    #reuse-citation + blockquote p { overflow-wrap: anywhere; }
+
+    /* A six-across pipeline map cannot hold its longest stage name at 320px
+       even after the 620px rule drops it to three columns, and a grid item's
+       automatic minimum is its own content unless min-width says otherwise.
+       The Copy link button in a chapter head needs the same room to wrap. */
+    .stage { min-width: 0; overflow-wrap: break-word; }
+    .chapter-head-row { flex-wrap: wrap; }
+    a.stage:hover, a.stage:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px;
+    }
+    a.stage.off:hover, a.stage.off:focus-visible { color: var(--ink); }
+
+    .stage-key {
+      display: grid; grid-template-columns: minmax(8rem, 13rem) minmax(0, 1fr);
+      gap: .45rem .9rem; margin: 0 0 1.8rem; font: .84rem/1.5 var(--sans);
+    }
+    .stage-key dt { font-weight: 800; color: var(--teal); }
+    .stage-key dt a { color: inherit; text-decoration: none;
+                      border-bottom: 1px solid var(--teal-soft); }
+    .stage-key dt a:hover, .stage-key dt a:focus-visible { border-bottom-color: var(--teal); }
+    .stage-key dd { margin: 0; color: #45504e; }
+    @media (max-width: 560px) {
+      .stage-key { grid-template-columns: 1fr; gap: .15rem; }
+      .stage-key dd { margin-bottom: .55rem; }
+    }
+    @media (max-width: 620px) {
+      .stage-row { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* fourth-level prose heading, created by demoting old in-flow h4s */
+    .chapter h5 {
+      margin: 1.8rem 0 .6rem; color: var(--ink);
+      font: 800 .98rem/1.35 var(--sans); scroll-margin-top: 1.5rem;
+    }
+
+    .section-group { margin: 3rem 0 1.5rem; padding-top: 1.2rem; border-top: 2px solid var(--accent); }
+    .section-group .group-title {
+      margin: 0 0 .3rem; color: var(--accent-dark); font: 800 1.15rem/1.3 var(--sans);
+    }
+    .section-group p { margin: 0; font-size: .93rem; color: #5c554b; }
+
+    .chapter-close {
+      margin: 2.6rem 0 1.2rem; padding: 1.3rem 1.5rem;
+      border: 1px solid var(--teal); border-radius: 12px; background: var(--paper-2);
+    }
+    .chapter-close-label {
+      margin: 0 0 .7rem; color: var(--teal);
+      font: 800 .72rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+    }
+    .chapter-close ol { margin: 0; }
+    .chapter-close li { font-size: .96rem; }
+    .chapter-transition {
+      margin: 1.1rem 0 0; padding-top: 1rem; border-top: 1px dashed var(--line);
+      font-style: italic; color: #5c554b;
+    }
+
+    .exercise {
+      margin: 3rem 0 4rem; padding: 1.6rem 1.8rem;
+      border: 2px dashed var(--accent); border-radius: 14px; background: #fbf7f0;
+    }
+    .exercise-label {
+      margin: 0 0 .4rem; color: var(--accent-dark);
+      font: 800 .72rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+    }
+    .exercise h2 { margin: 0 0 .8rem; padding: 0; border: 0; font-size: 1.3rem; }
+    .exercise-deliverable {
+      margin-top: 1.1rem; padding: .85rem 1.1rem; background: #fff;
+      border-left: 4px solid var(--teal); border-radius: 0 8px 8px 0; font-size: .95rem;
+    }
+
+    .asset-label {
+      margin: 2rem 0 -1.4rem; color: var(--accent-dark);
+      font: 700 .78rem/1.4 var(--sans);
+    }
+    .asset-label-inline {
+      font: 800 .74rem/1 var(--sans); color: var(--accent-dark);
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+
+    .chapter-nav {
+      display: flex; gap: 1rem; justify-content: space-between;
+      margin: 2rem 0 0; padding-top: 1.4rem; border-top: 1px solid var(--line);
+    }
+    .cnav {
+      /* Two of these plus the row's 1rem gap have to fit exactly, so the cap is
+         half the row minus half the gap. A flat 48% leaves only 4% for a fixed
+         16px gap, which is short of it on anything narrower than about 400px
+         and pushed the page sideways there. min-width lets a long chapter title
+         shrink rather than setting the floor. */
+      flex: 1; min-width: 0; max-width: calc(50% - .5rem);
+      overflow-wrap: break-word;
+      padding: .8rem 1rem; border: 1px solid var(--line);
+      border-radius: 10px; text-decoration: none; color: var(--ink);
+      font: 700 .92rem/1.35 var(--sans); background: var(--paper-2);
+    }
+    .cnav:hover { border-color: var(--accent); }
+    .cnav span {
+      display: block; color: var(--accent-dark);
+      font: 800 .66rem/1 var(--sans); letter-spacing: .12em; text-transform: uppercase;
+      margin-bottom: .3rem;
+    }
+    .cnav.next { text-align: right; }
+    .cnav.ghost { border: 0; background: none; }
+
+    /* Below this, half a row is narrower than the longest word in a chapter
+       title, so side-by-side cards could only fit by breaking words mid-syllable.
+       Stacking gives each the full column and the break-word net never fires.
+       Must follow the .cnav rule above: same selector, source order decides. */
+    @media (max-width: 420px) {
+      .chapter-nav { flex-direction: column; }
+      .cnav { max-width: 100%; }
+    }
+
+    /* three-level contents */
+    .toc-part a {
+      color: var(--teal) !important; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .08em; font-size: .68rem; padding-top: 1rem;
+    }
+    .toc-ch > a { font-weight: 700; }
+    .toc-ch > a em {
+      display: block; font-style: normal; color: var(--accent-dark);
+      font-size: .64rem; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .toc-ex a { font-style: italic; font-size: .74rem; }
+    .toc-subs { list-style: none; padding: 0; margin: 0; border: 0; display: none; }
+    .toc-ch.open .toc-subs { display: block; }
+    .toc-sec a { padding-left: 1.8rem; font-size: .73rem; opacity: .85; }
+    /* Reference entries that belong nowhere in the reading order, so they are
+       held outside the <ol> that maintain.py rebuilds from the headings. */
+    .toc-pinned {
+      list-style: none; padding: 0; margin: 1rem 0 0;
+      border-top: 1px solid var(--line); padding-top: .6rem;
+    }
+    .toc-pinned a { font-weight: 700; letter-spacing: .01em; }
+
+    /* The asset index carries its own numbers, so the list marker would double up. */
+    #figure-index, #table-index {
+      list-style: none; padding: 0; margin: 1rem 0 2rem;
+      font: .86rem/1.5 var(--sans);
+    }
+    #figure-index li, #table-index li {
+      display: grid; grid-template-columns: minmax(5.5rem, max-content) minmax(0, 1fr);
+      gap: .2rem .9rem; padding: .3rem 0; border-top: 1px solid var(--line);
+    }
+    #figure-index li:last-child, #table-index li:last-child { border-bottom: 1px solid var(--line); }
+    #figure-index a, #table-index a {
+      font-weight: 800; color: var(--accent-dark); text-decoration: none;
+    }
+    #figure-index a:hover, #table-index a:hover { text-decoration: underline; }
+    @media (max-width: 560px) {
+      #figure-index li, #table-index li { grid-template-columns: 1fr; gap: .1rem; }
+    }
+
+    /* A term marked at its first use in a chapter; the definition is the
+       glossary's own, read out of the page at load time. */
+    .term-mark {
+      font-style: normal;
+      border-bottom: 1px dotted var(--accent);
+      cursor: help;
+    }
+    .term-mark:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    #glossary-tip {
+      position: fixed; z-index: 60; max-width: 22rem; margin: 0;
+      padding: .6rem .75rem; border: 1px solid var(--line); border-radius: 9px;
+      background: var(--paper-2); color: var(--ink); box-shadow: var(--shadow);
+      font: .8rem/1.45 var(--sans);
+    }
+    #glossary-tip strong { display: block; color: var(--teal); font-weight: 800; }
+    #glossary-tip[hidden] { display: none; }
+    @media print {
+      .term-mark { border-bottom: 0; }
+      #glossary-tip { display: none !important; }
+      .toc-pinned { display: none; }
+    }
+
+    @media print {
+      .part-divider { background: none !important; color: var(--ink) !important;
+                      border: 2px solid var(--ink); }
+      .part-divider .part-title,
+      .part-divider .part-time { color: var(--ink) !important; }
+      .chapter-nav, .chapter-link { display: none !important; }
+      .chapter { break-before: page; }
+      .part-divider, .exercise, .chapter-close, .chapter-head { break-inside: avoid; }
+    }
+</style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    .product-claims-register { overflow-wrap: anywhere; }
+    .claim-entry { padding: 1.2rem .25rem; margin: 0; border: 0; border-bottom: 1px solid #d5d0c5; border-radius: 0; box-shadow: none; background: transparent; }
+    .claim-entry .claim-id { font: 600 .8rem/1.5 system-ui, sans-serif; color: #1d5b59; }
+    .claim-entry .claim-status { font: 600 .9rem/1.5 system-ui, sans-serif; }
+    .claim-entry details, .claim-coverage, .claim-links { border: 1px solid #d5d0c5; border-radius: 6px; padding: .65rem .85rem; margin: .8rem 0; }
+    .claim-links { font: 400 .82rem/1.5 system-ui, sans-serif; background: #fbf9f4; }
+    .claim-links p { margin: .5rem 0; }
+    .claim-entry summary, .claim-coverage summary, .claim-links summary { cursor: pointer; color: #1d5b59; }
+    .claim-entry summary:focus-visible, .claim-coverage summary:focus-visible, .claim-links summary:focus-visible { outline: 3px solid #1d5b59; outline-offset: 3px; }
+    .claim-entry:target { outline: 3px solid #1d5b59; outline-offset: 4px; }
+    @media print {
+      .claim-links { display: none; }
+      .claim-entry { break-inside: avoid; }
+      .claim-entry details::details-content, .claim-coverage::details-content { content-visibility: visible; }
+      .claim-entry details > *, .claim-coverage > * { display: block; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/glossary-hub.css">
+  <script defer src="assets/glossary-hub.js"></script>
+</head>
+<body>
+  <a class="skip-reading" href="#article">Skip to reading</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="hero"><div class="hero-inner"><p class="kicker">Textbook edition · Version 1.2.1 · Three parts, fifteen chapters</p>
+      <h1>How Search Decides What You See</h1>
+      <p class="subtitle">A librarian’s guide to Boolean search, BM25, embeddings, reranking, and the retrieval pipelines behind hybrid and agentic search</p>
+      <nav class="reading-routes" aria-label="Reading routes">
+        <a href="#intro">Start Chapter 1</a>
+        <a href="read-this-first.html">Take the 45-minute route</a>
+        <a href="teaching-notes.html#one-hour-workshop">Teach a workshop</a>
+        <a href="evaluation-kit.html">Evaluate a search system</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Table of contents">
+      <strong>Contents</strong>
+      <ol id="toc-list"></ol>
+      <ul class="toc-pinned"><li><a href="read-this-first.html">Read this first · 45-minute route</a></li><li class="lookup-trigger" hidden><a href="#book-lookup">Find a term or section</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#figures-and-tables">Figures and tables</a></li><li><a href="#references">References</a></li></ul>
+    </nav>
+    <main>
+      <details class="mobile-toc">
+        <summary>Contents</summary>
+        <ol id="mobile-toc-list"></ol>
+        <ul class="toc-pinned"><li><a href="read-this-first.html">Read this first · 45-minute route</a></li><li class="lookup-trigger" hidden><a href="#book-lookup">Find a term or section</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#figures-and-tables">Figures and tables</a></li><li><a href="#references">References</a></li></ul>
+      </details>
+      <article id="article" tabindex="-1"><!-- BOOK BODY --></article>
+    </main>
+  </div>
+
+  <footer class="page-footer">Textbook edition, version 1.2.1 · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · <a href="#how-to-cite-and-reuse">How to cite and reuse</a> · <a href="#generative-ai-use-disclosure">Generative AI use disclosure</a> · <a href="#product-evidence-currency">Product evidence and currency</a> · <a href="https://github.com/aarontaycheehsien/Information-retrieval-crashcourse/issues">Report an error</a>.</footer>
+
+  <script>
+    const progress = document.querySelector('.progress');
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    };
+    updateProgress();
+    addEventListener('scroll', updateProgress, { passive: true });
+    addEventListener('resize', updateProgress);
+
+    // Highlight the active chapter and reveal only its sections.
+    const desktopToc = document.getElementById('toc-list');
+    const chapterEls = [...document.querySelectorAll('.chapter[id^="sec-"]')];
+    const setActive = (key) => {
+      desktopToc.querySelectorAll('.toc-ch').forEach(li => {
+        const on = li.dataset.ch === key;
+        li.classList.toggle('open', on);
+        const a = li.querySelector('a');
+        if (a) a.classList.toggle('active', on);
+      });
+    };
+    const chObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id.replace('sec-', '')); });
+    }, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
+    chapterEls.forEach(c => chObs.observe(c));
+
+    // Section-level highlight inside the open chapter.
+    const secLinks = [...desktopToc.querySelectorAll('.toc-sec a')];
+    const secObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) secLinks.forEach(a =>
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+      });
+    }, { rootMargin: '-12% 0px -76% 0px', threshold: 0 });
+    document.querySelectorAll('#article h3[id]').forEach(h => secObs.observe(h));
+
+    // A permalink per chapter and appendix, so a reading list can point at one
+    // of them. Built here rather than in the markup: every chapter head is then
+    // identical, and a new chapter picks the control up for free.
+    const copyText = async (text) => {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch (e) { /* fall through to the selection-based route */ }
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        return ok;
+      } catch (e) { return false; }
+    };
+
+    document.querySelectorAll('.chapter > .chapter-head').forEach(head => {
+      const h2 = head.querySelector('h2[id]');
+      if (!h2) return;
+      const eyebrow = head.querySelector('.chapter-eyebrow');
+      const row = document.createElement('div');
+      row.className = 'chapter-head-row';
+      head.insertBefore(row, eyebrow || head.firstChild);
+      if (eyebrow) row.appendChild(eyebrow);
+      const meta = head.querySelector('.chapter-meta');
+      if (meta) row.appendChild(meta);
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'chapter-link';
+      btn.textContent = 'Copy link';
+      btn.setAttribute('aria-live', 'polite');
+      btn.setAttribute('aria-label', 'Copy a link to “' + h2.textContent.replace(/#$/, '').trim() + '”');
+      row.appendChild(btn);
+
+      let revert;
+      btn.addEventListener('click', async () => {
+        const url = location.origin + location.pathname + location.search + '#' + h2.id;
+        const ok = await copyText(url);
+        if (!ok) location.hash = h2.id;      // at least leave it in the address bar
+        btn.textContent = ok ? 'Copied' : 'In address bar';
+        btn.classList.add('copied');
+        clearTimeout(revert);
+        revert = setTimeout(() => {
+          btn.textContent = 'Copy link';
+          btn.classList.remove('copied');
+        }, 1800);
+      });
+    });
+
+
+    // ---- Glossary reachability -------------------------------------------
+    // The glossary is a <details> in the end matter, but it is linked from the
+    // sidebar and can be reached from any chapter, so a direct link opens it.
+    const glossary = document.getElementById('glossary');
+    const openGlossary = () => { if (glossary) glossary.open = true; };
+    if (location.hash === '#glossary') openGlossary();
+    addEventListener('hashchange', () => {
+      if (location.hash === '#glossary') openGlossary();
+    });
+    document.querySelectorAll('a[href="#glossary"]').forEach(a =>
+      a.addEventListener('click', openGlossary));
+    addEventListener('beforeprint', openGlossary);
+
+    // ---- First-use term marks --------------------------------------------
+    // Definitions come from the glossary itself, so the marks cannot drift
+    // from it. Only unambiguous terms are listed: single common words such as
+    // "term", "analysis", "vector" or "chunk" would match ordinary prose.
+    const MARKED = [
+      // index & analysis
+      'inverted index', 'posting list', 'term frequency',
+      'inverse document frequency', 'document frequency',
+      'controlled vocabulary', 'indexed unit',
+      // representations & models
+      'bi-encoder', 'cross-encoder', 'late interaction',
+      'approximate nearest neighbour', 'dense retrieval',
+      'learnt sparse retrieval', 'lexical retrieval', 'ranked retrieval',
+      'neural information retrieval', 'semantic search', 'vector search',
+      'vocabulary mismatch',
+      'sparse vector', 'dense vector', 'latent dimension',
+      'cosine similarity', 'dot product', 'hard negative', 'reranker',
+      // query-side & pipeline
+      'query by example', 'seed-based retrieval',
+      'query understanding', 'query transformation', 'retrieval control',
+      'retrieval feedback', 'screening feedback', 'result diversification',
+      'reciprocal rank fusion', 'learning to rank',
+      'top-k', 'precision@k', 'retrieval-augmented generation',
+      // evaluation & relevance
+      'test collection', 'relevance judgement', 'information need',
+      'topical relevance', 'cognitive relevance', 'situational relevance'
+    ];
+
+    // Order matters: longer RAG phrases must precede “RAG” so an acronym
+    // cannot be marked inside an already-marked phrase.
+    const MARKED_CASED = [
+      'BM25', 'IDF', 'ANN', 'nDCG', 'MRR', 'MAP',
+      'RRF', 'LTR', 'OOV', 'OOD',
+      'Agentic RAG', 'RAG Fusion', 'RAG', 'MCP', 'API'
+    ];
+
+    const defs = new Map();
+    const glossaryIndex = JSON.parse(document.getElementById('book-lookup-index').textContent)
+      .filter(entry => entry.kind === 'Term');
+    if (glossary) {
+      glossary.querySelectorAll('dt').forEach(dt => {
+        const dd = dt.nextElementSibling;
+        if (!dd || dd.tagName !== 'DD') return;
+        const text = dd.querySelector('.glossary-definition').textContent.trim();
+        const label = dt.textContent.trim();
+        const entry = { term: label, text, id: dt.id };
+        const indexed = glossaryIndex.find(item => item.id === dt.id);
+        [label, ...(indexed?.aliases || [])].forEach(alias => {
+          const key = alias.toLowerCase();
+          // Shared aliases are searchable, but must not acquire an arbitrary tooltip.
+          if (defs.has(key) && defs.get(key)?.id !== dt.id) defs.set(key, null);
+          else defs.set(key, entry);
+        });
+      });
+    }
+
+    const lookup = (needle) => defs.get(needle.toLowerCase())
+      || defs.get(needle.toLowerCase() + 's')
+      || defs.get(needle.toLowerCase().replace(/s$/, ''));
+
+    // Marks belong in the running argument. Tables are too terse to carry a
+    // dotted underline well, a mark inside a closed <details> would be spent on
+    // text nobody sees, Appendix D is itself a terminology map, and the
+    // back-matter lists are rebuilt by tools/maintain.py.
+    const SKIP = 'a, code, pre, h1, h2, h3, h4, dfn, .term-mark, figcaption, summary, ' +
+                 'table, details, output, .backsection, #app-D, ' +
+                 '.asset-label, .asset-label-inline, .glossary, .stage-map, ' +
+                 '.stage-key, .chapter-meta, .figure-title';
+
+    const escapeRe = (s) => s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+    // A listed term must not be marked inside a longer listed one: "RAG" inside
+    // "RAG Fusion", "document frequency" inside "inverse document frequency".
+    // Listing the longer phrase first is not enough on its own, because that
+    // only protects its first occurrence; every later occurrence is still bare
+    // text that the shorter term would otherwise claim, splitting the phrase
+    // and attaching the neighbouring definition to half of it.
+    const ALL_TERMS = MARKED.concat(MARKED_CASED);
+    const enclosing = (phrase) => ALL_TERMS
+      .filter((t) => t.length > phrase.length &&
+        new RegExp('(?<![\\w-])' + escapeRe(phrase) + '(?![\\w-])', 'i').test(t))
+      .map((t) => new RegExp('(?<![\\w-])' + escapeRe(t) + '(?![\\w-])', 'gi'));
+
+    const markTerm = (root, phrase, cased) => {
+      const flags = cased ? 'g' : 'gi';
+      // A hyphen counts as part of the word here, so that "IDF" does not match
+      // inside "TF-IDF" and split a compound term the glossary treats as one.
+      const re = new RegExp('(?<![\\w-])' + escapeRe(phrase) +
+                            (cased ? '' : 's?') + '(?![\\w-])', flags);
+      const longer = enclosing(phrase);
+      const insideLonger = (text, start, end) => longer.some((lr) => {
+        lr.lastIndex = 0;
+        let lm;
+        while ((lm = lr.exec(text))) {
+          if (lm.index > start) break;
+          if (lm.index <= start && end <= lm.index + lm[0].length) return true;
+        }
+        return false;
+      });
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          if (node.parentElement.closest(SKIP)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      let node;
+      while ((node = walker.nextNode())) {
+        re.lastIndex = 0;
+        let m;
+        // Take the first match this node offers that is not part of a longer
+        // listed phrase; a node may hold both, as "RAG Fusion ... RAG" does.
+        while ((m = re.exec(node.nodeValue))) {
+          if (!insideLonger(node.nodeValue, m.index, m.index + m[0].length)) break;
+        }
+        if (!m) continue;
+        const entry = lookup(phrase);
+        if (!entry) return false;
+        const after = node.splitText(m.index);
+        after.nodeValue = after.nodeValue.slice(m[0].length);
+        const mark = document.createElement('a');
+        mark.className = 'term-mark';
+        mark.href = '#' + entry.id;
+        mark.textContent = m[0];
+        mark.setAttribute('aria-describedby', 'definition-' + entry.id.slice(5));
+        mark.dataset.def = entry.text;
+        mark.dataset.term = entry.term;
+        after.parentNode.insertBefore(mark, after);
+        return true;
+      }
+      return false;
+    };
+
+    document.querySelectorAll('#article .chapter').forEach(chapter => {
+      MARKED.forEach(t => markTerm(chapter, t, false));
+      MARKED_CASED.forEach(t => markTerm(chapter, t, true));
+    });
+
+    // One shared tooltip, shown on hover and on keyboard focus.
+    const tip = document.createElement('div');
+    tip.id = 'glossary-tip';
+    tip.hidden = true;
+    tip.setAttribute('role', 'tooltip');
+    document.body.appendChild(tip);
+
+    let tipFor = null;
+    const showTip = (mark) => {
+      if (tipFor && tipFor !== mark) tipFor.setAttribute('aria-describedby', 'definition-' + tipFor.hash.slice(6));
+      tipFor = mark;
+      tip.innerHTML = '';
+      const h = document.createElement('strong');
+      h.textContent = mark.dataset.term;
+      tip.append(h, document.createTextNode(mark.dataset.def));
+      mark.setAttribute('aria-describedby', 'glossary-tip');
+      tip.hidden = false;
+      const r = mark.getBoundingClientRect();
+      const t = tip.getBoundingClientRect();
+      const clamp = (v, max) => Math.max(12, Math.min(v, max - 12));
+      tip.style.left = clamp(r.left, innerWidth - t.width) + 'px';
+      tip.style.top = clamp(r.bottom + t.height + 12 > innerHeight
+                            ? r.top - t.height - 8
+                            : r.bottom + 8, innerHeight - t.height) + 'px';
+    };
+    const hideTip = () => {
+      tip.hidden = true;
+      if (tipFor) tipFor.setAttribute('aria-describedby', 'definition-' + tipFor.hash.slice(6));
+      tipFor = null;
+    };
+
+    document.addEventListener('pointerover', (e) => {
+      const mark = e.target.closest && e.target.closest('.term-mark');
+      if (mark && e.pointerType !== 'touch') showTip(mark);
+      else if (tipFor && !tip.contains(e.target)) hideTip();
+    });
+    document.addEventListener('focusin', (e) => {
+      const mark = e.target.closest && e.target.closest('.term-mark');
+      if (mark) showTip(mark); else if (tipFor) hideTip();
+    });
+    addEventListener('keydown', (e) => { if (e.key === 'Escape') hideTip(); });
+    addEventListener('scroll', () => {
+      // Keyboard focus can scroll the mark into view; keep its description visible.
+      if (tipFor && document.activeElement === tipFor) {
+        const r = tipFor.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < innerHeight) { showTip(tipFor); return; }
+      }
+      hideTip();
+    }, { passive: true });
+    document.addEventListener('click', hideTip);
+
+  </script>
+
+
+
+
+</body></html>

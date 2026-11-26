@@ -1,0 +1,8 @@
+<div class="worked-grid">
+<div class="worked-card"><strong>Document side · when indexing</strong>
+<div class="worked-path"><span>Text contains <span class="worked-term">jobs</span><small>Document analyser stems the word.</small></span><span class="worked-arrow" aria-hidden="true">→</span><span>Stored term <span class="worked-term">job</span></span></div></div>
+<div class="worked-card"><strong>Query side · when searching</strong>
+<div class="worked-path"><span>You type <span class="worked-term">job</span><small>Query analyser keeps this form.</small></span><span class="worked-arrow" aria-hidden="true">→</span><span>Lookup term <span class="worked-term">job</span></span></div></div>
+</div>
+<p class="worked-result"><strong>They meet:</strong> the query looks up <code>job</code>; that index entry points to the document containing “jobs”.</p>
+<p class="worked-result caution"><strong>If the analysers disagree:</strong> the index stores only <code>jobs</code>, but the query looks up only <code>job</code>. Without another mapping, this document is missed.</p>

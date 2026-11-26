@@ -1,0 +1,43 @@
+{
+  "purpose": "Pipeline stage map shown in chapter headers. Rendered by tools/markdown/build_md.py from ::: {.stage-map on=\"KEYS\"} markers.",
+  "default_label": "Pipeline map: the stage this chapter covers is highlighted",
+  "controller_text": "Controller — chooses and sequences the stages below",
+  "stages": [
+    {
+      "key": "query-transformation",
+      "href": "#query-transformation",
+      "title": "Chapter 11 — the words you typed may be rewritten, expanded or split before retrieval sees them.",
+      "label_html": "Query<br>transformation"
+    },
+    {
+      "key": "analysis",
+      "href": "#boolean-admission",
+      "title": "Chapter 2 — text becomes index terms, and the rules decide which records are eligible at all.",
+      "label_html": "Analysis &amp;<br>execution rules"
+    },
+    {
+      "key": "first-stage",
+      "href": "#bm25-ranking",
+      "title": "Chapters 3 and 5–8 — one fast pass over the whole collection produces the candidate set.",
+      "label_html": "First-stage<br>retrieval"
+    },
+    {
+      "key": "fusion",
+      "href": "#hybrid-and-fusion",
+      "title": "Chapter 10 — several candidate lists are combined into one.",
+      "label_html": "Fusion"
+    },
+    {
+      "key": "reranking",
+      "href": "#reranking-and-hybrid",
+      "title": "Chapter 9 — a shortlist is compared again, more carefully than collection scale allowed.",
+      "label_html": "Reranking"
+    },
+    {
+      "key": "presentation",
+      "href": "#library-practice",
+      "title": "Chapter 15 — what the reader is finally shown, and what can be recorded about it.",
+      "label_html": "Presentation"
+    }
+  ]
+}

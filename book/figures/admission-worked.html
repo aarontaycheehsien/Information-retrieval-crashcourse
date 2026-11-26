@@ -1,0 +1,16 @@
+<p class="worked-kicker">Analysed query: apple orange banana</p>
+<div class="worked-grid">
+<div class="worked-card"><p class="worked-record"><b>A</b> <span class="worked-term">apple</span> <span class="worked-term">orange</span> <span class="worked-term">banana</span></p><p class="worked-record"><b>B</b> <span class="worked-term">apple</span> <span class="worked-term">orange</span></p></div>
+<div class="worked-card"><p class="worked-record"><b>C</b> <span class="worked-term">apple</span></p><p class="worked-record"><b>D</b> pear grape <span class="worked-note">(no query terms)</span></p></div>
+</div>
+<p class="worked-note">These cards show which query terms occur, not their frequencies or the full document lengths.</p>
+<div class="worked-grid three">
+<div class="worked-card"><strong>All three required</strong><span class="worked-rule">A admitted</span><p>B, C and D excluded.</p><p class="worked-note">An AND condition for every term.</p></div>
+<div class="worked-card"><strong>At least two required</strong><span class="worked-rule">A, B admitted</span><p>C and D excluded.</p><p class="worked-note">Minimum match: two of three.</p></div>
+<div class="worked-card"><strong>Any one sufficient</strong><span class="worked-rule">A, B, C admitted</span><p>D excluded.</p><p class="worked-note">Eligibility is the union of the posting lists, expressible as OR.</p></div>
+</div>
+<div class="worked-result"><p class="worked-kicker">Now keep the any-match rule fixed</p>
+<p><strong>Admission:</strong> A, B and C may compete.</p>
+<p><strong>Ranking:</strong> suppose a scoring rule orders them B, A, C.</p>
+<p><strong>Top-2 output:</strong> retain B and A.</p>
+<p class="worked-cutoff">C qualified, but fell below the output boundary. D never qualified.</p></div>
