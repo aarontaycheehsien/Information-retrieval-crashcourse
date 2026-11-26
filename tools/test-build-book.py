@@ -16,6 +16,7 @@ HERE = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location("build_book", HERE / "build-book.py")
 build_book = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build_book)
+import html_to_md  # noqa: E402  (tools/markdown is on the path after build-book.py loads)
 
 
 def run(*args):
@@ -50,6 +51,20 @@ class BuildBookTests(unittest.TestCase):
             for page in build_book.pages(a):
                 with self.subTest(page=page):
                     self.assertEqual((a / page).read_bytes(), (b / page).read_bytes())
+
+    def test_converter_round_trip_reproduces_the_page(self):
+        # Convert the committed page to Markdown, build that, and compare the
+        # result with the committed page. This keeps the converter faithful
+        # (for porting HTML edits from older branches) without requiring the
+        # authored sources to match its formatting byte for byte.
+        with tempfile.TemporaryDirectory() as tmp:
+            source, work = Path(tmp) / "book", Path(tmp) / "repo"
+            html_to_md.convert_book(source)
+            build_book.make_workspace(work)
+            build_book.build_md.build_book(source, work)
+            report = build_book.eq.compare(build_book.eq.load(build_book.ROOT / "search-textbook.html"),
+                                           build_book.eq.load(work / "search-textbook.html"))
+            self.assertEqual(report, [], "\n".join(report[:40]))
 
     def test_config_names_a_known_source(self):
         config = json.loads(build_book.CONFIG.read_text(encoding="utf-8"))

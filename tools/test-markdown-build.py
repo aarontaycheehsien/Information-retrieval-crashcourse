@@ -204,12 +204,16 @@ class AssemblyTests(unittest.TestCase):
         self.assertTrue(out.endswith('<section class="footnotes">\n<hr>\n<ol>\n<li id="fn:a">\n<p>A</p>\n</li>\n</ol>\n</section></article>'))
 
     def test_committed_sources_are_current(self):
+        # Only while the HTML is the source: book/ is then a conversion of it.
+        # After cut-over, authored Markdown may be formatted in ways the
+        # converter would not write (a trailing blank line, another line
+        # break) without changing the page, so a byte-exact reverse check
+        # would reject valid edits. tools/test-build-book.py checks the
+        # converter by building a fresh conversion and comparing the page.
+        if html_to_md.markdown_is_source():
+            self.skipTest("Markdown is the source; see test-build-book.py's converter round trip")
         stale = html_to_md.check_book(ROOT / "book")
-        # Before cut-over: book/ must match a conversion of the live HTML.
-        # After it: converting the built page back must reproduce book/ exactly,
-        # so the conversion stays a faithful round trip.
-        self.assertEqual(stale, [], "book/ and a conversion of search-textbook.html differ; "
-                                    "after cut-over, run python tools/build-book.py")
+        self.assertEqual(stale, [], "book/ is stale; run python tools/markdown/html_to_md.py --book book")
 
 
 class ConverterTests(unittest.TestCase):
