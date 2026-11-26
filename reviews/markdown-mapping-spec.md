@@ -25,21 +25,34 @@ Pandoc 3.1 reader `markdown-smart-auto_identifiers-implicit_figures`.
 - **Non-breaking space:** written as `\ ` (backslash, space), which Pandoc reads
   as U+00A0. The 60 `&nbsp;` entities become this.
 
-## File layout (phase 4)
+## File layout (as built in phase 4)
 
 ```
 book/
-  template.html            page shell: head, CSS, scripts, hero, nav, footer
-  00-front.md              disclosure notice, preface
-  parts/01-part-i.md       part divider and its asides
-  01-retrieval-problem.md  one file per chapter, appendix, exercise, back section
-  figures/SLUG.html        raw-HTML islands for bespoke diagrams
-data/stage-map.json        stage labels, links and tooltips, written once
+  template.html                 page shell: head, CSS, scripts, hero, empty TOC lists
+  00-ai-disclosure-notice.md    one file per top-level part of the article, in order:
+  01-preface.md                   fragments, chapters, parts, exercises, appendices,
+  02-part1.md                     back sections and the glossary
+  …
+  39-product-claims-register.html  empty BEGIN/END markers the claims builder fills
+  figures/SLUG.html             raw-HTML bodies of bespoke worked diagrams
+data/stage-map.json             stage labels, links and tooltips, written once
 ```
 
-Each file starts with YAML front matter: `key`, `kind`
-(chapter|appendix|exercise|backsection|front|part), `eyebrow`, `meta`,
-`question`, `legacy_anchors`. File order is book order.
+The two-digit prefix sets book order. Front matter by kind:
+
+| Kind | Front matter |
+|---|---|
+| chapter, appendix | `key`, `eyebrow`, `meta`, `question`, `legacy_anchors`, `section_id` (appendices) |
+| backsection | `nav` when it has a navigation bar or is linked to |
+| exercise | `id`, `label` |
+| part | `id`, `tag`, `blurb`, `time`, `class`, `nav` |
+| glossary | `nav` |
+| fragment | none: a standalone aside |
+
+Not in any file: the glossary lookup (inserted by its builder), the footnotes
+list (assembled from each file's definitions in book order), tables of contents
+and asset indexes (filled by `maintain.py`), and navigation bars (derived).
 
 ## What the author writes
 
@@ -192,3 +205,42 @@ Further findings:
   build. The regenerated digest is equivalent to the live one.
 - **Generated claims blocks can sit inside a figure.** The converter excludes
   them from raw islands, or the builder would add a second copy.
+
+## Phase 4 conventions (2026-11-26)
+
+Added so that the whole book converts with almost no raw HTML. Each is checked
+by `tools/test-markdown-build.py` and by the whole-book round trip.
+
+| Construct | Markdown |
+|---|---|
+| Table with header `scope` or a table class | `::: {.table scope="row" table-class="…"}` around the pipe table |
+| Query-flow figure | `:::: {.figure .query-flow key=…}` with a `::: {.track}` list of `**Step** description` items per track |
+| Definition list | Pandoc's `Term` then `:   definition`; `::: stage-key` and `::: distinction-map-list` add their classes |
+| Orientation note as a div | `::: {.orientation tag="div"}` |
+| Paragraph whose class names an aside type | `::: {.practice-callout tag="p"}` |
+| Aside label with an id | `label-id=` on the aside |
+| List item with an id | item starts `[]{#id .li-id}`; the start number is kept |
+| Horizontal rule | `---` between blank lines |
+| Display-maths div | `::: {.math tag="div"}`, with `$$` and line breaks exactly as written |
+| Footnote with an ordinary space before its backlink | definition ends with `[]{.backref-space}` (one note) |
+
+Pandoc behaviours the filter now also overrides:
+
+- **Divs become sections.** The HTML5 writer turns a div that starts with a
+  heading into `<section>`, so the filter writes every div itself.
+- **Line breaks add a space.** `<br />` is followed by a newline, which is a
+  space here, so the filter writes `<br>`.
+- **Adjacent raw blocks gain whitespace.** Consecutive anchor spans are joined
+  directly, because whitespace between inline elements is significant.
+- **Display maths is reformatted.** It is written back verbatim, because one
+  table cell has single-line `$$…$$`.
+
+Remaining raw HTML (0.7% of source characters):
+
+- the bespoke Part II stage map;
+- one figure without a class (Figure 5.1, "Where the numbers come from");
+- one `div.ir-figure` holding a table (Primo pipeline, Chapter 9);
+- one `<strong>` carrying an id (the disclosure notice);
+- the two empty asset-index containers.
+
+The 33 diagram files account for another 9.6%.

@@ -85,15 +85,36 @@ def postpass(fragment: str) -> str:
     return STAGE_PLACEHOLDER.sub(expand, fragment)
 
 
+FILE_RECORD = re.compile(r"<!-- BOOK FILE (\{.*?\}) -->\n?")
+
+
 def split_footnotes(fragment: str) -> tuple[str, str]:
     body, _, notes = fragment.partition("<!-- FOOTNOTE DEFINITIONS -->")
     return body.rstrip("\n") + "\n", notes.strip("\n")
 
 
+def build_file_with_record(path: Path, book_dir: Path = BOOK_DIR) -> tuple[str, str, dict]:
+    """Return (HTML, footnote <li> items, file record) for one source file.
+
+    An .html file is a verbatim fragment (generated-region markers)."""
+    path = Path(path)
+    text = path.read_text(encoding="utf-8")
+    if path.suffix == ".html":
+        return text.rstrip("\n") + "\n", "", {"kind": "html", "nav": "none"}
+    html_out = postpass(pandoc(prepass(text), book_dir))
+    record = FILE_RECORD.search(html_out)
+    if not record:
+        raise BuildError(f"{path}: the filter wrote no file record")
+    info = json.loads(record[1])
+    info["source"] = path.name
+    body, notes = split_footnotes(FILE_RECORD.sub("", html_out, count=1))
+    return body, notes, info
+
+
 def build_file(path: Path, book_dir: Path = BOOK_DIR) -> tuple[str, str]:
     """Return (section HTML, footnote <li> items) for one Markdown file."""
-    text = Path(path).read_text(encoding="utf-8")
-    return split_footnotes(postpass(pandoc(prepass(text), book_dir)))
+    body, notes, _ = build_file_with_record(path, book_dir)
+    return body, notes
 
 
 # --- Book-level derivation -------------------------------------------------
@@ -135,3 +156,103 @@ def fill_chapter_navs(book: str) -> str:
         last = m.end()
     pieces.append(book[last:])
     return "".join(pieces)
+
+
+def nav_title(rec: dict) -> str:
+    """How neighbours refer to a file in previous/next navigation."""
+    if rec.get("nav_title"):
+        return rec["nav_title"]
+    title = rec["title"]
+    if rec["kind"] == "exercise":
+        return title.split(" — ")[0]
+    if rec["kind"] == "appendix":
+        return f'{rec["eyebrow"]} · {title}'
+    return title
+
+
+def render_nav(rec: dict, prev: dict | None, nxt: dict | None) -> str:
+    appendix = rec["kind"] == "appendix"
+    links = []
+    for side, other, word in (("prev", prev, "Previous"), ("next", nxt, "Next")):
+        if other is None:
+            continue
+        label = f"{word} appendix" if appendix and other["kind"] == "appendix" else word
+        links.append(f'<a class="cnav {side}" href="#{other["href"]}"><span>{label}</span>{nav_title(other)}</a>')
+    aria = "Appendix navigation" if appendix else "Chapter navigation"
+    return f'<nav class="chapter-nav" aria-label="{aria}">{"".join(links)}</nav>'
+
+
+def assemble(parts: list[tuple[str, str, dict]], template: str) -> str:
+    """Join built files in order, derive navigation, append the footnotes."""
+    # "both": has a bar and is linked to; "target": linked to only as the
+    # next item (the back-matter divider, the glossary), never as previous.
+    sequence = [rec for _, _, rec in parts if rec["nav"] in ("both", "target")]
+    bodies = []
+    for html_body, _, rec in parts:
+        if rec["nav"] == "both":
+            i = sequence.index(rec)
+            prev = next((r for r in reversed(sequence[:i]) if r["nav"] == "both"), None)
+            nav = render_nav(rec, prev, sequence[i + 1] if i + 1 < len(sequence) else None)
+            if html_body.count(NAV_PLACEHOLDER) != 1:
+                raise BuildError(f"{rec['source']}: expected one navigation placeholder")
+            html_body = html_body.replace(NAV_PLACEHOLDER, nav)
+        bodies.append(html_body.rstrip("\n"))
+    notes = [n for _, n, _ in parts if n]
+    if notes:
+        bodies.append('<section class="footnotes">\n<hr>\n<ol>\n' + "\n".join(notes) + "\n</ol>\n</section>")
+    if template.count(BODY_PLACEHOLDER) != 1:
+        raise BuildError("template needs exactly one body placeholder")
+    return template.replace(BODY_PLACEHOLDER, "\n".join(bodies))
+
+
+BODY_PLACEHOLDER = "<!-- BOOK BODY -->"
+TEMPLATE = BOOK_DIR / "template.html"
+GENERATOR_PASSES = [
+    ["tools/maintain.py"],
+    ["tools/renumber_footnotes.py"],
+    ["tools/build-product-claims.py"],
+    ["tools/build-glossary-hub.py"],
+]
+COMPANION_BUILDERS = [["tools/build-digest.py"], ["tools/build-vendor-questionnaire.py"]]
+
+
+def source_files(book_dir: Path = BOOK_DIR) -> list[Path]:
+    files = sorted(p for p in book_dir.iterdir() if re.match(r"\d{2}-.*\.(md|html)$", p.name))
+    if not files:
+        raise BuildError(f"no NN-*.md or NN-*.html files in {book_dir}")
+    return files
+
+
+def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) -> dict:
+    """Build repo/search-textbook.html from book_dir, then run the generators
+    until a whole round changes nothing, then rebuild the companion pages.
+
+    repo is normally a scratch copy of the repository until cut-over."""
+    import sys
+    template = (book_dir / "template.html").read_text(encoding="utf-8")
+    parts = [build_file_with_record(p, book_dir) for p in source_files(book_dir)]
+    target = Path(repo) / "search-textbook.html"
+    target.write_text(assemble(parts, template), encoding="utf-8")
+    log = []
+    for round_no in range(1, passes + 1):
+        before = target.read_bytes()
+        for cmd in GENERATOR_PASSES:
+            r = subprocess.run([sys.executable, *cmd], cwd=repo, capture_output=True, text=True)
+            log.append((round_no, " ".join(cmd), r.returncode, (r.stdout + r.stderr).strip()))
+            if r.returncode and cmd[0] != "tools/maintain.py":
+                raise BuildError(f"{' '.join(cmd)} failed:\n{(r.stdout + r.stderr).strip()}")
+        if target.read_bytes() == before:
+            break
+    else:
+        raise BuildError(f"generators did not settle after {passes} rounds")
+    # maintain.py may report links to generated targets in early rounds; by
+    # the settled round it must report nothing.
+    final = [e for e in log if e[0] == round_no and e[1] == "tools/maintain.py"]
+    if final and final[-1][2]:
+        raise BuildError(f"maintain.py still reports problems after settling:\n{final[-1][3]}")
+    for cmd in COMPANION_BUILDERS:
+        r = subprocess.run([sys.executable, *cmd], cwd=repo, capture_output=True, text=True)
+        log.append(("companion", " ".join(cmd), r.returncode, (r.stdout + r.stderr).strip()))
+        if r.returncode:
+            raise BuildError(f"{' '.join(cmd)} failed:\n{(r.stdout + r.stderr).strip()}")
+    return {"files": len(parts), "rounds": round_no, "log": log}

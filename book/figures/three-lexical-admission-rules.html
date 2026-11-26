@@ -1,0 +1,20 @@
+<p class="worked-kicker">1 · What retrieval receives</p>
+<div class="worked-grid">
+<div class="worked-card"><strong>Understanding and transformation</strong><p>A system may interpret the request, then correct, map, expand or restructure it.</p><p class="worked-note">Optional. This changes the words sent on.</p></div>
+<div class="worked-card"><strong>Analysis</strong><p>Tokenise and normalise; perhaps stem and remove stop-words.</p><p class="worked-note">Routine. The output is the analysed query terms.</p></div>
+</div>
+<p class="worked-kicker worked-band">2 · Admission: which records may compete</p>
+<div class="worked-grid three">
+<div class="worked-card"><strong>All terms required</strong><p>A Boolean <code>AND</code> over every term.</p></div>
+<div class="worked-card"><strong>Some terms required</strong><p>Minimum match, such as two of three.</p></div>
+<div class="worked-card"><strong>Any term suffices</strong><p>The union of the posting lists. BM25 commonly runs this way.</p></div>
+</div>
+<p class="worked-kicker worked-band">3 · Ranking: how candidates are ordered</p>
+<div class="worked-grid three">
+<div class="worked-card"><strong>BM25’s lexical evidence</strong><p>Term rarity, term frequency with diminishing returns, and document length.</p></div>
+<div class="worked-card"><strong>Further lexical evidence</strong><p>Field weights, and phrase and proximity boosts.</p></div>
+<div class="worked-card"><strong>Signals that are not lexical matches</strong><p>Citations, recency, resource type or peer-review status can supplement the score.</p></div>
+</div>
+<p class="worked-kicker worked-band">4 · Output boundary: how many are kept</p>
+<div class="worked-card"><p>The engine may completely order the scored candidates or retain only a top-<em>k</em>. A later stage may rerank that shortlist.</p></div>
+<p class="worked-result"><strong>Every admission rule here is lexical.</strong> Boolean <code>AND</code> is one way to control admission; minimum-match and any-match rules are others, and graded scoring orders whatever is admitted.</p>

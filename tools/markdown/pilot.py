@@ -9,7 +9,8 @@ problems in the live book are not blamed on the conversion) and the pilot
 book is equivalent to the live book (tools/html_equivalence.py).
 
 Usage:
-    python tools/markdown/pilot.py book/02-boolean-admission.md [...]
+    python tools/markdown/pilot.py book/02-boolean-admission.md [...]   # splice chapters
+    python tools/markdown/pilot.py --book BOOK-DIR                       # whole book
 
 Exit 0 when equivalent. Standard library plus pandoc.
 """
@@ -101,18 +102,28 @@ def run_chain(work: Path):
 
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
-    sources = [Path(a) for a in argv]
-    if not sources:
+    book_mode = len(argv) == 2 and argv[0] == "--book"
+    sources = [] if book_mode else [Path(a) for a in argv]
+    if not (book_mode or sources):
         raise SystemExit(__doc__)
     control, pilot = OUT / "control", OUT / "pilot"
     for work in (control, pilot):
         make_workspace(work)
-    target = pilot / "search-textbook.html"
-    book = target.read_text(encoding="utf-8")
-    for src in sources:
-        book = splice(book, src)
-        print(f"Spliced {src}")
-    target.write_text(book, encoding="utf-8")
+    if book_mode:
+        # The whole book from Markdown: nothing of the live article is kept.
+        result = build_md.build_book(Path(argv[1]).resolve(), pilot)
+        print(f"Built the whole book from {result['files']} source files; "
+              f"generators settled in {result['rounds']} round(s).")
+        bad = [entry for entry in result["log"] if entry[2]]
+        for round_no, cmd, rc, out in bad:
+            print(f"  round {round_no} {cmd}: exit {rc}\n    " + "\n    ".join(out.splitlines()[-4:]))
+    else:
+        target = pilot / "search-textbook.html"
+        book = target.read_text(encoding="utf-8")
+        for src in sources:
+            book = splice(book, src)
+            print(f"Spliced {src}")
+        target.write_text(book, encoding="utf-8")
     expected, actual = run_chain(control), run_chain(pilot)
     mismatches = 0
     print("Generators and checks (pilot against control):")

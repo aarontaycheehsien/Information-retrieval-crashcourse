@@ -1,0 +1,13 @@
+<div class="token-pipeline">
+<div class="token-stage"><strong>1. Raw text</strong><p><code>Unbelievable rizzlord scenes!</code></p></div>
+<div class="token-arrow" aria-hidden="true">↓</div>
+<div class="token-stage"><strong>2. Normalisation</strong><p>The uncased tokeniser lowercases the text: <code>unbelievable rizzlord scenes!</code></p></div>
+<div class="token-arrow" aria-hidden="true">↓</div>
+<div class="token-stage"><strong>3. Basic tokenisation</strong><p>Whitespace and punctuation boundaries produce <code>unbelievable</code> · <code>rizzlord</code> · <code>scenes</code> · <code>!</code></p></div>
+<div class="token-arrow" aria-hidden="true">↓</div>
+<div class="token-stage"><strong>4. WordPiece segmentation</strong><p><code>unbelievable</code> · <code>ri</code> · <code>##zz</code> · <code>##lord</code> · <code>scenes</code> · <code>!</code></p></div>
+<div class="token-arrow" aria-hidden="true">↓</div>
+<div class="token-stage"><strong>5. Vocabulary lookup</strong><p><code>23653</code> · <code>15544</code> · <code>13213</code> · <code>19980</code> · <code>5019</code> · <code>999</code></p></div>
+<div class="token-arrow" aria-hidden="true">↓</div>
+<div class="token-stage"><strong>6. BERT-style input</strong><p>Special boundary tokens are added: <code>[CLS] unbelievable ri ##zz ##lord scenes ! [SEP]</code>, with IDs <code>101 23653 15544 13213 19980 5019 999 102</code></p></div>
+</div>

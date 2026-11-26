@@ -1,7 +1,8 @@
 """Unit tests for the Markdown build (tools/markdown/build_md.py and book.lua).
 
 The full round trip, with every generator and companion page, is
-tools/markdown/pilot.py; these tests pin the individual conventions.
+tools/markdown/pilot.py --book book; these tests pin the individual conventions,
+the navigation rules, and that book/ matches a fresh conversion of the live HTML.
 Requires pandoc.
 """
 import html
@@ -126,6 +127,85 @@ class FilterTests(unittest.TestCase):
         self.assertIn('<span id="old" class="legacy-anchor"></span>', out)
         self.assertIn("<var>d</var>", out)
         self.assertIn('<em class="verdict">no</em>', out)
+
+
+class Phase4ConventionTests(unittest.TestCase):
+    def test_table_options(self):
+        out = body('::: {.table table-class="token-comparison" scope="both"}\n| A | B |\n|---|---|\n| x | y |\n\n: Cap.\n:::\n')
+        self.assertIn('<div class="table-wrap"><table class="token-comparison">', out)
+        self.assertIn('<th scope="col">A</th>', out)
+        self.assertIn('<tr><th scope="row">x</th><td>y</td></tr>', out)
+
+    def test_query_flow_track(self):
+        out = body(':::: {.figure .query-flow key="q"}\nT\n\n::: {.track .five-step}\n- **One** first\n- **Two** second\n:::\n\n'
+                   '::: caption\nC\n:::\n::::\n')
+        self.assertIn('<figure class="query-flow" aria-labelledby="q-title">', out)
+        self.assertIn('<div class="query-flow-track five-step">\n<div class="query-flow-step"><strong>One</strong>'
+                      '<span>first</span></div>\n<span class="query-flow-arrow" aria-hidden="true">→</span>\n', out)
+
+    def test_divs_are_never_sections(self):
+        out = body("::: {.terminology-overlap}\n#### Head\n\nText.\n:::\n")
+        self.assertIn('<div class="terminology-overlap">', out)
+        self.assertNotIn("<section", out)
+
+    def test_list_items_with_ids_and_start(self):
+        out = body("3. []{#q3 .li-id}**Three?**\n\n    More.\n\n4. []{#q4 .li-id}Four.\n")
+        self.assertIn('<ol start="3">\n<li id="q3">', out)
+        self.assertIn('<li id="q4">', out)
+        self.assertNotIn("li-id", out)
+
+    def test_line_breaks_and_adjacent_anchors_add_no_space(self):
+        out = body("Line one\\\nline two.\n\n::: {#a .legacy-anchor}\n:::\n\n::: {#b .legacy-anchor}\n:::\n\n### H {#h}\n")
+        self.assertIn("Line one<br>line two.", out)
+        # No whitespace between the spans (inline); a newline before the block-level h3 is harmless.
+        self.assertIn('<span id="a" class="legacy-anchor"></span><span id="b" class="legacy-anchor"></span>\n<h3 id="h">', out)
+
+    def test_display_maths_keeps_its_own_line_breaks(self):
+        self.assertIn("$$a+b$$", body("::: math\n$$a+b$$\n:::\n"))
+        self.assertIn('<div class="math">$$\na\n$$</div>', body('::: {.math tag="div"}\n$$\na\n$$\n:::\n'))
+
+    def test_aside_label_id_and_paragraph_tag(self):
+        out = body('::: {.common-confusion label="Key distinction" label-class="key-distinction-label" label-id="d"}\nX.\n:::\n')
+        self.assertIn('<p class="key-distinction-label" id="d">Key distinction</p>', out)
+        self.assertEqual(body('::: {.practice-callout tag="p"}\nTry it.\n:::\n').strip(), '<p class="practice-callout">Try it.</p>')
+
+    def test_plain_space_before_backlink(self):
+        _, notes = build("---\nkind: fragment\n---\n\nT.[^n]\n\n[^n]: Text.[]{.backref-space}\n")
+        self.assertIn('Text. <a class="footnote-backref"', notes)
+
+
+class AssemblyTests(unittest.TestCase):
+    def rec(self, kind, href, title, nav="both", **extra):
+        return {"kind": kind, "href": href, "title": title, "nav": nav, "source": href, **extra}
+
+    def test_navigation_rules(self):
+        parts = [(f"<s>{b.NAV_PLACEHOLDER}</s>" if r["nav"] == "both" else "<s></s>", "", r) for r in [
+            self.rec("chapter", "c1", "First"),
+            self.rec("exercise", "exercise1", "Application exercise I — Long title"),
+            self.rec("backsection", "ask", "What you can now ask"),
+            self.rec("part", "backmatter", "Appendices and references", nav="target"),
+            self.rec("appendix", "app-a", "The Transformer", eyebrow="Appendix A"),
+            self.rec("appendix", "app-b", "Second: subtitle", eyebrow="Appendix B"),
+            self.rec("glossary", "glossary", "Complete glossary of terms", nav="target"),
+        ]]
+        out = b.assemble(parts, b.BODY_PLACEHOLDER)
+        self.assertIn('href="#exercise1"><span>Next</span>Application exercise I</a>', out)
+        self.assertIn('href="#backmatter"><span>Next</span>Appendices and references</a>', out)
+        # An appendix's previous link skips the target-only divider.
+        self.assertIn('<nav class="chapter-nav" aria-label="Appendix navigation"><a class="cnav prev" href="#ask">'
+                      '<span>Previous</span>What you can now ask</a>', out)
+        self.assertIn('<span>Next appendix</span>Appendix B · Second: subtitle</a>', out)
+        self.assertIn('<span>Previous appendix</span>Appendix A · The Transformer</a>', out)
+        self.assertIn('href="#glossary"><span>Next</span>Complete glossary of terms</a>', out)
+
+    def test_footnotes_section_follows_the_body(self):
+        out = b.assemble([("<p>x</p>", '<li id="fn:a">\n<p>A</p>\n</li>', {"kind": "fragment", "nav": "none"})],
+                         "<article>" + b.BODY_PLACEHOLDER + "</article>")
+        self.assertTrue(out.endswith('<section class="footnotes">\n<hr>\n<ol>\n<li id="fn:a">\n<p>A</p>\n</li>\n</ol>\n</section></article>'))
+
+    def test_committed_sources_are_current(self):
+        stale = html_to_md.check_book(ROOT / "book")
+        self.assertEqual(stale, [], "book/ is stale; run python tools/markdown/html_to_md.py --book book")
 
 
 class ConverterTests(unittest.TestCase):

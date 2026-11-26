@@ -1,0 +1,29 @@
+<div class="ir-grid">
+<section class="ir-panel" aria-label="Term dictionary">
+<span class="ir-panel-title">1 · Dictionary lookup</span>
+<div class="dictionary-row"><span class="term-chip term-delulu">delulu</span><output>df=2 · IDF=.693</output></div>
+<div class="dictionary-row"><span class="term-chip term-job">job</span><output>df=4 · IDF=.105</output></div>
+<div class="dictionary-row"><span class="term-chip term-interview">interview</span><output>df=2 · IDF=.693</output></div>
+</section>
+<section class="ir-panel" aria-label="Posting lists">
+<span class="ir-panel-title">2 · Follow pointers to postings</span>
+<div class="posting-row"><span class="posting-label term-delulu">delulu</span><div class="posting-track"><span class="posting-node">D1 · tf=1</span><span class="posting-arrow" aria-hidden="true">→</span><span class="posting-node">D4 · tf=1</span></div></div>
+<div class="posting-row"><span class="posting-label term-job">job</span><div class="posting-track"><span class="posting-node">D1 · tf=1</span><span class="posting-arrow" aria-hidden="true">→</span><span class="posting-node">D2 · tf=1</span><span class="posting-arrow" aria-hidden="true">→</span><span class="posting-node">D3 · tf=1</span><span class="posting-arrow" aria-hidden="true">→</span><span class="posting-node">D4 · tf=1</span></div></div>
+<div class="posting-row"><span class="posting-label term-interview">interview</span><div class="posting-track"><span class="posting-node">D1 · tf=1</span><span class="posting-arrow" aria-hidden="true">→</span><span class="posting-node">D2 · tf=1</span></div></div>
+</section>
+<section class="ir-panel" aria-label="Document metadata">
+<span class="ir-panel-title">3 · Read scoring metadata</span>
+<dl class="metadata-list">
+<dt>D1</dt><dd>length 4</dd>
+<dt>D2</dt><dd>length 4</dd>
+<dt>D3</dt><dd>length 3</dd>
+<dt>D4</dt><dd>length 5</dd>
+<dt>Collection</dt><dd><em>N</em>=4; average length=4</dd>
+</dl>
+</section>
+</div>
+<div class="storage-strip" aria-label="Three distinct physical index techniques">
+<div class="storage-step"><strong>Gap compression saves space</strong><code>D1, D4 → 1, +3</code></div>
+<div class="storage-step"><strong>Skip data jumps ahead</strong><code>D1 ⇢ D4</code></div>
+<div class="storage-step"><strong>Blocks group postings</strong><code>[D1 D2] [D3 D4]</code></div>
+</div>

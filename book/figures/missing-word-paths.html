@@ -1,0 +1,7 @@
+<p class="worked-note">Each panel is a possible mechanism, not a diagnosis of a named product.</p>
+<div class="worked-grid">
+<div class="worked-card"><strong>1 · Removed during analysis</strong><p>You type: <code>the job interview</code></p><p class="worked-arrow" aria-hidden="true">↓</p><p>Stop-word handling removes <code>the</code>.</p><p class="worked-result">Retrieval receives: <code>job interview</code></p></div>
+<div class="worked-card"><strong>2 · Changed during rewriting</strong><p>You type: <code>delulu job expectations</code></p><p class="worked-arrow" aria-hidden="true">↓</p><p>A rewrite replaces <code>delulu</code> with <code>unrealistic</code>.</p><p class="worked-result">Retrieval receives: <code>unrealistic job expectations</code></p></div>
+<div class="worked-card"><strong>3 · Retained but optional</strong><p>Retrieval receives: <code>delulu job interview</code></p><p class="worked-arrow" aria-hidden="true">↓</p><p>An any-match rule admits a record matching <code>job interview</code>.</p><p class="worked-result">No <code>delulu</code> match is required.</p><p class="worked-note">An optional term may also have no posting list anywhere in the index.</p></div>
+<div class="worked-card"><strong>4 · Matched outside the excerpt</strong><p>Visible title: <code>Job interview expectations</code></p><p class="worked-arrow" aria-hidden="true">↓</p><p>Indexed abstract: “We examine <span class="worked-term">delulu</span> expectations.”</p><p class="worked-result">The term matched; the snippet did not show it.</p></div>
+</div>

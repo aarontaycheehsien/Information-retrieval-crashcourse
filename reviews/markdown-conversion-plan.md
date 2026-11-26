@@ -177,3 +177,43 @@ none of them needs rewriting at the start.
 - **`book/` status.** `book/02-boolean-admission.md` and
   `book/03-bm25-ranking.md` are pilot outputs. Until the phase 4 freeze, the
   HTML stays the source and these files are regenerated, not edited.
+
+## Phase 4 status (2026-11-26)
+
+- **Whole book converted.** `book/` holds 40 ordered source files (39
+  Markdown, plus an empty claims-register marker), `template.html` and 33
+  diagram files. These replace the phase 3 pilot files. They are produced by
+  `python tools/markdown/html_to_md.py --book book`.
+- **Exit criterion met.** `python tools/markdown/pilot.py --book book` builds
+  the whole page from those sources alone, with nothing kept from the live
+  article, and runs the generators until they settle (three rounds).
+  - The book, and every root HTML page after the companion builders, are
+    equivalent to the live files.
+  - The build matches the phase 1 baseline (`a740bd2`). The live book is
+    unchanged since.
+  - All 19 generator, check and test runs match the control copy.
+- **Derived rather than hand-written:**
+  - all 27 navigation bars, using the rules in the mapping;
+  - all 15 stage maps but one;
+  - both tables of contents and the asset indexes (`maintain.py`);
+  - the footnotes list, the glossary wrappers and lookup, and the claims
+    register and links (existing generators).
+- **Raw HTML:** 0.7% of source characters inline, in five blocks listed in
+  the spec, plus 9.6% in the diagram files. This is down from 54 inline blocks
+  at the start of the phase, and well under the 25% threshold.
+- **Faults found and fixed during the phase:** Pandoc's div-to-section
+  conversion, line breaks and joined raw blocks adding spaces, display maths
+  reformatting, table labels separated from their tables by generated links,
+  and lost list start numbers. Each now has a unit test (25 in
+  `tools/test-markdown-build.py`).
+- **Freeze, revised.** The plan froze HTML edits from phase 4 to cut-over.
+  That is not needed yet, because conversion is repeatable:
+  - keep editing `search-textbook.html` and rerun the conversion;
+  - `python tools/markdown/html_to_md.py --check book` and the unit tests
+    report when `book/` has fallen behind;
+  - freeze only for the cut-over commit itself, then re-record the baseline.
+- **Not done:**
+  - the build still runs in a scratch copy (making it the in-place build is
+    phase 5);
+  - EPUB/PDF (phase 7);
+  - the annotation-editor decision (phase 6).

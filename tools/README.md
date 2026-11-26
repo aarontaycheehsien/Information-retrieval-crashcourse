@@ -65,22 +65,27 @@ python tools/markdown_mapping.py [--json]
 python tools/test-markdown-mapping.py
 ```
 
-### Markdown build and pilot (phase 3)
+### Markdown build and round trip (phases 3 and 4)
 
 `tools/markdown/` holds the conversion tooling:
 
-- `html_to_md.py` converts one book section into `book/*.md`, and the bodies
-  of bespoke diagrams into `book/figures/`. It warns about anything kept as
-  raw HTML.
-- `build_md.py` and `book.lua` build Markdown back into book HTML using
-  Pandoc 3.1.
-- `pilot.py` splices built chapters into two ignored copies of the repository
-  (control and pilot) under `outputs/markdown-conversion/`, runs every
-  generator, check and test in both, and requires the book and all root pages
-  to be equivalent to the live files. A run takes about a minute.
+- `html_to_md.py --book book` converts the whole book into `book/`: one file
+  per top-level part, the page template, and the bodies of bespoke diagrams in
+  `book/figures/`. It warns about anything kept as raw HTML. `--check book`
+  reports whether `book/` is stale against the live HTML.
+- `build_md.py` and `book.lua` build Markdown back into book HTML with
+  Pandoc 3.1, derive navigation and footnotes, and run the generators until
+  they settle.
+- `pilot.py --book book` builds the whole page from `book/` into an ignored
+  copy of the repository under `outputs/markdown-conversion/`. It runs every
+  generator, check and test there and in an unchanged control copy, and
+  requires the book and all root pages to be equivalent to the live files. A
+  run takes about a minute. Passing chapter files instead of `--book` splices
+  just those chapters.
 
 ```bash
-python tools/markdown/pilot.py book/02-boolean-admission.md book/03-bm25-ranking.md
+python tools/markdown/html_to_md.py --check book
+python tools/markdown/pilot.py --book book
 python tools/test-markdown-build.py
 ```
 
