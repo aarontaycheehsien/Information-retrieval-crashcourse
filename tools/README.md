@@ -65,6 +65,28 @@ python tools/markdown_mapping.py [--json]
 python tools/test-markdown-mapping.py
 ```
 
+### Markdown build and pilot (phase 3)
+
+`tools/markdown/` holds the conversion tooling:
+
+- `html_to_md.py` converts one book section into `book/*.md`, and the bodies
+  of bespoke diagrams into `book/figures/`. It warns about anything kept as
+  raw HTML.
+- `build_md.py` and `book.lua` build Markdown back into book HTML using
+  Pandoc 3.1.
+- `pilot.py` splices built chapters into two ignored copies of the repository
+  (control and pilot) under `outputs/markdown-conversion/`, runs every
+  generator, check and test in both, and requires the book and all root pages
+  to be equivalent to the live files. A run takes about a minute.
+
+```bash
+python tools/markdown/pilot.py book/02-boolean-admission.md book/03-bm25-ranking.md
+python tools/test-markdown-build.py
+```
+
+`data/stage-map.json` holds the chapter-header pipeline map that the build
+renders. The live HTML is still the source; see `book/README.md`.
+
 ## Read-this-first digest
 
 `read-this-first.html` is generated, not a separately authored edition. Run:

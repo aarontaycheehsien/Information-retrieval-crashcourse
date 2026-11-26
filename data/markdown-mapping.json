@@ -36,7 +36,7 @@
       "id": "chapter-section",
       "status": "derived",
       "classes": ["chapter", "appendix", "backsection", "chapter-head", "chapter-eyebrow", "chapter-meta", "chapter-question"],
-      "markdown": "One file per chapter. Front matter: key (sec-KEY / h2 id), kind (chapter|appendix|backsection|front), eyebrow, meta (\"About 17 min\"), question, stages, legacy_anchors. Body starts with `## Title {#KEY}`.",
+      "markdown": "One file per chapter. YAML front matter: key, kind (chapter|appendix|backsection), eyebrow, meta, question, legacy_anchors (those before the header). Body starts with `## Title {#KEY}`; a stage-map marker and ::: chapter-orient may follow and are placed inside the header.",
       "html": "<section class=\"chapter\" id=\"sec-KEY\"><header class=\"chapter-head\"><p class=\"chapter-eyebrow\">…</p><p class=\"chapter-meta\">…</p><h2 id=\"KEY\">…</h2><p class=\"chapter-question\"><span>Central question</span>…</p>…</header>",
       "notes": "Appendix letters and chapter numbers in the eyebrow stay owned by maintain.py; the front matter value is a starting value it may rewrite."
     },
@@ -65,15 +65,15 @@
       "id": "stage-map",
       "status": "derived",
       "classes": ["stage-map", "stage-controller", "stage-row", "stage", "on", "off", "stage-ch"],
-      "markdown": "Front matter `stages: [analysis]` and optional `controller: on`. Labels, links and tooltips come from data/stage-map.json, written once.",
-      "notes": "16 instances. Phase 3 must confirm every instance matches one template; any that differ stay raw until reconciled deliberately."
+      "markdown": "A one-line block marker, ::: {.stage-map on=\"analysis\" controller=\"on\" label=\"…\"} then :::, after the title (it moves into the header) or wherever the map sits in the body. Labels, links and tooltips come from data/stage-map.json.",
+      "notes": "15 maps. 14 render byte-for-byte from the template (verified in tools/test-markdown-build.py). The Part II map is bespoke and stays raw."
     },
     {
       "id": "chapter-nav",
       "status": "derived",
       "classes": ["chapter-nav", "cnav", "prev", "next"],
       "markdown": "None. Built from file order and each file's title.",
-      "notes": "Currently hand-maintained. 27 navs across chapters and exercises, 26 prev and 27 next, so the first and last cases need explicit rules."
+      "notes": "The default rule (neighbour h2 id and text) reproduces 13 of 20 standard navs. Exercise short titles, appendix labels (Appendix X ·, Previous/Next appendix) and the back-matter link need front-matter overrides (phase 4)."
     },
     {
       "id": "heading",
@@ -87,7 +87,7 @@
       "id": "legacy-anchor",
       "status": "native",
       "classes": ["legacy-anchor"],
-      "markdown": "[]{#old-id .legacy-anchor} where it sits in the body; front matter legacy_anchors for those before the chapter header.",
+      "markdown": "Inline: []{#old-id .legacy-anchor}. Between blocks: an empty div, ::: {#old-id .legacy-anchor} then :::. Before the chapter header: front matter legacy_anchors.",
       "html": "<span id=\"old-id\" class=\"legacy-anchor\"></span>"
     },
     {
@@ -96,7 +96,7 @@
       "classes": ["footnote-ref", "footnote-backref", "footnotes"],
       "markdown": "[^name] in text and [^name]: … in the same file. A build pre-pass keeps the name, because Pandoc's AST drops footnote labels.",
       "html": "<sup id=\"fnref:name\"><a class=\"footnote-ref\" href=\"#fn:name\">N</a></sup>; one <section class=\"footnotes\"> list for the whole book, in document order.",
-      "notes": "Numbering in document order replaces tools/renumber_footnotes.py."
+      "notes": "The filter writes the reference, the definition and the backlink with number 0; renumber_footnotes.py sets the numbers. Verified on Chapter 3: seven notes, some multi-paragraph, with display maths."
     },
     {
       "id": "figure",
@@ -180,7 +180,7 @@
       "id": "product-claims",
       "status": "generated",
       "classes": ["claim-entry", "claim-id", "claim-status", "claim-links", "claim-coverage", "product-claims-register"],
-      "markdown": "Placeholder comment <!-- PRODUCT CLAIMS LINKS slug --> where a links block belongs; <!-- PRODUCT CLAIMS REGISTER --> for the register. The build expands each to an empty BEGIN/END pair; build-product-claims.py fills it."
+      "markdown": "Nothing. build-product-claims.py removes every LINKS block and re-inserts it after the anchor recorded in data/product-claims.json, so the Markdown needs no placeholder. The register block (BEGIN/END PRODUCT CLAIMS REGISTER) is a template placeholder."
     },
     {
       "id": "glossary",
@@ -231,6 +231,8 @@
     "li": "An item that must carry an id (the 30 vendor questions) starts with []{#vendor-q01 .li-id}; the filter moves the id to the <li>.",
     "dd": "Pandoc emits definitions without <p> for tight lists, matching the book.",
     "title": "Also the SVG <title> element, which is raw.",
-    "sup": "Only footnote references use <sup> in the current book."
+    "sup": "Only footnote references use <sup> in the current book.",
+    "pre": "A fenced code block renders Pandoc's native <pre><code>, which is the book's markup.",
+    "img": "srcset and sizes are derived by the filter when a .960.webp sibling exists; an image whose srcset does not follow the rule carries it explicitly, and srcset=\"none\" suppresses derivation."
   }
 }

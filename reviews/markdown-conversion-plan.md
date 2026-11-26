@@ -134,3 +134,44 @@ none of them needs rewriting at the start.
   front matter and file order (currently hand-maintained), and footnote
   numbering moves into the build. The spec lists nine points phase 3 must
   verify before relying on these.
+
+## Phase 3 status (2026-11-26)
+
+- **Pilot passed for Chapters 2 and 3.** Chapter 3 was added because Chapter 2
+  has no footnotes or maths.
+  - Each chapter was converted with `tools/markdown/html_to_md.py`, rebuilt
+    with Pandoc and `tools/markdown/book.lua`, and spliced into a copy of the
+    repository.
+  - After every generator ran, the book and all 12 root HTML pages were
+    equivalent to the live files.
+  - All 19 generator, check and test runs behaved exactly as on an unchanged
+    copy: `python tools/markdown/pilot.py book/02-boolean-admission.md
+    book/03-bm25-ranking.md`.
+- **Readability.** One sentence per line, native lists, pipe tables,
+  footnotes and `$…$` maths. There are no inline raw-HTML blocks. The four
+  worked diagrams are kept in `book/figures/` (45 lines, against 702 lines of
+  chapter Markdown).
+- **Exit criterion met.**
+- **Faults found in the existing repository:**
+  - `maintain.py` could not run on the live book after `37dc2e3` added
+    `tabindex` to the article tag. Fixed in its own commit; on the current
+    book it then makes no changes.
+  - `maintain.py` still exits 1 on the live book for an existing content
+    problem: "From language model to retrieval encoder: 0 table(s) but 1
+    'Table n.n' label(s)". This is not fixed here, because it is a book
+    content decision.
+- **Phase 4 readiness.** The converter runs on all 23 chapter and appendix
+  sections without errors and leaves 54 blocks as raw HTML with warnings:
+  - 9 query-flow figures;
+  - 11 tables with attributes;
+  - 9 table labels not directly followed by a table;
+  - horizontal rules, `div.orientation`, evidence stacks, three definition
+    lists and two maths wrappers;
+  - appendix section ids (`app-A`, not `sec-KEY`).
+
+  Navigation needs overrides for exercises, appendices and the back-matter
+  link. Back sections, part dividers and the front matter have not been
+  attempted.
+- **`book/` status.** `book/02-boolean-admission.md` and
+  `book/03-bm25-ranking.md` are pilot outputs. Until the phase 4 freeze, the
+  HTML stays the source and these files are regenerated, not edited.

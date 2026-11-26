@@ -39,7 +39,7 @@ data/stage-map.json        stage labels, links and tooltips, written once
 
 Each file starts with YAML front matter: `key`, `kind`
 (chapter|appendix|exercise|backsection|front|part), `eyebrow`, `meta`,
-`question`, `stages`, `legacy_anchors`. File order is book order.
+`question`, `legacy_anchors`. File order is book order.
 
 ## What the author writes
 
@@ -47,7 +47,7 @@ Each file starts with YAML front matter: `key`, `kind`
 |---|---|---|
 | Chapter wrapper, header, eyebrow, reading time, central question | Front matter; body starts `## Title {#key}` | derived |
 | Chapter orientation | `::: chapter-orient` as the first block | filter |
-| Stage map (16) | Front matter `stages:` | derived |
+| Stage map (15) | `::: {.stage-map on="analysis"}` marker, then `:::` | derived |
 | Previous/next navigation (27) | Nothing; from file order | derived |
 | Section heading | `### Title {#id}`; the `#` link is added | filter |
 | Footnote | `[^name]` and `[^name]: text` in the same file | filter, with a pre-pass |
@@ -72,12 +72,13 @@ These are generated, and the Markdown has at most a placeholder:
 - **Tables of contents, figure and table numbers, the figures-and-tables
   index:** `maintain.py`.
 - **Product-claims register, evidence links and coverage:**
-  `build-product-claims.py`. The Markdown holds a placeholder comment,
-  `<!-- PRODUCT CLAIMS LINKS slug -->`.
+  `build-product-claims.py`. The Markdown holds nothing: the builder
+  re-inserts every evidence-links block after its recorded anchor.
 - **Glossary term ids, entry navigation and lookup index:**
   `build-glossary-hub.py`. The Markdown holds the plain definition list.
-- **Footnote numbers:** the build numbers them in document order. This replaces
-  `renumber_footnotes.py`.
+- **Footnote numbers:** the filter writes 0 and `renumber_footnotes.py` sets
+  them, as it does now. (The plan's idea of replacing it is dropped: keeping
+  it costs nothing and keeps one owner for numbering.)
 
 ## Raw HTML
 
@@ -145,3 +146,49 @@ These were checked against Pandoc 3.1.3 on 2026-11-26.
    markup.
 9. **Placeholder positions.** Product-claims links sit inside figures and after
    figcaptions, as well as after headings.
+
+## Phase 3 outcomes (2026-11-26)
+
+Chapters 2 and 3 were converted and rebuilt (see the plan's phase 3 status).
+The nine points above were settled as follows:
+
+1. **Stage maps.** There are 15, not 16. Fourteen render byte for byte from
+   `data/stage-map.json`. The Part II map is bespoke and stays raw. The stage
+   map is a block marker, not front matter, because one map sits in a chapter
+   body rather than its header.
+2. **Previous/next navigation.** The default rule (neighbour heading id and
+   text) reproduces 13 of the 20 standard navigation bars. Exercises use short
+   titles, appendices use `Appendix X ·` and "Previous/Next appendix", and the
+   last chapter links to the back matter. Phase 4 needs a front-matter
+   `nav_title` and appendix handling.
+3. **`maintain.py` placeholders.** It fills `Table 0.0 — ` and `Figure 0.0`
+   labels and adds their ids. Its regular expressions need the book's exact
+   attribute order (class before id) and the `<div class="table-wrap"><table>`
+   adjacency, so the filter writes those strings itself.
+4. **Image `srcset`.** One rule covers the PNGs with a `.960.webp` sibling:
+   commas are percent-encoded in the WebP entry only. The filter derives it
+   only when the WebP file exists. Other images carry explicit attributes, and
+   `srcset="none"` suppresses derivation.
+5. **Figure variants.** Covered by `title-id`, `aria-labelledby`, `tag` and
+   `role` attributes and a caption id. Not yet exercised by a converted
+   chapter.
+6. **Maths whitespace.** The book stores MathJax delimiters as text. The
+   converter turns them into Pandoc maths, and the filter writes them back with
+   the same surrounding newlines.
+7. **Footnote markup.** Reference, definition and backlink reproduced, with a
+   no-break space before the backlink. Verified on Chapter 3's seven notes.
+8. **Heading link labels.** `aria-label` is the heading's plain text. The
+   book's two headings with emphasis (Chapter 7's top-*k* headings) follow the
+   same rule. That is checked by a unit test, not yet by a converted chapter.
+9. **Placeholder positions.** Not needed (see "What the author never
+   writes").
+
+Further findings:
+
+- **`<pre>` already contains `<code>` in the book**, which is Pandoc's native
+  output, so no override is needed.
+- **The read-this-first digest copies excerpts byte for byte.** Rebuilt HTML
+  has different whitespace, so the digest must be regenerated after every book
+  build. The regenerated digest is equivalent to the live one.
+- **Generated claims blocks can sit inside a figure.** The converter excludes
+  them from raw islands, or the builder would add a second copy.
