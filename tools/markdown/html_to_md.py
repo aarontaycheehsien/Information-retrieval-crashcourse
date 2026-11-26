@@ -912,7 +912,7 @@ def check_book(book_dir: Path):
         convert_book(Path(tmp))
         fresh = {p.relative_to(tmp): p.read_bytes() for p in Path(tmp).rglob("*") if p.is_file()}
         current = {p.relative_to(book_dir): p.read_bytes() for p in book_dir.rglob("*")
-                   if p.is_file() and p.name != "README.md"}
+                   if p.is_file() and p.name not in ("README.md", "book.json")}
     return sorted(str(k) for k in set(fresh) | set(current) if fresh.get(k) != current.get(k))
 
 

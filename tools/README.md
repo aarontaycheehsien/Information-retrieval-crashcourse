@@ -65,6 +65,28 @@ python tools/markdown_mapping.py [--json]
 python tools/test-markdown-mapping.py
 ```
 
+### Building the book from Markdown (phase 5)
+
+`build-book.py` is the one command that produces the published page from
+`book/`. It builds each file with Pandoc and the book filter, assembles the
+template, derives navigation and footnotes, runs `maintain.py`,
+`renumber_footnotes.py` and the claims and glossary builders until a whole round
+changes nothing, then rebuilds the digest and the vendor questionnaire.
+
+```bash
+python tools/build-book.py --check     # build in a scratch copy, compare every root page
+python tools/build-book.py --out DIR   # build into a copy of the repository
+python tools/build-book.py             # build in place (refused until cut-over)
+python tools/test-build-book.py        # check, refusal and determinism (about 20 s)
+```
+
+`book/book.json` records the source of truth. While it says `"html"`, the
+in-place build is refused so that hand edits to `search-textbook.html` are never
+overwritten; regenerate `book/` with `html_to_md.py --book book` instead. After
+cut-over it says `"markdown"`, and `--check` then also requires byte-identical
+pages, so a stale committed build fails. Builds are deterministic: two builds
+give identical bytes.
+
 ### Markdown build and round trip (phases 3 and 4)
 
 `tools/markdown/` holds the conversion tooling:

@@ -8,8 +8,12 @@ regenerated from it, not edited**:
 ```bash
 python tools/markdown/html_to_md.py --book book     # regenerate after editing the HTML
 python tools/markdown/html_to_md.py --check book    # is book/ stale?
-python tools/markdown/pilot.py --book book          # build from book/ and compare (about a minute)
+python tools/build-book.py --check                  # build from book/ and compare (about 10 s)
+python tools/markdown/pilot.py --book book          # same, plus every generator, check and test (about a minute)
 ```
+
+`book.json` records that the HTML is still the source of truth, so
+`tools/build-book.py` refuses to build in place until cut-over.
 
 - `NN-*.md`: one file per top-level part of the article, in book order. The
   front matter says what kind it is (chapter, appendix, exercise, part,

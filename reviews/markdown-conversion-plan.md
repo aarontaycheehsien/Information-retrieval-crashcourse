@@ -217,3 +217,42 @@ none of them needs rewriting at the start.
     phase 5);
   - EPUB/PDF (phase 7);
   - the annotation-editor decision (phase 6).
+
+## Phase 5 status (2026-11-26)
+
+- **`python tools/build-book.py` is the single build command.** It builds
+  `book/`, runs the generators until they settle, and rebuilds the digest and
+  vendor questionnaire. It has three modes:
+  - `--check` builds in a scratch copy and compares every root page; it takes
+    about 8 seconds;
+  - `--out DIR` builds into a copy of the repository;
+  - with no option it builds in place.
+- **The in-place build is refused** while `book/book.json` says
+  `"source_of_truth": "html"`, so it cannot overwrite hand edits that `book/`
+  lacks.
+- **Exit criterion met.** One command reproduces the published page:
+  - `--check` passes;
+  - 10 of 12 pages are byte-identical, and `search-textbook.html` and
+    `read-this-first.html` are equivalent (reformatted).
+- **Deterministic and idempotent.** Two builds are byte-identical on all 12
+  pages. Rehearsed in a scratch copy with the source set to `"markdown"`:
+  - the strict byte-level `--check` passes;
+  - an in-place rebuild changes nothing;
+  - an unbuilt Markdown edit makes `--check` fail.
+- **Existing tests:**
+  - **Python suites:** all pass in the pilot (digest, glossary, claims,
+    questionnaire, equivalence, mapping, build). The four new
+    `tools/test-build-book.py` tests pass.
+  - **The 11 Node checks** (six browser checks, three lab tests, two
+    annotation suites) give identical passing results on the live repository
+    and on the built copy. They were run with Chromium in place of Edge,
+    because these scripts hard-code `channel: 'msedge'` and Edge is not
+    installed here. The repository's scripts were not changed.
+  - **Fault found in the existing repository:** `tools/test-evaluation-kit.py`
+    fails on the live repository as well as the built one. It expects three
+    links to `evaluation-kit.html` in the book, and commit `37dc2e3` added a
+    fourth. Not changed here.
+- **Not done:** the cut-over itself (phase 6): set the source of truth to
+  `"markdown"`, commit a fresh in-place build, update `README.md`,
+  `tools/README.md` and `AGENTS.md`, decide on the annotation editor, and
+  re-record the baseline.

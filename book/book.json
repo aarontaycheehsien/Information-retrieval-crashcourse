@@ -1,0 +1,4 @@
+{
+  "source_of_truth": "html",
+  "note": "Set to \"markdown\" at cut-over (phase 6). While \"html\", tools/build-book.py refuses to build in place; regenerate book/ with tools/markdown/html_to_md.py --book book."
+}
