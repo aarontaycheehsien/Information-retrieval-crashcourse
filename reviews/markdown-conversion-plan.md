@@ -118,3 +118,19 @@ none of them needs rewriting at the start.
 - The baseline must be re-recorded at the phase 4 freeze, because prose edits
   will continue until then. Re-record only on purpose:
   `python tools/html_equivalence.py --record-baseline`.
+
+## Phase 2 status (2026-11-26)
+
+- Mapping in `data/markdown-mapping.json` (30 constructs covering all 191
+  classes and 76 element types) and explained in
+  [`markdown-mapping-spec.md`](markdown-mapping-spec.md).
+- `tools/markdown_mapping.py` checks the mapping is complete and not stale,
+  and measures the raw-HTML share: 3.7% of authored words, 14.1% of authored
+  elements, both under the 25% stop threshold.
+  `tools/test-markdown-mapping.py` (7 tests) guards completeness, staleness,
+  duplicates and the threshold.
+- Exit criterion met: every surveyed class has a mapping or is marked raw.
+- New in the conversion: stage maps and chapter navigation become derived from
+  front matter and file order (currently hand-maintained), and footnote
+  numbering moves into the build. The spec lists nine points phase 3 must
+  verify before relying on these.

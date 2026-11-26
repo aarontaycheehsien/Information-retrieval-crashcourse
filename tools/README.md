@@ -51,6 +51,20 @@ the readable snapshot goes to ignored `outputs/markdown-conversion/`. Exit
 status is 0 equivalent, 1 different, 2 error. Re-record the baseline only
 deliberately, at the phase 4 freeze. Standard library only.
 
+### Markdown mapping
+
+Phase 2. `data/markdown-mapping.json` maps every class and element in the book
+to its Markdown construct and status (native, filter, derived, generated,
+template, raw); [`reviews/markdown-mapping-spec.md`](../reviews/markdown-mapping-spec.md)
+explains it. `markdown_mapping.py` fails on unmapped, duplicated or stale
+entries and reports the raw-HTML share against the plan's 25% threshold. Add a
+mapping whenever a new class enters the book.
+
+```bash
+python tools/markdown_mapping.py [--json]
+python tools/test-markdown-mapping.py
+```
+
 ## Read-this-first digest
 
 `read-this-first.html` is generated, not a separately authored edition. Run:
