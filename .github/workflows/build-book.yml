@@ -13,7 +13,6 @@ name: Build book
 on:
   push:
     branches: [main]
-    paths: ["book/**", "data/**", "tools/**", "images/**", "assets/**", "downloads/**", "*.html", ".github/workflows/build-book.yml"]
   pull_request:
     paths: ["book/**", "data/**", "tools/**", "images/**", "assets/**", "downloads/**", "*.html", ".github/workflows/build-book.yml"]
   workflow_dispatch:

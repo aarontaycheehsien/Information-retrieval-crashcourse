@@ -95,7 +95,7 @@ edited without Pandoc installed, including in GitHub's web editor.
 
 - **Pull requests:** commit rendered changes with the Markdown. The workflow
   runs `build-book.py --check` and the build and generator tests.
-- **Pushes to `main` that change `book/`, `data/` or `tools/`:**
+- **Every push to `main`:**
   `tools/markdown/ci-build.sh` rebuilds the pages and the workflow commits them
   back to `main` as `github-actions[bot]` after the tests pass. The tests also
   run when the pages already match, including on changes to companion downloads.

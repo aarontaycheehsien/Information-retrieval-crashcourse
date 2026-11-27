@@ -87,8 +87,8 @@ def main(argv=None) -> int:
     mode.add_argument("--check", action="store_true", help="build in a scratch copy and compare with the committed pages")
     mode.add_argument("--out", type=Path, help="build into a new or empty directory")
     args = parser.parse_args(argv)
-    truth = source_of_truth()
     try:
+        truth = source_of_truth()
         if args.check:
             with tempfile.TemporaryDirectory() as tmp:
                 work = Path(tmp) / "repo"
@@ -123,10 +123,16 @@ def main(argv=None) -> int:
         result = build_md.build_book(BOOK_DIR, ROOT)
         print(f"Built {result['files']} source files in place; generators settled in {result['rounds']} round(s).")
         return 0
-    except (build_md.BuildError, OSError) as exc:
+    except (build_md.BuildError, eq.EquivalenceError, OSError, ValueError, KeyError) as exc:
         print(f"build error: {exc}", file=sys.stderr)
         return 2
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except Exception:
+        # Exit 1 is reserved for a completed comparison that found stale pages.
+        import traceback
+        traceback.print_exc()
+        sys.exit(2)
