@@ -18,7 +18,8 @@ set -euo pipefail
 
 PY="${PYTHON:-python}"
 BUILT=(search-textbook.html read-this-first.html vendor-questionnaire.html)
-WRITABLE='^ M (search-textbook|read-this-first|vendor-questionnaire|teaching-notes)\.html$'
+# A manual rebuild can recreate a missing generated page as an untracked file.
+WRITABLE='^( M|\?\?) (search-textbook|read-this-first|vendor-questionnaire|teaching-notes)\.html$'
 before="${1:-}"
 output() { if [ -n "${GITHUB_OUTPUT:-}" ]; then echo "changed=$1" >> "$GITHUB_OUTPUT"; fi; }
 
@@ -30,10 +31,17 @@ if [ "$truth" != "markdown" ]; then
 fi
 
 log=$(mktemp)
+trap 'rm -f "$log"' EXIT
 if "$PY" tools/build-book.py --check > "$log" 2>&1; then
   echo "The committed pages already match a fresh build of book/."
   output false
   exit 0
+else
+  status=$?
+  if (( status != 1 )); then
+    cat "$log" >&2
+    exit "$status"
+  fi
 fi
 
 # A commit that is no longer in the history (after a force push) cannot be

@@ -20,7 +20,9 @@ import html
 import json
 import os
 import re
+import string
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -30,6 +32,8 @@ STAGE_MAP = ROOT / "data" / "stage-map.json"
 READER = "markdown-smart-auto_identifiers-implicit_figures-citations-raw_tex"
 
 FOOTNOTE_DEF = re.compile(r"^\[\^([A-Za-z0-9_:.-]+)\]:[ \t]*", re.M)
+FOOTNOTE_LABEL = re.compile(r"\[\^([A-Za-z0-9_:.-]+)\]")
+FOOTNOTE_ITEM = re.compile(r'<li id="fn:([^"]+)">')
 STAGE_PLACEHOLDER = re.compile(r'<!-- STAGE MAP on="([^"]*)" controller="([^"]*)" label="([^"]*)" -->')
 
 
@@ -42,15 +46,33 @@ def prepass(text: str) -> str:
     return FOOTNOTE_DEF.sub(lambda m: f"[^{m[1]}]: []{{.fn-name name={m[1]}}}", text)
 
 
-def pandoc(text: str, book_dir: Path = BOOK_DIR) -> str:
+def pandoc(text: str, book_dir: Path = BOOK_DIR, *, check_duplicate_notes: bool = True) -> str:
     env = dict(os.environ, BOOK_DIR=str(book_dir), ROOT_DIR=str(ROOT))
     result = subprocess.run(
         ["pandoc", "-f", READER, "-t", "html5", "--wrap=none", "--lua-filter", str(FILTER)],
         input=text, capture_output=True, text=True, encoding="utf-8", env=env,
     )
-    if result.returncode != 0:
+    if result.returncode or (check_duplicate_notes and "[WARNING] Duplicate note reference " in result.stderr):
         raise BuildError(result.stderr.strip())
     return result.stdout
+
+
+def render_markdown(text: str, book_dir: Path) -> str:
+    marked = prepass(text)
+    rendered = pandoc(marked, book_dir)
+    # Pandoc leaves an undefined reference as ordinary text. Supply trial definitions
+    # for unresolved labels and let the reader distinguish references from literal
+    # examples in code, escaped brackets, or raw HTML.
+    candidates = set(FOOTNOTE_LABEL.findall(text)) - set(FOOTNOTE_ITEM.findall(rendered))
+    if candidates:
+        definitions = "\n\n".join(f"[^{name}]: ." for name in sorted(candidates))
+        # A trial definition may duplicate an unused one. The original parse above
+        # already checked authored definitions for duplicates.
+        trial = pandoc(marked + "\n\n" + prepass(definitions) + "\n", book_dir, check_duplicate_notes=False)
+        missing = candidates.intersection(FOOTNOTE_ITEM.findall(trial))
+        if missing:
+            raise BuildError("undefined footnote: " + ", ".join(f"[^{n}]" for n in sorted(missing)))
+    return rendered
 
 
 def load_stage_map() -> dict:
@@ -101,7 +123,10 @@ def build_file_with_record(path: Path, book_dir: Path = BOOK_DIR) -> tuple[str, 
     text = path.read_text(encoding="utf-8")
     if path.suffix == ".html":
         return text.rstrip("\n") + "\n", "", {"kind": "html", "nav": "none"}
-    html_out = postpass(pandoc(prepass(text), book_dir))
+    try:
+        html_out = postpass(render_markdown(text, book_dir))
+    except BuildError as exc:
+        raise BuildError(f"{path}: {exc}") from exc
     record = FILE_RECORD.search(html_out)
     if not record:
         raise BuildError(f"{path}: the filter wrote no file record")
@@ -186,6 +211,10 @@ def assemble(parts: list[tuple[str, str, dict]], template: str) -> str:
     """Join built files in order, derive navigation, append the footnotes."""
     # "both": has a bar and is linked to; "target": linked to only as the
     # next item (the back-matter divider, the glossary), never as previous.
+    letters = iter(string.ascii_uppercase)
+    for _, _, rec in parts:
+        if rec["kind"] == "appendix":
+            rec["eyebrow"] = "Appendix " + next(letters)
     sequence = [rec for _, _, rec in parts if rec["nav"] in ("both", "target")]
     bodies = []
     for html_body, _, rec in parts:
@@ -239,12 +268,17 @@ def source_files(book_dir: Path = BOOK_DIR) -> list[Path]:
     return files
 
 
+def run_python(cmd: list[str], repo: Path) -> subprocess.CompletedProcess:
+    env = dict(os.environ, PYTHONUTF8="1", PYTHONIOENCODING="utf-8")
+    return subprocess.run([sys.executable, *cmd], cwd=repo, env=env,
+                          capture_output=True, encoding="utf-8")
+
+
 def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) -> dict:
     """Build repo/search-textbook.html from book_dir, then run the generators
     until a whole round changes nothing, then rebuild the companion pages.
 
     repo is normally a scratch copy of the repository until cut-over."""
-    import sys
     template = (book_dir / "template.html").read_text(encoding="utf-8")
     parts = [build_file_with_record(p, book_dir) for p in source_files(book_dir)]
     target = Path(repo) / "search-textbook.html"
@@ -253,7 +287,7 @@ def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) ->
     for round_no in range(1, passes + 1):
         before = target.read_bytes()
         for cmd in GENERATOR_PASSES:
-            r = subprocess.run([sys.executable, *cmd], cwd=repo, capture_output=True, text=True)
+            r = run_python(cmd, repo)
             log.append((round_no, " ".join(cmd), r.returncode, (r.stdout + r.stderr).strip()))
             if r.returncode and cmd[0] != "tools/maintain.py":
                 raise BuildError(f"{' '.join(cmd)} failed:\n{(r.stdout + r.stderr).strip()}")
@@ -269,7 +303,7 @@ def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) ->
         raise BuildError(f"maintain.py still reports problems after settling:\n{final[-1][3]}")
     normalise_newlines(repo)
     for cmd in COMPANION_BUILDERS:
-        r = subprocess.run([sys.executable, *cmd], cwd=repo, capture_output=True, text=True)
+        r = run_python(cmd, repo)
         log.append(("companion", " ".join(cmd), r.returncode, (r.stdout + r.stderr).strip()))
         if r.returncode:
             raise BuildError(f"{' '.join(cmd)} failed:\n{(r.stdout + r.stderr).strip()}")

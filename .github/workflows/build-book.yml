@@ -13,7 +13,6 @@ name: Build book
 on:
   push:
     branches: [main]
-    paths: ["book/**", "data/**", "tools/**", "images/**", "assets/**", "downloads/**", "*.html", ".github/workflows/build-book.yml"]
   pull_request:
     paths: ["book/**", "data/**", "tools/**", "images/**", "assets/**", "downloads/**", "*.html", ".github/workflows/build-book.yml"]
   workflow_dispatch:
@@ -81,7 +80,6 @@ jobs:
         id: build
         run: bash tools/markdown/ci-build.sh "${{ github.event.before }}"
       - name: Tests
-        if: steps.build.outputs.changed == 'true'
         run: |
           for t in test-markdown-build test-build-book test-html-equivalence test-markdown-mapping \
                    test-product-claims test-glossary-hub test-digest test-vendor-questionnaire \

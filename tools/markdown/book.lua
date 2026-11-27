@@ -114,9 +114,10 @@ local function Blocks(blocks)
 end
 
 local function Math(m)
-  if m.mathtype == 'InlineMath' then return rawi('\\(' .. m.text .. '\\)') end
+  local text = m.text:gsub('&', '&amp;'):gsub('<', '&lt;')
+  if m.mathtype == 'InlineMath' then return rawi('\\(' .. text .. '\\)') end
   -- Pandoc keeps the line breaks inside display maths, so write them as given.
-  return rawi('$$' .. m.text .. '$$')
+  return rawi('$$' .. text .. '$$')
 end
 
 ------------------------------------------------------------------------
