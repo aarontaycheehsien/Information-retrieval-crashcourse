@@ -206,8 +206,8 @@ class AssemblyTests(unittest.TestCase):
             self.rec("exercise", "exercise1", "Application exercise I — Long title"),
             self.rec("backsection", "ask", "What you can now ask"),
             self.rec("part", "backmatter", "Appendices and references", nav="target"),
-            self.rec("appendix", "app-a", "The Transformer", eyebrow="Appendix A"),
-            self.rec("appendix", "app-b", "Second: subtitle", eyebrow="Appendix B"),
+            self.rec("appendix", "app-a", "The Transformer", eyebrow="Appendix B"),
+            self.rec("appendix", "app-b", "Second: subtitle", eyebrow="Appendix A"),
             self.rec("glossary", "glossary", "Complete glossary of terms", nav="target"),
         ]]
         out = b.assemble(parts, b.BODY_PLACEHOLDER)

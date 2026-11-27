@@ -20,6 +20,7 @@ import html
 import json
 import os
 import re
+import string
 import subprocess
 from pathlib import Path
 
@@ -209,6 +210,10 @@ def assemble(parts: list[tuple[str, str, dict]], template: str) -> str:
     """Join built files in order, derive navigation, append the footnotes."""
     # "both": has a bar and is linked to; "target": linked to only as the
     # next item (the back-matter divider, the glossary), never as previous.
+    letters = iter(string.ascii_uppercase)
+    for _, _, rec in parts:
+        if rec["kind"] == "appendix":
+            rec["eyebrow"] = "Appendix " + next(letters)
     sequence = [rec for _, _, rec in parts if rec["nav"] in ("both", "target")]
     bodies = []
     for html_body, _, rec in parts:

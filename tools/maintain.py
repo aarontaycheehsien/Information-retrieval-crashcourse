@@ -149,7 +149,7 @@ for start, end, html in reversed(renumbered):
     doc = doc[:start] + html + doc[end:]
 
 # captions that are just a bare number with no sentence after it
-for m in re.finditer(r'<p class="asset-label[^"]*">(.*?)</p>', doc, re.S):
+for m in re.finditer(r'<p class="asset-label[^"]*"(?:\s+id="[^"]*")?>(.*?)</p>', doc, re.S):
     body = text_of(m.group(1))
     if not re.search(r'—\s*\S', body):
         problems.append('table label has no caption text: %r' % body)
