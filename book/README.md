@@ -12,9 +12,11 @@ python tools/build-book.py --check   # do the committed pages match a fresh buil
 python tools/test-build-book.py      # build checks, including determinism
 ```
 
-Once merged into `main`, a GitHub Actions workflow
-(`.github/workflows/build-book.yml`) rebuilds and commits the pages whenever
-`book/` changes, so you can edit these files without Pandoc installed.
+For a pull request that changes the rendered book, run `python tools/build-book.py`
+and commit the rebuilt pages with the Markdown. The pull request checks that they match.
+For a direct Markdown edit on `main`, the [build workflow](../.github/workflows/build-book.yml)
+rebuilds the pages, runs the tests and commits any generated changes. This also works
+for edits made in GitHub's web editor.
 
 - `NN-*.md`: one file per top-level part of the book, in reading order. The
   two-digit prefix sets the order; the front matter says what kind each is

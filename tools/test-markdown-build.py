@@ -99,6 +99,23 @@ class FilterTests(unittest.TestCase):
         self.assertIn("Inline \\(k_1\\) here.", out)
         self.assertIn("$$\na=\\frac{b}{c}\n$$", out)
 
+    def test_math_is_escaped_as_html_text(self):
+        out = body("Inline $a<b$.\n\n$$\na<b \\quad x&y\n$$\n")
+        self.assertIn(r"\(a&lt;b\)", out)
+        self.assertIn("$$\na&lt;b \\quad x&amp;y\n$$", out)
+
+    def test_bad_footnotes_report_the_source_file_and_label(self):
+        with self.assertRaisesRegex(b.BuildError, r"x\.md: undefined footnote: \[\^absent\]"):
+            body("Missing.[^absent]\n")
+        with self.assertRaisesRegex(b.BuildError, r"x\.md: .*Duplicate note reference 'twice'"):
+            body("Repeated.[^twice]\n\n[^twice]: First.\n\n[^twice]: Second.\n")
+
+    def test_literal_note_markers_are_allowed(self):
+        out = body("Inline `[^in-code]` and escaped \\[^example].\n\n```\n[^fenced]\n```\n")
+        self.assertIn("<code>[^in-code]</code>", out)
+        self.assertIn("escaped [^example]", out)
+        self.assertIn("<pre><code>[^fenced]</code></pre>", out)
+
     def test_aside_derives_label_and_name(self):
         out = body('::: {.common-confusion label="IR terminology"}\n#### Head {#h}\n\nBody.\n:::\n')
         self.assertIn('<aside class="common-confusion" aria-labelledby="h">\n<p class="common-confusion-label">IR terminology</p>', out)
@@ -175,6 +192,11 @@ class Phase4ConventionTests(unittest.TestCase):
 
 
 class AssemblyTests(unittest.TestCase):
+    def test_sidebar_keys_match_chapter_and_appendix_ids(self):
+        sections = re.findall(r'<section class="chapter(?: appendix)?" id="([^"]+)">', BOOK)
+        sidebar = BOOK.split('<ol id="toc-list">', 1)[1].split('</nav>', 1)[0]
+        self.assertEqual(re.findall(r'<li class="toc-ch" data-ch="([^"]+)">', sidebar), sections)
+
     def rec(self, kind, href, title, nav="both", **extra):
         return {"kind": kind, "href": href, "title": title, "nav": nav, "source": href, **extra}
 

@@ -30,6 +30,8 @@ STAGE_MAP = ROOT / "data" / "stage-map.json"
 READER = "markdown-smart-auto_identifiers-implicit_figures-citations-raw_tex"
 
 FOOTNOTE_DEF = re.compile(r"^\[\^([A-Za-z0-9_:.-]+)\]:[ \t]*", re.M)
+FOOTNOTE_LABEL = re.compile(r"\[\^([A-Za-z0-9_:.-]+)\]")
+FOOTNOTE_ITEM = re.compile(r'<li id="fn:([^"]+)">')
 STAGE_PLACEHOLDER = re.compile(r'<!-- STAGE MAP on="([^"]*)" controller="([^"]*)" label="([^"]*)" -->')
 
 
@@ -42,15 +44,33 @@ def prepass(text: str) -> str:
     return FOOTNOTE_DEF.sub(lambda m: f"[^{m[1]}]: []{{.fn-name name={m[1]}}}", text)
 
 
-def pandoc(text: str, book_dir: Path = BOOK_DIR) -> str:
+def pandoc(text: str, book_dir: Path = BOOK_DIR, *, check_duplicate_notes: bool = True) -> str:
     env = dict(os.environ, BOOK_DIR=str(book_dir), ROOT_DIR=str(ROOT))
     result = subprocess.run(
         ["pandoc", "-f", READER, "-t", "html5", "--wrap=none", "--lua-filter", str(FILTER)],
         input=text, capture_output=True, text=True, encoding="utf-8", env=env,
     )
-    if result.returncode != 0:
+    if result.returncode or (check_duplicate_notes and "[WARNING] Duplicate note reference " in result.stderr):
         raise BuildError(result.stderr.strip())
     return result.stdout
+
+
+def render_markdown(text: str, book_dir: Path) -> str:
+    marked = prepass(text)
+    rendered = pandoc(marked, book_dir)
+    # Pandoc leaves an undefined reference as ordinary text. Supply trial definitions
+    # for unresolved labels and let the reader distinguish references from literal
+    # examples in code, escaped brackets, or raw HTML.
+    candidates = set(FOOTNOTE_LABEL.findall(text)) - set(FOOTNOTE_ITEM.findall(rendered))
+    if candidates:
+        definitions = "\n\n".join(f"[^{name}]: ." for name in sorted(candidates))
+        # A trial definition may duplicate an unused one. The original parse above
+        # already checked authored definitions for duplicates.
+        trial = pandoc(marked + "\n\n" + prepass(definitions) + "\n", book_dir, check_duplicate_notes=False)
+        missing = candidates.intersection(FOOTNOTE_ITEM.findall(trial))
+        if missing:
+            raise BuildError("undefined footnote: " + ", ".join(f"[^{n}]" for n in sorted(missing)))
+    return rendered
 
 
 def load_stage_map() -> dict:
@@ -101,7 +121,10 @@ def build_file_with_record(path: Path, book_dir: Path = BOOK_DIR) -> tuple[str, 
     text = path.read_text(encoding="utf-8")
     if path.suffix == ".html":
         return text.rstrip("\n") + "\n", "", {"kind": "html", "nav": "none"}
-    html_out = postpass(pandoc(prepass(text), book_dir))
+    try:
+        html_out = postpass(render_markdown(text, book_dir))
+    except BuildError as exc:
+        raise BuildError(f"{path}: {exc}") from exc
     record = FILE_RECORD.search(html_out)
     if not record:
         raise BuildError(f"{path}: the filter wrote no file record")

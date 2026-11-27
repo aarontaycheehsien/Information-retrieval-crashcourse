@@ -203,7 +203,7 @@ for start, end, tag in sections:
             subs += u'<li class="toc-sec"><a href="#%s">%s</a></li>' % (
                 m.group(1), heading_text(m.group(2)))
 
-    data = u' data-ch="%s"' % sid[4:] if sid.startswith('sec-') else u''
+    data = u' data-ch="%s"' % sid if sid else u''
     inner = (u'<em>%s</em>%s' % (eye_txt, heading_text(h2.group(2)))) if eye_txt \
             else heading_text(h2.group(2))
     rows.append(u'<li class="toc-ch"%s><a href="#%s">%s</a>%s</li>'

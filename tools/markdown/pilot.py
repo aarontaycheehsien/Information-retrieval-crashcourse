@@ -76,14 +76,13 @@ def link_or_copy(src, dst):
     return dst
 
 
-def make_workspace(work: Path):
-    if work.exists():
-        shutil.rmtree(work)
-    ignore = shutil.ignore_patterns(".git", "outputs", "images", "__pycache__")
+def make_workspace(work: Path, *, exclude=()):
+    ignore = shutil.ignore_patterns(".git", "outputs", "images", "__pycache__", *exclude)
     shutil.copytree(ROOT, work, ignore=ignore)
     # Real files, not symlinks: the claims validator rejects evidence outside
     # the repository. Hard links are cheap; copies are the fallback.
-    shutil.copytree(ROOT / "images", work / "images", copy_function=link_or_copy)
+    shutil.copytree(ROOT / "images", work / "images", copy_function=link_or_copy,
+                    ignore=shutil.ignore_patterns(*exclude))
 
 
 def splice(book: str, md_path: Path) -> str:
@@ -122,6 +121,8 @@ def main(argv=None):
         raise SystemExit(__doc__)
     control, pilot = OUT / "control", OUT / "pilot"
     for work in (control, pilot):
+        if work.exists():
+            shutil.rmtree(work)
         make_workspace(work)
     if book_mode:
         # The whole book from Markdown: nothing of the live article is kept.

@@ -77,8 +77,8 @@ changes nothing, then rebuilds the digest and the vendor questionnaire.
 
 ```bash
 python tools/build-book.py --check     # build in a scratch copy, compare every root page
-python tools/build-book.py --out DIR   # build into a copy of the repository
-python tools/build-book.py             # build in place (refused until cut-over)
+python tools/build-book.py --out DIR   # build a preview in a new or empty directory
+python tools/build-book.py             # rebuild the published pages in place
 python tools/test-build-book.py        # check, refusal and determinism (about 20 s)
 ```
 
@@ -93,12 +93,12 @@ give identical bytes.
 `.github/workflows/build-book.yml` builds the book on GitHub, so `book/` can be
 edited without Pandoc installed, including in GitHub's web editor.
 
-- **Pull requests:** it runs `build-book.py --check` and the build and
-  generator tests, and writes nothing.
+- **Pull requests:** commit rendered changes with the Markdown. The workflow
+  runs `build-book.py --check` and the build and generator tests.
 - **Pushes to `main` that change `book/`, `data/` or `tools/`:**
   `tools/markdown/ci-build.sh` rebuilds the pages and the workflow commits them
-  back to `main` as `github-actions[bot]`. A push whose built pages already
-  match a fresh build is left alone.
+  back to `main` as `github-actions[bot]` after the tests pass. The tests also
+  run when the pages already match, including on changes to companion downloads.
 - **A push that edits `search-textbook.html`, `read-this-first.html` or
   `vendor-questionnaire.html` directly fails instead of being overwritten.**
   Make that change in `book/`.
@@ -131,7 +131,8 @@ python tools/test-markdown-build.py
 ```
 
 `data/stage-map.json` holds the chapter-header pipeline map that the build
-renders. The live HTML is still the source; see `book/README.md`.
+renders. The maintained Markdown sources and current authoring instructions are
+in [`book/`](../book/README.md).
 
 ## Read-this-first digest
 
@@ -506,8 +507,8 @@ the pieces:
 | Pinned TOC links | `<ul class="toc-pinned">` sits *outside* `<ol id="toc-list">`, which is why it survives the rebuild. Both TOCs carry a copy |
 | Chapter reading time | `<p class="chapter-meta">` immediately after the eyebrow; the page's own script moves it into the chapter-head row |
 
-The `data-ch` attribute on a TOC chapter row must match its section id minus the
-`sec-` prefix; `maintain.py` writes this for you.
+The `data-ch` attribute on a chapter or appendix row in the table of contents
+matches its section ID. `maintain.py` generates it for the sidebar.
 
 Two things the page does at runtime rather than in the markup, so nothing needs
 maintaining by hand: the **Copy link** control on every chapter heading, and the

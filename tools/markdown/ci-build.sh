@@ -18,7 +18,8 @@ set -euo pipefail
 
 PY="${PYTHON:-python}"
 BUILT=(search-textbook.html read-this-first.html vendor-questionnaire.html)
-WRITABLE='^ M (search-textbook|read-this-first|vendor-questionnaire|teaching-notes)\.html$'
+# A manual rebuild can recreate a missing generated page as an untracked file.
+WRITABLE='^( M|\?\?) (search-textbook|read-this-first|vendor-questionnaire|teaching-notes)\.html$'
 before="${1:-}"
 output() { if [ -n "${GITHUB_OUTPUT:-}" ]; then echo "changed=$1" >> "$GITHUB_OUTPUT"; fi; }
 

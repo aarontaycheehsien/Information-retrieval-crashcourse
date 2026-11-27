@@ -1115,7 +1115,7 @@
 
     // Highlight the active chapter and reveal only its sections.
     const desktopToc = document.getElementById('toc-list');
-    const chapterEls = [...document.querySelectorAll('.chapter[id^="sec-"]')];
+    const chapterEls = document.querySelectorAll('#article > .chapter[id]');
     const setActive = (key) => {
       desktopToc.querySelectorAll('.toc-ch').forEach(li => {
         const on = li.dataset.ch === key;
@@ -1125,7 +1125,7 @@
       });
     };
     const chObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id.replace('sec-', '')); });
+      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
     }, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
     chapterEls.forEach(c => chObs.observe(c));
 

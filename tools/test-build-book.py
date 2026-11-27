@@ -11,6 +11,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location("build_book", HERE / "build-book.py")
@@ -45,12 +46,51 @@ class BuildBookTests(unittest.TestCase):
     def test_builds_are_deterministic(self):
         with tempfile.TemporaryDirectory() as tmp:
             a, b = Path(tmp) / "a", Path(tmp) / "b"
+            b.mkdir()  # --out accepts both a new path and an existing empty directory
             for target in (a, b):
                 code, output = run("--out", str(target))
                 self.assertEqual(code, 0, output)
             for page in build_book.pages(a):
                 with self.subTest(page=page):
                     self.assertEqual((a / page).read_bytes(), (b / page).read_bytes())
+
+    def test_output_preserves_existing_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            existing = Path(tmp) / "author-notes.txt"
+            existing.write_text("keep me", encoding="utf-8")
+            code, message = run("--out", tmp)
+            self.assertEqual(code, 2)
+            self.assertIn("new or empty directory", message)
+            self.assertEqual(existing.read_text(encoding="utf-8"), "keep me")
+
+    def test_check_reports_missing_expected_pages(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            checkout, fresh = Path(tmp) / "checkout", Path(tmp) / "fresh"
+            checkout.mkdir()
+            fresh.mkdir()
+            for page in build_book.build_md.WRITTEN_PAGES:
+                (fresh / page).write_text("<p>Generated</p>", encoding="utf-8")
+            output = io.StringIO()
+            with mock.patch.object(build_book, "ROOT", checkout), redirect_stdout(output):
+                failures = build_book.compare(fresh, strict_bytes=True)
+            self.assertEqual(failures, len(build_book.build_md.WRITTEN_PAGES))
+            for page in build_book.build_md.WRITTEN_PAGES:
+                self.assertIn(f"{page}: missing from checkout", output.getvalue())
+
+    def test_output_preserves_files_added_during_the_build(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            dest = Path(tmp) / "preview"
+            dest.mkdir()
+            added = dest / "new-notes.txt"
+
+            def add_file(book_dir, work):
+                added.write_text("new notes", encoding="utf-8")
+                return {"files": 1, "rounds": 1}
+
+            with mock.patch.object(build_book.build_md, "build_book", side_effect=add_file):
+                code, _ = run("--out", str(dest))
+            self.assertEqual(code, 2)
+            self.assertEqual(added.read_text(encoding="utf-8"), "new notes")
 
     def test_converter_round_trip_reproduces_the_page(self):
         # Convert the committed page to Markdown, build that, and compare the
@@ -82,7 +122,6 @@ class BuildBookTests(unittest.TestCase):
     def test_scratch_copy_survives_a_failed_hard_link(self):
         # Hard links cannot cross drives or filesystems; the copy must fall back.
         import os
-        from unittest import mock
         with tempfile.TemporaryDirectory() as tmp:
             src, dst = Path(tmp) / "a.png", Path(tmp) / "b.png"
             src.write_bytes(b"image")

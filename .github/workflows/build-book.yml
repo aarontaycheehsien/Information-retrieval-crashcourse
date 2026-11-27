@@ -81,7 +81,6 @@ jobs:
         id: build
         run: bash tools/markdown/ci-build.sh "${{ github.event.before }}"
       - name: Tests
-        if: steps.build.outputs.changed == 'true'
         run: |
           for t in test-markdown-build test-build-book test-html-equivalence test-markdown-mapping \
                    test-product-claims test-glossary-hub test-digest test-vendor-questionnaire \

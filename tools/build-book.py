@@ -60,8 +60,12 @@ def pages(repo: Path) -> list[str]:
 
 def compare(built: Path, strict_bytes: bool) -> int:
     failed = 0
-    for page in pages(ROOT):
+    for page in sorted(set(pages(ROOT)).union(pages(built), build_md.WRITTEN_PAGES)):
         committed, fresh = ROOT / page, built / page
+        if not committed.is_file() or not fresh.is_file():
+            print(f"{page}: missing from {'checkout' if not committed.is_file() else 'fresh build'}")
+            failed += 1
+            continue
         report = eq.compare(eq.load(committed), eq.load(fresh), f"committed {page}", f"built {page}", max_diffs=5)
         # Compare with line endings normalised: a Windows checkout with
         # core.autocrlf=true holds CRLF copies of the LF files Git stores.
@@ -81,7 +85,7 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--check", action="store_true", help="build in a scratch copy and compare with the committed pages")
-    mode.add_argument("--out", type=Path, help="build into a fresh copy of the repository at this directory")
+    mode.add_argument("--out", type=Path, help="build into a new or empty directory")
     args = parser.parse_args(argv)
     truth = source_of_truth()
     try:
@@ -95,8 +99,19 @@ def main(argv=None) -> int:
             print("Build check passed." if not failed else f"Build check failed: {failed} page(s).")
             return 1 if failed else 0
         if args.out:
-            make_workspace(args.out)
-            result = build_md.build_book(BOOK_DIR, args.out)
+            dest = args.out.absolute()
+            if dest.is_symlink() or (dest.exists() and (not dest.is_dir() or any(dest.iterdir()))):
+                raise build_md.BuildError(f"--out needs a new or empty directory: {dest}")
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            # Stage beside the destination so a failed build leaves it available for retry.
+            with tempfile.TemporaryDirectory(dir=dest.parent, prefix=".book-build-") as tmp:
+                stage = Path(tmp)
+                work = stage / "repo"
+                make_workspace(work, exclude=(stage.name,))
+                result = build_md.build_book(BOOK_DIR, work)
+                if dest.is_dir():
+                    dest.rmdir()  # also protects files added while the build was running
+                work.rename(dest)
             print(f"Built {result['files']} source files into {args.out}; "
                   f"generators settled in {result['rounds']} round(s).")
             return 0
@@ -108,7 +123,7 @@ def main(argv=None) -> int:
         result = build_md.build_book(BOOK_DIR, ROOT)
         print(f"Built {result['files']} source files in place; generators settled in {result['rounds']} round(s).")
         return 0
-    except build_md.BuildError as exc:
+    except (build_md.BuildError, OSError) as exc:
         print(f"build error: {exc}", file=sys.stderr)
         return 2
 
