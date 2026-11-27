@@ -22,6 +22,7 @@ import os
 import re
 import string
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -267,12 +268,17 @@ def source_files(book_dir: Path = BOOK_DIR) -> list[Path]:
     return files
 
 
+def run_python(cmd: list[str], repo: Path) -> subprocess.CompletedProcess:
+    env = dict(os.environ, PYTHONUTF8="1", PYTHONIOENCODING="utf-8")
+    return subprocess.run([sys.executable, *cmd], cwd=repo, env=env,
+                          capture_output=True, encoding="utf-8")
+
+
 def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) -> dict:
     """Build repo/search-textbook.html from book_dir, then run the generators
     until a whole round changes nothing, then rebuild the companion pages.
 
     repo is normally a scratch copy of the repository until cut-over."""
-    import sys
     template = (book_dir / "template.html").read_text(encoding="utf-8")
     parts = [build_file_with_record(p, book_dir) for p in source_files(book_dir)]
     target = Path(repo) / "search-textbook.html"
@@ -281,7 +287,7 @@ def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) ->
     for round_no in range(1, passes + 1):
         before = target.read_bytes()
         for cmd in GENERATOR_PASSES:
-            r = subprocess.run([sys.executable, *cmd], cwd=repo, capture_output=True, text=True)
+            r = run_python(cmd, repo)
             log.append((round_no, " ".join(cmd), r.returncode, (r.stdout + r.stderr).strip()))
             if r.returncode and cmd[0] != "tools/maintain.py":
                 raise BuildError(f"{' '.join(cmd)} failed:\n{(r.stdout + r.stderr).strip()}")
@@ -297,7 +303,7 @@ def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) ->
         raise BuildError(f"maintain.py still reports problems after settling:\n{final[-1][3]}")
     normalise_newlines(repo)
     for cmd in COMPANION_BUILDERS:
-        r = subprocess.run([sys.executable, *cmd], cwd=repo, capture_output=True, text=True)
+        r = run_python(cmd, repo)
         log.append(("companion", " ".join(cmd), r.returncode, (r.stdout + r.stderr).strip()))
         if r.returncode:
             raise BuildError(f"{' '.join(cmd)} failed:\n{(r.stdout + r.stderr).strip()}")
