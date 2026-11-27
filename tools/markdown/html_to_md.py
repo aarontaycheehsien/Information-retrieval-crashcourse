@@ -808,11 +808,11 @@ def convert(section_id, out_md: Path, source=None):
     if notes:
         text += "\n" + notes + "\n"
     out_md.parent.mkdir(parents=True, exist_ok=True)
-    out_md.write_text(text, encoding="utf-8")
+    out_md.write_text(text, encoding="utf-8", newline="\n")
     for rel, content in conv.islands.items():
         path = out_md.parent / rel
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
+        path.write_text(content, encoding="utf-8", newline="\n")
     return conv
 
 
@@ -859,7 +859,7 @@ def convert_book(out_dir: Path, source=None):
     out_dir.mkdir(parents=True, exist_ok=True)
     for old in out_dir.glob("[0-9][0-9]-*"):
         old.unlink()
-    (out_dir / "template.html").write_text(make_template(source, article), encoding="utf-8")
+    (out_dir / "template.html").write_text(make_template(source, article), encoding="utf-8", newline="\n")
     nav_targets = set(re.findall(r'<a class="cnav (?:prev|next)" href="#([^"]+)"', source))
     conv = Converter(source, out_dir / "figures")
     files, region, n = [], None, 0
@@ -867,7 +867,7 @@ def convert_book(out_dir: Path, source=None):
     def emit(name, text):
         nonlocal n
         path = out_dir / f"{n:02d}-{name}"
-        path.write_text(text, encoding="utf-8")
+        path.write_text(text, encoding="utf-8", newline="\n")
         files.append(path)
         n += 1
 
@@ -913,7 +913,7 @@ def convert_book(out_dir: Path, source=None):
     for rel, content in conv.islands.items():
         path = out_dir / rel
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
+        path.write_text(content, encoding="utf-8", newline="\n")
     return conv, files
 
 

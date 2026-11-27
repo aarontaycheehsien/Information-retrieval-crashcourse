@@ -66,6 +66,30 @@ class BuildBookTests(unittest.TestCase):
                                            build_book.eq.load(work / "search-textbook.html"))
             self.assertEqual(report, [], "\n".join(report[:40]))
 
+    def test_line_endings_never_differ_by_platform(self):
+        # The existing generators write with the platform's line ending (CRLF
+        # on Windows). Simulate that, and check the build normalises it and
+        # --check ignores CRLF-only differences in a checkout.
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            for name in build_book.build_md.WRITTEN_PAGES:
+                (repo / name).write_bytes(b"<p>a</p>\r\n<p>b</p>\r\n")
+            build_book.build_md.normalise_newlines(repo)
+            for name in build_book.build_md.WRITTEN_PAGES:
+                self.assertEqual((repo / name).read_bytes(), b"<p>a</p>\n<p>b</p>\n")
+        self.assertEqual(build_book.lf(b"x\r\ny\n"), b"x\ny\n")
+
+    def test_scratch_copy_survives_a_failed_hard_link(self):
+        # Hard links cannot cross drives or filesystems; the copy must fall back.
+        import os
+        from unittest import mock
+        with tempfile.TemporaryDirectory() as tmp:
+            src, dst = Path(tmp) / "a.png", Path(tmp) / "b.png"
+            src.write_bytes(b"image")
+            with mock.patch.object(os, "link", side_effect=OSError(18, "Invalid cross-device link")):
+                build_book.make_workspace.__globals__["link_or_copy"](src, dst)
+            self.assertEqual(dst.read_bytes(), b"image")
+
     def test_config_names_a_known_source(self):
         config = json.loads(build_book.CONFIG.read_text(encoding="utf-8"))
         self.assertIn(config["source_of_truth"], ("html", "markdown"))

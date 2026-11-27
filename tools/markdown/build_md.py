@@ -216,6 +216,22 @@ GENERATOR_PASSES = [
 COMPANION_BUILDERS = [["tools/build-digest.py"], ["tools/build-vendor-questionnaire.py"]]
 
 
+# Pages the build or the generators rewrite. maintain.py, renumber_footnotes.py
+# and the claims and glossary builders write with the platform's line ending,
+# which is CRLF on Windows; the committed pages use LF, so the build normalises
+# them and a build gives the same bytes on every platform.
+WRITTEN_PAGES = ("search-textbook.html", "teaching-notes.html", "read-this-first.html", "vendor-questionnaire.html")
+
+
+def normalise_newlines(repo: Path) -> None:
+    for name in WRITTEN_PAGES:
+        page = Path(repo) / name
+        if page.exists():
+            data = page.read_bytes()
+            if b"\r\n" in data:
+                page.write_bytes(data.replace(b"\r\n", b"\n"))
+
+
 def source_files(book_dir: Path = BOOK_DIR) -> list[Path]:
     files = sorted(p for p in book_dir.iterdir() if re.match(r"\d{2}-.*\.(md|html)$", p.name))
     if not files:
@@ -232,7 +248,7 @@ def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) ->
     template = (book_dir / "template.html").read_text(encoding="utf-8")
     parts = [build_file_with_record(p, book_dir) for p in source_files(book_dir)]
     target = Path(repo) / "search-textbook.html"
-    target.write_text(assemble(parts, template), encoding="utf-8")
+    target.write_text(assemble(parts, template), encoding="utf-8", newline="\n")
     log = []
     for round_no in range(1, passes + 1):
         before = target.read_bytes()
@@ -241,6 +257,7 @@ def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) ->
             log.append((round_no, " ".join(cmd), r.returncode, (r.stdout + r.stderr).strip()))
             if r.returncode and cmd[0] != "tools/maintain.py":
                 raise BuildError(f"{' '.join(cmd)} failed:\n{(r.stdout + r.stderr).strip()}")
+            normalise_newlines(repo)
         if target.read_bytes() == before:
             break
     else:
@@ -250,6 +267,7 @@ def build_book(book_dir: Path = BOOK_DIR, repo: Path = ROOT, passes: int = 4) ->
     final = [e for e in log if e[0] == round_no and e[1] == "tools/maintain.py"]
     if final and final[-1][2]:
         raise BuildError(f"maintain.py still reports problems after settling:\n{final[-1][3]}")
+    normalise_newlines(repo)
     for cmd in COMPANION_BUILDERS:
         r = subprocess.run([sys.executable, *cmd], cwd=repo, capture_output=True, text=True)
         log.append(("companion", " ".join(cmd), r.returncode, (r.stdout + r.stderr).strip()))

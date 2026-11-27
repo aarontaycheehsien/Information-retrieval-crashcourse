@@ -36,6 +36,13 @@ if "$PY" tools/build-book.py --check > "$log" 2>&1; then
   exit 0
 fi
 
+# A commit that is no longer in the history (after a force push) cannot be
+# compared; treat the run like a manual one.
+if [[ -n "$before" && ! "$before" =~ ^0+$ ]] && ! git cat-file -e "${before}^{commit}" 2>/dev/null; then
+  echo "::notice::The previous commit $before is not in this history; rebuilding without the hand-edit guard."
+  before=""
+fi
+
 if [[ -n "$before" && ! "$before" =~ ^0+$ ]] && ! git diff --quiet "$before" HEAD -- "${BUILT[@]}"; then
   cat "$log"
   echo "::error::This push changed a built page directly, and it no longer matches a build of book/." \
