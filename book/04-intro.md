@@ -227,42 +227,18 @@ Behind every query stands a person who wants something—an answer, an overview,
 That fuller purpose is the **information need**.
 Queries, filters and task briefs can communicate substantial detail about it, using terms, headings, fields or other supplied criteria. **The query represents the information need; it is not the need itself.** How fully it expresses that need depends on what the searcher supplies and what the system can use. [Chapter 11 returns to this](#distinction-query-object) once the choice between expressions starts to matter.
 
-:::: {.figure .query-flow key="relevance-chain"}
-From a need to a relevance judgement
+:::: {.figure .worked-figure key="relevance-chain"}
+One study, two relevance judgements
 
-::: {.track .five-step}
-- **Information need** what the person wants to know or accomplish
-- **Query or representation** words, a question, a seed record or another expression
-- **Retrieval signals** terms, fields, citations, embeddings and scores
-- **Retrieved or ranked records** the candidates the system makes available
-- **Human judgement** whether each record helps with this need
+::: {.include src="figures/relevance-chain.html"}
 :::
 
 ::: caption
-The middle three boxes show what the system works with directly.
-A detailed request can communicate the purpose at the left, and feedback can communicate judgements from the right.
-The system can use these to estimate suitability; the reader still assesses whether a record helps with the task.
+The query, the retrieved study and its findings stay the same. The task changes what the librarian needs the evidence to establish.
 :::
 ::::
 
-Consider a hypothetical search for recent empirical studies of generative-AI services for research support in academic libraries.
-The librarian builds a strategy using alternative terminology—*generative AI* or *large language models*, *academic library* or *university library*, *research support* or *research consultation*—and limits publication dates to 2024 onwards.
-Now imagine two purposes for using the same search results: preparing a workshop introducing possible applications, and deciding whether the library should introduce such a service.
-
-The search retrieves an empirical study reporting positive participant reactions after a short demonstration of a university library’s generative-AI research-support service.
-It meets the search conditions and is topically suitable.
-For the workshop, it provides a useful example of a service and how participants responded.
-
-For the decision about introducing the service, the same study contributes less.
-Positive reactions alone provide insufficient evidence for deciding whether the library should introduce the service: they do not establish answer accuracy, staff workload or performance during actual research consultations.
-The paper still contributes evidence about participant reactions; its usefulness differs even though its match to the search conditions has not changed.
-
-A librarian might look specifically for evaluations of answer accuracy, staff workload or real-world use through targeted follow-up searches.
-These could retrieve evidence better suited to the service-adoption decision.
-Making every issue a compulsory search condition, however, could miss useful studies that describe these issues using unexpected terminology or report them only in the full text.
-
-**[Relevance judgement](#term-relevance-judgement){.term-mark aria-describedby="definition-relevance-judgement" data-term="Relevance judgement" data-def="A recorded decision that a particular record does or does not satisfy the relevance criteria for a represented information need. Retrieval metrics compare systems against these operational judgements rather than objective truth."} assesses whether a document is useful for the purpose of the search.** The librarian must still examine what each study measured, under what conditions, and whether its findings help answer the service-adoption question.
-Searching brings documents forward for consideration; those judgements can also guide subsequent searching.
+**[Relevance judgement](#term-relevance-judgement){.term-mark aria-describedby="definition-relevance-judgement" data-term="Relevance judgement" data-def="A recorded decision that a particular record does or does not satisfy the relevance criteria for a represented information need. Retrieval metrics compare systems against these operational judgements rather than objective truth."} assesses whether a document is useful for the purpose of the search.** For the adoption decision, the librarian could follow up with a search for evaluations of accuracy or staff workload. Requiring both terms in the original query could miss studies that report those outcomes only in the full text.
 
 ::: {.practice-callout label="Evidence synthesis"}
 #### Search-resistant concepts {#evidence-synthesis-search-resistant}
